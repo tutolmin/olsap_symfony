@@ -17,6 +17,7 @@
         "symfony/dotenv": "*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "*",
+        "symfony/messenger": "6.1.*",
         "symfony/monolog-bundle": "^3.8",
         "symfony/proxy-manager-bridge": "6.1.*",
         "symfony/runtime": "*",
@@ -77,5 +78,9 @@
             "require": "6.1.*",
             "docker": true
         }
+    },
+    "require-dev": {
+        "symfony/stopwatch": "6.1.*",
+        "symfony/web-profiler-bundle": "6.1.*"
     }
 }
