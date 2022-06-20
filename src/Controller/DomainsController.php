@@ -27,8 +27,16 @@ class DomainsController extends AbstractController
         // use the Product!
 	    // ...
 	    //
+	$techs = $domain->getTechnologies();
 
-        return new Response('Check out this great Domains: '.$domain->getName());
+        return $this->render('domains/show.html.twig', [
+#            'category' => '...',
+#            'promotions' => ['...', '...'],
+	    'domain' => $domain,
+	    'techs' => $techs,
+        ]);
+
+#        return new Response('Check out this great Domains: '.$domain->getName());
 
         // or render a template
         // in the template, print things with {{ product.name }}
@@ -46,8 +54,8 @@ class DomainsController extends AbstractController
         // the `render()` method returns a `Response` object with the
         // contents created by the template
         return $this->render('domains/list.html.twig', [
-            'category' => '...',
-            'promotions' => ['...', '...'],
+#            'category' => '...',
+#            'promotions' => ['...', '...'],
 	    'domains' => $domains,
         ]);
     }

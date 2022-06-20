@@ -24,6 +24,9 @@ class HardwareProfiles
     #[ORM\OneToMany(mappedBy: 'hw_profile', targetEntity: InstanceTypes::class, orphanRemoval: true)]
     private $instanceTypes;
 
+    #[ORM\Column(type: 'integer')]
+    private $cost;
+
     public function __construct()
     {
         $this->instanceTypes = new ArrayCollection();
@@ -84,6 +87,18 @@ class HardwareProfiles
                 $instanceType->setHwProfile(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCost(): ?int
+    {
+        return $this->cost;
+    }
+
+    public function setCost(int $cost): self
+    {
+        $this->cost = $cost;
 
         return $this;
     }

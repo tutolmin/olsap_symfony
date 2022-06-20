@@ -16,6 +16,7 @@
         "symfony/console": "*",
         "symfony/dotenv": "*",
         "symfony/flex": "^2",
+        "symfony/form": "6.1.*",
         "symfony/framework-bundle": "*",
         "symfony/messenger": "6.1.*",
         "symfony/monolog-bundle": "^3.8",

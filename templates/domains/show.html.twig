@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DomainsController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<h1>{{ domain.name }}</h1>
+
+<p>{{ domain.description }}</p>
+
+<div class="example-wrapper">
+        {% for item in techs %}
+            <li><a href="/technologies/{{ item.id }}">{{ item.name }}</a> - {{ item.description }}</li>
+        {% endfor %}
+</div>
+
+<p><a href="/domains/list">show all domains</a></p>
+
+
+{% endblock %}
