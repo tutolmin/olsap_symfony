@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit OperatingSystems{% endblock %}
+
+{% block body %}
+    <h1>Edit OperatingSystems</h1>
+
+    {{ include('operating_systems/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_operating_systems_index') }}">back to list</a>
+
+    {{ include('operating_systems/_delete_form.html.twig') }}
+{% endblock %}

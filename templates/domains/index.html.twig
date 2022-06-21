@@ -1,20 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DomainsController!{% endblock %}
+{% block title %}Domains index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Domains index</h1>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for domain in domains %}
+            <tr>
+                <td>{{ domain.id }}</td>
+                <td>{{ domain.name }}</td>
+                <td>{{ domain.description }}</td>
+                <td>
+                    <a href="{{ path('app_domains_show', {'id': domain.id}) }}">show</a>
+                    <a href="{{ path('app_domains_edit', {'id': domain.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/srv/app/src/Controller/DomainsController.php'|file_link(0) }}">src/Controller/DomainsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/srv/app/templates/domains/index.html.twig'|file_link(0) }}">templates/domains/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <a href="{{ path('app_domains_new') }}">Create new</a>
 {% endblock %}

@@ -27,12 +27,12 @@ class Sessions
     #[ORM\Column(type: 'string', length: 255)]
     private $hash;
 
-    #[ORM\ManyToOne(targetEntity: Testee::class, inversedBy: 'sessions')]
+    #[ORM\ManyToOne(targetEntity: Testees::class, inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private $testee;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionOses::class, orphanRemoval: true)]
-    private $oses;
+    private $sessionOses;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionTechs::class, orphanRemoval: true)]
     private $sessionTechs;
@@ -42,7 +42,7 @@ class Sessions
 
     public function __construct()
     {
-        $this->oses = new ArrayCollection();
+        $this->sessionOses = new ArrayCollection();
         $this->sessionTechs = new ArrayCollection();
         $this->envs = new ArrayCollection();
     }
@@ -100,12 +100,12 @@ class Sessions
         return $this;
     }
 
-    public function getTestee(): ?Testee
+    public function getTestee(): ?Testees
     {
         return $this->testee;
     }
 
-    public function setTestee(?Testee $testee): self
+    public function setTestee(?Testees $testee): self
     {
         $this->testee = $testee;
 
@@ -115,15 +115,15 @@ class Sessions
     /**
      * @return Collection<int, SessionOses>
      */
-    public function getOses(): Collection
+    public function getSessionOses(): Collection
     {
-        return $this->oses;
+        return $this->sessionOses;
     }
 
     public function addOs(SessionOses $os): self
     {
         if (!$this->sessionOses->contains($os)) {
-            $this->oses[] = $os;
+            $this->sessionOses[] = $os;
             $os->setSession($this);
         }
 
@@ -132,7 +132,7 @@ class Sessions
 
     public function removeOs(SessionOses $os): self
     {
-        if ($this->oses->removeElement($os)) {
+        if ($this->sessionOses->removeElement($os)) {
             // set the owning side to null (unless already changed)
             if ($os->getSession() === $this) {
                 $os->setSession(null);

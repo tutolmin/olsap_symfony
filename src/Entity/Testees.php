@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\TesteeRepository;
+use App\Repository\TesteesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: TesteeRepository::class)]
-class Testee
+#[ORM\Entity(repositoryClass: TesteesRepository::class)]
+class Testees
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -30,6 +30,11 @@ class Testee
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
+    }
+
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->email;
     }
 
     public function getId(): ?int

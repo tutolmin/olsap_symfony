@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sessions{% endblock %}
+
+{% block body %}
+    <h1>Create new Sessions</h1>
+
+    {{ include('sessions/_form.html.twig') }}
+
+    <a href="{{ path('app_sessions_index') }}">back to list</a>
+{% endblock %}

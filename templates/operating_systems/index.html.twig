@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}OperatingSystems index{% endblock %}
+
+{% block body %}
+    <h1>OperatingSystems index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Breed</th>
+                <th>Release</th>
+                <th>Description</th>
+                <th>Supported</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operating_system in operating_systems %}
+            <tr>
+                <td>{{ operating_system.id }}</td>
+                <td>{{ operating_system.breed }}</td>
+                <td>{{ operating_system.release }}</td>
+                <td>{{ operating_system.description }}</td>
+                <td>{{ operating_system.supported ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_operating_systems_show', {'id': operating_system.id}) }}">show</a>
+                    <a href="{{ path('app_operating_systems_edit', {'id': operating_system.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_operating_systems_new') }}">Create new</a>
+{% endblock %}

@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Testee;
+use App\Entity\Testees;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Testee>
+ * @extends ServiceEntityRepository<Testees>
  *
- * @method Testee|null find($id, $lockMode = null, $lockVersion = null)
- * @method Testee|null findOneBy(array $criteria, array $orderBy = null)
- * @method Testee[]    findAll()
- * @method Testee[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Testees|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Testees|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Testees[]    findAll()
+ * @method Testees[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TesteeRepository extends ServiceEntityRepository
+class TesteesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Testee::class);
+        parent::__construct($registry, Testees::class);
     }
 
-    public function add(Testee $entity, bool $flush = false): void
+    public function add(Testees $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class TesteeRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Testee $entity, bool $flush = false): void
+    public function remove(Testees $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class TesteeRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Testee[] Returns an array of Testee objects
+//     * @return Testees[] Returns an array of Testees objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class TesteeRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Testee
+//    public function findOneBySomeField($value): ?Testees
 //    {
 //        return $this->createQueryBuilder('t')
 //            ->andWhere('t.exampleField = :val')

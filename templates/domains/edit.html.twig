@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Domains{% endblock %}
+
+{% block body %}
+    <h1>Edit Domains</h1>
+
+    {{ include('domains/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_domains_index') }}">back to list</a>
+
+    {{ include('domains/_delete_form.html.twig') }}
+{% endblock %}
