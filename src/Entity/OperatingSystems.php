@@ -15,9 +15,6 @@ class OperatingSystems
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'simple_array')]
-    private $breed = [];
-
     #[ORM\Column(type: 'string', length: 255)]
     private $release;
 
@@ -31,33 +28,25 @@ class OperatingSystems
     private $instanceTypes;
 
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: SessionOses::class, orphanRemoval: true)]
-    private $sessions;
+    private $osSessions;
 
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: TaskOses::class, orphanRemoval: true)]
     private $osTasks;
 
+    #[ORM\ManyToOne(targetEntity: Breeds::class, inversedBy: 'operatingSystems')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $breed;
+
     public function __construct()
     {
         $this->instanceTypes = new ArrayCollection();
-        $this->sessions = new ArrayCollection();
+        $this->osSessions = new ArrayCollection();
         $this->osTasks = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getBreed(): ?array
-    {
-        return $this->breed;
-    }
-
-    public function setBreed(array $breed): self
-    {
-        $this->breed = $breed;
-
-        return $this;
     }
 
     public function getRelease(): ?string
@@ -131,13 +120,13 @@ class OperatingSystems
      */
     public function getSessions(): Collection
     {
-        return $this->sessions;
+        return $this->osSessions;
     }
 
     public function addSession(SessionOses $session): self
     {
-        if (!$this->sessions->contains($session)) {
-            $this->sessions[] = $session;
+        if (!$this->osSessions->contains($session)) {
+            $this->osSessions[] = $session;
             $session->setOs($this);
         }
 
@@ -146,7 +135,7 @@ class OperatingSystems
 
     public function removeSession(SessionOses $session): self
     {
-        if ($this->sessions->removeElement($session)) {
+        if ($this->osSessions->removeElement($session)) {
             // set the owning side to null (unless already changed)
             if ($session->getOs() === $this) {
                 $session->setOs(null);
@@ -182,6 +171,18 @@ class OperatingSystems
                 $osTask->setOs(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBreed(): ?Breeds
+    {
+        return $this->breed;
+    }
+
+    public function setBreed(?Breeds $breed): self
+    {
+        $this->breed = $breed;
 
         return $this;
     }

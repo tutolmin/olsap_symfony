@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\OperatingSystems;
-use App\Form\OperatingSystemsType;
+use App\Form\OperatingSystems1Type;
 use App\Repository\OperatingSystemsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,7 @@ class OperatingSystemsController extends AbstractController
     public function new(Request $request, OperatingSystemsRepository $operatingSystemsRepository): Response
     {
         $operatingSystem = new OperatingSystems();
-        $form = $this->createForm(OperatingSystemsType::class, $operatingSystem);
+        $form = $this->createForm(OperatingSystems1Type::class, $operatingSystem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,7 +51,7 @@ class OperatingSystemsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_operating_systems_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, OperatingSystems $operatingSystem, OperatingSystemsRepository $operatingSystemsRepository): Response
     {
-        $form = $this->createForm(OperatingSystemsType::class, $operatingSystem);
+        $form = $this->createForm(OperatingSystems1Type::class, $operatingSystem);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

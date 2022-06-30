@@ -2,29 +2,24 @@
 
 namespace App\Form;
 
-use App\Entity\OperatingSystems;
+use App\Entity\Breeds;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-#use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OperatingSystemsType extends AbstractType
+class BreedType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-#            ->add('breed', TextType::class)
-            ->add('breed')
-            ->add('release')
-            ->add('description')
-            ->add('supported')
+            ->add('name')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => OperatingSystems::class,
+            'data_class' => Breeds::class,
         ]);
     }
 }
