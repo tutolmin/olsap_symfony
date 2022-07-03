@@ -13,9 +13,6 @@ class Instances
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'simple_array')]
-    private $staus = [];
-
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
 
@@ -29,21 +26,13 @@ class Instances
     #[ORM\OneToOne(mappedBy: 'instance', targetEntity: Environments::class, cascade: ['persist', 'remove'])]
     private $envs;
 
+    #[ORM\ManyToOne(targetEntity: InstanceStatuses::class, inversedBy: 'instances')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStaus(): ?array
-    {
-        return $this->staus;
-    }
-
-    public function setStaus(array $staus): self
-    {
-        $this->staus = $staus;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -100,6 +89,18 @@ class Instances
         }
 
         $this->envs = $envs;
+
+        return $this;
+    }
+
+    public function getStatus(): ?InstanceStatuses
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?InstanceStatuses $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

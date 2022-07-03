@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Testee</th>
                 <th>Status</th>
                 <th>Created_at</th>
                 <th>Ended_at</th>
@@ -20,6 +21,7 @@
         {% for session in sessions %}
             <tr>
                 <td>{{ session.id }}</td>
+                <td>{{ session.testee }}</td>
                 <td>{{ session.status }}</td>
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>

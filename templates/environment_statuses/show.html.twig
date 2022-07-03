@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EnvironmentStatuses{% endblock %}
+
+{% block body %}
+    <h1>EnvironmentStatuses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ environment_status.id }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ environment_status.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_environment_statuses_index') }}">back to list</a>
+
+    <a href="{{ path('app_environment_statuses_edit', {'id': environment_status.id}) }}">edit</a>
+
+    {{ include('environment_statuses/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New InstanceStatuses{% endblock %}
+
+{% block body %}
+    <h1>Create new InstanceStatuses</h1>
+
+    {{ include('instance_statuses/_form.html.twig') }}
+
+    <a href="{{ path('app_instance_statuses_index') }}">back to list</a>
+{% endblock %}

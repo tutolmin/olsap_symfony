@@ -23,9 +23,6 @@ class Environments
     #[ORM\OneToOne(inversedBy: 'envs', targetEntity: Instances::class, cascade: ['persist', 'remove'])]
     private $instance;
 
-    #[ORM\Column(type: 'simple_array')]
-    private $status = [];
-
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $started_at;
 
@@ -34,6 +31,10 @@ class Environments
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $path;
+
+    #[ORM\ManyToOne(targetEntity: EnvironmentStatuses::class, inversedBy: 'environments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $status;
 
     public function getId(): ?int
     {
@@ -76,18 +77,6 @@ class Environments
         return $this;
     }
 
-    public function getStatus(): ?array
-    {
-        return $this->status;
-    }
-
-    public function setStatus(array $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     public function getStartedAt(): ?\DateTimeImmutable
     {
         return $this->started_at;
@@ -120,6 +109,18 @@ class Environments
     public function setPath(?string $path): self
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getStatus(): ?EnvironmentStatuses
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?EnvironmentStatuses $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

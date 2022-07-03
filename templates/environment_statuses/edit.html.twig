@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit EnvironmentStatuses{% endblock %}
+
+{% block body %}
+    <h1>Edit EnvironmentStatuses</h1>
+
+    {{ include('environment_statuses/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_environment_statuses_index') }}">back to list</a>
+
+    {{ include('environment_statuses/_delete_form.html.twig') }}
+{% endblock %}

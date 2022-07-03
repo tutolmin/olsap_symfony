@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SessionStatuses{% endblock %}
+
+{% block body %}
+    <h1>Create new SessionStatuses</h1>
+
+    {{ include('session_statuses/_form.html.twig') }}
+
+    <a href="{{ path('app_session_statuses_index') }}">back to list</a>
+{% endblock %}

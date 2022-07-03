@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InstanceStatuses index{% endblock %}
+
+{% block body %}
+    <h1>InstanceStatuses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instance_status in instance_statuses %}
+            <tr>
+                <td>{{ instance_status.id }}</td>
+                <td>{{ instance_status.status }}</td>
+                <td>
+                    <a href="{{ path('app_instance_statuses_show', {'id': instance_status.id}) }}">show</a>
+                    <a href="{{ path('app_instance_statuses_edit', {'id': instance_status.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_instance_statuses_new') }}">Create new</a>
+{% endblock %}

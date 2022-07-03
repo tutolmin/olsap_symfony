@@ -15,9 +15,6 @@ class Sessions
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'simple_array')]
-    private $status = [];
-
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
 
@@ -40,6 +37,10 @@ class Sessions
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Environments::class)]
     private $envs;
 
+    #[ORM\ManyToOne(targetEntity: SessionStatuses::class, inversedBy: 'sessions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $status;
+
     public function __construct()
     {
         $this->sessionOses = new ArrayCollection();
@@ -50,18 +51,6 @@ class Sessions
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getStatus(): ?array
-    {
-        return $this->status;
-    }
-
-    public function setStatus(array $status): self
-    {
-        $this->status = $status;
-
-        return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -198,6 +187,18 @@ class Sessions
                 $env->setSession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?SessionStatuses
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?SessionStatuses $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

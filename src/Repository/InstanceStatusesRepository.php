@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\InstanceTypes;
+use App\Entity\InstanceStatuses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<InstanceTypes>
+ * @extends ServiceEntityRepository<InstanceStatuses>
  *
- * @method InstanceTypes|null find($id, $lockMode = null, $lockVersion = null)
- * @method InstanceTypes|null findOneBy(array $criteria, array $orderBy = null)
- * @method InstanceTypes[]    findAll()
- * @method InstanceTypes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method InstanceStatuses|null find($id, $lockMode = null, $lockVersion = null)
+ * @method InstanceStatuses|null findOneBy(array $criteria, array $orderBy = null)
+ * @method InstanceStatuses[]    findAll()
+ * @method InstanceStatuses[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class InstanceTypesRepository extends ServiceEntityRepository
+class InstanceStatusesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, InstanceTypes::class);
+        parent::__construct($registry, InstanceStatuses::class);
     }
 
-    public function add(InstanceTypes $entity, bool $flush = false): void
+    public function add(InstanceStatuses $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class InstanceTypesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(InstanceTypes $entity, bool $flush = false): void
+    public function remove(InstanceStatuses $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -39,20 +39,8 @@ class InstanceTypesRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return int
-     */
-    public function deleteAll(): int
-    {
-	$qb = $this->createQueryBuilder('it');
-
-	$qb->delete();
-
-	return $qb->getQuery()->getSingleScalarResult() ?? 0;
-    }
-
 //    /**
-//     * @return InstanceTypes[] Returns an array of InstanceTypes objects
+//     * @return InstanceStatuses[] Returns an array of InstanceStatuses objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -66,7 +54,7 @@ class InstanceTypesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?InstanceTypes
+//    public function findOneBySomeField($value): ?InstanceStatuses
 //    {
 //        return $this->createQueryBuilder('i')
 //            ->andWhere('i.exampleField = :val')

@@ -1,3 +1,15 @@
+# Valuable additions
+
+## Combo indexes
+`CREATE UNIQUE INDEX instance_types_hw_profile_id_os_id_combo ON instance_types(hw_profile_id, os_id);`
+
+## To string convertion
+```
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->name;
+    }
+```
 # Symfony Docker
 
 A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework, with full [HTTP/2](https://symfony.com/doc/current/weblink.html), HTTP/3 and HTTPS support.
