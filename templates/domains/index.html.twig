@@ -11,6 +11,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Technologies</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +21,7 @@
                 <td>{{ domain.id }}</td>
                 <td>{{ domain.name }}</td>
                 <td>{{ domain.description }}</td>
+                <td>{{ domain.techsCounter }}</td>
                 <td>
                     <a href="{{ path('app_domains_show', {'id': domain.id}) }}">show</a>
                     <a href="{{ path('app_domains_edit', {'id': domain.id}) }}">edit</a>

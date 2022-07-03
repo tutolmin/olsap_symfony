@@ -45,6 +45,7 @@ class DomainsController extends AbstractController
     {
         return $this->render('domains/show.html.twig', [
             'domain' => $domain,
+	    'techs' => $domain->getTechsCounter() .': '. implode( ', ', $domain->getTechnologies()->getValues()),
         ]);
     }
 

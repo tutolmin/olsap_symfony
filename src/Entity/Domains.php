@@ -24,6 +24,8 @@ class Domains
     #[ORM\OneToMany(mappedBy: 'domain', targetEntity: Technologies::class, orphanRemoval: true)]
     private $technologies;
 
+    private $techsCounter;
+
     public function __construct()
     {
         $this->technologies = new ArrayCollection();
@@ -93,4 +95,8 @@ class Domains
         return $this;
     }
 
+    public function getTechsCounter(): int
+    {
+	return $this->techsCounter = count( $this->getTechnologies());
+    }
 }

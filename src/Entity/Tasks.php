@@ -30,6 +30,8 @@ class Tasks
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskTechs::class, orphanRemoval: true)]
     private $taskTechs;
 
+    private $techsCounter;
+
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskInstanceTypes::class, orphanRemoval: true)]
     private $taskInstanceTypes;
 
@@ -42,6 +44,11 @@ class Tasks
         $this->taskTechs = new ArrayCollection();
         $this->taskInstanceTypes = new ArrayCollection();
         $this->envs = new ArrayCollection();
+    }
+
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->name;
     }
 
     public function getId(): ?int
@@ -143,6 +150,11 @@ class Tasks
         }
 
         return $this;
+    }
+
+    public function getTechsCounter(): int
+    {
+        return $this->techsCounter = count( $this->getTaskTechs());
     }
 
     /**

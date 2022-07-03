@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TaskTechs index{% endblock %}
+
+{% block body %}
+    <h1>TaskTechs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Task</th>
+                <th>Technology</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task_tech in task_techs %}
+            <tr>
+                <td>{{ task_tech.id }}</td>
+                <td>{{ task_tech.task }}</td>
+                <td>{{ task_tech.tech }}</td>
+                <td>
+                    <a href="{{ path('app_task_techs_show', {'id': task_tech.id}) }}">show</a>
+                    <a href="{{ path('app_task_techs_edit', {'id': task_tech.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_task_techs_new') }}">Create new</a>
+{% endblock %}
