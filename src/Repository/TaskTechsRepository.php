@@ -39,6 +39,11 @@ class TaskTechsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('tech' => 'ASC', 'task' => 'ASC'));
+    }
+
 //    /**
 //     * @return TaskTechs[] Returns an array of TaskTechs objects
 //     */

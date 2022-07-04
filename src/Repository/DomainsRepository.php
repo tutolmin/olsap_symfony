@@ -39,6 +39,11 @@ class DomainsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
+
 //    /**
 //     * @return Domains[] Returns an array of Domains objects
 //     */

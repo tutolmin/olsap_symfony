@@ -16,6 +16,14 @@
                 <td>{{ session.status }}</td>
             </tr>
             <tr>
+                <th>OSes</th>
+                <td>{{ oses }}</td>
+            </tr>
+            <tr>
+                <th>Techs</th>
+                <td>{{ techs }}</td>
+            </tr>
+            <tr>
                 <th>Created_at</th>
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

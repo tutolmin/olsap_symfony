@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SessionTechs{% endblock %}
+
+{% block body %}
+    <h1>Create new SessionTechs</h1>
+
+    {{ include('session_techs/_form.html.twig') }}
+
+    <a href="{{ path('app_session_techs_index') }}">back to list</a>
+{% endblock %}

@@ -10,6 +10,8 @@
             <tr>
                 <th>Id</th>
                 <th>Testee</th>
+                <th>OSes</th>
+                <th>Techs</th>
                 <th>Status</th>
                 <th>Created_at</th>
                 <th>Ended_at</th>
@@ -22,6 +24,8 @@
             <tr>
                 <td>{{ session.id }}</td>
                 <td>{{ session.testee }}</td>
+                <td>{{ session.osesCounter }}</td>
+                <td>{{ session.techsCounter }}</td>
                 <td>{{ session.status }}</td>
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>

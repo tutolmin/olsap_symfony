@@ -39,6 +39,11 @@ class TasksRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
+
 //    /**
 //     * @return Tasks[] Returns an array of Tasks objects
 //     */

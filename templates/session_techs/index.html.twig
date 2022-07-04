@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SessionTechs index{% endblock %}
+
+{% block body %}
+    <h1>SessionTechs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Session</th>
+                <th>Technology</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for session_tech in session_techs %}
+            <tr>
+                <td>{{ session_tech.id }}</td>
+                <td>{{ session_tech.session }}</td>
+                <td>{{ session_tech.tech }}</td>
+                <td>
+                    <a href="{{ path('app_session_techs_show', {'id': session_tech.id}) }}">show</a>
+                    <a href="{{ path('app_session_techs_edit', {'id': session_tech.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_session_techs_new') }}">Create new</a>
+{% endblock %}

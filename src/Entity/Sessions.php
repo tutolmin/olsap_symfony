@@ -31,8 +31,12 @@ class Sessions
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionOses::class, orphanRemoval: true)]
     private $sessionOses;
 
+    private $osesCounter;
+
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionTechs::class, orphanRemoval: true)]
     private $sessionTechs;
+
+    private $techsCounter;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Environments::class)]
     private $envs;
@@ -46,6 +50,11 @@ class Sessions
         $this->sessionOses = new ArrayCollection();
         $this->sessionTechs = new ArrayCollection();
         $this->envs = new ArrayCollection();
+    }
+
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->getTestee()->getEmail()." at ".$this->getCreatedAt()->format('Y-m-d H:i:s');
     }
 
     public function getId(): ?int
@@ -131,6 +140,11 @@ class Sessions
         return $this;
     }
 
+    public function getOsesCounter(): int
+    {
+        return $this->osesCounter = count( $this->getSessionOses());
+    }
+
     /**
      * @return Collection<int, SessionTechs>
      */
@@ -159,6 +173,11 @@ class Sessions
         }
 
         return $this;
+    }
+
+    public function getTechsCounter(): int
+    {
+        return $this->techsCounter = count( $this->getSessionTechs());
     }
 
     /**

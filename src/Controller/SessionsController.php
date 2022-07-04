@@ -43,8 +43,18 @@ class SessionsController extends AbstractController
     #[Route('/{id}', name: 'app_sessions_show', methods: ['GET'])]
     public function show(Sessions $session): Response
     {
+        $techs = array();
+        foreach($session->getSessionTechs()->getValues() as $st)
+          $techs[] = $st->getTech();
+
+        $oses = array();
+        foreach($session->getSessionOses()->getValues() as $so)
+          $oses[] = $so->getOs();
+
         return $this->render('sessions/show.html.twig', [
             'session' => $session,
+            'techs' => $session->getTechsCounter() .': '. implode( ', ', $techs),
+            'oses' => $session->getOsesCounter() .': '. implode( ', ', $oses),
         ]);
     }
 

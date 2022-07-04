@@ -39,6 +39,11 @@ class BreedsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('name' => 'ASC'));
+    }
+
 //    /**
 //     * @return Breeds[] Returns an array of Breeds objects
 //     */

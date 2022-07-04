@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SessionTechs{% endblock %}
+
+{% block body %}
+    <h1>Edit SessionTechs</h1>
+
+    {{ include('session_techs/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_session_techs_index') }}">back to list</a>
+
+    {{ include('session_techs/_delete_form.html.twig') }}
+{% endblock %}

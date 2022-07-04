@@ -39,6 +39,11 @@ class OperatingSystemsRepository extends ServiceEntityRepository
         }
     }
 
+    public function findAll()
+    {
+        return $this->findBy(array(), array('breed' => 'ASC', 'release' => 'ASC'));
+    }
+
 //    /**
 //     * @return OperatingSystems[] Returns an array of OperatingSystems objects
 //     */
