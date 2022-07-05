@@ -16,34 +16,39 @@
         {% endblock %}
     </head>
     <body>
-    <a href="{{ path('app_breeds_index') }}">OS Breeds</a>
-::
-    <a href="{{ path('app_operating_systems_index') }}">Operating&nbsp;Systems</a>
-::
-    <a href="{{ path('app_hardware_profiles_index') }}">Hardware&nbsp;Profiles</a>
-::
-    <a href="{{ path('app_instance_statuses_index') }}">Instance Statuses</a>
-::
-    <a href="{{ path('app_domains_index') }}">Domains</a>
-::
-    <a href="{{ path('app_technologies_index') }}">Technologies</a>
-::
-    <a href="{{ path('app_tasks_index') }}">Tasks</a>
-::
-    <a href="{{ path('app_task_techs_index') }}">Task Techs</a>
-::
-    <a href="{{ path('app_testees_index') }}">Testees</a>
-::
-    <a href="{{ path('app_environment_statuses_index') }}">Env Statuses</a>
-::
-    <a href="{{ path('app_session_statuses_index') }}">Session Statuses</a>
-::
-    <a href="{{ path('app_sessions_index') }}">Sessions</a>
-::
-    <a href="{{ path('app_session_oses_index') }}">Session OSes</a>
-::
-    <a href="{{ path('app_session_techs_index') }}">Session Techs</a>
-::
+    <table cellpadding="15px">
+    <tr>
+    <td>
+    <a href="{{ path('app_breeds_index') }}">OS&nbsp;Breeds</a><br/>
+    <a href="{{ path('app_operating_systems_index') }}">Operating&nbsp;Systems</a><br/>
+    <a href="{{ path('app_hardware_profiles_index') }}">Hardware&nbsp;Profiles</a><br/>
+    <a href="{{ path('app_instance_types_index') }}">Instance&nbsp;Types</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_instance_statuses_index') }}">Instance&nbsp;Statuses</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_domains_index') }}">Domains</a><br/>
+    <a href="{{ path('app_technologies_index') }}">Technologies</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_tasks_index') }}">Tasks</a><br/>
+    <a href="{{ path('app_task_techs_index') }}">Task&nbsp;Techs</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_testees_index') }}">Testees</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_environment_statuses_index') }}">Env&nbsp;Statuses</a><br/>
+    </td>
+    <td>
+    <a href="{{ path('app_session_statuses_index') }}">Session&nbsp;Statuses</a><br/>
+    <a href="{{ path('app_sessions_index') }}">Sessions</a><br/>
+    <a href="{{ path('app_session_oses_index') }}">Session&nbsp;OSes</a><br/>
+    <a href="{{ path('app_session_techs_index') }}">Session&nbsp;Techs</a><br/>
+    </td>
+    </tr>
+    </table>
         {% block body %}{% endblock %}
     </body>
 </html>

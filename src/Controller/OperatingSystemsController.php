@@ -45,6 +45,7 @@ class OperatingSystemsController extends AbstractController
     {
         return $this->render('operating_systems/show.html.twig', [
             'operating_system' => $operatingSystem,
+            'sessions' => $operatingSystem->getSessionsCounter(),
         ]);
     }
 

@@ -29,6 +29,7 @@ class OperatingSystems
 
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: SessionOses::class, orphanRemoval: true)]
     private $osSessions;
+    private $sessionsCounter;
 
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: TaskOses::class, orphanRemoval: true)]
     private $osTasks;
@@ -136,6 +137,12 @@ class OperatingSystems
         }
 
         return $this;
+    }
+
+
+    public function getSessionsCounter(): int
+    {
+        return $this->sessionsCounter = count( $this->getSessions());
     }
 
     public function removeSession(SessionOses $session): self

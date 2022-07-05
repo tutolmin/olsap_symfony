@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}InstanceTypes index{% endblock %}
+
+{% block body %}
+    <h1>InstanceTypes index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>OS</th>
+                <th>HW Profile</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instance_type in instance_types %}
+            <tr>
+                <td>{{ instance_type.id }}</td>
+                <td>{{ instance_type.os }}</td>
+                <td>{{ instance_type.hw_profile }}</td>
+                <td>
+                    <a href="{{ path('app_instance_types_show', {'id': instance_type.id}) }}">show</a>
+                    <a href="{{ path('app_instance_types_edit', {'id': instance_type.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_instance_types_new') }}">Create new</a>
+{% endblock %}

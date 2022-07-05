@@ -12,6 +12,7 @@
                 <th>Breed</th>
                 <th>Release</th>
                 <th>Description</th>
+                <th>Sessions</th>
                 <th>Supported</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ operating_system.breed }}</td>
                 <td>{{ operating_system.release }}</td>
                 <td>{{ operating_system.description }}</td>
+                <td>{{ operating_system.sessionsCounter }}</td>
                 <td>{{ operating_system.supported ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('app_operating_systems_show', {'id': operating_system.id}) }}">show</a>

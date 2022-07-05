@@ -65,7 +65,7 @@ class PopulateInstanceTypesCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
 	// Truncate the InstanceType table first
-	$this->itRepository->deleteAll();
+//	$this->itRepository->deleteAll();
 
 	// look for *all* HW profiles objects
 	$hwProfiles = $this->hpRepository->findAll();
@@ -76,18 +76,31 @@ class PopulateInstanceTypesCommand extends Command
 	foreach( $hwProfiles as &$hp)
 	foreach( $oses as &$os) {
 
-	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
+#	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
+	  $io->note(sprintf('HW: %s OS: %s %s', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
 
-	  // Populate new InstanceType object
-	  $instanceType = new InstanceTypes();
-	  $instanceType->setHwProfile( $hp);
-	  $instanceType->setOs( $os);
+	  // Try to find existing Instance type
+	  $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
 
-	  // tell Doctrine you want to (eventually) save the Product (no queries yet)
-	  $this->entityManager->persist($instanceType);
+	  if( count($it)>0) {
 
-	  // actually executes the queries (i.e. the INSERT query)
-	  $this->entityManager->flush();
+            $io->warning(sprintf('Already exists, skipping addition'));
+
+	  } else {
+
+            $io->note(sprintf('Adding new record to the DB'));
+
+	    // Populate new InstanceType object
+	    $instanceType = new InstanceTypes();
+	    $instanceType->setHwProfile( $hp);
+	    $instanceType->setOs( $os);
+
+	    // tell Doctrine you want to (eventually) save the Product (no queries yet)
+	    $this->entityManager->persist($instanceType);
+
+	    // actually executes the queries (i.e. the INSERT query)
+	    $this->entityManager->flush();
+	  }
 	}
 /*
         $arg1 = $input->getArgument('arg1');

@@ -57,7 +57,19 @@ class InstanceTypes
         return $this->hw_profile;
     }
 
+    public function getHw_Profile(): ?HardwareProfiles
+    {
+        return $this->hw_profile;
+    }
+
     public function setHwProfile(?HardwareProfiles $hw_profile): self
+    {
+        $this->hw_profile = $hw_profile;
+
+        return $this;
+    }
+
+    public function setHw_Profile(?HardwareProfiles $hw_profile): self
     {
         $this->hw_profile = $hw_profile;
 
