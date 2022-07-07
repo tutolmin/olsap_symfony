@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Environments index{% endblock %}
+
+{% block body %}
+    <h1>Environments index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Instance</th>
+                <th>Session</th>
+                <th>Task</th>
+                <th>Started_at</th>
+                <th>Valid</th>
+                <th>Path</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for environment in environments %}
+            <tr>
+                <td>{{ environment.id }}</td>
+                <td>{{ environment.instance }}</td>
+                <td>{{ environment.session }}</td>
+                <td>{{ environment.task }}</td>
+                <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
+                <td>{{ environment.path }}</td>
+                <td>
+                    <a href="{{ path('app_environments_show', {'id': environment.id}) }}">show</a>
+                    <a href="{{ path('app_environments_edit', {'id': environment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_environments_new') }}">Create new</a>
+{% endblock %}

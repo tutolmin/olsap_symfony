@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TesteesRepository::class)]
+#[ORM\UniqueConstraint(name: "testees_oauth_token", columns: ["oauth_token"])]
 class Testees
 {
     #[ORM\Id]
@@ -19,7 +20,7 @@ class Testees
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $oath_token;
+    private $oauth_token;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private $registered_at;
@@ -54,14 +55,14 @@ class Testees
         return $this;
     }
 
-    public function getOathToken(): ?string
+    public function getOauthToken(): ?string
     {
-        return $this->oath_token;
+        return $this->oauth_token;
     }
 
-    public function setOathToken(string $oath_token): self
+    public function setOauthToken(string $oauth_token): self
     {
-        $this->oath_token = $oath_token;
+        $this->oauth_token = $oauth_token;
 
         return $this;
     }

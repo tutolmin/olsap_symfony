@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20220630073807 extends AbstractMigration
+final class Version20220707204852 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,15 +20,17 @@ final class Version20220630073807 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SEQUENCE breeds_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE breeds (id INT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE UNIQUE INDEX sessions_hash ON sessions (hash)');
+        $this->addSql('CREATE UNIQUE INDEX task_instance_types_combo ON task_instance_types (task_id, instance_type_id)');
+        $this->addSql('CREATE UNIQUE INDEX tasks_name ON tasks (name)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE SCHEMA public');
-        $this->addSql('DROP SEQUENCE breeds_id_seq CASCADE');
-        $this->addSql('DROP TABLE breeds');
+        $this->addSql('DROP INDEX task_instance_types_combo');
+        $this->addSql('DROP INDEX tasks_name');
+        $this->addSql('DROP INDEX sessions_hash');
     }
 }

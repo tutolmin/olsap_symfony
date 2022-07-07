@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DomainsRepository::class)]
+#[ORM\UniqueConstraint(name: "domains_name", columns: ["name"])]
 class Domains
 {
     #[ORM\Id]

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InstanceStatusesRepository::class)]
+#[ORM\UniqueConstraint(name: "instance_statuses_status", columns: ["status"])]
 class InstanceStatuses
 {
     #[ORM\Id]

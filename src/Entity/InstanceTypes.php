@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InstanceTypesRepository::class)]
+#[ORM\UniqueConstraint(name: "instance_types_combo", columns: ["hw_profile_id", "os_id"])]
 class InstanceTypes
 {
     #[ORM\Id]
@@ -35,6 +36,11 @@ class InstanceTypes
         $this->instanceTypeTasks = new ArrayCollection();
     }
 
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->getOs()." @ ".$this->getHwProfile();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -57,19 +63,7 @@ class InstanceTypes
         return $this->hw_profile;
     }
 
-    public function getHw_Profile(): ?HardwareProfiles
-    {
-        return $this->hw_profile;
-    }
-
     public function setHwProfile(?HardwareProfiles $hw_profile): self
-    {
-        $this->hw_profile = $hw_profile;
-
-        return $this;
-    }
-
-    public function setHw_Profile(?HardwareProfiles $hw_profile): self
     {
         $this->hw_profile = $hw_profile;
 

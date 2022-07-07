@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HardwareProfilesRepository::class)]
+#[ORM\UniqueConstraint(name: "hardware_profiles_name", columns: ["name"])]
 class HardwareProfiles
 {
     #[ORM\Id]
@@ -26,6 +27,9 @@ class HardwareProfiles
 
     #[ORM\Column(type: 'integer')]
     private $cost;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
 
     public function __construct()
     {
@@ -104,6 +108,18 @@ class HardwareProfiles
     public function setCost(int $cost): self
     {
         $this->cost = $cost;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

@@ -6,6 +6,7 @@ use App\Repository\TaskTechsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskTechsRepository::class)]
+#[ORM\UniqueConstraint(name: "task_techs_combo", columns: ["task_id", "tech_id"])]
 class TaskTechs
 {
     #[ORM\Id]

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Instances{% endblock %}
+
+{% block body %}
+    <h1>Edit Instances</h1>
+
+    {{ include('instances/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_instances_index') }}">back to list</a>
+
+    {{ include('instances/_delete_form.html.twig') }}
+{% endblock %}

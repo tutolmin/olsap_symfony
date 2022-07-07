@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OperatingSystemsRepository::class)]
+#[ORM\UniqueConstraint(name: "operating_systems_combo", columns: ["breed_id", "release"])]
 class OperatingSystems
 {
     #[ORM\Id]

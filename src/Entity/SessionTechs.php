@@ -6,6 +6,7 @@ use App\Repository\SessionTechsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SessionTechsRepository::class)]
+#[ORM\UniqueConstraint(name: "session_techs_combo", columns: ["session_id", "tech_id"])]
 class SessionTechs
 {
     #[ORM\Id]

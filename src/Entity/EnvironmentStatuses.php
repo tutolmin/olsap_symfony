@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EnvironmentStatusesRepository::class)]
+#[ORM\UniqueConstraint(name: "environments_statuses_status", columns: ["status"])]
 class EnvironmentStatuses
 {
     #[ORM\Id]

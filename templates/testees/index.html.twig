@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ testee.id }}</td>
                 <td>{{ testee.email }}</td>
-                <td>{{ testee.oathToken }}</td>
+                <td>{{ testee.oauthToken }}</td>
                 <td>{{ testee.registeredAt ? testee.registeredAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_testees_show', {'id': testee.id}) }}">show</a>

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Environments{% endblock %}
+
+{% block body %}
+    <h1>Environments</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ environment.id }}</td>
+            </tr>
+            <tr>
+                <th>Instance</th>
+                <td>{{ environment.instance }}</td>
+            </tr>
+            <tr>
+                <th>Session</th>
+                <td>{{ environment.session }}</td>
+            </tr>
+            <tr>
+                <th>Task</th>
+                <td>{{ environment.task }}</td>
+            </tr>
+            <tr>
+                <th>Started_at</th>
+                <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Valid</th>
+                <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Path</th>
+                <td>{{ environment.path }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_environments_index') }}">back to list</a>
+
+    <a href="{{ path('app_environments_edit', {'id': environment.id}) }}">edit</a>
+
+    {{ include('environments/_delete_form.html.twig') }}
+{% endblock %}

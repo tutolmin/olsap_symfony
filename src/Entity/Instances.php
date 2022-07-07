@@ -6,6 +6,7 @@ use App\Repository\InstancesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: InstancesRepository::class)]
+#[ORM\UniqueConstraint(name: "instances_name", columns: ["name"])]
 class Instances
 {
     #[ORM\Id]
@@ -29,6 +30,14 @@ class Instances
     #[ORM\ManyToOne(targetEntity: InstanceStatuses::class, inversedBy: 'instances')]
     #[ORM\JoinColumn(nullable: false)]
     private $status;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
+
+    // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
+    public function __toString() {
+        return $this->name;
+    }
 
     public function getId(): ?int
     {
@@ -101,6 +110,18 @@ class Instances
     public function setStatus(?InstanceStatuses $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

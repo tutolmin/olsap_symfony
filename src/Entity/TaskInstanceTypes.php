@@ -6,6 +6,7 @@ use App\Repository\TaskInstanceTypesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskInstanceTypesRepository::class)]
+#[ORM\UniqueConstraint(name: "task_instance_types_combo", columns: ["task_id", "instance_type_id"])]
 class TaskInstanceTypes
 {
     #[ORM\Id]

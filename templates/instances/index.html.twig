@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Instances index{% endblock %}
+
+{% block body %}
+    <h1>Instances index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Instance Type</th>
+                <th>Created At</th>
+                <th>Port</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for instance in instances %}
+            <tr>
+                <td>{{ instance.id }}</td>
+                <td>{{ instance.instancetype }}</td>
+                <td>{{ instance.createdAt ? instance.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ instance.port }}</td>
+                <td>{{ instance.name }}</td>
+                <td>
+                    <a href="{{ path('app_instances_show', {'id': instance.id}) }}">show</a>
+                    <a href="{{ path('app_instances_edit', {'id': instance.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_instances_new') }}">Create new</a>
+{% endblock %}
