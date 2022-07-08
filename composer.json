@@ -15,6 +15,7 @@
         "doctrine/orm": "^2.12",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "*",
+        "symfony/doctrine-messenger": "6.1.*",
         "symfony/dotenv": "*",
         "symfony/flex": "^2",
         "symfony/form": "6.1.*",
