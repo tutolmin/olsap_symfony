@@ -9,15 +9,31 @@ final class LxcOperation
      * to hold the data for this message class.
      */
 
-//     private $name;
+    private $command;
 
-//     public function __construct(string $name)
-//     {
-//         $this->name = $name;
-//     }
+    private $environment_id;
 
-//    public function getName(): string
-//    {
-//        return $this->name;
-//    }
+    private $instance_type_id;
+
+    public function __construct( $message)
+    {
+        $this->command = $message['command'];
+        $this->environment_id = $message['environment_id']?$message['environment_id']:"";
+        $this->instance_type_id = $message['instance_type_id'];
+    }
+
+    public function getCommand(): string
+    {
+	return $this->command;
+    }
+
+    public function getEnvironmentId(): string
+    {
+	return $this->environment_id;
+    }
+
+    public function getInstanceTypeId(): string
+    {
+	return $this->instance_type_id;
+    }
 }

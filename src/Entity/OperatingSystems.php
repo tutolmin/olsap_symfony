@@ -39,6 +39,9 @@ class OperatingSystems
     #[ORM\JoinColumn(nullable: false)]
     private $breed;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $alias;
+
     public function __construct()
     {
         $this->instanceTypes = new ArrayCollection();
@@ -196,6 +199,18 @@ class OperatingSystems
     public function setBreed(?Breeds $breed): self
     {
         $this->breed = $breed;
+
+        return $this;
+    }
+
+    public function getAlias(): ?string
+    {
+        return $this->alias;
+    }
+
+    public function setAlias(?string $alias): self
+    {
+        $this->alias = $alias;
 
         return $this;
     }

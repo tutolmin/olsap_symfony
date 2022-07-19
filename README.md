@@ -1,5 +1,16 @@
 # Valuable additions
 
+## Container limits
+```
+lxc profile set cricket limits.memory 256MB
+lxc profile set cricket limits.memory.swap false
+lxc profile device set cricket root size 1GB
+lxc profile set cricket limits.cpu.allowance 10%
+```
+
+## PHP LXC lib
+https://github.com/ashleyhood/php-lxd/blob/master/docs/configuration.md
+
 ## Combo indexes
 `CREATE UNIQUE INDEX instance_types_hw_profile_id_os_id_combo ON instance_types(hw_profile_id, os_id);`
 
