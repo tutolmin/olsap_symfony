@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Type</th>
+                <th>Name</th>
                 <th>Description</th>
                 <th>Cost</th>
                 <th>actions</th>
@@ -19,7 +20,8 @@
         {% for hardware_profile in hardware_profiles %}
             <tr>
                 <td>{{ hardware_profile.id }}</td>
-                <td>{{ hardware_profile.type ? 'Yes' : 'No' }}</td>
+                <td>{{ hardware_profile.type ? 'VM' : 'Container' }}</td>
+                <td>{{ hardware_profile.name }}</td>
                 <td>{{ hardware_profile.description }}</td>
                 <td>{{ hardware_profile.cost }}</td>
                 <td>

@@ -13,9 +13,9 @@ class OperatingSystemsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-#            ->add('breed', TextType::class)
             ->add('breed')
             ->add('release')
+            ->add('alias')
             ->add('description')
             ->add('supported')
         ;

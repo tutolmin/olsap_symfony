@@ -39,7 +39,7 @@ class InstancesCreateCommand extends Command
     // Message bus
     private $bus;
 
-    // Dependency injection of the OperatingSystems entity
+    // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager,
 	MessageBusInterface $bus)
     {
@@ -107,7 +107,8 @@ class InstancesCreateCommand extends Command
 
 	    for($i=0; $i<$number; $i++)
 	      $this->bus->dispatch(new LxcOperation(["command" => "create", 
-		"environment_id" => null, "instance_type_id" => $instance_type->getId()]));
+		"environment_id" => null, "instance_id" => null, 
+		"instance_type_id" => $instance_type->getId()]));
 
 	  } else
 

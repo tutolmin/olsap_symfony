@@ -43,17 +43,15 @@ class LxcLsCommand extends Command
         $config = [
             'verify' => false,
             'cert' => [
-                __DIR__.'/client.pem',
+                $_ENV["PROJECT_DIR"].'/client.pem',
                 ''
             ]
         ];
 
         $guzzle = new GuzzleClient($config);
         $adapter = new GuzzleAdapter($guzzle);
-
         $lxd = new \Opensaucesystems\Lxd\Client($adapter);
-
-        $lxd->setUrl('https://172.27.72.4:8443');
+        $lxd->setUrl($_ENV['LXD_URL']);
 
         #$certificates = $lxd->certificates->all();
         #$fingerprint = $lxd->certificates->add(file_get_contents(__DIR__.'/client.pem'), 'ins3Cure');
@@ -80,7 +78,6 @@ class LxcLsCommand extends Command
 //       var_dump( $info);
                     $io->note(sprintf('Name: %s', $info['name']));
         }
-
 #        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
         return Command::SUCCESS;

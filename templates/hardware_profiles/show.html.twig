@@ -13,7 +13,11 @@
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ hardware_profile.type ? 'Yes' : 'No' }}</td>
+                <td>{{ hardware_profile.type ? 'VM' : 'Container' }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ hardware_profile.name }}</td>
             </tr>
             <tr>
                 <th>Description</th>

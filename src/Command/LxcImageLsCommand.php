@@ -45,7 +45,7 @@ class LxcImageLsCommand extends Command
 	$config = [
 	    'verify' => false,
 	    'cert' => [
-		__DIR__.'/client.pem',
+		$_ENV["PROJECT_DIR"].'/client.pem',
 		''
 	    ]
 	];
@@ -55,7 +55,7 @@ class LxcImageLsCommand extends Command
 
 	$lxd = new \Opensaucesystems\Lxd\Client($adapter);
 
-	$lxd->setUrl('https://172.27.72.4:8443');
+	$lxd->setUrl($_ENV["LXD_URL"]);
 
 	#$certificates = $lxd->certificates->all();
 	#$fingerprint = $lxd->certificates->add(file_get_contents(__DIR__.'/client.pem'), 'ins3Cure');

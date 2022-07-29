@@ -51,10 +51,15 @@ class SessionsController extends AbstractController
         foreach($session->getSessionOses()->getValues() as $so)
           $oses[] = $so->getOs();
 
+        $envs = array();
+        foreach($session->getEnvs()->getValues() as $se)
+          $envs[] = $se->getTask() . " @ " . $se->getInstance();
+
         return $this->render('sessions/show.html.twig', [
             'session' => $session,
             'techs' => $session->getTechsCounter() .': '. implode( ', ', $techs),
             'oses' => $session->getOsesCounter() .': '. implode( ', ', $oses),
+            'envs' => $session->getEnvsCounter() .': '. implode( ', ', $envs),
         ]);
     }
 

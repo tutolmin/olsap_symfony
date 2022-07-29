@@ -42,6 +42,8 @@ class Sessions
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Environments::class)]
     private $envs;
 
+    private $envsCounter;
+
     #[ORM\ManyToOne(targetEntity: SessionStatuses::class, inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private $status;
@@ -187,6 +189,11 @@ class Sessions
     public function getEnvs(): Collection
     {
         return $this->envs;
+    }
+
+    public function getEnvsCounter(): int
+    {
+        return $this->envsCounter = count( $this->getEnvs());
     }
 
     public function addEnv(Environments $env): self

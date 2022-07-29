@@ -15,11 +15,14 @@ final class LxcOperation
 
     private $instance_type_id;
 
+    private $instance_id;
+
     public function __construct( $message)
     {
         $this->command = $message['command'];
         $this->environment_id = $message['environment_id']?$message['environment_id']:"";
-        $this->instance_type_id = $message['instance_type_id'];
+        $this->instance_type_id = $message['instance_type_id']?$message['instance_type_id']:"";
+        $this->instance_id = $message['instance_id']?$message['instance_id']:"";
     }
 
     public function getCommand(): string
@@ -35,5 +38,10 @@ final class LxcOperation
     public function getInstanceTypeId(): string
     {
 	return $this->instance_type_id;
+    }
+
+    public function getInstanceId(): string
+    {
+	return $this->instance_id;
     }
 }

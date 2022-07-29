@@ -27,12 +27,16 @@
                 <th>Name</th>
                 <td>{{ instance.name }}</td>
             </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ instance.status }}</td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('app_instances_index') }}">back to list</a>
-
+<!--
     <a href="{{ path('app_instances_edit', {'id': instance.id}) }}">edit</a>
-
+-->
     {{ include('instances/_delete_form.html.twig') }}
 {% endblock %}
