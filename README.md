@@ -1,5 +1,62 @@
 # Valuable additions
 
+## Bridge ###
+Bridge should be able to route DHCP requests out to pi. Docker rules disallow it.
+```
+#cat /etc/NetworkManager/dispatcher.d/99-bridge
+#!/bin/sh
+
+INTERFACE=$1
+ACTION=$2
+
+if [ "$INTERFACE" = "nm-bridge" ]; then
+  if [ "$ACTION" = "up" ]; then
+    iptables -A FORWARD -i nm-bridge -j ACCEPT
+  fi
+fi
+```
+
+## LXD auth ###
+Generate client key and cert in order to communicate with LXD
+```
+lxc_cert.php
+```
+Complete instruction: https://stgraber.org/2016/04/18/lxd-api-direct-interaction/
+
+## AWX
+CLI execution
+```
+awx -k --conf.host=http://localhost:8080/ projects list
+```
+Enter AWX container and install
+```
+ansible-galaxy collection install community.general
+ansible-inventory -i lxd.yml --graph
+```
+where lxd.yml contains
+```
+plugin: community.general.lxd
+#url: unix:/var/snap/lxd/common/lxd/unix.socket
+url: https://172.27.72.4:8443/
+#trust_password: "mypass"
+#state: RUNNING
+groupby:
+  osUbuntu:
+    type: os
+    attribute: ubuntu
+```
+... and /etc/ansible/ansible.cfg contains 
+```
+[inventory]
+enable_plugins = auto
+```
+... and ~/.config/lxc/ contains client.crt and client.key generated earlier
+
+## Start the containers
+```
+SERVER_NAME=:80  docker-compose up -d
+```
+
 ## Container limits
 ```
 lxc profile set cricket limits.memory 256MB

@@ -31,8 +31,14 @@
         "symfony/validator": "6.1.*",
         "symfony/yaml": "*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+	"sdwru/awx-v2": "dev-master",
+	"sdwru/oauth2-awx": "dev-master"
     },
+    "repositories": [
+	{ "type": "git", "url": "https://github.com/tutolmin/awx-v2.git" },
+	{ "type": "git", "url": "https://github.com/tutolmin/oauth2-awx.git" }
+    ],
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,

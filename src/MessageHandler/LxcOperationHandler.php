@@ -3,8 +3,10 @@
 namespace App\MessageHandler;
 
 use App\Message\LxcOperation;
+use App\Message\RunPlaybook;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\InstanceStatuses;
@@ -32,23 +34,23 @@ final class LxcOperationHandler implements MessageHandlerInterface
     private $instanceStatusRepository;
     private $instanceRepository;
 
+    // Message bus
+    private $bus;
+
     private $lxd;
 
     public function __construct(
-//	EnvironmentsRepository $environmentRepository,
-//	InstanceTypesRepository $instanceTypeRepository, 
-	LoggerInterface $logger, EntityManagerInterface $entityManager)
+	LoggerInterface $logger, EntityManagerInterface $entityManager,
+	MessageBusInterface $bus)
     {
         $this->logger = $logger;
+        $this->bus = $bus;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository( InstanceTypes::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
-
-//        $this->environmentRepository = $environmentRepository;
-//        $this->instanceTypeRepository = $instanceTypeRepository;
 
         $config = [
             'verify' => false,
@@ -84,11 +86,40 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	// Binding some orphan instance to an env
 	case "bind":
 
-	  // REQUIRED: EnvID and InstanceId
-	  if(!$instance || !$environment) {
-            $this->logger->error( "Instance ID and Env ID are required for `" . $message->getCommand() . "` LXD command");
+	  // REQUIRED: EnvID and InstanceTypeId
+	  if(!$instance_type || !$environment) {
+            $this->logger->error( "Instance type ID and Env ID are required for `" . $message->getCommand() . "` LXD command");
 	    break;
 	  }
+
+	  // Try to find an available Instance
+	  $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
+          $instance = $this->instanceRepository->findOneBy(["instance_type_id" => $instance_type->getId(),
+		"instance_status_id" => $instance_status->getId()]);
+
+	  // Started instance of necessary type was found
+	  if($instance) {
+
+	    // Bind an instance to an environment
+	    $environment->setInstance($instance);
+
+	    // Store item into the DB
+	    $this->entityManager->persist($environment);
+	    $this->entityManager->flush();
+
+	  } else {
+
+	      // Send message to request creation of the instance of the certain type
+              $this->bus->dispatch(new LxcOperation(["command" => "create",
+                "environment_id" => $environment->getId(), "instance_id" => null,
+                "instance_type_id" => $instance_type->getId()]));
+
+	      // Send message to request deployment of the env
+              $this->bus->dispatch(new RunPlaybook(["name" => "deploy",
+                "environment_id" => $environment->getId()]));
+
+	  }
+
 
 	  break;
 
@@ -131,7 +162,23 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	  $this->entityManager->persist($instance);
 	  $this->entityManager->flush();
 
+	  // Created instance for particular Environment
+	  if($environment) {
+
+	    // Bind an instance to an environment
+	    $environment->setInstance($instance);
+
+	    // Store item into the DB
+	    $this->entityManager->persist($environment);
+	    $this->entityManager->flush();
+	  }
+
 	  # TODO: Handle exception
+
+	  // Send message to start a container
+	  $this->bus->dispatch(new LxcOperation(["command" => "start",
+	    "environment_id" => null, "instance_id" => $instance->getId(),
+	    "instance_type_id"]));
 
 	  break;
 
