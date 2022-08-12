@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Ports{% endblock %}
+
+{% block body %}
+    <h1>Create new Ports</h1>
+
+    {{ include('ports/_form.html.twig') }}
+
+    <a href="{{ path('app_ports_index') }}">back to list</a>
+{% endblock %}

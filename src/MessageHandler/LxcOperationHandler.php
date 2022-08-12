@@ -178,7 +178,7 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	  // Send message to start a container
 	  $this->bus->dispatch(new LxcOperation(["command" => "start",
 	    "environment_id" => null, "instance_id" => $instance->getId(),
-	    "instance_type_id"]));
+	    "instance_type_id" => null]));
 
 	  break;
 

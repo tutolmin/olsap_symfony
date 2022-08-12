@@ -15,7 +15,7 @@ use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 
 #[AsCommand(
     name: 'lxc:image:ls',
-    description: 'Add a short description for your command',
+    description: 'Lists available LXC images',
 )]
 class LxcImageLsCommand extends Command
 {

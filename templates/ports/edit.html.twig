@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ports{% endblock %}
+
+{% block body %}
+    <h1>Edit Ports</h1>
+
+    {{ include('ports/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_ports_index') }}">back to list</a>
+
+    {{ include('ports/_delete_form.html.twig') }}
+{% endblock %}
