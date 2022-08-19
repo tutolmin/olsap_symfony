@@ -12,6 +12,7 @@ framework:
         routing:
             App\Message\LxcOperation: async            # Route your messages to the transports
             App\Message\RunPlaybook: async
+            App\Message\SessionAction: async
             # 'App\Message\YourMessage': async
 
 # when@test:
