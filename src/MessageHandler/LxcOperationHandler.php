@@ -16,9 +16,12 @@ use App\Entity\Environments;
 
 use Psr\Log\LoggerInterface;
 
+use App\Service\LxcManager;
+
+/*
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
-
+*/
 #[AsMessageHandler]
 final class LxcOperationHandler implements MessageHandlerInterface
 {
@@ -41,17 +44,18 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
     public function __construct(
 	LoggerInterface $logger, EntityManagerInterface $entityManager,
-	MessageBusInterface $bus)
+	MessageBusInterface $bus, LxcManager $lxd)
     {
         $this->logger = $logger;
         $this->bus = $bus;
+	$this->lxd = $lxd;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository( InstanceTypes::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
-
+/*
         $config = [
             'verify' => false,
             'cert' => [
@@ -63,6 +67,7 @@ final class LxcOperationHandler implements MessageHandlerInterface
         $adapter = new GuzzleAdapter($guzzle);
         $this->lxd = new \Opensaucesystems\Lxd\Client($adapter);
         $this->lxd->setUrl($_ENV['LXD_URL']);
+*/
     }
 
     public function __invoke(LxcOperation $message)
@@ -134,13 +139,16 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Creating LXC instance of type id: `" . $instance_type->getId() . "`, OS alias: `" . 
 	      $instance_type->getOs()->getAlias() . "`, HW profile: `" . $instance_type->getHwProfile()->getName() . "`");
-
+/*
 	  // Create an instance in LXD
 	  $options = [
 	      'alias'  => $instance_type->getOs()->getAlias(),
 	      'profiles' => [$instance_type->getHwProfile()->getName() ]
 	  ];
 	  $responce = $this->lxd->containers->create(null, $options);	
+*/
+	  $responce = $this->lxd->createInstance($instance_type->getOs()->getAlias(),
+		$instance_type->getHwProfile()->getName());
 
 	  # TODO: handle exception
 
@@ -194,7 +202,8 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Starting LXC instance: `" . $instance->getName() . "`");
 
-	  $responce = $this->lxd->containers->start($instance->getName());	
+//	  $responce = $this->lxd->containers->start($instance->getName());	
+	  $responce = $this->lxd->startInstance($instance->getName());	
 
 	  # TODO: handle exception
 
@@ -222,7 +231,8 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Stopping LXC instance: `" . $instance->getName() . "`");
 
-	  $responce = $this->lxd->containers->stop($instance->getName());	
+//	  $responce = $this->lxd->containers->stop($instance->getName());	
+	  $responce = $this->lxd->stopInstance($instance->getName());	
 
 	  # TODO: handle exception
 
@@ -250,7 +260,8 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Deleting LXC instance: `" . $instance->getName() . "`");
 
-	  $responce = $this->lxd->containers->remove($instance->getName());	
+//	  $responce = $this->lxd->containers->remove($instance->getName());	
+	  $responce = $this->lxd->deleteInstance($instance->getName());	
 
 	  # TODO: handle exception
 

@@ -16,6 +16,7 @@ class HardwareProfilesType extends AbstractType
             ->add('description')
             ->add('cost')
             ->add('name')
+            ->add('supported')
         ;
     }
 

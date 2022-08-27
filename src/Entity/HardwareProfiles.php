@@ -31,6 +31,9 @@ class HardwareProfiles
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
+    #[ORM\Column]
+    private ?bool $supported = null;
+
     public function __construct()
     {
         $this->instanceTypes = new ArrayCollection();
@@ -120,6 +123,18 @@ class HardwareProfiles
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function isSupported(): ?bool
+    {
+        return $this->supported;
+    }
+
+    public function setSupported(bool $supported): self
+    {
+        $this->supported = $supported;
 
         return $this;
     }

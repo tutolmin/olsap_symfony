@@ -12,57 +12,43 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Service\LxcManager;
 
 #[AsCommand(
-    name: 'lxc:image:ls',
-    description: 'Lists available LXC images',
+    name: 'lxc:start',
+    description: 'Starts a LXC instance',
 )]
-class LxcImageLsCommand extends Command
+class LxcStartCommand extends Command
 {
     private $lxd;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxd)
-    {   
+    {
         parent::__construct();
         $this->lxd = $lxd;
     }
 
     protected function configure(): void
     {
-/*
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addArgument('name', InputArgument::REQUIRED, 'Instance name')
+//            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
-*/
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-/*
-        $arg1 = $input->getArgument('arg1');
+        $name = $input->getArgument('name');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
+        if ($name) {
+            $io->note(sprintf('You passed an argument: %s', $name));
         }
 
+/*
         if ($input->getOption('option1')) {
             // ...
         }
 */
-	$images = $this->lxd->getImageList();
-
-	#var_dump( $images);
-
-	foreach ($images as &$value) {
-	#        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
-	#echo "sdfs";
-  	  $info = $this->lxd->getImageInfo($value);
-	//var_dump( $info);
-		    $io->note(sprintf('Name: %s', $info['properties']['description']));
-	}
-
-#        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $this->lxd->startInstance($name);
 
         return Command::SUCCESS;
     }

@@ -16,10 +16,10 @@ use App\Entity\InstanceStatuses;
 use App\Service\LxcManager;
 
 #[AsCommand(
-    name: 'app:instances:start',
-    description: 'Starts an instance',
+    name: 'app:instances:restart',
+    description: 'Rerestarts an instance',
 )]
-class InstancesStartCommand extends Command
+class InstancesRerestartCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;
@@ -48,7 +48,7 @@ class InstancesStartCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to start')
+            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to restart')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -70,28 +70,12 @@ class InstancesStartCommand extends Command
             $io->note(sprintf('Instance "%s" has been found in the database with ID: %d', 
 		$name, $instance->getId()));
 
-	    if($instance->getStatus() == "Stopped") {
+	    $io->note(sprintf('Sending "restart" command to LXD for "%s"', $name));
 
-              $io->note(sprintf('Sending "start" command to LXD for "%s"', $name));
+	    $this->lxd->restartInstance($name);
 
-              $this->lxd->startInstance($name);
+	// TODO: verify return code and check the status	
 
-              // Store item into the DB
-              $instance->setStatus($this->instanceStatusRepository->findOneByStatus("Started"));
-              $this->entityManager->persist($instance);
-              $this->entityManager->flush();
-	
-/*
-              $this->bus->dispatch(new LxcOperation(["command" => "start",
-                "environment_id" => null, "instance_type_id" => null, 
-		"instance_id" => $instance->getId()]));
-*/
-	    } else { 
-
-              $io->error(sprintf('Instance "%s" is NOT in "Stopped" state', $name));
-
-	    }
-	
 	} else {
 
             $io->error(sprintf('Instance "%s" was not found', $name));

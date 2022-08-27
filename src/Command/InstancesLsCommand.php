@@ -40,7 +40,6 @@ class InstancesLsCommand extends Command
     {
         $this
             ->addArgument('status', InputArgument::OPTIONAL, 'Filter certain status')
-#            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
 
@@ -49,22 +48,28 @@ class InstancesLsCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $status = $input->getArgument('status');
 
-        if ($status) {
+	if ($status) {
+
             $io->note(sprintf('You passed an argument: %s', $status));
-        }
+            $instance_status = $this->instanceStatusRepository->findOneByStatus($status);
 
-	// Check if the specified instance status exists
-        $instance_status = $this->instanceStatusRepository->findOneByStatus($status);
-	if($instance_status) {
+	    // Check if the specified instance status exists
+	    if($instance_status) {
 
-            $io->note(sprintf('Status "%s" exists, filter applied', $status));
+		$io->note(sprintf('Status "%s" exists, filter applied', $status));
 
-            // look for a specific instance type object
-            $instances = $this->instanceRepository->findByStatus($instance_status->getId());
+		// look for a specific instance type object
+		$instances = $this->instanceRepository->findByStatus($instance_status->getId());
 
-	} else {
+	    } else {
 
-            $io->note(sprintf('Status "%s" does NOT exist, filter will NOT be applied', $status));
+		$io->warning(sprintf('Status "%s" does NOT exist, filter will NOT be applied', $status));
+
+		// look for a specific instance type object
+		$instances = $this->instanceRepository->findAll();
+	    }
+
+        } else {
 
             // look for a specific instance type object
             $instances = $this->instanceRepository->findAll();
@@ -75,8 +80,6 @@ class InstancesLsCommand extends Command
             $io->note(sprintf('Name: %s, port: %d, status: %s', 
 		$instance->getName(), $instance->getPort(), $instance->getStatus()));
 	}
-
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
 
         return Command::SUCCESS;
     }

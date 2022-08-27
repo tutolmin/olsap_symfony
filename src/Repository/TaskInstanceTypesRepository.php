@@ -39,6 +39,18 @@ class TaskInstanceTypesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return int
+     */
+    public function deleteAll(): int
+    {
+        $qb = $this->createQueryBuilder('tt');
+
+        $qb->delete();
+
+        return $qb->getQuery()->getSingleScalarResult() ?? 0;
+    }
+
 //    /**
 //     * @return TaskInstanceTypes[] Returns an array of TaskInstanceTypes objects
 //     */

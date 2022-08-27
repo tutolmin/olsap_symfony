@@ -39,6 +39,18 @@ class TaskOsesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return int
+     */
+    public function deleteAll(): int
+    {
+        $qb = $this->createQueryBuilder('to');
+
+        $qb->delete();
+
+        return $qb->getQuery()->getSingleScalarResult() ?? 0;
+    }
+
 //    /**
 //     * @return TaskOses[] Returns an array of TaskOses objects
 //     */

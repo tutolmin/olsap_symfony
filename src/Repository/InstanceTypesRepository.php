@@ -42,7 +42,6 @@ class InstanceTypesRepository extends ServiceEntityRepository
     /**
      * @return int
      */
-/*
     public function deleteAll(): int
     {
 	$qb = $this->createQueryBuilder('it');
@@ -51,7 +50,6 @@ class InstanceTypesRepository extends ServiceEntityRepository
 
 	return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
-*/
 
 //    /**
 //     * @return InstanceTypes[] Returns an array of InstanceTypes objects

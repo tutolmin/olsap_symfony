@@ -11,78 +11,81 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\HardwareProfiles;
-use App\Entity\OperatingSystems;
 use App\Entity\InstanceTypes;
+use App\Entity\TaskInstanceTypes;
+use App\Entity\Tasks;
 
 #[AsCommand(
-    name: 'app:populate-instance-types',
-    description: 'Populates InstanseTypes table on new OS or HW profile addition',
+    name: 'app:task-instance-types:populate',
+    description: 'Populates TaskInstanseTypes table with supported items',
 )]
-class PopulateInstanceTypesCommand extends Command
+class TaskInstanceTypesPopulateCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;
 
     // HW profile repo
-    private $hpRepository;
+    private $tasksRepository;
 
     // OS repo
-    private $osRepository;
-
-    // InstanceTypes repo
     private $itRepository;
 
-    // Dependency injection of the OperatingSystems entity
+    // TaskInstanceTypes repo
+    private $ttRepository;
+
+    // Dependency injection of the InstanceTypes entity
     public function __construct( EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        // get the HW profile repository
-        $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
+        // get the repository
+        $this->tasksRepository = $this->entityManager->getRepository( Tasks::class);
 
-        // get the OS repository
-        $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
-
-        // get the InstanceTypes repository
+        // get the repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
+
+        // get the TaskInstanceTypes repository
+        $this->ttRepository = $this->entityManager->getRepository( TaskInstanceTypes::class);
     }
 
     protected function configure(): void
     {
-/*
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+//            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
+            ->addOption('purge', null, InputOption::VALUE_NONE, 'Purge the table first')
         ;
-*/
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
-	// Truncate the InstanceType table first
-//	$this->itRepository->deleteAll();
+	if($input->getOption('purge')) {
+
+  	  // Truncate the InstanceType table first
+	  $this->ttRepository->deleteAll();
+	}
 
 	// look for *all* HW profiles objects
-	$hwProfiles = $this->hpRepository->findAll();
+	$tasks = $this->tasksRepository->findAll();
+//	$tasks = $this->tasksRepository->findBySupported(1);
 
 	// look for *all* OSes objects
-	$oses = $this->osRepository->findAll();
+	$instanceTypes = $this->itRepository->findAll();
+//	$instanceTypes = $this->itRepository->findBySupported(1);
 
-	foreach( $hwProfiles as &$hp)
-	foreach( $oses as &$os) {
+	foreach( $tasks as &$task)
+	foreach( $instanceTypes as &$it) {
 
 #	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
-	  $io->note(sprintf('HW: %s OS: %s %s', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
+	  $io->note(sprintf('Task: %s, Instance type: %s', $task->getDescription(), $it));
 
 	  // Try to find existing Instance type
-	  $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
+	  $tt = $this->ttRepository->findBy(['task' => $task->getId(), 'instance_type' => $it->getId()]);
 
-	  if( count($it)>0) {
+	  if( count($tt)>0) {
 
             $io->warning(sprintf('Already exists, skipping addition'));
 
@@ -91,12 +94,12 @@ class PopulateInstanceTypesCommand extends Command
             $io->note(sprintf('Adding new record to the DB'));
 
 	    // Populate new InstanceType object
-	    $instanceType = new InstanceTypes();
-	    $instanceType->setHwProfile( $hp);
-	    $instanceType->setOs( $os);
+	    $taskInstanceType = new TaskInstanceTypes();
+	    $taskInstanceType->setTask( $task);
+	    $taskInstanceType->setInstanceType( $it);
 
 	    // tell Doctrine you want to (eventually) save the Product (no queries yet)
-	    $this->entityManager->persist($instanceType);
+	    $this->entityManager->persist($taskInstanceType);
 
 	    // actually executes the queries (i.e. the INSERT query)
 	    $this->entityManager->flush();
@@ -112,8 +115,8 @@ class PopulateInstanceTypesCommand extends Command
         if ($input->getOption('option1')) {
             // ...
         }
-*/
         $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+*/
 
         return Command::SUCCESS;
     }

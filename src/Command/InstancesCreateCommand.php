@@ -89,6 +89,8 @@ class InstancesCreateCommand extends Command
 	// Both OS and HW profile objects found
 	if( $os && $hp) {
 
+//	  $io->note('OS id: '.$os->getId().', HW profile id: '.$hp->getId());
+
 	  // look for a specific instance type object
 	  $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
 
@@ -112,7 +114,7 @@ class InstancesCreateCommand extends Command
 
 	  } else
 
-	    $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:populate-instance-types` command.');
+	    $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
 
 	} else 
 

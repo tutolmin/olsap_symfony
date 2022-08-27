@@ -12,6 +12,7 @@
                 <th>Type</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Supported</th>
                 <th>Cost</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +24,7 @@
                 <td>{{ hardware_profile.type ? 'VM' : 'Container' }}</td>
                 <td>{{ hardware_profile.name }}</td>
                 <td>{{ hardware_profile.description }}</td>
+                <td>{{ hardware_profile.supported ? 'Yes' : 'No' }}</td>
                 <td>{{ hardware_profile.cost }}</td>
                 <td>
                     <a href="{{ path('app_hardware_profiles_show', {'id': hardware_profile.id}) }}">show</a>

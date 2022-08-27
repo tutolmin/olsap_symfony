@@ -12,13 +12,15 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
+use App\Entity\InstanceStatuses;
+use App\Service\LxcManager;
 
-use App\Message\LxcOperation;
-use Symfony\Component\Messenger\MessageBusInterface;
+#use App\Message\LxcOperation;
+#use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'app:instances:stop',
-    description: 'Stop certain container',
+    description: 'Stops certain instance',
 )]
 class InstancesStopCommand extends Command
 {
@@ -27,22 +29,23 @@ class InstancesStopCommand extends Command
 
     // Instances repo
     private $instancesRepository;
+    private $instanceStatusRepository;
 
-    // Message bus
-    private $bus;
+    private $lxd;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager,
-        MessageBusInterface $bus)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->bus = $bus;
+        $this->lxd = $lxd;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
+        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+
     }
 
     protected function configure(): void
@@ -72,10 +75,12 @@ class InstancesStopCommand extends Command
 	    if($instance->getStatus() == "Started") {
 
               $io->note(sprintf('Sending "stop" command to LXD for "%s"', $name));
-
-              $this->bus->dispatch(new LxcOperation(["command" => "stop",
-                "environment_id" => null, "instance_type_id" => null, 
-		"instance_id" => $instance->getId()]));
+	      $this->lxd->stopInstance($name);
+	
+	      // Store item into the DB
+	      $instance->setStatus($this->instanceStatusRepository->findOneByStatus("Stopped"));
+	      $this->entityManager->persist($instance);
+	      $this->entityManager->flush();
 
 	    } else { 
 
