@@ -12,9 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-
-use App\Message\LxcOperation;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Service\LxcManager;
 
 #[AsCommand(
     name: 'app:instances:delete',
@@ -28,18 +26,16 @@ class InstancesDeleteCommand extends Command
     // Instances repo
     private $instancesRepository;
 
-    // Message bus
-    private $bus;
+    private $lxd;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager,
-        MessageBusInterface $bus)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->bus = $bus;
+        $this->lxd = $lxd;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
@@ -48,8 +44,8 @@ class InstancesDeleteCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to delete')
-//            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to delete or <ALL>')
+            ->addOption('force', null, InputOption::VALUE_NONE, 'Forcefully stop the container before deletion')
         ;
     }
 
@@ -57,35 +53,59 @@ class InstancesDeleteCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $name = $input->getArgument('name');
+        $force = $input->getOption('force');
 
-        if ($name) {
-            $io->note(sprintf('You passed an argument: %s', $name));
-        }
+        if($name)
+          $io->note(sprintf('You passed an argument: %s', $name));
 
-	// look for a specific instance object
-	$instance = $this->instancesRepository->findOneByName($name);
+        if($force)
+          $io->warning('You passed a force option');
 
-	if($instance) {
+        if ($name == "ALL") {
 
-            $io->note(sprintf('Instance "%s" has been found in the database', $name));
+	  $instances = $this->instancesRepository->findAll();
+	  foreach($instances as $instance) {
 
-	    if($instance->getStatus() == "Stopped") {
+	    $io->note(sprintf('Deleting "%s" from the database', $instance->getName()));
 
-              $io->note(sprintf('Sending "delete" command to LXD for "%s"', $name));
+	    if( $this->lxd->deleteInstance($instance->getName(), $force)) {
 
-              $this->bus->dispatch(new LxcOperation(["command" => "delete",
-                "environment_id" => null, "instance_type_id" => null, 
-		"instance_id" => $instance->getId()]));
+	      // Delete item from the DB
+	      $this->entityManager->remove($instance);
+	      $this->entityManager->flush();
 
-	    } else { 
-
-              $io->error(sprintf('Instance "%s" is NOT in "Stopped" state', $name));
-
+	      $io->note('Success!');
 	    }
-	
-	} else {
+            else
+              $io->error('Failure!');
 
-            $io->error(sprintf('Instance "%s" was not found', $name));
+	  }
+ 
+	} else { 
+
+	  // look for a specific instance object
+	  $instance = $this->instancesRepository->findOneByName($name);
+
+	  // Check if instance is present in the DB
+	  if($instance) {
+
+	      $io->note(sprintf('Deleting "%s" from the database', $name));
+
+	      if( $this->lxd->deleteInstance($name, $force)) {
+
+		// Delete item from the DB
+		$this->entityManager->remove($instance);
+		$this->entityManager->flush();
+
+		$io->note('Success!');
+	      }
+	      else
+		$io->error('Failure!');
+
+	  } else {
+
+	      $io->error(sprintf('Instance "%s" was not found', $name));
+	  }
 	}
 
         return Command::SUCCESS;

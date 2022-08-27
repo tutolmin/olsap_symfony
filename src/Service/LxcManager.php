@@ -17,6 +17,8 @@ class LxcManager
     private $logger;
 
     private $lxd;
+    private $timeout;
+    private $wait;
 
     private $entityManager;
 //    private $taskRepository;
@@ -25,6 +27,9 @@ class LxcManager
     {
         $this->logger = $logger;
         $this->entityManager = $em;
+
+	$this->timeout = intval($_ENV["LXD_TIMEOUT"]);
+	$this->wait = $_ENV["LXD_WAIT"];
 
         $config = [
             'verify' => false,
@@ -60,7 +65,6 @@ class LxcManager
     public function createInstance($os_alias, $hw_name)//: ?InstanceTypes
     {  
 
-//        $this->logger->debug( "Starting LXC instance: `" . $instance->getName() . "`");
         $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hw_name . "`");
 
 	// Create an instance in LXD
@@ -68,20 +72,24 @@ class LxcManager
 	    'alias'  => $os_alias,
 	    'profiles' => [$hw_name]
 	];
-	$responce = $this->lxd->containers->create(null, $options);
+	$responce = $this->lxd->containers->create(null, $options, $this->wait);
+
+	// Get the name for the reply
+	$name=explode( "/", $responce["resources"]["containers"][0]);
 
 	//TODO: Handle exception
+	$this->startInstance($name[3]);
 
-	return $responce;
+	return $name[3];
 
     }
 
-    public function startInstance($instance)//: ?InstanceTypes
+    public function startInstance($instance, $force=false)//: ?InstanceTypes
     {  
 
         $this->logger->debug( "Starting LXC instance: `" . $instance . "`");
 
-	$responce = $this->lxd->containers->start($instance);
+	$responce = $this->lxd->containers->start($instance, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 
@@ -89,12 +97,12 @@ class LxcManager
 
     }
 
-    public function stopInstance($instance)//: ?InstanceTypes
+    public function stopInstance($instance, $force=false)//: ?InstanceTypes
     {  
 
-        $this->logger->debug( "Stopping LXC instance: `" . $instance . "`");
+        $this->logger->debug( "Stopping LXC instance: `" . $instance . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
 
-	$responce = $this->lxd->containers->stop($instance);
+	$responce = $this->lxd->containers->stop($instance, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 
@@ -102,26 +110,57 @@ class LxcManager
 
     }
 
-    public function restartInstance($instance)//: ?InstanceTypes
+    public function restartInstance($instance, $force=false)//: ?InstanceTypes
     {  
-	$this->stopInstance($instance);
+	$this->stopInstance($instance, $force);
 
-	$this->startInstance($instance);
+	$this->startInstance($instance, $force);
 
 	return NULL;
     }
 
-    public function deleteInstance($instance)//: ?InstanceTypes
+    public function deleteInstance($instance, $force=false)//: ?InstanceTypes
     {  
-
         $this->logger->debug( "Deleting LXC instance: `" . $instance . "`");
 
-	$responce = $this->lxd->containers->remove($instance);
+	$info = $this->getInstanceInfo($instance);
+
+	if($info["status"] == "Stopped") {
+
+	  $this->lxd->containers->remove($instance, $this->wait);
+	  return true;
+
+	} else {
+
+	  if($force) {
+
+	    // Stop it first
+	    $this->stopInstance($instance, $force);
+	    $this->lxd->containers->remove($instance, $this->wait);
+
+	  } else {
+
+            $this->logger->debug( "Instance `" . $instance . "` is " . $info["status"]);
+	    return false;
+	  }
+	}
 
 	//TODO: Handle exception
 
-	return $responce;
+	return true;
+    }
 
+    public function deleteAllInstances($instance, $force)//: ?InstanceTypes
+    {  
+	$instances = $this->getInstanceList();
+
+	$result = true;
+
+	foreach($instances as $instance)
+	  if( !$this->deleteInstance($this->getInstanceInfo($instance)["name"], $force))
+	    $result = false;
+
+	return $result;
     }
 
     public function getInstanceInfo($container)//: ?InstanceTypes

@@ -45,6 +45,7 @@ class LxcLsCommand extends Command
 
         #var_dump( $containers);
 
+	if($containers)
         foreach ($containers as &$value) {
 
           $info = $this->lxd->getInstanceInfo($value);

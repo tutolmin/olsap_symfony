@@ -11,25 +11,22 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use App\Entity\HardwareProfiles;
 use App\Service\LxcManager;
 
 #[AsCommand(
-    name: 'app:instances:create',
-    description: 'Creates a number of instances for a specified instance type',
+    name: 'lxc:create',
+    description: 'Creates a number of LXC instances for a specified instance type',
 )]
-class InstancesCreateCommand extends Command
+class LxcCreateCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;
 
     // InstanceTypes repo
     private $itRepository;
-    private $isRepository;
 
     // OperatingSystems repo
     private $osRepository;
@@ -50,7 +47,6 @@ class InstancesCreateCommand extends Command
 
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
-        $this->isRepository = $this->entityManager->getRepository( InstanceStatuses::class);
 
         // get the OperatingSystems repository
         $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
@@ -64,7 +60,7 @@ class InstancesCreateCommand extends Command
         $this
             ->addArgument('profile', InputArgument::REQUIRED, 'Hardware profile name')
             ->addArgument('os', InputArgument::REQUIRED, 'OS alias')
-            ->addArgument('instance_number', InputArgument::OPTIONAL, 'Number of instances to create')
+            ->addArgument('number', InputArgument::OPTIONAL, 'Number of instances to create')
         ;
     }
 
@@ -101,9 +97,9 @@ class InstancesCreateCommand extends Command
 
 	    // Check the number of instances requested
 	    $number = 1;
-	    if ($input->getArgument('instance_number')) {
+	    if ($input->getArgument('number')) {
 
-	      $number = intval( $input->getArgument('instance_number'));
+	      $number = intval( $input->getArgument('number'));
 	    }
 	    $io->note(sprintf('We are going to create %d instances', $number));
 
@@ -111,29 +107,14 @@ class InstancesCreateCommand extends Command
 
               $name = $this->lxd->createInstance($os->getAlias(),$hp->getName());
 
-              $io->note(sprintf('Instance `' . $name . ' was created.'));
-
-	      $instance = new Instances;
-	      $instance->setName($name);
-	      $instance_status = $this->isRepository->findOneByStatus("Started");
-	      $instance->setStatus($instance_status);
-	      $instance->setInstanceType($instance_type);
-	      $now = new \DateTimeImmutable('NOW');
-	      $instance->setCreatedAt($now);
-
-	      # TODO: port allocation routine
-//	      $instance->setPort(1123);
-
-	      // Store item into the DB
-	      $this->entityManager->persist($instance);
-	      $this->entityManager->flush();
-
+	      $io->note(sprintf('Instance `' . $name . ' was created.'));
+	    }
 /*
 	      $this->bus->dispatch(new LxcOperation(["command" => "create", 
 		"environment_id" => null, "instance_id" => null, 
 		"instance_type_id" => $instance_type->getId()]));
 */
-	    }
+
 	  } else
 
 	    $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
