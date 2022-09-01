@@ -12,8 +12,12 @@
                 <td>{{ address.id }}</td>
             </tr>
             <tr>
-                <th>Ip</th>
+                <th>IP</th>
                 <td>{{ address.ip }}</td>
+            </tr>
+            <tr>
+                <th>MAC</th>
+                <td>{{ address.mac }}</td>
             </tr>
             <tr>
                 <th>Port</th>
@@ -25,6 +29,7 @@
     <a href="{{ path('app_addresses_index') }}">back to list</a>
 
     <a href="{{ path('app_addresses_edit', {'id': address.id}) }}">edit</a>
-
+<!--
     {{ include('addresses/_delete_form.html.twig') }}
+-->
 {% endblock %}

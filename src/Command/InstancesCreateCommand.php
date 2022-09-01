@@ -11,12 +11,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use App\Entity\HardwareProfiles;
-use App\Service\LxcManager;
+use App\Service\SessionManager;
 
 #[AsCommand(
     name: 'app:instances:create',
@@ -37,20 +35,19 @@ class InstancesCreateCommand extends Command
     // HardwareProfiles repo
     private $hpRepository;
 
-    private $lxd;
+    private $session;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
+    public function __construct( EntityManagerInterface $entityManager, SessionManager $session)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->lxd = $lxd;
+        $this->session = $session;
 
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
-        $this->isRepository = $this->entityManager->getRepository( InstanceStatuses::class);
 
         // get the OperatingSystems repository
         $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
@@ -79,17 +76,13 @@ class InstancesCreateCommand extends Command
             $io->note(sprintf('You passed os alias: %s and profile name: %s', $os_alias, $hw_name));
 
         // look for a specific OperatingSystems object
-#        $os = $this->osRepository->findOneBy(array('alias' => $os_alias));
         $os = $this->osRepository->findOneByAlias($os_alias);
 
         // look for a specific HardwareProfiles object
-#        $hp = $this->hpRepository->findOneBy(array('name' => $hw_name));
         $hp = $this->hpRepository->findOneByName($hw_name);
 
 	// Both OS and HW profile objects found
 	if( $os && $hp) {
-
-//	  $io->note('OS id: '.$os->getId().', HW profile id: '.$hp->getId());
 
 	  // look for a specific instance type object
 	  $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
@@ -97,8 +90,6 @@ class InstancesCreateCommand extends Command
 	  // Instance type found
 	  if( $instance_type) {
 	  
-  //          $io->success('Found!');
-
 	    // Check the number of instances requested
 	    $number = 1;
 	    if ($input->getArgument('instance_number')) {
@@ -109,24 +100,10 @@ class InstancesCreateCommand extends Command
 
 	    for($i=0; $i<$number; $i++) {
 
-              $name = $this->lxd->createInstance($os->getAlias(),$hp->getName());
+		// Call session manager method
+		$instance = $this->session->createInstance($instance_type);
 
-              $io->note(sprintf('Instance `' . $name . ' was created.'));
-
-	      $instance = new Instances;
-	      $instance->setName($name);
-	      $instance_status = $this->isRepository->findOneByStatus("Started");
-	      $instance->setStatus($instance_status);
-	      $instance->setInstanceType($instance_type);
-	      $now = new \DateTimeImmutable('NOW');
-	      $instance->setCreatedAt($now);
-
-	      # TODO: port allocation routine
-//	      $instance->setPort(1123);
-
-	      // Store item into the DB
-	      $this->entityManager->persist($instance);
-	      $this->entityManager->flush();
+                $io->note('Instance `' . $instance . '` was created.');
 
 /*
 	      $this->bus->dispatch(new LxcOperation(["command" => "create", 

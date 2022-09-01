@@ -70,6 +70,11 @@ class InstancesDeleteCommand extends Command
 
 	    if( $this->lxd->deleteInstance($instance->getName(), $force)) {
 
+	      // Fetch all linked Addresses and release them
+	      $addresses = $instance->getAddresses();
+	      foreach($addresses as $address)
+		$address->setInstance(null);
+
 	      // Delete item from the DB
 	      $this->entityManager->remove($instance);
 	      $this->entityManager->flush();
@@ -92,6 +97,11 @@ class InstancesDeleteCommand extends Command
 	      $io->note(sprintf('Deleting "%s" from the database', $name));
 
 	      if( $this->lxd->deleteInstance($name, $force)) {
+
+		// Fetch all linked Addresses and release them
+                $addresses = $instance->getAddresses();
+		foreach($addresses as $address)
+		  $address->setInstance(null);
 
 		// Delete item from the DB
 		$this->entityManager->remove($instance);

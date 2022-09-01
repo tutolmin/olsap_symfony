@@ -15,7 +15,7 @@ use App\Entity\Addresses;
 use App\Entity\Ports;
 
 #[AsCommand(
-    name: 'app:addresses:add',
+    name: 'net:addresses:add',
     description: 'Add subnet into the database',
 )]
 class AddressesAddCommand extends Command
@@ -66,6 +66,7 @@ class AddressesAddCommand extends Command
 
 	    $address = new Addresses;
 	    $address->setIp('172.27.'.$subnet.'.'.$p);
+	    $address->setMac('aa:bb:cc:dd:'.str_pad(dechex($subnet), 2, '0', STR_PAD_LEFT).':'.str_pad(dechex($p), 2, '0', STR_PAD_LEFT));
 
 	    $port = $this->portRepository->findOneByAddress(null);
 

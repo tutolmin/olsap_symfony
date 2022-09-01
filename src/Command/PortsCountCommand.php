@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Ports;
 
 #[AsCommand(
-    name: 'app:ports:count',
+    name: 'net:ports:count',
     description: 'Shows total number of configured ports',
 )]
 class PortsCountCommand extends Command

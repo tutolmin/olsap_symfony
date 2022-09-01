@@ -22,6 +22,9 @@ class Addresses
     #[ORM\OneToOne(mappedBy: 'address', cascade: ['persist', 'remove'])]
     private ?Ports $port = null;
 
+    #[ORM\Column(length: 18)]
+    private ?string $mac = null;
+
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
         return $this->ip;
@@ -74,6 +77,18 @@ class Addresses
         }
 
         $this->port = $port;
+
+        return $this;
+    }
+
+    public function getMac(): ?string
+    {
+        return $this->mac;
+    }
+
+    public function setMac(string $mac): self
+    {
+        $this->mac = $mac;
 
         return $this;
     }

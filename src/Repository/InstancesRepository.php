@@ -32,6 +32,11 @@ class InstancesRepository extends ServiceEntityRepository
 
     public function remove(Instances $entity, bool $flush = false): void
     {
+	// Fetch all linked Addresses and release them
+	$addresses = $entity->getAddresses();
+	foreach($addresses as $address)
+	  $address->setInstance(null);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

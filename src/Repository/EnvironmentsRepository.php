@@ -32,6 +32,11 @@ class EnvironmentsRepository extends ServiceEntityRepository
 
     public function remove(Environments $entity, bool $flush = false): void
     {
+	// TODO: change status, recover init snapshot, etc.
+
+        // Fetch linked Instances and release them
+	$entity->setInstance(null);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

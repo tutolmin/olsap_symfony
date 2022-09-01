@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Ports;
 
 #[AsCommand(
-    name: 'app:ports:delete',
+    name: 'net:ports:delete',
     description: 'Delete port range into the database',
 )]
 class PortsDeleteCommand extends Command

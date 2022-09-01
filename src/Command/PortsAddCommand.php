@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Ports;
 
 #[AsCommand(
-    name: 'app:ports:add',
+    name: 'net:ports:add',
     description: 'Add port range into the database',
 )]
 class PortsAddCommand extends Command

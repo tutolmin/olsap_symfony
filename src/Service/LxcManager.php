@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
-
+//use App\Entity\Addresses;
 
 #use App\Entity\Tasks;
 #use App\Entity\InstanceTypes;
@@ -21,7 +21,7 @@ class LxcManager
     private $wait;
 
     private $entityManager;
-//    private $taskRepository;
+//    private $addressRepository;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
     {
@@ -58,11 +58,11 @@ class LxcManager
         }
 	*/
         // get the task repository
-//        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
+//        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
     }
 
 
-    public function createInstance($os_alias, $hw_name)//: ?InstanceTypes
+    public function createInstance($os_alias, $hw_name, $mac)//: ?InstanceTypes
     {  
 
         $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hw_name . "`");
@@ -70,7 +70,10 @@ class LxcManager
 	// Create an instance in LXD
 	$options = [
 	    'alias'  => $os_alias,
-	    'profiles' => [$hw_name]
+	    'profiles' => [$hw_name],
+            "config" => [
+               "volatile.eth0.hwaddr" => $mac,
+	    ],
 	];
 	$responce = $this->lxd->containers->create(null, $options, $this->wait);
 

@@ -15,7 +15,7 @@ use App\Entity\Addresses;
 use App\Entity\Ports;
 
 #[AsCommand(
-    name: 'app:addresses:delete',
+    name: 'net:addresses:delete',
     description: 'Delete address subnet from the database',
 )]
 class AddressesDeleteCommand extends Command
@@ -64,8 +64,7 @@ class AddressesDeleteCommand extends Command
             $io->note('Deleting IP address 172.27.'.$subnet.'.'.$p.' from the database');
 
             // Unbind address from the port
-#	    $port = $address->getPort();
-#            $port->setAddress(null);
+	    $address->setPort(null);
 
 	    // Delete item from the DB
 	    $this->entityManager->remove($address);

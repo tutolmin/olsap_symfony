@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
 
 #[AsCommand(
-    name: 'app:addresses:count',
+    name: 'net:addresses:count',
     description: 'Shows total number of configured addresses',
 )]
 class AddressesCountCommand extends Command

@@ -13,6 +13,7 @@ class AddressesType extends AbstractType
     {
         $builder
             ->add('ip')
+            ->add('mac')
             ->add('port')
             ->add('instance')
         ;
