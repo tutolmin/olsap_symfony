@@ -15,6 +15,8 @@ use App\Entity\InstanceTypes;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
+use App\Service\AwxManager;
+use App\Service\LxcManager;
 
 class SessionManager
 {
@@ -27,12 +29,15 @@ class SessionManager
     private $esRepository;
 
     private $lxd;
+    private $awx;
 
-    public function __construct( LoggerInterface $logger, EntityManagerInterface $em, LxcManager $lxd)
+    public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
+	LxcManager $lxd, AwxManager $awx)
     {
         $this->logger = $logger;
         $this->entityManager = $em;
 	$this->lxd = $lxd;
+	$this->awx = $awx;
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
@@ -107,6 +112,37 @@ class SessionManager
 	  $this->logger->debug('No suitable instance types are available for task: '.$task);
 
 	return null;
+    }
+
+    public function deployEnvironment(Environments $env): bool
+    {
+	$this->logger->debug('Deploying: ' . $env);
+
+	if($task_id = $env->getTask()->getDeploy()) {
+
+	  // Limit execution on single host only
+	  $body["limit"] = $env->getInstance()->getName();
+
+	  // return the the account api
+	  $result = $this->awx->deploy($env->getTask()->getDeploy(), $body);
+
+	  $this->logger->debug('Status: ' . $result->status);
+
+	  $env_status = $this->esRepository->findOneByStatus("Deployed");
+	  $env->setStatus($env_status);
+
+	  // Store item into the DB
+	  $this->entityManager->persist($env);
+	  $this->entityManager->flush();
+
+	  return true;
+
+	} else {
+
+	  $this->logger->debug('Deploy job template with id `' . $task_id . '` was NOT found.');
+	}
+
+	return false;
     }
 
     public function getNextTask( Sessions $session): Tasks

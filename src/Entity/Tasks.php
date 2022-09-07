@@ -39,6 +39,18 @@ class Tasks
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: Environments::class, orphanRemoval: true)]
     private $envs;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $project = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $solve = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $deploy = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $verify = null;
+
     public function __construct()
     {
         $this->taskOses = new ArrayCollection();
@@ -214,6 +226,54 @@ class Tasks
                 $env->setTask(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProject(): ?int
+    {
+        return $this->project;
+    }
+
+    public function setProject(?int $project): self
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    public function getSolve(): ?int
+    {
+        return $this->solve;
+    }
+
+    public function setSolve(?int $solve): self
+    {
+        $this->solve = $solve;
+
+        return $this;
+    }
+
+    public function getDeploy(): ?int
+    {
+        return $this->deploy;
+    }
+
+    public function setDeploy(?int $deploy): self
+    {
+        $this->deploy = $deploy;
+
+        return $this;
+    }
+
+    public function getVerify(): ?int
+    {
+        return $this->verify;
+    }
+
+    public function setVerify(?int $verify): self
+    {
+        $this->verify = $verify;
 
         return $this;
     }

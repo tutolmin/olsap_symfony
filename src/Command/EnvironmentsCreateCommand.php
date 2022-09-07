@@ -79,11 +79,17 @@ class EnvironmentsCreateCommand extends Command
 	      $io->warning('Session with id '.$session_id.' does NOT exist in the database');
 	    }
 
+	    // Create an environment and undirlying LXC instance
 	    $environment=$this->sessionManager->createEnvironment($task, $session);
 
 	    // TODO: handle exception
 	
             $io->note('Environment `' . $environment . '` was created.');
+
+	    // Deploy an environment
+	    $deploy_result = $this->sessionManager->deployEnvironment($environment);
+
+            $io->note('... and deployed ' . ($deploy_result?'':'un').'successfully');
 
         } else {
 

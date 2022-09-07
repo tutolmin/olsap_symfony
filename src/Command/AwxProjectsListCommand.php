@@ -12,16 +12,18 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\AwxManager;
+use App\Entity\Tasks;
 
 #[AsCommand(
-    name: 'awx:me',
-    description: 'Show user information in AWX',
+    name: 'awx:projects:list',
+    description: 'Lists projects configured in AWX',
 )]
-class AwxMeCommand extends Command
+class AwxProjectsListCommand extends Command
 {
     private $awx;
     
     private $entityManager;
+    private $taskRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager, AwxManager $awx)
@@ -29,6 +31,7 @@ class AwxMeCommand extends Command
         parent::__construct();
 
         $this->entityManager = $entityManager;
+        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
 
         $this->awx = $awx;
     }
@@ -36,7 +39,7 @@ class AwxMeCommand extends Command
     protected function configure(): void
     {
         $this
-//            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
+//            ->addArgument('env_id', InputArgument::REQUIRED, 'Environment id to deploy')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -45,37 +48,26 @@ class AwxMeCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-	// return the the account api
-	$me = $this->awx->me();
+	$projects = $this->awx->getProjects();
 
-	// Get the info for the account
-	$userInformation = $me->getAll();
+	foreach($projects as $project) {
 
-//	var_dump($userInformation);
-        $io->success('AWX username: '.$userInformation[0]->username);
-/*
-// return the job template api
-$jobTemplate = $this->awx->jobTemplate();
+            $io->note('Project: ' . $project->name . ', branch: '. $project->scmBranch);
 
-$runResult = $jobTemplate->launch(9,"");
-#$runResult = $jobTemplate->getAll();
+	    if($task = $this->taskRepository->findOneByPath($project->scmBranch)) {
 
-var_dump($runResult->id);
+		$task->setProject($project->id);
 
-$job = $this->awx->Job();
+		// Store item into the DB
+		$this->entityManager->persist($task);
+		$this->entityManager->flush();
+	    
+	    } else {
 
-while(true) {
-$jobResult = $job->getById($runResult->id);
-var_dump($jobResult->status);
+                $io->warning('Task with SCM branch '.$project->scmBranch.' does NOT exist in the database');
+	    }
+	}
 
-if($jobResult->status == "successfull") break;
-sleep( 1);
-}
-*/
-/*
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
-
-*/
         return Command::SUCCESS;
     }
 }

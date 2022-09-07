@@ -163,9 +163,6 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	  $now = new \DateTimeImmutable('NOW');
 	  $instance->setCreatedAt($now);
 
-	  # TODO: port allocation routine
-	  $instance->setPort(1123);
-
 	  // Store item into the DB
 	  $this->entityManager->persist($instance);
 	  $this->entityManager->flush();

@@ -43,8 +43,13 @@ class InstancesController extends AbstractController
     #[Route('/{id}', name: 'app_instances_show', methods: ['GET'])]
     public function show(Instances $instance): Response
     {
+        $addrs = array();
+        foreach($instance->getAddresses()->getValues() as $se)
+          $addrs[] = $se->getPort() . ":" .$se->getIp();
+
         return $this->render('instances/show.html.twig', [
             'instance' => $instance,
+            'addrs' => $instance->getAddressesCounter() .': '. implode( ', ', $addrs),
         ]);
     }
 

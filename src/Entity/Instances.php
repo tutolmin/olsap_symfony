@@ -19,9 +19,6 @@ class Instances
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
 
-    #[ORM\Column(type: 'integer')]
-    private $port;
-
     #[ORM\ManyToOne(targetEntity: InstanceTypes::class, inversedBy: 'instances')]
     #[ORM\JoinColumn(nullable: false)]
     private $instance_type;
@@ -38,6 +35,8 @@ class Instances
 
     #[ORM\OneToMany(mappedBy: 'instance', targetEntity: Addresses::class)]
     private Collection $addresses;
+        
+    private $addressesCounter;
 
     public function __construct()
     {
@@ -62,18 +61,6 @@ class Instances
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
-
-        return $this;
-    }
-
-    public function getPort(): ?int
-    {
-        return $this->port;
-    }
-
-    public function setPort(int $port): self
-    {
-        $this->port = $port;
 
         return $this;
     }
@@ -164,5 +151,10 @@ class Instances
         }
 
         return $this;
+    }
+
+    public function getAddressesCounter(): int
+    {
+        return $this->addressesCounter = count( $this->getAddresses());
     }
 }

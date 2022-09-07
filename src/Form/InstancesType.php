@@ -13,7 +13,6 @@ class InstancesType extends AbstractType
     {
         $builder
             ->add('created_at')
-            ->add('port')
             ->add('name')
             ->add('instance_type')
             ->add('envs')
