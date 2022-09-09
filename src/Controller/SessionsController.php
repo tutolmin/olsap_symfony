@@ -40,6 +40,34 @@ class SessionsController extends AbstractController
         ]);
     }
 
+    #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function start(Sessions $session): Response
+    {
+        $envs = array();
+        foreach($session->getEnvs()->getValues() as $se)
+	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
+		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+
+        return $this->render('sessions/display.html.twig', [
+            'session' => $session,
+            'envs' => $envs,
+        ]);
+    }
+
+    #[Route('/{hash}/finish', name: 'app_sessions_finish', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function finish(Sessions $session): Response
+    {
+        $envs = array();
+        foreach($session->getEnvs()->getValues() as $se)
+	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
+		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+
+        return $this->render('sessions/display.html.twig', [
+            'session' => $session,
+            'envs' => $envs,
+        ]);
+    }
+
     #[Route('/{hash}', name: 'app_sessions_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
     public function display(Sessions $session): Response
     {

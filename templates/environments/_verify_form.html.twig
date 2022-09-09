@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_environments_verify', {'hash': environment.hash}) }}" onsubmit="return confirm('Are you sure you want to verify this env?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('verify' ~ environment.hash) }}">
+    <button class="btn">Verify</button>
+</form>

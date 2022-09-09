@@ -31,4 +31,15 @@
             </tr>
         </tbody>
     </table>
+
+{% if session.status == 'Started' %}
+
+    {{ include('sessions/_finish_form.html.twig') }}
+
+{% else %}
+
+    {{ include('sessions/_start_form.html.twig') }}
+
+{% endif %}
+
 {% endblock %}

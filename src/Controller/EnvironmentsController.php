@@ -51,6 +51,17 @@ class EnvironmentsController extends AbstractController
         ]);
     }
 
+    #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function verify(Environments $environment): Response
+    {
+        return $this->render('environments/display.html.twig', [
+            'environment' => $environment,
+            'port' => $environment->getInstance()->getAddresses()[0]->getPort(),
+	    'task_description' => $environment->getTask()->getDescription(),
+	    'session_url' => $this->generateUrl('app_sessions_display', ['hash' => $environment->getSession()->getHash()]),
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_environments_show', methods: ['GET'])]
     public function show(Environments $environment): Response
     {

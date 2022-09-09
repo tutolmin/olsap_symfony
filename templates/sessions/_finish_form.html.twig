@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_sessions_finish', {'hash': session.hash}) }}" onsubmit="return confirm('Are you sure you want to finish this session?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('finish' ~ session.hash) }}">
+    <button class="btn">Finish</button>
+</form>

@@ -34,4 +34,10 @@
         </tbody>
     </table>
 
+{% if environment.status == 'Deployed' %}
+
+    {{ include('environments/_verify_form.html.twig') }}
+
+{% endif %}
+
 {% endblock %}
