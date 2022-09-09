@@ -1,0 +1,37 @@
+{% extends 'userbase.html.twig' %}
+
+{% block title %}Environment{% endblock %}
+
+{% block body %}
+    <h1>Environment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Instance</th>
+                <td>{{ environment.instance }}:{{ port }}</td>
+            </tr>
+            <tr>
+                <th>Session</th>
+                <td><a href='{{ session_url }}'>{{ environment.session }}</a></td>
+            </tr>
+            <tr>
+                <th>Task</th>
+                <td>{{ task_description }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ environment.status }}</td>
+            </tr>
+            <tr>
+                <th>Started_at</th>
+                <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Valid</th>
+                <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

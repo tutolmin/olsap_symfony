@@ -12,6 +12,8 @@
                 <th>Instance</th>
                 <th>Session</th>
                 <th>Task</th>
+                <th>Hash</th>
+                <th>Status</th>
                 <th>Started_at</th>
                 <th>Valid</th>
                 <th>Path</th>
@@ -25,6 +27,8 @@
                 <td>{{ environment.instance }}</td>
                 <td>{{ environment.session }}</td>
                 <td>{{ environment.task }}</td>
+                <td>{{ environment.hash }}</td>
+                <td>{{ environment.status }}</td>
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
                 <td>{{ environment.path }}</td>

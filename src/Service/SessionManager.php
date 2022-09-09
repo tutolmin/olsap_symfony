@@ -46,6 +46,7 @@ class SessionManager
         $this->esRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
     }
 
+//    public function createInstance(InstanceTypes $it, Environments $env = null): Instances
     public function createInstance(InstanceTypes $it): Instances
     {
 	// TODO: check input parameters
@@ -57,7 +58,7 @@ class SessionManager
 
 	$this->logger->debug( "Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
 
-	$name = $this->lxd->createInstance($it->getOs()->getAlias(), $it->getHwProfile()->getNAme(), $address->getMac());
+	$name = $this->lxd->createInstance($it->getOs()->getAlias(), $it->getHwProfile()->getName(), $address->getMac());
 
 	$this->logger->debug('Instance `' . $name . '` was created.');
 

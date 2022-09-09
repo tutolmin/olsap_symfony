@@ -40,6 +40,20 @@ class SessionsController extends AbstractController
         ]);
     }
 
+    #[Route('/{hash}', name: 'app_sessions_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function display(Sessions $session): Response
+    {
+        $envs = array();
+        foreach($session->getEnvs()->getValues() as $se)
+	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
+		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+
+        return $this->render('sessions/display.html.twig', [
+            'session' => $session,
+            'envs' => $envs,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_sessions_show', methods: ['GET'])]
     public function show(Sessions $session): Response
     {

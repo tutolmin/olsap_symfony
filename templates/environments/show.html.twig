@@ -24,6 +24,14 @@
                 <td>{{ environment.task }}</td>
             </tr>
             <tr>
+                <th>Hash</th>
+                <td>{{ environment.hash }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ environment.status }}</td>
+            </tr>
+            <tr>
                 <th>Started_at</th>
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>

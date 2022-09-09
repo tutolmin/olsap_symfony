@@ -1,0 +1,34 @@
+{% extends 'userbase.html.twig' %}
+
+{% block title %}Session{% endblock %}
+
+{% block body %}
+    <h1>Session</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Status</th>
+                <td>{{ session.status }}</td>
+            </tr>
+            <tr>
+                <th>Envs</th>
+                <td>
+    {% for key, value in envs %}
+        <li><a href='{{ value|e }}'>{{ key }}</a></li>
+    {% endfor %}
+
+		</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Ended_at</th>
+                <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
