@@ -10,9 +10,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\ORM\EntityManagerInterface;
+//use App\Entity\SessionStatuses;
+use App\Service\SessionManager;
+
 #[Route('/sessions')]
 class SessionsController extends AbstractController
 {
+    // Doctrine EntityManager
+    private $entityManager;
+
+    private $sessionManager;
+
+    // InstanceTypes repo
+//    private $sessionStatusesRepository;
+
+    // Dependency injection of the EntityManagerInterface entity
+    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    {   
+        $this->entityManager = $entityManager;
+        $this->sessionManager = $sessionManager;
+
+        // get the SessionStatuses repository
+//        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+    }
+
     #[Route('/', name: 'app_sessions_index', methods: ['GET'])]
     public function index(SessionsRepository $sessionsRepository): Response
     {
@@ -40,32 +62,32 @@ class SessionsController extends AbstractController
         ]);
     }
 
-    #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function start(Sessions $session): Response
     {
-        $envs = array();
-        foreach($session->getEnvs()->getValues() as $se)
-	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
-		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+	$this->sessionManager->setSessionStatus($session, "Started");
+/*
+	$session->setStatus($this->sessionStatusesRepository->findOneByStatus("Started"));
 
-        return $this->render('sessions/display.html.twig', [
-            'session' => $session,
-            'envs' => $envs,
-        ]);
+        // Store item into the DB
+        $this->entityManager->persist($session);
+        $this->entityManager->flush();
+*/
+        return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{hash}/finish', name: 'app_sessions_finish', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    #[Route('/{hash}/finish', name: 'app_sessions_finish', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function finish(Sessions $session): Response
     {
-        $envs = array();
-        foreach($session->getEnvs()->getValues() as $se)
-	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
-		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+	$this->sessionManager->setSessionStatus($session, "Finished");
+/*
+	$session->setStatus($this->sessionStatusesRepository->findOneByStatus("Finished"));
 
-        return $this->render('sessions/display.html.twig', [
-            'session' => $session,
-            'envs' => $envs,
-        ]);
+        // Store item into the DB
+        $this->entityManager->persist($session);
+        $this->entityManager->flush();
+*/
+        return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{hash}', name: 'app_sessions_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
@@ -73,7 +95,7 @@ class SessionsController extends AbstractController
     {
         $envs = array();
         foreach($session->getEnvs()->getValues() as $se)
-	  $envs[$se->getTask() . " @ " . $se->getInstance()] = 
+	  $envs[$se->getTask() . " @ " . $se->getInstance() . " : " . $se->getStatus()] = 
 		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
 
         return $this->render('sessions/display.html.twig', [

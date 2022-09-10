@@ -10,9 +10,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Service\SessionManager;
+
 #[Route('/environments')]
 class EnvironmentsController extends AbstractController
 {
+    private $sessionManager;
+
+    // InstanceTypes repo
+//    private $sessionStatusesRepository;
+
+    // Dependency injection of the EntityManagerInterface entity
+    public function __construct( SessionManager $sessionManager)
+    {   
+//        $this->entityManager = $entityManager;
+        $this->sessionManager = $sessionManager;
+
+        // get the SessionStatuses repository
+//        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+    }
+
     #[Route('/', name: 'app_environments_index', methods: ['GET'])]
     public function index(EnvironmentsRepository $environmentsRepository): Response
     {
@@ -51,15 +68,12 @@ class EnvironmentsController extends AbstractController
         ]);
     }
 
-    #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['GET','POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function verify(Environments $environment): Response
     {
-        return $this->render('environments/display.html.twig', [
-            'environment' => $environment,
-            'port' => $environment->getInstance()->getAddresses()[0]->getPort(),
-	    'task_description' => $environment->getTask()->getDescription(),
-	    'session_url' => $this->generateUrl('app_sessions_display', ['hash' => $environment->getSession()->getHash()]),
-        ]);
+        $this->sessionManager->setEnvironmentStatus($environment, "Complete");
+
+        return $this->redirectToRoute('app_sessions_display', ['hash' => $environment->getSession()->getHash()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_environments_show', methods: ['GET'])]
