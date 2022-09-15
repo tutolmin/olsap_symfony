@@ -139,6 +139,7 @@ final class LxcOperationHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Creating LXC instance of type id: `" . $instance_type->getId() . "`, OS alias: `" . 
 	      $instance_type->getOs()->getAlias() . "`, HW profile: `" . $instance_type->getHwProfile()->getName() . "`");
+
 /*
 	  // Create an instance in LXD
 	  $options = [
@@ -151,7 +152,7 @@ final class LxcOperationHandler implements MessageHandlerInterface
 		$instance_type->getHwProfile()->getName());
 
 	  # TODO: handle exception
-
+/*
 	  // Get the name for the reply
 	  $name=explode( "/", $responce["resources"]["containers"][0]);
 
@@ -184,7 +185,7 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	  $this->bus->dispatch(new LxcOperation(["command" => "start",
 	    "environment_id" => null, "instance_id" => $instance->getId(),
 	    "instance_type_id" => null]));
-
+*/
 	  break;
 
 	case "start":

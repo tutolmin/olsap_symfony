@@ -11,8 +11,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
-//use App\Entity\SessionStatuses;
+use App\Entity\Environments;
 use App\Service\SessionManager;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Message\SessionAction;
+use Psr\Log\LoggerInterface;
 
 #[Route('/sessions')]
 class SessionsController extends AbstractController
@@ -20,19 +23,33 @@ class SessionsController extends AbstractController
     // Doctrine EntityManager
     private $entityManager;
 
+    // Repositories
+    private $environmentRepository;
+
     private $sessionManager;
+
+    // Message bus
+    private $bus;
+
+    private $logger;
 
     // InstanceTypes repo
 //    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    public function __construct( EntityManagerInterface $entityManager, 
+	SessionManager $sessionManager, MessageBusInterface $bus,
+	LoggerInterface $logger)
     {   
         $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
+        $this->bus = $bus;
+        $this->logger = $logger;
+
 
         // get the SessionStatuses repository
 //        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
     }
 
     #[Route('/', name: 'app_sessions_index', methods: ['GET'])]
@@ -73,6 +90,37 @@ class SessionsController extends AbstractController
         $this->entityManager->persist($session);
         $this->entityManager->flush();
 */
+	for($i=0;$i<1;$i++) { 
+
+	// Session has been specified
+//	$task = $this->sessionManager->getRandomTask();
+//	if($session)
+	  $task = $this->sessionManager->getNextTask($session);
+
+	  $this->logger->debug( "Selected task: " . $task);
+
+	  $environment = $this->environmentRepository->findOneDeployed($session);
+
+	  // Environment has been found
+	  if($environment) {
+
+	    $environment->setSession($session);
+
+	    // Store item into the DB
+	    $this->entityManager->persist($environment);
+	    $this->entityManager->flush();
+
+	    $this->logger->debug( "Allocated environment: " . $environment);
+
+	  // No env to allocate, create it
+	  } else {
+
+            $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", "session_id" => $session->getId()]));
+//        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $session->getId()]));
+
+	  }
+	  }
+
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 

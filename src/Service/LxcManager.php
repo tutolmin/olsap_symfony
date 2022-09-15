@@ -7,7 +7,7 @@ use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
-//use App\Entity\Addresses;
+use App\Entity\Addresses;
 
 #use App\Entity\Tasks;
 #use App\Entity\InstanceTypes;
@@ -20,8 +20,10 @@ class LxcManager
     private $timeout;
     private $wait;
 
+    private $name;
+
     private $entityManager;
-//    private $addressRepository;
+    private $addressRepository;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
     {
@@ -57,21 +59,35 @@ class LxcManager
             echo 'not trusted';
         }
 	*/
-        // get the task repository
-//        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
+        // get the address repository
+        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
     }
 
 
     public function createInstance($os_alias, $hw_name, $mac)//: ?InstanceTypes
     {  
-
+	/* We can not select address for the instance here
+	   since it SHOULD be connected to an Instance object.
+	   So, we expect that a passed parameter is valid
+	
+	   The same applies to OS alias and HW profile.
+	   Therse values should be verified earlier.
+	   Possibly we could double check it here.
+	*/
+/*
         $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hw_name . "`");
 
+        // Find an address item which is NOT linked to any instance
+        $address = $this->addressRepository->findOneByInstance(null);
+
+        $this->logger->debug( "Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
+*/
 	// Create an instance in LXD
 	$options = [
 	    'alias'  => $os_alias,
 	    'profiles' => [$hw_name],
             "config" => [
+//               "volatile.eth0.hwaddr" => $address->getMac(),
                "volatile.eth0.hwaddr" => $mac,
 	    ],
 	];
@@ -81,18 +97,18 @@ class LxcManager
 	$name=explode( "/", $responce["resources"]["containers"][0]);
 
 	//TODO: Handle exception
-	$this->startInstance($name[3]);
+//	$this->startInstance($name[3]);
 
 	return $name[3];
 
     }
 
-    public function startInstance($instance, $force=false)//: ?InstanceTypes
+    public function startInstance($name, $force=false)//: ?InstanceTypes
     {  
 
-        $this->logger->debug( "Starting LXC instance: `" . $instance . "`");
+        $this->logger->debug( "Starting LXC instance: `" . $name . "`");
 
-	$responce = $this->lxd->containers->start($instance, $this->timeout, $force, false, $this->wait);
+	$responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 
@@ -100,12 +116,12 @@ class LxcManager
 
     }
 
-    public function stopInstance($instance, $force=false)//: ?InstanceTypes
+    public function stopInstance($name, $force=false)//: ?InstanceTypes
     {  
 
-        $this->logger->debug( "Stopping LXC instance: `" . $instance . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
+        $this->logger->debug( "Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
 
-	$responce = $this->lxd->containers->stop($instance, $this->timeout, $force, false, $this->wait);
+	$responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 
@@ -113,24 +129,24 @@ class LxcManager
 
     }
 
-    public function restartInstance($instance, $force=false)//: ?InstanceTypes
+    public function restartInstance($name, $force=false)//: ?InstanceTypes
     {  
-	$this->stopInstance($instance, $force);
+	$this->stopInstance($name, $force);
 
-	$this->startInstance($instance, $force);
+	$this->startInstance($name, $force);
 
 	return NULL;
     }
 
-    public function deleteInstance($instance, $force=false)//: ?InstanceTypes
+    public function deleteInstance($name, $force=false)//: ?InstanceTypes
     {  
-        $this->logger->debug( "Deleting LXC instance: `" . $instance . "`");
+        $this->logger->debug( "Deleting LXC instance: `" . $name . "`");
 
-	$info = $this->getInstanceInfo($instance);
+	$info = $this->getInstanceInfo($name);
 
 	if($info["status"] == "Stopped") {
 
-	  $this->lxd->containers->remove($instance, $this->wait);
+	  $this->lxd->containers->remove($name, $this->wait);
 	  return true;
 
 	} else {
@@ -138,12 +154,12 @@ class LxcManager
 	  if($force) {
 
 	    // Stop it first
-	    $this->stopInstance($instance, $force);
-	    $this->lxd->containers->remove($instance, $this->wait);
+	    $this->stopInstance($name, $force);
+	    $this->lxd->containers->remove($name, $this->wait);
 
 	  } else {
 
-            $this->logger->debug( "Instance `" . $instance . "` is " . $info["status"]);
+            $this->logger->debug( "Instance `" . $name . "` is " . $info["status"]);
 	    return false;
 	  }
 	}
@@ -153,7 +169,7 @@ class LxcManager
 	return true;
     }
 
-    public function deleteAllInstances($instance, $force)//: ?InstanceTypes
+    public function deleteAllInstances($name, $force)//: ?InstanceTypes
     {  
 	$instances = $this->getInstanceList();
 
@@ -166,11 +182,11 @@ class LxcManager
 	return $result;
     }
 
-    public function getInstanceInfo($container)//: ?InstanceTypes
+    public function getInstanceInfo($name)//: ?InstanceTypes
     {  
 	// TODO: check container existence - input validation
 
-	return $this->lxd->containers->info($container);
+	return $this->lxd->containers->info($name);
     }
 
     public function getInstanceList()//: ?InstanceTypes

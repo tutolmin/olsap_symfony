@@ -61,6 +61,7 @@ class EnvironmentsDeleteCommand extends Command
 
             // Fetch linked Instances and release them
   	    $env->setInstance(null);
+	    $this->entityManager->flush();
 
 	    // Delete item from the DB
 	    $this->entityManager->remove($env);
@@ -72,14 +73,22 @@ class EnvironmentsDeleteCommand extends Command
 	  // look for a specific env object
 	  $env = $this->envRepository->find($env_id);
 
-	  $io->note(sprintf('Deleting "%s" from the database', $env));
+	  if($env) {
 
-	  // Fetch linked Instances and release them
-	  $env->setInstance(null);
+	    $io->note(sprintf('Deleting "%s" from the database', $env));
 
-	  // Delete item from the DB
-	  $this->entityManager->remove($env);
-	  $this->entityManager->flush();
+	    // Fetch linked Instances and release them
+	    $env->setInstance(null);
+	    $this->entityManager->flush();
+
+	    // Delete item from the DB
+	    $this->entityManager->remove($env);
+	    $this->entityManager->flush();
+
+	  } else {
+
+	    $io->error(sprintf('No environment with Id "%s" found', $env_id));
+	  }
 
 	}
 

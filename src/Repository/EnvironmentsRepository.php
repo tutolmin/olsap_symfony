@@ -3,8 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Environments;
+use App\Entity\EnvironmentStatuses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @extends ServiceEntityRepository<Environments>
@@ -16,9 +18,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EnvironmentsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+    private $environmentStatusesRepository;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Environments::class);
+
+	$this->entityManager = $entityManager;
+
+        $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
     }
 
     public function add(Environments $entity, bool $flush = false): void
@@ -68,4 +77,19 @@ class EnvironmentsRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findOneDeployed($task_id): ?Environments
+    {
+        $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
+
+        return $this->createQueryBuilder('e')
+            ->where('e.session is null')
+            ->andWhere('e.task = :task_id')
+            ->andWhere('e.status = :status_id')
+            ->setParameter('task_id', $task_id)
+            ->setParameter('status_id', $env_status->getId())
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }

@@ -66,10 +66,11 @@ class SessionManager
 
 	$instance = new Instances;
 	$instance->setName($name);
-/*
+
+	// It is New/Started by sefault
 	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Bound");
 	$instance->setStatus($instance_status);
-*/
+
 	$instance->setInstanceType($it);
 	$now = new \DateTimeImmutable('NOW');
 	$instance->setCreatedAt($now);
@@ -80,7 +81,8 @@ class SessionManager
 	$this->entityManager->persist($instance);
 	$this->entityManager->flush();
 
-	$this->setInstanceStatus($instance, "Bound");
+	// Update Instance status
+//	$this->setInstanceStatus($instance, "Bound");
 
 	return $instance;
     }
@@ -169,12 +171,15 @@ class SessionManager
 	  $this->logger->debug('First suitable instance type: '.$instance_type);
 
 	  $env = new Environments;
-/*
+
 	  $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
 	  $env->setStatus($env_status);
-*/
+
 	  $env->setTask($task);
 	  $env->setSession($session);
+
+	  $timestamp = new \DateTimeImmutable('NOW');
+	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
 
 	  $name = $this->createInstance($instance_type);
 
@@ -186,7 +191,7 @@ class SessionManager
 
 	  $this->logger->debug('Environment `' . $env . '` was created.');
 
-	  $this->setEnvironmentStatus($env, "Created");
+//	  $this->setEnvironmentStatus($env, "Created");
 
 	  return $env;
 
@@ -230,14 +235,19 @@ class SessionManager
 	return false;
     }
 
+    public function getRandomTask(): Tasks
+    {
+        $tasks = $this->taskRepository->findAll();
+
+        return $tasks[rand(0,count($tasks)-1)];
+    }
+
     public function getNextTask( Sessions $session): Tasks
     {
 
 	// TODO: Select a task specifically for a session
 
-        $tasks = $this->taskRepository->findAll();
-
-        return $tasks[rand(0,count($tasks)-1)];
+        return $this->getRandomTask();
     }
 
     public function getFirstInstanceType(Tasks $task): ?InstanceTypes

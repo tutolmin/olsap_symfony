@@ -11,20 +11,20 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
+use App\Entity\Environments;
+use App\Entity\EnvironmentStatuses;
 
 #[AsCommand(
-    name: 'app:instances:ls',
-    description: 'List instances stored in the database',
+    name: 'app:environments:ls',
+    description: 'List environments stored in the database',
 )]
-class InstancesLsCommand extends Command
+class EnvironmentsLsCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;
 
-    private $instanceRepository;
-    private $instanceStatusRepository;
+    private $environmentRepository;
+    private $environmentStatusRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager)
@@ -32,8 +32,8 @@ class InstancesLsCommand extends Command
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
-        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
+        $this->environmentStatusRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
+        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
     }
 
     protected function configure(): void
@@ -51,34 +51,34 @@ class InstancesLsCommand extends Command
 	if ($status) {
 
             $io->note(sprintf('You passed an argument: %s', $status));
-            $instance_status = $this->instanceStatusRepository->findOneByStatus($status);
+            $environment_status = $this->environmentStatusRepository->findOneByStatus($status);
 
-	    // Check if the specified instance status exists
-	    if($instance_status) {
+	    // Check if the specified environment status exists
+	    if($environment_status) {
 
 		$io->note(sprintf('Status "%s" exists, filter applied', $status));
 
-		// look for a specific instance type object
-		$instances = $this->instanceRepository->findByStatus($instance_status->getId());
+		// look for a specific environment type object
+		$environments = $this->environmentRepository->findByStatus($environment_status->getId());
 
 	    } else {
 
 		$io->warning(sprintf('Status "%s" does NOT exist, filter will NOT be applied', $status));
 
-		// look for a specific instance type object
-		$instances = $this->instanceRepository->findAll();
+		// look for a specific environment type object
+		$environments = $this->environmentRepository->findAll();
 	    }
 
         } else {
 
-            // look for a specific instance type object
-            $instances = $this->instanceRepository->findAll();
+            // look for a specific environment type object
+            $environments = $this->environmentRepository->findAll();
 	}
 
-	foreach( $instances as $instance) {
+	foreach( $environments as $environment) {
 
-            $io->note(sprintf('Name: %s, port: %s, status: %s', 
-		$instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+            $io->note(sprintf('Environment: %s, status: %s', 
+		$environment, $environment->getStatus()));
 	}
 
         return Command::SUCCESS;

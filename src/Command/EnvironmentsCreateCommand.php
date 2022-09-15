@@ -89,7 +89,7 @@ class EnvironmentsCreateCommand extends Command
 	    // Deploy an environment
 	    $deploy_result = $this->sessionManager->deployEnvironment($environment);
 
-            $io->note('... and deployed ' . ($deploy_result?'':'un').'successfully');
+            $io->warning('... and deployed ' . ($deploy_result?'':'un').'successfully');
 
         } else {
 

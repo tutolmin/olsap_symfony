@@ -72,8 +72,10 @@ class InstancesDeleteCommand extends Command
 
 	      // Fetch all linked Addresses and release them
 	      $addresses = $instance->getAddresses();
-	      foreach($addresses as $address)
+	      foreach($addresses as $address) {
 		$address->setInstance(null);
+		$this->entityManager->flush();
+	      }
 
 	      // Delete item from the DB
 	      $this->entityManager->remove($instance);
@@ -100,8 +102,11 @@ class InstancesDeleteCommand extends Command
 
 		// Fetch all linked Addresses and release them
                 $addresses = $instance->getAddresses();
-		foreach($addresses as $address)
+		foreach($addresses as $address) {
+
 		  $address->setInstance(null);
+		  $this->entityManager->flush();
+		}
 
 		// Delete item from the DB
 		$this->entityManager->remove($instance);

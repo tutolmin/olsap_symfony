@@ -9,18 +9,18 @@ final class SessionAction
      * to hold the data for this message class.
      */
 
-     private $name;
+     private $action;
      private $session_id;
 
      public function __construct($message)
      {
-        $this->name = $message['name'];
+        $this->action = $message['action'];
         $this->session_id = $message['session_id']?$message['session_id']:-1;
      }
 
-    public function getName(): string
+    public function getAction(): string
     {
-        return $this->name;
+        return $this->action;
     }
 
     public function getSessionId(): int

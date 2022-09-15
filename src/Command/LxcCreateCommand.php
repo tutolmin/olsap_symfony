@@ -14,6 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use App\Entity\HardwareProfiles;
+use App\Entity\Addresses;
 use App\Service\LxcManager;
 
 #[AsCommand(
@@ -34,6 +35,9 @@ class LxcCreateCommand extends Command
     // HardwareProfiles repo
     private $hpRepository;
 
+    // Addresses repo
+    private $adRepository;
+
     private $lxd;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -53,6 +57,9 @@ class LxcCreateCommand extends Command
 
         // get the HardwareProfiles repository
         $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
+
+        // get the Addresses repository
+        $this->adRepository = $this->entityManager->getRepository( Addresses::class);
     }
 
     protected function configure(): void
@@ -105,9 +112,12 @@ class LxcCreateCommand extends Command
 
 	    for($i=0; $i<$number; $i++) {
 
-              $name = $this->lxd->createInstance($os->getAlias(),$hp->getName());
+	      // Find an address item which is NOT linked to any instance
+	      $address = $this->adRepository->findOneByInstance(null);
+	      $io->note(sprintf('Selected address MAC: ' . $address->getMac()));
 
-	      $io->note(sprintf('Instance `' . $name . ' was created.'));
+              $name = $this->lxd->createInstance($os->getAlias(),$hp->getName(),$address->getMac());
+	      $io->note(sprintf('Instance ' . $name . ' was created.'));
 	    }
 /*
 	      $this->bus->dispatch(new LxcOperation(["command" => "create", 

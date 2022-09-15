@@ -65,6 +65,23 @@ lxc profile device set cricket root size 1GB
 lxc profile set cricket limits.cpu.allowance 10%
 ```
 
+## SystemD messenger consumer
+```
+[Unit]
+#Description=Symfony messenger-consume %i
+Description=Symfony messenger-consume
+
+[Service]
+#ExecStart=php /path/to/your/app/bin/console messenger:consume async --time-limit=3600
+ExecStart=/usr/local/bin/docker-compose exec -T php bin/console messenger:consume async --time-limit=3600 --limit=3
+Restart=always
+WorkingDirectory=/root/olsap
+RestartSec=3
+
+[Install]
+WantedBy=default.target
+```
+
 ## PHP LXC lib
 https://github.com/ashleyhood/php-lxd/blob/master/docs/configuration.md
 
