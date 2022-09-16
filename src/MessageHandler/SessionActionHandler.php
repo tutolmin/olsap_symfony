@@ -60,6 +60,10 @@ final class SessionActionHandler implements MessageHandlerInterface
         if( strlen($message->getSessionId()))
           $session = $this->sessionRepository->find($message->getSessionId());
 
+        $environment = null;
+        if( strlen($message->getEnvironmentId()))
+          $environment = $this->environmentRepository->find($message->getEnvironmentId());
+
         // Switch action to serve
         switch( $message->getAction()) {
 /*
@@ -106,16 +110,25 @@ final class SessionActionHandler implements MessageHandlerInterface
             $this->logger->debug( "Selected task: " . $task);
 
 	    $environment = $this->sessionManager->createEnvironment($task,$session);
-            $this->logger->debug( "Created environment: " . $environment);
+#            $this->logger->debug( "Created environment: " . $environment);
 
 	    if($environment) {
 
 	      $result = $this->sessionManager->deployEnvironment($environment);
-              $this->logger->debug( "Environment deployed successfully!");
+#              $this->logger->debug( "Environment deployed successfully!");
 	    } else {
 
-              $this->logger->debug( "Environment deployment failure!");
+#              $this->logger->debug( "Environment deployment failure!");
 	    }
+
+          break;
+
+        // Verify the environment
+        case "verifyEnvironment":
+
+	  $result = $this->sessionManager->verifyEnvironment($environment);
+
+	  $this->sessionManager->allocateEnvironment($environment->getSession());
 
           break;
 

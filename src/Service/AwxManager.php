@@ -82,7 +82,7 @@ class AwxManager
 	return $this->awx->project()->getAll();
     }
 
-    public function deploy($id, $body)#: MeEntity
+    public function runJobTemplate($id, $body)#: MeEntity
     {
 	// return the job template api
 	$jobTemplate = $this->awx->jobTemplate();
@@ -107,6 +107,7 @@ class AwxManager
 		
 	return $jobResult;
     }
+
 
 /*
     public function getNextTask( Awx $session): Tasks

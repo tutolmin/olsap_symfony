@@ -11,11 +11,13 @@ final class SessionAction
 
      private $action;
      private $session_id;
+     private $environment_id;
 
      public function __construct($message)
      {
         $this->action = $message['action'];
-        $this->session_id = $message['session_id']?$message['session_id']:-1;
+        $this->session_id = array_key_exists('session_id',$message)?$message['session_id']:-1;
+        $this->environment_id = array_key_exists('environment_id',$message)?$message['environment_id']:-1;
      }
 
     public function getAction(): string
@@ -26,5 +28,10 @@ final class SessionAction
     public function getSessionId(): int
     {
         return $this->session_id;
+    }
+
+    public function getEnvironmentId(): int
+    {
+        return $this->environment_id;
     }
 }

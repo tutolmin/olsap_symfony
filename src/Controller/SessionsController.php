@@ -10,46 +10,48 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Environments;
+//use Doctrine\ORM\EntityManagerInterface;
+//use App\Entity\Environments;
 use App\Service\SessionManager;
-use Symfony\Component\Messenger\MessageBusInterface;
-use App\Message\SessionAction;
-use Psr\Log\LoggerInterface;
+//use Symfony\Component\Messenger\MessageBusInterface;
+//use App\Message\SessionAction;
+//use Psr\Log\LoggerInterface;
 
 #[Route('/sessions')]
 class SessionsController extends AbstractController
 {
     // Doctrine EntityManager
-    private $entityManager;
+//    private $entityManager;
 
     // Repositories
-    private $environmentRepository;
+//    private $environmentRepository;
 
     private $sessionManager;
 
     // Message bus
-    private $bus;
+//    private $bus;
 
-    private $logger;
+//    private $logger;
 
     // InstanceTypes repo
 //    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, 
-	SessionManager $sessionManager, MessageBusInterface $bus,
-	LoggerInterface $logger)
+    public function __construct( SessionManager $sessionManager, 
+//	EntityManagerInterface $entityManager, MessageBusInterface $bus,
+//	LoggerInterface $logger
+	)
     {   
-        $this->entityManager = $entityManager;
+
+//        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
-        $this->bus = $bus;
-        $this->logger = $logger;
+//        $this->bus = $bus;
+//        $this->logger = $logger;
 
 
         // get the SessionStatuses repository
 //        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
-        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
+//        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
     }
 
     #[Route('/', name: 'app_sessions_index', methods: ['GET'])]
@@ -80,61 +82,28 @@ class SessionsController extends AbstractController
     }
 
     #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function start(Sessions $session): Response
+    public function start(Request $request, Sessions $session): Response
     {
-	$this->sessionManager->setSessionStatus($session, "Started");
-/*
-	$session->setStatus($this->sessionStatusesRepository->findOneByStatus("Started"));
+        if ($this->isCsrfTokenValid('start'.$session->getHash(), $request->request->get('_token'))) {
 
-        // Store item into the DB
-        $this->entityManager->persist($session);
-        $this->entityManager->flush();
-*/
-	for($i=0;$i<1;$i++) { 
+	  $this->sessionManager->setSessionStatus($session, "Started");
 
-	// Session has been specified
-//	$task = $this->sessionManager->getRandomTask();
-//	if($session)
-	  $task = $this->sessionManager->getNextTask($session);
-
-	  $this->logger->debug( "Selected task: " . $task);
-
-	  $environment = $this->environmentRepository->findOneDeployed($session);
-
-	  // Environment has been found
-	  if($environment) {
-
-	    $environment->setSession($session);
-
-	    // Store item into the DB
-	    $this->entityManager->persist($environment);
-	    $this->entityManager->flush();
-
-	    $this->logger->debug( "Allocated environment: " . $environment);
-
-	  // No env to allocate, create it
-	  } else {
-
-            $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", "session_id" => $session->getId()]));
-//        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $session->getId()]));
-
+	  // Start certain number of instances
+	  for($i=0;$i<$_ENV["APP_START_ENVS"];$i++) { 
+	
+	    $this->sessionManager->allocateEnvironment($session);
 	  }
-	  }
-
+	}
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{hash}/finish', name: 'app_sessions_finish', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function finish(Sessions $session): Response
+    public function finish(Request $request, Sessions $session): Response
     {
-	$this->sessionManager->setSessionStatus($session, "Finished");
-/*
-	$session->setStatus($this->sessionStatusesRepository->findOneByStatus("Finished"));
+        if ($this->isCsrfTokenValid('finish'.$session->getHash(), $request->request->get('_token'))) {
 
-        // Store item into the DB
-        $this->entityManager->persist($session);
-        $this->entityManager->flush();
-*/
+	  $this->sessionManager->setSessionStatus($session, "Finished");
+	}
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 

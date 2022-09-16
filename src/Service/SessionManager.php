@@ -17,6 +17,8 @@ use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
 use App\Service\AwxManager;
 use App\Service\LxcManager;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Message\SessionAction;
 
 class SessionManager
 {
@@ -27,23 +29,29 @@ class SessionManager
     private $addressRepository;
     private $instanceStatusesRepository;
     private $sessionStatusesRepository;
+    private $environmentRepository;
     private $environmentStatusesRepository;
+
+    private $bus;
 
     private $lxd;
     private $awx;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx)
+	LxcManager $lxd, AwxManager $awx, MessageBusInterface $bus)
+
     {
         $this->logger = $logger;
         $this->entityManager = $em;
 	$this->lxd = $lxd;
+	$this->bus = $bus;
 	$this->awx = $awx;
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
         $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
     }
@@ -159,6 +167,39 @@ class SessionManager
 	}
     }
 
+
+    public function allocateEnvironment(Sessions $session): bool
+    {
+	// TODO: check input parameters
+	$task = $this->getNextTask($session);
+
+	$this->logger->debug( "Selected task: " . $task);
+
+	$environment = $this->environmentRepository->findOneDeployed($session);
+
+	// Environment has been found
+	if($environment) {
+
+	  $environment->setSession($session);
+
+	  // Store item into the DB
+	  $this->entityManager->persist($environment);
+	  $this->entityManager->flush();
+
+	  $this->logger->debug( "Allocated environment: " . $environment);
+
+	// No env to allocate, create it
+	} else {
+
+	  $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", "session_id" => $session->getId()]));
+
+	  return false;	
+	}
+
+	return true;	
+    }
+
+
     public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments
     {
 	// TODO: check input parameters
@@ -202,6 +243,36 @@ class SessionManager
 	return null;
     }
 
+
+
+    public function verifyEnvironment(Environments $env): bool
+    {
+	$this->logger->debug('Verifying: ' . $env);
+
+	if($task_id = $env->getTask()->getVerify()) {
+
+	  // Limit execution on single host only
+	  $body["limit"] = $env->getInstance()->getName();
+
+	  // return the the account api
+	  $result = $this->awx->runJobTemplate($env->getTask()->getVerify(), $body);
+
+	  $this->logger->debug('Status: ' . $result->status);
+
+	  $this->setEnvironmentStatus($env, "Verified");
+
+	  return true;
+
+	} else {
+
+	  $this->logger->debug('Verify job template with id `' . $task_id . '` was NOT found.');
+	}
+
+	return false;
+    }
+
+
+
     public function deployEnvironment(Environments $env): bool
     {
 	$this->logger->debug('Deploying: ' . $env);
@@ -212,19 +283,12 @@ class SessionManager
 	  $body["limit"] = $env->getInstance()->getName();
 
 	  // return the the account api
-	  $result = $this->awx->deploy($env->getTask()->getDeploy(), $body);
+	  $result = $this->awx->runJobTemplate($env->getTask()->getDeploy(), $body);
 
 	  $this->logger->debug('Status: ' . $result->status);
 
 	  $this->setEnvironmentStatus($env, "Deployed");
-/*
-	  $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
-	  $env->setStatus($env_status);
 
-	  // Store item into the DB
-	  $this->entityManager->persist($env);
-	  $this->entityManager->flush();
-*/
 	  return true;
 
 	} else {
@@ -235,12 +299,16 @@ class SessionManager
 	return false;
     }
 
+
+
     public function getRandomTask(): Tasks
     {
         $tasks = $this->taskRepository->findAll();
 
         return $tasks[rand(0,count($tasks)-1)];
     }
+
+
 
     public function getNextTask( Sessions $session): Tasks
     {

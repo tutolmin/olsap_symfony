@@ -11,20 +11,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Service\SessionManager;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Message\SessionAction;
+use Psr\Log\LoggerInterface;
 
 #[Route('/environments')]
 class EnvironmentsController extends AbstractController
 {
     private $sessionManager;
+    private $bus;
 
     // InstanceTypes repo
 //    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( SessionManager $sessionManager)
+    public function __construct( SessionManager $sessionManager, MessageBusInterface $bus)
     {   
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
+
+        $this->bus = $bus;
 
         // get the SessionStatuses repository
 //        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
@@ -68,10 +74,34 @@ class EnvironmentsController extends AbstractController
         ]);
     }
 
-    #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function verify(Environments $environment): Response
+    #[Route('/{hash}/skip', name: 'app_environments_skip', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function skip(Request $request, Environments $environment): Response
     {
-        $this->sessionManager->setEnvironmentStatus($environment, "Complete");
+        if ($this->isCsrfTokenValid('skip'.$environment->getHash(), $request->request->get('_token'))) {
+
+	  $this->sessionManager->setEnvironmentStatus($environment, "Skipped");
+
+	  // Allocate new environment for a session
+	  $this->sessionManager->allocateEnvironment($environment->getSession());
+//        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $environment->getSession()->getId()]));
+	}
+
+        return $this->redirectToRoute('app_sessions_display', ['hash' => $environment->getSession()->getHash()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function verify(Request $request, Environments $environment): Response
+    {
+        if ($this->isCsrfTokenValid('verify'.$environment->getHash(), $request->request->get('_token'))) {
+
+	  $this->sessionManager->setEnvironmentStatus($environment, "Verified");
+
+	  // Verify specified environment
+	  $this->bus->dispatch(new SessionAction(["action" => "verifyEnvironment", "environment_id" => $environment->getId()]));
+
+	  // Allocate new environment for a session
+//        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $environment->getSession()->getId()]));
+	}
 
         return $this->redirectToRoute('app_sessions_display', ['hash' => $environment->getSession()->getHash()], Response::HTTP_SEE_OTHER);
     }

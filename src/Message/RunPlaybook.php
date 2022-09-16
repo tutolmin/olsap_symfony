@@ -15,7 +15,7 @@ final class RunPlaybook
     public function __construct($message)
     {
         $this->name = $message['name'];
-        $this->environment_id = $message['environment_id']?$message['environment_id']:"";
+        $this->environment_id = array_key_exists('environment_id',$message)?$message['environment_id']:"";
     }
 
     public function getName(): string
