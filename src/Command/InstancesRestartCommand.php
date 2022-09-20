@@ -17,9 +17,9 @@ use App\Service\LxcManager;
 
 #[AsCommand(
     name: 'app:instances:restart',
-    description: 'Rerestarts an instance',
+    description: 'Restarts an instance',
 )]
-class InstancesRerestartCommand extends Command
+class InstancesRestartCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_instances_start', {'id': instance.id}) }}" onsubmit="return confirm('Are you sure you want to start this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('start' ~ instance.id) }}">
+    <button class="btn">Start</button>
+</form>

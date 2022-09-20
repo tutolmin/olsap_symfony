@@ -10,9 +10,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Service\LxcManager;
+
 #[Route('/instances')]
 class InstancesController extends AbstractController
 {
+    private LxcManager $lxcManager;
+
+    // Dependency injection of the EntityManagerInterface entity
+    public function __construct( LxcManager $lxcManager,
+//      EntityManagerInterface $entityManager, MessageBusInterface $bus,
+//      LoggerInterface $logger
+        )
+    {
+
+        $this->lxcManager = $lxcManager;
+    }
+
     #[Route('/', name: 'app_instances_index', methods: ['GET'])]
     public function index(InstancesRepository $instancesRepository): Response
     {
@@ -71,7 +85,40 @@ class InstancesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_instances_delete', methods: ['POST'])]
+    #[Route('/{id}/start', name: 'app_instances_start', methods: ['POST'])]
+    public function start(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    {
+        if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
+
+            $this->lxcManager->startInstance($instance->getName());
+        }
+
+        return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/stop', name: 'app_instances_stop', methods: ['POST'])]
+    public function stop(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    {
+        if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {
+
+            $this->lxcManager->stopInstance($instance->getName());
+        }
+
+        return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/restart', name: 'app_instances_restart', methods: ['POST'])]
+    public function restart(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    {
+        if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {
+
+            $this->lxcManager->restartInstance($instance->getName());
+        }
+
+        return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/delete', name: 'app_instances_delete', methods: ['POST'])]
     public function delete(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$instance->getId(), $request->request->get('_token'))) {

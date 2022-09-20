@@ -26,7 +26,7 @@ class SessionsController extends AbstractController
     // Repositories
 //    private $environmentRepository;
 
-    private $sessionManager;
+    private SessionManager $sessionManager;
 
     // Message bus
 //    private $bus;
@@ -162,7 +162,7 @@ class SessionsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_sessions_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_sessions_delete', methods: ['POST'])]
     public function delete(Request $request, Sessions $session, SessionsRepository $sessionsRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {

@@ -38,5 +38,16 @@
 <!--
     <a href="{{ path('app_instances_edit', {'id': instance.id}) }}">edit</a>
 -->
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <td>{{ include('instances/_start_form.html.twig') }}</td>
+                <td>{{ include('instances/_stop_form.html.twig') }}</td>
+                <td>{{ include('instances/_restart_form.html.twig') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
     {{ include('instances/_delete_form.html.twig') }}
 {% endblock %}

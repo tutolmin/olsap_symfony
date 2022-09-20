@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_instances_stop', {'id': instance.id}) }}" onsubmit="return confirm('Are you sure you want to stop this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('stop' ~ instance.id) }}">
+    <button class="btn">Stop</button>
+</form>
