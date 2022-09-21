@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Tasks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Environments;
+
 
 /**
  * @extends ServiceEntityRepository<Tasks>
@@ -16,9 +19,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TasksRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+//    private $entityManager;
+    private $environmentRepository;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Tasks::class);
+
+//        $this->entityManager = $entityManager;
+
+        $this->environmentRepository = $entityManager->getRepository( Environments::class);
     }
 
     public function add(Tasks $entity, bool $flush = false): void
@@ -32,6 +42,12 @@ class TasksRepository extends ServiceEntityRepository
 
     public function remove(Tasks $entity, bool $flush = false): void
     {
+        // Fetch all linked Environments and delete them
+        $envs = $entity->getEnvs();
+
+        foreach($envs as $env)
+            $this->environmentRepository->remove($env);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

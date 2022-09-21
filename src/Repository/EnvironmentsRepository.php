@@ -32,6 +32,9 @@ class EnvironmentsRepository extends ServiceEntityRepository
 
     public function add(Environments $entity, bool $flush = false): void
     {
+	// TODO: check if the instance has been used already in another env
+	$timestamp = new \DateTimeImmutable('NOW');
+	$entity->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {

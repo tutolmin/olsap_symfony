@@ -219,8 +219,8 @@ class SessionManager
 	  $env->setTask($task);
 	  $env->setSession($session);
 
-	  $timestamp = new \DateTimeImmutable('NOW');
-	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
+//	  $timestamp = new \DateTimeImmutable('NOW');
+//	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
 
 	  $name = $this->createInstance($instance_type);
 
