@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Environments;
 use App\Form\EnvironmentsType;
 use App\Repository\EnvironmentsRepository;
@@ -13,11 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\SessionManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
-use Psr\Log\LoggerInterface;
 
 #[Route('/environments')]
 class EnvironmentsController extends AbstractController
 {
+    private $logger;
     private $sessionManager;
     private $bus;
 
@@ -25,12 +27,16 @@ class EnvironmentsController extends AbstractController
 //    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( SessionManager $sessionManager, MessageBusInterface $bus)
+    public function __construct( SessionManager $sessionManager, MessageBusInterface $bus,
+	LoggerInterface $logger)
     {   
+
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
 
         $this->bus = $bus;
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
 
         // get the SessionStatuses repository
 //        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
@@ -39,6 +45,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/', name: 'app_environments_index', methods: ['GET'])]
     public function index(EnvironmentsRepository $environmentsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('environments/index.html.twig', [
             'environments' => $environmentsRepository->findAll(),
         ]);
@@ -47,6 +55,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/new', name: 'app_environments_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EnvironmentsRepository $environmentsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $environment = new Environments();
         $form = $this->createForm(EnvironmentsType::class, $environment);
         $form->handleRequest($request);
@@ -66,6 +76,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/{hash}', name: 'app_environments_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
     public function display(Environments $environment): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
             'port' => $environment->getInstance()->getAddresses()[0]->getPort(),
@@ -77,7 +89,13 @@ class EnvironmentsController extends AbstractController
     #[Route('/{hash}/skip', name: 'app_environments_skip', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function skip(Request $request, Environments $environment): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('skip'.$environment->getHash(), $request->request->get('_token'))) {
+
+	  // Release instance
+	  $instance = $environment->getInstance();
+	  $this->sessionManager->releaseInstance($instance);
 
 	  $this->sessionManager->setEnvironmentStatus($environment, "Skipped");
 
@@ -92,6 +110,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function verify(Request $request, Environments $environment): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('verify'.$environment->getHash(), $request->request->get('_token'))) {
 
 	  $this->sessionManager->setEnvironmentStatus($environment, "Verified");
@@ -109,6 +129,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/{id}', name: 'app_environments_show', methods: ['GET'])]
     public function show(Environments $environment): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('environments/show.html.twig', [
             'environment' => $environment,
         ]);
@@ -117,6 +139,8 @@ class EnvironmentsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_environments_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Environments $environment, EnvironmentsRepository $environmentsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(EnvironmentsType::class, $environment);
         $form->handleRequest($request);
 
@@ -135,7 +159,14 @@ class EnvironmentsController extends AbstractController
     #[Route('/{id}', name: 'app_environments_delete', methods: ['POST'])]
     public function delete(Request $request, Environments $environment, EnvironmentsRepository $environmentsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$environment->getId(), $request->request->get('_token'))) {
+
+            // Release instance
+	    $instance = $environment->getInstance();
+	    $this->sessionManager->releaseInstance($instance);
+
             $environmentsRepository->remove($environment, true);
         }
 

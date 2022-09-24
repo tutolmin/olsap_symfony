@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Sessions;
 use App\Form\SessionsType;
 use App\Repository\SessionsRepository;
@@ -20,6 +22,8 @@ use App\Service\SessionManager;
 #[Route('/sessions')]
 class SessionsController extends AbstractController
 {
+    private $logger;
+
     // Doctrine EntityManager
 //    private $entityManager;
 
@@ -39,14 +43,16 @@ class SessionsController extends AbstractController
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( SessionManager $sessionManager, 
 //	EntityManagerInterface $entityManager, MessageBusInterface $bus,
-//	LoggerInterface $logger
+	LoggerInterface $logger
 	)
     {   
+
 
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
 //        $this->bus = $bus;
-//        $this->logger = $logger;
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
 
 
         // get the SessionStatuses repository
@@ -57,6 +63,8 @@ class SessionsController extends AbstractController
     #[Route('/', name: 'app_sessions_index', methods: ['GET'])]
     public function index(SessionsRepository $sessionsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('sessions/index.html.twig', [
             'sessions' => $sessionsRepository->findAll(),
         ]);
@@ -65,6 +73,8 @@ class SessionsController extends AbstractController
     #[Route('/new', name: 'app_sessions_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SessionsRepository $sessionsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $session = new Sessions();
         $form = $this->createForm(SessionsType::class, $session);
         $form->handleRequest($request);
@@ -84,6 +94,8 @@ class SessionsController extends AbstractController
     #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function start(Request $request, Sessions $session): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('start'.$session->getHash(), $request->request->get('_token'))) {
 
 	  $this->sessionManager->setSessionStatus($session, "Started");
@@ -100,6 +112,8 @@ class SessionsController extends AbstractController
     #[Route('/{hash}/finish', name: 'app_sessions_finish', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
     public function finish(Request $request, Sessions $session): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('finish'.$session->getHash(), $request->request->get('_token'))) {
 
 	  $this->sessionManager->setSessionStatus($session, "Finished");
@@ -110,6 +124,8 @@ class SessionsController extends AbstractController
     #[Route('/{hash}', name: 'app_sessions_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
     public function display(Sessions $session): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $envs = array();
         foreach($session->getEnvs()->getValues() as $se)
 	  $envs[$se->getTask() . " @ " . $se->getInstance() . " : " . $se->getStatus()] = 
@@ -124,6 +140,8 @@ class SessionsController extends AbstractController
     #[Route('/{id}', name: 'app_sessions_show', methods: ['GET'])]
     public function show(Sessions $session): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $techs = array();
         foreach($session->getSessionTechs()->getValues() as $st)
           $techs[] = $st->getTech();
@@ -147,6 +165,8 @@ class SessionsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_sessions_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Sessions $session, SessionsRepository $sessionsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(SessionsType::class, $session);
         $form->handleRequest($request);
 
@@ -165,6 +185,8 @@ class SessionsController extends AbstractController
     #[Route('/{id}/delete', name: 'app_sessions_delete', methods: ['POST'])]
     public function delete(Request $request, Sessions $session, SessionsRepository $sessionsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {
             $sessionsRepository->remove($session, true);
         }

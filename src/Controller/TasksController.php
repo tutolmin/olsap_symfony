@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Tasks;
 use App\Form\TasksType;
 use App\Repository\TasksRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/tasks')]
 class TasksController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_tasks_index', methods: ['GET'])]
     public function index(TasksRepository $tasksRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('tasks/index.html.twig', [
             'tasks' => $tasksRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class TasksController extends AbstractController
     #[Route('/new', name: 'app_tasks_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TasksRepository $tasksRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $task = new Tasks();
         $form = $this->createForm(TasksType::class, $task);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class TasksController extends AbstractController
     #[Route('/{id}', name: 'app_tasks_show', methods: ['GET'])]
     public function show(Tasks $task): Response
     {
+        $this->logger->debug(__METHOD__);
+
 	$techs = array();
 	foreach($task->getTaskTechs()->getValues() as $tt)
 	  $techs[] = $tt->getTech();
@@ -56,6 +71,8 @@ class TasksController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tasks_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tasks $task, TasksRepository $tasksRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(TasksType::class, $task);
         $form->handleRequest($request);
 
@@ -74,6 +91,8 @@ class TasksController extends AbstractController
     #[Route('/{id}', name: 'app_tasks_delete', methods: ['POST'])]
     public function delete(Request $request, Tasks $task, TasksRepository $tasksRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
             $tasksRepository->remove($task, true);
         }

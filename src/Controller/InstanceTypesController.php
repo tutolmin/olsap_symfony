@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\InstanceTypes;
 use App\Form\InstanceTypesType;
 use App\Repository\InstanceTypesRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/instance/types')]
 class InstanceTypesController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_instance_types_index', methods: ['GET'])]
     public function index(InstanceTypesRepository $instanceTypesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('instance_types/index.html.twig', [
             'instance_types' => $instanceTypesRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class InstanceTypesController extends AbstractController
     #[Route('/new', name: 'app_instance_types_new', methods: ['GET', 'POST'])]
     public function new(Request $request, InstanceTypesRepository $instanceTypesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $instanceType = new InstanceTypes();
         $form = $this->createForm(InstanceTypesType::class, $instanceType);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class InstanceTypesController extends AbstractController
     #[Route('/{id}', name: 'app_instance_types_show', methods: ['GET'])]
     public function show(InstanceTypes $instanceType): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('instance_types/show.html.twig', [
             'instance_type' => $instanceType,
         ]);
@@ -51,6 +66,8 @@ class InstanceTypesController extends AbstractController
     #[Route('/{id}/edit', name: 'app_instance_types_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, InstanceTypes $instanceType, InstanceTypesRepository $instanceTypesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(InstanceTypesType::class, $instanceType);
         $form->handleRequest($request);
 
@@ -69,6 +86,8 @@ class InstanceTypesController extends AbstractController
     #[Route('/{id}', name: 'app_instance_types_delete', methods: ['POST'])]
     public function delete(Request $request, InstanceTypes $instanceType, InstanceTypesRepository $instanceTypesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$instanceType->getId(), $request->request->get('_token'))) {
             $instanceTypesRepository->remove($instanceType, true);
         }

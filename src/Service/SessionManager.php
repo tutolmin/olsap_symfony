@@ -27,6 +27,7 @@ class SessionManager
     private $entityManager;
     private $taskRepository;
     private $addressRepository;
+    private $instanceRepository;
     private $instanceStatusesRepository;
     private $sessionStatusesRepository;
     private $environmentRepository;
@@ -42,6 +43,8 @@ class SessionManager
 
     {
         $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         $this->entityManager = $em;
 	$this->lxd = $lxd;
 	$this->bus = $bus;
@@ -50,6 +53,7 @@ class SessionManager
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
+        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
         $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
@@ -59,6 +63,8 @@ class SessionManager
 //    public function createInstance(InstanceTypes $it, Environments $env = null): Instances
     public function createInstance(InstanceTypes $it): Instances
     {
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check input parameters
 
 	// Find an address item which is NOT linked to any instance
@@ -76,12 +82,14 @@ class SessionManager
 	$instance->setName($name);
 
 	// It is New/Started by sefault
-	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Bound");
+	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
 	$instance->setStatus($instance_status);
+//	Ca not use this function yet - entity is absent in the DB
+//	$instance->setInstanceStatus("Bound");
 
 	$instance->setInstanceType($it);
-	$now = new \DateTimeImmutable('NOW');
-	$instance->setCreatedAt($now);
+//	$now = new \DateTimeImmutable('NOW');
+//	$instance->setCreatedAt($now);
 
 	$address->setInstance($instance);
 
@@ -95,8 +103,53 @@ class SessionManager
 	return $instance;
     }
 
+
+
+    // Bind the Instance
+    public function bindInstance(InstanceTypes $it): Instances
+    {
+        $this->logger->debug(__METHOD__);
+
+	// TODO: check input parameters
+
+	$instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
+
+	// Check if suitable instance has been found
+	if($instance)
+
+	  $this->logger->debug('Suitable started instance has been found: '.$instance);
+
+	// Create new Instance
+	else
+	    $instance = $this->createInstance($it);
+
+	// Update Instance status
+	$this->setInstanceStatus($instance, "Bound");
+
+	return $instance;
+    }
+
+
+
+    // Release the Instance
+    public function releaseInstance(Instances $instance): bool
+    {
+        $this->logger->debug(__METHOD__);
+
+	// TODO: check input parameters
+
+	// TODO: restore init snapshot
+
+	// Update Instance status
+	$this->setInstanceStatus($instance, "Started");
+
+	return true;
+    }
+
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	$status = $this->sessionStatusesRepository->findOneByStatus($status_str);
 
 	if($status) {
@@ -121,6 +174,8 @@ class SessionManager
 
     public function setEnvironmentStatus(Environments $environment, $status_str): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	$status = $this->environmentStatusesRepository->findOneByStatus($status_str);
 
 	if($status) {
@@ -145,11 +200,13 @@ class SessionManager
 
     public function setInstanceStatus(Instances $instance, $status_str): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	$status = $this->instanceStatusesRepository->findOneByStatus($status_str);
 
 	if($status) {
 
-	  $this->logger->debug('Changing instance status to: '.$status);
+	  $this->logger->debug('Changing instance '.$instance.' status to: '.$status);
 
 	  $instance->setStatus($status);
 
@@ -170,6 +227,8 @@ class SessionManager
 
     public function allocateEnvironment(Sessions $session): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check input parameters
 	$task = $this->getNextTask($session);
 
@@ -202,6 +261,8 @@ class SessionManager
 
     public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments
     {
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check input parameters
 
 	// Get the suitable InstanceType for a task
@@ -219,10 +280,17 @@ class SessionManager
 	  $env->setTask($task);
 	  $env->setSession($session);
 
+	  // Store item into the DB
+	  $this->entityManager->persist($env);
+	  $this->entityManager->flush();
+
+	  $this->logger->debug('Environment `' . $env . '` was created.');
+
 //	  $timestamp = new \DateTimeImmutable('NOW');
 //	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
 
-	  $name = $this->createInstance($instance_type);
+//	  $name = $this->createInstance($instance_type);
+	  $name = $this->bindInstance($instance_type);
 
 	  $env->setInstance($name);
 
@@ -230,7 +298,7 @@ class SessionManager
 	  $this->entityManager->persist($env);
 	  $this->entityManager->flush();
 
-	  $this->logger->debug('Environment `' . $env . '` was created.');
+	  $this->logger->debug('Instance `' . $name . '` has been bound to the environment.');
 
 //	  $this->setEnvironmentStatus($env, "Created");
 
@@ -247,6 +315,8 @@ class SessionManager
 
     public function verifyEnvironment(Environments $env): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	$this->logger->debug('Verifying: ' . $env);
 
 	if($task_id = $env->getTask()->getVerify()) {
@@ -273,8 +343,40 @@ class SessionManager
 
 
 
+    public function solveEnvironment(Environments $env): bool
+    {
+        $this->logger->debug(__METHOD__);
+
+	$this->logger->debug('Solving: ' . $env);
+
+	if($task_id = $env->getTask()->getSolve()) {
+
+	  // Limit execution on single host only
+	  $body["limit"] = $env->getInstance()->getName();
+
+	  // return the the account api
+	  $result = $this->awx->runJobTemplate($env->getTask()->getSolve(), $body);
+
+	  $this->logger->debug('Status: ' . $result->status);
+
+	  $this->setEnvironmentStatus($env, "Solved");
+
+	  return true;
+
+	} else {
+
+	  $this->logger->debug('Deploy job template with id `' . $task_id . '` was NOT found.');
+	}
+
+	return false;
+    }
+
+
+
     public function deployEnvironment(Environments $env): bool
     {
+        $this->logger->debug(__METHOD__);
+
 	$this->logger->debug('Deploying: ' . $env);
 
 	if($task_id = $env->getTask()->getDeploy()) {
@@ -303,6 +405,8 @@ class SessionManager
 
     public function getRandomTask(): Tasks
     {
+        $this->logger->debug(__METHOD__);
+
         $tasks = $this->taskRepository->findAll();
 
         return $tasks[rand(0,count($tasks)-1)];
@@ -312,6 +416,8 @@ class SessionManager
 
     public function getNextTask( Sessions $session): Tasks
     {
+        $this->logger->debug(__METHOD__);
+
 
 	// TODO: Select a task specifically for a session
 
@@ -320,6 +426,8 @@ class SessionManager
 
     public function getFirstInstanceType(Tasks $task): ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	$instanceTypes = $task->getTaskInstanceTypes();
 
 	if(count($instanceTypes))

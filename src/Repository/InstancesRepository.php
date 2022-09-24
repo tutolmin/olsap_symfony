@@ -5,6 +5,9 @@ namespace App\Repository;
 use App\Entity\Instances;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\InstanceStatuses;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 /**
  * @extends ServiceEntityRepository<Instances>
@@ -16,9 +19,16 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class InstancesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $instanceStatusesRepository;
+    private $entityManager;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
     {
         parent::__construct($registry, Instances::class);
+
+        $this->entityManager = $em;
+
+        $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
     }
 
     public function add(Instances $entity, bool $flush = false): void
@@ -42,6 +52,23 @@ class InstancesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findOneByTypeAndStatus($instance_type, $status_string): ?Instances
+    {
+        $status = $this->instanceStatusesRepository->findOneByStatus($status_string);
+
+	// TODO: check for valid result
+
+        return $this->createQueryBuilder('i')
+            ->where('i.status = :status')
+            ->andWhere('i.instance_type = :instance_type')
+            ->setParameter('status', $status->getId())
+            ->setParameter('instance_type', $instance_type->getId())
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
 //    /**

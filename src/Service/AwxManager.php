@@ -26,6 +26,8 @@ class AwxManager
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
     {
         $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         $this->entityManager = $em;
 
 	$awxVars = array (
@@ -59,31 +61,43 @@ class AwxManager
 
     public function me()#: MeEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	return $this->awx->me();
     }
 
     public function template()#: TemplateEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	return $this->awx->jobTemplate();
     }
 
     public function getTemplates()#: ProjectEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	return $this->awx->jobTemplate()->getAll();
     }
 
     public function project()#: ProjectEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	return $this->awx->project();
     }
 
     public function getProjects()#: ProjectEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	return $this->awx->project()->getAll();
     }
 
     public function runJobTemplate($id, $body)#: MeEntity
     {
+        $this->logger->debug(__METHOD__);
+
 	// return the job template api
 	$jobTemplate = $this->awx->jobTemplate();
 
@@ -100,7 +114,9 @@ class AwxManager
 	  $jobResult = $job->getById($runResult->id);
 	  $this->logger->debug( "Current job status: ".$jobResult->status);
 
-	  if($jobResult->status == "successful") break;
+	  if($jobResult->status == "successful" || 
+		$jobResult->status == "failed") 
+		break;
 
 	  sleep( 1);
 	}
@@ -112,6 +128,8 @@ class AwxManager
 /*
     public function getNextTask( Awx $session): Tasks
     {
+        $this->logger->debug(__METHOD__);
+
         $tasks = $this->taskRepository->findAll();
 
         return $tasks[rand(0,count($tasks)-1)];

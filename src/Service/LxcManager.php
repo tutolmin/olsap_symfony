@@ -28,6 +28,8 @@ class LxcManager
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
     {
         $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         $this->entityManager = $em;
 
 	$this->timeout = intval($_ENV["LXD_TIMEOUT"]);
@@ -66,6 +68,8 @@ class LxcManager
 
     public function createInstance($os_alias, $hw_name, $mac)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	/* We can not select address for the instance here
 	   since it SHOULD be connected to an Instance object.
 	   So, we expect that a passed parameter is valid
@@ -97,7 +101,8 @@ class LxcManager
 	$name=explode( "/", $responce["resources"]["containers"][0]);
 
 	//TODO: Handle exception
-//	$this->startInstance($name[3]);
+	// Why it was commented out?
+	$this->startInstance($name[3]);
 
 	return $name[3];
 
@@ -105,6 +110,7 @@ class LxcManager
 
     public function startInstance($name, $force=false)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
 
         $this->logger->debug( "Starting LXC instance: `" . $name . "`");
 
@@ -118,6 +124,7 @@ class LxcManager
 
     public function stopInstance($name, $force=false)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
 
         $this->logger->debug( "Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
 
@@ -131,6 +138,8 @@ class LxcManager
 
     public function restartInstance($name, $force=false)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	$this->stopInstance($name, $force);
 
 	$this->startInstance($name, $force);
@@ -140,6 +149,8 @@ class LxcManager
 
     public function deleteInstance($name, $force=false)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
         $this->logger->debug( "Deleting LXC instance: `" . $name . "`");
 
 	$info = $this->getInstanceInfo($name);
@@ -171,6 +182,8 @@ class LxcManager
 
     public function deleteAllInstances($name, $force)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	$instances = $this->getInstanceList();
 
 	$result = true;
@@ -184,6 +197,8 @@ class LxcManager
 
     public function getInstanceInfo($name)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check container existence - input validation
 
 	return $this->lxd->containers->info($name);
@@ -191,6 +206,8 @@ class LxcManager
 
     public function getInstanceList()//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
         $containers = $this->lxd->containers->all();
 
 	// TODO: handle exception
@@ -206,6 +223,8 @@ class LxcManager
 
     public function getImageInfo($image)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check image existence - input validation
 
 	return $this->lxd->images->info($image);
@@ -213,6 +232,8 @@ class LxcManager
 
     public function getImageList()//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
         $images = $this->lxd->images->all();
 
 	// TODO: handle exception
@@ -228,6 +249,8 @@ class LxcManager
 
     public function getProfileInfo($profile)//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check image existence - input validation
 
 	return $this->lxd->profiles->info($profile);
@@ -235,6 +258,8 @@ class LxcManager
 
     public function getProfileList()//: ?InstanceTypes
     {  
+        $this->logger->debug(__METHOD__);
+
         $profiles = $this->lxd->profiles->all();
 
 	// TODO: handle exception

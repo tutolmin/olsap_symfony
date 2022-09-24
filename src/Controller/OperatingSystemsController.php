@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\OperatingSystems;
 use App\Form\OperatingSystemsType;
 use App\Repository\OperatingSystemsRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/operating/systems')]
 class OperatingSystemsController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_operating_systems_index', methods: ['GET'])]
     public function index(OperatingSystemsRepository $operatingSystemsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('operating_systems/index.html.twig', [
             'operating_systems' => $operatingSystemsRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class OperatingSystemsController extends AbstractController
     #[Route('/new', name: 'app_operating_systems_new', methods: ['GET', 'POST'])]
     public function new(Request $request, OperatingSystemsRepository $operatingSystemsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $operatingSystem = new OperatingSystems();
         $form = $this->createForm(OperatingSystemsType::class, $operatingSystem);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class OperatingSystemsController extends AbstractController
     #[Route('/{id}', name: 'app_operating_systems_show', methods: ['GET'])]
     public function show(OperatingSystems $operatingSystem): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('operating_systems/show.html.twig', [
             'operating_system' => $operatingSystem,
             'sessions' => $operatingSystem->getSessionsCounter(),
@@ -52,6 +67,8 @@ class OperatingSystemsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_operating_systems_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, OperatingSystems $operatingSystem, OperatingSystemsRepository $operatingSystemsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(OperatingSystemsType::class, $operatingSystem);
         $form->handleRequest($request);
 
@@ -70,6 +87,8 @@ class OperatingSystemsController extends AbstractController
     #[Route('/{id}', name: 'app_operating_systems_delete', methods: ['POST'])]
     public function delete(Request $request, OperatingSystems $operatingSystem, OperatingSystemsRepository $operatingSystemsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$operatingSystem->getId(), $request->request->get('_token'))) {
             $operatingSystemsRepository->remove($operatingSystem, true);
         }

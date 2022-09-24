@@ -39,6 +39,14 @@ class Environments
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $hash = null;
 
+    public function __construct()
+    {
+#	parent::__construct();
+
+        $timestamp = new \DateTimeImmutable('NOW');
+        $this->hash = substr(md5($timestamp->format('Y-m-d H:i:s')),0,8);
+    }
+
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
         return $this->getTask() ." @ ". $this->getInstance();

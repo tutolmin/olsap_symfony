@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Testees;
 use App\Form\TesteesType;
 use App\Repository\TesteesRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/testees')]
 class TesteesController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_testees_index', methods: ['GET'])]
     public function index(TesteesRepository $testeesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('testees/index.html.twig', [
             'testees' => $testeesRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class TesteesController extends AbstractController
     #[Route('/new', name: 'app_testees_new', methods: ['GET', 'POST'])]
     public function new(Request $request, TesteesRepository $testeesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $testee = new Testees();
         $form = $this->createForm(TesteesType::class, $testee);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class TesteesController extends AbstractController
     #[Route('/{id}', name: 'app_testees_show', methods: ['GET'])]
     public function show(Testees $testee): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('testees/show.html.twig', [
             'testee' => $testee,
         ]);
@@ -51,6 +66,8 @@ class TesteesController extends AbstractController
     #[Route('/{id}/edit', name: 'app_testees_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Testees $testee, TesteesRepository $testeesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(TesteesType::class, $testee);
         $form->handleRequest($request);
 
@@ -69,6 +86,8 @@ class TesteesController extends AbstractController
     #[Route('/{id}', name: 'app_testees_delete', methods: ['POST'])]
     public function delete(Request $request, Testees $testee, TesteesRepository $testeesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$testee->getId(), $request->request->get('_token'))) {
             $testeesRepository->remove($testee, true);
         }

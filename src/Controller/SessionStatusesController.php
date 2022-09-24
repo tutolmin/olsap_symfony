@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\SessionStatuses;
 use App\Form\SessionStatusesType;
 use App\Repository\SessionStatusesRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/session/statuses')]
 class SessionStatusesController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_session_statuses_index', methods: ['GET'])]
     public function index(SessionStatusesRepository $sessionStatusesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('session_statuses/index.html.twig', [
             'session_statuses' => $sessionStatusesRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class SessionStatusesController extends AbstractController
     #[Route('/new', name: 'app_session_statuses_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SessionStatusesRepository $sessionStatusesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $sessionStatus = new SessionStatuses();
         $form = $this->createForm(SessionStatusesType::class, $sessionStatus);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class SessionStatusesController extends AbstractController
     #[Route('/{id}', name: 'app_session_statuses_show', methods: ['GET'])]
     public function show(SessionStatuses $sessionStatus): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('session_statuses/show.html.twig', [
             'session_status' => $sessionStatus,
         ]);
@@ -51,6 +66,8 @@ class SessionStatusesController extends AbstractController
     #[Route('/{id}/edit', name: 'app_session_statuses_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, SessionStatuses $sessionStatus, SessionStatusesRepository $sessionStatusesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(SessionStatusesType::class, $sessionStatus);
         $form->handleRequest($request);
 
@@ -69,6 +86,8 @@ class SessionStatusesController extends AbstractController
     #[Route('/{id}', name: 'app_session_statuses_delete', methods: ['POST'])]
     public function delete(Request $request, SessionStatuses $sessionStatus, SessionStatusesRepository $sessionStatusesRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$sessionStatus->getId(), $request->request->get('_token'))) {
             $sessionStatusesRepository->remove($sessionStatus, true);
         }

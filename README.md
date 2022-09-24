@@ -65,6 +65,11 @@ lxc profile device set cricket root size 1GB
 lxc profile set cricket limits.cpu.allowance 10%
 ```
 
+## Git bunch update
+```
+for i in `git branch`; do git checkout $i; git checkout set_immune .gitignore; git add .; git commit -m ".gitignore";git push;done
+```
+
 ## SystemD messenger consumer
 ```
 [Unit]

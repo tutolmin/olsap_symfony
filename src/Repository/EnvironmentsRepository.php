@@ -8,6 +8,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
+// Can NOT import service into repository
+// Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
+//use App\Service\SessionManager;
+
 /**
  * @extends ServiceEntityRepository<Environments>
  *
@@ -20,8 +24,10 @@ class EnvironmentsRepository extends ServiceEntityRepository
 {
     private $entityManager;
     private $environmentStatusesRepository;
+    private $sessionManager;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, 
+	EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Environments::class);
 
@@ -33,8 +39,9 @@ class EnvironmentsRepository extends ServiceEntityRepository
     public function add(Environments $entity, bool $flush = false): void
     {
 	// TODO: check if the instance has been used already in another env
-	$timestamp = new \DateTimeImmutable('NOW');
-	$entity->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
+#	$timestamp = new \DateTimeImmutable('NOW');
+#	$entity->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -45,6 +52,10 @@ class EnvironmentsRepository extends ServiceEntityRepository
     public function remove(Environments $entity, bool $flush = false): void
     {
 	// TODO: change status, recover init snapshot, etc.
+
+	// Release instance
+//	$instance = $entity->getInstance();
+//       $this->sessionManager->releaseInstance($instance);
 
         // Fetch linked Instances and release them
 	$entity->setInstance(null);

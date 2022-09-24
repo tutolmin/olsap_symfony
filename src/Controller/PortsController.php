@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Ports;
 use App\Form\PortsType;
 use App\Repository\PortsRepository;
@@ -13,9 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/ports')]
 class PortsController extends AbstractController
 {
+    private $logger;
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+    }
+
     #[Route('/', name: 'app_ports_index', methods: ['GET'])]
     public function index(PortsRepository $portsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('ports/index.html.twig', [
             'ports' => $portsRepository->findAll(),
         ]);
@@ -24,6 +35,8 @@ class PortsController extends AbstractController
     #[Route('/new', name: 'app_ports_new', methods: ['GET', 'POST'])]
     public function new(Request $request, PortsRepository $portsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $port = new Ports();
         $form = $this->createForm(PortsType::class, $port);
         $form->handleRequest($request);
@@ -43,6 +56,8 @@ class PortsController extends AbstractController
     #[Route('/{id}', name: 'app_ports_show', methods: ['GET'])]
     public function show(Ports $port): Response
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->render('ports/show.html.twig', [
             'port' => $port,
         ]);
@@ -51,6 +66,8 @@ class PortsController extends AbstractController
     #[Route('/{id}/edit', name: 'app_ports_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ports $port, PortsRepository $portsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         $form = $this->createForm(PortsType::class, $port);
         $form->handleRequest($request);
 
@@ -69,6 +86,8 @@ class PortsController extends AbstractController
     #[Route('/{id}', name: 'app_ports_delete', methods: ['POST'])]
     public function delete(Request $request, Ports $port, PortsRepository $portsRepository): Response
     {
+        $this->logger->debug(__METHOD__);
+
         if ($this->isCsrfTokenValid('delete'.$port->getId(), $request->request->get('_token'))) {
             $portsRepository->remove($port, true);
         }

@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Name</th>
                 <th>Instance Type</th>
                 <th>Created At</th>
-                <th>Name</th>
                 <th>Addresses</th>
                 <th>Status</th>
                 <th>actions</th>
@@ -21,9 +21,9 @@
         {% for instance in instances %}
             <tr>
                 <td>{{ instance.id }}</td>
+                <td>{{ instance.name }}</td>
                 <td>{{ instance.instancetype }}</td>
                 <td>{{ instance.createdAt ? instance.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ instance.name }}</td>
                 <td>{{ instance.addressesCounter }}</td>
                 <td>{{ instance.status }}</td>
                 <td>
