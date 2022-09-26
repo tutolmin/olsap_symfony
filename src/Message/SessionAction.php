@@ -10,12 +10,14 @@ final class SessionAction
      */
 
      private $action;
+     private $task_id;
      private $session_id;
      private $environment_id;
 
      public function __construct($message)
      {
         $this->action = $message['action'];
+        $this->task_id = array_key_exists('task_id',$message)?$message['task_id']:-1;
         $this->session_id = array_key_exists('session_id',$message)?$message['session_id']:-1;
         $this->environment_id = array_key_exists('environment_id',$message)?$message['environment_id']:-1;
      }
@@ -23,6 +25,11 @@ final class SessionAction
     public function getAction(): string
     {
         return $this->action;
+    }
+
+    public function getTaskId(): int
+    {
+        return $this->task_id;
     }
 
     public function getSessionId(): int

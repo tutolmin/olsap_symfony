@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\InstanceStatuses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,13 +18,21 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class InstanceStatusesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, InstanceStatuses::class);
+        $this->logger = $logger;
+
     }
 
     public function add(InstanceStatuses $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -32,6 +42,8 @@ class InstanceStatusesRepository extends ServiceEntityRepository
 
     public function remove(InstanceStatuses $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

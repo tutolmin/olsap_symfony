@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\SessionTechs;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,13 +18,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class SessionTechsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, SessionTechs::class);
     }
 
     public function add(SessionTechs $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -32,6 +41,8 @@ class SessionTechsRepository extends ServiceEntityRepository
 
     public function remove(SessionTechs $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

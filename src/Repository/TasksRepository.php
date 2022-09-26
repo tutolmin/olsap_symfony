@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Tasks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,11 +21,16 @@ use App\Entity\Environments;
  */
 class TasksRepository extends ServiceEntityRepository
 {
+    private $logger;
 //    private $entityManager;
     private $environmentRepository;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, Tasks::class);
 
 //        $this->entityManager = $entityManager;
@@ -33,6 +40,8 @@ class TasksRepository extends ServiceEntityRepository
 
     public function add(Tasks $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -42,6 +51,8 @@ class TasksRepository extends ServiceEntityRepository
 
     public function remove(Tasks $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         // Fetch all linked Environments and delete them
         $envs = $entity->getEnvs();
 
@@ -57,6 +68,8 @@ class TasksRepository extends ServiceEntityRepository
 
     public function findAll()
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->findBy(array(), array('name' => 'ASC'));
     }
 

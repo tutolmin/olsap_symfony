@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Combo</th>
                 <th>OS</th>
                 <th>HW Profile</th>
                 <th>actions</th>
@@ -18,6 +19,7 @@
         {% for instance_type in instance_types %}
             <tr>
                 <td>{{ instance_type.id }}</td>
+                <td>{{ instance_type.combo }}</td>
                 <td>{{ instance_type.os }}</td>
                 <td>{{ instance_type.hwprofile }}</td>
                 <td>

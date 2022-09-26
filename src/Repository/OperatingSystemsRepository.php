@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\OperatingSystems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,13 +18,20 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OperatingSystemsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, OperatingSystems::class);
     }
 
     public function add(OperatingSystems $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -32,6 +41,8 @@ class OperatingSystemsRepository extends ServiceEntityRepository
 
     public function remove(OperatingSystems $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
@@ -41,6 +52,8 @@ class OperatingSystemsRepository extends ServiceEntityRepository
 
     public function findAll()
     {
+        $this->logger->debug(__METHOD__);
+
         return $this->findBy(array(), array('breed' => 'ASC', 'release' => 'ASC'));
     }
 

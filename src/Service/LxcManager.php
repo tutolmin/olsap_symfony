@@ -100,6 +100,8 @@ class LxcManager
 	// Get the name for the reply
 	$name=explode( "/", $responce["resources"]["containers"][0]);
 
+        $this->logger->debug("Created instance: ".$name[3]);
+
 	//TODO: Handle exception
 	// Why it was commented out?
 	$this->startInstance($name[3]);
@@ -114,7 +116,11 @@ class LxcManager
 
         $this->logger->debug( "Starting LXC instance: `" . $name . "`");
 
-	$responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
+	$info = $this->getInstanceInfo($name);
+
+	$responce = null;
+	if($info["status"] != "Started")
+	    $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 
@@ -128,7 +134,11 @@ class LxcManager
 
         $this->logger->debug( "Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
 
-	$responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
+	$info = $this->getInstanceInfo($name);
+
+	$responce = null;
+	if($info["status"] != "Stopped")
+	    $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
 
 	//TODO: Handle exception
 

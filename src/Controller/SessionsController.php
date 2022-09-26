@@ -126,14 +126,19 @@ class SessionsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        $envs = array();
-        foreach($session->getEnvs()->getValues() as $se)
-	  $envs[$se->getTask() . " @ " . $se->getInstance() . " : " . $se->getStatus()] = 
+        $env_links = array();
+        $env_names = array();
+        foreach($session->getEnvs()->getValues() as $se) {
+//	  $envs[$se->getTask() . " @ " . $se->getInstance() . " : " . $se->getStatus()] = 
+	  $env_links[$se->getHash()] = 
 		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
-
+	  $env_names[$se->getHash()] = $se->__toString();
+//		$this->generateUrl('app_environments_display', ['hash' => $se->getHash()]);
+	}
         return $this->render('sessions/display.html.twig', [
             'session' => $session,
-            'envs' => $envs,
+            'env_links' => $env_links,
+            'env_names' => $env_names,
         ]);
     }
 
@@ -152,7 +157,8 @@ class SessionsController extends AbstractController
 
         $envs = array();
         foreach($session->getEnvs()->getValues() as $se)
-          $envs[] = $se->getTask() . " @ " . $se->getInstance();
+//          $envs[] = $se->getTask() . " @ " . $se->getInstance();
+          $envs[] = $se;
 
         return $this->render('sessions/show.html.twig', [
             'session' => $session,

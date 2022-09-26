@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\HardwareProfiles;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,13 +18,21 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class HardwareProfilesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, HardwareProfiles::class);
+        $this->logger = $logger;
+
     }
 
     public function add(HardwareProfiles $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -32,6 +42,8 @@ class HardwareProfilesRepository extends ServiceEntityRepository
 
     public function remove(HardwareProfiles $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

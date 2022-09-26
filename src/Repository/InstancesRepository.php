@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Instances;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -19,11 +21,15 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class InstancesRepository extends ServiceEntityRepository
 {
+    private $logger;
     private $instanceStatusesRepository;
     private $entityManager;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $em, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, Instances::class);
 
         $this->entityManager = $em;
@@ -33,6 +39,8 @@ class InstancesRepository extends ServiceEntityRepository
 
     public function add(Instances $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -42,6 +50,8 @@ class InstancesRepository extends ServiceEntityRepository
 
     public function remove(Instances $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
 	// Fetch all linked Addresses and release them
 	$addresses = $entity->getAddresses();
 	foreach($addresses as $address)
@@ -56,6 +66,8 @@ class InstancesRepository extends ServiceEntityRepository
 
     public function findOneByTypeAndStatus($instance_type, $status_string): ?Instances
     {
+        $this->logger->debug(__METHOD__);
+
         $status = $this->instanceStatusesRepository->findOneByStatus($status_string);
 
 	// TODO: check for valid result

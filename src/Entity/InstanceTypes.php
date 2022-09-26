@@ -24,6 +24,8 @@ class InstanceTypes
     #[ORM\JoinColumn(nullable: false)]
     private $hw_profile;
 
+#    private $combo;
+
     #[ORM\OneToMany(mappedBy: 'instance_type', targetEntity: Instances::class, orphanRemoval: true)]
     private $instances;
 
@@ -68,6 +70,11 @@ class InstanceTypes
         $this->hw_profile = $hw_profile;
 
         return $this;
+    }
+
+    public function getCombo()#: ?OperatingSystems
+    {
+        return $this->os->getAlias() . "@" . $this->hw_profile->getName();
     }
 
     /**

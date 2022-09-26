@@ -24,6 +24,11 @@ lxc_cert.php
 Complete instruction: https://stgraber.org/2016/04/18/lxd-api-direct-interaction/
 
 ## AWX
+Start the AWX containers
+```
+/root/.awx/awxcompose
+docker-compose up -d
+```
 CLI execution
 ```
 awx -k --conf.host=http://localhost:8080/ projects list

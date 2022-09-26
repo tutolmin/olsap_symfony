@@ -78,9 +78,14 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
+	// Some envs (Skipped/Verified) might not have linked instances
+	$port = "";
+	if($environment->getInstance())
+	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
+
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
-            'port' => $environment->getInstance()->getAddresses()[0]->getPort(),
+            'port' => $port,
 	    'task_description' => $environment->getTask()->getDescription(),
 	    'session_url' => $this->generateUrl('app_sessions_display', ['hash' => $environment->getSession()->getHash()]),
         ]);

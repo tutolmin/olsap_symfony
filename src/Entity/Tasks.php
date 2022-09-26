@@ -28,6 +28,8 @@ class Tasks
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskOses::class, orphanRemoval: true)]
     private $taskOses;
 
+    private $osesCounter;
+
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskTechs::class, orphanRemoval: true)]
     private $taskTechs;
 
@@ -35,6 +37,8 @@ class Tasks
 
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskInstanceTypes::class, orphanRemoval: true)]
     private $taskInstanceTypes;
+
+    private $instanceTypesCounter;
 
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: Environments::class, orphanRemoval: true)]
     private $envs;
@@ -168,6 +172,16 @@ class Tasks
     public function getTechsCounter(): int
     {
         return $this->techsCounter = count( $this->getTaskTechs());
+    }
+
+    public function getOsesCounter(): int
+    {
+        return $this->osesCounter = count( $this->getTaskOses());
+    }
+
+    public function getInstanceTypesCounter(): int
+    {
+        return $this->instanceTypesCounter = count( $this->getTaskInstanceTypes());
     }
 
     /**

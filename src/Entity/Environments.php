@@ -49,8 +49,15 @@ class Environments
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
-        return $this->getTask() ." @ ". $this->getInstance();
+
+	$instance = $this->getInstance();
+
+	if($instance)
+
+          return $this->getTask() . " @ ". $this->getInstance() . ": ". $this->getStatus();
 //        return strval($this->getId());
+
+        return $this->getTask() . ": ". $this->getStatus();
     }
 
     public function getId(): ?int

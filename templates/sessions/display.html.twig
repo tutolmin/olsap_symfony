@@ -14,8 +14,8 @@
             <tr>
                 <th>Envs</th>
                 <td>
-    {% for key, value in envs %}
-        <li><a href='{{ value|e }}'>{{ key }}</a></li>
+    {% for key, value in env_links %}
+        <li><a href='{{ value|e }}'>{{ env_names[key] }}</a></li>
     {% endfor %}
 
 		</td>

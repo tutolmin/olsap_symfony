@@ -94,7 +94,7 @@ class SessionManager
 	$address->setInstance($instance);
 
 	// Store item into the DB
-	$this->entityManager->persist($instance);
+//	$this->entityManager->persist($instance);
 	$this->entityManager->flush();
 
 	// Update Instance status
@@ -140,6 +140,13 @@ class SessionManager
 
 	// TODO: restore init snapshot
 
+	// Unbind an instance from env so it can be used again
+	$instance->setEnvs(null);
+
+	// Store item into the DB
+//	$this->entityManager->persist($session);
+	$this->entityManager->flush();
+
 	// Update Instance status
 	$this->setInstanceStatus($instance, "Started");
 
@@ -159,7 +166,7 @@ class SessionManager
 	  $session->setStatus($status);
 
 	  // Store item into the DB
-	  $this->entityManager->persist($session);
+//	  $this->entityManager->persist($session);
 	  $this->entityManager->flush();
 
 	  return true;
@@ -185,7 +192,7 @@ class SessionManager
 	  $environment->setStatus($status);
 
 	  // Store item into the DB
-	  $this->entityManager->persist($environment);
+//	  $this->entityManager->persist($environment);
 	  $this->entityManager->flush();
 
 	  return true;
@@ -211,7 +218,7 @@ class SessionManager
 	  $instance->setStatus($status);
 
 	  // Store item into the DB
-	  $this->entityManager->persist($instance);
+//	  $this->entityManager->persist($instance);
 	  $this->entityManager->flush();
 
 	  return true;
@@ -242,7 +249,7 @@ class SessionManager
 	  $environment->setSession($session);
 
 	  // Store item into the DB
-	  $this->entityManager->persist($environment);
+//	  $this->entityManager->persist($environment);
 	  $this->entityManager->flush();
 
 	  $this->logger->debug( "Allocated environment: " . $environment);
@@ -250,7 +257,10 @@ class SessionManager
 	// No env to allocate, create it
 	} else {
 
-	  $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", "session_id" => $session->getId()]));
+	  $this->logger->debug( "No suitable envs found. Requesting new env creation.");
+
+	  $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", 
+		"session_id" => $session->getId(), "task_id" => $task->getId()]));
 
 	  return false;	
 	}
@@ -295,7 +305,7 @@ class SessionManager
 	  $env->setInstance($name);
 
 	  // Store item into the DB
-	  $this->entityManager->persist($env);
+//	  $this->entityManager->persist($env);
 	  $this->entityManager->flush();
 
 	  $this->logger->debug('Instance `' . $name . '` has been bound to the environment.');
@@ -331,12 +341,18 @@ class SessionManager
 
 	  $this->setEnvironmentStatus($env, "Verified");
 
+	  // Release the Instance
+	  $this->releaseInstance($env->getInstance());
+
 	  return true;
 
 	} else {
 
 	  $this->logger->debug('Verify job template with id `' . $task_id . '` was NOT found.');
 	}
+
+	// Release the Instance
+	$this->releaseInstance($env->getInstance());
 
 	return false;
     }

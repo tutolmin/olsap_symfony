@@ -12,6 +12,8 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Techs</th>
+                <th>OSes</th>
+                <th>Instance&nbsp;types</th>
                 <th>Path</th>
                 <th>actions</th>
             </tr>
@@ -23,6 +25,8 @@
                 <td>{{ task.name }}</td>
                 <td>{{ task.description }}</td>
                 <td>{{ task.techsCounter }}</td>
+                <td>{{ task.osesCounter }}</td>
+                <td>{{ task.instanceTypesCounter }}</td>
                 <td>{{ task.path }}</td>
                 <td>
                     <a href="{{ path('app_tasks_show', {'id': task.id}) }}">show</a>

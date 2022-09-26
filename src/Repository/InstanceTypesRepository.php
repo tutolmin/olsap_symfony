@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\InstanceTypes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -16,13 +18,19 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class InstanceTypesRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $logger;
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, InstanceTypes::class);
     }
 
     public function add(InstanceTypes $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
@@ -32,6 +40,8 @@ class InstanceTypesRepository extends ServiceEntityRepository
 
     public function remove(InstanceTypes $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
@@ -44,6 +54,8 @@ class InstanceTypesRepository extends ServiceEntityRepository
      */
     public function deleteAll(): int
     {
+        $this->logger->debug(__METHOD__);
+
 	$qb = $this->createQueryBuilder('it');
 
 	$qb->delete();

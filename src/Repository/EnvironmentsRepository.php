@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use Psr\Log\LoggerInterface;
+
 use App\Entity\Environments;
 use App\Entity\EnvironmentStatuses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -22,13 +24,17 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class EnvironmentsRepository extends ServiceEntityRepository
 {
+    private $logger;
     private $entityManager;
     private $environmentStatusesRepository;
     private $sessionManager;
 
-    public function __construct(ManagerRegistry $registry, 
+    public function __construct(ManagerRegistry $registry, LoggerInterface $logger,
 	EntityManagerInterface $entityManager)
     {
+        $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
+
         parent::__construct($registry, Environments::class);
 
 	$this->entityManager = $entityManager;
@@ -38,6 +44,8 @@ class EnvironmentsRepository extends ServiceEntityRepository
 
     public function add(Environments $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
 	// TODO: check if the instance has been used already in another env
 #	$timestamp = new \DateTimeImmutable('NOW');
 #	$entity->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
@@ -51,6 +59,8 @@ class EnvironmentsRepository extends ServiceEntityRepository
 
     public function remove(Environments $entity, bool $flush = false): void
     {
+        $this->logger->debug(__METHOD__);
+
 	// TODO: change status, recover init snapshot, etc.
 
 	// Release instance
@@ -94,6 +104,8 @@ class EnvironmentsRepository extends ServiceEntityRepository
 
     public function findOneDeployed($task_id): ?Environments
     {
+        $this->logger->debug(__METHOD__);
+
         $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
 
         return $this->createQueryBuilder('e')
