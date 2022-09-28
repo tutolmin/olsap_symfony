@@ -77,8 +77,7 @@ class EnvironmentsLsCommand extends Command
 
 	foreach( $environments as $environment) {
 
-            $io->note(sprintf('Environment: %s, status: %s', 
-		$environment, $environment->getStatus()));
+            $io->note(sprintf('Environment: %s', $environment));
 	}
 
         return Command::SUCCESS;

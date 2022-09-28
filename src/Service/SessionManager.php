@@ -94,7 +94,7 @@ class SessionManager
 	$address->setInstance($instance);
 
 	// Store item into the DB
-//	$this->entityManager->persist($instance);
+	$this->entityManager->persist($instance);
 	$this->entityManager->flush();
 
 	// Update Instance status
@@ -241,7 +241,7 @@ class SessionManager
 
 	$this->logger->debug( "Selected task: " . $task);
 
-	$environment = $this->environmentRepository->findOneDeployed($session);
+	$environment = $this->environmentRepository->findOneDeployed($task->getId());
 
 	// Environment has been found
 	if($environment) {
@@ -400,7 +400,10 @@ class SessionManager
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
 
-	  // return the the account api
+	  // Deploy test user credentials
+	  $result = $this->awx->runJobTemplate(55, $body);
+
+	  // Deploy actual environment
 	  $result = $this->awx->runJobTemplate($env->getTask()->getDeploy(), $body);
 
 	  $this->logger->debug('Status: ' . $result->status);

@@ -116,6 +116,17 @@ class SessionsController extends AbstractController
 
         if ($this->isCsrfTokenValid('finish'.$session->getHash(), $request->request->get('_token'))) {
 
+	  // Skip all remaining envs
+          foreach($session->getEnvs()->getValues() as $se) {
+
+	    if( $se->getStatus() == "Deployed") {
+
+	      $this->sessionManager->releaseInstance($se->getInstance());
+
+	      $this->sessionManager->setEnvironmentStatus($se, "Skipped");
+	    }
+	  }
+
 	  $this->sessionManager->setSessionStatus($session, "Finished");
 	}
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);

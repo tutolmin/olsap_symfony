@@ -35,16 +35,16 @@ class InstancesCreateCommand extends Command
     // HardwareProfiles repo
     private $hpRepository;
 
-    private $session;
+    private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, SessionManager $session)
+    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->session = $session;
+        $this->sessionManager = $sessionManager;
 
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
@@ -100,8 +100,8 @@ class InstancesCreateCommand extends Command
 
 	    for($i=0; $i<$number; $i++) {
 
-		// Call session manager method
-		$instance = $this->session->createInstance($instance_type);
+		// Call sessionManager manager method
+		$instance = $this->sessionManager->createInstance($instance_type);
 
                 $io->note('Instance `' . $instance . '` was created.');
 

@@ -114,6 +114,7 @@ class EnvironmentsRepository extends ServiceEntityRepository
             ->andWhere('e.status = :status_id')
             ->setParameter('task_id', $task_id)
             ->setParameter('status_id', $env_status->getId())
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;

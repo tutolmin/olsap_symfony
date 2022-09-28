@@ -15,6 +15,12 @@ if [ "$INTERFACE" = "nm-bridge" ]; then
   fi
 fi
 ```
+## Populate ENVIRONMENTS ##
+```
+docker-compose exec php bin/console app:instances:create cricket bionic 20
+
+for i in 2 5 6 7 8; do for j in `seq 3`; do docker-compose exec php bin/console app:environments:create $i; done;done
+```
 
 ## LXD auth ###
 Generate client key and cert in order to communicate with LXD
