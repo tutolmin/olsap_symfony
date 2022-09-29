@@ -138,7 +138,15 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
+	// Some envs (Skipped/Verified) might not have linked instances
+	$port = "";
+	if($environment->getInstance())
+	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
+
         return $this->render('environments/show.html.twig', [
+            'test_username' => $_ENV['APP_USERNAME'],
+            'public_ip' => $_ENV['APP_PUBLIC_IP'],
+            'port' => $port,
             'environment' => $environment,
         ]);
     }

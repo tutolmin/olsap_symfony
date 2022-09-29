@@ -13,7 +13,11 @@
             </tr>
             <tr>
                 <th>Instance</th>
-                <td>{{ environment.instance }}</td>
+                <td>
+{% if environment.instance %}
+    {{ environment.instance }}: ssh {{ test_username }}@{{ public_ip }} -p {{ port }}
+{% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Session</th>

@@ -84,13 +84,28 @@ class NetMikrotikExportCommand extends Command
 
           $io->note($address->getIp());
 
-  try {
-	  $filesystem->appendToFile($filepath, "add action=dst-nat chain=dstnat dst-port=" . 
-		$address->getPort() . " protocol=tcp to-addresses=" . $address->getIp() . " to-ports=22\n");
+	  try {
+	      $filesystem->appendToFile($filepath, "add action=dst-nat chain=dstnat dst-port=" . 
+		    $address->getPort() . " protocol=tcp to-addresses=" . $address->getIp() . " to-ports=22\n");
 
-  } catch (IOExceptionInterface $exception) {
-      echo "An error occurred while writing to a temp file ".$exception->getPath();
-  }
+	  } catch (IOExceptionInterface $exception) {
+	      echo "An error occurred while writing to a temp file ".$exception->getPath();
+	  }
+	}
+
+	$filesystem->appendToFile($filepath, "/ip arp\nremove [find]\n");
+
+	foreach($addresses as $address) {
+
+          $io->note($address->getMac());
+
+	  try {
+	      $filesystem->appendToFile($filepath, "add address=" . $address->getIp() . " mac-address=" . 
+		    $address->getMac() . " interface=bridge1\n");
+
+	  } catch (IOExceptionInterface $exception) {
+	      echo "An error occurred while writing to a temp file ".$exception->getPath();
+	  }
 	}
 
   try {
