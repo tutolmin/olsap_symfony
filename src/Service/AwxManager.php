@@ -30,6 +30,12 @@ class AwxManager
 
         $this->entityManager = $em;
 
+        // get the task repository
+//        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
+    }
+
+    public function getClient()#: MeEntity
+    {
 	$awxVars = array (
 	    'clientId' => $_ENV["AWX_CLIENT_ID"], // The client ID assigned by AWX when you created the application
 	    'clientSecret' => $_ENV["AWX_CLIENT_SECRET"],
@@ -38,6 +44,8 @@ class AwxManager
 	    'apiUrl' => $_ENV["AWX_API_URL"], // Ie. https://x.x.x.x/api
 	    'sslVerify' => false, //SSL verify can be false during development and true after public SSL certificates are obtained
 	    );
+
+        $this->logger->debug(__METHOD__);
 
 	// Create oauth2 object
 	$oauth2 = new Oauth2($awxVars);
@@ -54,14 +62,14 @@ class AwxManager
 	// create an Awx object with the previous adapter
 	$this->awx = new AwxV2($adapter, $awxVars['apiUrl']);
 
-
-        // get the task repository
-//        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
+	return true;
     }
 
     public function me()#: MeEntity
     {
         $this->logger->debug(__METHOD__);
+
+	$this->getClient();
 
 	return $this->awx->me();
     }
@@ -70,12 +78,16 @@ class AwxManager
     {
         $this->logger->debug(__METHOD__);
 
+	$this->getClient();
+
 	return $this->awx->jobTemplate();
     }
 
     public function getTemplates()#: ProjectEntity
     {
         $this->logger->debug(__METHOD__);
+
+	$this->getClient();
 
 	return $this->awx->jobTemplate()->getAll();
     }
@@ -84,6 +96,8 @@ class AwxManager
     {
         $this->logger->debug(__METHOD__);
 
+	$this->getClient();
+
 	return $this->awx->project();
     }
 
@@ -91,12 +105,16 @@ class AwxManager
     {
         $this->logger->debug(__METHOD__);
 
+	$this->getClient();
+
 	return $this->awx->project()->getAll();
     }
 
     public function runJobTemplate($id, $body)#: MeEntity
     {
         $this->logger->debug(__METHOD__);
+
+	$this->getClient();
 
 	// return the job template api
 	$jobTemplate = $this->awx->jobTemplate();

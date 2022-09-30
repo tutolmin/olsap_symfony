@@ -11,7 +11,7 @@
                 <th>Instance</th>
                 <td>
 {% if environment.instance %}
-    {{ environment.instance }}: ssh {{ test_username }}@{{ public_ip }} -p {{ port }}
+    {{ environment.instance }}<br/>sshpass -f password ssh {{ test_username }}@{{ public_ip }} -p {{ port }}
 {% endif %}
 		</td>
 
