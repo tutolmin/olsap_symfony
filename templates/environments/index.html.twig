@@ -30,7 +30,7 @@
                 <td>{{ environment.hash }}</td>
                 <td>{{ environment.status }}</td>
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
+                <td>{{ (environment.valid == NULL) ? 'check pending' : (environment.valid ? 'True' : 'False') }}</td>
                 <td>{{ environment.path }}</td>
                 <td>
                     <a href="{{ path('app_environments_show', {'id': environment.id}) }}">show</a>

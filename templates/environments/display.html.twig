@@ -33,8 +33,15 @@
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
+                <th>Finished_at</th>
+                <td>{{ environment.finishedAt ? environment.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
                 <th>Valid</th>
-                <td>{{ environment.valid ? 'Yes' : 'No' }}</td>
+                <td>
+		{{ (environment.valid is same as (NULL)) ? '<span class="text-warning">Check pending</span>' : 
+		(environment.valid ? '<span class="text-success">True</span>' : '<span class="text-danger">False</span>') }}
+                </td>
             </tr>
         </tbody>
     </table>

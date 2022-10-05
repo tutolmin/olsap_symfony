@@ -26,10 +26,13 @@ class Environments
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $started_at;
 
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
+    private $finished_at;
+
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $valid;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'smallint', nullable: true)]
     private $path;
 
     #[ORM\ManyToOne(targetEntity: EnvironmentStatuses::class, inversedBy: 'environments')]
@@ -109,6 +112,18 @@ class Environments
     public function setStartedAt(?\DateTimeImmutable $started_at): self
     {
         $this->started_at = $started_at;
+
+        return $this;
+    }
+
+    public function getFinishedAt(): ?\DateTimeImmutable
+    {
+        return $this->finished_at;
+    }
+
+    public function setFinishedAt(?\DateTimeImmutable $finished_at): self
+    {
+        $this->finished_at = $finished_at;
 
         return $this;
     }

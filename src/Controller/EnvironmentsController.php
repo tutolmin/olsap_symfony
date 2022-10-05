@@ -78,6 +78,8 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
+	$this->sessionManager->setEnvironmentTimestamp($environment, "started");
+
 	// Some envs (Skipped/Verified) might not have linked instances
 	$port = "";
 	if($environment->getInstance())
@@ -97,6 +99,8 @@ class EnvironmentsController extends AbstractController
     public function skip(Request $request, Environments $environment): Response
     {
         $this->logger->debug(__METHOD__);
+
+	$this->sessionManager->setEnvironmentTimestamp($environment, "skipped");
 
         if ($this->isCsrfTokenValid('skip'.$environment->getHash(), $request->request->get('_token'))) {
 
@@ -118,6 +122,8 @@ class EnvironmentsController extends AbstractController
     public function verify(Request $request, Environments $environment): Response
     {
         $this->logger->debug(__METHOD__);
+
+	$this->sessionManager->setEnvironmentTimestamp($environment, "verified");
 
         if ($this->isCsrfTokenValid('verify'.$environment->getHash(), $request->request->get('_token'))) {
 

@@ -232,6 +232,48 @@ class SessionManager
     }
 
 
+    public function setEnvironmentTimestamp(Environments $environment, $timestamp_str): bool
+    {
+        $this->logger->debug(__METHOD__);
+
+	// We will use it for any timestamp type
+	$timestamp = new \DateTimeImmutable('NOW');
+	
+	// Which timestamp we are going to set
+	switch($timestamp_str) {
+
+	// Environment started
+	case "started":
+
+	  // Only update the timestamp if it was not previously set
+	  if(!$environment->getStartedAt()) {
+
+	    $environment->setStartedAt($timestamp);
+	    $this->entityManager->flush();
+	  }
+	  break;
+
+	// Environment skipped/finished
+	case "skipped":
+	case "verified":
+	case "finished":
+
+	  // Only update the timestamp if it was not previously set
+	  if(!$environment->getFinishedAt()) {
+
+	    $environment->setFinishedAt($timestamp);
+	    $this->entityManager->flush();
+	  }
+	  break;
+
+	default:
+	  $this->logger->debug('No such environment timestamp: '.$timestamp_str);
+	  break;
+	}
+	return true;
+    }
+
+
     public function allocateEnvironment(Sessions $session): bool
     {
         $this->logger->debug(__METHOD__);
@@ -338,6 +380,12 @@ class SessionManager
 	  $result = $this->awx->runJobTemplate($env->getTask()->getVerify(), $body);
 
 	  $this->logger->debug('Status: ' . $result->status);
+#	  $this->logger->debug('Status: ' . (($result->status == "successful")?1:0));
+#	  $this->logger->debug('Status: ' . ($result->status == "successful")?1:0);
+#	  $this->logger->debug('Status: ' . strcmp($result->status,"successful"));
+	
+	  $env->setValid((($result->status == "successful")?true:false));
+	  $this->entityManager->flush();
 
 	  $this->setEnvironmentStatus($env, "Verified");
 
