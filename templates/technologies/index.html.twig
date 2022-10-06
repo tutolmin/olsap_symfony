@@ -12,6 +12,7 @@
                 <th>Domain</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Tasks</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ technology.domain }}</td>
                 <td>{{ technology.name }}</td>
                 <td>{{ technology.description }}</td>
+                <td>{{ technology.tasksCounter }}</td>
                 <td>
                     <a href="{{ path('app_technologies_show', {'id': technology.id}) }}">show</a>
                     <a href="{{ path('app_technologies_edit', {'id': technology.id}) }}">edit</a>

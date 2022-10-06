@@ -385,6 +385,7 @@ class SessionManager
 #	  $this->logger->debug('Status: ' . strcmp($result->status,"successful"));
 	
 	  $env->setValid((($result->status == "successful")?true:false));
+	  $env->setVerification($result->id);
 	  $this->entityManager->flush();
 
 	  $this->setEnvironmentStatus($env, "Verified");
@@ -453,6 +454,9 @@ class SessionManager
 
 	  // Deploy actual environment
 	  $result = $this->awx->runJobTemplate($env->getTask()->getDeploy(), $body);
+
+	  $env->setDeployment($result->id);
+	  $this->entityManager->flush();
 
 	  $this->logger->debug('Status: ' . $result->status);
 

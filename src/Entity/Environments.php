@@ -32,8 +32,11 @@ class Environments
     #[ORM\Column(type: 'boolean', nullable: true)]
     private $valid;
 
-    #[ORM\Column(type: 'smallint', nullable: true)]
-    private $path;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $deployment;
+
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $verification;
 
     #[ORM\ManyToOne(targetEntity: EnvironmentStatuses::class, inversedBy: 'environments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -140,14 +143,26 @@ class Environments
         return $this;
     }
 
-    public function getPath(): ?string
+    public function getVerification(): ?int
     {
-        return $this->path;
+        return $this->verification;
     }
 
-    public function setPath(?string $path): self
+    public function setVerification(?int $verification): self
     {
-        $this->path = $path;
+        $this->verification = $verification;
+
+        return $this;
+    }
+
+    public function getDeployment(): ?int
+    {
+        return $this->deployment;
+    }
+
+    public function setDeployment(?int $deployment): self
+    {
+        $this->deployment = $deployment;
 
         return $this;
     }

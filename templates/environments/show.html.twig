@@ -15,7 +15,7 @@
                 <th>Instance</th>
                 <td>
 {% if environment.instance %}
-    {{ environment.instance }}</>sshpass -f password ssh {{ test_username }}@{{ public_ip }} -p {{ port }}
+    {{ environment.instance }}<br/>sshpass -f password ssh {{ test_username }}@{{ public_ip }} -p {{ port }}
 {% endif %}
                 </td>
             </tr>
@@ -50,8 +50,14 @@
 	        </td>
             </tr>
             <tr>
-                <th>Path</th>
-                <td>{{ environment.path }}</td>
+                <th>Jobs</th>
+                <td>
+{% if environment.deployment %} 
+Deployment: /jobs/playbook/{{ environment.deployment }}/output<br/>
+{% endif %}
+{% if environment.verification %} 
+Verification: /jobs/playbook/{{ environment.verification }}/output</td>
+{% endif %}
             </tr>
         </tbody>
     </table>

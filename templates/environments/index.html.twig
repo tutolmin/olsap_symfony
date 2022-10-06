@@ -16,7 +16,6 @@
                 <th>Status</th>
                 <th>Started_at</th>
                 <th>Valid</th>
-                <th>Path</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,7 +30,6 @@
                 <td>{{ environment.status }}</td>
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ (environment.valid == NULL) ? 'check pending' : (environment.valid ? 'True' : 'False') }}</td>
-                <td>{{ environment.path }}</td>
                 <td>
                     <a href="{{ path('app_environments_show', {'id': environment.id}) }}">show</a>
                     <a href="{{ path('app_environments_edit', {'id': environment.id}) }}">edit</a>

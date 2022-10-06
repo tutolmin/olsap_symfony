@@ -14,7 +14,6 @@ class EnvironmentsType extends AbstractType
         $builder
             ->add('started_at')
             ->add('valid')
-            ->add('path')
             ->add('task')
             ->add('session')
             ->add('instance')

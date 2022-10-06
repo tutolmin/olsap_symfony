@@ -186,7 +186,9 @@ class EnvironmentsController extends AbstractController
 
             // Release instance
 	    $instance = $environment->getInstance();
-	    $this->sessionManager->releaseInstance($instance);
+
+	    if($instance)
+	      $this->sessionManager->releaseInstance($instance);
 
             $environmentsRepository->remove($environment, true);
         }
