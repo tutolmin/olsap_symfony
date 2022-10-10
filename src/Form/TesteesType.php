@@ -13,7 +13,7 @@ class TesteesType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('oath_token')
+            ->add('oauth_token')
             ->add('registered_at')
         ;
     }

@@ -5,6 +5,20 @@
 {% block body %}
     <h1>Environment</h1>
 
+{% if environment.status == 'Deployed' %}
+<p>This is a test environment. Please find the task desription and connection details below. You will need to use a SSH client in order to connect to a real Linux system.</p>
+<p>When you are done with this particular task please submit it for verificaion by pressing 'Verify' button below.</p>
+<p>You can skip this particular test environment by pressing 'Skip' button below. You can only skip {{ skip_limit }} test environments during single test session.</p>
+{% endif %}
+
+{% if environment.status == 'Skipped' %}
+<p>This test environment has been skipped. It will not be accounted for the final test session result.</p>
+{% endif %}
+
+{% if environment.status == 'Verified' %}
+<p>This test environment has been submit for verification. Shortly you will see the test result below.</p>
+{% endif %}
+
     <table class="table">
         <tbody>
             <tr>

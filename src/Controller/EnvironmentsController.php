@@ -88,6 +88,7 @@ class EnvironmentsController extends AbstractController
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
             'test_username' => $_ENV['APP_USERNAME'],
+	    'skip_limit' => $_ENV['APP_SKIP_ENVS'],
             'public_ip' => $_ENV['APP_PUBLIC_IP'],
             'port' => $port,
 	    'task_description' => $environment->getTask()->getDescription(),

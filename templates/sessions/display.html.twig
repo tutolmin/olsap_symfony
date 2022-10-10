@@ -5,6 +5,22 @@
 {% block body %}
     <h1>Session</h1>
 
+{% if session.status == 'Ready' %}
+<p>This is a personal test session. You will need to solve as many test environments as possible. There will be different tasks related to Linux system administration.
+You will need to work with a real Linux system. This is a hands-on lab.</p> 
+<p>When you finish your work with certain test environment do not forget to submit it for verification. You will be provided with the new task instantly.</p>
+<p>In order to start please press 'Start' button below. You will be presented with randomly selected test environments. When you are done please press 'Finish' button.</p>
+{% endif %}
+
+{% if session.status == 'Started' %}
+<p>Below is the list of test environments with their statuses. Click the link in order to see the task description and connection details.</p>
+<p>When you are done please press 'Finish' button.</p>
+{% endif %}
+
+{% if session.status == 'Finished' %}
+<p>This test session has been finished already. You can view individual test environments below.</p>
+{% endif %}
+
     <table class="table">
         <tbody>
             <tr>
