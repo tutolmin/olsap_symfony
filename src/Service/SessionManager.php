@@ -232,6 +232,46 @@ class SessionManager
     }
 
 
+    public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
+    {
+        $this->logger->debug(__METHOD__);
+
+	// We will use it for any timestamp type
+	$timestamp = new \DateTimeImmutable('NOW');
+	
+	// Which timestamp we are going to set
+	switch($timestamp_str) {
+
+	// Session started
+	case "started":
+
+	  // Only update the timestamp if it was not previously set
+	  if(!$session->getStartedAt()) {
+
+	    $session->setStartedAt($timestamp);
+	    $this->entityManager->flush();
+	  }
+	  break;
+
+	// Session finished
+	case "finished":
+
+	  // Only update the timestamp if it was not previously set
+	  if(!$session->getFinishedAt()) {
+
+	    $session->setFinishedAt($timestamp);
+	    $this->entityManager->flush();
+	  }
+	  break;
+
+	default:
+	  $this->logger->debug('No such session timestamp: '.$timestamp_str);
+	  break;
+	}
+	return true;
+    }
+
+
     public function setEnvironmentTimestamp(Environments $environment, $timestamp_str): bool
     {
         $this->logger->debug(__METHOD__);

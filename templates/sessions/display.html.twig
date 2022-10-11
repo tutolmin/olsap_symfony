@@ -28,7 +28,7 @@ You will need to work with a real Linux system. This is a hands-on lab.</p>
                 <td>{{ session.status }}</td>
             </tr>
             <tr>
-                <th>Envs</th>
+                <th>Environments</th>
                 <td>
     {% for key, value in env_links %}
         <li><a href='{{ value|e }}'>{{ env_names[key] }}</a></li>
@@ -37,12 +37,12 @@ You will need to work with a real Linux system. This is a hands-on lab.</p>
 		</td>
             </tr>
             <tr>
-                <th>Created_at</th>
-                <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Started_at</th>
+                <td>{{ session.startedAt ? session.startedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Ended_at</th>
-                <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Finished_at</th>
+                <td>{{ session.finishedAt ? session.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             </tr>
         </tbody>

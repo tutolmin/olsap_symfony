@@ -32,8 +32,12 @@
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Ended_at</th>
-                <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Started_at</th>
+                <td>{{ session.startedAt ? session.startedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Finished_at</th>
+                <td>{{ session.finishedAt ? session.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>Hash</th>

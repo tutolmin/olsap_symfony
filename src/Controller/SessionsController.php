@@ -100,6 +100,8 @@ class SessionsController extends AbstractController
 
 	  $this->sessionManager->setSessionStatus($session, "Started");
 
+          $this->sessionManager->setSessionTimestamp($session, "started");
+
 	  // Start certain number of instances
 	  for($i=0;$i<$_ENV["APP_START_ENVS"];$i++) { 
 	
@@ -124,6 +126,9 @@ class SessionsController extends AbstractController
 	      $this->sessionManager->releaseInstance($se->getInstance());
 
 	      $this->sessionManager->setEnvironmentStatus($se, "Skipped");
+              $this->sessionManager->setEnvironmentTimestamp($se, "skipped");
+
+              $this->sessionManager->setSessionTimestamp($session, "started");
 	    }
 	  }
 

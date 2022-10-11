@@ -19,8 +19,11 @@ class Sessions
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
 
+    #[ORM\Column(type: 'datetime_immutable')]
+    private $started_at;
+
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $ended_at;
+    private $finished_at;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $hash;
@@ -77,14 +80,26 @@ class Sessions
         return $this;
     }
 
-    public function getEndedAt(): ?\DateTimeImmutable
+    public function getStartedAt(): ?\DateTimeImmutable
     {
-        return $this->ended_at;
+        return $this->started_at;
     }
 
-    public function setEndedAt(?\DateTimeImmutable $ended_at): self
+    public function setStartedAt(?\DateTimeImmutable $started_at): self
     {
-        $this->ended_at = $ended_at;
+        $this->started_at = $started_at;
+
+        return $this;
+    }
+
+    public function getFinishedAt(): ?\DateTimeImmutable
+    {
+        return $this->finished_at;
+    }
+
+    public function setFinishedAt(?\DateTimeImmutable $finished_at): self
+    {
+        $this->finished_at = $finished_at;
 
         return $this;
     }

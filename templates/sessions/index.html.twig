@@ -15,7 +15,7 @@
                 <th>Envs</th>
                 <th>Status</th>
                 <th>Created_at</th>
-                <th>Ended_at</th>
+                <th>Finished_at</th>
                 <th>Hash</th>
                 <th>actions</th>
             </tr>
@@ -30,7 +30,7 @@
                 <td>{{ session.envsCounter }}</td>
                 <td>{{ session.status }}</td>
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ session.endedAt ? session.endedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ session.finishedAt ? session.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ session.hash }}</td>
                 <td>
                     <a href="{{ path('app_sessions_show', {'id': session.id}) }}">show</a>
