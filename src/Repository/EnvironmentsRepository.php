@@ -119,4 +119,21 @@ class EnvironmentsRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    public function findAllDeployed($task_id): array
+    {
+        $this->logger->debug(__METHOD__);
+
+        $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
+
+        return $this->createQueryBuilder('e')
+            ->where('e.session is null')
+            ->andWhere('e.task = :task_id')
+            ->andWhere('e.status = :status_id')
+            ->setParameter('task_id', $task_id)
+            ->setParameter('status_id', $env_status->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

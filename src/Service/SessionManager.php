@@ -323,7 +323,10 @@ class SessionManager
 
 	$this->logger->debug( "Selected task: " . $task);
 
-	$environment = $this->environmentRepository->findOneDeployed($task->getId());
+//	$environment = $this->environmentRepository->findOneDeployed($task->getId());
+	$environments = $this->environmentRepository->findAllDeployed($task->getId());
+	$environment = NULL;
+	if(count($environments)) $environment = $environments[0];
 
 	// Environment has been found
 	if($environment) {

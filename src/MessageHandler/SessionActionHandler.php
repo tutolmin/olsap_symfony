@@ -105,6 +105,32 @@ final class SessionActionHandler implements MessageHandlerInterface
 
           break;
 */
+        // create spare environment for a task
+        case "createSpareEnvironment":
+
+	  // TODO: make sure task exists, and there are not enough spare envs for a task
+          $environments = $this->environmentRepository->findAllDeployed($task->getId());
+
+	  $this->logger->debug( "Specified task: " . $task . ", spare envs #: " . count($environments));
+	
+	  // Only add new envs if there are not enough
+	  if(count($environments) < $_ENV['APP_SPARE_ENVS']) {
+
+	    $environment = $this->sessionManager->createEnvironment($task);
+  #            $this->logger->debug( "Created environment: " . $environment);
+
+	    if($environment) {
+
+	      $result = $this->sessionManager->deployEnvironment($environment);
+  #              $this->logger->debug( "Environment deployed successfully!");
+	    } else {
+
+  #              $this->logger->debug( "Environment deployment failure!");
+	    }
+	  }
+
+          break;
+
         // Binding some orphan instance to an env
         case "createEnvironment":
 
