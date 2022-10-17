@@ -113,8 +113,16 @@ final class SessionActionHandler implements MessageHandlerInterface
 
 	  $this->logger->debug( "Specified task: " . $task . ", spare envs #: " . count($environments));
 	
+	  if(!is_numeric($task->getDeploy())) {
+
+	    $this->logger->warning( "Task does NOT have deployment template. Skipping deployment!");
+
+	    break;
+    	  }
+
 	  // Only add new envs if there are not enough
-	  if(count($environments) < $_ENV['APP_SPARE_ENVS']) {
+	  if(count($environments) < $_ENV['APP_SPARE_ENVS'] &&
+		is_numeric($task->getDeploy())) {
 
 	    $environment = $this->sessionManager->createEnvironment($task);
   #            $this->logger->debug( "Created environment: " . $environment);
@@ -147,6 +155,13 @@ final class SessionActionHandler implements MessageHandlerInterface
 	      $task = $this->sessionManager->getRandomTask();
 
 	  $this->logger->debug( "Selected task: " . $task);
+	
+	  if(!is_numeric($task->getDeploy())) {
+
+	    $this->logger->warning( "Task does NOT have deployment template. Skipping deployment!");
+
+	    break;
+    	  }
 
 	  $environment = $this->sessionManager->createEnvironment($task,$session);
 #            $this->logger->debug( "Created environment: " . $environment);
