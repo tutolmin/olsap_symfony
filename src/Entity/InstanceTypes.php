@@ -29,6 +29,8 @@ class InstanceTypes
     #[ORM\OneToMany(mappedBy: 'instance_type', targetEntity: Instances::class, orphanRemoval: true)]
     private $instances;
 
+    private $instancesCounter;
+
     #[ORM\OneToMany(mappedBy: 'instance_type', targetEntity: TaskInstanceTypes::class, orphanRemoval: true)]
     private $instanceTypeTasks;
 
@@ -83,6 +85,11 @@ class InstanceTypes
     public function getInstances(): Collection
     {
         return $this->instances;
+    }
+
+    public function getInstancesCounter(): int
+    {
+        return $this->instancesCounter = count( $this->getInstances());
     }
 
     public function addInstance(Instances $instance): self

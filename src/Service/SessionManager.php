@@ -19,6 +19,7 @@ use App\Service\AwxManager;
 use App\Service\LxcManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
+use App\Message\LxcOperation;
 
 class SessionManager
 {
@@ -119,9 +120,25 @@ class SessionManager
 
 	  $this->logger->debug('Suitable started instance has been found: '.$instance);
 
-	// Create new Instance
-	else
-	    $instance = $this->createInstance($it);
+	// Try to find stopped instance
+	else {
+
+	    // Find stopped instance
+	    $instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
+
+	    // Check if suitable instance has been found
+	    if($instance) {
+
+	      $this->logger->debug('Suitable stopped instance has been found: '.$instance);
+
+	      // stop instance for the time being
+	      $this->startInstance($instance);
+
+	    // Create new Instance
+	    } else 
+
+	      $instance = $this->createInstance($it);
+	}
 
 	// Update Instance status
 	$this->setInstanceStatus($instance, "Bound");
@@ -148,10 +165,15 @@ class SessionManager
 	$this->entityManager->flush();
 
 	// Update Instance status
-	$this->setInstanceStatus($instance, "Started");
+//	$this->setInstanceStatus($instance, "Started");
+
+	// stop instance for the time being
+	$this->stopInstance($instance);
 
 	return true;
     }
+
+
 
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
@@ -179,6 +201,8 @@ class SessionManager
 	}
     }
 
+
+
     public function setEnvironmentStatus(Environments $environment, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -205,6 +229,8 @@ class SessionManager
 	}
     }
 
+
+
     public function setInstanceStatus(Instances $instance, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -230,6 +256,7 @@ class SessionManager
 	  return false;
 	}
     }
+
 
 
     public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
@@ -352,6 +379,31 @@ class SessionManager
 
 	return true;	
     }
+
+
+
+    public function startInstance(Instances $instance)
+    {
+	$this->bus->dispatch(new LxcOperation(["command" => "start", 
+	  "environment_id" => null, "instance_id" => $instance->getId(), 
+	  "instance_type_id" => null]));
+
+	// Update Instance status
+//	$this->setInstanceStatus($instance, "Started");
+    }
+
+
+
+    public function stopInstance(Instances $instance)
+    {
+	$this->bus->dispatch(new LxcOperation(["command" => "stop", 
+	  "environment_id" => null, "instance_id" => $instance->getId(), 
+	  "instance_type_id" => null]));
+
+	// Update Instance status
+//	$this->setInstanceStatus($instance, "Stopped");
+    }
+
 
 
     public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments

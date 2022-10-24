@@ -12,6 +12,7 @@
                 <th>Combo</th>
                 <th>OS</th>
                 <th>HW Profile</th>
+                <th>Counter</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ instance_type.combo }}</td>
                 <td>{{ instance_type.os }}</td>
                 <td>{{ instance_type.hwprofile }}</td>
+                <td>{{ instance_type.instancesCounter }}</td>
                 <td>
                     <a href="{{ path('app_instance_types_show', {'id': instance_type.id}) }}">show</a>
                     <a href="{{ path('app_instance_types_edit', {'id': instance_type.id}) }}">edit</a>
