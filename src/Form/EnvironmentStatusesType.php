@@ -13,6 +13,7 @@ class EnvironmentStatusesType extends AbstractType
     {
         $builder
             ->add('status')
+            ->add('description')
         ;
     }
 

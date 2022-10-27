@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Status</th>
+                <th>Descriotion</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ instance_status.id }}</td>
                 <td>{{ instance_status.status }}</td>
+                <td>{{ instance_status.description }}</td>
                 <td>
                     <a href="{{ path('app_instance_statuses_show', {'id': instance_status.id}) }}">show</a>
                     <a href="{{ path('app_instance_statuses_edit', {'id': instance_status.id}) }}">edit</a>

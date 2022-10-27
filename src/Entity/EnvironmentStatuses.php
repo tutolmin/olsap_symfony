@@ -19,6 +19,9 @@ class EnvironmentStatuses
     #[ORM\Column(type: 'string', length: 255)]
     private $status;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $description;
+
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Environments::class, orphanRemoval: true)]
     private $environments;
 
@@ -45,6 +48,18 @@ class EnvironmentStatuses
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

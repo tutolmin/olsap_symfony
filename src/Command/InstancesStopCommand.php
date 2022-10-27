@@ -14,9 +14,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Service\LxcManager;
-
-#use App\Message\LxcOperation;
-#use Symfony\Component\Messenger\MessageBusInterface;
+use App\Service\SessionManager;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'app:instances:stop',
@@ -32,20 +31,24 @@ class InstancesStopCommand extends Command
     private $instanceStatusRepository;
 
     private $lxd;
+    private $bus;
+    private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd,
+	SessionManager $sessionManager, MessageBusInterface $bus)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
         $this->lxd = $lxd;
+        $this->bus = $bus;
+        $this->sessionManager = $sessionManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
-
     }
 
     protected function configure(): void
@@ -72,19 +75,22 @@ class InstancesStopCommand extends Command
 
             $io->note(sprintf('Instance "%s" has been found in the database', $name));
 
-	    if($instance->getStatus() == "Started") {
+	    if($instance->getStatus() != "Stopped") {
 
               $io->note(sprintf('Sending "stop" command to LXD for "%s"', $name));
+
+	      $this->sessionManager->stopInstance($instance);
+/*
 	      $this->lxd->stopInstance($name);
 	
 	      // Store item into the DB
 	      $instance->setStatus($this->instanceStatusRepository->findOneByStatus("Stopped"));
 	      $this->entityManager->persist($instance);
 	      $this->entityManager->flush();
-
+*/
 	    } else { 
 
-              $io->error(sprintf('Instance "%s" is NOT in "Started" state', $name));
+              $io->error(sprintf('Instance "%s" is already in "Stopped" state', $name));
 
 	    }
 	

@@ -85,7 +85,7 @@ class SessionManager
 	// It is New/Started by sefault
 	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
 	$instance->setStatus($instance_status);
-//	Ca not use this function yet - entity is absent in the DB
+//	Can not use this function yet - entity is absent in the DB
 //	$instance->setInstanceStatus("Bound");
 
 	$instance->setInstanceType($it);
@@ -97,9 +97,6 @@ class SessionManager
 	// Store item into the DB
 	$this->entityManager->persist($instance);
 	$this->entityManager->flush();
-
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Bound");
 
 	return $instance;
     }
@@ -141,7 +138,7 @@ class SessionManager
 	}
 
 	// Update Instance status
-	$this->setInstanceStatus($instance, "Bound");
+	$this->setInstanceStatus($instance, "Running");
 
 	return $instance;
     }
@@ -384,24 +381,46 @@ class SessionManager
 
     public function startInstance(Instances $instance)
     {
+        $this->logger->debug(__METHOD__);
+
 	$this->bus->dispatch(new LxcOperation(["command" => "start", 
 	  "environment_id" => null, "instance_id" => $instance->getId(), 
 	  "instance_type_id" => null]));
 
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Started");
+	// Select which status to apply
+	switch($instance->getStatus()) {
+
+	case "Sleeping":	
+	  $this->setInstanceStatus($instance, "Running");
+	  break;
+
+	default:
+	  $this->setInstanceStatus($instance, "Started");
+	  break;
+	}
     }
 
 
 
     public function stopInstance(Instances $instance)
     {
+        $this->logger->debug(__METHOD__);
+
 	$this->bus->dispatch(new LxcOperation(["command" => "stop", 
 	  "environment_id" => null, "instance_id" => $instance->getId(), 
 	  "instance_type_id" => null]));
 
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Stopped");
+	// Select which status to apply
+	switch($instance->getStatus()) {
+
+	case "Running":	
+	  $this->setInstanceStatus($instance, "Sleeping");
+	  break;
+
+	default:
+	  $this->setInstanceStatus($instance, "Stopped");
+	  break;
+	}
     }
 
 
