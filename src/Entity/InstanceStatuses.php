@@ -19,7 +19,7 @@ class InstanceStatuses
     #[ORM\Column(type: 'string', length: 255)]
     private $status;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
 
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Instances::class, orphanRemoval: true)]

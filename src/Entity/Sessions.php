@@ -19,13 +19,13 @@ class Sessions
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
 
-    #[ORM\Column(type: 'datetime_immutable')]
+    #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $started_at;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
     private $finished_at;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 8)]
     private $hash;
 
     #[ORM\ManyToOne(targetEntity: Testees::class, inversedBy: 'sessions')]
@@ -48,7 +48,7 @@ class Sessions
     private $envsCounter;
 
     #[ORM\ManyToOne(targetEntity: SessionStatuses::class, inversedBy: 'sessions')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, options: ['default' => 1])]
     private $status;
 
     public function __construct()
