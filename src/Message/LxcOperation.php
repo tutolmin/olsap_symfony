@@ -20,9 +20,9 @@ final class LxcOperation
     public function __construct( $message)
     {
         $this->command = $message['command'];
-        $this->environment_id = array_key_exists('environment_id',$message)?$message['environment_id']:"";
-        $this->instance_type_id = array_key_exists('instance_type_id',$message)?$message['instance_type_id']:"";
-        $this->instance_id = array_key_exists('instance_id',$message)?$message['instance_id']:"";
+        $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):"";
+        $this->instance_type_id = array_key_exists('instance_type_id',$message)?strval($message['instance_type_id']):"";
+        $this->instance_id = array_key_exists('instance_id',$message)?strval($message['instance_id']):"";
     }
 
     public function getCommand(): string

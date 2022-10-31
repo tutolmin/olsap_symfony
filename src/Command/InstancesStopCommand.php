@@ -12,10 +12,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
-use App\Service\LxcManager;
+#use App\Entity\InstanceStatuses;
 use App\Service\SessionManager;
-use Symfony\Component\Messenger\MessageBusInterface;
+#use App\Service\LxcManager;
+#use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'app:instances:stop',
@@ -28,27 +28,28 @@ class InstancesStopCommand extends Command
 
     // Instances repo
     private $instancesRepository;
-    private $instanceStatusRepository;
+#    private $instanceStatusRepository;
 
-    private $lxd;
-    private $bus;
+#    private $lxd;
+#    private $bus;
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd,
-	SessionManager $sessionManager, MessageBusInterface $bus)
+    public function __construct( EntityManagerInterface $entityManager,
+	SessionManager $sessionManager)
+#, LxcManager $lxd, MessageBusInterface $bus)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->lxd = $lxd;
-        $this->bus = $bus;
+#        $this->lxd = $lxd;
+#        $this->bus = $bus;
         $this->sessionManager = $sessionManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+#        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
     }
 
     protected function configure(): void

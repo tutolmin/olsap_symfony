@@ -34,13 +34,14 @@ class SessionManager
     private $environmentRepository;
     private $environmentStatusesRepository;
 
-    private $bus;
+    private $sessionBus;
+    private $lxdBus;
 
     private $lxd;
     private $awx;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, MessageBusInterface $bus)
+	LxcManager $lxd, AwxManager $awx, MessageBusInterface $sessionBus, MessageBusInterface $lxdBus)
 
     {
         $this->logger = $logger;
@@ -48,7 +49,8 @@ class SessionManager
 
         $this->entityManager = $em;
 	$this->lxd = $lxd;
-	$this->bus = $bus;
+	$this->sessionBus = $sessionBus;
+	$this->lxdBus = $lxdBus;
 	$this->awx = $awx;
 
         // get the repositories
@@ -368,7 +370,7 @@ class SessionManager
 
 	  $this->logger->debug( "No suitable envs found. Requesting new env creation.");
 
-	  $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", 
+	  $this->sessionBus->dispatch(new SessionAction(["action" => "createEnvironment", 
 		"session_id" => $session->getId(), "task_id" => $task->getId()]));
 
 	  return false;	
@@ -383,9 +385,8 @@ class SessionManager
     {
         $this->logger->debug(__METHOD__);
 
-	$this->bus->dispatch(new LxcOperation(["command" => "start", 
-	  "environment_id" => null, "instance_id" => $instance->getId(), 
-	  "instance_type_id" => null]));
+	$this->lxdBus->dispatch(new LxcOperation(["command" => "start", 
+	  "instance_id" => $instance->getId()]));
 
 	// Select which status to apply
 	switch($instance->getStatus()) {
@@ -406,9 +407,8 @@ class SessionManager
     {
         $this->logger->debug(__METHOD__);
 
-	$this->bus->dispatch(new LxcOperation(["command" => "stop", 
-	  "environment_id" => null, "instance_id" => $instance->getId(), 
-	  "instance_type_id" => null]));
+	$this->lxdBus->dispatch(new LxcOperation(["command" => "stop", 
+	  "instance_id" => $instance->getId()]));
 
 	// Select which status to apply
 	switch($instance->getStatus()) {

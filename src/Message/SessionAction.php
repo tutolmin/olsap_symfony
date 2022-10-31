@@ -17,9 +17,9 @@ final class SessionAction
      public function __construct($message)
      {
         $this->action = $message['action'];
-        $this->task_id = array_key_exists('task_id',$message)?$message['task_id']:-1;
-        $this->session_id = array_key_exists('session_id',$message)?$message['session_id']:-1;
-        $this->environment_id = array_key_exists('environment_id',$message)?$message['environment_id']:-1;
+        $this->task_id = array_key_exists('task_id',$message)?strval($message['task_id']):-1;
+        $this->session_id = array_key_exists('session_id',$message)?strval($message['session_id']):-1;
+        $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):-1;
      }
 
     public function getAction(): string
@@ -27,17 +27,17 @@ final class SessionAction
         return $this->action;
     }
 
-    public function getTaskId(): int
+    public function getTaskId(): string
     {
         return $this->task_id;
     }
 
-    public function getSessionId(): int
+    public function getSessionId(): string
     {
         return $this->session_id;
     }
 
-    public function getEnvironmentId(): int
+    public function getEnvironmentId(): string
     {
         return $this->environment_id;
     }

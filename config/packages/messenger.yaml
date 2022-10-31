@@ -5,10 +5,13 @@ framework:
         default_bus: session.bus
         buses:
             session.bus:
+                middleware:
+#                     - handle_message
                 default_middleware: allow_no_handlers
 
             awx.bus:
-#                middleware:
+                middleware:
+#                     - handle_message
 #                    - validation
 #                    - doctrine_transaction
                 # the 'allow_no_handlers' middleware allows to have no handler
@@ -16,7 +19,8 @@ framework:
                 default_middleware: allow_no_handlers
 
             lxd.bus:
-#                middleware:
+                middleware:
+#                     - handle_message
 #                    - validation
                 # the 'allow_no_handlers' middleware allows to have no handler
                 # configured for this bus without throwing an exception
