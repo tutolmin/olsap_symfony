@@ -31,20 +31,20 @@ class InstancesStartCommand extends Command
 #    private $instanceStatusRepository;
 
 #    private $lxd;
-#    private $bus;
+#    private $lxdBus;
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager,
         SessionManager $sessionManager)
-# LxcManager $lxd, MessageBusInterface $bus)
+# LxcManager $lxd, MessageBusInterface $lxdBus)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
 //        $this->lxd = $lxd;
-//        $this->bus = $bus;
+//        $this->lxdBus = $lxdBus;
         $this->sessionManager = $sessionManager;
 
         // get the Instances repository
@@ -91,7 +91,7 @@ class InstancesStartCommand extends Command
               $this->entityManager->flush();
 */	
 /*
-              $this->bus->dispatch(new LxcOperation(["command" => "start",
+              $this->lxdBus->dispatch(new LxcOperation(["command" => "start",
                 "environment_id" => null, "instance_type_id" => null, 
 		"instance_id" => $instance->getId()]));
 */

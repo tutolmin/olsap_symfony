@@ -31,20 +31,20 @@ class InstancesStopCommand extends Command
 #    private $instanceStatusRepository;
 
 #    private $lxd;
-#    private $bus;
+#    private $lxdBus;
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager,
 	SessionManager $sessionManager)
-#, LxcManager $lxd, MessageBusInterface $bus)
+#, LxcManager $lxd, MessageBusInterface $lxdBus)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
 #        $this->lxd = $lxd;
-#        $this->bus = $bus;
+#        $this->lxdBus = $lxdBus;
         $this->sessionManager = $sessionManager;
 
         // get the Instances repository

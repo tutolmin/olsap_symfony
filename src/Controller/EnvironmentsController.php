@@ -21,20 +21,20 @@ class EnvironmentsController extends AbstractController
 {
     private $logger;
     private $sessionManager;
-    private $bus;
+    private $sessionBus;
 
     // InstanceTypes repo
 //    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( SessionManager $sessionManager, MessageBusInterface $bus,
+    public function __construct( SessionManager $sessionManager, MessageBusInterface $sessionBus,
 	LoggerInterface $logger)
     {   
 
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
 
-        $this->bus = $bus;
+        $this->sessionBus = $sessionBus;
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
@@ -131,7 +131,7 @@ class EnvironmentsController extends AbstractController
 	  $this->sessionManager->setEnvironmentTimestamp($environment, "verified");
 
 	  // Verify specified environment
-	  $this->bus->dispatch(new SessionAction(["action" => "verifyEnvironment", "environment_id" => $environment->getId()]));
+	  $this->sessionBus->dispatch(new SessionAction(["action" => "verifyEnvironment", "environment_id" => $environment->getId()]));
 
 	  // Allocate new environment for a session
 //        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $environment->getSession()->getId()]));
