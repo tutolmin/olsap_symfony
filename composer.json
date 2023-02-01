@@ -19,19 +19,19 @@
         "sdwru/oauth2-awx": "dev-master",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "*",
-        "symfony/doctrine-messenger": "6.1.*",
+        "symfony/doctrine-messenger": "6.2.*",
         "symfony/dotenv": "*",
-        "symfony/filesystem": "6.1.*",
+        "symfony/filesystem": "6.2.*",
         "symfony/flex": "^2",
-        "symfony/form": "6.1.*",
+        "symfony/form": "6.2.*",
         "symfony/framework-bundle": "*",
-        "symfony/messenger": "6.1.*",
+        "symfony/messenger": "6.2.*",
         "symfony/monolog-bundle": "^3.8",
-        "symfony/proxy-manager-bridge": "6.1.*",
+        "symfony/proxy-manager-bridge": "6.2.*",
         "symfony/runtime": "*",
-        "symfony/security-csrf": "6.1.*",
-        "symfony/twig-bundle": "6.1.*",
-        "symfony/validator": "6.1.*",
+        "symfony/security-csrf": "6.2.*",
+        "symfony/twig-bundle": "6.2.*",
+        "symfony/validator": "6.2.*",
         "symfony/yaml": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -89,15 +89,15 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.1.*",
+            "require": "6.2.*",
             "docker": true
         }
     },
     "require-dev": {
         "phpstan/phpstan": "^1.7",
         "symfony/maker-bundle": "^1.43",
-        "symfony/stopwatch": "6.1.*",
-        "symfony/var-dumper": "6.1.*",
-        "symfony/web-profiler-bundle": "6.1.*"
+        "symfony/stopwatch": "6.2.*",
+        "symfony/var-dumper": "6.2.*",
+        "symfony/web-profiler-bundle": "6.2.*"
     }
 }
