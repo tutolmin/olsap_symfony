@@ -22,7 +22,7 @@ class InstancesController extends AbstractController
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxcManager, LoggerInterface $logger,
-//      EntityManagerInterface $entityManager, MessageBusInterface $bus,
+//      EntityManagerInterface $entityManager
         )
     {
  	$this->logger = $logger;

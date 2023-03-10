@@ -22,3 +22,22 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\MessageHandler\SessionActionHandler:
+        tags: [{ name: messenger.message_handler, bus: session.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+
+    App\MessageHandler\LxcOperationHandler:
+        tags: [{ name: messenger.message_handler, bus: lxd.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+
+    App\MessageHandler\RunPlaybookHandler:
+        tags: [{ name: messenger.message_handler, bus: awx.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+

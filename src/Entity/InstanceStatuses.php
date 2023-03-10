@@ -19,6 +19,9 @@ class InstanceStatuses
     #[ORM\Column(type: 'string', length: 255)]
     private $status;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
+
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Instances::class, orphanRemoval: true)]
     private $instances;
 
@@ -45,6 +48,18 @@ class InstanceStatuses
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

@@ -12,8 +12,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
-use App\Service\LxcManager;
+#use App\Entity\InstanceStatuses;
+#use App\Service\LxcManager;
+use App\Service\SessionManager;
+#use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'app:instances:start',
@@ -26,23 +28,28 @@ class InstancesStartCommand extends Command
 
     // Instances repo
     private $instancesRepository;
-    private $instanceStatusRepository;
+#    private $instanceStatusRepository;
 
-    private $lxd;
+#    private $lxd;
+#    private $lxdBus;
+    private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
+    public function __construct( EntityManagerInterface $entityManager,
+        SessionManager $sessionManager)
+# LxcManager $lxd, MessageBusInterface $lxdBus)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->lxd = $lxd;
+//        $this->lxd = $lxd;
+//        $this->lxdBus = $lxdBus;
+        $this->sessionManager = $sessionManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
-
+#        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
     }
 
     protected function configure(): void
@@ -70,19 +77,21 @@ class InstancesStartCommand extends Command
             $io->note(sprintf('Instance "%s" has been found in the database with ID: %d', 
 		$name, $instance->getId()));
 
-	    if($instance->getStatus() == "Stopped") {
+	    if($instance->getStatus() != "Started" && $instance->getStatus() != "Running") {
 
               $io->note(sprintf('Sending "start" command to LXD for "%s"', $name));
 
+              $this->sessionManager->startInstance($instance);
+/*
               $this->lxd->startInstance($name);
 
               // Store item into the DB
               $instance->setStatus($this->instanceStatusRepository->findOneByStatus("Started"));
               $this->entityManager->persist($instance);
               $this->entityManager->flush();
-	
+*/	
 /*
-              $this->bus->dispatch(new LxcOperation(["command" => "start",
+              $this->lxdBus->dispatch(new LxcOperation(["command" => "start",
                 "environment_id" => null, "instance_type_id" => null, 
 		"instance_id" => $instance->getId()]));
 */

@@ -6,6 +6,8 @@ use App\Repository\AddressesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AddressesRepository::class)]
+#[ORM\UniqueConstraint(name: 'addresses_mac', columns: ['mac'])]
+#[ORM\UniqueConstraint(name: 'addresses_ip', columns: ['ip'])]
 class Addresses
 {
     #[ORM\Id]
@@ -13,7 +15,7 @@ class Addresses
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 16)]
     private ?string $ip = null;
 
     #[ORM\ManyToOne(inversedBy: 'addresses')]

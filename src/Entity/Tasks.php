@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TasksRepository::class)]
 #[ORM\UniqueConstraint(name: "tasks_name", columns: ["name"])]
+#[ORM\UniqueConstraint(name: 'tasks_project', columns: ['project'])]
+#[ORM\UniqueConstraint(name: 'tasks_deploy', columns: ['deploy'])]
+#[ORM\UniqueConstraint(name: 'tasks_solve', columns: ['solve'])]
+#[ORM\UniqueConstraint(name: 'tasks_verify', columns: ['verify'])]
 class Tasks
 {
     #[ORM\Id]

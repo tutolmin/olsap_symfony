@@ -34,13 +34,14 @@ class SessionManager
     private $environmentRepository;
     private $environmentStatusesRepository;
 
-    private $bus;
+    private $sessionBus;
+    private $lxdBus;
 
     private $lxd;
     private $awx;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, MessageBusInterface $bus)
+	LxcManager $lxd, AwxManager $awx, MessageBusInterface $sessionBus, MessageBusInterface $lxdBus)
 
     {
         $this->logger = $logger;
@@ -48,7 +49,8 @@ class SessionManager
 
         $this->entityManager = $em;
 	$this->lxd = $lxd;
-	$this->bus = $bus;
+	$this->sessionBus = $sessionBus;
+	$this->lxdBus = $lxdBus;
 	$this->awx = $awx;
 
         // get the repositories
@@ -85,7 +87,7 @@ class SessionManager
 	// It is New/Started by sefault
 	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
 	$instance->setStatus($instance_status);
-//	Ca not use this function yet - entity is absent in the DB
+//	Can not use this function yet - entity is absent in the DB
 //	$instance->setInstanceStatus("Bound");
 
 	$instance->setInstanceType($it);
@@ -97,9 +99,6 @@ class SessionManager
 	// Store item into the DB
 	$this->entityManager->persist($instance);
 	$this->entityManager->flush();
-
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Bound");
 
 	return $instance;
     }
@@ -141,7 +140,7 @@ class SessionManager
 	}
 
 	// Update Instance status
-	$this->setInstanceStatus($instance, "Bound");
+	$this->setInstanceStatus($instance, "Running");
 
 	return $instance;
     }
@@ -371,7 +370,7 @@ class SessionManager
 
 	  $this->logger->debug( "No suitable envs found. Requesting new env creation.");
 
-	  $this->bus->dispatch(new SessionAction(["action" => "createEnvironment", 
+	  $this->sessionBus->dispatch(new SessionAction(["action" => "createEnvironment", 
 		"session_id" => $session->getId(), "task_id" => $task->getId()]));
 
 	  return false;	
@@ -384,24 +383,44 @@ class SessionManager
 
     public function startInstance(Instances $instance)
     {
-	$this->bus->dispatch(new LxcOperation(["command" => "start", 
-	  "environment_id" => null, "instance_id" => $instance->getId(), 
-	  "instance_type_id" => null]));
+        $this->logger->debug(__METHOD__);
 
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Started");
+	$this->lxdBus->dispatch(new LxcOperation(["command" => "start", 
+	  "instance_id" => $instance->getId()]));
+
+	// Select which status to apply
+	switch($instance->getStatus()) {
+
+	case "Sleeping":	
+	  $this->setInstanceStatus($instance, "Running");
+	  break;
+
+	default:
+	  $this->setInstanceStatus($instance, "Started");
+	  break;
+	}
     }
 
 
 
     public function stopInstance(Instances $instance)
     {
-	$this->bus->dispatch(new LxcOperation(["command" => "stop", 
-	  "environment_id" => null, "instance_id" => $instance->getId(), 
-	  "instance_type_id" => null]));
+        $this->logger->debug(__METHOD__);
 
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Stopped");
+	$this->lxdBus->dispatch(new LxcOperation(["command" => "stop", 
+	  "instance_id" => $instance->getId()]));
+
+	// Select which status to apply
+	switch($instance->getStatus()) {
+
+	case "Running":	
+	  $this->setInstanceStatus($instance, "Sleeping");
+	  break;
+
+	default:
+	  $this->setInstanceStatus($instance, "Stopped");
+	  break;
+	}
     }
 
 

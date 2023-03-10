@@ -38,16 +38,18 @@ final class LxcOperationHandler implements MessageHandlerInterface
     private $instanceRepository;
 
     // Message bus
-    private $bus;
+    private $awxBus;
+    private $lxdBus;
 
     private $lxd;
 
     public function __construct(
 	LoggerInterface $logger, EntityManagerInterface $entityManager,
-	MessageBusInterface $bus, LxcManager $lxd)
+	MessageBusInterface $awxBus, MessageBusInterface $lxdBus, LxcManager $lxd)
     {
         $this->logger = $logger;
-        $this->bus = $bus;
+        $this->awxBus = $awxBus;
+        $this->lxdBus = $lxdBus;
 	$this->lxd = $lxd;
 
         $this->entityManager = $entityManager;
@@ -115,14 +117,13 @@ final class LxcOperationHandler implements MessageHandlerInterface
 	  } else {
 
 	      // Send message to request creation of the instance of the certain type
-              $this->bus->dispatch(new LxcOperation(["command" => "create",
-                "environment_id" => $environment->getId(), "instance_id" => null,
+              $this->lxdBus->dispatch(new LxcOperation(["command" => "create",
+                "environment_id" => $environment->getId(),
                 "instance_type_id" => $instance_type->getId()]));
 
 	      // Send message to request deployment of the env
-              $this->bus->dispatch(new RunPlaybook(["name" => "deploy",
+              $this->awxBus->dispatch(new RunPlaybook(["name" => "deploy",
                 "environment_id" => $environment->getId()]));
-
 	  }
 
 

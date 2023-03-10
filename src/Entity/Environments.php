@@ -6,6 +6,9 @@ use App\Repository\EnvironmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EnvironmentsRepository::class)]
+#[ORM\UniqueConstraint(name: 'environments_hash', columns: ['hash'])]
+#[ORM\Index(name: 'environments_deployment', columns: ['deployment'])]
+#[ORM\Index(name: 'environments_verification', columns: ['verification'])]
 class Environments
 {
     #[ORM\Id]
@@ -39,10 +42,10 @@ class Environments
     private $verification;
 
     #[ORM\ManyToOne(targetEntity: EnvironmentStatuses::class, inversedBy: 'environments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, options: ['default' => 1])]
     private $status;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 8, nullable: false)]
     private ?string $hash = null;
 
     public function __construct()
@@ -60,7 +63,7 @@ class Environments
 
 	if($instance)
 
-          return $this->getTask() . " @ ". $this->getInstance() . ": ". $this->getStatus();
+          return $this->getId() . ": " . $this->getTask() . " @ ". $this->getInstance() . ": ". $this->getStatus();
 //        return strval($this->getId());
 
         return $this->getTask() . ": ". $this->getStatus();

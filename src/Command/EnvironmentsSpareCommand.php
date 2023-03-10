@@ -29,17 +29,17 @@ class EnvironmentsSpareCommand extends Command
     private $taskRepository;
     private $environmentRepository;
 
-    private $bus;
+    private $sessionBus;
 
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager, 
-	SessionManager $sessionManager, MessageBusInterface $bus)
+	SessionManager $sessionManager, MessageBusInterface $sessionBus)
     {
         parent::__construct();
 
-        $this->bus = $bus;
+        $this->sessionBus = $sessionBus;
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
@@ -77,8 +77,8 @@ class EnvironmentsSpareCommand extends Command
 
           $io->note(sprintf("Sending message to create a new spare environment"));
 
-          $this->bus->dispatch(new SessionAction(["action" => "createSpareEnvironment",
-                NULL, "task_id" => $task->getId()]));
+          $this->sessionBus->dispatch(new SessionAction(["action" => "createSpareEnvironment",
+                "task_id" => $task->getId()]));
 
 	}
 
