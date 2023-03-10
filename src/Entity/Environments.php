@@ -63,7 +63,7 @@ class Environments
 
 	if($instance)
 
-          return $this->getTask() . " @ ". $this->getInstance() . ": ". $this->getStatus();
+          return $this->getId() . ": " . $this->getTask() . " @ ". $this->getInstance() . ": ". $this->getStatus();
 //        return strval($this->getId());
 
         return $this->getTask() . ": ". $this->getStatus();
