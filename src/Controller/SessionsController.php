@@ -33,7 +33,7 @@ class SessionsController extends AbstractController
     private SessionManager $sessionManager;
 
     // Message bus
-//    private $bus;
+//    private $sessionBus;
 
 //    private $logger;
 
@@ -42,7 +42,7 @@ class SessionsController extends AbstractController
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( SessionManager $sessionManager, 
-//	EntityManagerInterface $entityManager, MessageBusInterface $bus,
+//	EntityManagerInterface $entityManager, MessageBusInterface $sessionBus,
 	LoggerInterface $logger
 	)
     {   
@@ -50,7 +50,7 @@ class SessionsController extends AbstractController
 
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
-//        $this->bus = $bus;
+//        $this->bus = $sessionBus;
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 

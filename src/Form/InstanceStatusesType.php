@@ -13,6 +13,7 @@ class InstanceStatusesType extends AbstractType
     {
         $builder
             ->add('status')
+            ->add('description')
         ;
     }
 

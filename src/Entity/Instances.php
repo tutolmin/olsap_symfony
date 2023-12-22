@@ -27,7 +27,7 @@ class Instances
     private $envs;
 
     #[ORM\ManyToOne(targetEntity: InstanceStatuses::class, inversedBy: 'instances')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, options: ['default' => 6])]
     private $status;
 
     #[ORM\Column(type: 'string', length: 255)]

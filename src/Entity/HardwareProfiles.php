@@ -31,7 +31,7 @@ class HardwareProfiles
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column]
+    #[ORM\Column(options: ['default' => false])]
     private ?bool $supported = null;
 
     public function __construct()
