@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use App\Entity\Addresses;
+use Opensaucesystems\Lxd\Exception\NotFoundException;
 
 #use App\Entity\Tasks;
 #use App\Entity\InstanceTypes;
@@ -165,6 +166,8 @@ class LxcManager
 
 	$info = $this->getInstanceInfo($name);
 
+        if ($info) {
+            
 	if($info["status"] == "Stopped") {
 
 	  $this->lxd->containers->remove($name, $this->wait);
@@ -177,17 +180,20 @@ class LxcManager
 	    // Stop it first
 	    $this->stopInstance($name, $force);
 	    $this->lxd->containers->remove($name, $this->wait);
+	    return true;
 
 	  } else {
 
             $this->logger->debug( "Instance `" . $name . "` is " . $info["status"]);
-	    return false;
 	  }
 	}
+//        } else {
+//            $this->logger->debug( "Instance `" . $name ."` does not exist");
+        }
 
 	//TODO: Handle exception
 
-	return true;
+	return false;
     }
 
     public function deleteAllInstances($name, $force)//: ?InstanceTypes
@@ -210,10 +216,19 @@ class LxcManager
         $this->logger->debug(__METHOD__);
 
 	// TODO: check container existence - input validation
+        $container = null;
+        
+        try {
+            $container = $this->lxd->containers->info($name);       
+        } catch (NotFoundException $exc) {
+            $this->logger->debug( "Instance `" . $name . "` does not exist!");
 
-	return $this->lxd->containers->info($name);
+//            echo $exc->getTraceAsString();
+        }
+        
+        return $container;
     }
-
+    
     public function getInstanceList()//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
