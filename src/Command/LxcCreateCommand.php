@@ -78,8 +78,9 @@ class LxcCreateCommand extends Command
 	$os_alias = $input->getArgument('os');
 	$hw_name = $input->getArgument('profile');
 
-        if ($os_alias && $hw_name)
+        if ($os_alias && $hw_name) {
             $io->note(sprintf('You passed os alias: %s and profile name: %s', $os_alias, $hw_name));
+        }
 
         // look for a specific OperatingSystems object
 #        $os = $this->osRepository->findOneBy(array('alias' => $os_alias));
