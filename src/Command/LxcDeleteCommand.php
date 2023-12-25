@@ -54,14 +54,14 @@ class LxcDeleteCommand extends Command
           if ($this->lxd->deleteAllInstances($force)) {
                 $io->note('Success!');
             } else {
-                $io->error('Failure!');
+                $io->error('Failure! Check object statuses.');
             }
         } else {
 
             if ($this->lxd->deleteInstance($name, $force)) {
                 $io->note('Success!');
             } else {
-                $io->error('Failure!');
+                $io->error('Failure! Check object statuses.');
             }
         }
 

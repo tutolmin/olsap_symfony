@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -58,7 +58,8 @@ class PortsDeleteCommand extends Command
 	for($p=$min;$p<=$max;$p++) {
 
 	  // Check is the port already exists
-	  if( $port = $this->portRepository->findOneByNumber($p)) {
+          $port = $this->portRepository->findOneByNumber($p);
+	  if( $port) {
 
             $io->note('Deleting '.$p.' from the database');
 

@@ -115,31 +115,30 @@ class SessionManager
 	$instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
 
 	// Check if suitable instance has been found
-	if($instance)
+	if ($instance) {
+            $this->logger->debug('Suitable started instance has been found: ' . $instance);
+        }
 
-	  $this->logger->debug('Suitable started instance has been found: '.$instance);
+        // Try to find stopped instance
+        else {
 
-	// Try to find stopped instance
-	else {
+            // Find stopped instance
+            $instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
 
-	    // Find stopped instance
-	    $instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
+            // Check if suitable instance has been found
+            if ($instance) {
 
-	    // Check if suitable instance has been found
-	    if($instance) {
+                $this->logger->debug('Suitable stopped instance has been found: ' . $instance);
 
-	      $this->logger->debug('Suitable stopped instance has been found: '.$instance);
+                // stop instance for the time being
+                $this->startInstance($instance);
 
-	      // stop instance for the time being
-	      $this->startInstance($instance);
+                // Create new Instance
+            } else
+                $instance = $this->createInstance($it);
+        }
 
-	    // Create new Instance
-	    } else 
-
-	      $instance = $this->createInstance($it);
-	}
-
-	// Update Instance status
+        // Update Instance status
 	$this->setInstanceStatus($instance, "Running");
 
 	return $instance;
@@ -352,9 +351,11 @@ class SessionManager
 //	$environment = $this->environmentRepository->findOneDeployed($task->getId());
 	$environments = $this->environmentRepository->findAllDeployed($task->getId());
 	$environment = NULL;
-	if(count($environments)) $environment = $environments[0];
+	if (count($environments)) {
+            $environment = $environments[0];
+        }
 
-	// Environment has been found
+        // Environment has been found
 	if($environment) {
 
 	  $environment->setSession($session);
@@ -434,47 +435,45 @@ class SessionManager
 	// Get the suitable InstanceType for a task
 	$instance_type = $this->getFirstInstanceType($task);
 
-	if($instance_type) { 
+	if ($instance_type) {
 
-	  $this->logger->debug('First suitable instance type: '.$instance_type);
+            $this->logger->debug('First suitable instance type: ' . $instance_type);
 
-	  $env = new Environments;
+            $env = new Environments;
 
-	  $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
-	  $env->setStatus($env_status);
+            $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
+            $env->setStatus($env_status);
 
-	  $env->setTask($task);
-	  $env->setSession($session);
+            $env->setTask($task);
+            $env->setSession($session);
 
-	  // Store item into the DB
-	  $this->entityManager->persist($env);
-	  $this->entityManager->flush();
+            // Store item into the DB
+            $this->entityManager->persist($env);
+            $this->entityManager->flush();
 
-	  $this->logger->debug('Environment `' . $env . '` was created.');
+            $this->logger->debug('Environment `' . $env . '` was created.');
 
 //	  $timestamp = new \DateTimeImmutable('NOW');
 //	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
-
 //	  $name = $this->createInstance($instance_type);
-	  $name = $this->bindInstance($instance_type);
+            $name = $this->bindInstance($instance_type);
 
-	  $env->setInstance($name);
+            $env->setInstance($name);
 
-	  // Store item into the DB
+            // Store item into the DB
 //	  $this->entityManager->persist($env);
-	  $this->entityManager->flush();
+            $this->entityManager->flush();
 
-	  $this->logger->debug('Instance `' . $name . '` has been bound to the environment.');
+            $this->logger->debug('Instance `' . $name . '` has been bound to the environment.');
 
 //	  $this->setEnvironmentStatus($env, "Created");
 
-	  return $env;
+            return $env;
+        } else {
+            $this->logger->debug('No suitable instance types are available for task: ' . $task);
+        }
 
-	} else
-
-	  $this->logger->debug('No suitable instance types are available for task: '.$task);
-
-	return null;
+        return null;
     }
 
 
@@ -485,7 +484,8 @@ class SessionManager
 
 	$this->logger->debug('Verifying: ' . $env);
 
-	if($task_id = $env->getTask()->getVerify()) {
+        $task_id = $env->getTask()->getVerify();
+	if($task_id) {
 
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
@@ -528,7 +528,8 @@ class SessionManager
 
 	$this->logger->debug('Solving: ' . $env);
 
-	if($task_id = $env->getTask()->getSolve()) {
+        $task_id = $env->getTask()->getSolve();
+	if($task_id) {
 
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
@@ -558,13 +559,14 @@ class SessionManager
 
 	$this->logger->debug('Deploying: ' . $env);
 
-	if($task_id = $env->getTask()->getDeploy()) {
+        $task_id = $env->getTask()->getDeploy();
+	if($task_id) {
 
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
 
 	  // Deploy test user credentials
-	  $result = $this->awx->runJobTemplate(55, $body);
+          $this->awx->runJobTemplate(55, $body);
 
 	  // Deploy actual environment
 	  $result = $this->awx->runJobTemplate($env->getTask()->getDeploy(), $body);
@@ -615,13 +617,11 @@ class SessionManager
 
 	$instanceTypes = $task->getTaskInstanceTypes();
 
-	if(count($instanceTypes))
-
-          return $task->getTaskInstanceTypes()[0]->getInstanceType();
-
-	else
-
-	  return NULL;
+	if (count($instanceTypes)) {
+            return $task->getTaskInstanceTypes()[0]->getInstanceType();
+        } else {
+            return NULL;
+        }
     }
 
 }

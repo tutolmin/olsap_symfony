@@ -4,7 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+#use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -76,36 +76,36 @@ class TaskInstanceTypesPopulateCommand extends Command
 	$instanceTypes = $this->itRepository->findAll();
 //	$instanceTypes = $this->itRepository->findBySupported(1);
 
-	foreach( $tasks as &$task)
-	foreach( $instanceTypes as &$it) {
+	foreach ($tasks as &$task) {
+            foreach ($instanceTypes as &$it) {
 
 #	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
-	  $io->note(sprintf('Task: %s, Instance type: %s', $task->getDescription(), $it));
+                $io->note(sprintf('Task: %s, Instance type: %s', $task->getDescription(), $it));
 
-	  // Try to find existing Instance type
-	  $tt = $this->ttRepository->findBy(['task' => $task->getId(), 'instance_type' => $it->getId()]);
+                // Try to find existing Instance type
+                $tt = $this->ttRepository->findBy(['task' => $task->getId(), 'instance_type' => $it->getId()]);
 
-	  if( count($tt)>0) {
+                if (count($tt) > 0) {
 
-            $io->warning(sprintf('Already exists, skipping addition'));
+                    $io->warning(sprintf('Already exists, skipping addition'));
+                } else {
 
-	  } else {
+                    $io->note(sprintf('Adding new record to the DB'));
 
-            $io->note(sprintf('Adding new record to the DB'));
+                    // Populate new InstanceType object
+                    $taskInstanceType = new TaskInstanceTypes();
+                    $taskInstanceType->setTask($task);
+                    $taskInstanceType->setInstanceType($it);
 
-	    // Populate new InstanceType object
-	    $taskInstanceType = new TaskInstanceTypes();
-	    $taskInstanceType->setTask( $task);
-	    $taskInstanceType->setInstanceType( $it);
+                    // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                    $this->entityManager->persist($taskInstanceType);
 
-	    // tell Doctrine you want to (eventually) save the Product (no queries yet)
-	    $this->entityManager->persist($taskInstanceType);
-
-	    // actually executes the queries (i.e. the INSERT query)
-	    $this->entityManager->flush();
-	  }
-	}
-/*
+                    // actually executes the queries (i.e. the INSERT query)
+                    $this->entityManager->flush();
+                }
+            }
+        }
+        /*
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {

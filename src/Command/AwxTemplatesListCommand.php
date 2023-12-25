@@ -4,9 +4,9 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+#use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -54,7 +54,8 @@ class AwxTemplatesListCommand extends Command
 
             $io->note('Template: ' . $template->name . ', playbook: '. $template->playbook);
 
-            if($task = $this->taskRepository->findOneByProject($template->project)) {
+            $task = $this->taskRepository->findOneByProject($template->project);
+            if($task) {
 
 		switch($template->playbook) {
 

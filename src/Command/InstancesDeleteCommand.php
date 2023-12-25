@@ -70,24 +70,21 @@ class InstancesDeleteCommand extends Command
 
 	    $io->note(sprintf('Deleting "%s" from the database', $instance->getName()));
 
-	    if ($this->lxd->deleteInstance($instance->getName(), $force)) {
+	    $this->lxd->deleteInstance($instance->getName(), $force);
 
-                    // Fetch all linked Addresses and release them
-                    $addresses = $instance->getAddresses();
-                    foreach ($addresses as $address) {
-                        $address->setInstance(null);
-                        $this->entityManager->flush();
-                    }
-
-                    // Delete item from the DB
-                    $this->entityManager->remove($instance);
-                    $this->entityManager->flush();
-
-                    $io->note('Success!');
-                } else {
-                    $io->error('Failure!');
-                }
+            // Fetch all linked Addresses and release them
+            $addresses = $instance->getAddresses();
+            foreach ($addresses as $address) {
+                $address->setInstance(null);
+                $this->entityManager->flush();
             }
+
+            // Delete item from the DB
+            $this->entityManager->remove($instance);
+            $this->entityManager->flush();
+
+            $io->note('Success!');
+          }
  
 	} else { 
 
@@ -97,26 +94,25 @@ class InstancesDeleteCommand extends Command
 	  // Check if instance is present in the DB
 	  if($instance) {
 
-	      $io->note(sprintf('Deleting "%s" from the database', $name));
+                $io->note(sprintf('Deleting "%s" from the database', $name));
 
-              if ($this->lxd->deleteInstance($name, $force)) {
+                // Delete corresponding LXC instance
+                $this->lxd->deleteInstance($name, $force);
 
-                    // Fetch all linked Addresses and release them
-                    $addresses = $instance->getAddresses();
-                    foreach ($addresses as $address) {
+                // Fetch all linked Addresses and release them
+                $addresses = $instance->getAddresses();
+                foreach ($addresses as $address) {
 
-                        $address->setInstance(null);
-                        $this->entityManager->flush();
-                    }
-
-                    // Delete item from the DB
-                    $this->entityManager->remove($instance);
+                    $address->setInstance(null);
                     $this->entityManager->flush();
-
-                    $io->note('Success!');
-                } else {
-                    $io->error('Failure!');
                 }
+
+                // Delete item from the DB
+                $this->entityManager->remove($instance);
+                $this->entityManager->flush();
+
+                $io->note('Success!');
+
             } else {
 
 	      $io->error(sprintf('Instance "%s" was not found', $name));

@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -62,24 +62,26 @@ class EnvironmentsCreateCommand extends Command
         }
 
         // Check if the task exists
-        if( $task = $this->taskRepository->find($task_id)) {
+        $task = $this->taskRepository->find($task_id);
+        if( $task) {
 
             $io->note('Task with id '.$task_id.' exists in the database');
 
 	    $session = null;
 
 	    // Check if the session exists
-	    if( $session_id)
-	    if( $session = $this->sessionRepository->find($session_id)) {
+	    if ($session_id) {
+                $session = $this->sessionRepository->find($session_id);
+                if ($session) {
 
-              $io->note('Session with id '.$session_id.' exists in the database');
+                    $io->note('Session with id ' . $session_id . ' exists in the database');
+                } else {
 
-	    } else {
+                    $io->warning('Session with id ' . $session_id . ' does NOT exist in the database');
+                }
+            }
 
-	      $io->warning('Session with id '.$session_id.' does NOT exist in the database');
-	    }
-
-	    // Create an environment and undirlying LXC instance
+            // Create an environment and undirlying LXC instance
 	    $environment=$this->sessionManager->createEnvironment($task, $session);
 
 	    // TODO: handle exception

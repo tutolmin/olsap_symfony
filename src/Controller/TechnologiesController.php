@@ -59,8 +59,9 @@ class TechnologiesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
 	$tasks = array();
-	foreach($technology->getTechTasks() as $taskTech)
-	  $tasks[] = $taskTech->getTask();
+	foreach ($technology->getTechTasks() as $taskTech) {
+            $tasks[] = $taskTech->getTask();
+        }
 
         return $this->render('technologies/show.html.twig', [
             'technology' => $technology,

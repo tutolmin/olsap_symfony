@@ -4,7 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+#use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -76,36 +76,36 @@ class TaskOsesPopulateCommand extends Command
 //	$oses = $this->osRepository->findAll();
 	$oses = $this->osRepository->findBySupported(1);
 
-	foreach( $tasks as &$task)
-	foreach( $oses as &$os) {
+	foreach ($tasks as &$task) {
+            foreach ($oses as &$os) {
 
 #	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
-	  $io->note(sprintf('Task: %s OS: %s %s', $task->getDescription(), $os->getBreed(), $os->getRelease()));
+                $io->note(sprintf('Task: %s OS: %s %s', $task->getDescription(), $os->getBreed(), $os->getRelease()));
 
-	  // Try to find existing record
-	  $to = $this->toRepository->findBy(['os' => $os->getId(), 'task' => $task->getId()]);
+                // Try to find existing record
+                $to = $this->toRepository->findBy(['os' => $os->getId(), 'task' => $task->getId()]);
 
-	  if( count($to)>0) {
+                if (count($to) > 0) {
 
-            $io->warning(sprintf('Already exists, skipping addition'));
+                    $io->warning(sprintf('Already exists, skipping addition'));
+                } else {
 
-	  } else {
+                    $io->note(sprintf('Adding new record to the DB'));
 
-            $io->note(sprintf('Adding new record to the DB'));
+                    // Populate new TaskOses object
+                    $taskOS = new TaskOses();
+                    $taskOS->setTask($task);
+                    $taskOS->setOs($os);
 
-	    // Populate new TaskOses object
-	    $taskOS = new TaskOses();
-	    $taskOS->setTask( $task);
-	    $taskOS->setOs( $os);
+                    // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                    $this->entityManager->persist($taskOS);
 
-	    // tell Doctrine you want to (eventually) save the Product (no queries yet)
-	    $this->entityManager->persist($taskOS);
-
-	    // actually executes the queries (i.e. the INSERT query)
-	    $this->entityManager->flush();
-	  }
-	}
-/*
+                    // actually executes the queries (i.e. the INSERT query)
+                    $this->entityManager->flush();
+                }
+            }
+        }
+        /*
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {

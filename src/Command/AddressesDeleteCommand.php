@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -59,7 +59,8 @@ class AddressesDeleteCommand extends Command
         for($p=0;$p<=255;$p++) {
 
           // Check is the address already exists
-          if( $address = $this->addressRepository->findOneByIp('172.27.'.$subnet.'.'.$p)) {
+          $address = $this->addressRepository->findOneByIp('172.27.'.$subnet.'.'.$p);
+          if( $address) {
 
             $io->note('Deleting IP address 172.27.'.$subnet.'.'.$p.' from the database');
 

@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -55,18 +55,16 @@ class TaskInstanceTypeCommand extends Command
         }
 
         // Check is the task exists
-        if( $task = $this->taskRepository->find($task_id)) {
+        $task = $this->taskRepository->find($task_id);
+        if( $task) {
 
             $io->note('Task with id '.$task_id.' exists in the database');
 
-	    if($this->sessionManager->getFirstInstanceType($task))
-
-              $io->note('First suitable instance type is "'.$this->sessionManager->getFirstInstanceType($task).'"');
-
-	    else
-
-              $io->warning('No suitable instance types are available for task id '.$task_id);
-
+	    if ($this->sessionManager->getFirstInstanceType($task)) {
+                $io->note('First suitable instance type is "' . $this->sessionManager->getFirstInstanceType($task) . '"');
+            } else {
+                $io->warning('No suitable instance types are available for task id ' . $task_id);
+            }
         } else {
 
             $io->warning('Task with id '.$task_id.' does NOT exist in the database');

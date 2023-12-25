@@ -132,11 +132,12 @@ class AwxManager
 	  $jobResult = $job->getById($runResult->id);
 	  $this->logger->debug( "Current job status: ".$jobResult->status);
 
-	  if($jobResult->status == "successful" || 
-		$jobResult->status == "failed") 
-		break;
+	  if ($jobResult->status == "successful" ||
+                    $jobResult->status == "failed") {
+                break;
+            }
 
-	  sleep( 1);
+            sleep( 1);
 	}
 		
 	return $jobResult;

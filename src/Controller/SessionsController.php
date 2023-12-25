@@ -164,17 +164,20 @@ class SessionsController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         $techs = array();
-        foreach($session->getSessionTechs()->getValues() as $st)
-          $techs[] = $st->getTech();
+        foreach ($session->getSessionTechs()->getValues() as $st) {
+            $techs[] = $st->getTech();
+        }
 
         $oses = array();
-        foreach($session->getSessionOses()->getValues() as $so)
-          $oses[] = $so->getOs();
+        foreach ($session->getSessionOses()->getValues() as $so) {
+            $oses[] = $so->getOs();
+        }
 
         $envs = array();
-        foreach($session->getEnvs()->getValues() as $se)
+        foreach ($session->getEnvs()->getValues() as $se) {
 //          $envs[] = $se->getTask() . " @ " . $se->getInstance();
-          $envs[] = $se;
+            $envs[] = $se;
+        }
 
         return $this->render('sessions/show.html.twig', [
             'session' => $session,
