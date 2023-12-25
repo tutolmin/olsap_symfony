@@ -40,27 +40,30 @@ class LxcDeleteCommand extends Command
         $name = $input->getArgument('name');
         $force = $input->getOption('force');
 
-	if($name)
-          $io->note(sprintf('You passed an argument: %s', $name));
+	if ($name) {
+            $io->note(sprintf('You passed an argument: %s', $name));
+        }
 
-	if($force)
-          $io->warning('You passed a force option');
+        if ($force) {
+            $io->warning('You passed a force option');
+        }
 
         if ($name == "ALL") {
 
           $io->warning('Deleting all instances');
-          if($this->lxd->deleteAllInstances($name, $force))
-            $io->note('Success!');
-	  else
-            $io->error('Failure!');
-
+          if ($this->lxd->deleteAllInstances($force)) {
+                $io->note('Success!');
+            } else {
+                $io->error('Failure!');
+            }
         } else {
 
-            if( $this->lxd->deleteInstance($name, $force))
-	      $io->note('Success!');
-	    else
-	      $io->error('Failure!');
-	}
+            if ($this->lxd->deleteInstance($name, $force)) {
+                $io->note('Success!');
+            } else {
+                $io->error('Failure!');
+            }
+        }
 
         return Command::SUCCESS;
     }

@@ -90,48 +90,44 @@ class LxcCreateCommand extends Command
         $hp = $this->hpRepository->findOneByName($hw_name);
 
 	// Both OS and HW profile objects found
-	if( $os && $hp) {
+	if ($os && $hp) {
 
 //	  $io->note('OS id: '.$os->getId().', HW profile id: '.$hp->getId());
+            // look for a specific instance type object
+            $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
 
-	  // look for a specific instance type object
-	  $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
+            // Instance type found
+            if ($instance_type) {
 
-	  // Instance type found
-	  if( $instance_type) {
-	  
-  //          $io->success('Found!');
+                //          $io->success('Found!');
+                // Check the number of instances requested
+                $number = 1;
+                if ($input->getArgument('number')) {
 
-	    // Check the number of instances requested
-	    $number = 1;
-	    if ($input->getArgument('number')) {
+                    $number = intval($input->getArgument('number'));
+                }
+                $io->note(sprintf('We are going to create %d instances', $number));
 
-	      $number = intval( $input->getArgument('number'));
-	    }
-	    $io->note(sprintf('We are going to create %d instances', $number));
+                for ($i = 0; $i < $number; $i++) {
 
-	    for($i=0; $i<$number; $i++) {
+                    // Find an address item which is NOT linked to any instance
+                    $address = $this->adRepository->findOneByInstance(null);
+                    $io->note(sprintf('Selected address MAC: ' . $address->getMac()));
 
-	      // Find an address item which is NOT linked to any instance
-	      $address = $this->adRepository->findOneByInstance(null);
-	      $io->note(sprintf('Selected address MAC: ' . $address->getMac()));
-
-              $name = $this->lxd->createInstance($os->getAlias(),$hp->getName(),$address->getMac());
-	      $io->note(sprintf('Instance ' . $name . ' was created.'));
-	    }
-/*
-	      $this->bus->dispatch(new LxcOperation(["command" => "create", 
-		"environment_id" => null, "instance_id" => null, 
-		"instance_type_id" => $instance_type->getId()]));
-*/
-
-	  } else
-
-	    $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
-
-	} else 
-
-          $io->warning('OS alias or HW profile name is invalid. Check your input!');
+                    $name = $this->lxd->createInstance($os->getAlias(), $hp->getName(), $address->getMac());
+                    $io->note(sprintf('Instance ' . $name . ' was created.'));
+                }
+                /*
+                  $this->bus->dispatch(new LxcOperation(["command" => "create",
+                  "environment_id" => null, "instance_id" => null,
+                  "instance_type_id" => $instance_type->getId()]));
+                 */
+            } else {
+                $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
+            }
+        } else {
+            $io->warning('OS alias or HW profile name is invalid. Check your input!');
+        }
 
         return Command::SUCCESS;
     }

@@ -4,9 +4,9 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+#use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Service\LxcManager;
@@ -45,14 +45,13 @@ class LxcLsCommand extends Command
 
         #var_dump( $containers);
 
-	if($containers)
         foreach ($containers as &$value) {
 
-          $info = $this->lxd->getInstanceInfo($value);
+            $info = $this->lxd->getInstanceInfo($value);
 
 //          var_dump( $info);
 
-          $io->note(sprintf('Name: %s', $info['name']));
+            $io->note(sprintf('Name: %s', $info['name']));
         }
 
         return Command::SUCCESS;

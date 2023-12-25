@@ -10,28 +10,30 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.13",
-        "doctrine/doctrine-bundle": "^2.6",
+        "doctrine/doctrine-bundle": "^2.7.0",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.12",
+        "doctrine/orm": "^2.13",
         "opensaucesystems/lxd": "^0.12.0",
         "php-http/guzzle7-adapter": "^1.0",
+        "php-http/message": "^1.16",
+        "php-http/message-factory": "^1.1",
         "sdwru/awx-v2": "dev-master",
         "sdwru/oauth2-awx": "dev-master",
         "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "*",
-        "symfony/doctrine-messenger": "6.2.*",
+        "symfony/doctrine-messenger": "6.4.*",
         "symfony/dotenv": "*",
-        "symfony/filesystem": "6.2.*",
+        "symfony/filesystem": "6.4.*",
         "symfony/flex": "^2",
-        "symfony/form": "6.2.*",
+        "symfony/form": "6.4.*",
         "symfony/framework-bundle": "*",
-        "symfony/messenger": "6.2.*",
+        "symfony/messenger": "6.4.*",
         "symfony/monolog-bundle": "^3.8",
-        "symfony/proxy-manager-bridge": "6.2.*",
+        "symfony/proxy-manager-bridge": "6.4.*",
         "symfony/runtime": "*",
-        "symfony/security-csrf": "6.2.*",
-        "symfony/twig-bundle": "6.2.*",
-        "symfony/validator": "6.2.*",
+        "symfony/security-csrf": "6.4.*",
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
         "symfony/yaml": "*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -44,7 +46,8 @@
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "php-http/discovery": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
@@ -89,15 +92,15 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.2.*",
+            "require": "6.4.*",
             "docker": true
         }
     },
     "require-dev": {
         "phpstan/phpstan": "^1.7",
         "symfony/maker-bundle": "^1.43",
-        "symfony/stopwatch": "6.2.*",
-        "symfony/var-dumper": "6.2.*",
-        "symfony/web-profiler-bundle": "6.2.*"
+        "symfony/stopwatch": "6.4.*",
+        "symfony/var-dumper": "6.4.*",
+        "symfony/web-profiler-bundle": "6.4.*"
     }
 }

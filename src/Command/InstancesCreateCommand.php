@@ -82,42 +82,41 @@ class InstancesCreateCommand extends Command
         $hp = $this->hpRepository->findOneByName($hw_name);
 
 	// Both OS and HW profile objects found
-	if( $os && $hp) {
+	if ($os && $hp) {
 
-	  // look for a specific instance type object
-	  $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
+            // look for a specific instance type object
+            $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
 
-	  // Instance type found
-	  if( $instance_type) {
-	  
-	    // Check the number of instances requested
-	    $number = 1;
-	    if ($input->getArgument('instance_number')) {
+            // Instance type found
+            if ($instance_type) {
 
-	      $number = intval( $input->getArgument('instance_number'));
-	    }
-	    $io->note(sprintf('We are going to create %d instances', $number));
+                // Check the number of instances requested
+                $number = 1;
+                if ($input->getArgument('instance_number')) {
 
-	    for($i=0; $i<$number; $i++) {
+                    $number = intval($input->getArgument('instance_number'));
+                }
+                $io->note(sprintf('We are going to create %d instances', $number));
 
-		// Call sessionManager manager method
-		$instance = $this->sessionManager->createInstance($instance_type);
+                for ($i = 0; $i < $number; $i++) {
 
-                $io->note('Instance `' . $instance . '` was created.');
+                    // Call sessionManager manager method
+                    $instance = $this->sessionManager->createInstance($instance_type);
 
-/*
-	      $this->bus->dispatch(new LxcOperation(["command" => "create", 
-		"environment_id" => null, "instance_id" => null, 
-		"instance_type_id" => $instance_type->getId()]));
-*/
-	    }
-	  } else
+                    $io->note('Instance `' . $instance . '` was created.');
 
-	    $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
-
-	} else 
-
-          $io->warning('OS alias or HW profile name is invalid. Check your input!');
+                    /*
+                      $this->bus->dispatch(new LxcOperation(["command" => "create",
+                      "environment_id" => null, "instance_id" => null,
+                      "instance_type_id" => $instance_type->getId()]));
+                     */
+                }
+            } else {
+                $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
+            }
+        } else {
+            $io->warning('OS alias or HW profile name is invalid. Check your input!');
+        }
 
         return Command::SUCCESS;
     }

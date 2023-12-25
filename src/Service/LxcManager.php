@@ -119,10 +119,11 @@ class LxcManager
 	$info = $this->getInstanceInfo($name);
 
 	$responce = null;
-	if($info["status"] != "Started")
-	    $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
+	if ($info["status"] != "Started") {
+            $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
+        }
 
-	//TODO: Handle exception
+        //TODO: Handle exception
 
 	return $responce;
 
@@ -137,10 +138,11 @@ class LxcManager
 	$info = $this->getInstanceInfo($name);
 
 	$responce = null;
-	if($info["status"] != "Stopped")
-	    $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
+	if ($info["status"] != "Stopped") {
+            $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
+        }
 
-	//TODO: Handle exception
+        //TODO: Handle exception
 
 	return $responce;
 
@@ -190,7 +192,7 @@ class LxcManager
 	return true;
     }
 
-    public function deleteAllInstances($name, $force)//: ?InstanceTypes
+    public function deleteAllInstances($force)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
@@ -198,11 +200,13 @@ class LxcManager
 
 	$result = true;
 
-	foreach($instances as $instance)
-	  if( !$this->deleteInstance($this->getInstanceInfo($instance)["name"], $force))
-	    $result = false;
+	foreach ($instances as $instance) {
+            if (!$this->deleteInstance($this->getInstanceInfo($instance)["name"], $force)) {
+                $result = false;
+            }
+        }
 
-	return $result;
+        return $result;
     }
 
     public function getInstanceInfo($name)//: ?InstanceTypes
@@ -222,13 +226,11 @@ class LxcManager
 
 	// TODO: handle exception
 
-	if(count($containers))
-
-          return $containers;
-
-	else
-
-	  return NULL;
+	if (count($containers)) {
+            return $containers;
+        } else {
+            return NULL;
+        }
     }
 
     public function getImageInfo($image)//: ?InstanceTypes
@@ -248,13 +250,11 @@ class LxcManager
 
 	// TODO: handle exception
 
-	if(count($images))
-
-          return $images;
-
-	else
-
-	  return NULL;
+	if (count($images)) {
+            return $images;
+        } else {
+            return NULL;
+        }
     }
 
     public function getProfileInfo($profile)//: ?InstanceTypes
@@ -274,13 +274,11 @@ class LxcManager
 
 	// TODO: handle exception
 
-	if(count($profiles))
-
-          return $profiles;
-
-	else
-
-	  return NULL;
+	if (count($profiles)) {
+            return $profiles;
+        } else {
+            return NULL;
+        }
     }
 
 }
