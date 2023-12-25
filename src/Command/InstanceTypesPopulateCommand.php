@@ -4,7 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+#use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -76,36 +76,36 @@ class InstanceTypesPopulateCommand extends Command
 //	$oses = $this->osRepository->findAll();
 	$oses = $this->osRepository->findBySupported(1);
 
-	foreach( $hwProfiles as &$hp)
-	foreach( $oses as &$os) {
+	foreach ($hwProfiles as &$hp) {
+            foreach ($oses as &$os) {
 
 #	  $io->note(sprintf('HW: %s %s OS: %s %s', $hp->isType()?'VM':'Container', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
-	  $io->note(sprintf('HW: %s OS: %s %s', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
+                $io->note(sprintf('HW: %s OS: %s %s', $hp->getDescription(), $os->getBreed(), $os->getRelease()));
 
-	  // Try to find existing Instance type
-	  $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
+                // Try to find existing Instance type
+                $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
 
-	  if( count($it)>0) {
+                if (count($it) > 0) {
 
-            $io->warning(sprintf('Already exists, skipping addition'));
+                    $io->warning(sprintf('Already exists, skipping addition'));
+                } else {
 
-	  } else {
+                    $io->note(sprintf('Adding new record to the DB'));
 
-            $io->note(sprintf('Adding new record to the DB'));
+                    // Populate new InstanceType object
+                    $instanceType = new InstanceTypes();
+                    $instanceType->setHwProfile($hp);
+                    $instanceType->setOs($os);
 
-	    // Populate new InstanceType object
-	    $instanceType = new InstanceTypes();
-	    $instanceType->setHwProfile( $hp);
-	    $instanceType->setOs( $os);
+                    // tell Doctrine you want to (eventually) save the Product (no queries yet)
+                    $this->entityManager->persist($instanceType);
 
-	    // tell Doctrine you want to (eventually) save the Product (no queries yet)
-	    $this->entityManager->persist($instanceType);
-
-	    // actually executes the queries (i.e. the INSERT query)
-	    $this->entityManager->flush();
-	  }
-	}
-/*
+                    // actually executes the queries (i.e. the INSERT query)
+                    $this->entityManager->flush();
+                }
+            }
+        }
+        /*
         $arg1 = $input->getArgument('arg1');
 
         if ($arg1) {

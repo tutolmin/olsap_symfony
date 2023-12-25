@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+#use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -72,8 +72,9 @@ class InstancesCreateCommand extends Command
 	$os_alias = $input->getArgument('os');
 	$hw_name = $input->getArgument('profile');
 
-        if ($os_alias && $hw_name)
+        if ($os_alias && $hw_name) {
             $io->note(sprintf('You passed os alias: %s and profile name: %s', $os_alias, $hw_name));
+        }
 
         // look for a specific OperatingSystems object
         $os = $this->osRepository->findOneByAlias($os_alias);

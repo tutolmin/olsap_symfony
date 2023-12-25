@@ -13,6 +13,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
+use App\Service\LxcManager;
+
 
 #[AsCommand(
     name: 'app:instances:ls',
@@ -20,6 +22,8 @@ use App\Entity\InstanceStatuses;
 )]
 class InstancesLsCommand extends Command
 {
+    private $lxd;
+
     // Doctrine EntityManager
     private $entityManager;
 
@@ -27,19 +31,21 @@ class InstancesLsCommand extends Command
     private $instanceStatusRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
+	$this->lxd = $lxd;
     }
 
     protected function configure(): void
     {
         $this
             ->addArgument('status', InputArgument::OPTIONAL, 'Filter certain status')
+            ->addOption('orphans', null, InputOption::VALUE_NONE, 'Show orphan records which does NOT have corresponding LXC objects')
         ;
     }
 
@@ -48,6 +54,13 @@ class InstancesLsCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $status = $input->getArgument('status');
 
+        $check_orphans = false;
+        
+        if($input->getOption('orphans')) {
+
+  	  $check_orphans = true;
+	}
+        
 	if ($status) {
 
             $io->note(sprintf('You passed an argument: %s', $status));
@@ -77,9 +90,21 @@ class InstancesLsCommand extends Command
 
 	foreach( $instances as $instance) {
 
-            $io->note(sprintf('Name: %s, port: %s, status: %s', 
-		$instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
-	}
+            if ($check_orphans) {
+                
+                $info = $this->lxd->getInstanceInfo($instance->getName());
+                
+                if(!$info) {
+                    $io->note(sprintf('Name: %s, port: %s, status: %s', 
+                        $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+                }
+            } else {
+          
+                $io->note(sprintf('Name: %s, port: %s, status: %s', 
+                    $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+            }
+        }
+        
 
         return Command::SUCCESS;
     }

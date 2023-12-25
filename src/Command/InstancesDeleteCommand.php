@@ -55,11 +55,13 @@ class InstancesDeleteCommand extends Command
         $name = $input->getArgument('name');
         $force = $input->getOption('force');
 
-        if($name)
-          $io->note(sprintf('You passed an argument: %s', $name));
+        if ($name) {
+            $io->note(sprintf('You passed an argument: %s', $name));
+        }
 
-        if($force)
-          $io->warning('You passed a force option');
+        if ($force) {
+            $io->warning('You passed a force option');
+        }
 
         if ($name == "ALL") {
 
@@ -68,25 +70,24 @@ class InstancesDeleteCommand extends Command
 
 	    $io->note(sprintf('Deleting "%s" from the database', $instance->getName()));
 
-	    if( $this->lxd->deleteInstance($instance->getName(), $force)) {
+	    if ($this->lxd->deleteInstance($instance->getName(), $force)) {
 
-	      // Fetch all linked Addresses and release them
-	      $addresses = $instance->getAddresses();
-	      foreach($addresses as $address) {
-		$address->setInstance(null);
-		$this->entityManager->flush();
-	      }
+                    // Fetch all linked Addresses and release them
+                    $addresses = $instance->getAddresses();
+                    foreach ($addresses as $address) {
+                        $address->setInstance(null);
+                        $this->entityManager->flush();
+                    }
 
-	      // Delete item from the DB
-	      $this->entityManager->remove($instance);
-	      $this->entityManager->flush();
+                    // Delete item from the DB
+                    $this->entityManager->remove($instance);
+                    $this->entityManager->flush();
 
-	      $io->note('Success!');
-	    }
-            else
-              $io->error('Failure!');
-
-	  }
+                    $io->note('Success!');
+                } else {
+                    $io->error('Failure!');
+                }
+            }
  
 	} else { 
 
@@ -98,26 +99,25 @@ class InstancesDeleteCommand extends Command
 
 	      $io->note(sprintf('Deleting "%s" from the database', $name));
 
-	      if( $this->lxd->deleteInstance($name, $force)) {
+              if ($this->lxd->deleteInstance($name, $force)) {
 
-		// Fetch all linked Addresses and release them
-                $addresses = $instance->getAddresses();
-		foreach($addresses as $address) {
+                    // Fetch all linked Addresses and release them
+                    $addresses = $instance->getAddresses();
+                    foreach ($addresses as $address) {
 
-		  $address->setInstance(null);
-		  $this->entityManager->flush();
-		}
+                        $address->setInstance(null);
+                        $this->entityManager->flush();
+                    }
 
-		// Delete item from the DB
-		$this->entityManager->remove($instance);
-		$this->entityManager->flush();
+                    // Delete item from the DB
+                    $this->entityManager->remove($instance);
+                    $this->entityManager->flush();
 
-		$io->note('Success!');
-	      }
-	      else
-		$io->error('Failure!');
-
-	  } else {
+                    $io->note('Success!');
+                } else {
+                    $io->error('Failure!');
+                }
+            } else {
 
 	      $io->error(sprintf('Instance "%s" was not found', $name));
 	  }
