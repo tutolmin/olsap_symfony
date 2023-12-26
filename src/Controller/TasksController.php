@@ -59,16 +59,19 @@ class TasksController extends AbstractController
         $this->logger->debug(__METHOD__);
 
 	$techs = array();
-	foreach($task->getTaskTechs()->getValues() as $tt)
-	  $techs[] = $tt->getTech();
+	foreach ($task->getTaskTechs()->getValues() as $tt) {
+            $techs[] = $tt->getTech();
+        }
 
-	$oses = array();
-	foreach($task->getTaskOses()->getValues() as $to)
-	  $oses[] = $to->getOs()->getAlias();
+        $oses = array();
+	foreach ($task->getTaskOses()->getValues() as $to) {
+            $oses[] = $to->getOs()->getAlias();
+        }
 
-	$combos = array();
-	foreach($task->getTaskInstanceTypes()->getValues() as $tit)
-	  $combos[] = $tit->getInstanceType()->getCombo();
+        $combos = array();
+	foreach ($task->getTaskInstanceTypes()->getValues() as $tit) {
+            $combos[] = $tit->getInstanceType()->getCombo();
+        }
 
         return $this->render('tasks/show.html.twig', [
             'task' => $task,

@@ -4,7 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-
+    awx.client_id:      "%env(AWX_CLIENT_ID)%"
+    awx.client_secret:  "%env(AWX_CLIENT_SECRET)%"
+    awx.username:       "%env(AWX_USERNAME)%"
+    awx.password:       "%env(AWX_PASSWORD)%"
+    awx.api_url:        "%env(AWX_API_URL)%"
+    
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -23,6 +28,14 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    App\Service\AwxManager:
+        arguments:
+            $awx_client_id:     '%awx.client_id%'
+            $awx_client_secret: '%awx.client_secret%'
+            $awx_username:      '%awx.username%'
+            $awx_password:      '%awx.password%'
+            $awx_api_url:       '%awx.api_url%'
+            
     App\MessageHandler\SessionActionHandler:
         tags: [{ name: messenger.message_handler, bus: session.bus }]
         # prevent handlers from being registered twice (or you can remove
@@ -30,7 +43,13 @@ services:
         autoconfigure: false
 
     App\MessageHandler\LxcOperationHandler:
-        tags: [{ name: messenger.message_handler, bus: lxd.bus }]
+        tags: [{ name: messenger.message_handler, bus: lxd.operation.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+
+    App\MessageHandler\LxcEventHandler:
+        tags: [{ name: messenger.message_handler, bus: lxd.event.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false

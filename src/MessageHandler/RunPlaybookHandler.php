@@ -4,6 +4,7 @@ namespace App\MessageHandler;
 
 use App\Message\RunPlaybook;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
 #use App\Entity\InstanceStatuses;
@@ -13,7 +14,8 @@ use App\Entity\Environments;
 
 use Psr\Log\LoggerInterface;
 
-final class RunPlaybookHandler implements MessageHandlerInterface
+#[AsMessageHandler(fromTransport: 'async', bus: 'awx.bus')]
+final class RunPlaybookHandler
 {
     // Logger reference
     private $logger;

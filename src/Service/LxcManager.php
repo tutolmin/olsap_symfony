@@ -146,18 +146,21 @@ class LxcManager
         //TODO: Handle exception
 
 	return $responce;
-
     }
 
     public function restartInstance($name, $force=false)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
-	$this->stopInstance($name, $force);
+        $this->logger->debug( "Restarting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
 
-	$this->startInstance($name, $force);
+	$info = $this->getInstanceInfo($name);
 
-	return NULL;
+        $responce = $this->lxd->containers->restart($name, $this->timeout, $force, false, $this->wait);
+
+        //TODO: Handle exception
+
+	return $responce;
     }
 
     public function deleteInstance($name, $force=false)//: ?InstanceTypes

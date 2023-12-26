@@ -4,6 +4,7 @@ namespace App\MessageHandler;
 
 use App\Message\SessionAction;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -12,7 +13,8 @@ use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Service\SessionManager;
 
-final class SessionActionHandler implements MessageHandlerInterface
+#[AsMessageHandler(fromTransport: 'async', bus: 'session.bus')]
+final class SessionActionHandler
 {
     // Logger reference
     private $logger;

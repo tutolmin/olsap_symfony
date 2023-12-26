@@ -11,6 +11,8 @@ final class LxcOperation
 
     private $command;
 
+    private $name;
+    
     private $environment_id;
 
     private $instance_type_id;
@@ -20,6 +22,7 @@ final class LxcOperation
     public function __construct( $message)
     {
         $this->command = $message['command'];
+        $this->name = array_key_exists('name',$message)?strval($message['name']):"";
         $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):"";
         $this->instance_type_id = array_key_exists('instance_type_id',$message)?strval($message['instance_type_id']):"";
         $this->instance_id = array_key_exists('instance_id',$message)?strval($message['instance_id']):"";
@@ -28,6 +31,11 @@ final class LxcOperation
     public function getCommand(): string
     {
 	return $this->command;
+    }
+
+    public function getName(): string
+    {
+	return $this->name;
     }
 
     public function getEnvironmentId(): string

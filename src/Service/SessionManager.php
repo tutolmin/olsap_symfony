@@ -134,8 +134,9 @@ class SessionManager
                 $this->startInstance($instance);
 
                 // Create new Instance
-            } else
+            } else {
                 $instance = $this->createInstance($it);
+            }
         }
 
         // Update Instance status

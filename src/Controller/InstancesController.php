@@ -5,30 +5,43 @@ namespace App\Controller;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\Instances;
+use App\Entity\InstanceStatuses;
 use App\Form\InstancesType;
 use App\Repository\InstancesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Doctrine\ORM\EntityManagerInterface;
 use App\Service\LxcManager;
+use App\Message\LxcOperation;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[Route('/instances')]
 class InstancesController extends AbstractController
 {
     private $logger;
     private LxcManager $lxcManager;
+    private $lxdOperationBus;
 
+    // Doctrine EntityManager
+    private $entityManager;
+
+    private $instanceStatusRepository;
+    
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxcManager, LoggerInterface $logger,
-//      EntityManagerInterface $entityManager
+    EntityManagerInterface $entityManager, MessageBusInterface $lxdOperationBus
         )
     {
  	$this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->lxcManager = $lxcManager;
+        $this->lxdOperationBus = $lxdOperationBus;        
+        
+        $this->entityManager = $entityManager;
+        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);        
     }
 
     #[Route('/', name: 'app_instances_index', methods: ['GET'])]
@@ -68,8 +81,9 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         $addrs = array();
-        foreach($instance->getAddresses()->getValues() as $se)
-          $addrs[] = $se->getPort() . ":" .$se->getIp();
+        foreach ($instance->getAddresses()->getValues() as $se) {
+            $addrs[] = $se->getPort() . ":" . $se->getIp();
+        }
 
         return $this->render('instances/show.html.twig', [
             'instance' => $instance,
@@ -98,41 +112,80 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/{id}/start', name: 'app_instances_start', methods: ['POST'])]
-    public function start(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    public function start(Request $request, Instances $instance): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
 
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $instance->getName()]));            
+/*            
+            // Start LXC object
             $this->lxcManager->startInstance($instance->getName());
-        }
+            
+            // Change Instance status
+            $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
+            $instance->setStatus($instance_status);
+            
+            // Store item into the DB
+            $this->entityManager->persist($instance);
+            $this->entityManager->flush();                
+*/
+         }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/stop', name: 'app_instances_stop', methods: ['POST'])]
-    public function stop(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    public function stop(Request $request, Instances $instance): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {
+            
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $instance->getName()]));            
 
+/*
+            // Stop LXC object
             $this->lxcManager->stopInstance($instance->getName());
+            
+            // Change Instance status
+            $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
+            $instance->setStatus($instance_status);
+            
+            // Store item into the DB
+            $this->entityManager->persist($instance);
+            $this->entityManager->flush();            
+*/
         }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/restart', name: 'app_instances_restart', methods: ['POST'])]
-    public function restart(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    public function restart(Request $request, Instances $instance): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {
+            
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $instance->getName()]));            
 
+/*
+            // Restart LXC object
             $this->lxcManager->restartInstance($instance->getName());
-        }
+            
+            // Change Instance status
+            $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
+            $instance->setStatus($instance_status);
+            
+            // Store item into the DB
+            $this->entityManager->persist($instance);
+            $this->entityManager->flush();             
 
+ */
+        }
+            
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
     }
 

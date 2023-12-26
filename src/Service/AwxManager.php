@@ -15,7 +15,9 @@ use AwxV2\AwxV2;
 //use App\Entity\InstanceTypes;
 
 class AwxManager
-{
+{    
+    private $params;
+
     private $logger;
 
     private $awx;
@@ -23,13 +25,21 @@ class AwxManager
     private $entityManager;
 //    private $taskRepository;
 
-    public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
+    public function __construct( string $awx_client_id, string $awx_client_secret,
+            string $awx_username, string $awx_password, string $awx_api_url,
+            LoggerInterface $logger, EntityManagerInterface $em)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
 
+        $this->params['awx_client_id']      = $awx_client_id;
+        $this->params['awx_client_secret']  = $awx_client_secret;
+        $this->params['awx_username']       = $awx_username;
+        $this->params['awx_password']       = $awx_password;
+        $this->params['awx_api_url']        = $awx_api_url;
+        
         // get the task repository
 //        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
     }
@@ -37,12 +47,12 @@ class AwxManager
     public function getClient()#: MeEntity
     {
 	$awxVars = array (
-	    'clientId' => $_ENV["AWX_CLIENT_ID"], // The client ID assigned by AWX when you created the application
-	    'clientSecret' => $_ENV["AWX_CLIENT_SECRET"],
-	    'username' => $_ENV["AWX_USERNAME"], // The AWX username associated with the application
-	    'password' => $_ENV["AWX_PASSWORD"],
-	    'apiUrl' => $_ENV["AWX_API_URL"], // Ie. https://x.x.x.x/api
-	    'sslVerify' => false, //SSL verify can be false during development and true after public SSL certificates are obtained
+	    'clientId'      => $this->params['awx_client_id'], // The client ID assigned by AWX when you created the application
+	    'clientSecret'  => $this->params['awx_client_secret'],
+	    'username'      => $this->params['awx_username'], // The AWX username associated with the application
+	    'password'      => $this->params['awx_password'],
+	    'apiUrl'        => $this->params['awx_api_url'], // Ie. https://x.x.x.x/api
+	    'sslVerify'     => false, //SSL verify can be false during development and true after public SSL certificates are obtained
 	    );
 
         $this->logger->debug(__METHOD__);

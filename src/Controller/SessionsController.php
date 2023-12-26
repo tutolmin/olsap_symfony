@@ -103,7 +103,8 @@ class SessionsController extends AbstractController
           $this->sessionManager->setSessionTimestamp($session, "started");
 
 	  // Start certain number of instances
-	  for($i=0;$i<$_ENV["APP_START_ENVS"];$i++) { 
+          $start_envs = intval( $this->getParameter('APP_START_ENVS'));
+	  for($i=0;$i<$start_envs;$i++) { 
 	
 	    $this->sessionManager->allocateEnvironment($session);
 	  }

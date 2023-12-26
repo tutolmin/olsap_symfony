@@ -6,10 +6,12 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-#use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Service\LxcManager;
+use App\Message\LxcOperation;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'lxc:restart',
@@ -18,19 +20,21 @@ use App\Service\LxcManager;
 class LxcRestartCommand extends Command
 {
     private $lxd;
+    private $lxdOperationBus;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( LxcManager $lxd)
+    public function __construct( LxcManager $lxd, MessageBusInterface $lxdOperationBus)
     {
         parent::__construct();
         $this->lxd = $lxd;
+        $this->lxdOperationBus = $lxdOperationBus;        
     }
 
     protected function configure(): void
     {
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'Instance name')
-//            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 
@@ -43,12 +47,13 @@ class LxcRestartCommand extends Command
             $io->note(sprintf('You passed an argument: %s', $name));
         }
 
-/*
-        if ($input->getOption('option1')) {
-            // ...
+        if ($input->getOption('async')) {
+            $io->note(sprintf('Dispatching LXC command message'));
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $name]));            
+        } else {
+            $io->note(sprintf('Starting LXC object: %s', $name));
+            $this->lxd->restartInstance($name);
         }
-*/
-        $this->lxd->restartInstance($name);
 
         return Command::SUCCESS;
     }

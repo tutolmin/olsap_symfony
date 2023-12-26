@@ -18,7 +18,15 @@ framework:
                 # configured for this bus without throwing an exception
                 default_middleware: allow_no_handlers
 
-            lxd.bus:
+            lxd.operation.bus:
+                middleware:
+#                     - handle_message
+#                    - validation
+                # the 'allow_no_handlers' middleware allows to have no handler
+                # configured for this bus without throwing an exception
+                default_middleware: allow_no_handlers
+
+            lxd.event.bus:
                 middleware:
 #                     - handle_message
 #                    - validation
@@ -37,6 +45,7 @@ framework:
 
         routing:
             App\Message\LxcOperation: async            # Route your messages to the transports
+            App\Message\LxcEvent: async
             App\Message\RunPlaybook: async
             App\Message\SessionAction: async
             # 'App\Message\YourMessage': async
