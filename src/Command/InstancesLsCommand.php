@@ -23,7 +23,8 @@ use App\Service\LxcManager;
 class InstancesLsCommand extends Command
 {
     private $lxd;
-
+    private $io;
+    
     // Doctrine EntityManager
     private $entityManager;
 
@@ -49,62 +50,58 @@ class InstancesLsCommand extends Command
         ;
     }
 
+    private function listItems(array $instances): void {
+        if ($instances) {
+            foreach ($instances as $instance) {
+                $this->io->note(sprintf('Name: %s, port: %s, status: %s',
+                    $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+            }
+        }
+    }
+
+    private function listOrphanItems(array $instances): void {
+        if ($instances) {
+            foreach ($instances as $instance) {
+                $info = $this->lxd->getInstanceInfo($instance->getName());
+                if (!$info) {
+                    $this->io->note(sprintf('Name: %s, port: %s, status: %s',
+                        $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+                }
+            }
+        }
+    }
+
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $this->io = new SymfonyStyle($input, $output);
         $status = $input->getArgument('status');
-
-        $check_orphans = false;
-        
-        if($input->getOption('orphans')) {
-
-  	  $check_orphans = true;
-	}
         
 	if ($status) {
 
-            $io->note(sprintf('You passed an argument: %s', $status));
+            $this->io->note(sprintf('You passed an argument: %s', $status));
             $instance_status = $this->instanceStatusRepository->findOneByStatus($status);
 
-	    // Check if the specified instance status exists
-	    if($instance_status) {
+            // Check if the specified instance status exists
+            if (!$instance_status) {
+                $this->io->warning(sprintf('Status "%s" does NOT exist. Check your input!', $status));
+                return Command::FAILURE;
+            }
+            $this->io->note(sprintf('Status filter "%s" applied', $status));
 
-		$io->note(sprintf('Status "%s" exists, filter applied', $status));
-
-		// look for a specific instance type object
-		$instances = $this->instanceRepository->findByStatus($instance_status->getId());
-
-	    } else {
-
-		$io->warning(sprintf('Status "%s" does NOT exist, filter will NOT be applied', $status));
-
-		// look for a specific instance type object
-		$instances = $this->instanceRepository->findAll();
-	    }
+            // look for a specific instance type object
+            $instances = $this->instanceRepository->findByStatus($instance_status->getId());
 
         } else {
 
             // look for a specific instance type object
             $instances = $this->instanceRepository->findAll();
-	}
-
-	foreach( $instances as $instance) {
-
-            if ($check_orphans) {
-                
-                $info = $this->lxd->getInstanceInfo($instance->getName());
-                
-                if(!$info) {
-                    $io->note(sprintf('Name: %s, port: %s, status: %s', 
-                        $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
-                }
-            } else {
-          
-                $io->note(sprintf('Name: %s, port: %s, status: %s', 
-                    $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
-            }
         }
-        
+
+        if ($input->getOption('orphans')) {
+            $this->listOrphanItems($instances);
+        } else {
+            $this->listItems($instances);
+        }
 
         return Command::SUCCESS;
     }

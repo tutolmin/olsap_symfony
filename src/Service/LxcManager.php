@@ -8,7 +8,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use App\Entity\Addresses;
+use App\Entity\Instances;
+use App\Entity\InstanceStatuses;
+use App\Entity\InstanceTypes;
+use App\Entity\OperatingSystems;
+use App\Entity\HardwareProfiles;
 use Opensaucesystems\Lxd\Exception\NotFoundException;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Message\LxcEvent;
+use App\Message\LxcOperation;
 
 #use App\Entity\Tasks;
 #use App\Entity\InstanceTypes;
@@ -16,23 +24,54 @@ use Opensaucesystems\Lxd\Exception\NotFoundException;
 class LxcManager
 {
     private $logger;
-
+    private $lxdEventBus;
+    private $lxdOperationBus;
     private $lxd;
+//    private $session;
     private $timeout;
     private $wait;
 
-    private $name;
+//    private $name;
 
+    // Doctrine EntityManager
     private $entityManager;
+
+    // InstanceTypes repo
+    private $itRepository;
+    private $instanceStatusRepository;
+
+    // OperatingSystems repo
+    private $osRepository;
+
+    // HardwareProfiles repo
+    private $hpRepository;
+
+    // Addresses repo    
     private $addressRepository;
 
-    public function __construct( LoggerInterface $logger, EntityManagerInterface $em)
+    public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
+            MessageBusInterface $lxdEventBus, MessageBusInterface $lxdOperationBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
-        $this->entityManager = $em;
+        $this->entityManager = $entityManager;
 
+        // get the InstanceTypes repository
+        $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
+        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
+
+        // get the OperatingSystems repository
+        $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
+
+        // get the HardwareProfiles repository
+        $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
+
+        // get the Addresses repository
+        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
+        
+        $this->lxdEventBus = $lxdEventBus;
+        $this->lxdOperationBus = $lxdOperationBus;
 	$this->timeout = intval($_ENV["LXD_TIMEOUT"]);
 	$this->wait = $_ENV["LXD_WAIT"];
 
@@ -67,100 +106,133 @@ class LxcManager
     }
 
 
-    public function createInstance($os_alias, $hw_name, $mac)//: ?InstanceTypes
+    public function createInstance($os_alias, $hp_name)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
-	/* We can not select address for the instance here
-	   since it SHOULD be connected to an Instance object.
-	   So, we expect that a passed parameter is valid
-	
-	   The same applies to OS alias and HW profile.
-	   Therse values should be verified earlier.
-	   Possibly we could double check it here.
-	*/
-/*
-        $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hw_name . "`");
+        // look for a specific OperatingSystems object
+        $os = $this->osRepository->findOneByAlias($os_alias);
+
+        // look for a specific HardwareProfiles object
+        $hp = $this->hpRepository->findOneByName($hp_name);
+
+	// Both OS and HW profile objects found
+	if (!$os || !$hp) {
+            $this->logger->debug( "OS alias or HW profile name is invalid. Check your input!");
+            return null;
+        }   
+        
+        // look for the instance type
+        $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
+
+	// Both OS and HW profile objects found
+	if (!$instance_type) {
+            $this->logger->debug( "Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command");
+            return null;
+        }   
+
+        $instance = new Instances;
+
+	// It is New/Started by sefault
+        $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
+        $instance->setStatus($instance_status);
+        $instance->setInstanceType($instance_type);
+        
+        $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
 
         // Find an address item which is NOT linked to any instance
         $address = $this->addressRepository->findOneByInstance(null);
+        $address->setInstance($instance);
 
+        // TODO: catch no address available exception
+
+        // TODO: same address can be allocated to multiple new instances on a race condidion
+        
         $this->logger->debug( "Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
-*/
+
 	// Create an instance in LXD
 	$options = [
 	    'alias'  => $os_alias,
-	    'profiles' => [$hw_name],
+	    'profiles' => [$hp_name],
             "config" => [
-//               "volatile.eth0.hwaddr" => $address->getMac(),
-               "volatile.eth0.hwaddr" => $mac,
+               "volatile.eth0.hwaddr" => $address->getMac(),
 	    ],
 	];
 	$responce = $this->lxd->containers->create(null, $options, $this->wait);
 
+        //Catch exception
+        
 	// Get the name for the reply
 	$name=explode( "/", $responce["resources"]["containers"][0]);
 
         $this->logger->debug("Created instance: ".$name[3]);
 
-	//TODO: Handle exception
-	// Why it was commented out?
-	$this->startInstance($name[3]);
+        $instance->setName($name[3]);
+
+        // Store item into the DB
+        $this->entityManager->persist($instance);
+        $this->entityManager->flush();
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
 	return $name[3];
-
     }
 
-    public function startInstance($name, $force=false)//: ?InstanceTypes
-    {  
+    public function startInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug( "Starting LXC instance: `" . $name . "`");
+        $this->logger->debug("Starting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-	$info = $this->getInstanceInfo($name);
+        $info = $this->getInstanceInfo($name);
 
-	$responce = null;
-	if ($info["status"] != "Started") {
+        if ($info && $info["status"] != "Started") {
             $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
+            $this->logger->debug('Dispatching LXC event message');
+            $this->lxdEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
+            return $responce;
         }
 
         //TODO: Handle exception
 
-	return $responce;
-
+        return null;
     }
 
-    public function stopInstance($name, $force=false)//: ?InstanceTypes
-    {  
+    public function stopInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug( "Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
+        $this->logger->debug("Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-	$info = $this->getInstanceInfo($name);
+        $info = $this->getInstanceInfo($name);
 
-	$responce = null;
-	if ($info["status"] != "Stopped") {
+        if ($info && $info["status"] != "Stopped") {
             $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
+            $this->logger->debug('Dispatching LXC event message');
+            $this->lxdEventBus->dispatch(new LxcEvent(["event" => "stopped", "name" => $name]));
+            return $responce;
         }
 
         //TODO: Handle exception
 
-	return $responce;
+        return null;
     }
 
-    public function restartInstance($name, $force=false)//: ?InstanceTypes
-    {  
+    public function restartInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug( "Restarting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force?"true":"false"));
+        $this->logger->debug("Restarting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-	$info = $this->getInstanceInfo($name);
+        $info = $this->getInstanceInfo($name);
 
-        $responce = $this->lxd->containers->restart($name, $this->timeout, $force, false, $this->wait);
+        if ($info) {
+            $responce = $this->lxd->containers->restart($name, $this->timeout, $force, false, $this->wait);
+            $this->logger->debug('Dispatching LXC event message');
+            $this->lxdEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
+            return $responce;
+        }
 
         //TODO: Handle exception
 
-	return $responce;
+        return null;
     }
 
     public function deleteInstance($name, $force=false)//: ?InstanceTypes
@@ -223,17 +295,16 @@ class LxcManager
         $this->logger->debug(__METHOD__);
 
 	// TODO: check container existence - input validation
-        $container = null;
         
         try {
-            $container = $this->lxd->containers->info($name);       
+            $container = $this->lxd->containers->info($name);  
+            return $container;
         } catch (NotFoundException $exc) {
             $this->logger->debug( "Instance `" . $name . "` does not exist!");
-
-//            echo $exc->getTraceAsString();
+            $this->logger->debug( $exc->getTraceAsString());
         }
         
-        return $container;
+        return null;
     }
     
     public function getInstanceList()//: ?InstanceTypes

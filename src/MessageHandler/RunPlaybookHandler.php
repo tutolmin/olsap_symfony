@@ -23,7 +23,7 @@ final class RunPlaybookHandler
     // Doctrine EntityManager
     private $entityManager;
 
-    private $message;
+//    private $message;
     private $environmentRepository;
 
     public function __construct(

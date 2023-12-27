@@ -20,6 +20,8 @@ use App\Service\LxcManager;
 class LxcLsCommand extends Command {
 
     private $lxd;
+    private $io;
+    
     // Doctrine EntityManager
     private $entityManager;
     private $instanceRepository;
@@ -40,40 +42,41 @@ class LxcLsCommand extends Command {
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int {
-        $io = new SymfonyStyle($input, $output);
-        $check_orphans = false;
-
-        if ($input->getOption('orphans')) {
-
-            $check_orphans = true;
+    private function listItems(array $instances): void {
+        if ($instances) {
+            foreach ($instances as $instance) {
+                $info = $this->lxd->getInstanceInfo($instance);
+                $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
+            }
         }
+    }
 
-        // Use Lxc service method
-        $containers = $this->lxd->getInstanceList();
-
-        #var_dump( $containers);
-
-        if ($containers) {
-
-            foreach ($containers as &$value) {
-
-                $info = $this->lxd->getInstanceInfo($value);
-
-                //          var_dump( $info);
-                if ($check_orphans) {
-
-                    // look for a specific instance type object
-                    $instance = $this->instanceRepository->findOneByName($info['name']);
-
-                    if (!$instance) {
-                        $io->note(sprintf('Name: %s (%s)', $info['name'], $info['status']));
-                    }
-                } else {
-
-                    $io->note(sprintf('Name: %s (%s)', $info['name'], $info['status']));
+    private function listOrphanItems(array $instances): void {
+        if ($instances) {
+            foreach ($instances as $instance) {
+                $info = $this->lxd->getInstanceInfo($instance);
+                
+                // look for a specific instance type object
+                $obj = $this->instanceRepository->findOneByName($info['name']);
+                
+                if (!$obj) {
+                    $this->io->note(sprintf('Name: %s, status: %s',
+                        $info['name'], $info['status']));
                 }
             }
+        }
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+        $this->io = new SymfonyStyle($input, $output);
+
+        // Use Lxc service method
+        $instances = $this->lxd->getInstanceList();
+
+        if ($input->getOption('orphans')) {
+            $this->listOrphanItems($instances);
+        } else {
+            $this->listItems($instances);
         }
 
         return Command::SUCCESS;

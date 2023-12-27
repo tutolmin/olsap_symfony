@@ -85,22 +85,22 @@ class SessionManager
 	$instance->setName($name);
 
 	// It is New/Started by sefault
-	$instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
-	$instance->setStatus($instance_status);
+        $instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
+        $instance->setStatus($instance_status);
 //	Can not use this function yet - entity is absent in the DB
 //	$instance->setInstanceStatus("Bound");
 
-	$instance->setInstanceType($it);
+        $instance->setInstanceType($it);
 //	$now = new \DateTimeImmutable('NOW');
 //	$instance->setCreatedAt($now);
 
-	$address->setInstance($instance);
+        $address->setInstance($instance);
 
-	// Store item into the DB
-	$this->entityManager->persist($instance);
-	$this->entityManager->flush();
+        // Store item into the DB
+        $this->entityManager->persist($instance);
+        $this->entityManager->flush();
 
-	return $instance;
+        return $instance;
     }
 
 
@@ -230,33 +230,27 @@ class SessionManager
 
 
 
-    public function setInstanceStatus(Instances $instance, $status_str): bool
-    {
+    public function setInstanceStatus(Instances $instance, $status_str): bool {
+        
         $this->logger->debug(__METHOD__);
 
-	$status = $this->instanceStatusesRepository->findOneByStatus($status_str);
+        $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
 
-	if($status) {
+        if (!$status) {
+            $this->logger->debug('No such instance status: ' . $status_str);
+            return false;
+        }
 
-	  $this->logger->debug('Changing instance '.$instance.' status to: '.$status);
+        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);
 
-	  $instance->setStatus($status);
+        $instance->setStatus($status);
 
-	  // Store item into the DB
+        // Store item into the DB
 //	  $this->entityManager->persist($instance);
-	  $this->entityManager->flush();
+        $this->entityManager->flush();
 
-	  return true;
-
-	} else {
-
-	  $this->logger->debug('No such instance status: '.$status_str);
-
-	  return false;
-	}
+        return true;
     }
-
-
 
     public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
     {

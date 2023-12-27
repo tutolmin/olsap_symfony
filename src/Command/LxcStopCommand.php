@@ -52,7 +52,9 @@ class LxcStopCommand extends Command
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $name]));            
         } else {
             $io->note(sprintf('Stopping LXC object: %s', $name));
-            $this->lxd->stopInstance($name);
+            if( !$this->lxd->stopInstance($name)){
+                return Command::FAILURE;
+            }
         }
 
         return Command::SUCCESS;

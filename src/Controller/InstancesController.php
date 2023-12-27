@@ -117,20 +117,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
-
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $instance->getName()]));            
-/*            
-            // Start LXC object
-            $this->lxcManager->startInstance($instance->getName());
-            
-            // Change Instance status
-            $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
-            $instance->setStatus($instance_status);
-            
-            // Store item into the DB
-            $this->entityManager->persist($instance);
-            $this->entityManager->flush();                
-*/
          }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -141,22 +128,8 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {
-            
+        if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {       
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $instance->getName()]));            
-
-/*
-            // Stop LXC object
-            $this->lxcManager->stopInstance($instance->getName());
-            
-            // Change Instance status
-            $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
-            $instance->setStatus($instance_status);
-            
-            // Store item into the DB
-            $this->entityManager->persist($instance);
-            $this->entityManager->flush();            
-*/
         }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -167,23 +140,8 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {
-            
+        if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {            
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $instance->getName()]));            
-
-/*
-            // Restart LXC object
-            $this->lxcManager->restartInstance($instance->getName());
-            
-            // Change Instance status
-            $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
-            $instance->setStatus($instance_status);
-            
-            // Store item into the DB
-            $this->entityManager->persist($instance);
-            $this->entityManager->flush();             
-
- */
         }
             
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);

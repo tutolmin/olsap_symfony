@@ -14,6 +14,7 @@ use App\Entity\InstanceTypes;
 use App\Entity\Environments;
 use Psr\Log\LoggerInterface;
 use App\Service\LxcManager;
+use App\Service\SessionManager;
 
 #[AsMessageHandler(fromTransport: 'async', bus: 'lxd.event.bus')]
 final class LxcEventHandler {
@@ -31,14 +32,17 @@ final class LxcEventHandler {
     private $awxBus;
     private $lxdBus;
     private $lxd;
+    private $session;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $awxBus, MessageBusInterface $lxdBus, LxcManager $lxd) {
+            MessageBusInterface $awxBus, MessageBusInterface $lxdBus, 
+            LxcManager $lxd, SessionManager $session) {
         $this->logger = $logger;
         $this->awxBus = $awxBus;
         $this->lxdBus = $lxdBus;
-        $this->lxd = $lxd;
+        $this->lxd = $lxd;        
+        $this->session = $session;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
@@ -59,6 +63,23 @@ final class LxcEventHandler {
         switch ($message->getEvent()) {
 
             // Instance started
+            case "created":
+
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getEvent() . "` LXD event");
+                    break;
+                }
+
+                $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
+
+                $instance = $this->instanceRepository->findOneByName($name);
+                $this->session->setInstanceStatus( $instance, "Started");
+
+                # TODO: Handle exception
+                break;
+                
+            // Instance started
             case "started":
 
                 // REQUIRED: name
@@ -70,12 +91,7 @@ final class LxcEventHandler {
                 $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
-                $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
-                $instance->setStatus($instance_status);
-
-                // Store item into the DB
-                $this->entityManager->persist($instance);
-                $this->entityManager->flush();
+                $this->session->setInstanceStatus( $instance, "Started");
 
                 # TODO: Handle exception
                 break;
@@ -92,12 +108,7 @@ final class LxcEventHandler {
                 $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
-                $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
-                $instance->setStatus($instance_status);
-
-                // Store item into the DB
-                $this->entityManager->persist($instance);
-                $this->entityManager->flush();
+                $this->session->setInstanceStatus( $instance, "Stopped");
 
                 # TODO: Handle exception
                 break;

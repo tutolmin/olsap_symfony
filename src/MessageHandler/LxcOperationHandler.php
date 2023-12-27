@@ -3,9 +3,9 @@
 namespace App\MessageHandler;
 
 use App\Message\LxcOperation;
-use App\Message\LxcEvent;
+#use App\Message\LxcEvent;
 use App\Message\RunPlaybook;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+#use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -32,7 +32,7 @@ final class LxcOperationHandler
     // Doctrine EntityManager
     private $entityManager;
 
-    private $message;
+//    private $message;
     private $environmentRepository;
     private $instanceTypeRepository;
     private $instanceStatusRepository;
@@ -83,7 +83,16 @@ final class LxcOperationHandler
 	if (strlen($message->getName())) {
             $name = $message->getName();
         }
-
+	// Get passed optional parameters
+	$os = null;
+	if (strlen($message->getOS())) {
+            $os = $message->getOS();
+        }
+	// Get passed optional parameters
+	$hp = null;
+	if (strlen($message->getHP())) {
+            $hp = $message->getHP();
+        }
         $environment = null;
 	if (strlen($message->getEnvironmentId())) {
             $environment = $this->environmentRepository->find($message->getEnvironmentId());
@@ -145,13 +154,12 @@ final class LxcOperationHandler
 	case "create":
 
 	  // REQUIRED: InstanceTypeId
-	  if(!$instance_type) {
-            $this->logger->error( "Instance type ID is required for `" . $message->getCommand() . "` LXD command");
+	  if(!$os || !$hp) {
+            $this->logger->error( "OS & HP is required for `" . $message->getCommand() . "` LXD command");
 	    break;
 	  }
 
-	  $this->logger->debug( "Creating LXC instance of type id: `" . $instance_type->getId() . "`, OS alias: `" . 
-	      $instance_type->getOs()->getAlias() . "`, HW profile: `" . $instance_type->getHwProfile()->getName() . "`");
+	  $this->logger->debug( "Creating LXC instance, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
 
 /*
 	  // Create an instance in LXD
@@ -161,8 +169,7 @@ final class LxcOperationHandler
 	  ];
 	  $responce = $this->lxd->containers->create(null, $options);	
 */
-	  $responce = $this->lxd->createInstance($instance_type->getOs()->getAlias(),
-		$instance_type->getHwProfile()->getName());
+	  $responce = $this->lxd->createInstance($os, $hp);
 
 	  # TODO: handle exception
 /*
@@ -212,14 +219,8 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->stopInstance($name);
-
-          $this->logger->debug('Dispatching LXC event message');
-          $this->lxdEventBus->dispatch(new LxcEvent(["event" => "stopped", "name" => $name])); 
-            
-          $this->logger->debug('Dispatching LXC command message');
-          $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name])); 
-                      
+	  $responce = $this->lxd->restartInstance($name);    
+          
 	  break;
           
 	case "start":
@@ -234,9 +235,6 @@ final class LxcOperationHandler
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
 	  $responce = $this->lxd->startInstance($name);
-
-          $this->logger->debug('Dispatching LXC event message');
-          $this->lxdEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name])); 
             
 	  break;
           
@@ -252,10 +250,7 @@ final class LxcOperationHandler
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
 	  $responce = $this->lxd->stopInstance($name);
-
-          $this->logger->debug('Dispatching LXC event message');
-          $this->lxdEventBus->dispatch(new LxcEvent(["event" => "stopped", "name" => $name])); 
-            
+  
 	  break;
 
 	case "delete":
