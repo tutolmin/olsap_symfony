@@ -9,40 +9,34 @@ use Symfony\Component\Console\Input\InputInterface;
 #use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
-use App\Service\LxcManager;
+use App\Service\SessionManager;
 
 #[AsCommand(
     name: 'app:instances:restart',
-    description: 'Restarts an instance',
+    description: 'Restarts certain instance',
 )]
 class InstancesRestartCommand extends Command
 {
     // Doctrine EntityManager
     private $entityManager;
-
     // Instances repo
     private $instancesRepository;
-    private $instanceStatusRepository;
-
-    private $lxd;
+    private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
-    {
+    public function __construct( EntityManagerInterface $entityManager,
+                SessionManager $sessionManager) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->lxd = $lxd;
+        $this->sessionManager = $sessionManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
-
+        $this->sessionManager = $sessionManager;
     }
 
     protected function configure(): void
@@ -70,12 +64,15 @@ class InstancesRestartCommand extends Command
             $io->note(sprintf('Instance "%s" has been found in the database with ID: %d', 
 		$name, $instance->getId()));
 
-	    $io->note(sprintf('Sending "restart" command to LXD for "%s"', $name));
+            if ($instance->getStatus() != "Started" && $instance->getStatus() != "Running") {
 
-	    $this->lxd->restartInstance($name);
+                $io->note(sprintf('Sending "start" command to LXD for "%s"', $name));
 
-	// TODO: verify return code and check the status	
+                $this->sessionManager->startInstance($instance);
+            } else {
 
+                $io->error(sprintf('Instance "%s" is NOT stopped', $name));
+            }
 	} else {
 
             $io->error(sprintf('Instance "%s" was not found', $name));

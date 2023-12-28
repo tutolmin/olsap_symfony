@@ -54,7 +54,8 @@ class InstancesLsCommand extends Command
         if ($instances) {
             foreach ($instances as $instance) {
                 $this->io->note(sprintf('Name: %s, port: %s, status: %s',
-                    $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+                    $instance->getName(), $instance->getAddresses()[0]->getPort(), 
+                        $instance->getStatus()));
             }
         }
     }
@@ -65,7 +66,8 @@ class InstancesLsCommand extends Command
                 $info = $this->lxd->getInstanceInfo($instance->getName());
                 if (!$info) {
                     $this->io->note(sprintf('Name: %s, port: %s, status: %s',
-                        $instance->getName(), $instance->getAddresses()[0]->getPort(), $instance->getStatus()));
+                        $instance->getName(), $instance->getAddresses()[0]->getPort(), 
+                            $instance->getStatus()));
                 }
             }
         }

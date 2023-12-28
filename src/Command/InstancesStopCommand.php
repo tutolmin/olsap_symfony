@@ -9,59 +9,43 @@ use Symfony\Component\Console\Input\InputInterface;
 #use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-#use App\Entity\InstanceStatuses;
 use App\Service\SessionManager;
-#use App\Service\LxcManager;
-#use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
-    name: 'app:instances:stop',
-    description: 'Stops certain instance',
-)]
-class InstancesStopCommand extends Command
-{
+            name: 'app:instances:stop',
+            description: 'Stops certain instance',
+    )]
+class InstancesStopCommand extends Command {
+
     // Doctrine EntityManager
     private $entityManager;
-
     // Instances repo
     private $instancesRepository;
-#    private $instanceStatusRepository;
-
-#    private $lxd;
-#    private $lxdBus;
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager,
-	SessionManager $sessionManager)
-#, LxcManager $lxd, MessageBusInterface $lxdBus)
-    {
+    public function __construct(EntityManagerInterface $entityManager,
+            SessionManager $sessionManager) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-#        $this->lxd = $lxd;
-#        $this->lxdBus = $lxdBus;
         $this->sessionManager = $sessionManager;
 
         // get the Instances repository
-        $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
-#        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+        $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
     }
 
-    protected function configure(): void
-    {
+    protected function configure(): void {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to stop')
+                ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to stop')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $io = new SymfonyStyle($input, $output);
         $name = $input->getArgument('name');
 
@@ -69,36 +53,27 @@ class InstancesStopCommand extends Command
             $io->note(sprintf('You passed an argument: %s', $name));
         }
 
-	// look for a specific instance object
-	$instance = $this->instancesRepository->findOneByName($name);
+        // look for a specific instance object
+        $instance = $this->instancesRepository->findOneByName($name);
 
-	if($instance) {
+        if ($instance) {
 
-            $io->note(sprintf('Instance "%s" has been found in the database', $name));
+            $io->note(sprintf('Instance "%s" has been found in the database with ID: %d',
+                            $name, $instance->getId()));
+            
+            if ($instance->getStatus() != "Stopped" && $instance->getStatus() != "Sleeping") {
 
-	    if($instance->getStatus() != "Stopped") {
+                $io->note(sprintf('Sending "stop" command to LXD for "%s"', $name));
 
-              $io->note(sprintf('Sending "stop" command to LXD for "%s"', $name));
+                $this->sessionManager->stopInstance($instance);
+            } else {
 
-	      $this->sessionManager->stopInstance($instance);
-/*
-	      $this->lxd->stopInstance($name);
-	
-	      // Store item into the DB
-	      $instance->setStatus($this->instanceStatusRepository->findOneByStatus("Stopped"));
-	      $this->entityManager->persist($instance);
-	      $this->entityManager->flush();
-*/
-	    } else { 
-
-              $io->error(sprintf('Instance "%s" is already in "Stopped" state', $name));
-
-	    }
-	
-	} else {
+                $io->error(sprintf('Instance "%s" is NOT started', $name));
+            }
+        } else {
 
             $io->error(sprintf('Instance "%s" was not found', $name));
-	}
+        }
 
         return Command::SUCCESS;
     }

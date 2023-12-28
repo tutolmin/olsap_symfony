@@ -29,6 +29,11 @@ class InstancesCreateCommand extends Command
     private $itRepository;
     private $isRepository;
 
+    private $io;
+    private $os_alias;
+    private $hp_name;
+    private $number;
+    
     // OperatingSystems repo
     private $osRepository;
 
@@ -61,62 +66,58 @@ class InstancesCreateCommand extends Command
         $this
             ->addArgument('profile', InputArgument::REQUIRED, 'Hardware profile name')
             ->addArgument('os', InputArgument::REQUIRED, 'OS alias')
-            ->addArgument('instance_number', InputArgument::OPTIONAL, 'Number of instances to create')
+            ->addArgument('number', InputArgument::OPTIONAL, 'Number of instances to create')
         ;
     }
-
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    
+    private function parseParams($input, $output)
     {
-        $io = new SymfonyStyle($input, $output);
+        $this->io = new SymfonyStyle($input, $output);
 
-	$os_alias = $input->getArgument('os');
-	$hw_name = $input->getArgument('profile');
+        $this->os_alias = $input->getArgument('os');
+        $this->hp_name = $input->getArgument('profile');
 
-        if ($os_alias && $hw_name) {
-            $io->note(sprintf('You passed os alias: %s and profile name: %s', $os_alias, $hw_name));
+        if ($this->os_alias && $this->hp_name) {
+            $this->io->note(sprintf('You passed os alias: %s and profile name: %s', 
+                    $this->os_alias, $this->hp_name));
         }
+        // Check the number of instances requested
+        $this->number = 1;
+        if ($input->getArgument('number')) {
+            $this->io->note(sprintf('You passed number of instances: %s', $this->number));
+            $this->number = intval($input->getArgument('number'));
+        }
+    }
+    
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+
+        $this->parseParams($input, $output);
 
         // look for a specific OperatingSystems object
-        $os = $this->osRepository->findOneByAlias($os_alias);
+        $os = $this->osRepository->findOneByAlias($this->os_alias);
 
         // look for a specific HardwareProfiles object
-        $hp = $this->hpRepository->findOneByName($hw_name);
+        $hp = $this->hpRepository->findOneByName($this->hp_name);
 
-	// Both OS and HW profile objects found
-	if ($os && $hp) {
-
-            // look for a specific instance type object
-            $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
-
-            // Instance type found
-            if ($instance_type) {
-
-                // Check the number of instances requested
-                $number = 1;
-                if ($input->getArgument('instance_number')) {
-
-                    $number = intval($input->getArgument('instance_number'));
-                }
-                $io->note(sprintf('We are going to create %d instances', $number));
-
-                for ($i = 0; $i < $number; $i++) {
-
-                    // Call sessionManager manager method
-                    $instance = $this->sessionManager->createInstance($instance_type);
-
-                    $io->note('Instance `' . $instance . '` was created.');
-
-                    /*
-                      $this->bus->dispatch(new LxcOperation(["command" => "create",
-                      "environment_id" => null, "instance_id" => null,
-                      "instance_type_id" => $instance_type->getId()]));
-                     */
-                }
-            } else {
-                $io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
-            }
+        // Both OS and HW profile objects found
+        if (!$os || !$hp) {
+            $this->io->warning('OS alias or HW profile name is invalid. Check your input!');
+            return Command::FAILURE;
+        }
+        
+        // look for a specific instance type object
+        $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
+        if (!$instance_type) {
+            $this->io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
+            return Command::FAILURE;
         } else {
-            $io->warning('OS alias or HW profile name is invalid. Check your input!');
+            $this->io->note(sprintf('We are going to create %d instances', $this->number));
+
+            for ($i = 0; $i < $this->number; $i++) {
+                $this->io->note(sprintf('Creating new LXC object(s): %s %s',
+                                $this->os_alias, $this->hp_name));
+                $this->sessionManager->createInstance($instance_type);
+            }
         }
 
         return Command::SUCCESS;

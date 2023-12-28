@@ -20,6 +20,8 @@ use App\Entity\EnvironmentStatuses;
 )]
 class EnvironmentsLsCommand extends Command
 {
+    private $io;
+
     // Doctrine EntityManager
     private $entityManager;
 
@@ -43,42 +45,39 @@ class EnvironmentsLsCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $io = new SymfonyStyle($input, $output);
+    private function listItems(array $environments): void {
+        if ($environments) {
+            foreach ($environments as $environment) {
+                $this->io->note(sprintf('Environment: %s', $environment));
+            }
+        }
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+        $this->io = new SymfonyStyle($input, $output);
         $status = $input->getArgument('status');
 
-	if ($status) {
+        if ($status) {
 
-            $io->note(sprintf('You passed an argument: %s', $status));
+            $this->io->note(sprintf('You passed an argument: %s', $status));
             $environment_status = $this->environmentStatusRepository->findOneByStatus($status);
 
-	    // Check if the specified environment status exists
-	    if($environment_status) {
+            // Check if the specified instance status exists
+            if (!$environment_status) {
+                $this->io->warning(sprintf('Status "%s" does NOT exist. Check your input!', $status));
+                return Command::FAILURE;
+            }
+            $this->io->note(sprintf('Status "%s" exists, filter applied', $status));
 
-		$io->note(sprintf('Status "%s" exists, filter applied', $status));
-
-		// look for a specific environment type object
-		$environments = $this->environmentRepository->findByStatus($environment_status->getId());
-
-	    } else {
-
-		$io->warning(sprintf('Status "%s" does NOT exist, filter will NOT be applied', $status));
-
-		// look for a specific environment type object
-		$environments = $this->environmentRepository->findAll();
-	    }
-
+            // look for a specific environment type object
+            $environments = $this->environmentRepository->findByStatus($environment_status->getId());
         } else {
 
             // look for a specific environment type object
             $environments = $this->environmentRepository->findAll();
-	}
+        }
 
-	foreach( $environments as $environment) {
-
-            $io->note(sprintf('Environment: %s', $environment));
-	}
+        $this->listItems($environments);
 
         return Command::SUCCESS;
     }

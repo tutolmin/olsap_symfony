@@ -24,9 +24,14 @@ class LxcCreateCommand extends Command {
     private $entityManager;
     private $lxd;
     private $lxdOperationBus;
+    private $io;
+    private $os_alias;
+    private $hp_name;
+    private $number;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(EntityManagerInterface $entityManager, LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
+    public function __construct(EntityManagerInterface $entityManager, 
+            LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
@@ -44,30 +49,40 @@ class LxcCreateCommand extends Command {
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int {
-        $io = new SymfonyStyle($input, $output);
+    private function parseParams($input, $output)
+    {
+        $this->io = new SymfonyStyle($input, $output);
 
-        $os_alias = $input->getArgument('os');
-        $hp_name = $input->getArgument('profile');
+        $this->os_alias = $input->getArgument('os');
+        $this->hp_name = $input->getArgument('profile');
 
-        if ($os_alias && $hp_name) {
-            $io->note(sprintf('You passed os alias: %s and profile name: %s', $os_alias, $hp_name));
+        if ($this->os_alias && $this->hp_name) {
+            $this->io->note(sprintf('You passed os alias: %s and profile name: %s', 
+                    $this->os_alias, $this->hp_name));
         }
         // Check the number of instances requested
-        $number = 1;
+        $this->number = 1;
         if ($input->getArgument('number')) {
-            $number = intval($input->getArgument('number'));
+            $this->io->note(sprintf('You passed number of instances: %s', $this->number));
+            $this->number = intval($input->getArgument('number'));
         }
+    }
 
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+
+        $this->parseParams($input, $output);
+        
         if ($input->getOption('async')) {
-            $io->note(sprintf('Dispatching LXC command message(s)'));
-            for ($i = 0; $i < $number; $i++) {
-                $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create", "os" => $os_alias, "hp" => $hp_name]));
+            $this->io->note(sprintf('Dispatching LXC command message(s)'));
+            for ($i = 0; $i < $this->number; $i++) {
+                $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create", 
+                    "os" => $this->os_alias, "hp" => $this->hp_name]));
             }
         } else {
-            $io->note(sprintf('Creating new LXC object(s): %s %s', $os_alias, $hp_name));
-            for ($i = 0; $i < $number; $i++) {
-                $this->lxd->createInstance($os_alias, $hp_name);
+            $this->io->note(sprintf('Creating new LXC object(s): %s %s', 
+                    $this->os_alias, $this->hp_name));
+            for ($i = 0; $i < $this->number; $i++) {
+                $this->lxd->createInstance($this->os_alias, $this->hp_name);
             }
         }
 

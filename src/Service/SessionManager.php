@@ -35,13 +35,14 @@ class SessionManager
     private $environmentStatusesRepository;
 
     private $sessionBus;
-    private $lxdBus;
+    private $lxdOperationBus;
 
     private $lxd;
     private $awx;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, MessageBusInterface $sessionBus, MessageBusInterface $lxdBus)
+	LxcManager $lxd, AwxManager $awx, MessageBusInterface $sessionBus, 
+            MessageBusInterface $lxdOperationBus)
 
     {
         $this->logger = $logger;
@@ -50,7 +51,7 @@ class SessionManager
         $this->entityManager = $em;
 	$this->lxd = $lxd;
 	$this->sessionBus = $sessionBus;
-	$this->lxdBus = $lxdBus;
+	$this->lxdOperationBus = $lxdOperationBus;
 	$this->awx = $awx;
 
         // get the repositories
@@ -63,46 +64,14 @@ class SessionManager
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
     }
 
-//    public function createInstance(InstanceTypes $it, Environments $env = null): Instances
-    public function createInstance(InstanceTypes $it): Instances
+    public function createInstance(InstanceTypes $instance_type)
     {
         $this->logger->debug(__METHOD__);
 
-	// TODO: check input parameters
-
-	// Find an address item which is NOT linked to any instance
-	$address = $this->addressRepository->findOneByInstance(null);
-	
-	// TODO: Handle situation when no such addresses found
-
-	$this->logger->debug( "Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
-
-	$name = $this->lxd->createInstance($it->getOs()->getAlias(), $it->getHwProfile()->getName(), $address->getMac());
-
-	$this->logger->debug('Instance `' . $name . '` was created.');
-
-	$instance = new Instances;
-	$instance->setName($name);
-
-	// It is New/Started by sefault
-        $instance_status = $this->instanceStatusesRepository->findOneByStatus("Started");
-        $instance->setStatus($instance_status);
-//	Can not use this function yet - entity is absent in the DB
-//	$instance->setInstanceStatus("Bound");
-
-        $instance->setInstanceType($it);
-//	$now = new \DateTimeImmutable('NOW');
-//	$instance->setCreatedAt($now);
-
-        $address->setInstance($instance);
-
-        // Store item into the DB
-        $this->entityManager->persist($instance);
-        $this->entityManager->flush();
-
-        return $instance;
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
+            "os" => $instance_type->getOs()->getAlias(), 
+            "hp" => $instance_type->getHwProfile()->getName()]));
     }
-
 
 
     // Bind the Instance
@@ -131,7 +100,7 @@ class SessionManager
                 $this->logger->debug('Suitable stopped instance has been found: ' . $instance);
 
                 // stop instance for the time being
-                $this->startInstance($instance);
+//                $this->startInstance($instance);
 
                 // Create new Instance
             } else {
@@ -167,7 +136,7 @@ class SessionManager
 //	$this->setInstanceStatus($instance, "Started");
 
 	// stop instance for the time being
-	$this->stopInstance($instance);
+//	$this->stopInstance($instance);
 
 	return true;
     }
@@ -231,7 +200,7 @@ class SessionManager
 
 
     public function setInstanceStatus(Instances $instance, $status_str): bool {
-        
+
         $this->logger->debug(__METHOD__);
 
         $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
@@ -239,6 +208,16 @@ class SessionManager
         if (!$status) {
             $this->logger->debug('No such instance status: ' . $status_str);
             return false;
+        }
+
+        // Special statuses for bound instances
+        $envs = $instance->getEnvs();
+        if ($envs) {
+            if ($status_str == "Started") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Running");
+            } elseif ($status_str == "Stopped") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
+            }
         }
 
         $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);
@@ -375,51 +354,26 @@ class SessionManager
 	return true;	
     }
 
-
-
-    public function startInstance(Instances $instance)
-    {
+    public function startInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-	$this->lxdBus->dispatch(new LxcOperation(["command" => "start", 
-	  "instance_id" => $instance->getId()]));
-
-	// Select which status to apply
-	switch($instance->getStatus()) {
-
-	case "Sleeping":	
-	  $this->setInstanceStatus($instance, "Running");
-	  break;
-
-	default:
-	  $this->setInstanceStatus($instance, "Started");
-	  break;
-	}
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start",
+                    "name" => $instance->getName()]));
     }
-
-
-
-    public function stopInstance(Instances $instance)
-    {
+    
+    public function restartInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-	$this->lxdBus->dispatch(new LxcOperation(["command" => "stop", 
-	  "instance_id" => $instance->getId()]));
-
-	// Select which status to apply
-	switch($instance->getStatus()) {
-
-	case "Running":	
-	  $this->setInstanceStatus($instance, "Sleeping");
-	  break;
-
-	default:
-	  $this->setInstanceStatus($instance, "Stopped");
-	  break;
-	}
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart",
+                    "name" => $instance->getName()]));
     }
 
+    public function stopInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
 
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop",
+                    "name" => $instance->getName()]));
+    }
 
     public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments
     {

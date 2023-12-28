@@ -160,52 +160,8 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Creating LXC instance, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-
-/*
-	  // Create an instance in LXD
-	  $options = [
-	      'alias'  => $instance_type->getOs()->getAlias(),
-	      'profiles' => [$instance_type->getHwProfile()->getName() ]
-	  ];
-	  $responce = $this->lxd->containers->create(null, $options);	
-*/
 	  $responce = $this->lxd->createInstance($os, $hp);
 
-	  # TODO: handle exception
-/*
-	  // Get the name for the reply
-	  $name=explode( "/", $responce["resources"]["containers"][0]);
-
-	  $instance = new Instances;
-	  $instance->setName($name[3]);
-	  $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
-	  $instance->setStatus($instance_status);
-	  $instance->setInstanceType($instance_type);
-	  $now = new \DateTimeImmutable('NOW');
-	  $instance->setCreatedAt($now);
-
-	  // Store item into the DB
-	  $this->entityManager->persist($instance);
-	  $this->entityManager->flush();
-
-	  // Created instance for particular Environment
-	  if($environment) {
-
-	    // Bind an instance to an environment
-	    $environment->setInstance($instance);
-
-	    // Store item into the DB
-	    $this->entityManager->persist($environment);
-	    $this->entityManager->flush();
-	  }
-
-	  # TODO: Handle exception
-
-	  // Send message to start a container
-	  $this->bus->dispatch(new LxcOperation(["command" => "start",
-	    "environment_id" => null, "instance_id" => $instance->getId(),
-	    "instance_type_id" => null]));
-*/
 	  break;
           
 	case "restart":

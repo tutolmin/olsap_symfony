@@ -298,6 +298,7 @@ class LxcManager
         
         try {
             $container = $this->lxd->containers->info($name);  
+            $this->logger->debug( "Instance `" . $name . "` status: ".$container['status']);
             return $container;
         } catch (NotFoundException $exc) {
             $this->logger->debug( "Instance `" . $name . "` does not exist!");
