@@ -4,9 +4,10 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
+//use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
+//use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -53,12 +54,19 @@ class InstancesSyncCommand extends Command
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
+        $io = new SymfonyStyle($input, $output);
+
         // look for a specific instance type object
         $instances = $this->instanceRepository->findAll();
 
         foreach ($instances as $instance) {
             $info = $this->lxd->getInstanceInfo($instance->getName());
-            $this->session->setInstanceStatus($instance, $info['status']);
+            if ($info) {
+                $this->session->setInstanceStatus($instance, $info['status']);
+            } else {
+                $io->error(sprintf('Instance "%s" was not found in LXD, run app:instances:ls --orphans',
+                                $instance->getName()));
+            }
         }
 
         return Command::SUCCESS;

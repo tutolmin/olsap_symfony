@@ -273,7 +273,7 @@ class LxcManager
 	return false;
     }
 
-    public function deleteAllInstances($force)//: ?InstanceTypes
+    public function deleteAllInstances($force=false)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
