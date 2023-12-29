@@ -39,6 +39,7 @@ class LxcManager
     // InstanceTypes repo
     private $itRepository;
     private $instanceStatusRepository;
+    private $instanceRepository;
 
     // OperatingSystems repo
     private $osRepository;
@@ -60,6 +61,7 @@ class LxcManager
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
+        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
 
         // get the OperatingSystems repository
         $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
@@ -105,9 +107,8 @@ class LxcManager
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
     }
 
+    private function initInstance($os_alias, $hp_name) {
 
-    public function createInstance($os_alias, $hp_name)//: ?InstanceTypes
-    {  
         $this->logger->debug(__METHOD__);
 
         // look for a specific OperatingSystems object
@@ -116,66 +117,88 @@ class LxcManager
         // look for a specific HardwareProfiles object
         $hp = $this->hpRepository->findOneByName($hp_name);
 
-	// Both OS and HW profile objects found
-	if (!$os || !$hp) {
-            $this->logger->debug( "OS alias or HW profile name is invalid. Check your input!");
+        // Both OS and HW profile objects found
+        if (!$os || !$hp) {
+            $this->logger->debug("OS alias or HW profile name is invalid. Check your input!");
             return null;
-        }   
-        
+        }
+
         // look for the instance type
         $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
 
-	// Both OS and HW profile objects found
-	if (!$instance_type) {
-            $this->logger->debug( "Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command");
+        // Both OS and HW profile objects found
+        if (!$instance_type) {
+            $this->logger->debug("Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command");
             return null;
-        }   
+        }
 
         $instance = new Instances;
 
-	// It is New/Started by sefault
-        $instance_status = $this->instanceStatusRepository->findOneByStatus("Stopped");
+        // It is New/Started by sefault
+        $instance_status = $this->instanceStatusRepository->findOneByStatus("New");
         $instance->setStatus($instance_status);
         $instance->setInstanceType($instance_type);
-        
-        $this->logger->debug( "Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
+        $instance->setName(bin2hex(random_bytes(10)));
+        $this->logger->debug("Generated Instance name: " . $instance->getName());
+        $this->entityManager->persist($instance);
 
         // Find an address item which is NOT linked to any instance
         $address = $this->addressRepository->findOneByInstance(null);
         $address->setInstance($instance);
 
         // TODO: catch no address available exception
-
         // TODO: same address can be allocated to multiple new instances on a race condidion
-        
-        $this->logger->debug( "Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
 
-	// Create an instance in LXD
-	$options = [
-	    'alias'  => $os_alias,
-	    'profiles' => [$hp_name],
+        $this->logger->debug("Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
+        $this->entityManager->flush();
+
+        return $instance->getId();
+    }
+
+    public function createInstance($os_alias, $hp_name) {//: ?InstanceTypes
+        $this->logger->debug(__METHOD__);
+
+        $this->logger->debug("Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
+
+        $instance_id = $this->initInstance($os_alias, $hp_name);
+        $instance = $this->instanceRepository->findOneById($instance_id);
+
+        if (!$instance) {
+            $this->logger->debug("Instance creation failure");
+            return false;
+        }
+
+//        $addresses = $instance->getAddresses();
+        $address = $this->addressRepository->findOneByInstance($instance);
+
+ //       $this->logger->debug($address->getMac());
+//        $this->logger->debug("Address: ".$addresses->current()->getMac());
+
+        // Create an instance in LXD
+        $options = [
+            'alias' => $os_alias,
+            'profiles' => [$hp_name],
             "config" => [
-               "volatile.eth0.hwaddr" => $address->getMac(),
-	    ],
-	];
-	$responce = $this->lxd->containers->create(null, $options, $this->wait);
+                "volatile.eth0.hwaddr" => $address->getMac()
+            ],
+        ];
+        $responce = $this->lxd->containers->create(null, $options, $this->wait);
 
         //Catch exception
-        
-	// Get the name for the reply
-	$name=explode( "/", $responce["resources"]["containers"][0]);
+        // Get the name for the reply
+        $name = explode("/", $responce["resources"]["containers"][0]);
 
-        $this->logger->debug("Created instance: ".$name[3]);
+        $this->logger->debug("Created instance: " . $name[3]);
 
         $instance->setName($name[3]);
 
         // Store item into the DB
-        $this->entityManager->persist($instance);
+//        $this->entityManager->persist($instance);
         $this->entityManager->flush();
 
         $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
-	return $name[3];
+        return $name[3];
     }
 
     public function startInstance($name, $force = false) {//: ?InstanceTypes
@@ -235,54 +258,68 @@ class LxcManager
         return null;
     }
 
-    public function deleteInstance($name, $force=false)//: ?InstanceTypes
-    {  
+    public function deleteInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug( "Deleting LXC instance: `" . $name . "`");
+        $this->logger->debug("Deleting LXC instance: `" . $name . "`");
 
-	$info = $this->getInstanceInfo($name);
+        // look for a specific Instance object
+        $instance = $this->instanceRepository->findOneByName($name);
 
-        if ($info) {
-            
-	if($info["status"] == "Stopped") {
-
-	  $this->lxd->containers->remove($name, $this->wait);
-	  return true;
-
-	} else {
-
-	  if($force) {
-
-	    // Stop it first
-	    $this->stopInstance($name, $force);
-	    $this->lxd->containers->remove($name, $this->wait);
-	    return true;
-
-	  } else {
-
-            $this->logger->debug( "Instance `" . $name . "` is " . $info["status"]);
-	  }
-	}
-//        } else {
-//            $this->logger->debug( "Instance `" . $name ."` does not exist");
+        if (!$instance) {
+            $this->logger->debug("Instance NOT found");
+            return false;
         }
 
-	//TODO: Handle exception
+        if ($instance->getStatus()->getStatus() != "Stopped" &&
+                $instance->getStatus()->getStatus() != "Sleeping") {
+            $this->logger->debug("Instance is NOT stopped");
+            if (!$force) {
+                return false;
+            } else {
+                $this->logger->debug("Force opiton specified");
+            }
+        }
 
-	return false;
+        // Unbind an instance from env so it can be used again
+        $instance->setEnvs(null);
+
+        // Fetch all linked Addresses and release them
+        $addresses = $instance->getAddresses();
+        foreach ($addresses as $address) {
+            $address->setInstance(null);
+            $this->entityManager->flush();
+        }
+
+        // Delete item from the DB
+        $this->entityManager->remove($instance);
+        $this->entityManager->flush();
+
+        try {
+            $this->lxd->containers->remove($name, $this->wait);
+        } catch (NotFoundException $exc) {
+            $this->logger->debug("Object `" . $name . "` does not exist!");
+            $this->logger->debug($exc->getTraceAsString());
+        }
+
+        return true;
     }
 
-    public function deleteAllInstances($force=false)//: ?InstanceTypes
-    {  
+    public function deleteAllInstances($force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-	$instances = $this->getInstanceList();
+//        $instances = $this->getInstanceList();
+        $instances = $this->instanceRepository->findAll();
 
-	$result = true;
+        $result = true;
 
-	foreach ($instances as $instance) {
-            if (!$this->deleteInstance($this->getInstanceInfo($instance)["name"], $force)) {
+        if(!$instances)
+        {
+            $this->logger->debug("No instances to delete");   
+        }
+        
+        foreach ($instances as $instance) {
+            if (!$this->deleteInstance($instance->getName(), $force)) {
                 $result = false;
             }
         }

@@ -129,18 +129,79 @@ class SessionManager
 	$instance->setEnvs(null);
 
 	// Store item into the DB
-//	$this->entityManager->persist($session);
 	$this->entityManager->flush();
 
-	// Update Instance status
-//	$this->setInstanceStatus($instance, "Started");
-
 	// stop instance for the time being
-//	$this->stopInstance($instance);
+	$this->stopInstance($instance);
 
 	return true;
     }
 
+    public function startInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start",
+                    "name" => $instance->getName()]));
+    }
+    
+    public function restartInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart",
+                    "name" => $instance->getName()]));
+    }
+
+    public function stopInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop",
+                    "name" => $instance->getName()]));
+    }
+
+    public function deleteInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "delete",
+                    "name" => $instance->getName()]));
+    }
+    
+    public function deleteAllInstances() {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "wipe"]));
+    }
+
+    public function setInstanceStatus(Instances $instance, $status_str): bool {
+
+        $this->logger->debug(__METHOD__);
+
+        $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
+
+        if (!$status) {
+            $this->logger->debug('No such instance status: ' . $status_str);
+            return false;
+        }
+
+        // Special statuses for bound instances
+        $envs = $instance->getEnvs();
+        if ($envs) {
+            if ($status_str == "Started") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Running");
+            } elseif ($status_str == "Stopped") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
+            }
+        }
+
+        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);
+
+        $instance->setStatus($status);
+
+        // Store item into the DB
+//	  $this->entityManager->persist($instance);
+        $this->entityManager->flush();
+
+        return true;
+    }
 
 
     public function setSessionStatus(Sessions $session, $status_str): bool
@@ -197,39 +258,6 @@ class SessionManager
 	}
     }
 
-
-
-    public function setInstanceStatus(Instances $instance, $status_str): bool {
-
-        $this->logger->debug(__METHOD__);
-
-        $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
-
-        if (!$status) {
-            $this->logger->debug('No such instance status: ' . $status_str);
-            return false;
-        }
-
-        // Special statuses for bound instances
-        $envs = $instance->getEnvs();
-        if ($envs) {
-            if ($status_str == "Started") {
-                $status = $this->instanceStatusesRepository->findOneByStatus("Running");
-            } elseif ($status_str == "Stopped") {
-                $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
-            }
-        }
-
-        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);
-
-        $instance->setStatus($status);
-
-        // Store item into the DB
-//	  $this->entityManager->persist($instance);
-        $this->entityManager->flush();
-
-        return true;
-    }
 
     public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
     {
@@ -352,27 +380,6 @@ class SessionManager
 	}
 
 	return true;	
-    }
-
-    public function startInstance(Instances $instance) {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start",
-                    "name" => $instance->getName()]));
-    }
-    
-    public function restartInstance(Instances $instance) {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart",
-                    "name" => $instance->getName()]));
-    }
-
-    public function stopInstance(Instances $instance) {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop",
-                    "name" => $instance->getName()]));
     }
 
     public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments

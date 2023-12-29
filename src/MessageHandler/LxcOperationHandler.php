@@ -210,29 +210,22 @@ final class LxcOperationHandler
 	  break;
 
 	case "delete":
-
-	  // REQUIRED: InstanceId
-	  if(!$instance) {
-            $this->logger->error( "Instance ID is required for `" . $message->getCommand() . "` LXD command");
+            
+	  // REQUIRED: name
+	  if(!$name) {
+            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
 	    break;
 	  }
 
-	  # TODO: Check state: can not delete running container unless forced
+	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+	  $responce = $this->lxd->deleteInstance($name);	
 
-	  $this->logger->debug( "Deleting LXC instance: `" . $instance->getName() . "`");
+	  break;
 
-//	  $responce = $this->lxd->containers->remove($instance->getName());	
-	  $responce = $this->lxd->deleteInstance($instance->getName());	
+	case "wipe":
 
-	  # TODO: handle exception
-
-          $instance = $this->instanceRepository->findOneById($instance);
-
-	  // Store item into the DB
-	  $this->entityManager->remove($instance);
-	  $this->entityManager->flush();
-
-	  # TODO: Handle exception
+	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
+	  $responce = $this->lxd->deleteAllInstances(true);	
 
 	  break;
 

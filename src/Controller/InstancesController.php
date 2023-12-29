@@ -148,13 +148,12 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_instances_delete', methods: ['POST'])]
-    public function delete(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    public function delete(Request $request, Instances $instance): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$instance->getId(), $request->request->get('_token'))) {
-            $this->lxcManager->deleteInstance($instance->getName(),true);
-            $instancesRepository->remove($instance, true);
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "delete", "name" => $instance->getName()]));   
         }
 
         return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);

@@ -13,6 +13,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
 use App\Service\LxcManager;
+use App\Message\LxcOperation;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Service\SessionManager;
 
 #[AsCommand(
     name: 'app:instances:delete',
@@ -25,17 +28,26 @@ class InstancesDeleteCommand extends Command
 
     // Instances repo
     private $instancesRepository;
+    private $sessionManager;
 
     private $lxd;
+    private $lxdOperationBus;
+    private $io;
+    private $name;
+    private $force;
+    private $async;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxd, 
+            MessageBusInterface $lxdOperationBus, SessionManager $sessionManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
         $this->lxd = $lxd;
+        $this->lxdOperationBus = $lxdOperationBus;
+        $this->sessionManager = $sessionManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
@@ -49,75 +61,34 @@ class InstancesDeleteCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $io = new SymfonyStyle($input, $output);
-        $name = $input->getArgument('name');
-        $force = $input->getOption('force');
+    private function parseParams($input, $output) {
+        $this->io = new SymfonyStyle($input, $output);
+        $this->name = $input->getArgument('name');
+        $this->force = $input->getOption('force');
 
-        if ($name) {
-            $io->note(sprintf('You passed an argument: %s', $name));
+        if ($this->name) {
+            $this->io->note(sprintf('You passed an argument: %s', $this->name));
         }
 
-        if ($force) {
-            $io->warning('You passed a force option');
+        if ($this->force) {
+            $this->io->warning('You passed a force option');
         }
+    }
+    
+    
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+        $this->parseParams($input, $output);
 
-        if ($name == "ALL") {
-
-	  $instances = $this->instancesRepository->findAll();
-	  foreach($instances as $instance) {
-
-	    $io->note(sprintf('Deleting "%s" from the database', $instance->getName()));
-
-	    $this->lxd->deleteInstance($instance->getName(), $force);
-
-            // Fetch all linked Addresses and release them
-            $addresses = $instance->getAddresses();
-            foreach ($addresses as $address) {
-                $address->setInstance(null);
-                $this->entityManager->flush();
+        if ($this->name == "ALL") {
+            $this->sessionManager->deleteAllInstances();
+        } else {
+            // look for a specific instance object
+            $instance = $this->instancesRepository->findOneByName($this->name);
+            if (!$instance) {
+                $this->io->error(sprintf('Instance "%s" was not found', $this->name));
             }
-
-            // Delete item from the DB
-            $this->entityManager->remove($instance);
-            $this->entityManager->flush();
-
-            $io->note('Success!');
-          }
- 
-	} else { 
-
-	  // look for a specific instance object
-	  $instance = $this->instancesRepository->findOneByName($name);
-
-	  // Check if instance is present in the DB
-	  if($instance) {
-
-                $io->note(sprintf('Deleting "%s" from the database', $name));
-
-                // Delete corresponding LXC instance
-                $this->lxd->deleteInstance($name, $force);
-
-                // Fetch all linked Addresses and release them
-                $addresses = $instance->getAddresses();
-                foreach ($addresses as $address) {
-
-                    $address->setInstance(null);
-                    $this->entityManager->flush();
-                }
-
-                // Delete item from the DB
-                $this->entityManager->remove($instance);
-                $this->entityManager->flush();
-
-                $io->note('Success!');
-
-            } else {
-
-	      $io->error(sprintf('Instance "%s" was not found', $name));
-	  }
-	}
+            $this->sessionManager->deleteInstance($instance, $this->force);
+        }
 
         return Command::SUCCESS;
     }

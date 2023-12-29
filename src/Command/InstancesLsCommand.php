@@ -53,9 +53,15 @@ class InstancesLsCommand extends Command
     private function listItems(array $instances): void {
         if ($instances) {
             foreach ($instances as $instance) {
-                $this->io->note(sprintf('Name: %s, port: %s, status: %s',
-                    $instance->getName(), $instance->getAddresses()[0]->getPort(), 
-                        $instance->getStatus()));
+                $addresses = $instance->getAddresses();
+                /*
+                  $addresses->forAll(function ($key, $value) {
+                  $this->io->note(sprintf('address(es): %s %s', $addresses , $value->getMac()));
+                  });
+                 */
+                $this->io->note(sprintf('Name: %s, port: %s, status: %s, MAC: %s',
+                                $instance->getName(), $instance->getAddresses()[0]->getPort(),
+                                $instance->getStatus(), $addresses->current()->getMac()));
             }
         }
     }

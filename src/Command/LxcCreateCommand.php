@@ -71,18 +71,20 @@ class LxcCreateCommand extends Command {
     protected function execute(InputInterface $input, OutputInterface $output): int {
 
         $this->parseParams($input, $output);
-        
+
         if ($input->getOption('async')) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
             for ($i = 0; $i < $this->number; $i++) {
-                $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create", 
-                    "os" => $this->os_alias, "hp" => $this->hp_name]));
+                $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
+                            "os" => $this->os_alias, "hp" => $this->hp_name]));
             }
         } else {
-            $this->io->note(sprintf('Creating new LXC object(s): %s %s', 
-                    $this->os_alias, $this->hp_name));
+            $this->io->note(sprintf('Creating new LXC object(s): %s %s',
+                            $this->os_alias, $this->hp_name));
             for ($i = 0; $i < $this->number; $i++) {
-                $this->lxd->createInstance($this->os_alias, $this->hp_name);
+                if ($this->lxd->createInstance($this->os_alias, $this->hp_name)) {
+                    $this->io->note('Success!');
+                }
             }
         }
 

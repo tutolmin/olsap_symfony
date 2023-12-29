@@ -73,6 +73,10 @@ class LxcLsCommand extends Command {
         // Use Lxc service method
         $instances = $this->lxd->getInstanceList();
 
+        if (!$instances) {
+            return Command::FAILURE;
+        }
+
         if ($input->getOption('orphans')) {
             $this->listOrphanItems($instances);
         } else {
