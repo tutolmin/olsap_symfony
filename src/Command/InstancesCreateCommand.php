@@ -27,7 +27,6 @@ class InstancesCreateCommand extends Command
 
     // InstanceTypes repo
     private $itRepository;
-    private $isRepository;
 
     private $io;
     private $os_alias;
@@ -114,7 +113,7 @@ class InstancesCreateCommand extends Command
             $this->io->note(sprintf('We are going to create %d instances', $this->number));
 
             for ($i = 0; $i < $this->number; $i++) {
-                $this->io->note(sprintf('Creating new LXC object(s): %s %s',
+                $this->io->note(sprintf('Creating new Instances: %s %s',
                                 $this->os_alias, $this->hp_name));
                 $this->sessionManager->createInstance($instance_type);
             }

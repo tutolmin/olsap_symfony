@@ -155,10 +155,10 @@ class LxcManager
         return $instance->getId();
     }
 
-    public function createInstance($os_alias, $hp_name) {//: ?InstanceTypes
+    public function createObject($os_alias, $hp_name) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Creating LXC instance: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
+        $this->logger->debug("Creating LXC object: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
 
         $instance_id = $this->initInstance($os_alias, $hp_name);
         $instance = $this->instanceRepository->findOneById($instance_id);
@@ -174,7 +174,7 @@ class LxcManager
  //       $this->logger->debug($address->getMac());
 //        $this->logger->debug("Address: ".$addresses->current()->getMac());
 
-        // Create an instance in LXD
+        // Create an object in LXC
         $options = [
             'alias' => $os_alias,
             'profiles' => [$hp_name],
@@ -188,7 +188,7 @@ class LxcManager
         // Get the name for the reply
         $name = explode("/", $responce["resources"]["containers"][0]);
 
-        $this->logger->debug("Created instance: " . $name[3]);
+        $this->logger->debug("Created object: " . $name[3]);
 
         $instance->setName($name[3]);
 
@@ -201,12 +201,12 @@ class LxcManager
         return $name[3];
     }
 
-    public function startInstance($name, $force = false) {//: ?InstanceTypes
+    public function startObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Starting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        $this->logger->debug("Starting LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-        $info = $this->getInstanceInfo($name);
+        $info = $this->getObjectInfo($name);
 
         if ($info && $info["status"] != "Started") {
             $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
@@ -220,12 +220,12 @@ class LxcManager
         return null;
     }
 
-    public function stopInstance($name, $force = false) {//: ?InstanceTypes
+    public function stopObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Stopping LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        $this->logger->debug("Stopping LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-        $info = $this->getInstanceInfo($name);
+        $info = $this->getObjectInfo($name);
 
         if ($info && $info["status"] != "Stopped") {
             $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
@@ -239,12 +239,12 @@ class LxcManager
         return null;
     }
 
-    public function restartInstance($name, $force = false) {//: ?InstanceTypes
+    public function restartObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Restarting LXC instance: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        $this->logger->debug("Restarting LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
 
-        $info = $this->getInstanceInfo($name);
+        $info = $this->getObjectInfo($name);
 
         if ($info) {
             $responce = $this->lxd->containers->restart($name, $this->timeout, $force, false, $this->wait);
@@ -258,12 +258,72 @@ class LxcManager
         return null;
     }
 
+    public function deleteObject($name, $force = false) {//: ?InstanceTypes
+        $this->logger->debug(__METHOD__);
+
+        if($this->wipeInstance($name, $force))
+        {
+            $this->logger->debug("Instance ".$name." was deleted successfully");
+        } else {
+            $this->logger->debug("Instance ".$name." deletion failure");
+        }
+                
+        if($this->wipeObject($name, $force))
+        {
+            $this->logger->debug("Object ".$name." was deleted successfully");
+        } else {
+            $this->logger->debug("Object ".$name." deletion failure");
+        }
+        
+        return true;
+    }
+
     public function deleteInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Deleting LXC instance: `" . $name . "`");
+        $this->deleteObject($name, $force);
 
-        // look for a specific Instance object
+        return true;
+    }
+
+    private function wipeObject($name, $force = false) {
+        $this->logger->debug("Deleting LXC object: `" . $name . "`");
+
+        $object = $this->getObjectInfo($name);
+
+        if (!$object) {
+            $this->logger->debug("Object NOT found");
+            return false;
+        }     
+
+        if ($object['status'] != "Stopped") {
+            $this->logger->debug("Object is NOT stopped");
+/*
+ * https://documentation.ubuntu.com/lxd/en/latest/api/#/
+ * 
+ * DELETE instance API does NOT have force option
+ * 
+            if (!$force) {
+                return false;
+            } else {
+                $this->logger->debug("Force opiton specified");
+            }
+ * 
+ */
+        }
+        
+        try {
+            $this->lxd->containers->remove($name, $this->wait);
+        } catch (NotFoundException $exc) {
+            $this->logger->debug("LXC object `" . $name . "` does not exist!");
+            $this->logger->debug($exc->getTraceAsString());
+        }
+        return true;
+    }
+
+    private function wipeInstance($name, $force = false)
+    {
+        // look for a specific Instance 
         $instance = $this->instanceRepository->findOneByName($name);
 
         if (!$instance) {
@@ -288,36 +348,48 @@ class LxcManager
         $addresses = $instance->getAddresses();
         foreach ($addresses as $address) {
             $address->setInstance(null);
-            $this->entityManager->flush();
+//            $this->entityManager->flush();
         }
 
         // Delete item from the DB
         $this->entityManager->remove($instance);
         $this->entityManager->flush();
-
-        try {
-            $this->lxd->containers->remove($name, $this->wait);
-        } catch (NotFoundException $exc) {
-            $this->logger->debug("Object `" . $name . "` does not exist!");
-            $this->logger->debug($exc->getTraceAsString());
-        }
-
+        
         return true;
     }
-
-    public function deleteAllInstances($force = false) {//: ?InstanceTypes
+    
+    public function deleteAllObjects($force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-//        $instances = $this->getInstanceList();
-        $instances = $this->instanceRepository->findAll();
+        $objects = $this->getObjectList();
 
         $result = true;
 
-        if(!$instances)
-        {
-            $this->logger->debug("No instances to delete");   
+        if (!$objects) {
+            $this->logger->debug("No objects to delete");
         }
-        
+
+        foreach ($objects as $object) {
+            $info = $this->getObjectInfo($object);
+            if (!$this->deleteObject($info['name'], $force)) {
+                $result = false;
+            }
+        }
+
+        return $result;
+    }    
+    
+    public function deleteAllInstances($force = false) {//: ?InstanceTypes
+        $this->logger->debug(__METHOD__);
+
+        $instances = $this->getInstanceList();
+
+        $result = true;
+
+        if (!$instances) {
+            $this->logger->debug("No instances to delete");
+        }
+
         foreach ($instances as $instance) {
             if (!$this->deleteInstance($instance->getName(), $force)) {
                 $result = false;
@@ -327,34 +399,46 @@ class LxcManager
         return $result;
     }
 
-    public function getInstanceInfo($name)//: ?InstanceTypes
+    public function getObjectInfo($name)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
 	// TODO: check container existence - input validation
         
         try {
-            $container = $this->lxd->containers->info($name);  
-            $this->logger->debug( "Instance `" . $name . "` status: ".$container['status']);
-            return $container;
+            $object = $this->lxd->containers->info($name);  
+            $this->logger->debug( "Object `" . $name . "` status: ".$object['status']);
+            return $object;
         } catch (NotFoundException $exc) {
-            $this->logger->debug( "Instance `" . $name . "` does not exist!");
+            $this->logger->debug( "Object `" . $name . "` does not exist!");
             $this->logger->debug( $exc->getTraceAsString());
         }
-        
         return null;
     }
     
-    public function getInstanceList()//: ?InstanceTypes
-    {  
+    public function getObjectList() {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $containers = $this->lxd->containers->all();
+        $objects = $this->lxd->containers->all();
 
-	// TODO: handle exception
+        // TODO: handle exception
 
-	if (count($containers)) {
-            return $containers;
+        if (count($objects)) {
+            return $objects;
+        } else {
+            return NULL;
+        }
+    }
+    
+    public function getInstanceList() {//: ?InstanceTypes
+        $this->logger->debug(__METHOD__);
+
+        $instances = $this->instanceRepository->findAll();
+
+        // TODO: handle exception
+
+        if (count($instances)) {
+            return $instances;
         } else {
             return NULL;
         }

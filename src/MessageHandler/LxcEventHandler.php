@@ -23,7 +23,6 @@ final class LxcEventHandler {
     private $logger;
     // Doctrine EntityManager
     private $entityManager;
-    private $message;
     private $environmentRepository;
     private $instanceTypeRepository;
     private $instanceStatusRepository;

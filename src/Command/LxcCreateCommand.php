@@ -16,25 +16,20 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
             name: 'lxc:create',
-            description: 'Creates a number of LXC instances for a specified instance type',
+            description: 'Creates a number of LXC objects for a specified OS alias and Hardware Profile',
     )]
 class LxcCreateCommand extends Command {
 
-    // Doctrine EntityManager
-    private $entityManager;
     private $lxd;
     private $lxdOperationBus;
     private $io;
     private $os_alias;
     private $hp_name;
-    private $number;
+    private $object_number;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(EntityManagerInterface $entityManager, 
-            LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
+    public function __construct(LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
         parent::__construct();
-
-        $this->entityManager = $entityManager;
 
         $this->lxd = $lxd;
         $this->lxdOperationBus = $lxdOperationBus;
@@ -43,8 +38,8 @@ class LxcCreateCommand extends Command {
     protected function configure(): void {
         $this
                 ->addArgument('profile', InputArgument::REQUIRED, 'Hardware profile name')
-                ->addArgument('os', InputArgument::REQUIRED, 'OS alias')
-                ->addArgument('number', InputArgument::OPTIONAL, 'Number of instances to create')
+                ->addArgument('os', InputArgument::REQUIRED, 'Operating system alias')
+                ->addArgument('number', InputArgument::OPTIONAL, 'Number of objects to create')
                 ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
@@ -60,11 +55,11 @@ class LxcCreateCommand extends Command {
             $this->io->note(sprintf('You passed os alias: %s and profile name: %s', 
                     $this->os_alias, $this->hp_name));
         }
-        // Check the number of instances requested
-        $this->number = 1;
+        // Check the number of objects requested
+        $this->object_number = 1;
         if ($input->getArgument('number')) {
-            $this->io->note(sprintf('You passed number of instances: %s', $this->number));
-            $this->number = intval($input->getArgument('number'));
+            $this->io->note(sprintf('You passed number of objects: %s', $this->object_number));
+            $this->object_number = intval($input->getArgument('number'));
         }
     }
 
@@ -74,15 +69,15 @@ class LxcCreateCommand extends Command {
 
         if ($input->getOption('async')) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
-            for ($i = 0; $i < $this->number; $i++) {
+            for ($i = 0; $i < $this->object_number; $i++) {
                 $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
                             "os" => $this->os_alias, "hp" => $this->hp_name]));
             }
         } else {
             $this->io->note(sprintf('Creating new LXC object(s): %s %s',
                             $this->os_alias, $this->hp_name));
-            for ($i = 0; $i < $this->number; $i++) {
-                if ($this->lxd->createInstance($this->os_alias, $this->hp_name)) {
+            for ($i = 0; $i < $this->object_number; $i++) {
+                if ($this->lxd->createObject($this->os_alias, $this->hp_name)) {
                     $this->io->note('Success!');
                 }
             }

@@ -68,7 +68,7 @@ class SessionManager
     {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "createInstance",
             "os" => $instance_type->getOs()->getAlias(), 
             "hp" => $instance_type->getHwProfile()->getName()]));
     }
@@ -140,35 +140,35 @@ class SessionManager
     public function startInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start",
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
                     "name" => $instance->getName()]));
     }
     
     public function restartInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart",
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
                     "name" => $instance->getName()]));
     }
 
     public function stopInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop",
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
                     "name" => $instance->getName()]));
     }
 
     public function deleteInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "delete",
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
                     "name" => $instance->getName()]));
     }
     
     public function deleteAllInstances() {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "wipe"]));
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
     }
 
     public function setInstanceStatus(Instances $instance, $status_str): bool {

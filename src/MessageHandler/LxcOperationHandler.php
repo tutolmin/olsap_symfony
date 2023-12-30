@@ -152,6 +152,7 @@ final class LxcOperationHandler
 
 	// Creating new LXC instance
 	case "create":
+	case "createInstance":
 
 	  // REQUIRED: InstanceTypeId
 	  if(!$os || !$hp) {
@@ -160,11 +161,12 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Creating LXC instance, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-	  $responce = $this->lxd->createInstance($os, $hp);
+	  $responce = $this->lxd->createObject($os, $hp);
 
 	  break;
           
 	case "restart":
+	case "restartInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -175,11 +177,12 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->restartInstance($name);    
+	  $responce = $this->lxd->restartObject($name);    
           
 	  break;
           
 	case "start":
+	case "startInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -190,11 +193,12 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->startInstance($name);
+	  $responce = $this->lxd->startObject($name);
             
 	  break;
           
 	case "stop":
+	case "stopInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -205,7 +209,7 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->stopInstance($name);
+	  $responce = $this->lxd->stopObject($name);
   
 	  break;
 
@@ -218,11 +222,31 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+	  $responce = $this->lxd->deleteObject($name);	
+
+	  break;
+
+        case "deleteInstance":
+            
+	  // REQUIRED: name
+	  if(!$name) {
+            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
+	    break;
+	  }
+
+	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for Instance: `" . $name . "`");
 	  $responce = $this->lxd->deleteInstance($name);	
 
 	  break;
 
-	case "wipe":
+	case "deleteAll":
+
+	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
+	  $responce = $this->lxd->deleteAllObjects(true);	
+
+	  break;
+      
+	case "deleteAllInstances":
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
 	  $responce = $this->lxd->deleteAllInstances(true);	

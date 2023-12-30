@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'lxc:start',
-    description: 'Starts a LXC instance',
+    description: 'Starts a LXC object',
 )]
 class LxcStartCommand extends Command
 {
@@ -33,7 +33,7 @@ class LxcStartCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Instance name')
+            ->addArgument('name', InputArgument::REQUIRED, 'LXC object name')
             ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
@@ -52,7 +52,7 @@ class LxcStartCommand extends Command
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name]));            
         } else {
             $io->note(sprintf('Starting LXC object: %s', $name));
-            $this->lxd->startInstance($name);
+            $this->lxd->startObject($name);
         }
 
         return Command::SUCCESS;

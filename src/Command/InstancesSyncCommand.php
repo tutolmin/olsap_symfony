@@ -60,7 +60,7 @@ class InstancesSyncCommand extends Command
         $instances = $this->instanceRepository->findAll();
 
         foreach ($instances as $instance) {
-            $info = $this->lxd->getInstanceInfo($instance->getName());
+            $info = $this->lxd->getObjectInfo($instance->getName());
             if ($info) {
                 $this->session->setInstanceStatus($instance, $info['status']);
             } else {

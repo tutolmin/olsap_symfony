@@ -66,7 +66,7 @@ class InstancesRestartCommand extends Command
 
             if ($instance->getStatus() != "Started" && $instance->getStatus() != "Running") {
 
-                $io->note(sprintf('Sending "start" command to LXD for "%s"', $name));
+                $io->note(sprintf('Sending "start" command for "%s"', $name));
 
                 $this->sessionManager->startInstance($instance);
             } else {

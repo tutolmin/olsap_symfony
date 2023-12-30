@@ -42,19 +42,19 @@ class LxcLsCommand extends Command {
         ;
     }
 
-    private function listItems(array $instances): void {
-        if ($instances) {
-            foreach ($instances as $instance) {
-                $info = $this->lxd->getInstanceInfo($instance);
+    private function listItems(array $objects): void {
+        if ($objects) {
+            foreach ($objects as $object) {
+                $info = $this->lxd->getObjectInfo($object);
                 $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
             }
         }
     }
 
-    private function listOrphanItems(array $instances): void {
-        if ($instances) {
-            foreach ($instances as $instance) {
-                $info = $this->lxd->getInstanceInfo($instance);
+    private function listOrphanItems(array $objects): void {
+        if ($objects) {
+            foreach ($objects as $object) {
+                $info = $this->lxd->getObjectInfo($object);
                 
                 // look for a specific instance type object
                 $obj = $this->instanceRepository->findOneByName($info['name']);
@@ -71,16 +71,16 @@ class LxcLsCommand extends Command {
         $this->io = new SymfonyStyle($input, $output);
 
         // Use Lxc service method
-        $instances = $this->lxd->getInstanceList();
+        $objects = $this->lxd->getObjectList();
 
-        if (!$instances) {
+        if (!$objects) {
             return Command::FAILURE;
         }
 
         if ($input->getOption('orphans')) {
-            $this->listOrphanItems($instances);
+            $this->listOrphanItems($objects);
         } else {
-            $this->listItems($instances);
+            $this->listItems($objects);
         }
 
         return Command::SUCCESS;

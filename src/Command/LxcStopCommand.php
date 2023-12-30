@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'lxc:stop',
-    description: 'Stops a LXC instance',
+    description: 'Stops a LXC object',
 )]
 class LxcStopCommand extends Command
 {
@@ -33,7 +33,7 @@ class LxcStopCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Instance name')
+            ->addArgument('name', InputArgument::REQUIRED, 'LXC object name')
             ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
@@ -52,7 +52,7 @@ class LxcStopCommand extends Command
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $name]));            
         } else {
             $io->note(sprintf('Stopping LXC object: %s', $name));
-            if( !$this->lxd->stopInstance($name)){
+            if( !$this->lxd->stopObject($name)){
                 return Command::FAILURE;
             }
         }

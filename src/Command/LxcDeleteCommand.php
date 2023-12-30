@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
             name: 'lxc:delete',
-            description: 'Delete an LXC instance',
+            description: 'Delete an LXC object',
     )]
 class LxcDeleteCommand extends Command {
 
@@ -35,7 +35,7 @@ class LxcDeleteCommand extends Command {
 
     protected function configure(): void {
         $this
-                ->addArgument('name', InputArgument::REQUIRED, 'Instance name or <ALL> for all instances')
+                ->addArgument('name', InputArgument::REQUIRED, 'Object name or <ALL> for all objects')
                 ->addOption('force', null, InputOption::VALUE_NONE, 'Forcefully stop the container before deletion')
                 ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
@@ -56,13 +56,13 @@ class LxcDeleteCommand extends Command {
         }
     }
 
-    private function deleteAllInstances() {
+    private function deleteAllObjects() {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message'));
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "wipe"]));
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAll"]));
         } else {
             $this->io->warning('Deleting all LXC objects');
-            if ($this->lxd->deleteAllInstances($this->force)) {
+            if ($this->lxd->deleteAllObjects($this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure! Check object statuses.');
@@ -70,7 +70,7 @@ class LxcDeleteCommand extends Command {
         }
     }
 
-    private function deleteInstance() {
+    private function deleteObject() {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "delete",
@@ -78,7 +78,7 @@ class LxcDeleteCommand extends Command {
         } else {
             $this->io->note(sprintf('Deleting LXC object: %s',
                             $this->name));
-            if ($this->lxd->deleteInstance($this->name, $this->force)) {
+            if ($this->lxd->deleteObject($this->name, $this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure!');
@@ -90,9 +90,9 @@ class LxcDeleteCommand extends Command {
         $this->parseParams($input, $output);
 
         if ($this->name == "ALL") {
-            $this->deleteAllInstances();
+            $this->deleteAllObjects();
         } else {
-            $this->deleteInstance();
+            $this->deleteObject();
         }
 
         return Command::SUCCESS;

@@ -63,7 +63,7 @@ class InstancesStopCommand extends Command {
             
             if ($instance->getStatus() != "Stopped" && $instance->getStatus() != "Sleeping") {
 
-                $io->note(sprintf('Sending "stop" command to LXD for "%s"', $name));
+                $io->note(sprintf('Sending "stop" command for "%s"', $name));
 
                 $this->sessionManager->stopInstance($instance);
             } else {

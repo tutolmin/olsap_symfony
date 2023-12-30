@@ -15,7 +15,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'lxc:restart',
-    description: 'Restarts a LXC instance',
+    description: 'Restarts a LXC object',
 )]
 class LxcRestartCommand extends Command
 {
@@ -33,7 +33,7 @@ class LxcRestartCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Instance name')
+            ->addArgument('name', InputArgument::REQUIRED, 'LCX object name')
             ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
@@ -52,7 +52,7 @@ class LxcRestartCommand extends Command
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $name]));            
         } else {
             $io->note(sprintf('Starting LXC object: %s', $name));
-            $this->lxd->restartInstance($name);
+            $this->lxd->restartObject($name);
         }
 
         return Command::SUCCESS;
