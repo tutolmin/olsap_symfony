@@ -190,6 +190,12 @@ class SessionManager
             } elseif ($status_str == "Stopped") {
                 $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
             }
+        } else {
+             if ($status_str == "Running") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Started");
+            } elseif ($status_str == "Sleeping") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Stopped");
+            }           
         }
 
         $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);

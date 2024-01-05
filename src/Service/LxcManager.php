@@ -294,24 +294,25 @@ class LxcManager
         if (!$object) {
             $this->logger->debug("Object NOT found");
             return false;
-        }     
+        }
 
         if ($object['status'] != "Stopped") {
             $this->logger->debug("Object is NOT stopped");
-/*
- * https://documentation.ubuntu.com/lxd/en/latest/api/#/
- * 
- * DELETE instance API does NOT have force option
- * 
+            /*
+             * https://documentation.ubuntu.com/lxd/en/latest/api/#/
+             * 
+             * DELETE instance API does NOT have force option
+             * 
+             */
             if (!$force) {
                 return false;
             } else {
                 $this->logger->debug("Force opiton specified");
             }
- * 
- */
         }
-        
+
+        $this->stopObject($name, $force);
+
         try {
             $this->lxd->containers->remove($name, $this->wait);
         } catch (NotFoundException $exc) {

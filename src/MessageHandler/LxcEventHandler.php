@@ -70,14 +70,15 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
+                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
-                $this->session->setInstanceStatus( $instance, "Started");
-
+                if ($instance) {
+                    $this->session->setInstanceStatus($instance, "Started");
+                }
                 # TODO: Handle exception
                 break;
-                
+
             // Instance started
             case "started":
 
@@ -87,11 +88,12 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
+                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
-                $this->session->setInstanceStatus( $instance, "Started");
-
+                if ($instance) {
+                    $this->session->setInstanceStatus($instance, "Started");
+                }
                 # TODO: Handle exception
                 break;
 
@@ -104,11 +106,12 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `".$message->getEvent()."`: `" . $name . "`");
+                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
-                $this->session->setInstanceStatus( $instance, "Stopped");
-
+                if ($instance) {
+                    $this->session->setInstanceStatus($instance, "Stopped");
+                }
                 # TODO: Handle exception
                 break;
 
