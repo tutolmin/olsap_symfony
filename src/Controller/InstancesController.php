@@ -46,8 +46,7 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_instances_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, InstancesRepository $instancesRepository): Response
-    {
+    public function new(Request $request, InstancesRepository $instancesRepository): Response {
         $this->logger->debug(__METHOD__);
 
         $instance = new Instances();
@@ -55,14 +54,19 @@ class InstancesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $instancesRepository->add($instance, true);
+//            $instancesRepository->add($instance, true);
+            $this->logger->debug("Number of Instances to create: " . $form->get('number')->getData());
 
+            $this->logger->debug("Selected Instance type: " . $instance->getInstanceType());
+            for ($i = 0; $i < $form->get('number')->getData(); $i++) {
+                $this->session->createInstance($instance->getInstanceType());
+            }
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('instances/new.html.twig', [
-            'instance' => $instance,
-            'form' => $form,
+                    'instance' => $instance,
+                    'form' => $form,
         ]);
     }
 

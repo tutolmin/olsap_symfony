@@ -4,6 +4,7 @@
 
 {% block body %}
     <h1>Instances index</h1>
+    <a href="{{ path('app_instances_new') }}">Create new</a>
 
     <table class="table">
         <thead>
@@ -41,7 +42,4 @@
         </tbody>
     </table>
 
-<!--
-    <a href="{{ path('app_instances_new') }}">Create new</a>
--->
 {% endblock %}

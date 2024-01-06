@@ -368,6 +368,7 @@ class LxcManager
 
         if (!$objects) {
             $this->logger->debug("No objects to delete");
+            return false;
         }
 
         foreach ($objects as $object) {
