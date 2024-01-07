@@ -62,7 +62,7 @@ class InstancesSyncCommand extends Command
         foreach ($instances as $instance) {
             $info = $this->lxd->getObjectInfo($instance->getName());
             if ($info) {
-                $this->session->setInstanceStatus($instance, $info['status']);
+                $this->session->setInstanceStatus($instance->getId(), $info['status']);
             } else {
                 $io->error(sprintf('Instance "%s" was not found in LXD, run app:instances:ls --orphans',
                                 $instance->getName()));

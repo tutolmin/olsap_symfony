@@ -161,7 +161,7 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Creating LXC instance, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-	  $responce = $this->lxd->createObject($os, $hp);
+	  $this->lxd->createObject($os, $hp);
 
 	  break;
           

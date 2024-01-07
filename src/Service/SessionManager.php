@@ -64,15 +64,19 @@ class SessionManager
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
     }
 
-    public function createInstance(InstanceTypes $instance_type)
-    {
+    public function createInstance(InstanceTypes $instance_type, bool $async = true): ?Instances {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "createInstance",
-            "os" => $instance_type->getOs()->getAlias(), 
-            "hp" => $instance_type->getHwProfile()->getName()]));
+        if ($async) {
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "createInstance",
+                        "os" => $instance_type->getOs()->getAlias(),
+                        "hp" => $instance_type->getHwProfile()->getName()]));
+        } else {
+            return $this->lxd->createInstance($instance_type->getOs()->getAlias(),
+                            $instance_type->getHwProfile()->getName());
+        }
+        return null;
     }
-
 
     // Bind the Instance
     public function bindInstance(InstanceTypes $it): Instances
@@ -81,40 +85,37 @@ class SessionManager
 
 	// TODO: check input parameters
 
-	$instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
+        // Find started instance
+	$started_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
 
 	// Check if suitable instance has been found
-	if ($instance) {
-            $this->logger->debug('Suitable started instance has been found: ' . $instance);
+        if ($started_instance) {
+            $this->logger->debug('Suitable started instance has been found: ' . $started_instance);
+            return $started_instance;
         }
 
-        // Try to find stopped instance
-        else {
+        // Find stopped instance
+        $stopped_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
 
-            // Find stopped instance
-            $instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
+        // Check if suitable instance has been found
+        if ($stopped_instance) {
 
-            // Check if suitable instance has been found
-            if ($instance) {
+            $this->logger->debug('Suitable stopped instance has been found: ' . $stopped_instance);
 
-                $this->logger->debug('Suitable stopped instance has been found: ' . $instance);
+            // start instance asyncroneously
+            $this->startInstance($stopped_instance, false);
 
-                // stop instance for the time being
-//                $this->startInstance($instance);
-
-                // Create new Instance
-            } else {
-                $instance = $this->createInstance($it);
-            }
+            return $stopped_instance;
         }
+
+        // Create new Instance synchroneously
+        $instance = $this->createInstance($it, false);
 
         // Update Instance status
-	$this->setInstanceStatus($instance, "Running");
-
-	return $instance;
+//        $this->setInstanceStatus($instance->getId(), "Running");
+       
+        return $instance;
     }
-
-
 
     // Release the Instance
     public function releaseInstance(Instances $instance): bool
@@ -137,25 +138,37 @@ class SessionManager
 	return true;
     }
 
-    public function startInstance(Instances $instance) {
+    public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
-                    "name" => $instance->getName()]));
-    }
-    
-    public function restartInstance(Instances $instance) {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
-                    "name" => $instance->getName()]));
+        if ($async) {
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxd->startObject($instance->getName());
+        }
     }
 
-    public function stopInstance(Instances $instance) {
+    public function restartInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
-                    "name" => $instance->getName()]));
+        if ($async) {
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxd->stopObject($instance->getName());
+        }
+    }
+
+    public function stopInstance(Instances $instance, bool $async = true) {
+        $this->logger->debug(__METHOD__);
+
+        if ($async) {
+            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxd->restartObject($instance->getName());
+        }
     }
 
     public function deleteInstance(Instances $instance) {
@@ -171,7 +184,7 @@ class SessionManager
         $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
     }
 
-    public function setInstanceStatus(Instances $instance, $status_str): bool {
+    public function setInstanceStatus(int $instance_id, $status_str): bool {
 
         $this->logger->debug(__METHOD__);
 
@@ -182,6 +195,33 @@ class SessionManager
             return false;
         }
 
+        $instance = $this->instanceRepository->findOneById($instance_id);
+
+        if (!$instance) {
+            $this->logger->debug('No such instance!');
+            return false;
+        }
+
+        // Special statuses for bound instances
+        $target_status = $this->tweakInstanceStatus($instance_id, $status_str);
+
+        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
+
+        $instance->setStatus($target_status);
+
+        // Store item into the DB
+//	  $this->entityManager->persist($instance);
+        $this->entityManager->flush();
+
+        return true;
+    }
+
+    private function tweakInstanceStatus(int $instance_id, string $status_str): InstanceStatuses {
+
+        $instance = $this->instanceRepository->findOneById($instance_id);
+
+        $status = $instance->getStatus();
+        
         // Special statuses for bound instances
         $envs = $instance->getEnvs();
         if ($envs) {
@@ -191,24 +231,14 @@ class SessionManager
                 $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
             }
         } else {
-             if ($status_str == "Running") {
+            if ($status_str == "Running") {
                 $status = $this->instanceStatusesRepository->findOneByStatus("Started");
             } elseif ($status_str == "Sleeping") {
                 $status = $this->instanceStatusesRepository->findOneByStatus("Stopped");
-            }           
+            }
         }
-
-        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $status);
-
-        $instance->setStatus($status);
-
-        // Store item into the DB
-//	  $this->entityManager->persist($instance);
-        $this->entityManager->flush();
-
-        return true;
+        return $status;
     }
-
 
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
@@ -388,57 +418,53 @@ class SessionManager
 	return true;	
     }
 
-    public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments
-    {
+    public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments {
         $this->logger->debug(__METHOD__);
 
-	// TODO: check input parameters
+        // TODO: check input parameters
+        // Get the suitable InstanceType for a task
+        $instance_type = $this->getFirstInstanceType($task);
 
-	// Get the suitable InstanceType for a task
-	$instance_type = $this->getFirstInstanceType($task);
+        if (!$instance_type) {
+            $this->logger->debug('No suitable instance types are available for task: ' . $task);
+            return null;
+        }
+        $this->logger->debug('First suitable instance type: ' . $instance_type);
 
-	if ($instance_type) {
+        $env = new Environments;
 
-            $this->logger->debug('First suitable instance type: ' . $instance_type);
+        $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
+        $env->setStatus($env_status);
 
-            $env = new Environments;
+        $env->setTask($task);
+        $env->setSession($session);
 
-            $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
-            $env->setStatus($env_status);
+        // Store item into the DB
+        $this->entityManager->persist($env);
+//            $this->entityManager->flush();
 
-            $env->setTask($task);
-            $env->setSession($session);
-
-            // Store item into the DB
-            $this->entityManager->persist($env);
-            $this->entityManager->flush();
-
-            $this->logger->debug('Environment `' . $env . '` was created.');
+        $this->logger->debug('Environment `' . $env . '` was created.');
 
 //	  $timestamp = new \DateTimeImmutable('NOW');
 //	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
 //	  $name = $this->createInstance($instance_type);
-            $name = $this->bindInstance($instance_type);
+        $instance = $this->bindInstance($instance_type);
 
-            $env->setInstance($name);
+        $env->setInstance($instance);
 
-            // Store item into the DB
+        // Store item into the DB
 //	  $this->entityManager->persist($env);
-            $this->entityManager->flush();
+        $this->entityManager->flush();
 
-            $this->logger->debug('Instance `' . $name . '` has been bound to the environment.');
+        $this->logger->debug('Instance `' . $instance->getName() . 
+                '` has been bound to the newly created environment.');
+
+        $this->setInstanceStatus($instance->getId(), "Running");
 
 //	  $this->setEnvironmentStatus($env, "Created");
 
-            return $env;
-        } else {
-            $this->logger->debug('No suitable instance types are available for task: ' . $task);
-        }
-
-        return null;
+        return $env;
     }
-
-
 
     public function verifyEnvironment(Environments $env): bool
     {

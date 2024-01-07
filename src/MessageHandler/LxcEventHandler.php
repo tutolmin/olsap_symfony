@@ -74,7 +74,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance, "Started");
+                    $this->session->setInstanceStatus($instance->getId(), "Started");
                 }
                 # TODO: Handle exception
                 break;
@@ -92,7 +92,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance, "Started");
+                    $this->session->setInstanceStatus($instance->getId(), "Started");
                 }
                 # TODO: Handle exception
                 break;
@@ -110,7 +110,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance, "Stopped");
+                    $this->session->setInstanceStatus($instance->getId(), "Stopped");
                 }
                 # TODO: Handle exception
                 break;

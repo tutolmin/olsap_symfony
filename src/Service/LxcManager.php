@@ -152,7 +152,16 @@ class LxcManager
         $this->logger->debug("Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
         $this->entityManager->flush();
 
+        // This will trigger DB flush
+        // So we can get the Instance from the repo by id.
         return $instance->getId();
+//        return $instance;
+    }
+
+    public function createInstance($os_alias, $hp_name) {//: ?InstanceTypes
+        $this->logger->debug(__METHOD__);
+
+        return $this->createObject($os_alias, $hp_name);
     }
 
     public function createObject($os_alias, $hp_name) {//: ?InstanceTypes
@@ -198,7 +207,7 @@ class LxcManager
 
         $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
-        return $name[3];
+        return $instance;
     }
 
     public function startObject($name, $force = false) {//: ?InstanceTypes
@@ -261,29 +270,27 @@ class LxcManager
     public function deleteObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        if($this->wipeInstance($name, $force))
-        {
-            $this->logger->debug("Instance ".$name." was deleted successfully");
+        $result = true;
+        if ($this->wipeInstance($name, $force)) {
+            $this->logger->debug("Instance " . $name . " was deleted successfully");
         } else {
-            $this->logger->debug("Instance ".$name." deletion failure");
+            $this->logger->debug("Instance " . $name . " deletion failure");
+            $result = false;
         }
-                
-        if($this->wipeObject($name, $force))
-        {
-            $this->logger->debug("Object ".$name." was deleted successfully");
+
+        if ($this->wipeObject($name, $force)) {
+            $this->logger->debug("Object " . $name . " was deleted successfully");
         } else {
-            $this->logger->debug("Object ".$name." deletion failure");
+            $this->logger->debug("Object " . $name . " deletion failure");
+            $result = false;
         }
-        
-        return true;
+        return $result;
     }
 
     public function deleteInstance($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $this->deleteObject($name, $force);
-
-        return true;
+        return $this->deleteObject($name, $force);
     }
 
     private function wipeObject($name, $force = false) {
