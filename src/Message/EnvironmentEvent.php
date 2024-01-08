@@ -2,25 +2,25 @@
 
 namespace App\Message;
 
-final class LxcEvent {
+final class EnvironmentEvent {
     /*
      * Add whatever properties and methods you need
      * to hold the data for this message class.
      */
 
     private $event;
-    private $name;
+    private $id;
 
     public function __construct($message) {
         $this->event = $message['event'];
-        $this->name = array_key_exists('name', $message) ? strval($message['name']) : "";
+        $this->id = array_key_exists('id', $message) ? intval($message['id']) : "";
     }
 
     public function getEvent(): string {
         return $this->event;
     }
 
-    public function getName(): string {
-        return $this->name;
+    public function getId(): int {
+        return $this->id;
     }
 }

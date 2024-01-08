@@ -22,7 +22,7 @@ use App\Service\LxcManager;
 )]
 class InstancesLsCommand extends Command
 {
-    private $lxd;
+    private $lxdService;
     private $io;
     
     // Doctrine EntityManager
@@ -39,7 +39,7 @@ class InstancesLsCommand extends Command
         $this->entityManager = $entityManager;
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
-	$this->lxd = $lxd;
+	$this->lxdService = $lxd;
     }
 
     protected function configure(): void
@@ -69,7 +69,7 @@ class InstancesLsCommand extends Command
     private function listOrphanItems(array $instances): void {
         if ($instances) {
             foreach ($instances as $instance) {
-                $info = $this->lxd->getObjectInfo($instance->getName());
+                $info = $this->lxdService->getObjectInfo($instance->getName());
                 if (!$info) {
                     $this->io->note(sprintf('Name: %s, port: %s, status: %s',
                         $instance->getName(), $instance->getAddresses()[0]->getPort(), 

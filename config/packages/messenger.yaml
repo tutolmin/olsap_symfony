@@ -2,9 +2,24 @@ framework:
     messenger:
 
         # The bus that is going to be injected when injecting MessageBusInterface
-        default_bus: session.bus
+        default_bus: session.action.bus
         buses:
-            session.bus:
+            session.action.bus:
+                middleware:
+#                     - handle_message
+                default_middleware: allow_no_handlers
+                
+            session.event.bus:
+                middleware:
+#                     - handle_message
+                default_middleware: allow_no_handlers
+                
+            env.action.bus:
+                middleware:
+#                     - handle_message
+                default_middleware: allow_no_handlers
+                
+            env.event.bus:
                 middleware:
 #                     - handle_message
                 default_middleware: allow_no_handlers
@@ -48,7 +63,9 @@ framework:
             App\Message\LxcEvent: async
             App\Message\RunPlaybook: async
             App\Message\SessionAction: async
-            # 'App\Message\YourMessage': async
+            App\Message\SessionEvent: async
+            App\Message\EnvironmentAction: async
+            App\Message\EnvironmentEvent: async
 
 # when@test:
 #    framework:

@@ -5,7 +5,6 @@ namespace App\Controller;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
 use App\Form\InstancesType;
 use App\Repository\InstancesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,24 +12,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Service\SessionManager;
+use App\Service\LxcManager;
+use Symfony\Component\Messenger\MessageBusInterface;
+use App\Message\LxcOperation;
 
 #[Route('/instances')]
 class InstancesController extends AbstractController
 {
     private $logger;
-    private $session;
+    private $lxcService;
+    private $lxcOperationBus;
 
     // Doctrine EntityManager
     private $entityManager;
     
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LoggerInterface $logger,
-            EntityManagerInterface $entityManager, SessionManager $session) {
+            EntityManagerInterface $entityManager, LxcManager $lxcService,
+            MessageBusInterface $lxcOperationBus
+            ) {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
-        $this->session = $session;
+        $this->lxcService = $lxcService;
+        $this->lxcOperationBus = $lxcOperationBus;
 
         $this->entityManager = $entityManager;
     }
@@ -46,7 +51,7 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_instances_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, InstancesRepository $instancesRepository): Response {
+    public function new(Request $request): Response {
         $this->logger->debug(__METHOD__);
 
         $instance = new Instances();
@@ -59,7 +64,7 @@ class InstancesController extends AbstractController
 
             $this->logger->debug("Selected Instance type: " . $instance->getInstanceType());
             for ($i = 0; $i < $form->get('number')->getData(); $i++) {
-                $this->session->createInstance($instance->getInstanceType());
+//                $this->lxcService->createInstance($instance->getInstanceType());
             }
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -112,7 +117,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
-            $this->session->startInstance($instance);            
+            $this->lxcService->startInstance($instance);            
          }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -124,7 +129,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {       
-            $this->session->stopInstance($instance);            
+            $this->lxcService->stopInstance($instance);            
         }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -136,7 +141,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {            
-            $this->session->restartInstance($instance);            
+            $this->lxcService->restartInstance($instance);            
         }
             
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -147,8 +152,10 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$instance->getId(), $request->request->get('_token'))) {
-            $this->session->deleteInstance($instance);            
+        if ($this->isCsrfTokenValid('delete' . $instance->getId(), $request->request->get('_token'))) {
+//            $this->lxcService->deleteInstance($instance);     
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
+                        "name" => $instance->getName()]));
         }
 
         return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);

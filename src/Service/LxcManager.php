@@ -18,27 +18,21 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
 use App\Message\LxcOperation;
 
-#use App\Entity\Tasks;
-#use App\Entity\InstanceTypes;
-
 class LxcManager
 {
     private $logger;
     private $lxdEventBus;
-    private $lxdOperationBus;
-    private $lxd;
-//    private $session;
+    private $lxcOperationBus;
+    private $lxcService;
     private $timeout;
     private $wait;
-
-//    private $name;
 
     // Doctrine EntityManager
     private $entityManager;
 
     // InstanceTypes repo
     private $itRepository;
-    private $instanceStatusRepository;
+    private $instanceStatusesRepository;
     private $instanceRepository;
 
     // OperatingSystems repo
@@ -51,7 +45,7 @@ class LxcManager
     private $addressRepository;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $lxdEventBus, MessageBusInterface $lxdOperationBus)
+            MessageBusInterface $lxdEventBus, MessageBusInterface $lxcOperationBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -60,7 +54,7 @@ class LxcManager
 
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
+        $this->instanceStatusesRepository = $this->entityManager->getRepository(InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
 
         // get the OperatingSystems repository
@@ -73,7 +67,7 @@ class LxcManager
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
         
         $this->lxdEventBus = $lxdEventBus;
-        $this->lxdOperationBus = $lxdOperationBus;
+        $this->lxcOperationBus = $lxcOperationBus;
 	$this->timeout = intval($_ENV["LXD_TIMEOUT"]);
 	$this->wait = $_ENV["LXD_WAIT"];
 
@@ -87,8 +81,8 @@ class LxcManager
 
         $guzzle = new GuzzleClient($config);
         $adapter = new GuzzleAdapter($guzzle);
-        $this->lxd = new \Opensaucesystems\Lxd\Client($adapter);
-        $this->lxd->setUrl($_ENV['LXD_URL']);
+        $this->lxcService = new \Opensaucesystems\Lxd\Client($adapter);
+        $this->lxcService->setUrl($_ENV['LXD_URL']);
 
         #$certificates = $lxd->certificates->all();
         #$fingerprint = $lxd->certificates->add(file_get_contents(__DIR__.'/client.pem'), 'ins3Cure');
@@ -135,7 +129,7 @@ class LxcManager
         $instance = new Instances;
 
         // It is New/Started by sefault
-        $instance_status = $this->instanceStatusRepository->findOneByStatus("New");
+        $instance_status = $this->instanceStatusesRepository->findOneByStatus("New");
         $instance->setStatus($instance_status);
         $instance->setInstanceType($instance_type);
         $instance->setName(bin2hex(random_bytes(10)));
@@ -191,7 +185,7 @@ class LxcManager
                 "volatile.eth0.hwaddr" => $address->getMac()
             ],
         ];
-        $responce = $this->lxd->containers->create(null, $options, $this->wait);
+        $responce = $this->lxcService->containers->create(null, $options, $this->wait);
 
         //Catch exception
         // Get the name for the reply
@@ -205,7 +199,7 @@ class LxcManager
 //        $this->entityManager->persist($instance);
         $this->entityManager->flush();
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
+        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
         return $instance;
     }
@@ -218,7 +212,7 @@ class LxcManager
         $info = $this->getObjectInfo($name);
 
         if ($info && $info["status"] != "Started") {
-            $responce = $this->lxd->containers->start($name, $this->timeout, $force, false, $this->wait);
+            $responce = $this->lxcService->containers->start($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxdEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
             return $responce;
@@ -237,7 +231,7 @@ class LxcManager
         $info = $this->getObjectInfo($name);
 
         if ($info && $info["status"] != "Stopped") {
-            $responce = $this->lxd->containers->stop($name, $this->timeout, $force, false, $this->wait);
+            $responce = $this->lxcService->containers->stop($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxdEventBus->dispatch(new LxcEvent(["event" => "stopped", "name" => $name]));
             return $responce;
@@ -256,7 +250,7 @@ class LxcManager
         $info = $this->getObjectInfo($name);
 
         if ($info) {
-            $responce = $this->lxd->containers->restart($name, $this->timeout, $force, false, $this->wait);
+            $responce = $this->lxcService->containers->restart($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxdEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
             return $responce;
@@ -321,7 +315,7 @@ class LxcManager
         $this->stopObject($name, $force);
 
         try {
-            $this->lxd->containers->remove($name, $this->wait);
+            $this->lxcService->containers->remove($name, $this->wait);
         } catch (NotFoundException $exc) {
             $this->logger->debug("LXC object `" . $name . "` does not exist!");
             $this->logger->debug($exc->getTraceAsString());
@@ -339,8 +333,8 @@ class LxcManager
             return false;
         }
 
-        if ($instance->getStatus()->getStatus() != "Stopped" &&
-                $instance->getStatus()->getStatus() != "Sleeping") {
+        if ($instance->getStatus() != "Stopped" &&
+                $instance->getStatus() != "Sleeping") {
             $this->logger->debug("Instance is NOT stopped");
             if (!$force) {
                 return false;
@@ -415,7 +409,7 @@ class LxcManager
 	// TODO: check container existence - input validation
         
         try {
-            $object = $this->lxd->containers->info($name);  
+            $object = $this->lxcService->containers->info($name);  
             $this->logger->debug( "Object `" . $name . "` status: ".$object['status']);
             return $object;
         } catch (NotFoundException $exc) {
@@ -428,7 +422,7 @@ class LxcManager
     public function getObjectList() {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $objects = $this->lxd->containers->all();
+        $objects = $this->lxcService->containers->all();
 
         // TODO: handle exception
 
@@ -459,14 +453,14 @@ class LxcManager
 
 	// TODO: check image existence - input validation
 
-	return $this->lxd->images->info($image);
+	return $this->lxcService->images->info($image);
     }
 
     public function getImageList()//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
-        $images = $this->lxd->images->all();
+        $images = $this->lxcService->images->all();
 
 	// TODO: handle exception
 
@@ -483,14 +477,14 @@ class LxcManager
 
 	// TODO: check image existence - input validation
 
-	return $this->lxd->profiles->info($profile);
+	return $this->lxcService->profiles->info($profile);
     }
 
     public function getProfileList()//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 
-        $profiles = $this->lxd->profiles->all();
+        $profiles = $this->lxcService->profiles->all();
 
 	// TODO: handle exception
 
@@ -500,6 +494,112 @@ class LxcManager
             return NULL;
         }
     }
+
+    public function setInstanceStatus(int $instance_id, $status_str): bool {
+
+        $this->logger->debug(__METHOD__);
+
+        $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
+
+        if (!$status) {
+            $this->logger->debug('No such instance status: ' . $status_str);
+            return false;
+        }
+
+        $instance = $this->instanceRepository->findOneById($instance_id);
+
+        if (!$instance) {
+            $this->logger->debug('No such instance!');
+            return false;
+        }
+
+        // Special statuses for bound instances
+        $target_status = $this->tweakInstanceStatus($instance_id, $status_str);
+
+        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
+
+        $instance->setStatus($target_status);
+
+        // Store item into the DB
+//	  $this->entityManager->persist($instance);
+        $this->entityManager->flush();
+
+        return true;
+    }
+
+    private function tweakInstanceStatus(int $instance_id, string $status_str): InstanceStatuses {
+
+        $this->logger->debug(__METHOD__);
+
+        $instance = $this->instanceRepository->findOneById($instance_id);
+
+        $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
+
+        // Special statuses for bound instances
+        $envs = $instance->getEnvs();
+        if ($envs) {
+            if ($status_str == "Started") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Running");
+            } elseif ($status_str == "Stopped") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Sleeping");
+            }
+        } else {
+            if ($status_str == "Running") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Started");
+            } elseif ($status_str == "Sleeping") {
+                $status = $this->instanceStatusesRepository->findOneByStatus("Stopped");
+            }
+        }
+        return $status;
+    }
+
+    public function startInstance(Instances $instance, bool $async = true) {
+        $this->logger->debug(__METHOD__);
+
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxcService->startObject($instance->getName());
+        }
+    }
+
+    public function restartInstance(Instances $instance, bool $async = true) {
+        $this->logger->debug(__METHOD__);
+
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxcService->restartObject($instance->getName());
+        }
+    }
+
+    public function stopInstance(Instances $instance, bool $async = true) {
+        $this->logger->debug(__METHOD__);
+
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
+                        "name" => $instance->getName()]));
+        } else {
+            $this->lxcService->stopObject($instance->getName());
+        }
+    }
+
+/*
+    public function deleteInstance(Instances $instance) {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
+                    "name" => $instance->getName()]));
+    }
+
+    public function deleteAllInstances() {
+        $this->logger->debug(__METHOD__);
+
+        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
+    }
+*/
 
 }
 

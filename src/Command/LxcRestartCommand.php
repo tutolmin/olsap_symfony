@@ -19,14 +19,14 @@ use Symfony\Component\Messenger\MessageBusInterface;
 )]
 class LxcRestartCommand extends Command
 {
-    private $lxd;
+    private $lxdService;
     private $lxdOperationBus;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxd, MessageBusInterface $lxdOperationBus)
     {
         parent::__construct();
-        $this->lxd = $lxd;
+        $this->lxdService = $lxd;
         $this->lxdOperationBus = $lxdOperationBus;        
     }
 
@@ -52,7 +52,7 @@ class LxcRestartCommand extends Command
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $name]));            
         } else {
             $io->note(sprintf('Starting LXC object: %s', $name));
-            $this->lxd->restartObject($name);
+            $this->lxdService->restartObject($name);
         }
 
         return Command::SUCCESS;

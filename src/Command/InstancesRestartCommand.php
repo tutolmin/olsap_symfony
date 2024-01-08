@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Service\SessionManager;
+use App\Service\LxcManager;
 
 #[AsCommand(
     name: 'app:instances:restart',
@@ -23,26 +23,24 @@ class InstancesRestartCommand extends Command
     private $entityManager;
     // Instances repo
     private $instancesRepository;
-    private $sessionManager;
+    private $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager,
-                SessionManager $sessionManager) {
+    public function __construct(EntityManagerInterface $entityManager,
+            LxcManager $lxcService) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->sessionManager = $sessionManager;
+        $this->lxcService = $lxcService;
 
         // get the Instances repository
-        $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
-        $this->sessionManager = $sessionManager;
+        $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
     }
 
-    protected function configure(): void
-    {
+    protected function configure(): void {
         $this
-            ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to restart')
+                ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to restart')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
@@ -68,7 +66,7 @@ class InstancesRestartCommand extends Command
 
                 $io->note(sprintf('Sending "start" command for "%s"', $name));
 
-                $this->sessionManager->startInstance($instance);
+                $this->lxcService->startInstance($instance);
             } else {
 
                 $io->error(sprintf('Instance "%s" is NOT stopped', $name));

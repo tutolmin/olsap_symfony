@@ -37,7 +37,25 @@ services:
             $awx_api_url:       '%awx.api_url%'
             
     App\MessageHandler\SessionActionHandler:
-        tags: [{ name: messenger.message_handler, bus: session.bus }]
+        tags: [{ name: messenger.message_handler, bus: session.action.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+        
+    App\MessageHandler\SessionEventHandler:
+        tags: [{ name: messenger.message_handler, bus: session.event.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+        
+    App\MessageHandler\EnvironmentActionHandler:
+        tags: [{ name: messenger.message_handler, bus: env.action.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false    
+        
+    App\MessageHandler\EnvironmentEventHandler:
+        tags: [{ name: messenger.message_handler, bus: env.event.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false

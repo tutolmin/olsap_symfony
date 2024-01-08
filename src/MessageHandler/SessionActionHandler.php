@@ -13,7 +13,7 @@ use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Service\SessionManager;
 
-#[AsMessageHandler(fromTransport: 'async', bus: 'session.bus')]
+#[AsMessageHandler(fromTransport: 'async', bus: 'session.action.bus')]
 final class SessionActionHandler
 {
     // Logger reference

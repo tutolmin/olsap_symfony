@@ -14,7 +14,6 @@ use App\Entity\InstanceTypes;
 use App\Entity\Environments;
 use Psr\Log\LoggerInterface;
 use App\Service\LxcManager;
-use App\Service\SessionManager;
 
 #[AsMessageHandler(fromTransport: 'async', bus: 'lxd.event.bus')]
 final class LxcEventHandler {
@@ -30,18 +29,16 @@ final class LxcEventHandler {
     // Message bus
     private $awxBus;
     private $lxdBus;
-    private $lxd;
-    private $session;
+    private $lxdService;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
             MessageBusInterface $awxBus, MessageBusInterface $lxdBus, 
-            LxcManager $lxd, SessionManager $session) {
+            LxcManager $lxd) {
         $this->logger = $logger;
         $this->awxBus = $awxBus;
         $this->lxdBus = $lxdBus;
-        $this->lxd = $lxd;        
-        $this->session = $session;
+        $this->lxdService = $lxd;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
@@ -60,7 +57,7 @@ final class LxcEventHandler {
 
         // Select event to serve
         switch ($message->getEvent()) {
-
+/*
             // Instance started
             case "created":
 
@@ -74,11 +71,11 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance->getId(), "Started");
+                    $this->lxdService->setInstanceStatus($instance->getId(), "Started");
                 }
                 # TODO: Handle exception
                 break;
-
+*/
             // Instance started
             case "started":
 
@@ -92,7 +89,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance->getId(), "Started");
+                    $this->lxdService->setInstanceStatus($instance->getId(), "Started");
                 }
                 # TODO: Handle exception
                 break;
@@ -110,7 +107,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->session->setInstanceStatus($instance->getId(), "Stopped");
+                    $this->lxdService->setInstanceStatus($instance->getId(), "Stopped");
                 }
                 # TODO: Handle exception
                 break;

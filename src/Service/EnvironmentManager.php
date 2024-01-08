@@ -1,6 +1,6 @@
 <?php
 
-// src/Service/SessionManager.php
+// src/Service/EnvironmentManager.php
 namespace App\Service;
 
 use Psr\Log\LoggerInterface;
@@ -17,12 +17,14 @@ use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
 use App\Service\AwxManager;
 use App\Service\LxcManager;
-use App\Service\EnvironmentManager;
+//use App\Service\SessionManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
-use App\Message\LxcOperation;
+use App\Message\LxcOperation; 
+use App\Message\EnvironmentAction;
+use App\Message\EnvironmentEvent;
 
-class SessionManager
+class EnvironmentManager
 {
     private $logger;
 
@@ -32,20 +34,22 @@ class SessionManager
     private $instanceRepository;
     private $instanceStatusesRepository;
     private $sessionStatusesRepository;
+    private $sessionsRepository;
     private $environmentRepository;
     private $environmentStatusesRepository;
 
     private $sessionBus;
     private $lxdOperationBus;
+    private $envEventBus;
 
     private $lxdService;
     private $awxService;
-    private $envService;
+//    private $sessionService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, EnvironmentManager $env,
-            MessageBusInterface $sessionBus, MessageBusInterface $lxdOperationBus)
-
+	LxcManager $lxd, AwxManager $awx, //SessionManager $session,
+            MessageBusInterface $sessionBus, MessageBusInterface $lxdOperationBus,
+            MessageBusInterface $envEventBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -55,7 +59,8 @@ class SessionManager
 	$this->sessionBus = $sessionBus;
 	$this->lxdOperationBus = $lxdOperationBus;
 	$this->awxService = $awx;
-	$this->envService = $env;
+        $this->envEventBus = $envEventBus;
+//	$this->sessionService = $session;
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
@@ -65,8 +70,9 @@ class SessionManager
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+        $this->sessionsRepository = $this->entityManager->getRepository( Sessions::class);
     }
-/*
+
     public function createInstance(InstanceTypes $instance_type, bool $async = true): ?Instances {
         $this->logger->debug(__METHOD__);
 
@@ -80,8 +86,7 @@ class SessionManager
         }
         return null;
     }
- */
-/*
+
     // Bind the Instance
     public function bindInstance(InstanceTypes $it): Instances
     {
@@ -115,12 +120,9 @@ class SessionManager
         // Create new Instance synchroneously
         $instance = $this->createInstance($it, false);
 
-        // Update Instance status
-//        $this->setInstanceStatus($instance->getId(), "Running");
-       
         return $instance;
     }
-*/
+
     // Release the Instance
     public function releaseInstance(Instances $instance): bool
     {
@@ -137,11 +139,11 @@ class SessionManager
 	$this->entityManager->flush();
 
 	// stop instance for the time being
-//	$this->stopInstance($instance);
+	$this->stopInstance($instance);
 
 	return true;
     }
-/*
+
     public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
@@ -245,7 +247,7 @@ class SessionManager
         }
         return $status;
     }
-*/
+
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -271,7 +273,6 @@ class SessionManager
 	  return false;
 	}
     }
-
 
 
     public function setEnvironmentStatus(Environments $environment, $status_str): bool
@@ -300,7 +301,7 @@ class SessionManager
 	}
     }
 
-
+/*
     public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -339,7 +340,7 @@ class SessionManager
 	}
 	return true;
     }
-
+*/
 
     public function setEnvironmentTimestamp(Environments $environment, $timestamp_str): bool
     {
@@ -423,28 +424,18 @@ class SessionManager
 
 	return true;	
     }
-/*
-    public function createEnvironment(Tasks $task, Sessions $session = null, bool $async = true): ?Environments {
-        $this->logger->debug(__METHOD__);
 
-        $session_id = null;
-        if ($session) {
-            $session_id = $session->getId();
-        }
-        if ($async) {
-            $this->sessionBus->dispatch(new SessionAction(["action" => "createEnvironment",
-                        "task_id" => $task->getId(), "session_id" => $session_id]));
-        } else {
-            return $this->envService->createEnvironment($task->getId(), $session_id);
-        }
-        return null;
-    }
-*/
-    /*    
-    public function createEnvironment(Tasks $task, Sessions $session = null): ?Environments {
+    public function createEnvironment(int $task_id, int $session_id = null): ?Environments {
         $this->logger->debug(__METHOD__);
 
         // TODO: check input parameters
+
+        $task = $this->taskRepository->findOneById($task_id);
+        $session = null;
+        if ($session_id) {
+            $session = $this->sessionsRepository->findOneById($session_id);
+        }
+
         // Get the suitable InstanceType for a task
         $instance_type = $this->getFirstInstanceType($task);
 
@@ -456,7 +447,7 @@ class SessionManager
 
         $env = new Environments;
 
-        $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
+        $env_status = $this->environmentStatusesRepository->findOneByStatus("New");
         $env->setStatus($env_status);
 
         $env->setTask($task);
@@ -482,13 +473,13 @@ class SessionManager
         $this->logger->debug('Instance `' . $instance->getName() . 
                 '` has been bound to the newly created environment.');
 
-        $this->setInstanceStatus($instance->getId(), "Running");
+//        $this->setInstanceStatus($instance->getId(), "Running");
 
-//	  $this->setEnvironmentStatus($env, "Created");
+        $this->envEventBus->dispatch(new EnvironmentEvent(["event" => "created", "id" => $env->getId()]));
 
         return $env;
     }
-*/
+
     public function verifyEnvironment(Environments $env): bool
     {
         $this->logger->debug(__METHOD__);
@@ -516,7 +507,7 @@ class SessionManager
 	  $this->setEnvironmentStatus($env, "Verified");
 
 	  // Release the Instance
-	  $this->releaseInstance($env->getInstance());
+//	  $this->releaseInstance($env->getInstance());
 
 	  return true;
 
@@ -526,7 +517,7 @@ class SessionManager
 	}
 
 	// Release the Instance
-	$this->releaseInstance($env->getInstance());
+//	$this->releaseInstance($env->getInstance());
 
 	return false;
     }
@@ -621,7 +612,7 @@ class SessionManager
 
         return $this->getRandomTask();
     }
-/*
+
     public function getFirstInstanceType(Tasks $task): ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
@@ -634,6 +625,6 @@ class SessionManager
             return NULL;
         }
     }
-*/
+
 }
 

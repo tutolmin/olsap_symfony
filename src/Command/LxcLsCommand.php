@@ -19,7 +19,7 @@ use App\Service\LxcManager;
     )]
 class LxcLsCommand extends Command {
 
-    private $lxd;
+    private $lxdService;
     private $io;
     
     // Doctrine EntityManager
@@ -32,7 +32,7 @@ class LxcLsCommand extends Command {
 
         $this->entityManager = $entityManager;
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
-        $this->lxd = $lxd;
+        $this->lxdService = $lxd;
     }
 
     protected function configure(): void {
@@ -45,7 +45,7 @@ class LxcLsCommand extends Command {
     private function listItems(array $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
-                $info = $this->lxd->getObjectInfo($object);
+                $info = $this->lxdService->getObjectInfo($object);
                 $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
             }
         }
@@ -54,7 +54,7 @@ class LxcLsCommand extends Command {
     private function listOrphanItems(array $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
-                $info = $this->lxd->getObjectInfo($object);
+                $info = $this->lxdService->getObjectInfo($object);
                 
                 // look for a specific instance type object
                 $obj = $this->instanceRepository->findOneByName($info['name']);
@@ -71,7 +71,7 @@ class LxcLsCommand extends Command {
         $this->io = new SymfonyStyle($input, $output);
 
         // Use Lxc service method
-        $objects = $this->lxd->getObjectList();
+        $objects = $this->lxdService->getObjectList();
 
         if (!$objects) {
             return Command::FAILURE;

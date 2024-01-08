@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Service\SessionManager;
+use App\Service\LxcManager;
 
 #[AsCommand(
             name: 'app:instances:start',
@@ -23,15 +23,15 @@ class InstancesStartCommand extends Command {
     private $entityManager;
     // Instances repo
     private $instancesRepository;
-    private $sessionManager;
+    private $lxcManager;
     
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager,
-            SessionManager $sessionManager) {
+            LxcManager $lxcManager) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->sessionManager = $sessionManager;
+        $this->lxcManager = $lxcManager;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
@@ -65,7 +65,7 @@ class InstancesStartCommand extends Command {
 
                 $io->note(sprintf('Sending "start" command for "%s"', $name));
 
-                $this->sessionManager->startInstance($instance);
+                $this->lxcManager->startInstance($instance);
             } else {
 
                 $io->error(sprintf('Instance "%s" is NOT stopped', $name));

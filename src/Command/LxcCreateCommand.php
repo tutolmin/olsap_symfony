@@ -19,7 +19,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
     )]
 class LxcCreateCommand extends Command {
 
-    private $lxd;
+    private $lxdService;
     private $lxdOperationBus;
     private $io;
     private $os_alias;
@@ -30,7 +30,7 @@ class LxcCreateCommand extends Command {
     public function __construct(LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
         parent::__construct();
 
-        $this->lxd = $lxd;
+        $this->lxdService = $lxd;
         $this->lxdOperationBus = $lxdOperationBus;
     }
 
@@ -76,7 +76,7 @@ class LxcCreateCommand extends Command {
             $this->io->note(sprintf('Creating new LXC object(s): %s %s',
                             $this->os_alias, $this->hp_name));
             for ($i = 0; $i < $this->object_number; $i++) {
-                if ($this->lxd->createObject($this->os_alias, $this->hp_name)) {
+                if ($this->lxdService->createObject($this->os_alias, $this->hp_name)) {
                     $this->io->note('Success!');
                 }
             }

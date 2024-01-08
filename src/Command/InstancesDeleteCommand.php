@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-use App\Service\SessionManager;
+use App\Service\LxcManager;
 
 #[AsCommand(
     name: 'app:instances:delete',
@@ -25,21 +25,20 @@ class InstancesDeleteCommand extends Command
 
     // Instances repo
     private $instancesRepository;
-    private $sessionManager;
+    private $lxcService;
 
     private $io;
     private $name;
-    private $force;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager,
-            SessionManager $sessionManager)
+            LxcManager $lxcService)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->sessionManager = $sessionManager;
+        $this->lxcService = $lxcService;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
@@ -74,14 +73,14 @@ class InstancesDeleteCommand extends Command
         $this->parseParams($input, $output);
 
         if ($this->name == "ALL") {
-            $this->sessionManager->deleteAllInstances();
+            $this->lxcService->deleteAllInstances();
         } else {
             // look for a specific instance object
             $instance = $this->instancesRepository->findOneByName($this->name);
             if (!$instance) {
                 $this->io->error(sprintf('Instance "%s" was not found', $this->name));
             }
-            $this->sessionManager->deleteInstance($instance);
+            $this->lxcService->deleteInstance($instance);
         }
 
         return Command::SUCCESS;

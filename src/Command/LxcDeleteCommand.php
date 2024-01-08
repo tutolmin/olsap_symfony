@@ -19,7 +19,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
     )]
 class LxcDeleteCommand extends Command {
 
-    private $lxd;
+    private $lxdService;
     private $lxdOperationBus;
     private $io;
     private $name;
@@ -29,7 +29,7 @@ class LxcDeleteCommand extends Command {
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
         parent::__construct();
-        $this->lxd = $lxd;
+        $this->lxdService = $lxd;
         $this->lxdOperationBus = $lxdOperationBus;
     }
 
@@ -62,7 +62,7 @@ class LxcDeleteCommand extends Command {
             $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAll"]));
         } else {
             $this->io->warning('Deleting all LXC objects');
-            if ($this->lxd->deleteAllObjects($this->force)) {
+            if ($this->lxdService->deleteAllObjects($this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure! Check object statuses.');
@@ -78,7 +78,7 @@ class LxcDeleteCommand extends Command {
         } else {
             $this->io->note(sprintf('Deleting LXC object: %s',
                             $this->name));
-            if ($this->lxd->deleteObject($this->name, $this->force)) {
+            if ($this->lxdService->deleteObject($this->name, $this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure!');

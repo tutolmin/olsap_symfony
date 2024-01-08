@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use App\Entity\HardwareProfiles;
-use App\Service\SessionManager;
+use App\Service\LxcManager;
 
 #[AsCommand(
     name: 'app:instances:create',
@@ -39,16 +39,16 @@ class InstancesCreateCommand extends Command
     // HardwareProfiles repo
     private $hpRepository;
 
-    private $sessionManager;
+    private $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxcService)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->sessionManager = $sessionManager;
+        $this->lxcService = $lxcService;
 
         // get the InstanceTypes repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
@@ -115,7 +115,7 @@ class InstancesCreateCommand extends Command
             for ($i = 0; $i < $this->number; $i++) {
                 $this->io->note(sprintf('Creating new Instances: %s %s',
                                 $this->os_alias, $this->hp_name));
-                $this->sessionManager->createInstance($instance_type);
+                $this->lxcService->createInstance($instance_type);
             }
         }
 
