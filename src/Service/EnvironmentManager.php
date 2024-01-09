@@ -39,27 +39,27 @@ class EnvironmentManager
     private $environmentStatusesRepository;
 
     private $sessionBus;
-    private $lxdOperationBus;
-    private $envEventBus;
+    private $lxcOperationBus;
+    private $environmentEventBus;
 
-    private $lxdService;
+    private $lxcService;
     private $awxService;
 //    private $sessionService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, //SessionManager $session,
-            MessageBusInterface $sessionBus, MessageBusInterface $lxdOperationBus,
-            MessageBusInterface $envEventBus)
+	LxcManager $lxc, AwxManager $awx, //SessionManager $session,
+            MessageBusInterface $sessionBus, MessageBusInterface $lxcOperationBus,
+            MessageBusInterface $environmentEventBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
-	$this->lxdService = $lxd;
+	$this->lxcService = $lxc;
 	$this->sessionBus = $sessionBus;
-	$this->lxdOperationBus = $lxdOperationBus;
+	$this->lxcOperationBus = $lxcOperationBus;
 	$this->awxService = $awx;
-        $this->envEventBus = $envEventBus;
+        $this->environmentEventBus = $environmentEventBus;
 //	$this->sessionService = $session;
 
         // get the repositories
@@ -77,11 +77,11 @@ class EnvironmentManager
         $this->logger->debug(__METHOD__);
 
         if ($async) {
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "createInstance",
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "createInstance",
                         "os" => $instance_type->getOs()->getAlias(),
                         "hp" => $instance_type->getHwProfile()->getName()]));
         } else {
-            return $this->lxdService->createInstance($instance_type->getOs()->getAlias(),
+            return $this->lxcService->createInstance($instance_type->getOs()->getAlias(),
                             $instance_type->getHwProfile()->getName());
         }
         return null;
@@ -148,10 +148,10 @@ class EnvironmentManager
         $this->logger->debug(__METHOD__);
 
         if ($async) {
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
                         "name" => $instance->getName()]));
         } else {
-            $this->lxdService->startObject($instance->getName());
+            $this->lxcService->startObject($instance->getName());
         }
     }
 
@@ -159,10 +159,10 @@ class EnvironmentManager
         $this->logger->debug(__METHOD__);
 
         if ($async) {
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "restartInstance",
                         "name" => $instance->getName()]));
         } else {
-            $this->lxdService->stopObject($instance->getName());
+            $this->lxcService->stopObject($instance->getName());
         }
     }
 
@@ -170,24 +170,24 @@ class EnvironmentManager
         $this->logger->debug(__METHOD__);
 
         if ($async) {
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "stopInstance",
                         "name" => $instance->getName()]));
         } else {
-            $this->lxdService->restartObject($instance->getName());
+            $this->lxcService->restartObject($instance->getName());
         }
     }
 
     public function deleteInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
+        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
                     "name" => $instance->getName()]));
     }
     
     public function deleteAllInstances() {
         $this->logger->debug(__METHOD__);
 
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
+        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
     }
 
     public function setInstanceStatus(int $instance_id, $status_str): bool {
@@ -437,7 +437,7 @@ class EnvironmentManager
         }
 
         // Get the suitable InstanceType for a task
-        $instance_type = $this->getFirstInstanceType($task);
+        $instance_type = $this->findSuitableInstanceType($task);
 
         if (!$instance_type) {
             $this->logger->debug('No suitable instance types are available for task: ' . $task);
@@ -475,7 +475,8 @@ class EnvironmentManager
 
 //        $this->setInstanceStatus($instance->getId(), "Running");
 
-        $this->envEventBus->dispatch(new EnvironmentEvent(["event" => "created", "id" => $env->getId()]));
+        $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
+            "id" => $env->getId()]));
 
         return $env;
     }
@@ -613,7 +614,7 @@ class EnvironmentManager
         return $this->getRandomTask();
     }
 
-    public function getFirstInstanceType(Tasks $task): ?InstanceTypes
+    public function findSuitableInstanceType(Tasks $task): ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
 

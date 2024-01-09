@@ -17,7 +17,7 @@ use Psr\Log\LoggerInterface;
 use App\Service\LxcManager;
 use App\Service\SessionManager;
 
-#[AsMessageHandler(fromTransport: 'async', bus: 'env.event.bus')]
+#[AsMessageHandler(fromTransport: 'async', bus: 'environment.event.bus')]
 final class EnvironmentEventHandler {
 
     // Logger reference
@@ -31,18 +31,18 @@ final class EnvironmentEventHandler {
     private $instanceRepository;
     // Message bus
     private $awxBus;
-    private $lxdBus;
-    private $lxdService;
+    private $lxcOperationBus;
+    private $lxcService;
     private $session;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $awxBus, MessageBusInterface $lxdBus,
-            LxcManager $lxd, SessionManager $session) {
+            MessageBusInterface $awxBus, MessageBusInterface $lxcOperationBus,
+            LxcManager $lxcService, SessionManager $session) {
         $this->logger = $logger;
         $this->awxBus = $awxBus;
-        $this->lxdBus = $lxdBus;
-        $this->lxdService = $lxd;
+        $this->lxcOperationBus = $lxcOperationBus;
+        $this->lxcService = $lxcService;
         $this->session = $session;
 
         $this->entityManager = $entityManager;
@@ -76,7 +76,7 @@ final class EnvironmentEventHandler {
 
                 $env = $this->environmentRepository->findOneById($id);
                 if ($env) {
-                    $this->lxdService->setInstanceStatus($env->getInstance()->getId(), "Running");
+                    $this->lxcService->setInstanceStatus($env->getInstance()->getId(), "Running");
 
                     $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
                     $env->setStatus($env_status);

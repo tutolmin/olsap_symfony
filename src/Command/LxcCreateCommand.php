@@ -10,8 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Service\LxcManager;
-use App\Message\LxcOperation;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
             name: 'lxc:create',
@@ -19,19 +17,17 @@ use Symfony\Component\Messenger\MessageBusInterface;
     )]
 class LxcCreateCommand extends Command {
 
-    private $lxdService;
-    private $lxdOperationBus;
+    private $lxcService;
     private $io;
     private $os_alias;
     private $hp_name;
     private $object_number;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
+    public function __construct(LxcManager $lxcService) {
         parent::__construct();
 
-        $this->lxdService = $lxd;
-        $this->lxdOperationBus = $lxdOperationBus;
+        $this->lxcService = $lxcService;
     }
 
     protected function configure(): void {
@@ -69,19 +65,19 @@ class LxcCreateCommand extends Command {
         if ($input->getOption('async')) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
             for ($i = 0; $i < $this->object_number; $i++) {
-                $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
-                            "os" => $this->os_alias, "hp" => $this->hp_name]));
+                $this->lxcService->createInstance($this->os_alias, $this->hp_name);
+                $this->io->note('Object creation initiated!');
             }
         } else {
             $this->io->note(sprintf('Creating new LXC object(s): %s %s',
                             $this->os_alias, $this->hp_name));
             for ($i = 0; $i < $this->object_number; $i++) {
-                if ($this->lxdService->createObject($this->os_alias, $this->hp_name)) {
-                    $this->io->note('Success!');
+                $instance = $this->lxcService->createObject($this->os_alias, $this->hp_name);
+                if ($instance) {
+                    $this->io->note(sprintf('Object %s created successfully!', $instance));
                 }
             }
         }
-
         return Command::SUCCESS;
     }
 }

@@ -13,29 +13,23 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\LxcManager;
-use Symfony\Component\Messenger\MessageBusInterface;
-use App\Message\LxcOperation;
 
 #[Route('/instances')]
 class InstancesController extends AbstractController
 {
     private $logger;
     private $lxcService;
-    private $lxcOperationBus;
 
     // Doctrine EntityManager
     private $entityManager;
     
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LoggerInterface $logger,
-            EntityManagerInterface $entityManager, LxcManager $lxcService,
-            MessageBusInterface $lxcOperationBus
-            ) {
+            EntityManagerInterface $entityManager, LxcManager $lxcService) {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->lxcService = $lxcService;
-        $this->lxcOperationBus = $lxcOperationBus;
 
         $this->entityManager = $entityManager;
     }
@@ -59,12 +53,14 @@ class InstancesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $instancesRepository->add($instance, true);
             $this->logger->debug("Number of Instances to create: " . $form->get('number')->getData());
 
             $this->logger->debug("Selected Instance type: " . $instance->getInstanceType());
+            
             for ($i = 0; $i < $form->get('number')->getData(); $i++) {
-//                $this->lxcService->createInstance($instance->getInstanceType());
+                
+                $this->lxcService->createInstance($instance->getInstanceType()->getOs()->getAlias(),
+                        $instance->getInstanceType()->getHwProfile()->getName());
             }
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -153,9 +149,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete' . $instance->getId(), $request->request->get('_token'))) {
-//            $this->lxcService->deleteInstance($instance);     
-            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
-                        "name" => $instance->getName()]));
+            $this->lxcService->deleteInstance($instance->getName());     
         }
 
         return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);

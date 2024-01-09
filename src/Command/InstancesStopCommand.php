@@ -23,16 +23,16 @@ class InstancesStopCommand extends Command {
     private $entityManager;
     // Instances repo
     private $instancesRepository;
-    private $lxdService;
+    private $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager,
-            LxcManager $lxcManager) {
+            LxcManager $lxcService) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 
-        $this->lxdService = $lxcManager;
+        $this->lxcService = $lxcService;
 
         // get the Instances repository
         $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
@@ -56,24 +56,14 @@ class InstancesStopCommand extends Command {
         // look for a specific instance object
         $instance = $this->instancesRepository->findOneByName($name);
 
-        if ($instance) {
-
-            $io->note(sprintf('Instance "%s" has been found in the database with ID: %d',
-                            $name, $instance->getId()));
-            
-            if ($instance->getStatus() != "Stopped" && $instance->getStatus() != "Sleeping") {
-
-                $io->note(sprintf('Sending "stop" command for "%s"', $name));
-
-                $this->lxdService->stopInstance($instance);
-            } else {
-
-                $io->error(sprintf('Instance "%s" is NOT started', $name));
-            }
-        } else {
-
+        if (!$instance) {
             $io->error(sprintf('Instance "%s" was not found', $name));
+            return Command::FAILURE;
         }
+
+        $io->note(sprintf('Sending "stop" command for "%s"', $name));
+
+        $this->lxcService->stopInstance($instance);
 
         return Command::SUCCESS;
     }

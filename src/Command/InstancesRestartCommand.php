@@ -54,27 +54,18 @@ class InstancesRestartCommand extends Command
             $io->note(sprintf('You passed an argument: %s', $name));
         }
 
-	// look for a specific instance object
-	$instance = $this->instancesRepository->findOneByName($name);
+        // look for a specific instance object
+        $instance = $this->instancesRepository->findOneByName($name);
 
-	if($instance) {
+        if (!$instance) {
 
-            $io->note(sprintf('Instance "%s" has been found in the database with ID: %d', 
-		$name, $instance->getId()));
+            $io->note('Instance "%s" was NOT found in the database.');
+            return Command::FAILURE;
+        }
 
-            if ($instance->getStatus() != "Started" && $instance->getStatus() != "Running") {
+        $io->note(sprintf('Sending "restart" command for "%s"', $name));
 
-                $io->note(sprintf('Sending "start" command for "%s"', $name));
-
-                $this->lxcService->startInstance($instance);
-            } else {
-
-                $io->error(sprintf('Instance "%s" is NOT stopped', $name));
-            }
-	} else {
-
-            $io->error(sprintf('Instance "%s" was not found', $name));
-	}
+        $this->lxcService->restartInstance($instance);
 
         return Command::SUCCESS;
     }

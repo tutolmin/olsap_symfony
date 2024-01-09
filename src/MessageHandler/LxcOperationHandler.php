@@ -4,7 +4,7 @@ namespace App\MessageHandler;
 
 use App\Message\LxcOperation;
 #use App\Message\LxcEvent;
-use App\Message\RunPlaybook;
+//use App\Message\RunPlaybook;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -23,7 +23,7 @@ use App\Service\LxcManager;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 */
-#[AsMessageHandler(fromTransport: 'async', bus: 'lxd.operation.bus')]
+#[AsMessageHandler(fromTransport: 'async', bus: 'lxc.operation.bus')]
 final class LxcOperationHandler
 {
     // Logger reference
@@ -41,20 +41,20 @@ final class LxcOperationHandler
     // Message bus
     private $awxBus;
     private $lxdEventBus;
-    private $lxdOperationBus;
+    private $lxcOperationBus;
 
-    private $lxd;
+    private $lxcService;
 
     public function __construct(
 	LoggerInterface $logger, EntityManagerInterface $entityManager,
 	MessageBusInterface $awxBus, MessageBusInterface $lxdEventBus, 
-        MessageBusInterface $lxdOperationBus, LxcManager $lxd)
+        MessageBusInterface $lxcOperationBus, LxcManager $lxcService)
     {
         $this->logger = $logger;
         $this->awxBus = $awxBus;
         $this->lxdEventBus = $lxdEventBus;
-        $this->lxdOperationBus = $lxdOperationBus;
-	$this->lxd = $lxd;
+        $this->lxcOperationBus = $lxcOperationBus;
+	$this->lxcService = $lxcService;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository( InstanceTypes::class);
@@ -110,7 +110,7 @@ final class LxcOperationHandler
 
         // Switch command to serve
 	switch( $message->getCommand()) {
-
+/*
 	// Binding some orphan instance to an env
 	case "bind":
 
@@ -138,7 +138,7 @@ final class LxcOperationHandler
 	  } else {
 
 	      // Send message to request creation of the instance of the certain type
-              $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "create",
+              $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
                 "environment_id" => $environment->getId(),
                 "instance_type_id" => $instance_type->getId()]));
 
@@ -147,26 +147,22 @@ final class LxcOperationHandler
                 "environment_id" => $environment->getId()]));
 	  }
 
-
 	  break;
-
-	// Creating new LXC instance
+*/
+	// Creating new LXC object
 	case "create":
-	case "createInstance":
 
-	  // REQUIRED: InstanceTypeId
 	  if(!$os || !$hp) {
             $this->logger->error( "OS & HP is required for `" . $message->getCommand() . "` LXD command");
 	    break;
 	  }
 
-	  $this->logger->debug( "Creating LXC instance, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-	  $this->lxd->createObject($os, $hp);
+	  $this->logger->debug( "Creating LXC object, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
+	  $this->lxcService->createObject($os, $hp);
 
 	  break;
           
 	case "restart":
-	case "restartInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -177,12 +173,11 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->restartObject($name);    
+	  $responce = $this->lxcService->restartObject($name);    
           
 	  break;
           
 	case "start":
-	case "startInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -193,12 +188,11 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->startObject($name);
+	  $responce = $this->lxcService->startObject($name);
             
 	  break;
           
 	case "stop":
-	case "stopInstance":
 
 	  // REQUIRED: name
 	  if(!$name) {
@@ -209,7 +203,7 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->stopObject($name);
+	  $responce = $this->lxcService->stopObject($name);
   
 	  break;
 
@@ -222,34 +216,14 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxd->deleteObject($name);	
-
-	  break;
-
-        case "deleteInstance":
-            
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
-
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for Instance: `" . $name . "`");
-	  $responce = $this->lxd->deleteInstance($name);	
+	  $responce = $this->lxcService->deleteObject($name);	
 
 	  break;
 
 	case "deleteAll":
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
-	  $responce = $this->lxd->deleteAllObjects(true);	
-
-	  break;
-      
-	case "deleteAllInstances":
-
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
-	  $responce = $this->lxd->deleteAllInstances(true);	
+	  $responce = $this->lxcService->deleteAllObjects(true);	
 
 	  break;
 

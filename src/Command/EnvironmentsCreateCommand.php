@@ -24,7 +24,7 @@ class EnvironmentsCreateCommand extends Command {
     private $taskRepository;
 
     private $envs_number;
-    private $environmentManager;
+    private $environmentService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager,
@@ -33,7 +33,7 @@ class EnvironmentsCreateCommand extends Command {
 
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
-        $this->environmentManager = $environmentManager;
+        $this->environmentService = $environmentManager;
     }
 
     protected function configure(): void {
@@ -68,7 +68,7 @@ class EnvironmentsCreateCommand extends Command {
         }
         for ($i = 0; $i < $this->envs_number; $i++) {
             // Create an environment and underlying LXC instance
-            $environment = $this->environmentManager->createEnvironment($task, null, false);
+            $environment = $this->environmentService->createEnvironment($task, null, false);
             $io->note('Environment `' . $environment . '` was created.');
         }
         // TODO: handle exception

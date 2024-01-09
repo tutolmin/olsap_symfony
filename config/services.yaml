@@ -49,25 +49,25 @@ services:
         autoconfigure: false
         
     App\MessageHandler\EnvironmentActionHandler:
-        tags: [{ name: messenger.message_handler, bus: env.action.bus }]
+        tags: [{ name: messenger.message_handler, bus: environment.action.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false    
         
     App\MessageHandler\EnvironmentEventHandler:
-        tags: [{ name: messenger.message_handler, bus: env.event.bus }]
+        tags: [{ name: messenger.message_handler, bus: environment.event.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false
 
     App\MessageHandler\LxcOperationHandler:
-        tags: [{ name: messenger.message_handler, bus: lxd.operation.bus }]
+        tags: [{ name: messenger.message_handler, bus: lxc.operation.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false
 
     App\MessageHandler\LxcEventHandler:
-        tags: [{ name: messenger.message_handler, bus: lxd.event.bus }]
+        tags: [{ name: messenger.message_handler, bus: lxc.event.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false

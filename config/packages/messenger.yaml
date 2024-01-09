@@ -14,12 +14,12 @@ framework:
 #                     - handle_message
                 default_middleware: allow_no_handlers
                 
-            env.action.bus:
+            environment.action.bus:
                 middleware:
 #                     - handle_message
                 default_middleware: allow_no_handlers
                 
-            env.event.bus:
+            environment.event.bus:
                 middleware:
 #                     - handle_message
                 default_middleware: allow_no_handlers
@@ -33,7 +33,7 @@ framework:
                 # configured for this bus without throwing an exception
                 default_middleware: allow_no_handlers
 
-            lxd.operation.bus:
+            lxc.operation.bus:
                 middleware:
 #                     - handle_message
 #                    - validation
@@ -41,7 +41,7 @@ framework:
                 # configured for this bus without throwing an exception
                 default_middleware: allow_no_handlers
 
-            lxd.event.bus:
+            lxc.event.bus:
                 middleware:
 #                     - handle_message
 #                    - validation

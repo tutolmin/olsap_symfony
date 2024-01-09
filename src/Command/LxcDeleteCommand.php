@@ -19,18 +19,18 @@ use Symfony\Component\Messenger\MessageBusInterface;
     )]
 class LxcDeleteCommand extends Command {
 
-    private $lxdService;
-    private $lxdOperationBus;
+    private $lxcService;
+    private $lxcOperationBus;
     private $io;
     private $name;
     private $force;
     private $async;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(LxcManager $lxd, MessageBusInterface $lxdOperationBus) {
+    public function __construct(LxcManager $lxcService, MessageBusInterface $lxcOperationBus) {
         parent::__construct();
-        $this->lxdService = $lxd;
-        $this->lxdOperationBus = $lxdOperationBus;
+        $this->lxcService = $lxcService;
+        $this->lxcOperationBus = $lxcOperationBus;
     }
 
     protected function configure(): void {
@@ -59,10 +59,10 @@ class LxcDeleteCommand extends Command {
     private function deleteAllObjects() {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message'));
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAll"]));
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteAll"]));
         } else {
             $this->io->warning('Deleting all LXC objects');
-            if ($this->lxdService->deleteAllObjects($this->force)) {
+            if ($this->lxcService->deleteAllObjects($this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure! Check object statuses.');
@@ -73,12 +73,12 @@ class LxcDeleteCommand extends Command {
     private function deleteObject() {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "delete",
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "delete",
                         "name" => $this->name]));
         } else {
             $this->io->note(sprintf('Deleting LXC object: %s',
                             $this->name));
-            if ($this->lxdService->deleteObject($this->name, $this->force)) {
+            if ($this->lxcService->deleteObject($this->name, $this->force)) {
                 $this->io->note('Success!');
             } else {
                 $this->io->error('Failure!');

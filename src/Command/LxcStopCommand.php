@@ -19,15 +19,15 @@ use Symfony\Component\Messenger\MessageBusInterface;
 )]
 class LxcStopCommand extends Command
 {
-    private $lxdService;
-    private $lxdOperationBus;
+    private $lxcService;
+    private $lxcOperationBus;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( LxcManager $lxd, MessageBusInterface $lxdOperationBus)
+    public function __construct( LxcManager $lxcService, MessageBusInterface $lxcOperationBus)
     {
         parent::__construct();
-        $this->lxdService = $lxd;
-        $this->lxdOperationBus = $lxdOperationBus;
+        $this->lxcService = $lxcService;
+        $this->lxcOperationBus = $lxcOperationBus;
     }
 
     protected function configure(): void
@@ -49,10 +49,10 @@ class LxcStopCommand extends Command
 
         if ($input->getOption('async')) {
             $io->note(sprintf('Dispatching LXC command message'));
-            $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $name]));            
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $name]));            
         } else {
             $io->note(sprintf('Stopping LXC object: %s', $name));
-            if( !$this->lxdService->stopObject($name)){
+            if( !$this->lxcService->stopObject($name)){
                 return Command::FAILURE;
             }
         }

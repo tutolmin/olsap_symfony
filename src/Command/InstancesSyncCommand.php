@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Instances;
-//use App\Entity\InstanceStatuses;
 use App\Service\LxcManager;
 
 #[AsCommand(
@@ -20,20 +19,20 @@ use App\Service\LxcManager;
     )]
 class InstancesSyncCommand extends Command {
 
-    private $lxdService;
+    private $lxcService;
     // Doctrine EntityManager
     private $entityManager;
     private $instanceRepository;
 
 //    private $instanceStatusRepository;
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(EntityManagerInterface $entityManager, LxcManager $lxd) {
+    public function __construct(EntityManagerInterface $entityManager, LxcManager $lxcService) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
 //        $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
-        $this->lxdService = $lxd;
+        $this->lxcService = $lxcService;
 //        $this->session = $session;
     }
 
@@ -51,9 +50,9 @@ class InstancesSyncCommand extends Command {
         $instances = $this->instanceRepository->findAll();
 
         foreach ($instances as $instance) {
-            $info = $this->lxdService->getObjectInfo($instance->getName());
+            $info = $this->lxcService->getObjectInfo($instance->getName());
             if ($info) {
-                $this->lxdService->setInstanceStatus($instance->getId(), $info['status']);
+                $this->lxcService->setInstanceStatus($instance->getId(), $info['status']);
             } else {
                 $io->error(sprintf('Instance "%s" was not found in LXD, run app:instances:ls --orphans',
                                 $instance->getName()));

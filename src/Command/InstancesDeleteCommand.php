@@ -6,7 +6,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-//use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -29,6 +29,7 @@ class InstancesDeleteCommand extends Command
 
     private $io;
     private $name;
+    private $force;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager,
@@ -48,24 +49,21 @@ class InstancesDeleteCommand extends Command
     {
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'Specify instance name to delete or <ALL>')
-//            ->addOption('force', null, InputOption::VALUE_NONE, 'Forcefully stop the container before deletion')
+            ->addOption('force', null, InputOption::VALUE_NONE, 'Forcefully stop the LXC object before deletion')
         ;
     }
 
     private function parseParams($input, $output) {
         $this->io = new SymfonyStyle($input, $output);
         $this->name = $input->getArgument('name');
-//        $this->force = $input->getOption('force');
+        $this->force = $input->getOption('force');
 
         if ($this->name) {
             $this->io->note(sprintf('You passed an argument: %s', $this->name));
         }
-/*
         if ($this->force) {
             $this->io->warning('You passed a force option');
         }
- * 
- */
     }
     
     
@@ -73,14 +71,14 @@ class InstancesDeleteCommand extends Command
         $this->parseParams($input, $output);
 
         if ($this->name == "ALL") {
-            $this->lxcService->deleteAllInstances();
+            $this->lxcService->deleteAllInstances($this->force);
         } else {
             // look for a specific instance object
             $instance = $this->instancesRepository->findOneByName($this->name);
             if (!$instance) {
                 $this->io->error(sprintf('Instance "%s" was not found', $this->name));
             }
-            $this->lxcService->deleteInstance($instance);
+            $this->lxcService->deleteInstance($instance, $this->force);
         }
 
         return Command::SUCCESS;

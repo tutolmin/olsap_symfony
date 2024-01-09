@@ -15,7 +15,7 @@ use App\Entity\Environments;
 use Psr\Log\LoggerInterface;
 use App\Service\LxcManager;
 
-#[AsMessageHandler(fromTransport: 'async', bus: 'lxd.event.bus')]
+#[AsMessageHandler(fromTransport: 'async', bus: 'lxc.event.bus')]
 final class LxcEventHandler {
 
     // Logger reference
@@ -28,17 +28,15 @@ final class LxcEventHandler {
     private $instanceRepository;
     // Message bus
     private $awxBus;
-    private $lxdBus;
-    private $lxdService;
+    private $lxcService;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $awxBus, MessageBusInterface $lxdBus, 
-            LxcManager $lxd) {
+            MessageBusInterface $awxBus, 
+            LxcManager $lxcService) {
         $this->logger = $logger;
         $this->awxBus = $awxBus;
-        $this->lxdBus = $lxdBus;
-        $this->lxdService = $lxd;
+        $this->lxcService = $lxcService;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
@@ -89,7 +87,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->lxdService->setInstanceStatus($instance->getId(), "Started");
+                    $this->lxcService->setInstanceStatus($instance->getId(), "Started");
                 }
                 # TODO: Handle exception
                 break;
@@ -107,7 +105,7 @@ final class LxcEventHandler {
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
-                    $this->lxdService->setInstanceStatus($instance->getId(), "Stopped");
+                    $this->lxcService->setInstanceStatus($instance->getId(), "Stopped");
                 }
                 # TODO: Handle exception
                 break;
