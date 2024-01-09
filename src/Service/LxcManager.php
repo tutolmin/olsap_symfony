@@ -337,7 +337,7 @@ class LxcManager
             }
         }
 
-        $this->stop($name, $force);
+        $this->stop($name, $force, false);
 
         try {
             $this->lxcService->containers->remove($name, $this->wait);
@@ -585,53 +585,5 @@ class LxcManager
         }
         return $status;
     }
-/*
-    public function startInstance(Instances $instance, bool $async = true) {
-        $this->logger->debug(__METHOD__);
-
-        if ($async) {
-            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start",
-                        "name" => $instance->getName()]));
-        } else {
-            $this->lxcService->startObject($instance->getName());
-        }
-    }
-
-    public function restart(Instances $instance, bool $async = true) {
-        $this->logger->debug(__METHOD__);
-
-        if ($async) {
-            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "restart",
-                        "name" => $instance->getName()]));
-        } else {
-            $this->lxcService->restartObject($instance->getName());
-        }
-    }
-
-    public function stop(Instances $instance, bool $async = true) {
-        $this->logger->debug(__METHOD__);
-
-        if ($async) {
-            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "stop",
-                        "name" => $instance->getName()]));
-        } else {
-            $this->lxcService->stopObject($instance->getName());
-        }
-    }
-
-    public function deleteInstance(Instances $instance) {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteInstance",
-                    "name" => $instance->getName()]));
-    }
-
-    public function deleteAllInstances() {
-        $this->logger->debug(__METHOD__);
-
-        $this->lxdOperationBus->dispatch(new LxcOperation(["command" => "deleteAllInstances"]));
-    }
-*/
-
 }
 

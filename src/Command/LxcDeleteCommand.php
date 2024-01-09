@@ -63,7 +63,7 @@ class LxcDeleteCommand extends Command {
         } else {
             $this->io->warning('Deleting all LXC objects');
             if ($this->lxcService->deleteAllObjects($this->force)) {
-                $this->io->note('Success!');
+                $this->io->success('Success!');
             } else {
                 $this->io->error('Failure! Check object statuses.');
             }
@@ -79,7 +79,7 @@ class LxcDeleteCommand extends Command {
             $this->io->note(sprintf('Deleting LXC object: %s',
                             $this->name));
             if ($this->lxcService->deleteObject($this->name, $this->force)) {
-                $this->io->note('Success!');
+                $this->io->success('Success!');
             } else {
                 $this->io->error('Failure!');
             }
