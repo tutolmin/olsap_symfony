@@ -59,14 +59,15 @@ class InstancesRestartCommand extends Command
 
         if (!$instance) {
 
-            $io->note('Instance "%s" was NOT found in the database.');
+            $io->error('Instance "%s" was NOT found in the database.');
             return Command::FAILURE;
         }
 
         $io->note(sprintf('Sending "restart" command for "%s"', $name));
 
-        $this->lxcService->restartInstance($instance);
+        $this->lxcService->restart($instance);
 
+        $io->success('Success!');
         return Command::SUCCESS;
     }
 }

@@ -63,8 +63,9 @@ class InstancesStartCommand extends Command {
 
         $io->note(sprintf('Sending "start" command for "%s"', $name));
 
-        $this->lxcService->startInstance($instance);
-
+        $this->lxcService->start($instance->getName());
+            
+        $io->success('Success!');
         return Command::SUCCESS;
     }
 }

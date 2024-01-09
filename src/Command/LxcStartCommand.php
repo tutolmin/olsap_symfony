@@ -10,8 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use App\Service\LxcManager;
-use App\Message\LxcOperation;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsCommand(
     name: 'lxc:start',
@@ -20,14 +18,12 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class LxcStartCommand extends Command
 {
     private $lxcService;
-    private $lxcOperationBus;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( LxcManager $lxcService, MessageBusInterface $lxcOperationBus)
+    public function __construct( LxcManager $lxcService)
     {
         parent::__construct();
         $this->lxcService = $lxcService;
-        $this->lxcOperationBus = $lxcOperationBus;
     }
 
     protected function configure(): void
@@ -38,8 +34,7 @@ class LxcStartCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
+    protected function execute(InputInterface $input, OutputInterface $output): int {
         $io = new SymfonyStyle($input, $output);
         $name = $input->getArgument('name');
 
@@ -47,14 +42,14 @@ class LxcStartCommand extends Command
             $io->note(sprintf('You passed an argument: %s', $name));
         }
 
-        if ($input->getOption('async')) {
-            $io->note(sprintf('Dispatching LXC command message'));
-            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name]));            
-        } else {
-            $io->note(sprintf('Starting LXC object: %s', $name));
-            $this->lxcService->startObject($name);
-        }
+        $io->note(sprintf('Starting LXC object: %s', $name));
 
+        if (!$this->lxcService->start($name, false, $input->getOption('async'))) {
+            $io->error('Failure! Check object name and status.');
+            return Command::FAILURE;
+        }
+        
+        $io->success('Success!');
         return Command::SUCCESS;
     }
 }

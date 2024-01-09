@@ -158,7 +158,7 @@ final class LxcOperationHandler
 	  }
 
 	  $this->logger->debug( "Creating LXC object, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-	  $this->lxcService->createObject($os, $hp);
+	  $this->lxcService->create($os, $hp, false);
 
 	  break;
           
@@ -173,7 +173,7 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->restartObject($name);    
+	  $responce = $this->lxcService->restart($name, false, false);    
           
 	  break;
           
@@ -188,7 +188,7 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->startObject($name);
+	  $responce = $this->lxcService->start($name, false, false);
             
 	  break;
           
@@ -203,7 +203,7 @@ final class LxcOperationHandler
 	  # TODO: Check state: can not stop already stopped unless forced
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->stopObject($name);
+	  $responce = $this->lxcService->stop($name, false, false);
   
 	  break;
 

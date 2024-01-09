@@ -62,22 +62,17 @@ class LxcCreateCommand extends Command {
 
         $this->parseParams($input, $output);
 
-        if ($input->getOption('async')) {
-            $this->io->note(sprintf('Dispatching LXC command message(s)'));
-            for ($i = 0; $i < $this->object_number; $i++) {
-                $this->lxcService->createInstance($this->os_alias, $this->hp_name);
-                $this->io->note('Object creation initiated!');
-            }
-        } else {
-            $this->io->note(sprintf('Creating new LXC object(s): %s %s',
-                            $this->os_alias, $this->hp_name));
-            for ($i = 0; $i < $this->object_number; $i++) {
-                $instance = $this->lxcService->createObject($this->os_alias, $this->hp_name);
-                if ($instance) {
-                    $this->io->note(sprintf('Object %s created successfully!', $instance));
-                }
+        $this->io->note(sprintf('Creating new LXC object(s): %s %s',
+                        $this->os_alias, $this->hp_name));
+        for ($i = 0; $i < $this->object_number; $i++) {
+            if ($this->lxcService->create($this->os_alias, $this->hp_name,
+                            $input->getOption('async'))) {
+                $this->io->success('Object created successfully!');
+            } else {
+                $this->io->error(sprintf('Object creation failure!'));
             }
         }
+
         return Command::SUCCESS;
     }
 }

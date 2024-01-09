@@ -152,19 +152,14 @@ class LxcManager
 //        return $instance;
     }
 
-    public function createInstance($os_alias, $hp_name, bool $async = true) {//: ?InstanceTypes
+    public function create($os_alias, $hp_name, bool $async = true): bool {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
                         "os" => $os_alias, "hp" => $hp_name]));
-        } else {
-            return $this->createObject($os_alias, $hp_name);
+            return true;
         }
-    }
-
-    public function createObject($os_alias, $hp_name) {//: ?InstanceTypes
-        $this->logger->debug(__METHOD__);
 
         $this->logger->debug("Creating LXC object: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
 
@@ -206,64 +201,82 @@ class LxcManager
 
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
-        return $instance;
+        return true;
     }
 
-    public function startObject($name, $force = false) {//: ?InstanceTypes
+    public function start($name, $force = false, bool $async = true): bool {
         $this->logger->debug(__METHOD__);
 
-        $this->logger->debug("Starting LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name]));
+            return true;
+        }
+
+        $this->logger->debug("Starting LXC object: `" . $name . "`, timeout: " . 
+                $this->timeout . ", force: " . ($force ? "true" : "false"));
 
         $info = $this->getObjectInfo($name);
 
-        if ($info && $info["status"] != "Started") {
-            $responce = $this->lxcService->containers->start($name, $this->timeout, $force, false, $this->wait);
+        if ($info && $info["status"] != "Running") {
+            $this->lxcService->containers->start($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxcEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
-            return $responce;
+            return true;
         }
 
         //TODO: Handle exception
 
-        return null;
+        return false;
     }
 
-    public function stopObject($name, $force = false) {//: ?InstanceTypes
+    public function stop($name, $force = false, bool $async = true): bool {
         $this->logger->debug(__METHOD__);
-
-        $this->logger->debug("Stopping LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "stop", "name" => $name]));
+            return true;
+        }
+        
+        $this->logger->debug("Stopping LXC object: `" . $name . "`, timeout: " . 
+                $this->timeout . ", force: " . ($force ? "true" : "false"));
 
         $info = $this->getObjectInfo($name);
 
         if ($info && $info["status"] != "Stopped") {
-            $responce = $this->lxcService->containers->stop($name, $this->timeout, $force, false, $this->wait);
+            $this->lxcService->containers->stop($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxcEventBus->dispatch(new LxcEvent(["event" => "stopped", "name" => $name]));
-            return $responce;
+            return true;
         }
 
         //TODO: Handle exception
 
-        return null;
+        return false;
     }
 
-    public function restartObject($name, $force = false) {//: ?InstanceTypes
+    public function restart($name, $force = false, bool $async = true): bool {
         $this->logger->debug(__METHOD__);
-
-        $this->logger->debug("Restarting LXC object: `" . $name . "`, timeout: " . $this->timeout . ", force: " . ($force ? "true" : "false"));
+        
+        if ($async) {
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "restart", "name" => $name]));
+            return true;
+        }
+        
+        $this->logger->debug("Restarting LXC object: `" . $name . "`, timeout: " . 
+                $this->timeout . ", force: " . ($force ? "true" : "false"));
 
         $info = $this->getObjectInfo($name);
 
         if ($info) {
-            $responce = $this->lxcService->containers->restart($name, $this->timeout, $force, false, $this->wait);
+            $this->lxcService->containers->restart($name, $this->timeout, $force, false, $this->wait);
             $this->logger->debug('Dispatching LXC event message');
             $this->lxcEventBus->dispatch(new LxcEvent(["event" => "started", "name" => $name]));
-            return $responce;
+            return true;
         }
 
         //TODO: Handle exception
 
-        return null;
+        return false;
     }
 
     public function deleteObject($name, $force = false) {//: ?InstanceTypes
@@ -324,7 +337,7 @@ class LxcManager
             }
         }
 
-        $this->stopObject($name, $force);
+        $this->stop($name, $force);
 
         try {
             $this->lxcService->containers->remove($name, $this->wait);
@@ -572,7 +585,7 @@ class LxcManager
         }
         return $status;
     }
-
+/*
     public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
@@ -584,7 +597,7 @@ class LxcManager
         }
     }
 
-    public function restartInstance(Instances $instance, bool $async = true) {
+    public function restart(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
@@ -595,7 +608,7 @@ class LxcManager
         }
     }
 
-    public function stopInstance(Instances $instance, bool $async = true) {
+    public function stop(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
@@ -606,7 +619,6 @@ class LxcManager
         }
     }
 
-/*
     public function deleteInstance(Instances $instance) {
         $this->logger->debug(__METHOD__);
 

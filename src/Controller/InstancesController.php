@@ -59,7 +59,7 @@ class InstancesController extends AbstractController
             
             for ($i = 0; $i < $form->get('number')->getData(); $i++) {
                 
-                $this->lxcService->createInstance($instance->getInstanceType()->getOs()->getAlias(),
+                $this->lxcService->create($instance->getInstanceType()->getOs()->getAlias(),
                         $instance->getInstanceType()->getHwProfile()->getName());
             }
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
@@ -113,7 +113,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
-            $this->lxcService->startInstance($instance);            
+            $this->lxcService->start($instance->getName());            
          }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -125,7 +125,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {       
-            $this->lxcService->stopInstance($instance);            
+            $this->lxcService->stop($instance->getName());            
         }
 
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);
@@ -137,7 +137,7 @@ class InstancesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {            
-            $this->lxcService->restartInstance($instance);            
+            $this->lxcService->restart($instance->getName());            
         }
             
         return $this->redirectToRoute('app_instances_show', ['id'=>$instance->getId()], Response::HTTP_SEE_OTHER);

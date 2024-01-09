@@ -63,8 +63,9 @@ class InstancesStopCommand extends Command {
 
         $io->note(sprintf('Sending "stop" command for "%s"', $name));
 
-        $this->lxcService->stopInstance($instance);
+        $this->lxcService->stop($instance);
 
+        $io->success('Success!');
         return Command::SUCCESS;
     }
 }

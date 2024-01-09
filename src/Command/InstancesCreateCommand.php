@@ -87,35 +87,18 @@ class InstancesCreateCommand extends Command
             $this->number = intval($input->getArgument('number'));
         }
     }
-    
+
     protected function execute(InputInterface $input, OutputInterface $output): int {
 
         $this->parseParams($input, $output);
 
-        // look for a specific OperatingSystems object
-        $os = $this->osRepository->findOneByAlias($this->os_alias);
-
-        // look for a specific HardwareProfiles object
-        $hp = $this->hpRepository->findOneByName($this->hp_name);
-
-        // Both OS and HW profile objects found
-        if (!$os || !$hp) {
-            $this->io->warning('OS alias or HW profile name is invalid. Check your input!');
-            return Command::FAILURE;
-        }
-        
-        // look for a specific instance type object
-        $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
-        if (!$instance_type) {
-            $this->io->error('Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command.');
-            return Command::FAILURE;
-        } else {
-            $this->io->note(sprintf('We are going to create %d instances', $this->number));
-
-            for ($i = 0; $i < $this->number; $i++) {
-                $this->io->note(sprintf('Creating new Instances: %s %s',
-                                $this->os_alias, $this->hp_name));
-                $this->lxcService->createInstance($instance_type);
+        $this->io->note(sprintf('Creating new Instance(s): %s %s',
+                        $this->os_alias, $this->hp_name));
+        for ($i = 0; $i < $this->number; $i++) {
+            if ($this->lxcService->create($this->os_alias, $this->hp_name)) {
+                $this->io->success('Instance created successfully!');
+            } else {
+                $this->io->error('Object creation failure!');
             }
         }
 

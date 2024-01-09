@@ -112,7 +112,7 @@ class EnvironmentManager
             $this->logger->debug('Suitable stopped instance has been found: ' . $stopped_instance);
 
             // start instance asyncroneously
-            $this->startInstance($stopped_instance, false);
+//            $this->start($stopped_instance, false);
 
             return $stopped_instance;
         }
@@ -139,11 +139,11 @@ class EnvironmentManager
 	$this->entityManager->flush();
 
 	// stop instance for the time being
-	$this->stopInstance($instance);
+//	$this->stopInstance($instance);
 
 	return true;
     }
-
+/*
     public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
@@ -151,7 +151,7 @@ class EnvironmentManager
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "startInstance",
                         "name" => $instance->getName()]));
         } else {
-            $this->lxcService->startObject($instance->getName());
+            $this->lxcService->start($instance->getName());
         }
     }
 
@@ -221,7 +221,7 @@ class EnvironmentManager
 
         return true;
     }
-
+*/
     private function tweakInstanceStatus(int $instance_id, string $status_str): InstanceStatuses {
 
         $this->logger->debug(__METHOD__);
