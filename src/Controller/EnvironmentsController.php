@@ -15,12 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\SessionManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
+use App\Service\EnvironmentManager;
 
 #[Route('/environments')]
 class EnvironmentsController extends AbstractController
 {
     private $logger;
     private $sessionManager;
+    private $environmentService;
     private $sessionBus;
 
     // InstanceTypes repo
@@ -28,12 +30,12 @@ class EnvironmentsController extends AbstractController
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( SessionManager $sessionManager, MessageBusInterface $sessionBus,
-	LoggerInterface $logger)
+	LoggerInterface $logger, EnvironmentManager $environmentService)
     {   
 
 //        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
-
+        $this->environmentService = $environmentService;
         $this->sessionBus = $sessionBus;
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -53,7 +55,7 @@ class EnvironmentsController extends AbstractController
     }
 
     #[Route('/new', name: 'app_environments_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EnvironmentsRepository $environmentsRepository): Response
+    public function new(Request $request): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -62,7 +64,20 @@ class EnvironmentsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $environmentsRepository->add($environment, true);
+            $this->logger->debug("Number of Environments to create: " . $form->get('number')->getData());
+
+            $this->logger->debug("Selected Task: " . $environment->getTask() .
+                    " Session: " . $environment->getSession());
+
+            for ($i = 0; $i < $form->get('number')->getData(); $i++) {
+
+                if ($environment->getSession()) {
+                    $this->environmentService->createEnvironment($environment->getTask()->getId(),
+                            $environment->getSession()->getId());
+                } else {
+                    $this->environmentService->createEnvironment($environment->getTask()->getId(), null);
+                }
+            }
 
             return $this->redirectToRoute('app_environments_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -82,9 +97,9 @@ class EnvironmentsController extends AbstractController
 
 	// Some envs (Skipped/Verified) might not have linked instances
 	$port = "";
-	if($environment->getInstance())
+	if($environment->getInstance()){
 	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
-
+        }
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
             'test_username' => $_ENV['APP_USERNAME'],
@@ -147,9 +162,9 @@ class EnvironmentsController extends AbstractController
 
 	// Some envs (Skipped/Verified) might not have linked instances
 	$port = "";
-	if($environment->getInstance())
+	if($environment->getInstance()){
 	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
-
+        }
         return $this->render('environments/show.html.twig', [
             'test_username' => $_ENV['APP_USERNAME'],
             'public_ip' => $_ENV['APP_PUBLIC_IP'],
@@ -188,9 +203,9 @@ class EnvironmentsController extends AbstractController
             // Release instance
 	    $instance = $environment->getInstance();
 
-	    if($instance)
+        if($instance){
 	      $this->sessionManager->releaseInstance($instance);
-
+        }
             $environmentsRepository->remove($environment, true);
         }
 

@@ -152,13 +152,13 @@ class LxcManager
 //        return $instance;
     }
 
-    public function create($os_alias, $hp_name, bool $async = true): bool {
+    public function create($os_alias, $hp_name, bool $async = true): ?Instances {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
                         "os" => $os_alias, "hp" => $hp_name]));
-            return true;
+            return null;
         }
 
         $this->logger->debug("Creating LXC object: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
@@ -168,7 +168,7 @@ class LxcManager
 
         if (!$instance) {
             $this->logger->debug("Instance creation failure");
-            return false;
+            return null;
         }
 
 //        $addresses = $instance->getAddresses();
@@ -201,7 +201,7 @@ class LxcManager
 
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
-        return true;
+        return $instance;
     }
 
     public function start($name, $force = false, bool $async = true): bool {

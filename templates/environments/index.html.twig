@@ -5,6 +5,7 @@
 {% block body %}
     <h1>Environments index</h1>
 
+    <a href="{{ path('app_environments_new') }}">Create new</a>
     <table class="table">
         <thead>
             <tr>
@@ -32,7 +33,9 @@
                 <td>{{ (environment.valid == NULL) ? 'check pending' : (environment.valid ? 'True' : 'False') }}</td>
                 <td>
                     <a href="{{ path('app_environments_show', {'id': environment.id}) }}">show</a>
+<!--
                     <a href="{{ path('app_environments_edit', {'id': environment.id}) }}">edit</a>
+-->
                 </td>
             </tr>
         {% else %}
@@ -43,5 +46,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_environments_new') }}">Create new</a>
 {% endblock %}

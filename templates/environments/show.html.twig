@@ -63,8 +63,8 @@ Verification: /jobs/playbook/{{ environment.verification }}/output</td>
     </table>
 
     <a href="{{ path('app_environments_index') }}">back to list</a>
-
+<!--
     <a href="{{ path('app_environments_edit', {'id': environment.id}) }}">edit</a>
-
+-->
     {{ include('environments/_delete_form.html.twig') }}
 {% endblock %}

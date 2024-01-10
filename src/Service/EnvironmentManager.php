@@ -41,6 +41,7 @@ class EnvironmentManager
     private $sessionBus;
     private $lxcOperationBus;
     private $environmentEventBus;
+    private $environmentActionBus;
 
     private $lxcService;
     private $awxService;
@@ -49,7 +50,7 @@ class EnvironmentManager
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
 	LxcManager $lxc, AwxManager $awx, //SessionManager $session,
             MessageBusInterface $sessionBus, MessageBusInterface $lxcOperationBus,
-            MessageBusInterface $environmentEventBus)
+            MessageBusInterface $environmentEventBus, MessageBusInterface $environmentActionBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -60,6 +61,7 @@ class EnvironmentManager
 	$this->lxcOperationBus = $lxcOperationBus;
 	$this->awxService = $awx;
         $this->environmentEventBus = $environmentEventBus;
+        $this->environmentActionBus = $environmentActionBus;
 //	$this->sessionService = $session;
 
         // get the repositories
@@ -72,7 +74,7 @@ class EnvironmentManager
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
         $this->sessionsRepository = $this->entityManager->getRepository( Sessions::class);
     }
-
+/*
     public function createInstance(InstanceTypes $instance_type, bool $async = true): ?Instances {
         $this->logger->debug(__METHOD__);
 
@@ -86,18 +88,16 @@ class EnvironmentManager
         }
         return null;
     }
-
+*/
     // Bind the Instance
-    public function bindInstance(InstanceTypes $it): Instances
-    {
+    public function bindInstance(InstanceTypes $it): Instances {
         $this->logger->debug(__METHOD__);
 
-	// TODO: check input parameters
-
+        // TODO: check input parameters
         // Find started instance
-	$started_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
+        $started_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
 
-	// Check if suitable instance has been found
+        // Check if suitable instance has been found
         if ($started_instance) {
             $this->logger->debug('Suitable started instance has been found: ' . $started_instance);
             return $started_instance;
@@ -111,14 +111,15 @@ class EnvironmentManager
 
             $this->logger->debug('Suitable stopped instance has been found: ' . $stopped_instance);
 
-            // start instance asyncroneously
-//            $this->start($stopped_instance, false);
+            // start instance synchroneously
+            $this->lxcService->start($stopped_instance->getName(), false, false);
 
             return $stopped_instance;
         }
 
         // Create new Instance synchroneously
-        $instance = $this->createInstance($it, false);
+        $instance = $this->lxcService->create($it->getOs()->getAlias(),
+                $it->getHwProfile()->getName(), false);
 
         return $instance;
     }
@@ -425,10 +426,17 @@ class EnvironmentManager
 	return true;	
     }
 
-    public function createEnvironment(int $task_id, int $session_id = null): ?Environments {
+    public function createEnvironment(int $task_id, int $session_id = null, 
+            bool $async = true): ?Environments {
         $this->logger->debug(__METHOD__);
 
         // TODO: check input parameters
+
+        if ($async) {
+            $this->environmentActionBus->dispatch(new EnvironmentAction(["action" => "create",
+                        "task_id" => $task_id, "session_id" => $session_id]));
+            return null;
+        }
 
         $task = $this->taskRepository->findOneById($task_id);
         $session = null;
@@ -472,8 +480,6 @@ class EnvironmentManager
 
         $this->logger->debug('Instance `' . $instance->getName() . 
                 '` has been bound to the newly created environment.');
-
-//        $this->setInstanceStatus($instance->getId(), "Running");
 
         $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
             "id" => $env->getId()]));

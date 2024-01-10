@@ -72,7 +72,8 @@ final class EnvironmentEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "` for Environment ID`" . $id . "`");
+                $this->logger->debug("Handling instance status change `" . 
+                        $message->getEvent() . "` for Environment ID " . $id);
 
                 $env = $this->environmentRepository->findOneById($id);
                 if ($env) {
@@ -81,7 +82,7 @@ final class EnvironmentEventHandler {
                     $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
                     $env->setStatus($env_status);
                     // Store item into the DB
-                    $this->entityManager->persist($env);
+                    $this->entityManager->flush();
                 }
                 # TODO: Handle exception
                 break;

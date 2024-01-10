@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Tasks;
+use App\Entity\Environments;
 use App\Service\EnvironmentManager;
 
 #[AsCommand(
@@ -22,18 +23,20 @@ class EnvironmentsCreateCommand extends Command {
     // Doctrine EntityManager
     private $entityManager;
     private $taskRepository;
+    private $environmentRepository;
 
     private $envs_number;
     private $environmentService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager,
-            EnvironmentManager $environmentManager) {
+            EnvironmentManager $environmentService) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
-        $this->environmentService = $environmentManager;
+        $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
+        $this->environmentService = $environmentService;
     }
 
     protected function configure(): void {
@@ -43,6 +46,7 @@ class EnvironmentsCreateCommand extends Command {
 //            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
                 ->addArgument('number', InputArgument::OPTIONAL, 'Number of environments to create')
                 ->addOption('spare', null, InputOption::VALUE_NONE, 'Create spare environments')
+                ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 
@@ -62,14 +66,21 @@ class EnvironmentsCreateCommand extends Command {
         }
         // Check if the task exists
         $task = $this->taskRepository->findOneByPath($task_path);
+        
         if (!$task) {
             $io->note('Task `' . $task_path . '` was NOT found!');
             return Command::FAILURE;
         }
+        
+        $environments = $this->environmentRepository->findAllDeployed($task->getId());
+
+	$io->note("Specified task: " . $task . ", spare envs #: " . count($environments));
+	
         for ($i = 0; $i < $this->envs_number; $i++) {
             // Create an environment and underlying LXC instance
-            $environment = $this->environmentService->createEnvironment($task, null, false);
-            $io->note('Environment `' . $environment . '` was created.');
+            $this->environmentService->createEnvironment($task->getId(),
+                    null, $input->getOption('async'));
+            $io->success('Environment creation initiated.');
         }
         // TODO: handle exception
 
