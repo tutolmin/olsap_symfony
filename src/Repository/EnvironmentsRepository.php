@@ -27,7 +27,7 @@ class EnvironmentsRepository extends ServiceEntityRepository
     private $logger;
     private $entityManager;
     private $environmentStatusesRepository;
-    private $sessionManager;
+//    private $sessionManager;
 
     public function __construct(ManagerRegistry $registry, LoggerInterface $logger,
 	EntityManagerInterface $entityManager)

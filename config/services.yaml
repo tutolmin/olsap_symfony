@@ -9,6 +9,7 @@ parameters:
     awx.username:       "%env(AWX_USERNAME)%"
     awx.password:       "%env(AWX_PASSWORD)%"
     awx.api_url:        "%env(AWX_API_URL)%"
+    app.spare_instances: "%env(APP_SPARE_INSTANCES)%"
     
 services:
     # default configuration for services in *this* file
@@ -27,6 +28,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Command\InstancesSpareCommand:
+        arguments:
+            $spare_instances:   '%app.spare_instances%'
 
     App\Service\AwxManager:
         arguments:

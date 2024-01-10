@@ -45,7 +45,6 @@ class EnvironmentsCreateCommand extends Command {
 //                ->addArgument('session_id', InputArgument::OPTIONAL, 'Session identificator')
 //            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
                 ->addArgument('number', InputArgument::OPTIONAL, 'Number of environments to create')
-                ->addOption('spare', null, InputOption::VALUE_NONE, 'Create spare environments')
                 ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }

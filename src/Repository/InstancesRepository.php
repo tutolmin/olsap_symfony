@@ -48,15 +48,14 @@ class InstancesRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Instances $entity, bool $flush = false): void
-    {
+    public function remove(Instances $entity, bool $flush = false): void {
         $this->logger->debug(__METHOD__);
 
-	// Fetch all linked Addresses and release them
-	$addresses = $entity->getAddresses();
-	foreach($addresses as $address)
-	  $address->setInstance(null);
-
+        // Fetch all linked Addresses and release them
+        $addresses = $entity->getAddresses();
+        foreach ($addresses as $address) {
+            $address->setInstance(null);
+        }
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
@@ -83,28 +82,20 @@ class InstancesRepository extends ServiceEntityRepository
         ;
     }
 
-//    /**
-//     * @return Instances[] Returns an array of Instances objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllSpare($instance_type): array {
+        $this->logger->debug(__METHOD__);
 
-//    public function findOneBySomeField($value): ?Instances
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $status_started = $this->instanceStatusesRepository->findOneByStatus("Started");
+        $status_stopped = $this->instanceStatusesRepository->findOneByStatus("Stopped");
+
+        return $this->createQueryBuilder('i')
+            ->where('i.instance_type = :instance_type')
+            ->andWhere('(i.status = :status_started OR i.status = :status_stopped)')
+            ->setParameter('status_started', $status_started->getId())
+            ->setParameter('status_stopped', $status_stopped->getId())
+            ->setParameter('instance_type', $instance_type->getId())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
