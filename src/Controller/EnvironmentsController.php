@@ -102,9 +102,9 @@ class EnvironmentsController extends AbstractController
         }
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
-            'test_username' => $_ENV['APP_USERNAME'],
-	    'skip_limit' => $_ENV['APP_SKIP_ENVS'],
-            'public_ip' => $_ENV['APP_PUBLIC_IP'],
+            'test_username' => $this->getParameter('app.username'),
+	    'skip_limit' => $this->getParameter('app.skip_envs'),
+            'public_ip' => $this->getParameter('app.public_ip'),
             'port' => $port,
 	    'task_description' => $environment->getTask()->getDescription(),
 	    'session_url' => $this->generateUrl('app_sessions_display', ['hash' => $environment->getSession()->getHash()]),
@@ -166,15 +166,16 @@ class EnvironmentsController extends AbstractController
 	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
         }
         return $this->render('environments/show.html.twig', [
-            'test_username' => $_ENV['APP_USERNAME'],
-            'public_ip' => $_ENV['APP_PUBLIC_IP'],
+            'test_username' => $this->getParameter('app.username'),            
+            'public_ip' => $this->getParameter('app.public_ip'),
             'port' => $port,
             'environment' => $environment,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_environments_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Environments $environment, EnvironmentsRepository $environmentsRepository): Response
+    public function edit(Request $request, Environments $environment, 
+            EnvironmentsRepository $environmentsRepository): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -194,19 +195,11 @@ class EnvironmentsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_environments_delete', methods: ['POST'])]
-    public function delete(Request $request, Environments $environment, EnvironmentsRepository $environmentsRepository): Response
-    {
+    public function delete(Request $request, Environments $environment): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$environment->getId(), $request->request->get('_token'))) {
-
-            // Release instance
-	    $instance = $environment->getInstance();
-
-        if($instance){
-	      $this->sessionManager->releaseInstance($instance);
-        }
-            $environmentsRepository->remove($environment, true);
+        if ($this->isCsrfTokenValid('delete' . $environment->getId(), $request->request->get('_token'))) {
+            $this->environmentService->deleteEnvironment($environment);
         }
 
         return $this->redirectToRoute('app_environments_index', [], Response::HTTP_SEE_OTHER);

@@ -120,7 +120,7 @@ class SessionManager
        
         return $instance;
     }
-*/
+
     // Release the Instance
     public function releaseInstance(Instances $instance): bool
     {
@@ -141,7 +141,7 @@ class SessionManager
 
 	return true;
     }
-/*
+
     public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
@@ -516,7 +516,7 @@ class SessionManager
 	  $this->setEnvironmentStatus($env, "Verified");
 
 	  // Release the Instance
-	  $this->releaseInstance($env->getInstance());
+//	  $this->releaseInstance($env->getInstance());
 
 	  return true;
 
@@ -526,7 +526,7 @@ class SessionManager
 	}
 
 	// Release the Instance
-	$this->releaseInstance($env->getInstance());
+//	$this->releaseInstance($env->getInstance());
 
 	return false;
     }

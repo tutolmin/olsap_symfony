@@ -282,21 +282,20 @@ class LxcManager
     public function deleteObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
-        $result = true;
         if ($this->wipeInstance($name, $force)) {
             $this->logger->debug("Instance " . $name . " was deleted successfully");
         } else {
             $this->logger->debug("Instance " . $name . " deletion failure");
-            $result = false;
+            return false;
         }
 
         if ($this->wipeObject($name, $force)) {
             $this->logger->debug("Object " . $name . " was deleted successfully");
         } else {
             $this->logger->debug("Object " . $name . " deletion failure");
-            $result = false;
+            return false;
         }
-        return $result;
+        return true;
     }
 
     public function deleteInstance($name, $force = false, bool $async = true) {//: ?InstanceTypes
@@ -363,6 +362,16 @@ class LxcManager
         if ($instance->getStatus() != "Stopped" &&
                 $instance->getStatus() != "Sleeping") {
             $this->logger->debug("Instance is NOT stopped");
+            if (!$force) {
+                return false;
+            } else {
+                $this->logger->debug("Force opiton specified");
+            }
+        }
+
+        if ($instance->getEnvs()) {
+            $this->logger->debug("Instance is bound to the environment");
+
             if (!$force) {
                 return false;
             } else {

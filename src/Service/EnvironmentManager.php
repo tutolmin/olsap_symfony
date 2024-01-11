@@ -124,27 +124,39 @@ class EnvironmentManager
         return $instance;
     }
 
+    public function deleteEnvironment($environment) {
+
+        // Release instance
+        $instance = $environment->getInstance();
+
+        if ($instance) {
+            $this->releaseInstance($instance);
+        }
+        $this->environmentRepository->remove($environment, true);
+    }
+
     // Release the Instance
-    public function releaseInstance(Instances $instance): bool
-    {
+    public function releaseInstance(Instances $instance): bool {
         $this->logger->debug(__METHOD__);
 
-	// TODO: check input parameters
+        // TODO: check input parameters
+        // TODO: restore init snapshot
+        // Unbind an instance from env so it can be used again
+        $instance->setEnvs(null);
 
-	// TODO: restore init snapshot
+        // Store item into the DB
+        $this->entityManager->flush();
 
-	// Unbind an instance from env so it can be used again
-	$instance->setEnvs(null);
-
-	// Store item into the DB
-	$this->entityManager->flush();
-
-	// stop instance for the time being
+        // stop instance for the time being
 //	$this->stopInstance($instance);
+        
+        $this->lxcService->setInstanceStatus($instance->getId(), 
+                $instance->getStatus()->getStatus());
 
-	return true;
+        return true;
     }
-/*
+
+    /*
     public function startInstance(Instances $instance, bool $async = true) {
         $this->logger->debug(__METHOD__);
 

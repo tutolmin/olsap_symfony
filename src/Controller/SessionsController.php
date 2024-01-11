@@ -124,7 +124,7 @@ class SessionsController extends AbstractController
 
 	    if( $se->getStatus() == "Deployed") {
 
-	      $this->sessionManager->releaseInstance($se->getInstance());
+//	      $this->sessionManager->releaseInstance($se->getInstance());
 
 	      $this->sessionManager->setEnvironmentStatus($se, "Skipped");
               $this->sessionManager->setEnvironmentTimestamp($se, "skipped");

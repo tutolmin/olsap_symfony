@@ -10,6 +10,9 @@ parameters:
     awx.password:       "%env(AWX_PASSWORD)%"
     awx.api_url:        "%env(AWX_API_URL)%"
     app.spare_instances: "%env(APP_SPARE_INSTANCES)%"
+    app.username:       "%env(APP_USERNAME)%"
+    app.public_ip:      "%env(APP_PUBLIC_IP)%"
+    app.skip_envs:      "%env(APP_SKIP_ENVS)%"
     
 services:
     # default configuration for services in *this* file
