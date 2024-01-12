@@ -395,7 +395,7 @@ class EnvironmentManager
 	}
 	return true;
     }
-
+/*
 
     public function allocateEnvironment(Sessions $session): bool
     {
@@ -437,7 +437,7 @@ class EnvironmentManager
 
 	return true;	
     }
-
+*/
     public function createEnvironment(int $task_id, int $session_id = null, 
             bool $async = true): ?Environments {
         $this->logger->debug(__METHOD__);
@@ -609,7 +609,7 @@ class EnvironmentManager
 	return false;
     }
 
-
+/*
 
     public function getRandomTask(): Tasks
     {
@@ -631,7 +631,7 @@ class EnvironmentManager
 
         return $this->getRandomTask();
     }
-
+*/
     public function findSuitableInstanceType(Tasks $task): ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);

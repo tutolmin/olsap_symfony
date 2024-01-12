@@ -56,6 +56,9 @@ class Sessions
         $this->sessionOses = new ArrayCollection();
         $this->sessionTechs = new ArrayCollection();
         $this->envs = new ArrayCollection();
+        
+        $timestamp = new \DateTimeImmutable('NOW');
+        $this->hash = substr(md5($timestamp->format('Y-m-d H:i:s')),0,8);
     }
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5

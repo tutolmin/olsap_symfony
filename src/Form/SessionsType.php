@@ -12,10 +12,10 @@ class SessionsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('status')
-            ->add('created_at')
-            ->add('ended_at')
-            ->add('hash')
+//            ->add('status')
+//            ->add('created_at')
+//            ->add('finished_at')
+//            ->add('hash')
             ->add('testee')
         ;
     }

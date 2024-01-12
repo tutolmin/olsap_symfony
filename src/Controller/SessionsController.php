@@ -7,17 +7,17 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Sessions;
 use App\Form\SessionsType;
 use App\Repository\SessionsRepository;
+use App\Entity\SessionStatuses;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-//use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 //use App\Entity\Environments;
 use App\Service\SessionManager;
 //use Symfony\Component\Messenger\MessageBusInterface;
 //use App\Message\SessionAction;
-//use Psr\Log\LoggerInterface;
 
 #[Route('/sessions')]
 class SessionsController extends AbstractController
@@ -25,7 +25,7 @@ class SessionsController extends AbstractController
     private $logger;
 
     // Doctrine EntityManager
-//    private $entityManager;
+    private $entityManager;
 
     // Repositories
 //    private $environmentRepository;
@@ -34,21 +34,18 @@ class SessionsController extends AbstractController
 
     // Message bus
 //    private $sessionBus;
-
-//    private $logger;
-
+//    
     // InstanceTypes repo
-//    private $sessionStatusesRepository;
+    private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( SessionManager $sessionManager, 
-//	EntityManagerInterface $entityManager, MessageBusInterface $sessionBus,
-	LoggerInterface $logger
+	EntityManagerInterface $entityManager, LoggerInterface $logger
 	)
     {   
 
 
-//        $this->entityManager = $entityManager;
+        $this->entityManager = $entityManager;
         $this->sessionManager = $sessionManager;
 //        $this->bus = $sessionBus;
         $this->logger = $logger;
@@ -56,7 +53,7 @@ class SessionsController extends AbstractController
 
 
         // get the SessionStatuses repository
-//        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+        $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
 //        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
     }
 
@@ -80,6 +77,14 @@ class SessionsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // We will use it for any timestamp type
+            $timestamp = new \DateTimeImmutable('NOW');
+            $session->setCreatedAt($timestamp);
+
+            $session_status = $this->sessionStatusesRepository->findOneByStatus("New");
+            $session->setStatus($session_status);
+            
             $sessionsRepository->add($session, true);
 
             return $this->redirectToRoute('app_sessions_index', [], Response::HTTP_SEE_OTHER);
@@ -92,23 +97,30 @@ class SessionsController extends AbstractController
     }
 
     #[Route('/{hash}/start', name: 'app_sessions_start', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function start(Request $request, Sessions $session): Response
-    {
+    public function start(Request $request, Sessions $session): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('start'.$session->getHash(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('start' . $session->getHash(), $request->request->get('_token'))) {
 
-	  $this->sessionManager->setSessionStatus($session, "Started");
+//            $this->logger->debug($session->getOsesCounter());
+//            $this->logger->debug($session->getTechsCounter());
+            if ($session->getOsesCounter() == 0 || $session->getTechsCounter() == 0) {
+                return $this->redirectToRoute('app_sessions_show', ['id' => $session->getId()], Response::HTTP_SEE_OTHER);
+            }
+            $this->sessionManager->start($session);
+/*
+            $this->sessionManager->setSessionStatus($session, "Started");
 
-          $this->sessionManager->setSessionTimestamp($session, "started");
+            $this->sessionManager->setSessionTimestamp($session, "started");
 
-	  // Start certain number of instances
-          $start_envs = intval( $this->getParameter('APP_START_ENVS'));
-	  for($i=0;$i<$start_envs;$i++) { 
-	
-	    $this->sessionManager->allocateEnvironment($session);
-	  }
-	}
+            // Start certain number of instances
+            $start_envs = intval($this->getParameter('APP_START_ENVS'));
+            for ($i = 0; $i < $start_envs; $i++) {
+
+                $this->sessionManager->allocateEnvironment($session);
+            }
+*/
+        }
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }
 
@@ -118,7 +130,8 @@ class SessionsController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('finish'.$session->getHash(), $request->request->get('_token'))) {
-
+            $this->sessionManager->finish($session);
+/*
 	  // Skip all remaining envs
           foreach($session->getEnvs()->getValues() as $se) {
 
@@ -134,6 +147,8 @@ class SessionsController extends AbstractController
 	  }
 
 	  $this->sessionManager->setSessionStatus($session, "Finished");
+ * 
+ */
 	}
         return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
     }

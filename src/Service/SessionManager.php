@@ -20,7 +20,7 @@ use App\Service\LxcManager;
 use App\Service\EnvironmentManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
-use App\Message\LxcOperation;
+use App\Message\EnvironmentAction;
 
 class SessionManager
 {
@@ -35,8 +35,10 @@ class SessionManager
     private $environmentRepository;
     private $environmentStatusesRepository;
 
+    private $params;
+
     private $sessionBus;
-    private $lxdOperationBus;
+    private $environmentActionBus;
 
     private $lxdService;
     private $awxService;
@@ -44,7 +46,8 @@ class SessionManager
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
 	LxcManager $lxd, AwxManager $awx, EnvironmentManager $env,
-            MessageBusInterface $sessionBus, MessageBusInterface $lxdOperationBus)
+            MessageBusInterface $sessionBus, MessageBusInterface $environmentActionBus,
+            $app_start_envs)
 
     {
         $this->logger = $logger;
@@ -53,9 +56,13 @@ class SessionManager
         $this->entityManager = $em;
 	$this->lxdService = $lxd;
 	$this->sessionBus = $sessionBus;
-	$this->lxdOperationBus = $lxdOperationBus;
+//	$this->lxdOperationBus = $lxdOperationBus;
 	$this->awxService = $awx;
 	$this->envService = $env;
+
+        $this->params['app_start_envs']        = $app_start_envs;
+
+        $this->environmentActionBus = $environmentActionBus;
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
@@ -246,33 +253,68 @@ class SessionManager
         return $status;
     }
 */
-    public function setSessionStatus(Sessions $session, $status_str): bool
-    {
+    
+        
+    public function start(Sessions $session) {
         $this->logger->debug(__METHOD__);
 
-	$status = $this->sessionStatusesRepository->findOneByStatus($status_str);
+        $this->setSessionStatus($session, "Started");
 
-	if($status) {
+        $this->setSessionTimestamp($session, "started");
 
-	  $this->logger->debug('Changing session status to: '.$status);
+        // Start certain number of instances
+        $start_envs = $this->params['app_start_envs'];
+        for ($i = 0; $i < $start_envs; $i++) {
 
-	  $session->setStatus($status);
-
-	  // Store item into the DB
-//	  $this->entityManager->persist($session);
-	  $this->entityManager->flush();
-
-	  return true;
-
-	} else {
-
-	  $this->logger->debug('No such session status: '.$status_str);
-
-	  return false;
-	}
+            $this->allocateEnvironment($session);
+        }
     }
 
+    public function finish($session) {
+        $this->logger->debug(__METHOD__);
 
+        // Skip all remaining envs
+        foreach ($session->getEnvs()->getValues() as $se) {
+
+            if ($se->getStatus() == "Deployed") {
+
+//	      $this->sessionManager->releaseInstance($se->getInstance());
+/*
+                $this->setEnvironmentStatus($se, "Skipped");
+                $this->setEnvironmentTimestamp($se, "skipped");
+*/
+            }
+        }
+        $this->setSessionTimestamp($session, "finished");
+
+        $this->setSessionStatus($session, "Finished");
+    }
+
+    public function setSessionStatus(Sessions $session, $status_str): bool {
+        $this->logger->debug(__METHOD__);
+
+        $status = $this->sessionStatusesRepository->findOneByStatus($status_str);
+
+        if ($status) {
+
+            $this->logger->debug('Changing session status to: ' . $status);
+
+            $session->setStatus($status);
+
+            // Store item into the DB
+//	  $this->entityManager->persist($session);
+            $this->entityManager->flush();
+
+            return true;
+        } else {
+
+            $this->logger->debug('No such session status: ' . $status_str);
+
+            return false;
+        }
+    }
+
+    /*
 
     public function setEnvironmentStatus(Environments $environment, $status_str): bool
     {
@@ -299,7 +341,7 @@ class SessionManager
 	  return false;
 	}
     }
-
+*/
 
     public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
     {
@@ -339,7 +381,7 @@ class SessionManager
 	}
 	return true;
     }
-
+/*
 
     public function setEnvironmentTimestamp(Environments $environment, $timestamp_str): bool
     {
@@ -381,7 +423,7 @@ class SessionManager
 	}
 	return true;
     }
-
+*/
 
     public function allocateEnvironment(Sessions $session): bool
     {
@@ -415,12 +457,11 @@ class SessionManager
 
 	  $this->logger->debug( "No suitable envs found. Requesting new env creation.");
 
-	  $this->sessionBus->dispatch(new SessionAction(["action" => "createEnvironment", 
-		"session_id" => $session->getId(), "task_id" => $task->getId()]));
 
+            $this->environmentActionBus->dispatch(new EnvironmentAction(["action" => "create",
+                        "task_id" => $task->getId(), "session_id" => $session->getId()]));
 	  return false;	
 	}
-
 	return true;	
     }
 /*
@@ -488,7 +529,7 @@ class SessionManager
 
         return $env;
     }
-*/
+
     public function verifyEnvironment(Environments $env): bool
     {
         $this->logger->debug(__METHOD__);
@@ -513,7 +554,7 @@ class SessionManager
 	  $env->setVerification($result->id);
 	  $this->entityManager->flush();
 
-	  $this->setEnvironmentStatus($env, "Verified");
+//	  $this->setEnvironmentStatus($env, "Verified");
 
 	  // Release the Instance
 //	  $this->releaseInstance($env->getInstance());
@@ -550,7 +591,7 @@ class SessionManager
 
 	  $this->logger->debug('Status: ' . $result->status);
 
-	  $this->setEnvironmentStatus($env, "Solved");
+//	  $this->setEnvironmentStatus($env, "Solved");
 
 	  return true;
 
@@ -587,7 +628,7 @@ class SessionManager
 
 	  $this->logger->debug('Status: ' . $result->status);
 
-	  $this->setEnvironmentStatus($env, "Deployed");
+//	  $this->setEnvironmentStatus($env, "Deployed");
 
 	  return true;
 
@@ -599,7 +640,7 @@ class SessionManager
 	return false;
     }
 
-
+*/
 
     public function getRandomTask(): Tasks
     {

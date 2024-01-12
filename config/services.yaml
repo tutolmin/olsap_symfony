@@ -13,6 +13,7 @@ parameters:
     app.username:       "%env(APP_USERNAME)%"
     app.public_ip:      "%env(APP_PUBLIC_IP)%"
     app.skip_envs:      "%env(APP_SKIP_ENVS)%"
+    app.start_envs:     "%env(APP_START_ENVS)%"
     
 services:
     # default configuration for services in *this* file
@@ -36,6 +37,10 @@ services:
         arguments:
             $spare_instances:   '%app.spare_instances%'
 
+    App\Service\SessionManager:
+        arguments:
+            $app_start_envs:    '%app.start_envs%'
+            
     App\Service\AwxManager:
         arguments:
             $awx_client_id:     '%awx.client_id%'

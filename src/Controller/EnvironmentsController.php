@@ -93,16 +93,16 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-	$this->sessionManager->setEnvironmentTimestamp($environment, "started");
+	$this->environmentService->setEnvironmentTimestamp($environment, "started");
 
 	// Some envs (Skipped/Verified) might not have linked instances
 	$port = "";
 	if($environment->getInstance()){
 	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
         }
-        $session = "_session";
+        $session_url = "_session";
         if($environment->getSession()){
-            $session = $environment->getSession()->getHash();
+            $session_url = $environment->getSession()->getHash();
         }
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
@@ -111,7 +111,7 @@ class EnvironmentsController extends AbstractController
             'public_ip' => $this->getParameter('app.public_ip'),
             'port' => $port,
 	    'task_description' => $environment->getTask()->getDescription(),
-	    'session_url' => $session,
+	    'session_url' => $session_url,
         ]);
     }
 
