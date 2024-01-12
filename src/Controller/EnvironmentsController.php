@@ -100,6 +100,10 @@ class EnvironmentsController extends AbstractController
 	if($environment->getInstance()){
 	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
         }
+        $session = "_session";
+        if($environment->getSession()){
+            $session = $environment->getSession()->getHash();
+        }
         return $this->render('environments/display.html.twig', [
             'environment' => $environment,
             'test_username' => $this->getParameter('app.username'),
@@ -107,7 +111,7 @@ class EnvironmentsController extends AbstractController
             'public_ip' => $this->getParameter('app.public_ip'),
             'port' => $port,
 	    'task_description' => $environment->getTask()->getDescription(),
-	    'session_url' => $this->generateUrl('app_sessions_display', ['hash' => $environment->getSession()->getHash()]),
+	    'session_url' => $session,
         ]);
     }
 
