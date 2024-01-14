@@ -54,12 +54,25 @@ class TesteesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_testees_show', methods: ['GET'])]
-    public function show(Testees $testee): Response
-    {
+    public function show(Testees $testee): Response {
         $this->logger->debug(__METHOD__);
 
+//        $sessions = array();
+        $session_links = array();
+        $session_names = array();
+
+        foreach ($testee->getSessions()->getValues() as $s) {
+//            $sessions[] = $s;
+            $session_links[$s->getHash()] = $this->generateUrl('app_sessions_display', 
+                    ['hash' => $s->getHash()]);
+            $session_names[$s->getHash()] = $s;
+        }
+
         return $this->render('testees/show.html.twig', [
-            'testee' => $testee,
+                    'testee' => $testee,
+//                    'sessions' => $testee->getSessionsCounter() . ': ' . implode(', ', $sessions),
+                    'session_links' => $session_links,
+                    'session_names' => $session_names,
         ]);
     }
 

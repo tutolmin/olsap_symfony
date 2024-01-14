@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Email</th>
+                <th>Sessions</th>
                 <th>Oath_token</th>
                 <th>Registered_at</th>
                 <th>actions</th>
@@ -20,6 +21,7 @@
             <tr>
                 <td>{{ testee.id }}</td>
                 <td>{{ testee.email }}</td>
+                <td>{{ testee.sessionsCounter }}</td>                
                 <td>{{ testee.oauthToken }}</td>
                 <td>{{ testee.registeredAt ? testee.registeredAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>

@@ -27,7 +27,7 @@
                 <td>{{ environment.instance }}</td>
                 <td>{{ environment.session }}</td>
                 <td>{{ environment.task }}</td>
-                <td>{{ environment.hash }}</td>
+                <td><a href="/environments/{{ environment.hash }}">{{ environment.hash }}</a></td>
                 <td>{{ environment.status }}</td>
                 <td>{{ environment.startedAt ? environment.startedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ (environment.valid == NULL) ? 'check pending' : (environment.valid ? 'True' : 'False') }}</td>

@@ -27,6 +27,8 @@ class Testees
 
     #[ORM\OneToMany(mappedBy: 'testee', targetEntity: Sessions::class, orphanRemoval: true)]
     private $sessions;
+    
+    private $sessionsCounter;
 
     public function __construct()
     {
@@ -77,6 +79,11 @@ class Testees
         $this->registered_at = $registered_at;
 
         return $this;
+    }
+    
+    public function getSessionsCounter(): int
+    {
+        return $this->sessionsCounter = count( $this->getSessions());
     }
 
     /**

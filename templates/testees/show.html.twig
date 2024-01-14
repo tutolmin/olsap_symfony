@@ -16,6 +16,16 @@
                 <td>{{ testee.email }}</td>
             </tr>
             <tr>
+                <th>Sessions</th>
+                <td>
+                <ul>
+                    {% for key, value in session_links %}
+                    <li><a href='{{ value|e }}'>{{ session_names[key] }}</a></li>
+                    {% endfor %}
+                </ul>
+                </td>
+            </tr>            
+            <tr>
                 <th>Oath_token</th>
                 <td>{{ testee.oauthToken }}</td>
             </tr>

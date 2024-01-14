@@ -31,7 +31,7 @@
                 <td>{{ session.status }}</td>
                 <td>{{ session.createdAt ? session.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ session.finishedAt ? session.finishedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ session.hash }}</td>
+                <td><a href='/sessions/{{ session.hash }}'>{{ session.hash }}</a></td>
                 <td>
                     <a href="{{ path('app_sessions_show', {'id': session.id}) }}">show</a>
                     <a href="{{ path('app_sessions_edit', {'id': session.id}) }}">edit</a>

@@ -66,6 +66,16 @@ class SessionsController extends AbstractController
             'sessions' => $sessionsRepository->findAll(),
         ]);
     }
+    
+    #[Route('/_{hash}', name: 'app_sessions_index_search', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
+    public function indexSearch(SessionsRepository $sessionsRepository): Response
+    {
+        $this->logger->debug(__METHOD__);
+
+        return $this->render('sessions/index.html.twig', [
+            'sessions' => $sessionsRepository->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_sessions_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SessionsRepository $sessionsRepository): Response

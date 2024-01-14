@@ -1,0 +1,32 @@
+{% extends 'userbase.html.twig' %}
+
+{% block title %}Testee{% endblock %}
+
+{% block body %}
+    <h1>Testee</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Email</th>
+                <td>{{ testee.email }}
+                </td>
+
+            </tr>
+            <tr>
+                <th>Sessions</th>
+                <td>
+                    {% for key, value in session_links %}
+                    <li><a href='/sessions/{{ value|e }}'>{{ session_links[key] }}</a></li>
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Registered_at</th>
+                <td>{{ testee.registeredAt ? testee.registeredAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}
