@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
-use App\Service\SessionManager;
+use App\Service\EnvironmentManager;
 use App\Entity\Environments;
 
 #[AsCommand(
@@ -20,20 +20,21 @@ use App\Entity\Environments;
 )]
 class AwxDeployCommand extends Command
 {
-    private $sessionManager;
+    private $environmentService;
   
     private $entityManager;
     private $envRepository;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    public function __construct( EntityManagerInterface $entityManager, 
+            EnvironmentManager $environmentManager)
     {   
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->envRepository = $this->entityManager->getRepository( Environments::class);
 
-	$this->sessionManager = $sessionManager;
+	$this->environmentService = $environmentManager;
     }
 
     protected function configure(): void
@@ -60,7 +61,7 @@ class AwxDeployCommand extends Command
             $io->note('Deploying: ' . $env);
 
             // Deploy an environment
-            $deploy_result = $this->sessionManager->deployEnvironment($env);
+            $deploy_result = $this->environmentService->deployEnvironment($env);
 
             $io->note('... ' . ($deploy_result?'':'un').'successfully');
 

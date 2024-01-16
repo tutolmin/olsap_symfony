@@ -496,6 +496,7 @@ class EnvironmentManager
         $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
             "id" => $env->getId()]));
 
+        $this->deployEnvironment($env);
         return $env;
     }
 

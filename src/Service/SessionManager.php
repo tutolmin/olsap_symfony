@@ -11,7 +11,7 @@ use App\Entity\SessionStatuses;
 use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Entity\EnvironmentStatuses;
-use App\Entity\InstanceTypes;
+//use App\Entity\InstanceTypes;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
@@ -19,7 +19,7 @@ use App\Service\AwxManager;
 use App\Service\LxcManager;
 use App\Service\EnvironmentManager;
 use Symfony\Component\Messenger\MessageBusInterface;
-use App\Message\SessionAction;
+//use App\Message\SessionAction;
 use App\Message\EnvironmentAction;
 
 class SessionManager

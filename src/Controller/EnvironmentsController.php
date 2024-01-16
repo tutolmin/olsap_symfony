@@ -124,11 +124,11 @@ class EnvironmentsController extends AbstractController
 
 	  // Release instance
 	  $instance = $environment->getInstance();
-	  $this->sessionManager->releaseInstance($instance);
+	  $this->environmentService->releaseInstance($instance);
 
-	  $this->sessionManager->setEnvironmentStatus($environment, "Skipped");
+	  $this->environmentService->setEnvironmentStatus($environment, "Skipped");
 
- 	  $this->sessionManager->setEnvironmentTimestamp($environment, "skipped");
+ 	  $this->environmentService->setEnvironmentTimestamp($environment, "skipped");
 
 	  // Allocate new environment for a session
 	  $this->sessionManager->allocateEnvironment($environment->getSession());
@@ -145,9 +145,9 @@ class EnvironmentsController extends AbstractController
 
         if ($this->isCsrfTokenValid('verify'.$environment->getHash(), $request->request->get('_token'))) {
 
-	  $this->sessionManager->setEnvironmentStatus($environment, "Verified");
+	  $this->environmentService->setEnvironmentStatus($environment, "Verified");
 
-	  $this->sessionManager->setEnvironmentTimestamp($environment, "verified");
+	  $this->environmentService->setEnvironmentTimestamp($environment, "verified");
 
 	  // Verify specified environment
 	  $this->sessionBus->dispatch(new SessionAction(["action" => "verifyEnvironment", "environment_id" => $environment->getId()]));

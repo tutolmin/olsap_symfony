@@ -152,18 +152,5 @@ class AwxManager
 		
 	return $jobResult;
     }
-
-
-/*
-    public function getNextTask( Awx $session): Tasks
-    {
-        $this->logger->debug(__METHOD__);
-
-        $tasks = $this->taskRepository->findAll();
-
-        return $tasks[rand(0,count($tasks)-1)];
-    }
-*/
-
 }
 
