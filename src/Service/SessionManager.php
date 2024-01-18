@@ -16,8 +16,8 @@ use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
 use App\Service\AwxManager;
-use App\Service\LxcManager;
-use App\Service\EnvironmentManager;
+//use App\Service\LxcManager;
+//use App\Service\EnvironmentManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 //use App\Message\SessionAction;
 use App\Message\EnvironmentAction;
@@ -40,13 +40,14 @@ class SessionManager
     private $sessionBus;
     private $environmentActionBus;
 
-    private $lxdService;
+//    private $lxdService;
     private $awxService;
-    private $envService;
+//    private $envService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxd, AwxManager $awx, EnvironmentManager $env,
-            MessageBusInterface $sessionBus, MessageBusInterface $environmentActionBus,
+	AwxManager $awx, 
+            MessageBusInterface $sessionBus, 
+            MessageBusInterface $environmentActionBus,
             $app_start_envs)
 
     {
@@ -54,11 +55,11 @@ class SessionManager
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
-	$this->lxdService = $lxd;
+//	$this->lxdService = $lxd;
 	$this->sessionBus = $sessionBus;
 //	$this->lxdOperationBus = $lxdOperationBus;
 	$this->awxService = $awx;
-	$this->envService = $env;
+//	$this->envService = $env;
 
         $this->params['app_start_envs']        = $app_start_envs;
 

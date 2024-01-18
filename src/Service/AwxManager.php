@@ -13,6 +13,7 @@ use AwxV2\AwxV2;
 
 //use App\Entity\Tasks;
 //use App\Entity\InstanceTypes;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 class AwxManager
 {    
