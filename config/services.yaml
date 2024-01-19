@@ -85,8 +85,14 @@ services:
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false
 
-    App\MessageHandler\RunPlaybookHandler:
-        tags: [{ name: messenger.message_handler, bus: awx.bus }]
+    App\MessageHandler\AwxActionHandler:
+        tags: [{ name: messenger.message_handler, bus: awx.action.bus }]
+        # prevent handlers from being registered twice (or you can remove
+        # the MessageHandlerInterface that autoconfigure uses to find handlers)
+        autoconfigure: false
+        
+    App\MessageHandler\AwxEventHandler:
+        tags: [{ name: messenger.message_handler, bus: awx.event.bus }]
         # prevent handlers from being registered twice (or you can remove
         # the MessageHandlerInterface that autoconfigure uses to find handlers)
         autoconfigure: false
