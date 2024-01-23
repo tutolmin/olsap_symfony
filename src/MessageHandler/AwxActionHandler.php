@@ -2,7 +2,7 @@
 
 namespace App\MessageHandler;
 
-use App\Message\RunPlaybook;
+use App\Message\AwxAction;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -15,7 +15,7 @@ use App\Entity\Environments;
 use Psr\Log\LoggerInterface;
 
 #[AsMessageHandler(fromTransport: 'async', bus: 'awx.bus')]
-final class RunPlaybookHandler
+final class AwxActionHandler
 {
     // Logger reference
     private $logger;
@@ -38,7 +38,7 @@ final class RunPlaybookHandler
 #        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
     }
 
-    public function __invoke(RunPlaybook $message)
+    public function __invoke(AwxAction $message)
     {
         // Get passed optional parameters
         $environment = null;

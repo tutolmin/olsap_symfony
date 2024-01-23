@@ -2,7 +2,7 @@
 
 namespace App\Message;
 
-final class RunPlaybook
+final class AwxAction
 {
     /*
      * Add whatever properties and methods you need

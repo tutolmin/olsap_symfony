@@ -23,7 +23,7 @@ framework:
                 middleware:
 #                     - handle_message
                 default_middleware: allow_no_handlers
-
+                
             awx.action.bus:
                 middleware:
                 default_middleware: allow_no_handlers

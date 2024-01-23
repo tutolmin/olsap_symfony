@@ -3,8 +3,8 @@
 {% block title %}Testee{% endblock %}
 
 {% block body %}
-    <h1>Testee</h1>
-
+    <h1>Online Linux Skills Assessment Platform</h1>
+<p>This is your personal page. You can see your test sessions below.</p>    
     <table class="table">
         <tbody>
             <tr>
@@ -17,7 +17,7 @@
                 <th>Sessions</th>
                 <td>
                     {% for key, value in session_links %}
-                    <li><a href='/sessions/{{ value|e }}'>{{ session_links[key] }}</a></li>
+                    <li><a href='{{ value|e }}'>{{ session_names[key] }}</a></li>
                     {% endfor %}
                 </td>
             </tr>
