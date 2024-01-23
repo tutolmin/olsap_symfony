@@ -32,6 +32,8 @@ final class EnvironmentActionHandler
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository(Tasks::class);
         $this->sessionRepository = $this->entityManager->getRepository(Sessions::class);
+
+        $this->logger->debug(__METHOD__);
     }
 
     public function __invoke(EnvironmentAction $message) {

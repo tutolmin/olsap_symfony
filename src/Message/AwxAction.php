@@ -9,18 +9,19 @@ final class AwxAction
      * to hold the data for this message class.
      */
 
-    private $name;
+    private $action;
     private $environment_id;
 
+    
     public function __construct($message)
     {
-        $this->name = $message['name'];
+        $this->action = $message['name'];
         $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):"";
     }
 
-    public function getName(): string
+    public function getAction(): string
     {
-        return $this->name;
+        return $this->action;
     }
 
     public function getEnvironmentId(): string

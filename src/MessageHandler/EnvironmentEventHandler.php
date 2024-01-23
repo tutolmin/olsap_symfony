@@ -51,6 +51,8 @@ final class EnvironmentEventHandler {
         $this->environmentStatusesRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
+
+        $this->logger->debug(__METHOD__);
     }
 
     public function __invoke(EnvironmentEvent $message) {
