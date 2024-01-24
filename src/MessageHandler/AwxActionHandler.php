@@ -15,7 +15,7 @@ use App\Service\AwxManager;
 
 use Psr\Log\LoggerInterface;
 
-#[AsMessageHandler(fromTransport: 'async', bus: 'awx.bus')]
+#[AsMessageHandler(fromTransport: 'async', bus: 'awx.action.bus')]
 final class AwxActionHandler
 {
     // Logger reference
@@ -57,7 +57,7 @@ final class AwxActionHandler
         // Switch playbook name to serve
         switch( $message->getAction()) {
 
-        // Update the inventoryn
+        // Update the inventory
         case "inventory":
 	  break;
 
@@ -66,7 +66,7 @@ final class AwxActionHandler
 	  break;
 
         default:
-            $this->logger->debug( "Unknown playbook: `" . $message->getAction() . "`");
+          $this->logger->debug( "Unknown playbook: `" . $message->getAction() . "`");
           break;
         }
     }

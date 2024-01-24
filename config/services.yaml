@@ -14,6 +14,9 @@ parameters:
     app.public_ip:      "%env(APP_PUBLIC_IP)%"
     app.skip_envs:      "%env(APP_SKIP_ENVS)%"
     app.start_envs:     "%env(APP_START_ENVS)%"
+    lxc.timeout:        "%env(LXD_TIMEOUT)%"
+    lxc.wait:           "%env(LXD_WAIT)%"
+    lxc.url:            "%env(LXD_URL)%"
     
 services:
     # default configuration for services in *this* file

@@ -20,6 +20,8 @@ use App\Message\LxcOperation;
 
 class LxcManager
 {
+    private $params;
+
     private $logger;
     private $lxcEventBus;
     private $lxcOperationBus;
@@ -45,7 +47,8 @@ class LxcManager
     private $addressRepository;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $lxcEventBus, MessageBusInterface $lxcOperationBus)
+            MessageBusInterface $lxcEventBus, MessageBusInterface $lxcOperationBus,
+            string $lxc_timeout, string $lxc_wait, string $lxc_url)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -68,8 +71,8 @@ class LxcManager
         
         $this->lxcEventBus = $lxcEventBus;
         $this->lxcOperationBus = $lxcOperationBus;
-	$this->timeout = intval($_ENV["LXD_TIMEOUT"]);
-	$this->wait = $_ENV["LXD_WAIT"];
+	$this->timeout = intval($lxc_timeout);
+	$this->wait = $lxc_wait;
 
         $config = [
             'verify' => false,
@@ -82,7 +85,7 @@ class LxcManager
         $guzzle = new GuzzleClient($config);
         $adapter = new GuzzleAdapter($guzzle);
         $this->lxcService = new \Opensaucesystems\Lxd\Client($adapter);
-        $this->lxcService->setUrl($_ENV['LXD_URL']);
+        $this->lxcService->setUrl($lxc_url);
 
         #$certificates = $lxd->certificates->all();
         #$fingerprint = $lxd->certificates->add(file_get_contents(__DIR__.'/client.pem'), 'ins3Cure');

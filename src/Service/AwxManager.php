@@ -103,6 +103,16 @@ class AwxManager
 	return $this->awx->jobTemplate()->getAll();
     }
 
+
+    public function getTemplateById(int $id)#: ProjectEntity
+    {
+        $this->logger->debug(__METHOD__);
+
+	$this->getClient();
+
+	return $this->awx->jobTemplate()->getById($id);
+    }
+    
     public function project()#: ProjectEntity
     {
         $this->logger->debug(__METHOD__);
@@ -119,6 +129,16 @@ class AwxManager
 	$this->getClient();
 
 	return $this->awx->project()->getAll();
+    }
+
+    
+    public function getProjectById(int $id)#: ProjectEntity
+    {
+        $this->logger->debug(__METHOD__);
+
+	$this->getClient();
+
+	return $this->awx->project()->getById($id);
     }
 
     public function runJobTemplate($id, $body)#: MeEntity
