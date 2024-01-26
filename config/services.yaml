@@ -52,6 +52,12 @@ services:
             $awx_password:      '%awx.password%'
             $awx_api_url:       '%awx.api_url%'
             
+    App\Service\LxcManager:
+        arguments:
+            $lxc_timeout:       '%lxc.timeout%'
+            $lxc_wait:          '%lxc.wait%'
+            $lxc_url:           '%lxc.url%'
+                        
     App\MessageHandler\SessionActionHandler:
         tags: [{ name: messenger.message_handler, bus: session.action.bus }]
         # prevent handlers from being registered twice (or you can remove
