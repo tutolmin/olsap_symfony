@@ -140,6 +140,15 @@ class AwxManager
 
 	return $this->awx->project()->getById($id);
     }
+    
+    public function getJobById(int $id)#: ProjectEntity
+    {
+        $this->logger->debug(__METHOD__);
+
+	$this->getClient();
+
+	return $this->awx->job()->getById($id);
+    }
 
     public function runJobTemplate($id, $body)#: MeEntity
     {

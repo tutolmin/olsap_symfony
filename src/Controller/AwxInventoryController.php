@@ -32,7 +32,8 @@ class AwxInventoryController extends AbstractController
 //        $this->logger->debug(json_decode($request->getContent(), true));
 
         // Dispatch AWX event message
-	$this->awxEventBus->dispatch(new AwxEvent(["event" => "inventory"]));
+	$this->awxEventBus->dispatch(new AwxEvent(["event" => "inventory", 
+            "id" => $request->getPayload()->get('id')]));
         
         return $this->render('awx_web_hook/index.html.twig', [
             'controller_name' => 'AwxInventoryController',

@@ -30,6 +30,7 @@ final class AwxEventHandler
         $id = null;
         if (strlen($message->getId())) {
             $id = $message->getId();
+            $this->logger->debug("Provided ID: " . $id);
         }
         
         // Switch event to handle
@@ -41,13 +42,17 @@ final class AwxEventHandler
 
             // Playbook execution
             case "playbook":
+                
+                $job = $this->awxService->getJobById($id);
+                $this->logger->debug("Job status: " . $job->status);
+
                 break;
 
             // Project event
             case "project":
 
-                $projectResult = $this->awxService->getById($id);
-                $this->logger->debug("Current Project status: " . $projectResult->status);
+//                $projectResult = $this->awxService->getById($id);
+//                $this->logger->debug("Current Project status: " . $projectResult->status);
 
                 break;
 
