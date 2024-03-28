@@ -161,4 +161,9 @@ class Instances
     {
         return $this->addressesCounter = count( $this->getAddresses());
     }
+    
+    public function getEnvHash(): string
+    {
+        return $this->getEnvs()?$this->getEnvs()->getHash():'';
+    }
 }

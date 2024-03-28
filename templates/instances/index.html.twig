@@ -14,6 +14,7 @@
                 <th>Instance Type</th>
                 <th>Created At</th>
                 <th>Addresses</th>
+                <th>Env</th>                
                 <th>Status</th>
                 <th>actions</th>
             </tr>
@@ -26,6 +27,7 @@
                 <td>{{ instance.instancetype }}</td>
                 <td>{{ instance.createdAt ? instance.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ instance.addressesCounter }}</td>
+                <td><a href="/environments/{{ instance.envHash }}">{{ instance.envHash }}</a></td>
                 <td>{{ instance.status }}</td>
                 <td>
                     <a href="{{ path('app_instances_show', {'id': instance.id}) }}">show</a>

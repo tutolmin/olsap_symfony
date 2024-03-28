@@ -54,14 +54,16 @@ class InstancesLsCommand extends Command
         if ($instances) {
             foreach ($instances as $instance) {
                 $addresses = $instance->getAddresses();
+                $environments = $instance->getEnvs();
                 /*
                   $addresses->forAll(function ($key, $value) {
                   $this->io->note(sprintf('address(es): %s %s', $addresses , $value->getMac()));
                   });
                  */
-                $this->io->note(sprintf('Name: %s, port: %s, status: %s, MAC: %s',
+                $this->io->note(sprintf('Name: %s, port: %s, status: %s, MAC: %s, env: %s',
                                 $instance->getName(), $instance->getAddresses()[0]->getPort(),
-                                $instance->getStatus(), $addresses->current()->getMac()));
+                                $instance->getStatus(), $addresses->current()->getMac(),
+                                $environments?$environments->getHash():''));
             }
         }
     }
