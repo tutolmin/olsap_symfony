@@ -35,7 +35,11 @@ class SessionTechsRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            try {
+                $this->getEntityManager()->flush();
+            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex) {
+//                echo "Exception Found - " . $ex->getMessage() . "<br/>";
+            }
         }
     }
 
