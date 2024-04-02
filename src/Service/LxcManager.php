@@ -12,11 +12,14 @@ use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
+use App\Entity\Environments;
 use App\Entity\HardwareProfiles;
 use Opensaucesystems\Lxd\Exception\NotFoundException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
-use App\Message\LxcOperation;
+use App\Message\LxcOperation; 
+//use App\Service\EnvironmentManager;
+use App\Message\EnvironmentAction;
 
 class LxcManager
 {
@@ -26,6 +29,7 @@ class LxcManager
     private $lxcEventBus;
     private $lxcOperationBus;
     private $lxcService;
+//    private $environmentService;
     private $timeout;
     private $wait;
 
@@ -46,7 +50,14 @@ class LxcManager
     // Addresses repo    
     private $addressRepository;
 
+    // Environment repo
+    private $environmentRepository;
+
+    private $environmentActionBus;
+    
     public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
+//            EnvironmentManager $environmentService,
+            MessageBusInterface $environmentActionBus, 
             MessageBusInterface $lxcEventBus, MessageBusInterface $lxcOperationBus,
             string $lxc_timeout, string $lxc_wait, string $lxc_url)
     {
@@ -69,6 +80,11 @@ class LxcManager
         // get the Addresses repository
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
         
+        // get the Environment repository
+        $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
+                
+//        $this->environmentService = $environmentService;
+        $this->environmentActionBus = $environmentActionBus;       
         $this->lxcEventBus = $lxcEventBus;
         $this->lxcOperationBus = $lxcOperationBus;
 	$this->timeout = intval($lxc_timeout);
@@ -155,13 +171,13 @@ class LxcManager
 //        return $instance;
     }
 
-    public function create($os_alias, $hp_name, bool $async = true): ?Instances {
+    public function create($os_alias, $hp_name, $env_id = null, bool $async = true): bool {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
-                        "os" => $os_alias, "hp" => $hp_name]));
-            return null;
+            "os" => $os_alias, "hp" => $hp_name, "env_id" => $env_id]));
+            return true;
         }
 
         $this->logger->debug("Creating LXC object: OS: `" . $os_alias . "`, HW profile: `" . $hp_name . "`");
@@ -171,7 +187,7 @@ class LxcManager
 
         if (!$instance) {
             $this->logger->debug("Instance creation failure");
-            return null;
+            return false;
         }
 
 //        $addresses = $instance->getAddresses();
@@ -201,10 +217,23 @@ class LxcManager
         // Store item into the DB
 //        $this->entityManager->persist($instance);
         $this->entityManager->flush();
-
+                
+        // Starting the instance
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
 
-        return $instance;
+        // Environment id has been specified, bind to it
+        if($env_id){
+
+            $environment = $this->environmentRepository->findOneById($env_id);
+            
+            $this->logger->debug("Binding instance to the environment: `" . $environment);
+
+//            $this->environmentService->bindInstance($environment, $instance);
+            $this->environmentActionBus->dispatch(new EnvironmentAction(["action" => "bind",
+                        "env_id" => $environment->getId(), "instance" => $instance->getName()]));
+        }
+        
+        return true;
     }
 
     public function start($name, $force = false, bool $async = true): bool {
@@ -540,7 +569,7 @@ class LxcManager
         }
     }
 
-    public function setInstanceStatus(int $instance_id, $status_str): bool {
+    public function setInstanceStatus(string $name, string $status_str): bool {
 
         $this->logger->debug(__METHOD__);
 
@@ -551,7 +580,7 @@ class LxcManager
             return false;
         }
 
-        $instance = $this->instanceRepository->findOneById($instance_id);
+        $instance = $this->instanceRepository->findOneByName($name);
 
         if (!$instance) {
             $this->logger->debug('No such instance!');
@@ -559,7 +588,7 @@ class LxcManager
         }
 
         // Special statuses for bound instances
-        $target_status = $this->tweakInstanceStatus($instance_id, $status_str);
+        $target_status = $this->tweakInstanceStatus($instance->getID(), $status_str);
 
         $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
 

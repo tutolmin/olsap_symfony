@@ -74,18 +74,22 @@ final class EnvironmentEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `" . 
+                $this->logger->debug("Handling environment event `" . 
                         $message->getEvent() . "` for Environment ID " . $id);
 
                 $env = $this->environmentRepository->findOneById($id);
                 if ($env) {
+                    
+/*                   
                     $this->lxcService->setInstanceStatus($env->getInstance()->getId(), "Running");
 
                     $env_status = $this->environmentStatusesRepository->findOneByStatus("Created");
                     $env->setStatus($env_status);
                     // Store item into the DB
                     $this->entityManager->flush();
+                */                    
                 }
+                
                 # TODO: Handle exception
                 break;
 

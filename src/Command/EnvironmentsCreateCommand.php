@@ -41,11 +41,11 @@ class EnvironmentsCreateCommand extends Command {
 
     protected function configure(): void {
         $this
-                ->addArgument('task', InputArgument::REQUIRED, 'Task identificator')
+                ->addArgument('task', InputArgument::REQUIRED, 'Task identificator by path')
 //                ->addArgument('session_id', InputArgument::OPTIONAL, 'Session identificator')
 //            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
                 ->addArgument('number', InputArgument::OPTIONAL, 'Number of environments to create')
-                ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
+                ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 

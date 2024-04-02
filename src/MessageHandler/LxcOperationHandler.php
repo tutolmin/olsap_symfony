@@ -84,20 +84,25 @@ final class LxcOperationHandler
             $name = $message->getName();
         }
 	// Get passed optional parameters
-	$os = null;
+	$operating_system = null;
 	if (strlen($message->getOS())) {
-            $os = $message->getOS();
+            $operating_system = $message->getOS();
         }
 	// Get passed optional parameters
-	$hp = null;
+	$hardware_profile = null;
 	if (strlen($message->getHP())) {
-            $hp = $message->getHP();
+            $hardware_profile = $message->getHP();
         }
-        $environment = null;
+        $environment_id = null;
 	if (strlen($message->getEnvironmentId())) {
-            $environment = $this->environmentRepository->find($message->getEnvironmentId());
+            $environment_id = $message->getEnvironmentId();
         }
 
+        $instance_status = null;
+	if (strlen($message->getInstanceStatus())) {
+            $instance_status = $this->instanceStatusRepository->findOneByStatus($message->getInstanceStatus());
+        }
+        
         $instance = null;
 	if (strlen($message->getInstanceId())) {
             $instance = $this->instanceRepository->find($message->getInstanceId());
@@ -152,13 +157,14 @@ final class LxcOperationHandler
 	// Creating new LXC object
 	case "create":
 
-	  if(!$os || !$hp) {
+	  if(!$operating_system || !$hardware_profile) {
             $this->logger->error( "OS & HP is required for `" . $message->getCommand() . "` LXD command");
 	    break;
 	  }
 
-	  $this->logger->debug( "Creating LXC object, OS alias: `" . $os . "`, HW profile: `" . $hp . "`");
-	  $this->lxcService->create($os, $hp, false);
+	  $this->logger->debug( "Creating LXC object, OS alias: `" . $operating_system . 
+                  "`, HW profile: `" . $hardware_profile . "`");
+	  $this->lxcService->create($operating_system, $hardware_profile, $environment_id, false);
 
 	  break;
           
@@ -219,13 +225,26 @@ final class LxcOperationHandler
 	  $responce = $this->lxcService->deleteObject($name);	
 
 	  break;
-
+        
 	case "deleteAll":
 
 	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
 	  $responce = $this->lxcService->deleteAllObjects(true);	
 
 	  break;
+
+        case "setInstanceStatus":
+
+	  // REQUIRED: name
+	  if(!$name) {
+            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
+	    break;
+	  }
+
+	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+	  $responce = $this->lxcService->setInstanceStatus($name, $instance_status);	            
+          
+          break;
 
 	default:
             $this->logger->debug( "Unknown command: `" . $message->getCommand() . "`");

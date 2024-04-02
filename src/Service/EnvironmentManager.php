@@ -16,11 +16,11 @@ use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\Addresses;
 use App\Service\AwxManager;
-use App\Service\LxcManager;
+//use App\Service\LxcManager;
 //use App\Service\SessionManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 //use App\Message\SessionAction;
-//use App\Message\LxcOperation; 
+use App\Message\LxcOperation; 
 use App\Message\EnvironmentAction;
 use App\Message\EnvironmentEvent;
 
@@ -38,26 +38,27 @@ class EnvironmentManager
     private $environmentRepository;
     private $environmentStatusesRepository;
 
-    private $sessionBus;
+//    private $sessionBus;
     private $lxcOperationBus;
     private $environmentEventBus;
     private $environmentActionBus;
 
-    private $lxcService;
+//    private $lxcService;
     private $awxService;
 //    private $sessionService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	LxcManager $lxc, AwxManager $awx, //SessionManager $session,
-            MessageBusInterface $sessionBus, MessageBusInterface $lxcOperationBus,
+	AwxManager $awx, //SessionManager $session,
+            // MessageBusInterface $sessionBus, 
+            MessageBusInterface $lxcOperationBus,
             MessageBusInterface $environmentEventBus, MessageBusInterface $environmentActionBus)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
-	$this->lxcService = $lxc;
-	$this->sessionBus = $sessionBus;
+//	$this->lxcService = $lxc;
+//	$this->sessionBus = $sessionBus;
 	$this->lxcOperationBus = $lxcOperationBus;
 	$this->awxService = $awx;
         $this->environmentEventBus = $environmentEventBus;
@@ -89,8 +90,19 @@ class EnvironmentManager
         return null;
     }
 */
-    // Bind the Instance
-    public function bindInstance(InstanceTypes $it): Instances {
+    
+    // Bind Instance to the Evironment
+    public function bindInstance($environment, $instance) {
+        $this->logger->debug(__METHOD__);
+
+	$environment->setInstance($instance);
+	$this->entityManager->flush();
+
+        $this->deployEnvironment($environment);
+    }
+    
+    // Allocate the Instance
+    public function allocateInstance(InstanceTypes $it): ?Instances {
         $this->logger->debug(__METHOD__);
 
         // TODO: check input parameters
@@ -111,17 +123,15 @@ class EnvironmentManager
 
             $this->logger->debug('Suitable stopped instance has been found: ' . $stopped_instance);
 
-            // start instance synchroneously
-            $this->lxcService->start($stopped_instance->getName(), false, false);
+            // start instance
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start",
+                "name" => $stopped_instance->getName()]));
+//            $this->lxcService->start($stopped_instance->getName(), false, false);
 
             return $stopped_instance;
         }
 
-        // Create new Instance synchroneously
-        $instance = $this->lxcService->create($it->getOs()->getAlias(),
-                $it->getHwProfile()->getName(), false);
-
-        return $instance;
+        return null;
     }
 
     public function deleteEnvironment($environment) {
@@ -150,8 +160,11 @@ class EnvironmentManager
         // stop instance for the time being
 //	$this->stopInstance($instance);
         
-        $this->lxcService->setInstanceStatus($instance->getId(), 
-                $instance->getStatus()->getStatus());
+        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "setInstanceStatus",
+            "name" => $instance->getName(), "status" => $instance->getStatus()->getStatus()]));
+        
+//        $this->lxcService->setInstanceStatus($instance->getId(), 
+//                $instance->getStatus()->getStatus());
 
         return true;
     }
@@ -478,25 +491,45 @@ class EnvironmentManager
 //            $this->entityManager->flush();
 
         $this->logger->debug('Environment `' . $env . '` was created.');
+        
+        $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
+            "id" => $env->getId()]));
+
+        $this->entityManager->flush();
 
 //	  $timestamp = new \DateTimeImmutable('NOW');
 //	  $env->setHash(substr(md5($timestamp->format('Y-m-d H:i:s')),0,8));
 //	  $name = $this->createInstance($instance_type);
-        $instance = $this->bindInstance($instance_type);
+	  
+        // Try to allocate the inctance first
+        $instance = $this->allocateInstance($instance_type);
+        
+        if ($instance) {
+            $env->setInstance($instance);
 
-        $env->setInstance($instance);
-
-        // Store item into the DB
+            // Store item into the DB
 //	  $this->entityManager->persist($env);
-        $this->entityManager->flush();
+            $this->entityManager->flush();
 
-        $this->logger->debug('Instance `' . $instance->getName() . 
-                '` has been bound to the newly created environment.');
+            $this->logger->debug('Instance `' . $instance->getName() .
+                    '` has been allocated to the newly created environment.');
 
-        $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
-            "id" => $env->getId()]));
+            // Deploy it immediately
+            $this->deployEnvironment($env);
 
-        $this->deployEnvironment($env);
+        } else {
+            
+            $this->logger->debug('Request instance creation for the newly created environment.');
+
+//            $this->lxcService->create($instance_type->getOs()->getAlias(),
+//                    $instance_type->getHwProfile()->getName(), $env);
+            
+            $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
+                "os" => $instance_type->getOs()->getAlias(),
+                "hp" => $instance_type->getHwProfile()->getName(), 
+                "env_id" => $env->getId()]));
+        }
+
         return $env;
     }
 
@@ -583,7 +616,7 @@ class EnvironmentManager
 
         $task_id = $env->getTask()->getDeploy();
 	if($task_id) {
-
+/*
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
 
@@ -597,7 +630,7 @@ class EnvironmentManager
 	  $this->entityManager->flush();
 
 	  $this->logger->debug('Status: ' . $result->status);
-
+*/
 	  $this->setEnvironmentStatus($env, "Deployed");
 
 	  return true;

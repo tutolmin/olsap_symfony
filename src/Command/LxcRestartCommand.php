@@ -31,7 +31,7 @@ class LxcRestartCommand extends Command
     {
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'LCX object name')
-            ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
+            ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 

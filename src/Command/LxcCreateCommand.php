@@ -35,7 +35,7 @@ class LxcCreateCommand extends Command {
                 ->addArgument('profile', InputArgument::REQUIRED, 'Hardware profile name')
                 ->addArgument('os', InputArgument::REQUIRED, 'Operating system alias')
                 ->addArgument('number', InputArgument::OPTIONAL, 'Number of objects to create')
-                ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
+                ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 
@@ -66,7 +66,7 @@ class LxcCreateCommand extends Command {
                         $this->os_alias, $this->hp_name));
         for ($i = 0; $i < $this->object_number; $i++) {
             if ($this->lxcService->create($this->os_alias, $this->hp_name,
-                            $input->getOption('async'))) {
+                    null, $input->getOption('async'))) {
                 $this->io->success('Object created successfully!');
             } else {
                 $this->io->error(sprintf('Object creation failure!'));
