@@ -18,7 +18,6 @@ use App\Service\LxcManager;
 class LxcRestartCommand extends Command
 {
     private $lxcService;
-    private $lxcOperationBus;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxcService)
@@ -31,7 +30,7 @@ class LxcRestartCommand extends Command
     {
         $this
             ->addArgument('name', InputArgument::REQUIRED, 'LCX object name')
-            ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
+            ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 

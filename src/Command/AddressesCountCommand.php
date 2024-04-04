@@ -35,11 +35,11 @@ class AddressesCountCommand extends Command
 
     protected function configure(): void
     {
-        $this
+#        $this
 #            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
 #            ->addOption('used', null, InputOption::VALUE_NONE, 'Used addresses only')
 #            ->addOption('unused', null, InputOption::VALUE_NONE, 'Unused addresses only')
-        ;
+#        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

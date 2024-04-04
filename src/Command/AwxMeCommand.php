@@ -21,24 +21,26 @@ class AwxMeCommand extends Command
 {
     private $awx;
     
-    private $entityManager;
+//    private $entityManager;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, AwxManager $awx)
+    public function __construct( 
+//            EntityManagerInterface $entityManager, 
+            AwxManager $awx)
     {   
         parent::__construct();
 
-        $this->entityManager = $entityManager;
+//        $this->entityManager = $entityManager;
 
         $this->awx = $awx;
     }
 
     protected function configure(): void
     {
-        $this
+//        $this
 //            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

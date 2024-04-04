@@ -7,13 +7,13 @@ use App\Message\LxcOperation;
 //use App\Message\RunPlaybook;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\MessageBusInterface;
+//use Symfony\Component\Messenger\MessageBusInterface;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\InstanceStatuses;
 use App\Entity\Instances;
 use App\Entity\InstanceTypes;
-use App\Entity\Environments;
+//use App\Entity\Environments;
 
 use Psr\Log\LoggerInterface;
 
@@ -33,32 +33,34 @@ final class LxcOperationHandler
     private $entityManager;
 
 //    private $message;
-    private $environmentRepository;
+//    private $environmentRepository;
     private $instanceTypeRepository;
     private $instanceStatusRepository;
     private $instanceRepository;
 
     // Message bus
-    private $awxBus;
-    private $lxdEventBus;
-    private $lxcOperationBus;
+//    private $awxBus;
+//    private $lxdEventBus;
+//    private $lxcOperationBus;
 
     private $lxcService;
 
     public function __construct(
 	LoggerInterface $logger, EntityManagerInterface $entityManager,
-	MessageBusInterface $awxBus, MessageBusInterface $lxdEventBus, 
-        MessageBusInterface $lxcOperationBus, LxcManager $lxcService)
+//	MessageBusInterface $awxBus, 
+//        MessageBusInterface $lxdEventBus, 
+//        MessageBusInterface $lxcOperationBus, 
+        LxcManager $lxcService)
     {
         $this->logger = $logger;
-        $this->awxBus = $awxBus;
-        $this->lxdEventBus = $lxdEventBus;
-        $this->lxcOperationBus = $lxcOperationBus;
+//        $this->awxBus = $awxBus;
+//        $this->lxdEventBus = $lxdEventBus;
+//        $this->lxcOperationBus = $lxcOperationBus;
 	$this->lxcService = $lxcService;
 
         $this->entityManager = $entityManager;
         $this->instanceTypeRepository = $this->entityManager->getRepository( InstanceTypes::class);
-        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
+//        $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->instanceStatusRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
 /*

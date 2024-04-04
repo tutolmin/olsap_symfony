@@ -16,7 +16,7 @@ class Addresses
     private ?int $id = null;
 
     #[ORM\Column(length: 16)]
-    private ?string $ip = null;
+    private string $ip;
 
     #[ORM\ManyToOne(inversedBy: 'addresses')]
     private ?Instances $instance = null;
@@ -25,7 +25,7 @@ class Addresses
     private ?Ports $port = null;
 
     #[ORM\Column(length: 18)]
-    private ?string $mac = null;
+    private string $mac;
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {

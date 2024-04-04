@@ -35,9 +35,9 @@ class TasksLsCommand extends Command
 
     protected function configure(): void
     {
-        $this
+//        $this
 //            ->addArgument('status', InputArgument::OPTIONAL, 'Filter certain status')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

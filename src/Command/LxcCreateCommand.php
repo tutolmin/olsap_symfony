@@ -35,7 +35,7 @@ class LxcCreateCommand extends Command {
                 ->addArgument('profile', InputArgument::REQUIRED, 'Hardware profile name')
                 ->addArgument('os', InputArgument::REQUIRED, 'Operating system alias')
                 ->addArgument('number', InputArgument::OPTIONAL, 'Number of objects to create')
-                ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
+                ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 

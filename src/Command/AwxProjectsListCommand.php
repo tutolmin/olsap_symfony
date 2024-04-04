@@ -38,10 +38,10 @@ class AwxProjectsListCommand extends Command
 
     protected function configure(): void
     {
-        $this
+//        $this
 //            ->addArgument('env_id', InputArgument::REQUIRED, 'Environment id to deploy')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

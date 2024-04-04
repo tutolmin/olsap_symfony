@@ -14,7 +14,7 @@ use App\Entity\EnvironmentStatuses;
 use App\Entity\InstanceTypes;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
-use App\Entity\Addresses;
+//use App\Entity\Addresses;
 use App\Service\AwxManager;
 //use App\Service\LxcManager;
 //use App\Service\SessionManager;
@@ -30,9 +30,9 @@ class EnvironmentManager
 
     private $entityManager;
     private $taskRepository;
-    private $addressRepository;
+//    private $addressRepository;
     private $instanceRepository;
-    private $instanceStatusesRepository;
+//    private $instanceStatusesRepository;
     private $sessionStatusesRepository;
     private $sessionsRepository;
     private $environmentRepository;
@@ -67,9 +67,9 @@ class EnvironmentManager
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
-        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
+//        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
         $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
-        $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+//        $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
@@ -248,6 +248,7 @@ class EnvironmentManager
         return true;
     }
 */
+    /*
     private function tweakInstanceStatus(int $instance_id, string $status_str): InstanceStatuses {
 
         $this->logger->debug(__METHOD__);
@@ -273,7 +274,7 @@ class EnvironmentManager
         }
         return $status;
     }
-
+*/
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -590,9 +591,9 @@ class EnvironmentManager
 	  $body["limit"] = $env->getInstance()->getName();
 
 	  // return the the account api
-	  $result = $this->awxService->runJobTemplate($env->getTask()->getSolve(), $body);
+	  $this->awxService->runJobTemplate($env->getTask()->getSolve(), $body);
 
-	  $this->logger->debug('Status: ' . $result->status);
+//	  $this->logger->debug('Status: ' . $result->status);
 
 	  $this->setEnvironmentStatus($env, "Solved");
 
@@ -616,16 +617,16 @@ class EnvironmentManager
 
         $task_id = $env->getTask()->getDeploy();
 	if($task_id) {
-/*
+
 	  // Limit execution on single host only
 	  $body["limit"] = $env->getInstance()->getName();
 
 	  // Deploy test user credentials
-          $this->awxService->runJobTemplate(55, $body);
+//          $this->awxService->runJobTemplate(55, $body);
 
 	  // Deploy actual environment
-	  $result = $this->awxService->runJobTemplate($env->getTask()->getDeploy(), $body);
-
+	  $this->awxService->runJobTemplate($env->getTask()->getDeploy(), $body);
+/*
 	  $env->setDeployment($result->id);
 	  $this->entityManager->flush();
 

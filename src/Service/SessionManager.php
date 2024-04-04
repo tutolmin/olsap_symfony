@@ -12,10 +12,10 @@ use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Entity\EnvironmentStatuses;
 //use App\Entity\InstanceTypes;
-use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
-use App\Entity\Addresses;
-use App\Service\AwxManager;
+//use App\Entity\Instances;
+//use App\Entity\InstanceStatuses;
+//use App\Entity\Addresses;
+//ctuse App\Service\AwxManager;
 //use App\Service\LxcManager;
 //use App\Service\EnvironmentManager;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -28,25 +28,25 @@ class SessionManager
 
     private $entityManager;
     private $taskRepository;
-    private $addressRepository;
-    private $instanceRepository;
-    private $instanceStatusesRepository;
+//    private $addressRepository;
+//    private $instanceRepository;
+//    private $instanceStatusesRepository;
     private $sessionStatusesRepository;
     private $environmentRepository;
-    private $environmentStatusesRepository;
+//    private $environmentStatusesRepository;
 
     private $params;
 
-    private $sessionBus;
+//    private $sessionBus;
     private $environmentActionBus;
 
 //    private $lxdService;
-    private $awxService;
+//    private $awxService;
 //    private $envService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
-	AwxManager $awx, 
-            MessageBusInterface $sessionBus, 
+//	AwxManager $awx, 
+//            MessageBusInterface $sessionBus, 
             MessageBusInterface $environmentActionBus,
             $app_start_envs)
 
@@ -56,9 +56,9 @@ class SessionManager
 
         $this->entityManager = $em;
 //	$this->lxdService = $lxd;
-	$this->sessionBus = $sessionBus;
+//	$this->sessionBus = $sessionBus;
 //	$this->lxdOperationBus = $lxdOperationBus;
-	$this->awxService = $awx;
+//	$this->awxService = $awx;
 //	$this->envService = $env;
 
         $this->params['app_start_envs']        = $app_start_envs;
@@ -67,11 +67,11 @@ class SessionManager
 
         // get the repositories
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
-        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
-        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
-        $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
+//        $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
+//        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
+//        $this->instanceStatusesRepository = $this->entityManager->getRepository( InstanceStatuses::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
-        $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
+//        $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
     }
 /*

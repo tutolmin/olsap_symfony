@@ -35,17 +35,17 @@ class Sessions
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionOses::class, orphanRemoval: true)]
     private $sessionOses;
 
-    private $osesCounter;
+#    private $osesCounter;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionTechs::class, orphanRemoval: true)]
     private $sessionTechs;
 
-    private $techsCounter;
+#    private $techsCounter;
 
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Environments::class)]
     private $envs;
 
-    private $envsCounter;
+#    private $envsCounter;
 
     #[ORM\ManyToOne(targetEntity: SessionStatuses::class, inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false, options: ['default' => 1])]
@@ -163,7 +163,7 @@ class Sessions
 
     public function getOsesCounter(): int
     {
-        return $this->osesCounter = count( $this->getSessionOses());
+        return count( $this->getSessionOses());
     }
 
     /**
@@ -198,7 +198,7 @@ class Sessions
 
     public function getTechsCounter(): int
     {
-        return $this->techsCounter = count( $this->getSessionTechs());
+        return count( $this->getSessionTechs());
     }
 
     /**
@@ -211,7 +211,7 @@ class Sessions
 
     public function getEnvsCounter(): int
     {
-        return $this->envsCounter = count( $this->getEnvs());
+        return count( $this->getEnvs());
     }
 
     public function addEnv(Environments $env): self

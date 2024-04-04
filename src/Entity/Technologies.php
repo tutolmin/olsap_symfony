@@ -32,7 +32,7 @@ class Technologies
     #[ORM\OneToMany(mappedBy: 'tech', targetEntity: TaskTechs::class, orphanRemoval: true)]
     private $techTasks;
 
-    private $tasksCounter;
+#    private $tasksCounter;
 
     public function __construct()
     {
@@ -148,6 +148,6 @@ class Technologies
 
     public function getTasksCounter(): int
     {   
-        return $this->tasksCounter = count( $this->getTechTasks());
+        return count( $this->getTechTasks());
     }
 }

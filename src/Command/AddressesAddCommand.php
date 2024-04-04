@@ -36,10 +36,9 @@ class AddressesAddCommand extends Command
         $this->portRepository = $this->entityManager->getRepository( Ports::class);
     }
 
-    protected function configure(): void
-    {
-        $this
-            ->addArgument('subnet', InputArgument::REQUIRED, '172.27.<subnet>.[0-255] number')
+    protected function configure(): void {
+        $this->
+                addArgument('subnet', InputArgument::REQUIRED, '172.27.<subnet>.[0-255] number')
         ;
     }
 

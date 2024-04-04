@@ -46,7 +46,7 @@ class Environments
     private $status;
 
     #[ORM\Column(length: 8, nullable: false)]
-    private ?string $hash = null;
+    private string $hash;
 
     public function __construct()
     {

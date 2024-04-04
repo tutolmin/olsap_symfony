@@ -4,7 +4,7 @@
 namespace App\Service;
 
 use Psr\Log\LoggerInterface;
-use Doctrine\ORM\EntityManagerInterface;
+#use Doctrine\ORM\EntityManagerInterface;
 use AwxV2\Oauth\Oauth2;
 use AwxV2\Adapter\GuzzleHttpAdapter;
 use AwxV2\AwxV2;
@@ -13,7 +13,7 @@ use AwxV2\AwxV2;
 
 //use App\Entity\Tasks;
 //use App\Entity\InstanceTypes;
-use Symfony\Component\Messenger\MessageBusInterface;
+#use Symfony\Component\Messenger\MessageBusInterface;
 
 class AwxManager
 {    
@@ -23,17 +23,19 @@ class AwxManager
 
     private $awx;
 
-    private $entityManager;
+#    private $entityManager;
 //    private $taskRepository;
 
     public function __construct( string $awx_client_id, string $awx_client_secret,
             string $awx_username, string $awx_password, string $awx_api_url,
-            LoggerInterface $logger, EntityManagerInterface $em)
+            LoggerInterface $logger
+            #, EntityManagerInterface $em
+            )
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
-        $this->entityManager = $em;
+//        $this->entityManager = $em;
 
         $this->params['awx_client_id']      = $awx_client_id;
         $this->params['awx_client_secret']  = $awx_client_secret;
@@ -150,6 +152,20 @@ class AwxManager
 	return $this->awx->job()->getById($id);
     }
 
+    public function deployTestUser($body)
+    {
+        // Hardcoded ID for user creation
+        // It can be defferent for PROM
+        $this->runJobTemplate(55, $body);
+    }
+        
+    public function updateInventory()
+    {
+        // Hardcoded ID for inventory update
+        // It can be defferent for PROM
+//        $this->awxService->runJobTemplate(55, $body);
+    }
+    
     public function runJobTemplate($id, $body)#: MeEntity
     {
         $this->logger->debug(__METHOD__);
@@ -165,8 +181,8 @@ class AwxManager
 
 	//var_dump($runResult->id);
 
-	$job = $this->awx->Job();
-
+//	$job = $this->awx->Job();
+/*
 	while(true) {
 
 	  $jobResult = $job->getById($runResult->id);
@@ -179,8 +195,8 @@ class AwxManager
 
             sleep( 1);
 	}
-		
-	return $jobResult;
+*/		
+	return $runResult;
     }
 }
 

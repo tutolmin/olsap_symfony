@@ -36,23 +36,33 @@ final class AwxEventHandler
         // Switch event to handle
         switch ($message->getEvent()) {
 
-            // Update the inventory
-            case "inventory":
+            // Updated the inventory
+            case "inventory": 
+                
+//                $inventoryResult = $this->awxService->getJobById($id);
+//                $this->logger->debug("Inventory update status: " . $inventoryResult->status);
+                $this->logger->debug("Inventory update");
+                
                 break;
 
-            // Playbook execution
+            // Playbook execution details
             case "playbook":
                 
                 $job = $this->awxService->getJobById($id);
                 $this->logger->debug("Job status: " . $job->status);
 
+                // Check what playbook was executed? 
+                // Update env status accordingly
+                // Update verification status if verify.yml
+                
                 break;
 
             // Project event
             case "project":
 
-//                $projectResult = $this->awxService->getById($id);
+//                $projectResult = $this->awxService->getJobById($id);
 //                $this->logger->debug("Current Project status: " . $projectResult->status);
+                $this->logger->debug("Project update");
 
                 break;
 

@@ -6,16 +6,16 @@ use App\Message\EnvironmentEvent;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #use App\Message\RunPlaybook;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+//use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\InstanceStatuses;
-use App\Entity\Instances;
-use App\Entity\InstanceTypes;
+//use App\Entity\InstanceStatuses;
+//use App\Entity\Instances;
+//use App\Entity\InstanceTypes;
 use App\Entity\Environments;
-use App\Entity\EnvironmentStatuses;
+//use App\Entity\EnvironmentStatuses;
 use Psr\Log\LoggerInterface;
-use App\Service\LxcManager;
-use App\Service\SessionManager;
+//use App\Service\LxcManager;
+//use App\Service\SessionManager;
 
 #[AsMessageHandler(fromTransport: 'async', bus: 'environment.event.bus')]
 final class EnvironmentEventHandler {
@@ -25,32 +25,33 @@ final class EnvironmentEventHandler {
     // Doctrine EntityManager
     private $entityManager;
     private $environmentRepository;
-    private $environmentStatusesRepository;
-    private $instanceTypeRepository;
-    private $instanceStatusRepository;
-    private $instanceRepository;
+//    private $environmentStatusesRepository;
+//    private $instanceTypeRepository;
+//    private $instanceStatusRepository;
+//    private $instanceRepository;
     // Message bus
-    private $awxBus;
-    private $lxcOperationBus;
-    private $lxcService;
-    private $session;
+//    private $awxBus;
+//    private $lxcOperationBus;
+//    private $lxcService;
+//    private $session;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $awxBus, MessageBusInterface $lxcOperationBus,
-            LxcManager $lxcService, SessionManager $session) {
+//            MessageBusInterface $awxBus, MessageBusInterface $lxcOperationBus,
+//            LxcManager $lxcService, SessionManager $session
+            ) {
         $this->logger = $logger;
-        $this->awxBus = $awxBus;
-        $this->lxcOperationBus = $lxcOperationBus;
-        $this->lxcService = $lxcService;
-        $this->session = $session;
+//        $this->awxBus = $awxBus;
+//        $this->lxcOperationBus = $lxcOperationBus;
+//        $this->lxcService = $lxcService;
+//        $this->session = $session;
 
         $this->entityManager = $entityManager;
-        $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
+//        $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
-        $this->environmentStatusesRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
-        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
+//        $this->environmentStatusesRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
+//        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
+//        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
 
         $this->logger->debug(__METHOD__);
     }
@@ -58,7 +59,7 @@ final class EnvironmentEventHandler {
     public function __invoke(EnvironmentEvent $message) {
         // Get passed optional parameters
         $id = null;
-        if (strlen($message->getId())) {
+        if (strlen($message->getId())>0) {
             $id = $message->getId();
         }
 

@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 #use App\Entity\Instances;
 #use App\Entity\InstanceTypes;
 use App\Entity\Environments;
-use App\Service\AwxManager;
+#use App\Service\AwxManager;
 
 use Psr\Log\LoggerInterface;
 
@@ -24,18 +24,19 @@ final class AwxActionHandler
     // Doctrine EntityManager
     private $entityManager;
 
-    private $awxService;
+//    private $awxService;
     
 //    private $message;
     private $environmentRepository;
 
     public function __construct(
         LoggerInterface $logger, EntityManagerInterface $entityManager,
-        AwxManager $manager)
+#        AwxManager $manager
+            )
     {   
         $this->logger = $logger;
 
-        $this->awxService = $manager;
+#        $this->awxService = $manager;
         $this->entityManager = $entityManager;
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
 #        $this->instanceTypeRepository = $this->entityManager->getRepository( InstanceTypes::class);

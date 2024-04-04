@@ -26,7 +26,7 @@ class AwxJobDetailsCommand extends Command
     private $envService;
 
     private $entityManager;
-    private $taskRepository;
+//    private $taskRepository;
     private $instanceRepository;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -36,7 +36,7 @@ class AwxJobDetailsCommand extends Command
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
+//        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
         
         $this->awxService = $awxService;

@@ -123,8 +123,10 @@ final class SessionActionHandler
     	  }
 
 	  // Only add new envs if there are not enough
-	  if(count($environments) < $_ENV['APP_SPARE_ENVS'] &&
-		is_numeric($task->getDeploy())) {
+        if(count($environments) < $_ENV['APP_SPARE_ENVS']) {
+//              && is_numeric($task->getDeploy())) {
+//              $task->getDeploy()) {
+         
 
 	    $environment = $this->sessionManager->createEnvironment($task);
   #            $this->logger->debug( "Created environment: " . $environment);

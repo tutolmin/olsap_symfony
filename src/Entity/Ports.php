@@ -15,8 +15,8 @@ class Ports
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $number = null;
-
+    private int $number;
+    
     #[ORM\OneToOne(inversedBy: 'port', cascade: ['persist', 'remove'])]
     private ?Addresses $address = null;
 

@@ -17,17 +17,19 @@ use App\Entity\HardwareProfiles;
 use Opensaucesystems\Lxd\Exception\NotFoundException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
-use App\Message\LxcOperation; 
+use App\Message\LxcOperation;
+use App\Message\AwxAction;
 //use App\Service\EnvironmentManager;
 use App\Message\EnvironmentAction;
 
 class LxcManager
 {
-    private $params;
+//    private $params;
 
     private $logger;
     private $lxcEventBus;
     private $lxcOperationBus;
+//    private $awxActionBus;    
     private $lxcService;
 //    private $environmentService;
     private $timeout;
@@ -58,6 +60,7 @@ class LxcManager
     public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
 //            EnvironmentManager $environmentService,
             MessageBusInterface $environmentActionBus, 
+//            MessageBusInterface $awxActionBus,
             MessageBusInterface $lxcEventBus, MessageBusInterface $lxcOperationBus,
             string $lxc_timeout, string $lxc_wait, string $lxc_url)
     {
@@ -87,6 +90,7 @@ class LxcManager
         $this->environmentActionBus = $environmentActionBus;       
         $this->lxcEventBus = $lxcEventBus;
         $this->lxcOperationBus = $lxcOperationBus;
+//        $this->awxActionBus = $awxActionBus;
 	$this->timeout = intval($lxc_timeout);
 	$this->wait = $lxc_wait;
 
@@ -212,6 +216,9 @@ class LxcManager
 
         $this->logger->debug("Created object: " . $name[3]);
 
+        $this->logger->debug('Dispatching LXC event message');
+        $this->lxcEventBus->dispatch(new LxcEvent(["event" => "created", "name" => $name[3]]));
+            
         $instance->setName($name[3]);
 
         // Store item into the DB
@@ -220,6 +227,9 @@ class LxcManager
                 
         // Starting the instance
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
+
+        // Deploy test user
+//        $this->awxActionBus->dispatch(new AwxAction(["action" => "deployTestUser", "name" => $name[3]]));
 
         // Environment id has been specified, bind to it
         if($env_id){
@@ -372,6 +382,10 @@ class LxcManager
 
         try {
             $this->lxcService->containers->remove($name, $this->wait);
+            
+            $this->logger->debug('Dispatching LXC event message');
+            $this->lxcEventBus->dispatch(new LxcEvent(["event" => "deleted", "name" => $name]));
+         
         } catch (NotFoundException $exc) {
             $this->logger->debug("LXC object `" . $name . "` does not exist!");
             $this->logger->debug($exc->getTraceAsString());
@@ -392,7 +406,8 @@ class LxcManager
         }
 
         if ($instance->getStatus() != "Stopped" &&
-                $instance->getStatus() != "Sleeping") {
+                $instance->getStatus() != "Sleeping" &&
+                $instance->getStatus() != "New") {
             $this->logger->debug("Instance is NOT stopped");
             if (!$force) {
                 return false;

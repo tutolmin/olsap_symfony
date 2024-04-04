@@ -6,14 +6,9 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\InstanceTypes;
-use App\Entity\OperatingSystems;
-use App\Entity\HardwareProfiles;
 use App\Service\LxcManager;
 
 #[AsCommand(
@@ -22,42 +17,18 @@ use App\Service\LxcManager;
 )]
 class InstancesCreateCommand extends Command
 {
-    // Doctrine EntityManager
-    private $entityManager;
-
-    // InstanceTypes repo
-    private $itRepository;
-
     private $io;
     private $os_alias;
     private $hp_name;
     private $number;
-    
-    // OperatingSystems repo
-    private $osRepository;
-
-    // HardwareProfiles repo
-    private $hpRepository;
-
     private $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, LxcManager $lxcService)
+    public function __construct( LxcManager $lxcService)
     {
         parent::__construct();
 
-        $this->entityManager = $entityManager;
-
         $this->lxcService = $lxcService;
-
-        // get the InstanceTypes repository
-        $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
-
-        // get the OperatingSystems repository
-        $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
-
-        // get the HardwareProfiles repository
-        $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
     }
 
     protected function configure(): void

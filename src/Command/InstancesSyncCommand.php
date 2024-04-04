@@ -37,10 +37,10 @@ class InstancesSyncCommand extends Command {
     }
 
     protected function configure(): void {
-        $this
+//        $this
 //            ->addArgument('status', InputArgument::OPTIONAL, 'Filter certain status')
 //            ->addOption('orphans', null, InputOption::VALUE_NONE, 'Show orphan records which does NOT have corresponding LXC objects')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int {

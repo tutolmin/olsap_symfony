@@ -36,8 +36,8 @@ class LxcDeleteCommand extends Command {
     protected function configure(): void {
         $this
                 ->addArgument('name', InputArgument::REQUIRED, 'Object name or <ALL> for all objects')
-                ->addOption('force', false, InputOption::VALUE_NONE, 'Forcefully stop the container before deletion')
-                ->addOption('async', false, InputOption::VALUE_NONE, 'Asyncroneous execution')
+                ->addOption('force', null, InputOption::VALUE_NONE, 'Forcefully stop the container before deletion')
+                ->addOption('async', null, InputOption::VALUE_NONE, 'Asyncroneous execution')
         ;
     }
 

@@ -30,11 +30,12 @@ class EnvironmentsSpareCommand extends Command
 
     private $sessionBus;
 
-    private $sessionManager;
+//    private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager, 
-	SessionManager $sessionManager, MessageBusInterface $sessionBus)
+//	SessionManager $sessionManager, 
+	MessageBusInterface $sessionBus)
     {
         parent::__construct();
 
@@ -42,17 +43,17 @@ class EnvironmentsSpareCommand extends Command
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
-        $this->sessionManager = $sessionManager;
+//        $this->sessionManager = $sessionManager;
     }
 
     protected function configure(): void
     {
-        $this
+//        $this
 //            ->addArgument('task_id', InputArgument::REQUIRED, 'Task identificator')
 //            ->addArgument('session_id', InputArgument::OPTIONAL, 'Session identificator')
 //            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
 //            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
-        ;
+//        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

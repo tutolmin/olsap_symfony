@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
+//use Doctrine\ORM\EntityManagerInterface;
 use App\Service\LxcManager;
 
 #[Route('/instances')]
@@ -21,17 +21,18 @@ class InstancesController extends AbstractController
     private $lxcService;
 
     // Doctrine EntityManager
-    private $entityManager;
+//    private $entityManager;
     
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LoggerInterface $logger,
-            EntityManagerInterface $entityManager, LxcManager $lxcService) {
+//            EntityManagerInterface $entityManager, 
+            LxcManager $lxcService) {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->lxcService = $lxcService;
 
-        $this->entityManager = $entityManager;
+//        $this->entityManager = $entityManager;
     }
 
     #[Route('/', name: 'app_instances_index', methods: ['GET'])]

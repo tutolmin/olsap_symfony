@@ -34,9 +34,9 @@ class Instances
     private $name;
 
     #[ORM\OneToMany(mappedBy: 'instance', targetEntity: Addresses::class)]
-    private Collection $addresses;
+    private Collection $addresses; // @phpstan-ignore-line
         
-    private $addressesCounter;
+#    private $addressesCounter;
 
     public function __construct()
     {
@@ -159,7 +159,7 @@ class Instances
 
     public function getAddressesCounter(): int
     {
-        return $this->addressesCounter = count( $this->getAddresses());
+        return count( $this->getAddresses());
     }
     
     public function getEnvHash(): string

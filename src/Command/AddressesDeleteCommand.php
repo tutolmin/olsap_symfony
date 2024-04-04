@@ -12,7 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
-use App\Entity\Ports;
+//use App\Entity\Ports;
 
 #[AsCommand(
     name: 'net:addresses:delete',
@@ -24,7 +24,7 @@ class AddressesDeleteCommand extends Command
     private $entityManager;
 
     private $addressRepository;
-    private $portRepository;
+//    private $portRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager)
@@ -33,7 +33,7 @@ class AddressesDeleteCommand extends Command
 
         $this->entityManager = $entityManager;
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
-        $this->portRepository = $this->entityManager->getRepository( Ports::class);
+//        $this->portRepository = $this->entityManager->getRepository( Ports::class);
     }
 
     protected function configure(): void

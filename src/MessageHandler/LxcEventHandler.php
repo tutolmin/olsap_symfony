@@ -8,10 +8,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\InstanceStatuses;
+//use App\Entity\InstanceStatuses;
 use App\Entity\Instances;
-use App\Entity\InstanceTypes;
-use App\Entity\Environments;
+//use App\Entity\InstanceTypes;
+//use App\Entity\Environments;
 use Psr\Log\LoggerInterface;
 use App\Service\LxcManager;
 
@@ -22,26 +22,26 @@ final class LxcEventHandler {
     private $logger;
     // Doctrine EntityManager
     private $entityManager;
-    private $environmentRepository;
-    private $instanceTypeRepository;
-    private $instanceStatusRepository;
+//    private $environmentRepository;
+//    private $instanceTypeRepository;
+//    private $instanceStatusRepository;
     private $instanceRepository;
     // Message bus
-    private $awxBus;
+//    private $awxBus;
     private $lxcService;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,
-            MessageBusInterface $awxBus, 
+//            MessageBusInterface $awxBus, 
             LxcManager $lxcService) {
         $this->logger = $logger;
-        $this->awxBus = $awxBus;
+//        $this->awxBus = $awxBus;
         $this->lxcService = $lxcService;
 
         $this->entityManager = $entityManager;
-        $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
-        $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
-        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
+//        $this->instanceTypeRepository = $this->entityManager->getRepository(InstanceTypes::class);
+//        $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
+//        $this->instanceStatusRepository = $this->entityManager->getRepository(InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
     }
 
@@ -55,8 +55,8 @@ final class LxcEventHandler {
 
         // Select event to serve
         switch ($message->getEvent()) {
-/*
-            // Instance started
+
+            // Object started
             case "created":
 
                 // REQUIRED: name
@@ -65,16 +65,15 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
+                $this->logger->info("Handling object event `" . $message->getEvent() . "`: `" . $name . "`");
 
-                $instance = $this->instanceRepository->findOneByName($name);
-                if ($instance) {
-                    $this->lxdService->setInstanceStatus($instance->getName(), "Started");
-                }
+                // Update inventory
+//              $this->awxActionBus->dispatch(new AwxAction(["action" => "updateInventory"]));
+
                 # TODO: Handle exception
                 break;
-*/
-            // Instance started
+
+            // Object started
             case "started":
 
                 // REQUIRED: name
@@ -83,7 +82,7 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
+                $this->logger->info("Handling object status change `" . $message->getEvent() . "`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
@@ -101,7 +100,7 @@ final class LxcEventHandler {
                     break;
                 }
 
-                $this->logger->debug("Handling instance status change `" . $message->getEvent() . "`: `" . $name . "`");
+                $this->logger->info("Handling object status change `" . $message->getEvent() . "`: `" . $name . "`");
 
                 $instance = $this->instanceRepository->findOneByName($name);
                 if ($instance) {
@@ -110,8 +109,25 @@ final class LxcEventHandler {
                 # TODO: Handle exception
                 break;
 
+            // Object deleted
+            case "deleted":
+
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getEvent() . "` LXD event");
+                    break;
+                }
+
+                $this->logger->info("Handling object event` " . $message->getEvent() . "`: `" . $name . "`");
+
+                // Update inventory
+//              $this->awxActionBus->dispatch(new AwxAction(["action" => "updateInventory"]));
+
+                # TODO: Handle exception
+                break;
+                
             default :
-                $this->logger->debug("Unknown LXC event: `" . $message->getEvent() . "`");
+                $this->logger->error("Unknown LXC event: `" . $message->getEvent() . "`");
 
                 break;
         }
