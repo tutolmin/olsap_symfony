@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Tasks;
+use App\Repository\TasksRepository;
 use App\Service\SessionManager;
 
 #[AsCommand(
@@ -21,9 +22,9 @@ use App\Service\SessionManager;
 class TaskInstanceTypeCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $taskRepository;
+    private TasksRepository $taskRepository;
 
     private $sessionManager;
 

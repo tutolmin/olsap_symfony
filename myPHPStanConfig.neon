@@ -8,7 +8,10 @@ parameters:
     # If you're using PHP config files for Symfony 5.3+, you also need this for auto-loading of `Symfony\Config`:
     scanDirectories:
         - var/cache/dev/Symfony/Config
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
-#        - '#Property * type mapping mismatch .#'
+#            - '#^Property [a-zA-Z0-9\\_]+::\$logger has no type specified\.$#'
+#            - '#^Property [a-zA-Z0-9\\_]+::\$entityManager has no type specified\.$#'
+#            - '#^Property [a-zA-Z0-9\\_]+::\$environmentService has no type specified\.$#'
     doctrine:
         objectManagerLoader: tests/object-manager.php

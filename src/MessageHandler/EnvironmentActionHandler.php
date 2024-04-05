@@ -6,6 +6,8 @@ use App\Message\EnvironmentAction;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
+use App\Repository\TasksRepository;
 use App\Entity\Sessions;
 use App\Entity\Instances;
 use App\Entity\Environments;
@@ -16,17 +18,17 @@ use App\Service\EnvironmentManager;
 final class EnvironmentActionHandler
 {
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
     private $environmentService;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // Repositories
-    private $taskRepository;
+    private TasksRepository $taskRepository;
     private $sessionRepository;
     private $environmentRepository;
-    private $instanceRepository;
+    private InstancesRepository $instanceRepository;
     
     public function __construct( LoggerInterface $logger, 
             EntityManagerInterface $entityManager, EnvironmentManager $environmentService)

@@ -17,11 +17,11 @@ use App\Service\LxcManager;
 #[Route('/instances')]
 class InstancesController extends AbstractController
 {
-    private $logger;
-    private $lxcService;
+    private LoggerInterface $logger;
+    private LxcManager $lxcService;
 
     // Doctrine EntityManager
-//    private $entityManager;
+//    private EntityManagerInterface $entityManager;
     
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LoggerInterface $logger,
@@ -36,12 +36,12 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/', name: 'app_instances_index', methods: ['GET'])]
-    public function index(InstancesRepository $instancesRepository): Response
+    public function index(InstancesRepository $instanceRepository): Response
     {
         $this->logger->debug(__METHOD__);
 
         return $this->render('instances/index.html.twig', [
-            'instances' => $instancesRepository->findAll(),
+            'instances' => $instanceRepository->findAll(),
         ]);
     }
 
@@ -89,7 +89,7 @@ class InstancesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_instances_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Instances $instance, InstancesRepository $instancesRepository): Response
+    public function edit(Request $request, Instances $instance, InstancesRepository $instanceRepository): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -97,7 +97,7 @@ class InstancesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $instancesRepository->add($instance, true);
+            $instanceRepository->add($instance, true);
 
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
         }

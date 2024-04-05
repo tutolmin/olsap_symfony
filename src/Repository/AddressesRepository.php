@@ -18,7 +18,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class AddressesRepository extends ServiceEntityRepository
 {
-    private $logger;
+    private LoggerInterface $logger;
     public function __construct(ManagerRegistry $registry, LoggerInterface $logger)
     {
         $this->logger = $logger;

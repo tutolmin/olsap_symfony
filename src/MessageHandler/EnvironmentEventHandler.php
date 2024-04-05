@@ -8,6 +8,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 //use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\EnvironmentsRepository;
 //use App\Entity\InstanceStatuses;
 //use App\Entity\Instances;
 //use App\Entity\InstanceTypes;
@@ -21,18 +22,18 @@ use Psr\Log\LoggerInterface;
 final class EnvironmentEventHandler {
 
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
     // Doctrine EntityManager
-    private $entityManager;
-    private $environmentRepository;
+    private EntityManagerInterface $entityManager;
+    private EnvironmentsRepository $environmentRepository;
 //    private $environmentStatusesRepository;
 //    private $instanceTypeRepository;
 //    private $instanceStatusRepository;
-//    private $instanceRepository;
+//    private InstancesRepository $instanceRepository;
     // Message bus
 //    private $awxBus;
 //    private $lxcOperationBus;
-//    private $lxcService;
+//    private LxcManager $lxcService;
 //    private $session;
 
     public function __construct(

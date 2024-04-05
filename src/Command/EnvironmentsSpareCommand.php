@@ -10,9 +10,10 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use App\Entity\Tasks;
 use App\Entity\Environments;
-use App\Service\SessionManager;
+//use App\Service\SessionManager;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\SessionAction;
 
@@ -23,9 +24,9 @@ use App\Message\SessionAction;
 class EnvironmentsSpareCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $taskRepository;
+    private TasksRepository $taskRepository;
     private $environmentRepository;
 
     private $sessionBus;

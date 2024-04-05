@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
+
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Service\LxcManager;
@@ -26,9 +28,9 @@ class InstancesLsCommand extends Command
     private $io;
     
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $instanceRepository;
+    private InstancesRepository $instanceRepository;
     private $instanceStatusRepository;
 
     // Dependency injection of the EntityManagerInterface entity

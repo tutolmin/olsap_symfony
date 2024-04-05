@@ -22,7 +22,7 @@ class AwxDeployCommand extends Command
 {
     private $environmentService;
   
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     private $envRepository;
 
     // Dependency injection of the EntityManagerInterface entity

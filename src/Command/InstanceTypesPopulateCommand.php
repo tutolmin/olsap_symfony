@@ -22,7 +22,7 @@ use App\Entity\InstanceTypes;
 class InstanceTypesPopulateCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // HW profile repo
     private $hpRepository;

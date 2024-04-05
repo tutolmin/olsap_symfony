@@ -5,6 +5,8 @@ namespace App\Service;
 
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
+use App\Repository\InstanceStatusesRepository;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use App\Entity\Addresses;
@@ -18,7 +20,7 @@ use Opensaucesystems\Lxd\Exception\NotFoundException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
 use App\Message\LxcOperation;
-use App\Message\AwxAction;
+//use App\Message\AwxAction;
 //use App\Service\EnvironmentManager;
 use App\Message\EnvironmentAction;
 
@@ -26,7 +28,7 @@ class LxcManager
 {
 //    private $params;
 
-    private $logger;
+    private LoggerInterface $logger;
     private $lxcEventBus;
     private $lxcOperationBus;
 //    private $awxActionBus;    
@@ -36,12 +38,12 @@ class LxcManager
     private $wait;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // InstanceTypes repo
     private $itRepository;
-    private $instanceStatusesRepository;
-    private $instanceRepository;
+    private InstanceStatusesRepository $instanceStatusesRepository;
+    private InstancesRepository $instanceRepository;
 
     // OperatingSystems repo
     private $osRepository;

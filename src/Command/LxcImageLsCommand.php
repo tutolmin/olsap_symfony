@@ -17,12 +17,12 @@ use App\Service\LxcManager;
     )]
 class LxcImageLsCommand extends Command {
 
-    private $lxd;
+    private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(LxcManager $lxd) {
+    public function __construct(LxcManager $lxcService) {
         parent::__construct();
-        $this->lxd = $lxd;
+        $this->lxcService = $lxcService;
     }
 
     protected function configure(): void {
@@ -47,7 +47,7 @@ class LxcImageLsCommand extends Command {
           // ...
           }
          */
-        $images = $this->lxd->getImageList();
+        $images = $this->lxcService->getImageList();
 
         #var_dump( $images);
 
@@ -55,7 +55,7 @@ class LxcImageLsCommand extends Command {
             foreach ($images as &$value) {
                 #        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
                 #echo "sdfs";
-                $info = $this->lxd->getImageInfo($value);
+                $info = $this->lxcService->getImageInfo($value);
                 //var_dump( $info);
                 $io->note(sprintf('Name: %s', $info['properties']['description']));
             }

@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LuckyController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger;
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;

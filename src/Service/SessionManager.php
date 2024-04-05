@@ -5,12 +5,14 @@ namespace App\Service;
 
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SessionStatusesRepository;
+use App\Repository\TasksRepository;
 
 use App\Entity\Sessions;
 use App\Entity\SessionStatuses;
 use App\Entity\Tasks;
 use App\Entity\Environments;
-use App\Entity\EnvironmentStatuses;
+//use App\Entity\EnvironmentStatuses;
 //use App\Entity\InstanceTypes;
 //use App\Entity\Instances;
 //use App\Entity\InstanceStatuses;
@@ -24,14 +26,14 @@ use App\Message\EnvironmentAction;
 
 class SessionManager
 {
-    private $logger;
+    private LoggerInterface $logger;
 
-    private $entityManager;
-    private $taskRepository;
+    private EntityManagerInterface $entityManager;
+    private TasksRepository $taskRepository;
 //    private $addressRepository;
-//    private $instanceRepository;
+//    private InstancesRepository $instanceRepository;
 //    private $instanceStatusesRepository;
-    private $sessionStatusesRepository;
+    private SessionStatusesRepository $sessionStatusesRepository;
     private $environmentRepository;
 //    private $environmentStatusesRepository;
 

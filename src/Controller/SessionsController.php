@@ -22,10 +22,10 @@ use App\Service\SessionManager;
 #[Route('/sessions')]
 class SessionsController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // Repositories
 //    private $environmentRepository;

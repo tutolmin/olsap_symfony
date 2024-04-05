@@ -21,7 +21,7 @@ class AwxMeCommand extends Command
 {
     private $awx;
     
-//    private $entityManager;
+//    private EntityManagerInterface $entityManager;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( 

@@ -15,8 +15,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class IndexController extends AbstractController
 {
-    private $logger;
-    private $entityManager;
+    private LoggerInterface $logger;
+    private EntityManagerInterface $entityManager;
     private $testeesRepository;
     public function __construct(LoggerInterface $logger, EntityManagerInterface $entityManager)
     {

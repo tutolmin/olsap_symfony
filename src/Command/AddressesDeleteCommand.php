@@ -21,7 +21,7 @@ use App\Entity\Addresses;
 class AddressesDeleteCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private $addressRepository;
 //    private $portRepository;

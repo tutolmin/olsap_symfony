@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use App\Entity\InstanceTypes;
 use App\Entity\TaskInstanceTypes;
 use App\Entity\Tasks;
@@ -22,10 +23,10 @@ use App\Entity\Tasks;
 class TaskInstanceTypesPopulateCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // HW profile repo
-    private $tasksRepository;
+    private TasksRepository $taskRepository;
 
     // OS repo
     private $itRepository;
@@ -41,7 +42,7 @@ class TaskInstanceTypesPopulateCommand extends Command
         $this->entityManager = $entityManager;
 
         // get the repository
-        $this->tasksRepository = $this->entityManager->getRepository( Tasks::class);
+        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
 
         // get the repository
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
@@ -69,7 +70,7 @@ class TaskInstanceTypesPopulateCommand extends Command
 	}
 
 	// look for *all* HW profiles objects
-	$tasks = $this->tasksRepository->findAll();
+	$tasks = $this->taskRepository->findAll();
 //	$tasks = $this->tasksRepository->findBySupported(1);
 
 	// look for *all* OSes objects

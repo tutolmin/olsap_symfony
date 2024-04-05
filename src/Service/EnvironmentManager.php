@@ -5,6 +5,8 @@ namespace App\Service;
 
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
+use App\Repository\TasksRepository;
 
 use App\Entity\Sessions;
 use App\Entity\SessionStatuses;
@@ -13,7 +15,7 @@ use App\Entity\Environments;
 use App\Entity\EnvironmentStatuses;
 use App\Entity\InstanceTypes;
 use App\Entity\Instances;
-use App\Entity\InstanceStatuses;
+//use App\Entity\InstanceStatuses;
 //use App\Entity\Addresses;
 use App\Service\AwxManager;
 //use App\Service\LxcManager;
@@ -26,12 +28,12 @@ use App\Message\EnvironmentEvent;
 
 class EnvironmentManager
 {
-    private $logger;
+    private LoggerInterface $logger;
 
-    private $entityManager;
-    private $taskRepository;
+    private EntityManagerInterface $entityManager;
+    private TasksRepository $taskRepository;
 //    private $addressRepository;
-    private $instanceRepository;
+    private InstancesRepository $instanceRepository;
 //    private $instanceStatusesRepository;
     private $sessionStatusesRepository;
     private $sessionsRepository;
@@ -43,7 +45,7 @@ class EnvironmentManager
     private $environmentEventBus;
     private $environmentActionBus;
 
-//    private $lxcService;
+//    private LxcManager $lxcService;
     private $awxService;
 //    private $sessionService;
 

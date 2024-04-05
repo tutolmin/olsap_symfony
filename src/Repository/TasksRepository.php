@@ -21,8 +21,8 @@ use App\Entity\Environments;
  */
 class TasksRepository extends ServiceEntityRepository
 {
-    private $logger;
-//    private $entityManager;
+    private LoggerInterface $logger;
+//    private EntityManagerInterface $entityManager;
     private $environmentRepository;
 
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, LoggerInterface $logger)

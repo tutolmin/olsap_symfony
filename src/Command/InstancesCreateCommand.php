@@ -21,7 +21,7 @@ class InstancesCreateCommand extends Command
     private $os_alias;
     private $hp_name;
     private $number;
-    private $lxcService;
+    private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( LxcManager $lxcService)

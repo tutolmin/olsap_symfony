@@ -12,7 +12,7 @@ use App\Message\AwxEvent;
 
 class AwxPlaybookController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger;
     private $awxEventBus;
     
     // Dependency injection of the LoggerInterface entity

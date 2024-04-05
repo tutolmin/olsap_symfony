@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Console\Output\OutputInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
 use App\Entity\Instances;
 use App\Service\LxcManager;
 
@@ -19,10 +20,10 @@ use App\Service\LxcManager;
     )]
 class InstancesSyncCommand extends Command {
 
-    private $lxcService;
+    private LxcManager $lxcService;
     // Doctrine EntityManager
-    private $entityManager;
-    private $instanceRepository;
+    private EntityManagerInterface $entityManager;
+    private InstancesRepository $instanceRepository;
 
 //    private $instanceStatusRepository;
     // Dependency injection of the EntityManagerInterface entity

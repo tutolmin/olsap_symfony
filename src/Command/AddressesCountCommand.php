@@ -20,7 +20,7 @@ use App\Entity\Addresses;
 class AddressesCountCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private $addressRepository;
 

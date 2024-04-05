@@ -5,7 +5,7 @@
 
 # https://docs.docker.com/engine/reference/builder/#understand-how-arg-and-from-interact
 ARG PHP_VERSION=8.1.7
-ARG CADDY_VERSION=2.7
+ARG CADDY_VERSION=2
 
 # "php" stage
 FROM php:${PHP_VERSION}-fpm-alpine AS symfony_php
@@ -18,7 +18,7 @@ RUN apk add --no-cache \
 		gettext \
 		git \
 	;
-RUN apk add --no-cache --update \
+RUN apk add --no-cacke --update \
 		linux-headers
 
 ARG APCU_VERSION=5.1.21

@@ -3,10 +3,11 @@
 namespace App\MessageHandler;
 
 use App\Message\SessionAction;
-use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
+//use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use Psr\Log\LoggerInterface;
 use App\Entity\Sessions;
 use App\Entity\Tasks;
@@ -17,16 +18,16 @@ use App\Service\SessionManager;
 final class SessionActionHandler
 {
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // SessionManager
     private $sessionManager;
 
     // Repositories
-    private $taskRepository;
+    private TasksRepository $taskRepository;
     private $sessionRepository;
     private $environmentRepository;
 

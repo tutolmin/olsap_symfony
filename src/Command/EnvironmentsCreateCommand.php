@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Service\EnvironmentManager;
@@ -21,8 +22,8 @@ use App\Service\EnvironmentManager;
 class EnvironmentsCreateCommand extends Command {
 
     // Doctrine EntityManager
-    private $entityManager;
-    private $taskRepository;
+    private EntityManagerInterface $entityManager;
+    private TasksRepository $taskRepository;
     private $environmentRepository;
 
     private $envs_number;

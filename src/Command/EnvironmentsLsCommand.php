@@ -23,7 +23,7 @@ class EnvironmentsLsCommand extends Command
     private $io;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private $environmentRepository;
     private $environmentStatusRepository;

@@ -6,8 +6,9 @@ use App\Message\LxcEvent;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #use App\Message\RunPlaybook;
 #use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Symfony\Component\Messenger\MessageBusInterface;
+//use Symfony\Component\Messenger\MessageBusInterface;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
 //use App\Entity\InstanceStatuses;
 use App\Entity\Instances;
 //use App\Entity\InstanceTypes;
@@ -19,16 +20,16 @@ use App\Service\LxcManager;
 final class LxcEventHandler {
 
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 //    private $environmentRepository;
 //    private $instanceTypeRepository;
 //    private $instanceStatusRepository;
-    private $instanceRepository;
+    private InstancesRepository $instanceRepository;
     // Message bus
 //    private $awxBus;
-    private $lxcService;
+    private LxcManager $lxcService;
 
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $entityManager,

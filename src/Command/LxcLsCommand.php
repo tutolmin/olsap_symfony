@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
 use App\Entity\Instances;
 use App\Service\LxcManager;
 
@@ -19,12 +20,12 @@ use App\Service\LxcManager;
     )]
 class LxcLsCommand extends Command {
 
-    private $lxdService;
+    private LxcManager $lxcService;
     private $io;
     
     // Doctrine EntityManager
-    private $entityManager;
-    private $instanceRepository;
+    private EntityManagerInterface $entityManager;
+    private InstancesRepository $instanceRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager, LxcManager $lxd) {
@@ -32,7 +33,7 @@ class LxcLsCommand extends Command {
 
         $this->entityManager = $entityManager;
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
-        $this->lxdService = $lxd;
+        $this->lxcService = $lxd;
     }
 
     protected function configure(): void {
@@ -45,7 +46,7 @@ class LxcLsCommand extends Command {
     private function listItems(array $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
-                $info = $this->lxdService->getObjectInfo($object);
+                $info = $this->lxcService->getObjectInfo($object);
                 $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
             }
         }
@@ -54,7 +55,7 @@ class LxcLsCommand extends Command {
     private function listOrphanItems(array $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
-                $info = $this->lxdService->getObjectInfo($object);
+                $info = $this->lxcService->getObjectInfo($object);
                 
                 // look for a specific instance type object
                 $obj = $this->instanceRepository->findOneByName($info['name']);
@@ -71,7 +72,7 @@ class LxcLsCommand extends Command {
         $this->io = new SymfonyStyle($input, $output);
 
         // Use Lxc service method
-        $objects = $this->lxdService->getObjectList();
+        $objects = $this->lxcService->getObjectList();
 
         if (!$objects) {
             return Command::FAILURE;

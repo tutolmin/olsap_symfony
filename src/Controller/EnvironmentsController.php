@@ -20,7 +20,7 @@ use App\Service\EnvironmentManager;
 #[Route('/environments')]
 class EnvironmentsController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger;
     private $sessionManager;
     private $environmentService;
     private $sessionBus;

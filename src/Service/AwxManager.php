@@ -19,12 +19,12 @@ class AwxManager
 {    
     private $params;
 
-    private $logger;
+    private LoggerInterface $logger;
 
     private $awx;
 
-#    private $entityManager;
-//    private $taskRepository;
+#    private EntityManagerInterface $entityManager;
+//    private TasksRepository $taskRepository;
 
     public function __construct( string $awx_client_id, string $awx_client_secret,
             string $awx_username, string $awx_password, string $awx_api_url,

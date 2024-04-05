@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use App\Entity\OperatingSystems;
 use App\Entity\Tasks;
 use App\Entity\TaskOses;
@@ -22,10 +23,10 @@ use App\Entity\TaskOses;
 class TaskOsesPopulateCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // Task profile repo
-    private $taskRepository;
+    private TasksRepository $taskRepository;
 
     // OS repo
     private $osRepository;

@@ -23,7 +23,7 @@ use Symfony\Component\Filesystem\Filesystem;
 class NetEthersExportCommand extends Command {
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     private $addressRepository;
 
     // Dependency injection of the EntityManagerInterface entity

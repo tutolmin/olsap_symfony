@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TasksRepository;
 use App\Entity\Tasks;
 
 #[AsCommand(
@@ -20,9 +21,9 @@ use App\Entity\Tasks;
 class TasksLsCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
-    private $taskRepository;
+    private TasksRepository $taskRepository;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( EntityManagerInterface $entityManager)

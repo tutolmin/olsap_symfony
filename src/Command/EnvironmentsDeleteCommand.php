@@ -20,7 +20,7 @@ use App\Service\EnvironmentManager;
 class EnvironmentsDeleteCommand extends Command {
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     // Environments repo
     private $environmentsRepository;
     private $environmentService;

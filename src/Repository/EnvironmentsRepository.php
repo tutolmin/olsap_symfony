@@ -24,8 +24,8 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class EnvironmentsRepository extends ServiceEntityRepository
 {
-    private $logger;
-    private $entityManager;
+    private LoggerInterface $logger;
+    private EntityManagerInterface $entityManager;
     private $environmentStatusesRepository;
 //    private $sessionManager;
 

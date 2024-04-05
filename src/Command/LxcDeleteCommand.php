@@ -19,7 +19,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
     )]
 class LxcDeleteCommand extends Command {
 
-    private $lxcService;
+    private LxcManager $lxcService;
     private $lxcOperationBus;
     private $io;
     private $name;

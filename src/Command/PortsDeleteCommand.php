@@ -20,7 +20,7 @@ use App\Entity\Ports;
 class PortsDeleteCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private $portRepository;
 

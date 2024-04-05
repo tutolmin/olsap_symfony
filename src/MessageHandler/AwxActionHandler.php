@@ -7,6 +7,7 @@ use App\Message\AwxAction;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\EnvironmentsRepository;
 #use App\Entity\InstanceStatuses;
 #use App\Entity\Instances;
 #use App\Entity\InstanceTypes;
@@ -19,15 +20,15 @@ use Psr\Log\LoggerInterface;
 final class AwxActionHandler
 {
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
 
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
 //    private $awxService;
     
 //    private $message;
-    private $environmentRepository;
+    private EnvironmentsRepository $environmentRepository;
 
     public function __construct(
         LoggerInterface $logger, EntityManagerInterface $entityManager,

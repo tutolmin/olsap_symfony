@@ -11,7 +11,7 @@ use App\Service\AwxManager;
 final class AwxEventHandler
 {
     // Logger reference
-    private $logger;
+    private LoggerInterface $logger;
     private $awxService;
 
     public function __construct(

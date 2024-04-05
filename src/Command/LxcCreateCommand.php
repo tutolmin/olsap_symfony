@@ -17,7 +17,7 @@ use App\Service\LxcManager;
     )]
 class LxcCreateCommand extends Command {
 
-    private $lxcService;
+    private LxcManager $lxcService;
     private $io;
     private $os_alias;
     private $hp_name;

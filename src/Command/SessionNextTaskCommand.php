@@ -21,7 +21,7 @@ use App\Service\SessionManager;
 class SessionNextTaskCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     private $sessionRepository;
 

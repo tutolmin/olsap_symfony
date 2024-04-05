@@ -17,12 +17,12 @@ use App\Service\LxcManager;
     )]
 class LxcProfileLsCommand extends Command {
 
-    private $lxd;
+    private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct(LxcManager $lxd) {
+    public function __construct(LxcManager $lxcService) {
         parent::__construct();
-        $this->lxd = $lxd;
+        $this->lxcService = $lxcService;
     }
 
     protected function configure(): void {
@@ -47,7 +47,7 @@ class LxcProfileLsCommand extends Command {
           // ...
           }
          */
-        $profiles = $this->lxd->getProfileList();
+        $profiles = $this->lxcService->getProfileList();
 
         #var_dump( $profiles);
 
@@ -55,7 +55,7 @@ class LxcProfileLsCommand extends Command {
             foreach ($profiles as &$value) {
                 #        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
                 #echo "sdfs";
-                $info = $this->lxd->getProfileInfo($value);
+                $info = $this->lxcService->getProfileInfo($value);
 //          var_dump( $info);
                 $io->note(sprintf('Name: %s', $info['name']));
             }

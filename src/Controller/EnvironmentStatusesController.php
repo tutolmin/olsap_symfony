@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/environment/statuses')]
 class EnvironmentStatusesController extends AbstractController
 {
-    private $logger;
+    private LoggerInterface $logger;
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;

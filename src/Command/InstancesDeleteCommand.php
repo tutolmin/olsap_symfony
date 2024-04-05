@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
+
 use App\Entity\Instances;
 use App\Service\LxcManager;
 
@@ -21,11 +23,11 @@ use App\Service\LxcManager;
 class InstancesDeleteCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // Instances repo
-    private $instancesRepository;
-    private $lxcService;
+    private InstancesRepository $instanceRepository;
+    private LxcManager $lxcService;
 
     private $io;
     private $name;
@@ -42,7 +44,7 @@ class InstancesDeleteCommand extends Command
         $this->lxcService = $lxcService;
 
         // get the Instances repository
-        $this->instancesRepository = $this->entityManager->getRepository( Instances::class);
+        $this->instanceRepository = $this->entityManager->getRepository( Instances::class);
     }
 
     protected function configure(): void
@@ -74,7 +76,7 @@ class InstancesDeleteCommand extends Command
             $this->lxcService->deleteAllInstances($this->force);
         } else {
             // look for a specific instance object
-            $instance = $this->instancesRepository->findOneByName($this->name);
+            $instance = $this->instanceRepository->findOneByName($this->name);
             if (!$instance) {
                 $this->io->error(sprintf('Instance "%s" was not found', $this->name));
             }

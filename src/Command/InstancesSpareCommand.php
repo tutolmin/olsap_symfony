@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
 use App\Entity\InstanceTypes;
 use App\Entity\Instances;
 use App\Service\LxcManager;
@@ -21,16 +22,16 @@ use App\Service\LxcManager;
 class InstancesSpareCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     // InstanceTypes repo
     private $instanceTypeRepository;
-    private $instanceRepository;
+    private InstancesRepository $instanceRepository;
 
     private $io;
     private $spare_instances;
     
-    private $lxcService;
+    private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct( string $spare_instances, 

@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\InstancesRepository;
 use App\Entity\Instances;
 use App\Service\LxcManager;
 
@@ -20,10 +21,10 @@ use App\Service\LxcManager;
 class InstancesRestartCommand extends Command
 {
     // Doctrine EntityManager
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
     // Instances repo
-    private $instancesRepository;
-    private $lxcService;
+    private InstancesRepository $instanceRepository;
+    private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(EntityManagerInterface $entityManager,
@@ -35,7 +36,7 @@ class InstancesRestartCommand extends Command
         $this->lxcService = $lxcService;
 
         // get the Instances repository
-        $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
+        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
     }
 
     protected function configure(): void {
@@ -55,7 +56,7 @@ class InstancesRestartCommand extends Command
         }
 
         // look for a specific instance object
-        $instance = $this->instancesRepository->findOneByName($name);
+        $instance = $this->instanceRepository->findOneByName($name);
 
         if (!$instance) {
 

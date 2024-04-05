@@ -21,9 +21,9 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class InstancesRepository extends ServiceEntityRepository
 {
-    private $logger;
+    private LoggerInterface $logger;
     private $instanceStatusesRepository;
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $em, LoggerInterface $logger)
     {
