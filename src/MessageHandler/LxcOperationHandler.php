@@ -97,7 +97,7 @@ final class LxcOperationHandler
             $hardware_profile = $message->getHP();
         }
         $environment_id = null;
-	if (strlen($message->getEnvironmentId())) {
+	if ($message->getEnvironmentId()>0) {
             $environment_id = $message->getEnvironmentId();
         }
 
@@ -107,12 +107,12 @@ final class LxcOperationHandler
         }
         
         $instance = null;
-	if (strlen($message->getInstanceId())) {
+	if ($message->getInstanceId()>0) {
             $instance = $this->instanceRepository->find($message->getInstanceId());
         }
 
         $instance_type = null;
-	if (strlen($message->getInstanceTypeId())) {
+	if ($message->getInstanceTypeId()>0) {
             $instance_type = $this->instanceTypeRepository->find($message->getInstanceTypeId());
         }
 

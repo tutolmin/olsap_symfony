@@ -13,14 +13,14 @@ final class EnvironmentEvent {
 
     public function __construct($message) {
         $this->event = $message['event'];
-        $this->id = array_key_exists('id', $message) ? intval($message['id']) : "";
+        $this->id = array_key_exists('id', $message) ? intval($message['id']) : -1;
     }
 
     public function getEvent(): string {
         return $this->event;
     }
 
-    public function getId(): string {
+    public function getId(): int {
         return $this->id;
     }
 }

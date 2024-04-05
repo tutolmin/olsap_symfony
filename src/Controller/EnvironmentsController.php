@@ -75,7 +75,7 @@ class EnvironmentsController extends AbstractController
                     $this->environmentService->createEnvironment($environment->getTask()->getId(),
                             $environment->getSession()->getId());
                 } else {
-                    $this->environmentService->createEnvironment($environment->getTask()->getId(), null);
+                    $this->environmentService->createEnvironment($environment->getTask()->getId());
                 }
             }
 

@@ -32,7 +32,7 @@ class AwxProjectController extends AbstractController
 //        $this->logger->debug(json_decode($request->getContent(), true));
 
         // Dispatch AWX event message
-	$this->awxEventBus->dispatch(new AwxEvent(["event" => "playbook", 
+	$this->awxEventBus->dispatch(new AwxEvent(["event" => "project", 
             "id" => $request->getPayload()->get('id')]));
         
         return $this->render('awx_web_hook/index.html.twig', [

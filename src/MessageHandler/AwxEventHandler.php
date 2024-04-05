@@ -28,7 +28,7 @@ final class AwxEventHandler
         
         // Get passed optional parameters
         $id = null;
-        if (strlen($message->getId())) {
+        if ($message->getId()>0) {
             $id = $message->getId();
             $this->logger->debug("Provided ID: " . $id);
         }

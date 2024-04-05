@@ -60,7 +60,7 @@ final class EnvironmentEventHandler {
     public function __invoke(EnvironmentEvent $message) {
         // Get passed optional parameters
         $id = null;
-        if (strlen($message->getId())>0) {
+        if ($message->getId()>0) {
             $id = $message->getId();
         }
 

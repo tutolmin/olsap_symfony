@@ -47,11 +47,11 @@ final class EnvironmentActionHandler
     public function __invoke(EnvironmentAction $message) {
         // Get passed parameters
         $task = null;
-        if (strlen($message->getTaskId())) {
+        if ($message->getTaskId()>0) {
             $task = $this->taskRepository->find($message->getTaskId());
         }
         $environment = null;
-        if (strlen($message->getEnvId())) {
+        if ($message->getEnvId()>0) {
             $environment = $this->environmentRepository->find($message->getEnvId());
         }
         $instance = null;
@@ -59,7 +59,7 @@ final class EnvironmentActionHandler
             $instance = $this->instanceRepository->findByName($message->getInstanceName());
         }                
         $session = null;
-        if (strlen($message->getSessionId())) {
+        if ($message->getSessionId()>0) {
             $session = $this->sessionRepository->find($message->getSessionId());
         }
         // Switch action to serve
@@ -75,7 +75,7 @@ final class EnvironmentActionHandler
                 if ($session) {
                     $this->environmentService->createEnvironment($task->getId(), $session->getId(), false);
                 } else {
-                    $this->environmentService->createEnvironment($task->getId(), null, false);
+                    $this->environmentService->createEnvironment($task->getId(), -1, false);
                 }
                 break;
 

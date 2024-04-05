@@ -29,12 +29,12 @@ final class EnvironmentAction
         return $this->action;
     }
 
-    public function getTaskId(): string
+    public function getTaskId(): int
     {
         return $this->task_id;
     }
 
-    public function getEnvId(): string
+    public function getEnvId(): int
     {
         return $this->env_id;
     }
@@ -44,7 +44,7 @@ final class EnvironmentAction
         return $this->instance_name;
     }
 
-    public function getSessionId(): string
+    public function getSessionId(): int
     {
         return $this->session_id;
     }

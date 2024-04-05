@@ -10,7 +10,7 @@ final class AwxEvent
      public function __construct( $message)
      {
          $this->event = $message['event'];
-         $this->id = array_key_exists('id',$message)?strval($message['id']):"";
+         $this->id = array_key_exists('id',$message)?strval($message['id']):-1;
       }
 
     public function getEvent(): string
@@ -18,7 +18,7 @@ final class AwxEvent
         return $this->event;
     }
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

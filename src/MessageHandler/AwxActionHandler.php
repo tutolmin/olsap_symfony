@@ -51,7 +51,7 @@ final class AwxActionHandler
     {
         // Get passed optional parameters
         $environment = null;
-        if( strlen($message->getEnvironmentId()))
+        if($message->getEnvironmentId()>0)
         {
           $environment = $this->environmentRepository->find($message->getEnvironmentId());
         }

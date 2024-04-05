@@ -454,7 +454,7 @@ class EnvironmentManager
 	return true;	
     }
 */
-    public function createEnvironment(int $task_id, int $session_id = null, 
+    public function createEnvironment(int $task_id, int $session_id = -1, 
             bool $async = true): ?Environments {
         $this->logger->debug(__METHOD__);
 
@@ -468,7 +468,7 @@ class EnvironmentManager
 
         $task = $this->taskRepository->findOneById($task_id);
         $session = null;
-        if ($session_id) {
+        if ($session_id>0) {
             $session = $this->sessionsRepository->findOneById($session_id);
         }
 

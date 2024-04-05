@@ -62,17 +62,17 @@ final class SessionActionHandler
     {
         // Get passed parameters
         $task = null;
-        if( strlen($message->getTaskId()))
-          $task = $this->taskRepository->find($message->getTaskId());
-
+        if ($message->getTaskId() > 0) {
+            $task = $this->taskRepository->find($message->getTaskId());
+        }
         $session = null;
-        if( strlen($message->getSessionId()))
-          $session = $this->sessionRepository->find($message->getSessionId());
-
+        if ($message->getSessionId() > 0) {
+            $session = $this->sessionRepository->find($message->getSessionId());
+        }
         $environment = null;
-        if( strlen($message->getEnvironmentId()))
-          $environment = $this->environmentRepository->find($message->getEnvironmentId());
-
+        if ($message->getEnvironmentId() > 0) {
+            $environment = $this->environmentRepository->find($message->getEnvironmentId());
+        }
         // Switch action to serve
         switch( $message->getAction()) {
 /*

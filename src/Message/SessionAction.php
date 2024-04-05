@@ -32,12 +32,12 @@ final class SessionAction
         return $this->task_id;
     }
 
-    public function getSessionId(): string
+    public function getSessionId(): int
     {
         return $this->session_id;
     }
 
-    public function getEnvironmentId(): string
+    public function getEnvironmentId(): int
     {
         return $this->environment_id;
     }
