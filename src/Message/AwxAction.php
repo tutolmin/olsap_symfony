@@ -16,7 +16,7 @@ final class AwxAction
     public function __construct($message)
     {
         $this->action = $message['name'];
-        $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):-1;
+        $this->environment_id = array_key_exists('environment_id',$message)?intval($message['environment_id']):-1;
     }
 
     public function getAction(): string

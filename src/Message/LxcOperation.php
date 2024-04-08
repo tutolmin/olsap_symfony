@@ -26,11 +26,11 @@ final class LxcOperation
         $this->name = array_key_exists('name',$message)?strval($message['name']):"";
         $this->operating_system = array_key_exists('os',$message)?strval($message['os']):"";
         $this->hardware_profile = array_key_exists('hp',$message)?strval($message['hp']):"";
-        $this->environment_id = array_key_exists('env_id',$message)?strval($message['env_id']):-1;
-        $this->status = array_key_exists('status', $message) ? strval($message['status']) : "";
+        $this->environment_id = array_key_exists('env_id',$message)?intval($message['env_id']):-1;
+        $this->status = array_key_exists('status', $message) ? intval($message['status']) : "";
         
-        $this->instance_type_id = array_key_exists('instance_type_id',$message)?strval($message['instance_type_id']):-1;
-        $this->instance_id = array_key_exists('instance_id',$message)?strval($message['instance_id']):-1;
+        $this->instance_type_id = array_key_exists('instance_type_id',$message)?intval($message['instance_type_id']):-1;
+        $this->instance_id = array_key_exists('instance_id',$message)?intval($message['instance_id']):-1;
     }
 
     public function getCommand(): string

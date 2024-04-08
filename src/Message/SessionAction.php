@@ -17,9 +17,9 @@ final class SessionAction
      public function __construct($message)
      {
         $this->action = $message['action'];
-        $this->task_id = array_key_exists('task_id',$message)?strval($message['task_id']):-1;
-        $this->session_id = array_key_exists('session_id',$message)?strval($message['session_id']):-1;
-        $this->environment_id = array_key_exists('environment_id',$message)?strval($message['environment_id']):-1;
+        $this->task_id = array_key_exists('task_id',$message)?intval($message['task_id']):-1;
+        $this->session_id = array_key_exists('session_id',$message)?intval($message['session_id']):-1;
+        $this->environment_id = array_key_exists('environment_id',$message)?intval($message['environment_id']):-1;
      }
 
     public function getAction(): string
