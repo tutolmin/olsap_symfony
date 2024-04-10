@@ -18,9 +18,29 @@ use App\Service\LxcManager;
 class LxcCreateCommand extends Command {
 
     private LxcManager $lxcService;
+    
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
+    
+    /**
+     * 
+     * @var string
+     */
     private $os_alias;
+    
+    /**
+     * 
+     * @var string
+     */
     private $hp_name;
+    
+    /**
+     * 
+     * @var int
+     */
     private $object_number;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -39,7 +59,12 @@ class LxcCreateCommand extends Command {
         ;
     }
 
-    private function parseParams($input, $output)
+    /**
+     * 
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    private function parseParams(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
 

@@ -109,7 +109,7 @@ class EnvironmentManager
 
         // TODO: check input parameters
         // Find started instance
-        $started_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Started");
+        $started_instance = $this->instanceRepository->findOneByTypeAndStatus($it->getId(), "Started");
 
         // Check if suitable instance has been found
         if ($started_instance) {
@@ -118,7 +118,7 @@ class EnvironmentManager
         }
 
         // Find stopped instance
-        $stopped_instance = $this->instanceRepository->findOneByTypeAndStatus($it, "Stopped");
+        $stopped_instance = $this->instanceRepository->findOneByTypeAndStatus($it->getId(), "Stopped");
 
         // Check if suitable instance has been found
         if ($stopped_instance) {

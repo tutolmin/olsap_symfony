@@ -9,6 +9,7 @@ use App\Entity\EnvironmentStatuses;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\EnvironmentStatusesRepository;
 
 // Can NOT import service into repository
 // Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
@@ -26,6 +27,10 @@ class EnvironmentsRepository extends ServiceEntityRepository
 {
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
+    /**
+     * 
+     * @var EnvironmentStatusesRepository
+     */
     private $environmentStatusesRepository;
 //    private $sessionManager;
 
@@ -102,6 +107,11 @@ class EnvironmentsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+    /**
+     * 
+     * @param int $task_id
+     * @return Environments|null
+     */
     public function findOneDeployed($task_id): ?Environments
     {
         $this->logger->debug(__METHOD__);
@@ -120,6 +130,11 @@ class EnvironmentsRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * 
+     * @param int $task_id
+     * @return array<Environments>
+     */
     public function findAllDeployed($task_id): array
     {
         $this->logger->debug(__METHOD__);

@@ -2,43 +2,56 @@
 
 namespace App\Message;
 
-final class SessionAction
-{
-    /*
-     * Add whatever properties and methods you need
-     * to hold the data for this message class.
+final class SessionAction {
+
+    /**
+     * 
+     * @var string
      */
+    private $action;
 
-     private $action;
-     private $task_id;
-     private $session_id;
-     private $environment_id;
+    /**
+     * 
+     * @var int
+     */
+    private $task_id;
 
-     public function __construct($message)
-     {
+    /**
+     * 
+     * @var int
+     */
+    private $session_id;
+
+    /**
+     * 
+     * @var int
+     */
+    private $environment_id;
+
+    /**
+     * 
+     * @param array<string> $message
+     */
+    public function __construct($message) {
         $this->action = $message['action'];
-        $this->task_id = array_key_exists('task_id',$message)?intval($message['task_id']):-1;
-        $this->session_id = array_key_exists('session_id',$message)?intval($message['session_id']):-1;
-        $this->environment_id = array_key_exists('environment_id',$message)?intval($message['environment_id']):-1;
-     }
+        $this->task_id = array_key_exists('task_id', $message) ? intval($message['task_id']) : -1;
+        $this->session_id = array_key_exists('session_id', $message) ? intval($message['session_id']) : -1;
+        $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;
+    }
 
-    public function getAction(): string
-    {
+    public function getAction(): string {
         return $this->action;
     }
 
-    public function getTaskId(): string
-    {
+    public function getTaskId(): int {
         return $this->task_id;
     }
 
-    public function getSessionId(): int
-    {
+    public function getSessionId(): int {
         return $this->session_id;
     }
 
-    public function getEnvironmentId(): int
-    {
+    public function getEnvironmentId(): int {
         return $this->environment_id;
     }
 }

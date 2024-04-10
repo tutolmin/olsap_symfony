@@ -12,6 +12,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TasksRepository;
+use App\Repository\InstanceTypesRepository;
+use App\Repository\TaskInstanceTypesRepository;
 use App\Entity\InstanceTypes;
 use App\Entity\TaskInstanceTypes;
 use App\Entity\Tasks;
@@ -28,10 +30,16 @@ class TaskInstanceTypesPopulateCommand extends Command
     // HW profile repo
     private TasksRepository $taskRepository;
 
-    // OS repo
+    /**
+     * 
+     * @var InstanceTypesRepository
+     */
     private $itRepository;
 
-    // TaskInstanceTypes repo
+    /**
+     * 
+     * @var TaskInstanceTypesRepository
+     */
     private $ttRepository;
 
     // Dependency injection of the InstanceTypes entity

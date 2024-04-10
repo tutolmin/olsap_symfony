@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Environments;
 use App\Service\EnvironmentManager;
+use App\Repository\EnvironmentsRepository;
 
 #[AsCommand(
             name: 'app:environments:delete',
@@ -21,8 +22,17 @@ class EnvironmentsDeleteCommand extends Command {
 
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
-    // Environments repo
+
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */    
     private $environmentsRepository;
+    
+    /**
+     * 
+     * @var EnvironmentManager
+     */
     private $environmentService;
 
     // Dependency injection of the EntityManagerInterface entity

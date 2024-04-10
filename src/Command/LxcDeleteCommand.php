@@ -20,10 +20,35 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class LxcDeleteCommand extends Command {
 
     private LxcManager $lxcService;
+    
+    /**
+     * 
+     * @var MessageBusInterface
+     */
     private $lxcOperationBus;
+    
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
+    
+    /**
+     * 
+     * @var string
+     */
     private $name;
+    
+    /**
+     * 
+     * @var bool
+     */   
     private $force;
+    
+    /**
+     * 
+     * @var bool
+     */
     private $async;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -41,7 +66,13 @@ class LxcDeleteCommand extends Command {
         ;
     }
 
-    private function parseParams($input, $output) {
+    /**
+     * 
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    private function parseParams(InputInterface $input, OutputInterface $output): void
+    {
         $this->io = new SymfonyStyle($input, $output);
         $this->name = $input->getArgument('name');
         $this->force = $input->getOption('force');
@@ -56,7 +87,11 @@ class LxcDeleteCommand extends Command {
         }
     }
 
-    private function deleteAllObjects() {
+    /**
+     * 
+     * @return void
+     */
+    private function deleteAllObjects(): void {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message'));
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "deleteAll"]));
@@ -70,7 +105,11 @@ class LxcDeleteCommand extends Command {
         }
     }
 
-    private function deleteObject() {
+    /**
+     * 
+     * @return void
+     */
+    private function deleteObject(): void {
         if ($this->async) {
             $this->io->note(sprintf('Dispatching LXC command message(s)'));
             $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "delete",

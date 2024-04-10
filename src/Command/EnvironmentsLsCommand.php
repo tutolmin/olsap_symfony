@@ -9,6 +9,8 @@ use Symfony\Component\Console\Input\InputInterface;
 #use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use App\Repository\EnvironmentsRepository;
+use App\Repository\EnvironmentStatusesRepository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Environments;
@@ -20,12 +22,25 @@ use App\Entity\EnvironmentStatuses;
 )]
 class EnvironmentsLsCommand extends Command
 {
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
 
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
+    
+    /**
+     * 
+     * @var EnvironmentStatusesRepository
+     */
     private $environmentStatusRepository;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -45,6 +60,11 @@ class EnvironmentsLsCommand extends Command
         ;
     }
 
+    /**
+     * 
+     * @param array<int, Environments> $environments
+     * @return void
+     */
     private function listItems(array $environments): void {
         if ($environments) {
             foreach ($environments as $environment) {

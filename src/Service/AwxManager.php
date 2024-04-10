@@ -8,8 +8,13 @@ use Psr\Log\LoggerInterface;
 use AwxV2\Oauth\Oauth2;
 use AwxV2\Adapter\GuzzleHttpAdapter;
 use AwxV2\AwxV2;
-#use AwxV2\Entity\Me as MeEntity;
-#use AwxV2\Entity\Project as ProjectEntity;
+use AwxV2\Api\Me;
+use AwxV2\Api\JobTemplate;
+use AwxV2\Api\Project;
+//use AwxV2\Api\Job;
+use AwxV2\Entity\JobTemplate as JobTemplateEntity;
+use AwxV2\Entity\Project as ProjectEntity;
+use AwxV2\Entity\Job as JobEntity;
 
 //use App\Entity\Tasks;
 //use App\Entity\InstanceTypes;
@@ -17,11 +22,15 @@ use AwxV2\AwxV2;
 
 class AwxManager
 {    
-    private $params;
+    /**
+     * 
+     * @var array<string>  
+     */
+    private array $params;
 
     private LoggerInterface $logger;
 
-    private $awx;
+    private AwxV2 $awx;
 
 #    private EntityManagerInterface $entityManager;
 //    private TasksRepository $taskRepository;
@@ -47,7 +56,7 @@ class AwxManager
 //        $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
     }
 
-    public function getClient()#: MeEntity
+    public function getClient(): void
     {
 	$awxVars = array (
 	    'clientId'      => $this->params['awx_client_id'], // The client ID assigned by AWX when you created the application
@@ -74,11 +83,9 @@ class AwxManager
 
 	// create an Awx object with the previous adapter
 	$this->awx = new AwxV2($adapter, $awxVars['apiUrl']);
-
-	return true;
     }
 
-    public function me()#: MeEntity
+    public function me(): Me
     {
         $this->logger->debug(__METHOD__);
 
@@ -87,7 +94,7 @@ class AwxManager
 	return $this->awx->me();
     }
 
-    public function template()#: TemplateEntity
+    public function template(): JobTemplate
     {
         $this->logger->debug(__METHOD__);
 
@@ -96,6 +103,10 @@ class AwxManager
 	return $this->awx->jobTemplate();
     }
 
+    /**
+     * 
+     * @return array<JobTemplateEntity>
+     */
     public function getTemplates()#: ProjectEntity
     {
         $this->logger->debug(__METHOD__);
@@ -105,7 +116,11 @@ class AwxManager
 	return $this->awx->jobTemplate()->getAll();
     }
 
-
+    /**
+     * 
+     * @param int $id
+     * @return JobTemplateEntity
+     */
     public function getTemplateById(int $id)#: ProjectEntity
     {
         $this->logger->debug(__METHOD__);
@@ -115,7 +130,7 @@ class AwxManager
 	return $this->awx->jobTemplate()->getById($id);
     }
     
-    public function project()#: ProjectEntity
+    public function project(): Project
     {
         $this->logger->debug(__METHOD__);
 
@@ -124,7 +139,11 @@ class AwxManager
 	return $this->awx->project();
     }
 
-    public function getProjects()#: ProjectEntity
+    /**
+     * 
+     * @return array<ProjectEntity>
+     */
+    public function getProjects()
     {
         $this->logger->debug(__METHOD__);
 
@@ -133,8 +152,12 @@ class AwxManager
 	return $this->awx->project()->getAll();
     }
 
-    
-    public function getProjectById(int $id)#: ProjectEntity
+    /**
+     * 
+     * @param int $id
+     * @return ProjectEntity
+     */
+    public function getProjectById(int $id)
     {
         $this->logger->debug(__METHOD__);
 
@@ -143,7 +166,12 @@ class AwxManager
 	return $this->awx->project()->getById($id);
     }
     
-    public function getJobById(int $id)#: ProjectEntity
+    /**
+     * 
+     * @param int $id
+     * @return JobEntity
+     */
+    public function getJobById(int $id)
     {
         $this->logger->debug(__METHOD__);
 
@@ -152,21 +180,31 @@ class AwxManager
 	return $this->awx->job()->getById($id);
     }
 
-    public function deployTestUser($body)
+    /**
+     * 
+     * @param string $body
+     */
+    public function deployTestUser($body): void
     {
         // Hardcoded ID for user creation
         // It can be defferent for PROM
         $this->runJobTemplate(55, $body);
     }
         
-    public function updateInventory()
+    public function updateInventory(): void
     {
         // Hardcoded ID for inventory update
         // It can be defferent for PROM
 //        $this->awxService->runJobTemplate(55, $body);
     }
     
-    public function runJobTemplate($id, $body)#: MeEntity
+    /**
+     * 
+     * @param int $id
+     * @param string $body
+     * @return JobTemplateEntity
+     */
+    public function runJobTemplate($id, $body)
     {
         $this->logger->debug(__METHOD__);
 

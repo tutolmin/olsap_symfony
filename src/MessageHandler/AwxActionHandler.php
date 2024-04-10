@@ -47,7 +47,7 @@ final class AwxActionHandler
         $this->logger->debug(__METHOD__);
     }
 
-    public function __invoke(AwxAction $message)
+    public function __invoke(AwxAction $message): void
     {
         // Get passed optional parameters
         $environment = null;

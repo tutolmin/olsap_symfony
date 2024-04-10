@@ -6,6 +6,11 @@ use App\Repository\InstancesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Environments;
+use App\Entity\InstanceTypes;
+use App\Entity\InstanceStatuses;
+use DateTimeImmutable;
+use App\Entity\Addresses;
 
 #[ORM\Entity(repositoryClass: InstancesRepository::class)]
 #[ORM\UniqueConstraint(name: "instances_name", columns: ["name"])]
@@ -14,27 +19,31 @@ class Instances
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $created_at;
+    private DateTimeImmutable $created_at;
 
     #[ORM\ManyToOne(targetEntity: InstanceTypes::class, inversedBy: 'instances')]
     #[ORM\JoinColumn(nullable: false)]
-    private $instance_type;
+    private InstanceTypes $instance_type;
 
     #[ORM\OneToOne(mappedBy: 'instance', targetEntity: Environments::class, cascade: ['persist', 'remove'])]
-    private $envs;
+    private ?Environments $envs;
 
     #[ORM\ManyToOne(targetEntity: InstanceStatuses::class, inversedBy: 'instances')]
     #[ORM\JoinColumn(nullable: false, options: ['default' => 6])]
-    private $status;
+    private InstanceStatuses $status;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
+    /**
+     * 
+     * @var Collection<int, Addresses>
+     */
     #[ORM\OneToMany(mappedBy: 'instance', targetEntity: Addresses::class)]
-    private Collection $addresses; // @phpstan-ignore-line
+    private $addresses; 
         
 #    private $addressesCounter;
 

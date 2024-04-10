@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TaskOsesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Tasks;
+use App\Entity\OperatingSystems;
 
 #[ORM\Entity(repositoryClass: TaskOsesRepository::class)]
 #[ORM\UniqueConstraint(name: "task_oses_combo", columns: ["task_id", "os_id"])]
@@ -12,15 +14,15 @@ class TaskOses
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Tasks::class, inversedBy: 'taskOses')]
     #[ORM\JoinColumn(nullable: false)]
-    private $task;
+    private Tasks $task;
 
     #[ORM\ManyToOne(targetEntity: OperatingSystems::class, inversedBy: 'osTasks')]
     #[ORM\JoinColumn(nullable: false)]
-    private $os;
+    private OperatingSystems $os;
 
     public function getId(): ?int
     {

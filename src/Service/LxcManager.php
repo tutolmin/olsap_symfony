@@ -17,48 +17,39 @@ use App\Entity\OperatingSystems;
 use App\Entity\Environments;
 use App\Entity\HardwareProfiles;
 use Opensaucesystems\Lxd\Exception\NotFoundException;
+use Opensaucesystems\Lxd\Client as LxdClient;
+use Opensaucesystems\Lxd\Endpoint\Images;
+use Opensaucesystems\Lxd\Endpoint\Profiles;
 use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
 use App\Message\LxcOperation;
-//use App\Message\AwxAction;
-//use App\Service\EnvironmentManager;
 use App\Message\EnvironmentAction;
+use App\Repository\OperatingSystemsRepository;
+use App\Repository\HardwareProfilesRepository;
+use App\Repository\AddressesRepository;
+use App\Repository\EnvironmentsRepository;
+use App\Repository\InstanceTypesRepository;
 
 class LxcManager
 {
-//    private $params;
-
     private LoggerInterface $logger;
-    private $lxcEventBus;
-    private $lxcOperationBus;
-//    private $awxActionBus;    
+    private MessageBusInterface $lxcEventBus;
+    private MessageBusInterface $lxcOperationBus;
+    private MessageBusInterface $environmentActionBus;
+
     private $lxcService;
-//    private $environmentService;
-    private $timeout;
-    private $wait;
+    private int $timeout;
+    private bool $wait;
 
-    // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
-
-    // InstanceTypes repo
-    private $itRepository;
+    private InstanceTypesRepository $itRepository;
     private InstanceStatusesRepository $instanceStatusesRepository;
     private InstancesRepository $instanceRepository;
+    private OperatingSystemsRepository $osRepository;
+    private HardwareProfilesRepository $hpRepository;
+    private AddressesRepository $addressRepository;
+    private EnvironmentsRepository $environmentRepository;
 
-    // OperatingSystems repo
-    private $osRepository;
-
-    // HardwareProfiles repo
-    private $hpRepository;
-
-    // Addresses repo    
-    private $addressRepository;
-
-    // Environment repo
-    private $environmentRepository;
-
-    private $environmentActionBus;
-    
     public function __construct( LoggerInterface $logger, EntityManagerInterface $entityManager,
 //            EnvironmentManager $environmentService,
             MessageBusInterface $environmentActionBus, 
@@ -94,7 +85,7 @@ class LxcManager
         $this->lxcOperationBus = $lxcOperationBus;
 //        $this->awxActionBus = $awxActionBus;
 	$this->timeout = intval($lxc_timeout);
-	$this->wait = $lxc_wait;
+	$this->wait = boolval($lxc_wait);
 
         $config = [
             'verify' => false,
@@ -105,9 +96,10 @@ class LxcManager
         ];
 
         $guzzle = new GuzzleClient($config);
-        $adapter = new GuzzleAdapter($guzzle);
-        $this->lxcService = new \Opensaucesystems\Lxd\Client($adapter);
-        $this->lxcService->setUrl($lxc_url);
+        $adapter = new GuzzleAdapter($guzzle); 
+        $this->lxcService = new LxdClient($adapter, '1.0', $lxc_url);
+//        $this->lxcService = new LxdClient($adapter);
+//        $this->lxcService->setUrl($lxc_url);
 
         #$certificates = $lxd->certificates->all();
         #$fingerprint = $lxd->certificates->add(file_get_contents(__DIR__.'/client.pem'), 'ins3Cure');
@@ -126,6 +118,12 @@ class LxcManager
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
     }
 
+    /**
+     * 
+     * @param string $os_alias
+     * @param string $hp_name
+     * @return ?int
+     */
     private function initInstance($os_alias, $hp_name) {
 
         $this->logger->debug(__METHOD__);
@@ -177,7 +175,15 @@ class LxcManager
 //        return $instance;
     }
 
-    public function create($os_alias, $hp_name, $env_id = null, bool $async = true): bool {
+    /**
+     * 
+     * @param string $os_alias
+     * @param string $hp_name
+     * @param int $env_id
+     * @param bool $async
+     * @return bool
+     */
+    public function create($os_alias, $hp_name, $env_id = null, $async = true): bool {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
@@ -248,7 +254,14 @@ class LxcManager
         return true;
     }
 
-    public function start($name, $force = false, bool $async = true): bool {
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @param bool $async
+     * @return bool
+     */
+    public function start($name, $force = false, $async = true): bool {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
@@ -273,7 +286,14 @@ class LxcManager
         return false;
     }
 
-    public function stop($name, $force = false, bool $async = true): bool {
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @param bool $async
+     * @return bool
+     */
+    public function stop($name, $force = false, $async = true): bool {
         $this->logger->debug(__METHOD__);
         
         if ($async) {
@@ -298,7 +318,14 @@ class LxcManager
         return false;
     }
 
-    public function restart($name, $force = false, bool $async = true): bool {
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @param bool $async
+     * @return bool
+     */
+    public function restart($name, $force = false, $async = true): bool {
         $this->logger->debug(__METHOD__);
         
         if ($async) {
@@ -323,6 +350,12 @@ class LxcManager
         return false;
     }
 
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @return bool
+     */
     public function deleteObject($name, $force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
@@ -342,6 +375,13 @@ class LxcManager
         return true;
     }
 
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @param bool $async
+     * @return bool
+     */
     public function deleteInstance($name, $force = false, bool $async = true) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
@@ -351,8 +391,15 @@ class LxcManager
         } else {
             return $this->deleteObject($name, $force);
         }
+        return true;
     }
 
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @return bool
+     */
     private function wipeObject($name, $force = false) {
         $this->logger->debug(__METHOD__);
 
@@ -395,6 +442,12 @@ class LxcManager
         return true;
     }
 
+    /**
+     * 
+     * @param string $name
+     * @param bool $force
+     * @return bool
+     */
     private function wipeInstance($name, $force = false)
     {
         $this->logger->debug(__METHOD__);
@@ -445,6 +498,11 @@ class LxcManager
         return true;
     }
     
+    /**
+     * 
+     * @param bool $force
+     * @return bool
+     */
     public function deleteAllObjects($force = false) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
@@ -467,7 +525,13 @@ class LxcManager
         return $result;
     }    
     
-    public function deleteAllInstances($force = false, bool $async = true) {//: ?InstanceTypes
+    /**
+     * 
+     * @param bool $force
+     * @param bool $async
+     * @return bool
+     */
+    public function deleteAllInstances($force = false, $async = true) {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
         $instances = $this->getInstanceList();
@@ -493,7 +557,12 @@ class LxcManager
         return $result;
     }
 
-    public function getObjectInfo($name)//: ?InstanceTypes
+    /**
+     * 
+     * @param string $name
+     * @return array<mixed>|null
+     */
+    public function getObjectInfo($name)
     {  
         $this->logger->debug(__METHOD__);
 
@@ -510,7 +579,11 @@ class LxcManager
         return null;
     }
     
-    public function getObjectList() {//: ?InstanceTypes
+    /**
+     * 
+     * @return array<string>|null
+     */
+    public function getObjectList() {
         $this->logger->debug(__METHOD__);
 
         $objects = $this->lxcService->containers->all();
@@ -520,10 +593,14 @@ class LxcManager
         if (count($objects)) {
             return $objects;
         } else {
-            return NULL;
+            return null;
         }
     }
     
+    /**
+     * 
+     * @return array<Instances>|null
+     */
     public function getInstanceList() {//: ?InstanceTypes
         $this->logger->debug(__METHOD__);
 
@@ -534,10 +611,15 @@ class LxcManager
         if (count($instances)) {
             return $instances;
         } else {
-            return NULL;
+            return null;
         }
     }
 
+    /**
+     * 
+     * @param Images $image
+     * @return array<mixed>
+     */
     public function getImageInfo($image)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
@@ -547,7 +629,11 @@ class LxcManager
 	return $this->lxcService->images->info($image);
     }
 
-    public function getImageList()//: ?InstanceTypes
+    /**
+     * 
+     * @return array<Images>|null
+     */
+    public function getImageList()
     {  
         $this->logger->debug(__METHOD__);
 
@@ -558,10 +644,15 @@ class LxcManager
 	if (count($images)) {
             return $images;
         } else {
-            return NULL;
+            return null;
         }
     }
 
+    /**
+     * 
+     * @param Profiles $profile
+     * @return array<mixed>
+     */
     public function getProfileInfo($profile)//: ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
@@ -571,7 +662,11 @@ class LxcManager
 	return $this->lxcService->profiles->info($profile);
     }
 
-    public function getProfileList()//: ?InstanceTypes
+    /**
+     * 
+     * @return array<Profiles>|null
+     */
+    public function getProfileList()
     {  
         $this->logger->debug(__METHOD__);
 
@@ -582,11 +677,17 @@ class LxcManager
 	if (count($profiles)) {
             return $profiles;
         } else {
-            return NULL;
+            return null;
         }
     }
 
-    public function setInstanceStatus(string $name, string $status_str): bool {
+    /**
+     * 
+     * @param string $name
+     * @param string $status_str
+     * @return bool
+     */
+    public function setInstanceStatus($name, $status_str): bool {
 
         $this->logger->debug(__METHOD__);
 
@@ -618,7 +719,13 @@ class LxcManager
         return true;
     }
 
-    private function tweakInstanceStatus(int $instance_id, string $status_str): InstanceStatuses {
+    /**
+     * 
+     * @param int $instance_id
+     * @param string $status_str
+     * @return InstanceStatuses
+     */
+    private function tweakInstanceStatus( $instance_id, $status_str): InstanceStatuses {
 
         $this->logger->debug(__METHOD__);
 

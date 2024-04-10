@@ -2,30 +2,34 @@
 
 namespace App\Message;
 
-final class AwxAction
-{
-    /*
-     * Add whatever properties and methods you need
-     * to hold the data for this message class.
-     */
+final class AwxAction {
 
+    /**
+     * 
+     * @var string
+     */
     private $action;
+
+    /**
+     * 
+     * @var int
+     */
     private $environment_id;
 
-    
-    public function __construct($message)
-    {
+    /**
+     * 
+     * @param array<string> $message
+     */
+    public function __construct(array $message) {
         $this->action = $message['name'];
-        $this->environment_id = array_key_exists('environment_id',$message)?intval($message['environment_id']):-1;
+        $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;
     }
 
-    public function getAction(): string
-    {
+    public function getAction(): string {
         return $this->action;
     }
 
-    public function getEnvironmentId(): int
-    {
+    public function getEnvironmentId(): int {
         return $this->environment_id;
     }
 }

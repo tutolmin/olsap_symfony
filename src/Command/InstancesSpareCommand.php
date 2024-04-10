@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\InstancesRepository;
+use App\Repository\InstanceTypesRepository;
+
 use App\Entity\InstanceTypes;
 use App\Entity\Instances;
 use App\Service\LxcManager;
@@ -24,17 +26,29 @@ class InstancesSpareCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    // InstanceTypes repo
+    /**
+     * 
+     * @var InstanceTypesRepository
+     */
     private $instanceTypeRepository;
     private InstancesRepository $instanceRepository;
 
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
+    
+    /**
+     * 
+     * @var int
+     */
     private $spare_instances;
     
     private LxcManager $lxcService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( string $spare_instances, 
+    public function __construct( int $spare_instances, 
             EntityManagerInterface $entityManager, LxcManager $lxcService)
     {
         parent::__construct();
@@ -62,9 +76,14 @@ class InstancesSpareCommand extends Command
 //        ;
     }
 
-    private function createSpareInstances($instanceType) {
+    /**
+     * 
+     * @param InstanceTypes $instanceType
+     * @return void
+     */
+    private function createSpareInstances($instanceType): void {
 
-        $spare_instances = $this->instanceRepository->findAllSpare($instanceType);
+        $spare_instances = $this->instanceRepository->findAllSpare($instanceType->getId());
 
         // Only add new envs if there are not enough
         if (count($spare_instances) < $this->spare_instances) {

@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
+use App\Repository\AddressesRepository;
 
 #[AsCommand(
     name: 'net:addresses:count',
@@ -22,6 +23,10 @@ class AddressesCountCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+    /**
+     * 
+     * @var AddressesRepository
+     */
     private $addressRepository;
 
     // Dependency injection of the EntityManagerInterface entity

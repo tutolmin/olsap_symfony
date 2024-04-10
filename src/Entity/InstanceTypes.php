@@ -6,6 +6,10 @@ use App\Repository\InstanceTypesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\OperatingSystems;
+use App\Entity\HardwareProfiles;
+use App\Entity\Instances;
+use App\Entity\TaskInstanceTypes;
 
 #[ORM\Entity(repositoryClass: InstanceTypesRepository::class)]
 #[ORM\UniqueConstraint(name: "instance_types_combo", columns: ["hw_profile_id", "os_id"])]
@@ -14,23 +18,30 @@ class InstanceTypes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: OperatingSystems::class, inversedBy: 'instanceTypes')]
     #[ORM\JoinColumn(nullable: false)]
-    private $os;
+    private OperatingSystems $os;
 
     #[ORM\ManyToOne(targetEntity: HardwareProfiles::class, inversedBy: 'instanceTypes')]
     #[ORM\JoinColumn(nullable: false)]
-    private $hw_profile;
+    private HardwareProfiles $hw_profile;
 
 #    private $combo;
-
+    /**
+     * 
+     * @var Collection<int, Instances>
+     */
     #[ORM\OneToMany(mappedBy: 'instance_type', targetEntity: Instances::class, orphanRemoval: true)]
     private $instances;
 
 #    private $instancesCounter;
 
+    /**
+     * 
+     * @var Collection<int, TaskInstanceTypes>
+     */
     #[ORM\OneToMany(mappedBy: 'instance_type', targetEntity: TaskInstanceTypes::class, orphanRemoval: true)]
     private $instanceTypeTasks;
 
@@ -74,7 +85,7 @@ class InstanceTypes
         return $this;
     }
 
-    public function getCombo()#: ?OperatingSystems
+    public function getCombo(): string
     {
         return $this->os->getAlias() . "@" . $this->hw_profile->getName();
     }

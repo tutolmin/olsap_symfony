@@ -6,6 +6,7 @@ use App\Repository\BreedsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\OperatingSystems;
 
 #[ORM\Entity(repositoryClass: BreedsRepository::class)]
 #[ORM\UniqueConstraint(name: "breeds_name", columns: ["name"])]
@@ -19,6 +20,10 @@ class Breeds
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
+    /**
+     * 
+     * @var Collection<int, OperatingSystems>
+     */
     #[ORM\OneToMany(mappedBy: 'breed', targetEntity: OperatingSystems::class, orphanRemoval: true)]
     private $operatingSystems;
 

@@ -6,6 +6,8 @@ use App\Repository\TesteesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Sessions;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: TesteesRepository::class)]
 #[ORM\UniqueConstraint(name: "testees_oauth_token", columns: ["oauth_token"])]
@@ -14,17 +16,21 @@ class Testees
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $email;
+    private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $oauth_token;
+    private string $oauth_token;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $registered_at;
+    private DateTimeImmutable $registered_at;
 
+    /**
+     * 
+     * @var Collection<int, Sessions>
+     */
     #[ORM\OneToMany(mappedBy: 'testee', targetEntity: Sessions::class, orphanRemoval: true)]
     private $sessions;
     

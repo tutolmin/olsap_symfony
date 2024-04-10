@@ -14,6 +14,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\HardwareProfiles;
 use App\Entity\OperatingSystems;
 use App\Entity\InstanceTypes;
+use App\Repository\HardwareProfilesRepository;
+use App\Repository\OperatingSystemsRepository;
+use App\Repository\InstanceTypesRepository;
+
 
 #[AsCommand(
     name: 'app:instance-types:populate',
@@ -24,13 +28,22 @@ class InstanceTypesPopulateCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    // HW profile repo
+    /**
+     * 
+     * @var HardwareProfilesRepository
+     */
     private $hpRepository;
 
-    // OS repo
+    /**
+     * 
+     * @var OperatingSystemsRepository
+     */
     private $osRepository;
 
-    // InstanceTypes repo
+    /**
+     * 
+     * @var InstanceTypesRepository
+     */
     private $itRepository;
 
     // Dependency injection of the OperatingSystems entity

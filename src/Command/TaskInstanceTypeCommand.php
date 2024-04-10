@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Tasks;
 use App\Repository\TasksRepository;
-use App\Service\SessionManager;
+use App\Service\EnvironmentManager;
 
 #[AsCommand(
     name: 'app:task:instance-type',
@@ -26,16 +26,20 @@ class TaskInstanceTypeCommand extends Command
 
     private TasksRepository $taskRepository;
 
-    private $sessionManager;
+    /**
+     * 
+     * @var EnvironmentManager
+     */
+    private $envService;
 
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    public function __construct( EntityManagerInterface $entityManager, EnvironmentManager $sessionManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
-        $this->sessionManager = $sessionManager;
+        $this->envService = $sessionManager;
     }
 
     protected function configure(): void
@@ -61,8 +65,8 @@ class TaskInstanceTypeCommand extends Command
 
             $io->note('Task with id '.$task_id.' exists in the database');
 
-	    if ($this->sessionManager->getFirstInstanceType($task)) {
-                $io->note('First suitable instance type is "' . $this->sessionManager->getFirstInstanceType($task) . '"');
+	    if ($this->envService->findSuitableInstanceType($task)) {
+                $io->note('First suitable instance type is "' . $this->envService->findSuitableInstanceType($task) . '"');
             } else {
                 $io->warning('No suitable instance types are available for task id ' . $task_id);
             }

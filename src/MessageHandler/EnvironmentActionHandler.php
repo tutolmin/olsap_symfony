@@ -8,6 +8,8 @@ use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\InstancesRepository;
 use App\Repository\TasksRepository;
+use App\Repository\SessionsRepository;
+use App\Repository\EnvironmentsRepository;
 use App\Entity\Sessions;
 use App\Entity\Instances;
 use App\Entity\Environments;
@@ -19,6 +21,11 @@ final class EnvironmentActionHandler
 {
     // Logger reference
     private LoggerInterface $logger;
+    
+    /**
+     * 
+     * @var EnvironmentManager
+     */
     private $environmentService;
 
     // Doctrine EntityManager
@@ -26,7 +33,17 @@ final class EnvironmentActionHandler
 
     // Repositories
     private TasksRepository $taskRepository;
+    
+    /**
+     * 
+     * @var SessionsRepository
+     */
     private $sessionRepository;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
     private InstancesRepository $instanceRepository;
     
@@ -44,7 +61,7 @@ final class EnvironmentActionHandler
         $this->logger->debug(__METHOD__);
     }
 
-    public function __invoke(EnvironmentAction $message) {
+    public function __invoke(EnvironmentAction $message): void {
         // Get passed parameters
         $task = null;
         if ($message->getTaskId()>0) {

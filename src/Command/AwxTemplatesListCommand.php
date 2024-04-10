@@ -21,6 +21,10 @@ use App\Entity\Tasks;
 )]
 class AwxTemplatesListCommand extends Command
 {
+    /**
+     * 
+     * @var AwxManager
+     */
     private $awx;
     
     private EntityManagerInterface $entityManager;

@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Ports;
+use App\Repository\PortsRepository;
 
 #[AsCommand(
     name: 'net:ports:delete',
@@ -22,6 +23,10 @@ class PortsDeleteCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+    /**
+     * 
+     * @var PortsRepository
+     */
     private $portRepository;
 
     // Dependency injection of the EntityManagerInterface entity

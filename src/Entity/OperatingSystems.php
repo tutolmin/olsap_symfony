@@ -6,6 +6,10 @@ use App\Repository\OperatingSystemsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Breeds;
+use App\Entity\InstanceTypes;
+use App\Entity\SessionOses;
+use App\Entity\TaskOses;
 
 #[ORM\Entity(repositoryClass: OperatingSystemsRepository::class)]
 #[ORM\UniqueConstraint(name: "operating_systems_combo", columns: ["breed_id", "release"])]
@@ -14,33 +18,45 @@ class OperatingSystems
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $release;
+    private string $release;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description;
 
     #[ORM\Column(type: 'boolean')]
-    private $supported;
+    private bool $supported;
 
+    /**
+     * 
+     * @var Collection<int, InstanceTypes>
+     */
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: InstanceTypes::class, orphanRemoval: true)]
     private $instanceTypes;
 
+    /**
+     * 
+     * @var Collection<int, SessionOses>
+     */
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: SessionOses::class, orphanRemoval: true)]
     private $osSessions;
 #    private $sessionsCounter;
 
+    /**
+     * 
+     * @var Collection<int, TaskOses>
+     */
     #[ORM\OneToMany(mappedBy: 'os', targetEntity: TaskOses::class, orphanRemoval: true)]
     private $osTasks;
 
     #[ORM\ManyToOne(targetEntity: Breeds::class, inversedBy: 'operatingSystems')]
     #[ORM\JoinColumn(nullable: false)]
-    private $breed;
+    private Breeds $breed;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $alias;
+    private ?string $alias;
 
     public function __construct()
     {

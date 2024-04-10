@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SessionsRepository;
 use App\Entity\Sessions;
 use App\Service\SessionManager;
 
@@ -23,8 +24,16 @@ class SessionNextTaskCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+    /**
+     * 
+     * @var SessionsRepository
+     */
     private $sessionRepository;
 
+    /**
+     * 
+     * @var SessionManager
+     */
     private $sessionManager;
 
     // Dependency injection of the EntityManagerInterface entity

@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Sessions;
 use App\Form\SessionsType;
 use App\Repository\SessionsRepository;
+use App\Repository\SessionStatusesRepository;
 use App\Entity\SessionStatuses;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,6 +37,10 @@ class SessionsController extends AbstractController
 //    private $sessionBus;
 //    
     // InstanceTypes repo
+    /**
+     * 
+     * @var SessionStatusesRepository
+     */
     private $sessionStatusesRepository;
 
     // Dependency injection of the EntityManagerInterface entity

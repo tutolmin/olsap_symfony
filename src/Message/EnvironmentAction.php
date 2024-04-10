@@ -2,50 +2,67 @@
 
 namespace App\Message;
 
-final class EnvironmentAction
-{
-    /*
-     * Add whatever properties and methods you need
-     * to hold the data for this message class.
+final class EnvironmentAction {
+
+    /**
+     * 
+     * @var string
      */
+    private $action;
 
-     private $action;
-     private $task_id;
-     private $env_id;
-     private $session_id;
-     private $instance_name;
+    /**
+     * 
+     * @var int
+     */
+    private $task_id;
 
-     public function __construct($message)
-     {
+    /**
+     * 
+     * @var int 
+     */
+    private $env_id;
+
+    /**
+     * 
+     * @var int
+     */
+    private $session_id;
+
+    /**
+     * 
+     * @var string
+     */
+    private $instance_name;
+
+    /**
+     * 
+     * @param array<string> $message
+     */
+    public function __construct($message) {
         $this->action = $message['action'];
-        $this->env_id = array_key_exists('env_id',$message)?intval($message['env_id']):-1;
-        $this->instance_name = array_key_exists('instance_name',$message)?strval($message['instance_name']):"";        
-        $this->task_id = array_key_exists('task_id',$message)?intval($message['task_id']):-1;
-        $this->session_id = array_key_exists('session_id',$message)?intval($message['session_id']):-1;
-     }
+        $this->env_id = array_key_exists('env_id', $message) ? intval($message['env_id']) : -1;
+        $this->instance_name = array_key_exists('instance_name', $message) ? strval($message['instance_name']) : "";
+        $this->task_id = array_key_exists('task_id', $message) ? intval($message['task_id']) : -1;
+        $this->session_id = array_key_exists('session_id', $message) ? intval($message['session_id']) : -1;
+    }
 
-    public function getAction(): string
-    {
+    public function getAction(): string {
         return $this->action;
     }
 
-    public function getTaskId(): int
-    {
+    public function getTaskId(): int {
         return $this->task_id;
     }
 
-    public function getEnvId(): int
-    {
+    public function getEnvId(): int {
         return $this->env_id;
     }
 
-    public function getInstanceName(): string
-    {
+    public function getInstanceName(): string {
         return $this->instance_name;
     }
 
-    public function getSessionId(): int
-    {
+    public function getSessionId(): int {
         return $this->session_id;
     }
 }

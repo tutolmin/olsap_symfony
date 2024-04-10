@@ -8,11 +8,14 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TasksRepository;
+use App\Repository\SessionsRepository;
+use App\Repository\EnvironmentsRepository;
 use Psr\Log\LoggerInterface;
 use App\Entity\Sessions;
 use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Service\SessionManager;
+use App\Service\EnvironmentManager;
 
 #[AsMessageHandler(fromTransport: 'async', bus: 'session.action.bus')]
 final class SessionActionHandler
@@ -24,25 +27,45 @@ final class SessionActionHandler
     private EntityManagerInterface $entityManager;
 
     // SessionManager
+    /**
+     * 
+     * @var SessionManager
+     */
     private $sessionManager;
 
+    /**
+     * @var EnvironmentManager
+     */
+    private $envManager;
+            
     // Repositories
     private TasksRepository $taskRepository;
+    
+    /**
+     * 
+     * @var SessionsRepository
+     */
     private $sessionRepository;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
 
     public function __construct(
         LoggerInterface $logger, EntityManagerInterface $entityManager,
-        SessionManager $sessionManager)
+        SessionManager $sessionManager, EnvironmentManager $envManager)
     {   
         $this->logger = $logger;
 	$this->sessionManager = $sessionManager;
+        $this->envManager = $envManager;
 	$this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
         $this->sessionRepository = $this->entityManager->getRepository( Sessions::class);
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
     }
-
+/*
     public function createEnvironment(Tasks $task, Sessions $session)
     {
 	$environment = $this->sessionManager->createEnvironment($task,$session);
@@ -57,8 +80,8 @@ final class SessionActionHandler
 	  $this->logger->debug( "Environment deployment failure!");
 	}
     }
-
-    public function __invoke(SessionAction $message)
+*/
+    public function __invoke(SessionAction $message): void
     {
         // Get passed parameters
         $task = null;
@@ -129,12 +152,12 @@ final class SessionActionHandler
 //              $task->getDeploy()) {
          
 
-	    $environment = $this->sessionManager->createEnvironment($task);
+	    $environment = $this->envManager->createEnvironment($task->getId());
   #            $this->logger->debug( "Created environment: " . $environment);
 
 	    if($environment) {
 
-	      $result = $this->sessionManager->deployEnvironment($environment);
+	      $result = $this->envManager->deployEnvironment($environment);
   #              $this->logger->debug( "Environment deployed successfully!");
 	    } else {
 
@@ -168,12 +191,12 @@ final class SessionActionHandler
 	    break;
     	  }
 
-	  $environment = $this->sessionManager->createEnvironment($task,$session);
+	  $environment = $this->envManager->createEnvironment($task->getId(),$session->getId());
 #            $this->logger->debug( "Created environment: " . $environment);
 
 	  if($environment) {
 
-	    $result = $this->sessionManager->deployEnvironment($environment);
+	    $result = $this->envManager->deployEnvironment($environment);
 #              $this->logger->debug( "Environment deployed successfully!");
 	  } else {
 
@@ -185,12 +208,12 @@ final class SessionActionHandler
         // Verify the environment
         case "verifyEnvironment":
 
-	  // Verify the environment
-	  $result = $this->sessionManager->verifyEnvironment($environment);
-
+            // Verify the environment
+	  $result = $this->envManager->verifyEnvironment($environment);
+/*
 	  // Allocate new environment instead of verified one
 	  $this->sessionManager->allocateEnvironment($environment->getSession());
-
+*/
           break;
 
         default:

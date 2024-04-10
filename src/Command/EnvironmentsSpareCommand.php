@@ -11,6 +11,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TasksRepository;
+use App\Repository\EnvironmentsRepository;
+
 use App\Entity\Tasks;
 use App\Entity\Environments;
 //use App\Service\SessionManager;
@@ -27,8 +29,17 @@ class EnvironmentsSpareCommand extends Command
     private EntityManagerInterface $entityManager;
 
     private TasksRepository $taskRepository;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
 
+    /**
+     * 
+     * @var MessageBusInterface
+     */
     private $sessionBus;
 
 //    private $sessionManager;

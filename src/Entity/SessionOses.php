@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\SessionOsesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Sessions;
+use App\Entity\OperatingSystems;
 
 #[ORM\Entity(repositoryClass: SessionOsesRepository::class)]
 #[ORM\UniqueConstraint(name: "session_oses_combo", columns: ["session_id", "os_id"])]
@@ -12,15 +14,15 @@ class SessionOses
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Sessions::class, inversedBy: 'sessionOses')]
     #[ORM\JoinColumn(nullable: false)]
-    private $session;
+    private Sessions $session;
 
     #[ORM\ManyToOne(targetEntity: OperatingSystems::class, inversedBy: 'osSessions')]
     #[ORM\JoinColumn(nullable: false)]
-    private $os;
+    private OperatingSystems $os;
 
     public function getId(): ?int
     {

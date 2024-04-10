@@ -9,7 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Environments;
-
+use App\Repository\EnvironmentsRepository;
 
 /**
  * @extends ServiceEntityRepository<Tasks>
@@ -23,6 +23,10 @@ class TasksRepository extends ServiceEntityRepository
 {
     private LoggerInterface $logger;
 //    private EntityManagerInterface $entityManager;
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
 
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, LoggerInterface $logger)

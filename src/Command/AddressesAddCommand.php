@@ -11,6 +11,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\AddressesRepository;
+use App\Repository\PortsRepository;
+
 use App\Entity\Addresses;
 use App\Entity\Ports;
 
@@ -23,7 +26,16 @@ class AddressesAddCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+    /**
+     * 
+     * @var AddressesRepository
+     */
     private $addressRepository;
+    
+    /**
+     * 
+     * @var PortsRepository
+     */
     private $portRepository;
 
     // Dependency injection of the EntityManagerInterface entity

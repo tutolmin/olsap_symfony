@@ -12,6 +12,11 @@ final class AwxEventHandler
 {
     // Logger reference
     private LoggerInterface $logger;
+    
+    /**
+     * 
+     * @var AwxManager
+     */
     private $awxService;
 
     public function __construct(
@@ -24,7 +29,7 @@ final class AwxEventHandler
         $this->logger->debug(__METHOD__);
     }
     
-    public function __invoke(AwxEvent $message) {
+    public function __invoke(AwxEvent $message): void {
         
         // Get passed optional parameters
         $id = null;

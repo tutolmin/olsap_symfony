@@ -4,6 +4,11 @@ namespace App\Entity;
 
 use App\Repository\EnvironmentsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Tasks;
+use App\Entity\Sessions;
+use App\Entity\Instances;
+use App\Entity\EnvironmentStatuses;
+use DateTimeImmutable;
 
 #[ORM\Entity(repositoryClass: EnvironmentsRepository::class)]
 #[ORM\UniqueConstraint(name: 'environments_hash', columns: ['hash'])]
@@ -14,36 +19,36 @@ class Environments
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Tasks::class, inversedBy: 'envs')]
     #[ORM\JoinColumn(nullable: false)]
-    private $task;
+    private Tasks $task;
 
     #[ORM\ManyToOne(targetEntity: Sessions::class, inversedBy: 'envs')]
-    private $session;
+    private ?Sessions $session;
 
     #[ORM\OneToOne(inversedBy: 'envs', targetEntity: Instances::class, cascade: ['persist', 'remove'])]
-    private $instance;
+    private ?Instances $instance;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $started_at;
+    private ?DateTimeImmutable $started_at;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $finished_at;
+    private ?DateTimeImmutable $finished_at;
 
     #[ORM\Column(type: 'boolean', nullable: true)]
-    private $valid;
+    private ?bool $valid;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $deployment;
+    private ?int $deployment;
 
     #[ORM\Column(type: 'integer', nullable: true)]
-    private $verification;
+    private ?int $verification;
 
     #[ORM\ManyToOne(targetEntity: EnvironmentStatuses::class, inversedBy: 'environments')]
     #[ORM\JoinColumn(nullable: false, options: ['default' => 1])]
-    private $status;
+    private EnvironmentStatuses $status;
 
     #[ORM\Column(length: 8, nullable: false)]
     private string $hash;

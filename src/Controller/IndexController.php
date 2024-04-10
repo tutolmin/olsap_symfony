@@ -5,10 +5,10 @@ namespace App\Controller;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\Testees;
-use App\Form\TesteesType;
+//use App\Form\TesteesType;
 use App\Repository\TesteesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +17,13 @@ class IndexController extends AbstractController
 {
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
+    
+    /**
+     * 
+     * @var TesteesRepository
+     */
     private $testeesRepository;
+    
     public function __construct(LoggerInterface $logger, EntityManagerInterface $entityManager)
     {
         $this->logger = $logger;

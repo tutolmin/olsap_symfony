@@ -6,6 +6,7 @@ use App\Repository\EnvironmentStatusesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Environments;
 
 #[ORM\Entity(repositoryClass: EnvironmentStatusesRepository::class)]
 #[ORM\UniqueConstraint(name: "environments_statuses_status", columns: ["status"])]
@@ -14,14 +15,18 @@ class EnvironmentStatuses
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $status;
+    private string $status;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $description;
+    private ?string $description;
 
+    /**
+     * 
+     * @var Collection<int, Environments>
+     */
     #[ORM\OneToMany(mappedBy: 'status', targetEntity: Environments::class, orphanRemoval: true)]
     private $environments;
 

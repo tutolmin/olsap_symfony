@@ -12,6 +12,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TasksRepository;
+use App\Repository\OperatingSystemsRepository;
+use App\Repository\TaskOsesRepository;
+
 use App\Entity\OperatingSystems;
 use App\Entity\Tasks;
 use App\Entity\TaskOses;
@@ -28,10 +31,16 @@ class TaskOsesPopulateCommand extends Command
     // Task profile repo
     private TasksRepository $taskRepository;
 
-    // OS repo
+    /**
+     * 
+     * @var OperatingSystemsRepository
+     */
     private $osRepository;
 
-    // TaskOses repo
+    /**
+     * 
+     * @var TaskOsesRepository
+     */
     private $toRepository;
 
     // Dependency injection of the OperatingSystems entity

@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\EnvironmentManager;
 use App\Entity\Environments;
+use App\Repository\EnvironmentsRepository;
 
 #[AsCommand(
     name: 'awx:deploy',
@@ -20,9 +21,23 @@ use App\Entity\Environments;
 )]
 class AwxDeployCommand extends Command
 {
+    
+     /**
+     * 
+     * @var EnvironmentManager
+     */
     private $environmentService;
   
-    private EntityManagerInterface $entityManager;
+    /**
+     * 
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $envRepository;
 
     // Dependency injection of the EntityManagerInterface entity

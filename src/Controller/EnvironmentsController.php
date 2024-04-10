@@ -21,8 +21,23 @@ use App\Service\EnvironmentManager;
 class EnvironmentsController extends AbstractController
 {
     private LoggerInterface $logger;
+    
+    /**
+     * 
+     * @var SessionManager
+     */
     private $sessionManager;
+    
+    /**
+     * 
+     * @var EnvironmentManager
+     */
     private $environmentService;
+    
+    /**
+     * 
+     * @var MessageBusInterface
+     */
     private $sessionBus;
 
     // InstanceTypes repo

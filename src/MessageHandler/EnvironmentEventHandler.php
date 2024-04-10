@@ -57,7 +57,7 @@ final class EnvironmentEventHandler {
         $this->logger->debug(__METHOD__);
     }
 
-    public function __invoke(EnvironmentEvent $message) {
+    public function __invoke(EnvironmentEvent $message): void {
         // Get passed optional parameters
         $id = null;
         if ($message->getId()>0) {

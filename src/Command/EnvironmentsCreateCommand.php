@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TasksRepository;
+use App\Repository\EnvironmentsRepository;
 use App\Entity\Tasks;
 use App\Entity\Environments;
 use App\Service\EnvironmentManager;
@@ -24,9 +25,23 @@ class EnvironmentsCreateCommand extends Command {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
     private TasksRepository $taskRepository;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
     private $environmentRepository;
 
+    /**
+     * 
+     * @var int
+     */
     private $envs_number;
+    
+    /**
+     * 
+     * @var EnvironmentManager
+     */
     private $environmentService;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -79,7 +94,7 @@ class EnvironmentsCreateCommand extends Command {
         for ($i = 0; $i < $this->envs_number; $i++) {
             // Create an environment and underlying LXC instance
             $this->environmentService->createEnvironment($task->getId(),
-                    null, $input->getOption('async'));
+                    -1, $input->getOption('async'));
             $io->success('Environment creation initiated.');
         }
         // TODO: handle exception

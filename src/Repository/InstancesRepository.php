@@ -5,11 +5,12 @@ namespace App\Repository;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\Instances;
+use App\Entity\InstanceTypes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\InstanceStatuses;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Repository\InstanceStatusesRepository;
 
 /**
  * @extends ServiceEntityRepository<Instances>
@@ -22,6 +23,11 @@ use Doctrine\ORM\EntityManagerInterface;
 class InstancesRepository extends ServiceEntityRepository
 {
     private LoggerInterface $logger;
+    
+    /**
+     * 
+     * @var InstanceStatusesRepository
+     */
     private $instanceStatusesRepository;
     private EntityManagerInterface $entityManager;
 
@@ -63,7 +69,13 @@ class InstancesRepository extends ServiceEntityRepository
         }
     }
 
-    public function findOneByTypeAndStatus($instance_type, $status_string): ?Instances
+    /**
+     * 
+     * @param int $instance_type_id
+     * @param string $status_string
+     * @return Instances|null
+     */
+    public function findOneByTypeAndStatus($instance_type_id, $status_string): ?Instances
     {
         $this->logger->debug(__METHOD__);
 
@@ -75,14 +87,19 @@ class InstancesRepository extends ServiceEntityRepository
             ->where('i.status = :status')
             ->andWhere('i.instance_type = :instance_type')
             ->setParameter('status', $status->getId())
-            ->setParameter('instance_type', $instance_type->getId())
+            ->setParameter('instance_type', $instance_type_id)
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
 
-    public function findAllSpare($instance_type): array {
+    /**
+     * 
+     * @param int $instance_type_id
+     * @return array<Instances>
+     */
+    public function findAllSpare($instance_type_id): array {
         $this->logger->debug(__METHOD__);
 
         $status_started = $this->instanceStatusesRepository->findOneByStatus("Started");
@@ -93,7 +110,7 @@ class InstancesRepository extends ServiceEntityRepository
             ->andWhere('(i.status = :status_started OR i.status = :status_stopped)')
             ->setParameter('status_started', $status_started->getId())
             ->setParameter('status_stopped', $status_stopped->getId())
-            ->setParameter('instance_type', $instance_type->getId())
+            ->setParameter('instance_type', $instance_type_id)
             ->getQuery()
             ->getResult()
         ;

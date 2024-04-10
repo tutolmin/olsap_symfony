@@ -11,6 +11,8 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\InstancesRepository;
+use App\Repository\InstanceStatusesRepository;
+use App\Repository\InstanceTypesRepository;
 use App\Entity\InstanceStatuses;
 use App\Entity\Instances;
 use App\Entity\InstanceTypes;
@@ -35,7 +37,17 @@ final class LxcOperationHandler
 
 //    private $message;
 //    private $environmentRepository;
+    
+    /**
+     * 
+     * @var InstanceTypesRepository
+     */
     private $instanceTypeRepository;
+    
+    /**
+     * 
+     * @var InstanceStatusesRepository
+     */
     private $instanceStatusRepository;
     private InstancesRepository $instanceRepository;
 
@@ -79,7 +91,7 @@ final class LxcOperationHandler
 */
     }
 
-    public function __invoke(LxcOperation $message)
+    public function __invoke(LxcOperation $message): void
     {
 	// Get passed optional parameters
 	$name = null;

@@ -6,6 +6,10 @@ use App\Repository\TasksRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\TaskOses;
+use App\Entity\TaskTechs;
+use App\Entity\TaskInstanceTypes;
+use App\Entity\Environments;
 
 #[ORM\Entity(repositoryClass: TasksRepository::class)]
 #[ORM\UniqueConstraint(name: "tasks_name", columns: ["name"])]
@@ -18,32 +22,48 @@ class Tasks
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $path;
+    private string $path;
 
+    /**
+     * 
+     * @var Collection<int, TaskOses>
+     */
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskOses::class, orphanRemoval: true)]
     private $taskOses;
 
 #    private $osesCounter;
 
+    /**
+     * 
+     * @var Collection<int, TaskTechs>
+     */
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskTechs::class, orphanRemoval: true)]
     private $taskTechs;
 
 #    private $techsCounter;
 
+    /**
+     * 
+     * @var Collection<int, TaskInstanceTypes>
+     */
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: TaskInstanceTypes::class, orphanRemoval: true)]
     private $taskInstanceTypes;
 
 #    private $instanceTypesCounter;
 
+    /**
+     * 
+     * @var Collection<int, Environments>
+     */
     #[ORM\OneToMany(mappedBy: 'task', targetEntity: Environments::class, orphanRemoval: true)]
     private $envs;
 

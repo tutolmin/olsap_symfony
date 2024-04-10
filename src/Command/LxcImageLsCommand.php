@@ -56,7 +56,7 @@ class LxcImageLsCommand extends Command {
                 #        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
                 #echo "sdfs";
                 $info = $this->lxcService->getImageInfo($value);
-                //var_dump( $info);
+//                var_dump( $info);
                 $io->note(sprintf('Name: %s', $info['properties']['description']));
             }
         }

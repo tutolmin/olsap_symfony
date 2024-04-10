@@ -3,14 +3,23 @@
 namespace App\Message;
 
 final class LxcEvent {
-    /*
-     * Add whatever properties and methods you need
-     * to hold the data for this message class.
-     */
 
+    /**
+     * 
+     * @var string
+     */
     private $event;
+
+    /**
+     * 
+     * @var string
+     */
     private $name;
 
+    /**
+     * 
+     * @param array<string> $message
+     */
     public function __construct($message) {
         $this->event = $message['event'];
         $this->name = array_key_exists('name', $message) ? strval($message['name']) : "";

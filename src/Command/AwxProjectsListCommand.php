@@ -21,7 +21,11 @@ use App\Entity\Tasks;
 )]
 class AwxProjectsListCommand extends Command
 {
-    private $awx;
+    /**
+     * 
+     * @var AwxManager
+     */
+    private $awxService;
     
     private EntityManagerInterface $entityManager;
     private TasksRepository $taskRepository;
@@ -34,7 +38,7 @@ class AwxProjectsListCommand extends Command
         $this->entityManager = $entityManager;
         $this->taskRepository = $this->entityManager->getRepository( Tasks::class);
 
-        $this->awx = $awx;
+        $this->awxService = $awx;
     }
 
     protected function configure(): void
@@ -49,7 +53,7 @@ class AwxProjectsListCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-	$projects = $this->awx->getProjects();
+	$projects = $this->awxService->getProjects();
 
 	foreach($projects as $project) {
 

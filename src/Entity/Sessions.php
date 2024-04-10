@@ -6,6 +6,12 @@ use App\Repository\SessionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use DateTimeImmutable;
+use App\Entity\Testees;
+use App\Entity\SessionStatuses;
+use App\Entity\SessionOses;
+use App\Entity\SessionTechs;
+use App\Entity\Environments;
 
 #[ORM\Entity(repositoryClass: SessionsRepository::class)]
 #[ORM\UniqueConstraint(name: "sessions_hash", columns: ["hash"])]
@@ -14,34 +20,46 @@ class Sessions
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'datetime_immutable')]
-    private $created_at;
+    private DateTimeImmutable $created_at;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $started_at;
+    private ?DateTimeImmutable $started_at;
 
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $finished_at;
+    private ?DateTimeImmutable $finished_at;
 
     #[ORM\Column(type: 'string', length: 8)]
-    private $hash;
+    private string $hash;
 
     #[ORM\ManyToOne(targetEntity: Testees::class, inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
-    private $testee;
+    private Testees $testee;
 
+    /**
+     * 
+     * @var Collection<int, SessionOses>
+     */
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionOses::class, orphanRemoval: true)]
     private $sessionOses;
 
 #    private $osesCounter;
 
+    /**
+     * 
+     * @var Collection<int, SessionTechs>
+     */
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: SessionTechs::class, orphanRemoval: true)]
     private $sessionTechs;
 
 #    private $techsCounter;
 
+    /**
+     * 
+     * @var Collection<int, Environments>
+     */
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Environments::class)]
     private $envs;
 
@@ -49,7 +67,7 @@ class Sessions
 
     #[ORM\ManyToOne(targetEntity: SessionStatuses::class, inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false, options: ['default' => 1])]
-    private $status;
+    private SessionStatuses $status;
 
     public function __construct()
     {

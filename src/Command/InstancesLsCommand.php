@@ -12,6 +12,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\InstancesRepository;
+use App\Repository\InstanceStatusesRepository;
 
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
@@ -24,13 +25,27 @@ use App\Service\LxcManager;
 )]
 class InstancesLsCommand extends Command
 {
+    /**
+     * 
+     * @var LxcManager
+     */
     private $lxdService;
+    
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
     
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
     private InstancesRepository $instanceRepository;
+    
+    /**
+     * 
+     * @var InstanceStatusesRepository
+     */
     private $instanceStatusRepository;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -52,6 +67,11 @@ class InstancesLsCommand extends Command
         ;
     }
 
+    /**
+     * 
+     * @param array<int, Instances> $instances
+     * @return void
+     */
     private function listItems(array $instances): void {
         if ($instances) {
             foreach ($instances as $instance) {
@@ -70,6 +90,11 @@ class InstancesLsCommand extends Command
         }
     }
 
+    /**
+     * 
+     * @param array<int, Instances> $instances
+     * @return void
+     */
     private function listOrphanItems(array $instances): void {
         if ($instances) {
             foreach ($instances as $instance) {

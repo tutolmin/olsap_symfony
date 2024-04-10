@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
 //use App\Entity\Ports;
+use App\Repository\AddressesRepository;
 
 #[AsCommand(
     name: 'net:addresses:delete',
@@ -23,6 +24,10 @@ class AddressesDeleteCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
+     /**
+      * 
+      * @var AddressesRepository
+      */
     private $addressRepository;
 //    private $portRepository;
 

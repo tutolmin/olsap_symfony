@@ -24,7 +24,16 @@ use App\Entity\Instances;
 )]
 class AwxJobDetailsCommand extends Command
 {
+    /**
+     * 
+     * @var AwxManager
+     */
     private $awxService;
+    
+    /**
+     * 
+     * @var EnvironmentManager
+     */
     private $envService;
 
     private EntityManagerInterface $entityManager;
@@ -61,51 +70,26 @@ class AwxJobDetailsCommand extends Command
         if ($job_id) {
             $io->note(sprintf('You passed a Job id: %s', $job_id));
         }
-        
-        $job = $this->awxService->getJobById($job_id);
+       
+        try {
+            $job = $this->awxService->getJobById($job_id);
+            $io->note(sprintf('Name: %s, status: %s, limit: %s',
+                            $job->name, $job->status, $job->limit));
 
-        // Handle exception 
-        // In GuzzleHttpAdapter.php line 148:                        
-        // Request not processed.  
+            $instance = $this->instanceRepository->findOneByName($job->limit);
 
-        if (!$job) {
+            $environment = $instance->getEnvs();
+
+            if ($environment) {
+                $io->note(sprintf('Environment: %s', $environment));
+                $this->envService->setEnvironmentStatus($environment, 'Deployed');
+            }
+        } catch (\AwxV2\Exception\HttpException $ex) {
+//                echo "Exception Found - " . $ex->getMessage() . "<br/>";
             $io->error('No such job found');
             return Command::FAILURE;
         }
-
-        $io->note(sprintf('Name: %s, status: %s, limit: %s', 
-                $job->name, $job->status, $job->limit));
-
-        $instance = $this->instanceRepository->findOneByName($job->limit);
-
-        $environment = $instance->getEnvs();
-
-        if ($environment) {
-            $io->note(sprintf('Environment: %s', $environment));
-            $this->envService->setEnvironmentStatus($environment, 'Deployed');
-        }
-        /*
-	$projects = $this->awx->getProjects();
-
-	foreach($projects as $project) {
-
-            $io->note('Project: ' . $project->name . ', branch: '. $project->scmBranch);
-
-            $task = $this->taskRepository->findOneByPath($project->scmBranch);
-	    if($task) {
-
-		$task->setProject($project->id);
-
-		// Store item into the DB
-		$this->entityManager->persist($task);
-		$this->entityManager->flush();
-	    
-	    } else {
-
-                $io->warning('Task with SCM branch '.$project->scmBranch.' does NOT exist in the database');
-	    }
-	}
-*/
+ 
         return Command::SUCCESS;
     }
 }

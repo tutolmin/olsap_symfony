@@ -9,8 +9,6 @@ use Symfony\Component\Console\Input\InputInterface;
 #use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-
-use Doctrine\ORM\EntityManagerInterface;
 use App\Service\AwxManager;
 
 #[AsCommand(
@@ -19,7 +17,11 @@ use App\Service\AwxManager;
 )]
 class AwxMeCommand extends Command
 {
-    private $awx;
+    /**
+     * 
+     * @var AwxManager
+     */
+    private $awxService;
     
 //    private EntityManagerInterface $entityManager;
 
@@ -32,7 +34,7 @@ class AwxMeCommand extends Command
 
 //        $this->entityManager = $entityManager;
 
-        $this->awx = $awx;
+        $this->awxService = $awx;
     }
 
     protected function configure(): void
@@ -48,7 +50,7 @@ class AwxMeCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
 	// return the the account api
-	$me = $this->awx->me();
+	$me = $this->awxService->me();
 
 	// Get the info for the account
 	$userInformation = $me->getAll();

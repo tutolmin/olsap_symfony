@@ -6,6 +6,9 @@ use App\Repository\TechnologiesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Domains;
+use App\Entity\SessionTechs;
+use App\Entity\TaskTechs;
 
 #[ORM\Entity(repositoryClass: TechnologiesRepository::class)]
 #[ORM\UniqueConstraint(name: "technologies_name", columns: ["name"])]
@@ -14,21 +17,29 @@ class Technologies
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description;
 
     #[ORM\ManyToOne(targetEntity: Domains::class, inversedBy: 'technologies')]
     #[ORM\JoinColumn(nullable: false)]
-    private $domain;
+    private Domains $domain;
 
+    /**
+     * 
+     * @var Collection<int, SessionTechs>
+     */
     #[ORM\OneToMany(mappedBy: 'tech', targetEntity: SessionTechs::class, orphanRemoval: true)]
     private $techSessions;
 
+    /**
+     * 
+     * @var Collection<int, TaskTechs>
+     */
     #[ORM\OneToMany(mappedBy: 'tech', targetEntity: TaskTechs::class, orphanRemoval: true)]
     private $techTasks;
 

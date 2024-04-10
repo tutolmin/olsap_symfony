@@ -6,6 +6,7 @@ use App\Repository\HardwareProfilesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\InstanceTypes;
 
 #[ORM\Entity(repositoryClass: HardwareProfilesRepository::class)]
 #[ORM\UniqueConstraint(name: "hardware_profiles_name", columns: ["name"])]
@@ -14,22 +15,26 @@ class HardwareProfiles
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'boolean')]
-    private $type;
+    private bool $type;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description;
 
+    /**
+     * 
+     * @var Collection<int, InstanceTypes>
+     */
     #[ORM\OneToMany(mappedBy: 'hw_profile', targetEntity: InstanceTypes::class, orphanRemoval: true)]
     private $instanceTypes;
 
     #[ORM\Column(type: 'integer')]
-    private $cost;
+    private int $cost;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(options: ['default' => false])]
     private bool $supported = false;

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TaskInstanceTypesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Tasks;
+use App\Entity\InstanceTypes;
 
 #[ORM\Entity(repositoryClass: TaskInstanceTypesRepository::class)]
 #[ORM\UniqueConstraint(name: "task_instance_types_combo", columns: ["task_id", "instance_type_id"])]
@@ -12,15 +14,15 @@ class TaskInstanceTypes
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\ManyToOne(targetEntity: Tasks::class, inversedBy: 'taskInstanceTypes')]
     #[ORM\JoinColumn(nullable: false)]
-    private $task;
+    private Tasks $task;
 
     #[ORM\ManyToOne(targetEntity: InstanceTypes::class, inversedBy: 'instanceTypeTasks')]
     #[ORM\JoinColumn(nullable: false)]
-    private $instance_type;
+    private InstanceTypes $instance_type;
 
     public function getId(): ?int
     {

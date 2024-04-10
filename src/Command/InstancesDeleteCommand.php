@@ -29,8 +29,22 @@ class InstancesDeleteCommand extends Command
     private InstancesRepository $instanceRepository;
     private LxcManager $lxcService;
 
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
+    
+    /**
+     * 
+     * @var string
+     */
     private $name;
+    
+    /**
+     * 
+     * @var bool
+     */
     private $force;
 
     // Dependency injection of the EntityManagerInterface entity
@@ -55,7 +69,13 @@ class InstancesDeleteCommand extends Command
         ;
     }
 
-    private function parseParams($input, $output) {
+    /**
+     * 
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
+    private function parseParams(InputInterface $input, OutputInterface $output): void
+    {
         $this->io = new SymfonyStyle($input, $output);
         $this->name = $input->getArgument('name');
         $this->force = $input->getOption('force');

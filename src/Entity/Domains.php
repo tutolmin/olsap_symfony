@@ -6,6 +6,7 @@ use App\Repository\DomainsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Technologies;
 
 #[ORM\Entity(repositoryClass: DomainsRepository::class)]
 #[ORM\UniqueConstraint(name: "domains_name", columns: ["name"])]
@@ -14,14 +15,18 @@ class Domains
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    private ?string $description;
 
+    /**
+     * 
+     * @var Collection<int, Technologies>
+     */
     #[ORM\OneToMany(mappedBy: 'domain', targetEntity: Technologies::class, orphanRemoval: true)]
     private $technologies;
 

@@ -46,7 +46,7 @@ final class LxcEventHandler {
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
     }
 
-    public function __invoke(LxcEvent $message) {
+    public function __invoke(LxcEvent $message): void {
 
         // Get passed optional parameters
         $name = null;

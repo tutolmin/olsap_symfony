@@ -21,6 +21,11 @@ use App\Service\LxcManager;
 class LxcLsCommand extends Command {
 
     private LxcManager $lxcService;
+    
+    /**
+     * 
+     * @var SymfonyStyle
+     */
     private $io;
     
     // Doctrine EntityManager
@@ -43,7 +48,12 @@ class LxcLsCommand extends Command {
         ;
     }
 
-    private function listItems(array $objects): void {
+    /**
+     * 
+     * @param array<string> $objects
+     * @return void
+     */
+    private function listItems( $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
                 $info = $this->lxcService->getObjectInfo($object);
@@ -52,7 +62,12 @@ class LxcLsCommand extends Command {
         }
     }
 
-    private function listOrphanItems(array $objects): void {
+    /**
+     * 
+     * @param array<string> $objects
+     * @return void
+     */
+    private function listOrphanItems( $objects): void {
         if ($objects) {
             foreach ($objects as $object) {
                 $info = $this->lxcService->getObjectInfo($object);

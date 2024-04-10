@@ -13,6 +13,11 @@ use App\Message\AwxEvent;
 class AwxInventoryController extends AbstractController
 {
     private LoggerInterface $logger;
+    
+    /**
+     * 
+     * @var MessageBusInterface
+     */
     private $awxEventBus;
     
     // Dependency injection of the LoggerInterface entity
