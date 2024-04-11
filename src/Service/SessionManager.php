@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SessionStatusesRepository;
 use App\Repository\TasksRepository;
+use App\Repository\EnvironmentsRepository;
 
 use App\Entity\Sessions;
 use App\Entity\SessionStatuses;
@@ -34,13 +35,17 @@ class SessionManager
 //    private InstancesRepository $instanceRepository;
 //    private $instanceStatusesRepository;
     private SessionStatusesRepository $sessionStatusesRepository;
-    private $environmentRepository;
+    private EnvironmentsRepository $environmentRepository;
 //    private $environmentStatusesRepository;
 
+    /**
+     * 
+     * @var array<string>
+     */
     private $params;
 
 //    private $sessionBus;
-    private $environmentActionBus;
+    private MessageBusInterface $environmentActionBus;
 
 //    private $lxdService;
 //    private $awxService;
@@ -50,7 +55,7 @@ class SessionManager
 //	AwxManager $awx, 
 //            MessageBusInterface $sessionBus, 
             MessageBusInterface $environmentActionBus,
-            $app_start_envs)
+            int $app_start_envs)
 
     {
         $this->logger = $logger;
@@ -63,7 +68,7 @@ class SessionManager
 //	$this->awxService = $awx;
 //	$this->envService = $env;
 
-        $this->params['app_start_envs']        = $app_start_envs;
+        $this->params['app_start_envs']        = strval($app_start_envs);
 
         $this->environmentActionBus = $environmentActionBus;
 
@@ -257,8 +262,12 @@ class SessionManager
     }
 */
     
-        
-    public function start(Sessions $session) {
+    /**
+     * 
+     * @param Sessions $session
+     * @return void
+     */
+    public function start(Sessions $session): void {
         $this->logger->debug(__METHOD__);
 
         $this->setSessionStatus($session, "Started");
@@ -273,7 +282,12 @@ class SessionManager
         }
     }
 
-    public function finish($session) {
+    /**
+     * 
+     * @param Sessions $session
+     * @return void
+     */
+    public function finish(Sessions $session): void {
         $this->logger->debug(__METHOD__);
 
         // Skip all remaining envs
@@ -293,7 +307,13 @@ class SessionManager
         $this->setSessionStatus($session, "Finished");
     }
 
-    public function setSessionStatus(Sessions $session, $status_str): bool {
+    /**
+     * 
+     * @param Sessions $session
+     * @param string $status_str
+     * @return bool
+     */
+    public function setSessionStatus(Sessions $session, string $status_str): bool {
         $this->logger->debug(__METHOD__);
 
         $status = $this->sessionStatusesRepository->findOneByStatus($status_str);
@@ -346,7 +366,13 @@ class SessionManager
     }
 */
 
-    public function setSessionTimestamp(Sessions $session, $timestamp_str): bool
+    /**
+     * 
+     * @param Sessions $session
+     * @param string $timestamp_str
+     * @return bool
+     */
+    public function setSessionTimestamp(Sessions $session, string $timestamp_str): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -428,6 +454,11 @@ class SessionManager
     }
 */
 
+    /**
+     * 
+     * @param Sessions $session
+     * @return bool
+     */
     public function allocateEnvironment(Sessions $session): bool
     {
         $this->logger->debug(__METHOD__);
@@ -645,6 +676,10 @@ class SessionManager
 
 */
 
+    /**
+     * 
+     * @return Tasks
+     */
     public function getRandomTask(): Tasks
     {
         $this->logger->debug(__METHOD__);
@@ -655,7 +690,11 @@ class SessionManager
     }
 
 
-
+    /**
+     * 
+     * @param Sessions $session
+     * @return Tasks
+     */
     public function getNextTask( Sessions $session): Tasks
     {
         $this->logger->debug(__METHOD__);

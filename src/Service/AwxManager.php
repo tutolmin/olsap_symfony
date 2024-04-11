@@ -182,7 +182,7 @@ class AwxManager
 
     /**
      * 
-     * @param string $body
+     * @param array<string> $body
      */
     public function deployTestUser($body): void
     {
@@ -201,7 +201,7 @@ class AwxManager
     /**
      * 
      * @param int $id
-     * @param string $body
+     * @param array<string> $body
      * @return JobTemplateEntity
      */
     public function runJobTemplate($id, $body)

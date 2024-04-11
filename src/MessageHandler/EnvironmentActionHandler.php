@@ -73,11 +73,11 @@ final class EnvironmentActionHandler
         }
         $instance = null;
         if (strlen($message->getInstanceName())) {
-            $instance = $this->instanceRepository->findByName($message->getInstanceName());
+            $instance = $this->instanceRepository->findOneByName($message->getInstanceName());
         }                
         $session = null;
         if ($message->getSessionId()>0) {
-            $session = $this->sessionRepository->find($message->getSessionId());
+            $session = $this->sessionRepository->findOneById($message->getSessionId());
         }
         // Switch action to serve
         switch ($message->getAction()) {

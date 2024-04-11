@@ -25,6 +25,10 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcOperation; 
 use App\Message\EnvironmentAction;
 use App\Message\EnvironmentEvent;
+use App\Repository\SessionStatusesRepository;
+use App\Repository\SessionsRepository;
+use App\Repository\EnvironmentsRepository;
+use App\Repository\EnvironmentStatusesRepository;
 
 class EnvironmentManager
 {
@@ -32,21 +36,18 @@ class EnvironmentManager
 
     private EntityManagerInterface $entityManager;
     private TasksRepository $taskRepository;
-//    private $addressRepository;
     private InstancesRepository $instanceRepository;
-//    private $instanceStatusesRepository;
-    private $sessionStatusesRepository;
-    private $sessionsRepository;
-    private $environmentRepository;
-    private $environmentStatusesRepository;
+    private SessionStatusesRepository $sessionStatusesRepository;
+    private SessionsRepository $sessionsRepository;
+    private EnvironmentsRepository $environmentRepository;
+    private EnvironmentStatusesRepository $environmentStatusesRepository;
 
-//    private $sessionBus;
-    private $lxcOperationBus;
-    private $environmentEventBus;
-    private $environmentActionBus;
+    private MessageBusInterface $lxcOperationBus;
+    private MessageBusInterface $environmentEventBus;
+    private MessageBusInterface $environmentActionBus;
 
 //    private LxcManager $lxcService;
-    private $awxService;
+    private AwxManager $awxService;
 //    private $sessionService;
 
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
@@ -93,18 +94,28 @@ class EnvironmentManager
     }
 */
     
-    // Bind Instance to the Evironment
-    public function bindInstance($environment, $instance) {
+    /**
+     * 
+     * @param Environments $environment
+     * @param Instances $instance
+     */
+    public function bindInstance($environment, $instance): void {
         $this->logger->debug(__METHOD__);
 
 	$environment->setInstance($instance);
 	$this->entityManager->flush();
 
         $this->deployEnvironment($environment);
+        
+        return;
     }
     
-    // Allocate the Instance
-    public function allocateInstance(InstanceTypes $it): ?Instances {
+    /**
+     * 
+     * @param InstanceTypes $it
+     * @return Instances|null
+     */
+    public function allocateInstance( $it) {
         $this->logger->debug(__METHOD__);
 
         // TODO: check input parameters
@@ -136,7 +147,11 @@ class EnvironmentManager
         return null;
     }
 
-    public function deleteEnvironment($environment) {
+    /**
+     * 
+     * @param Environments $environment
+     */
+    public function deleteEnvironment($environment): void {
 
         // Release instance
         $instance = $environment->getInstance();
@@ -145,10 +160,15 @@ class EnvironmentManager
             $this->releaseInstance($instance);
         }
         $this->environmentRepository->remove($environment, true);
+
+        return;
     }
 
-    // Release the Instance
-    public function releaseInstance(Instances $instance): bool {
+    /**
+     * 
+     * @param Instances $instance
+     */
+    public function releaseInstance( $instance): void {
         $this->logger->debug(__METHOD__);
 
         // TODO: check input parameters
@@ -168,7 +188,7 @@ class EnvironmentManager
 //        $this->lxcService->setInstanceStatus($instance->getId(), 
 //                $instance->getStatus()->getStatus());
 
-        return true;
+        return;
     }
 
     /*
@@ -277,6 +297,12 @@ class EnvironmentManager
         return $status;
     }
 */
+    /**
+     * 
+     * @param Sessions $session
+     * @param string $status_str
+     * @return bool
+     */
     public function setSessionStatus(Sessions $session, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
@@ -303,8 +329,13 @@ class EnvironmentManager
 	}
     }
 
-
-    public function setEnvironmentStatus(Environments $environment, $status_str): bool
+    /**
+     * 
+     * @param Environments $environment
+     * @param string $status_str
+     * @return bool
+     */
+    public function setEnvironmentStatus( $environment, $status_str): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -371,7 +402,13 @@ class EnvironmentManager
     }
 */
 
-    public function setEnvironmentTimestamp(Environments $environment, $timestamp_str): bool
+    /**
+     * 
+     * @param Environments $environment
+     * @param string $timestamp_str
+     * @return bool
+     */
+    public function setEnvironmentTimestamp( $environment, $timestamp_str): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -454,6 +491,13 @@ class EnvironmentManager
 	return true;	
     }
 */
+    /**
+     * 
+     * @param int $task_id
+     * @param int $session_id
+     * @param bool $async
+     * @return Environments|null
+     */
     public function createEnvironment(int $task_id, int $session_id = -1, 
             bool $async = true): ?Environments {
         $this->logger->debug(__METHOD__);
@@ -536,6 +580,11 @@ class EnvironmentManager
         return $env;
     }
 
+    /**
+     * 
+     * @param Environments $env
+     * @return bool
+     */
     public function verifyEnvironment(Environments $env): bool
     {
         $this->logger->debug(__METHOD__);
@@ -550,7 +599,7 @@ class EnvironmentManager
 
 	  // return the the account api
 	  $result = $this->awxService->runJobTemplate($env->getTask()->getVerify(), $body);
-
+/*
 	  $this->logger->debug('Status: ' . $result->status);
 #	  $this->logger->debug('Status: ' . (($result->status == "successful")?1:0));
 #	  $this->logger->debug('Status: ' . ($result->status == "successful")?1:0);
@@ -559,7 +608,7 @@ class EnvironmentManager
 	  $env->setValid((($result->status == "successful")?true:false));
 	  $env->setVerification($result->id);
 	  $this->entityManager->flush();
-
+*/
 	  $this->setEnvironmentStatus($env, "Verified");
 
 	  // Release the Instance
@@ -579,7 +628,11 @@ class EnvironmentManager
     }
 
 
-
+    /**
+     * 
+     * @param Environments $env
+     * @return bool
+     */
     public function solveEnvironment(Environments $env): bool
     {
         $this->logger->debug(__METHOD__);
@@ -610,7 +663,11 @@ class EnvironmentManager
     }
 
 
-
+    /**
+     * 
+     * @param Environments $env
+     * @return bool
+     */
     public function deployEnvironment(Environments $env): bool
     {
         $this->logger->debug(__METHOD__);
@@ -669,6 +726,11 @@ class EnvironmentManager
         return $this->getRandomTask();
     }
 */
+    /**
+     * 
+     * @param Tasks $task
+     * @return InstanceTypes|null
+     */
     public function findSuitableInstanceType(Tasks $task): ?InstanceTypes
     {  
         $this->logger->debug(__METHOD__);
@@ -678,7 +740,7 @@ class EnvironmentManager
 	if (count($instanceTypes)) {
             return $task->getTaskInstanceTypes()[0]->getInstanceType();
         } else {
-            return NULL;
+            return null;
         }
     }
 

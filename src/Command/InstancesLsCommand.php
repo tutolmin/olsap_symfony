@@ -84,7 +84,7 @@ class InstancesLsCommand extends Command
                  */
                 $this->io->note(sprintf('Name: %s, port: %s, status: %s, MAC: %s, env: %s',
                                 $instance->getName(), $instance->getAddresses()[0]->getPort(),
-                                $instance->getStatus(), $addresses->current()->getMac(),
+                                $instance->getStatus(), ($addresses->current())?$addresses->current()->getMac():'',
                                 $environments?$environments->getHash():''));
             }
         }
