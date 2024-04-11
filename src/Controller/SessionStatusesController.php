@@ -88,7 +88,7 @@ class SessionStatusesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$sessionStatus->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$sessionStatus->getId(), strval($request->request->get('_token')))) {
             $sessionStatusesRepository->remove($sessionStatus, true);
         }
 

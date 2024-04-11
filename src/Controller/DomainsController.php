@@ -89,7 +89,7 @@ class DomainsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$domain->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$domain->getId(), strval($request->request->get('_token')))) {
             $domainsRepository->remove($domain, true);
         }
 

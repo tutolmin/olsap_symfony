@@ -101,7 +101,7 @@ class TesteesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$testee->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$testee->getId(), strval($request->request->get('_token')))) {
             $testeesRepository->remove($testee, true);
         }
 

@@ -135,7 +135,7 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('skip'.$environment->getHash(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('skip'.$environment->getHash(), strval($request->request->get('_token')))) {
 
 	  // Release instance
 	  $instance = $environment->getInstance();
@@ -158,7 +158,7 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('verify'.$environment->getHash(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('verify'.$environment->getHash(), strval($request->request->get('_token')))) {
 
 	  $this->environmentService->setEnvironmentStatus($environment, "Verified");
 
@@ -217,7 +217,7 @@ class EnvironmentsController extends AbstractController
     public function delete(Request $request, Environments $environment): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete' . $environment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $environment->getId(), strval($request->request->get('_token')))) {
             $this->environmentService->deleteEnvironment($environment);
         }
 

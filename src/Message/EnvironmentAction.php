@@ -36,7 +36,7 @@ final class EnvironmentAction {
 
     /**
      * 
-     * @param array<string> $message
+     * @param array<string, mixed> $message
      */
     public function __construct($message) {
         $this->action = $message['action'];

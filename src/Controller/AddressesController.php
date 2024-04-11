@@ -88,7 +88,7 @@ class AddressesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$address->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$address->getId(), strval($request->request->get('_token')))) {
             $addressesRepository->remove($address, true);
         }
 

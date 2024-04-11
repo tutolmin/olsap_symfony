@@ -88,7 +88,7 @@ class TaskTechsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$taskTech->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$taskTech->getId(), strval($request->request->get('_token')))) {
             $taskTechsRepository->remove($taskTech, true);
         }
 

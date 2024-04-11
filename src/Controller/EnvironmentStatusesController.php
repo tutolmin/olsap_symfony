@@ -88,7 +88,7 @@ class EnvironmentStatusesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$environmentStatus->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$environmentStatus->getId(), strval($request->request->get('_token')))) {
             $environmentStatusesRepository->remove($environmentStatus, true);
         }
 

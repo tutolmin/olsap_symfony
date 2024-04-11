@@ -54,9 +54,9 @@ class InstanceTypesRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return int
+     * @return void
      */
-    public function deleteAll(): int
+    public function deleteAll(): void
     {
         $this->logger->debug(__METHOD__);
 
@@ -64,7 +64,7 @@ class InstanceTypesRepository extends ServiceEntityRepository
 
 	$qb->delete();
 
-	return $qb->getQuery()->getSingleScalarResult() ?? 0;
+//      return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
 
 //    /**

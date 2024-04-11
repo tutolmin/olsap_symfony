@@ -18,7 +18,7 @@ final class LxcEvent {
 
     /**
      * 
-     * @param array<string> $message
+     * @param array<string, mixed> $message
      */
     public function __construct($message) {
         $this->event = $message['event'];

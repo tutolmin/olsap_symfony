@@ -106,7 +106,7 @@ class TasksController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$task->getId(), strval($request->request->get('_token')))) {
             $tasksRepository->remove($task, true);
         }
 

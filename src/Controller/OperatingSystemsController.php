@@ -89,7 +89,7 @@ class OperatingSystemsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$operatingSystem->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$operatingSystem->getId(), strval($request->request->get('_token')))) {
             $operatingSystemsRepository->remove($operatingSystem, true);
         }
 

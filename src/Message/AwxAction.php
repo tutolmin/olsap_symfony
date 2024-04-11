@@ -18,7 +18,7 @@ final class AwxAction {
 
     /**
      * 
-     * @param array<string> $message
+     * @param array<string, mixed> $message
      */
     public function __construct(array $message) {
         $this->action = $message['name'];

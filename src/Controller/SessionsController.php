@@ -115,7 +115,7 @@ class SessionsController extends AbstractController
     public function start(Request $request, Sessions $session): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('start' . $session->getHash(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('start' . $session->getHash(), strval($request->request->get('_token')))) {
 
 //            $this->logger->debug($session->getOsesCounter());
 //            $this->logger->debug($session->getTechsCounter());
@@ -144,7 +144,7 @@ class SessionsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('finish'.$session->getHash(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('finish'.$session->getHash(), strval($request->request->get('_token')))) {
             $this->sessionManager->finish($session);
 /*
 	  // Skip all remaining envs
@@ -243,7 +243,7 @@ class SessionsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$session->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$session->getId(), strval($request->request->get('_token')))) {
             $sessionsRepository->remove($session, true);
         }
 

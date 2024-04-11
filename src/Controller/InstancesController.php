@@ -113,7 +113,7 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('start'.$instance->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('start'.$instance->getId(), strval($request->request->get('_token')))) {
             $this->lxcService->start($instance->getName());            
          }
 
@@ -125,7 +125,7 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('stop'.$instance->getId(), $request->request->get('_token'))) {       
+        if ($this->isCsrfTokenValid('stop'.$instance->getId(), strval($request->request->get('_token')))) {       
             $this->lxcService->stop($instance->getName());            
         }
 
@@ -137,7 +137,7 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('restart'.$instance->getId(), $request->request->get('_token'))) {            
+        if ($this->isCsrfTokenValid('restart'.$instance->getId(), strval($request->request->get('_token')))) {            
             $this->lxcService->restart($instance->getName());            
         }
             
@@ -149,7 +149,7 @@ class InstancesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete' . $instance->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $instance->getId(), strval($request->request->get('_token')))) {
             $this->lxcService->deleteInstance($instance->getName());     
         }
 

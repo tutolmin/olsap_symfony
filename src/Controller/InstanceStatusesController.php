@@ -88,7 +88,7 @@ class InstanceStatusesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$instanceStatus->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$instanceStatus->getId(), strval($request->request->get('_token')))) {
             $instanceStatusesRepository->remove($instanceStatus, true);
         }
 

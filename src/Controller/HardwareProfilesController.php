@@ -88,7 +88,7 @@ class HardwareProfilesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$hardwareProfile->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$hardwareProfile->getId(), strval($request->request->get('_token')))) {
             $hardwareProfilesRepository->remove($hardwareProfile, true);
         }
 

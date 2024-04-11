@@ -88,7 +88,7 @@ class BreedsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$breed->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$breed->getId(), strval($request->request->get('_token')))) {
             $breedsRepository->remove($breed, true);
         }
 

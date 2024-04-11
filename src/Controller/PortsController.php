@@ -88,7 +88,7 @@ class PortsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$port->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$port->getId(), strval($request->request->get('_token')))) {
             $portsRepository->remove($port, true);
         }
 

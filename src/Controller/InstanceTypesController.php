@@ -88,7 +88,7 @@ class InstanceTypesController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$instanceType->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$instanceType->getId(), strval($request->request->get('_token')))) {
             $instanceTypesRepository->remove($instanceType, true);
         }
 
