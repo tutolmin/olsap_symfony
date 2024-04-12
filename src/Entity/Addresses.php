@@ -37,7 +37,7 @@ class Addresses
         return $this->id;
     }
 
-    public function getIp(): ?string
+    public function getIp(): string
     {
         return $this->ip;
     }
@@ -83,7 +83,7 @@ class Addresses
         return $this;
     }
 
-    public function getMac(): ?string
+    public function getMac(): string
     {
         return $this->mac;
     }

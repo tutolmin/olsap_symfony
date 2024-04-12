@@ -83,9 +83,9 @@ class InstancesLsCommand extends Command
                   });
                  */
                 $this->io->note(sprintf('Name: %s, port: %s, status: %s, MAC: %s, env: %s',
-                                $instance->getName(), $instance->getAddresses()[0]->getPort(),
-                                $instance->getStatus(), ($addresses->current())?$addresses->current()->getMac():'',
-                                $environments?$environments->getHash():''));
+                                $instance->getName(), $addresses->current() ? $addresses->current()->getPort() : '',
+                                $instance->getStatus(), $addresses->current() ? $addresses->current()->getMac() : '',
+                                $environments ? $environments->getHash() : ''));
             }
         }
     }
@@ -101,8 +101,9 @@ class InstancesLsCommand extends Command
                 $info = $this->lxdService->getObjectInfo($instance->getName());
                 if (!$info) {
                     $this->io->note(sprintf('Name: %s, port: %s, status: %s',
-                        $instance->getName(), $instance->getAddresses()[0]->getPort(), 
-                            $instance->getStatus()));
+                                    $instance->getName(),
+                                    $instance->getAddresses()->current() ? $instance->getAddresses()->current()->getPort() : '',
+                                    $instance->getStatus()));
                 }
             }
         }

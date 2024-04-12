@@ -56,12 +56,12 @@ class InstanceTypes
         return $this->getOs()." @ ".$this->getHwProfile();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getOs(): ?OperatingSystems
+    public function getOs(): OperatingSystems
     {
         return $this->os;
     }
@@ -73,7 +73,7 @@ class InstanceTypes
         return $this;
     }
 
-    public function getHwProfile(): ?HardwareProfiles
+    public function getHwProfile(): HardwareProfiles
     {
         return $this->hw_profile;
     }

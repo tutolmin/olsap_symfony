@@ -112,35 +112,42 @@ class EnvironmentsRepository extends ServiceEntityRepository
      * @param int $task_id
      * @return Environments|null
      */
-    public function findOneDeployed($task_id): ?Environments
-    {
+    public function findOneDeployed($task_id): ?Environments {
         $this->logger->debug(__METHOD__);
 
         $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
 
+        if(!$env_status){
+            return null;
+        }
+        
         return $this->createQueryBuilder('e')
-            ->where('e.session is null')
-            ->andWhere('e.task = :task_id')
-            ->andWhere('e.status = :status_id')
-            ->setParameter('task_id', $task_id)
-            ->setParameter('status_id', $env_status->getId())
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult()
+        ->where('e.session is null')
+        ->andWhere('e.task = :task_id')
+        ->andWhere('e.status = :status_id')
+        ->setParameter('task_id', $task_id)
+        ->setParameter('status_id', $env_status->getId())
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult()
         ;
     }
 
     /**
      * 
      * @param int $task_id
-     * @return array<Environments>
+     * @return array<Environments>|null
      */
-    public function findAllDeployed($task_id): array
+    public function findAllDeployed($task_id)
     {
         $this->logger->debug(__METHOD__);
 
         $env_status = $this->environmentStatusesRepository->findOneByStatus("Deployed");
 
+        if(!$env_status){
+            return null;
+        }
+        
         return $this->createQueryBuilder('e')
             ->where('e.session is null')
             ->andWhere('e.task = :task_id')

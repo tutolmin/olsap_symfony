@@ -85,18 +85,21 @@ class InstancesSpareCommand extends Command
 
         $spare_instances = $this->instanceRepository->findAllSpare($instanceType->getId());
 
+        $instances_num = $spare_instances ? count($spare_instances) : 0;
+        
         // Only add new envs if there are not enough
-        if (count($spare_instances) < $this->spare_instances) {
+        if ($instances_num < $this->spare_instances) {
 
-            for ($i = 0; $i < $this->spare_instances - count($spare_instances); $i++) {
+            for ($i = 0; $i < $this->spare_instances - $instances_num; $i++) {
 
-                $this->io->note(sprintf('Creating new Instance(s): %s %s',
-                                $instanceType->getOs()->getAlias(),
-                                $instanceType->getHwProfile()->getName()));
+                $alias = $instanceType->getOs()->getAlias() ? $instanceType->getOs()->getAlias() : '';
 
-                $this->lxcService->create($instanceType->getOs()->getAlias(),
-                        $instanceType->getHwProfile()->getName());
-                
+                $profile = $instanceType->getHwProfile()->getName() ? $instanceType->getHwProfile()->getName() : '';
+
+                $this->io->note(sprintf('Creating new Instance(s): %s %s', $alias, $profile));
+
+                $this->lxcService->create($alias, $profile);
+
                 $this->io->success('Instance created successfully!');
             }
         }

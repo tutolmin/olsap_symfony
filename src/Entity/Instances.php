@@ -61,7 +61,7 @@ class Instances
         return $this->name;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -78,7 +78,7 @@ class Instances
         return $this;
     }
 
-    public function getInstanceType(): ?InstanceTypes
+    public function getInstanceType(): InstanceTypes
     {
         return $this->instance_type;
     }
@@ -124,7 +124,7 @@ class Instances
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -59,9 +59,10 @@ class InstancesController extends AbstractController
             $this->logger->debug("Selected Instance type: " . $instance->getInstanceType());
             
             for ($i = 0; $i < $form->get('number')->getData(); $i++) {
-                
-                $this->lxcService->create($instance->getInstanceType()->getOs()->getAlias(),
-                        $instance->getInstanceType()->getHwProfile()->getName());
+
+                $this->lxcService->create(
+                        $instance->getInstanceType()->getOs()->getAlias() ? $instance->getInstanceType()->getOs()->getAlias() : "",
+                        $instance->getInstanceType()->getHwProfile()->getName() ? $instance->getInstanceType()->getHwProfile()->getName() : "");
             }
             return $this->redirectToRoute('app_instances_index', [], Response::HTTP_SEE_OTHER);
         }

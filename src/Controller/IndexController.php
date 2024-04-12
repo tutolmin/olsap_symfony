@@ -44,11 +44,12 @@ class IndexController extends AbstractController
         $session_links = array();
         $session_names = array();
 
-        foreach ($testee->getSessions()->getValues() as $s) {
-//            $sessions[] = $s;
-            $session_links[$s->getHash()] = $this->generateUrl('app_sessions_display', 
-                    ['hash' => $s->getHash()]);
-            $session_names[$s->getHash()] = $s;
+        if ($testee) {
+            foreach ($testee->getSessions()->getValues() as $s) {
+                $session_links[$s->getHash()] = $this->generateUrl('app_sessions_display',
+                        ['hash' => $s->getHash()]);
+                $session_names[$s->getHash()] = $s;
+            }
         }
 
         return $this->render('testees/display.html.twig', [

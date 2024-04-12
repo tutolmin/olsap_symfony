@@ -78,7 +78,10 @@ class AwxJobDetailsCommand extends Command
 
             $instance = $this->instanceRepository->findOneByName($job->limit);
 
-            $environment = $instance->getEnvs();
+            $environment = null;
+            if ($instance) {
+                $environment = $instance->getEnvs();
+            }
 
             if ($environment) {
                 $io->note(sprintf('Environment: %s', $environment));

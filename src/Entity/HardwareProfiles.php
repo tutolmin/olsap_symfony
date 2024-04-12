@@ -46,7 +46,7 @@ class HardwareProfiles
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
-	return $this->getDescription();
+        return $this->getDescription() ? $this->getDescription() : '';
     }
 
     public function getId(): ?int

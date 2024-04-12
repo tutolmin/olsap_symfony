@@ -92,7 +92,7 @@ class Tasks
         return $this->getPath() . ": " . $this->name;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }

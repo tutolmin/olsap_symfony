@@ -53,10 +53,10 @@ class LxcLsCommand extends Command {
      * @param array<string> $objects
      * @return void
      */
-    private function listItems( $objects): void {
-        if ($objects) {
-            foreach ($objects as $object) {
-                $info = $this->lxcService->getObjectInfo($object);
+    private function listItems($objects): void {
+        foreach ($objects as $object) {
+            $info = $this->lxcService->getObjectInfo($object);
+            if ($info) {
                 $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
             }
         }
@@ -67,19 +67,25 @@ class LxcLsCommand extends Command {
      * @param array<string> $objects
      * @return void
      */
-    private function listOrphanItems( $objects): void {
-        if ($objects) {
-            foreach ($objects as $object) {
-                $info = $this->lxcService->getObjectInfo($object);
-                
-                // look for a specific instance type object
-                $obj = $this->instanceRepository->findOneByName($info['name']);
-                
-                if (!$obj) {
-                    $this->io->note(sprintf('Name: %s, status: %s',
-                        $info['name'], $info['status']));
-                }
+    private function listOrphanItems($objects): void {
+        foreach ($objects as $object) {
+            $info = $this->lxcService->getObjectInfo($object);
+            if ($info) {
+                $this->showOrphanItem($info);
             }
+        }
+    }
+    
+    /**
+     * 
+     * @param array<string> $info
+     */
+    private function showOrphanItem(array $info): void {
+        // look for a specific instance type object
+        $obj = $this->instanceRepository->findOneByName($info['name']);
+        if (!$obj) {
+            $this->io->note(sprintf('Name: %s, status: %s',
+                            $info['name'], $info['status']));
         }
     }
 

@@ -87,13 +87,16 @@ class EnvironmentsCreateCommand extends Command {
             return Command::FAILURE;
         }
         
-        $environments = $this->environmentRepository->findAllDeployed($task->getId());
+        $environments = $this->environmentRepository->findAllDeployed(
+                $task->getId() ? $task->getId() : -1);
 
-	$io->note("Specified task: " . $task . ", spare envs #: " . count($environments));
-	
+        $io->note("Specified task: " . $task . ", spare envs #: " . 
+                ($environments ? count($environments) : "0"));
+
         for ($i = 0; $i < $this->envs_number; $i++) {
             // Create an environment and underlying LXC instance
-            $this->environmentService->createEnvironment($task->getId(),
+            $this->environmentService->createEnvironment(
+                    $task->getId() ? $task->getId() : -1,
                     -1, $input->getOption('async'));
             $io->success('Environment creation initiated.');
         }

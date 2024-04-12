@@ -99,8 +99,9 @@ class InstancesDeleteCommand extends Command
             $instance = $this->instanceRepository->findOneByName($this->name);
             if (!$instance) {
                 $this->io->error(sprintf('Instance "%s" was not found', $this->name));
+            } else {
+                $this->lxcService->deleteInstance($instance, $this->force);
             }
-            $this->lxcService->deleteInstance($instance, $this->force);
         }
 
         return Command::SUCCESS;

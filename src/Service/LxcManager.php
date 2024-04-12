@@ -37,6 +37,7 @@ class LxcManager
     private MessageBusInterface $lxcOperationBus;
     private MessageBusInterface $environmentActionBus;
 
+//    private LxdClient $lxcService;
     private $lxcService;
     private int $timeout;
     private bool $wait;
@@ -161,12 +162,17 @@ class LxcManager
 
         // Find an address item which is NOT linked to any instance
         $address = $this->addressRepository->findOneByInstance(null);
+        if (!$address) {
+            $this->logger->error("Can't allocate the address");
+            return null;
+        }
         $address->setInstance($instance);
 
         // TODO: catch no address available exception
         // TODO: same address can be allocated to multiple new instances on a race condidion
 
         $this->logger->debug("Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
+
         $this->entityManager->flush();
 
         // This will trigger DB flush
@@ -202,9 +208,12 @@ class LxcManager
             return false;
         }
 
-//        $addresses = $instance->getAddresses();
         $address = $this->addressRepository->findOneByInstance($instance);
-
+        if (!$address) {
+            $this->logger->error("Can't allocate the address");
+            return false;
+        }
+        
  //       $this->logger->debug($address->getMac());
 //        $this->logger->debug("Address: ".$addresses->current()->getMac());
 
@@ -216,6 +225,7 @@ class LxcManager
                 "volatile.eth0.hwaddr" => $address->getMac()
             ],
         ];
+
         $responce = $this->lxcService->containers->create(null, $options, $this->wait);
 
         //Catch exception
@@ -243,6 +253,11 @@ class LxcManager
         if($env_id){
 
             $environment = $this->environmentRepository->findOneById($env_id);
+            
+            if(!$environment){
+                $this->logger->error("Environment id wasn't found " . $env_id);
+                return false;
+            }
             
             $this->logger->debug("Binding instance to the environment: `" . $environment);
 
@@ -516,15 +531,20 @@ class LxcManager
         }
 
         foreach ($objects as $object) {
+
             $info = $this->getObjectInfo($object);
-            if (!$this->deleteObject($info['name'], $force)) {
-                $result = false;
+
+            if (!empty($info)) {
+
+                if (!$this->deleteObject($info['name'], $force)) {
+                    $result = false;
+                }
             }
         }
 
         return $result;
-    }    
-    
+    }
+
     /**
      * 
      * @param bool $force
@@ -703,18 +723,19 @@ class LxcManager
         if (!$instance) {
             $this->logger->debug('No such instance!');
             return false;
-        }
+        } else {
 
-        // Special statuses for bound instances
-        $target_status = $this->tweakInstanceStatus($instance->getID(), $status_str);
+            // Special statuses for bound instances
+            $target_status = $this->tweakInstanceStatus($instance->getId(), $status_str);
 
-        $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
+            $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
 
-        $instance->setStatus($target_status);
+            $instance->setStatus($target_status);
 
-        // Store item into the DB
+            // Store item into the DB
 //	  $this->entityManager->persist($instance);
-        $this->entityManager->flush();
+            $this->entityManager->flush();
+        }
 
         return true;
     }
@@ -723,9 +744,9 @@ class LxcManager
      * 
      * @param int $instance_id
      * @param string $status_str
-     * @return InstanceStatuses
+     * @return ?InstanceStatuses
      */
-    private function tweakInstanceStatus( $instance_id, $status_str): InstanceStatuses {
+    private function tweakInstanceStatus( $instance_id, $status_str): ?InstanceStatuses {
 
         $this->logger->debug(__METHOD__);
 
@@ -733,6 +754,13 @@ class LxcManager
 
         $status = $this->instanceStatusesRepository->findOneByStatus($status_str);
 
+        if(!$instance){
+        
+            $this->logger->error('Instance with ID' . $instance_id . ' was not found.');
+
+            return null;
+        }
+        
         // Special statuses for bound instances
         $envs = $instance->getEnvs();
         if ($envs) {

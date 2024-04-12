@@ -54,30 +54,27 @@ class TasksController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_tasks_show', methods: ['GET'])]
-    public function show(Tasks $task): Response
-    {
+    public function show(Tasks $task): Response {
         $this->logger->debug(__METHOD__);
 
-	$techs = array();
-	foreach ($task->getTaskTechs()->getValues() as $tt) {
+        $techs = array();
+        foreach ($task->getTaskTechs()->getValues() as $tt) {
             $techs[] = $tt->getTech();
         }
 
         $oses = array();
-	foreach ($task->getTaskOses()->getValues() as $to) {
-            $oses[] = $to->getOs()->getAlias();
+        foreach ($task->getTaskOses()->getValues() as $to) {
+            $oses[] = $to->getOs() ? $to->getOs()->getAlias() : '';
         }
-
         $combos = array();
-	foreach ($task->getTaskInstanceTypes()->getValues() as $tit) {
-            $combos[] = $tit->getInstanceType()->getCombo();
+        foreach ($task->getTaskInstanceTypes()->getValues() as $tit) {
+            $combos[] = $tit->getInstanceType() ? $tit->getInstanceType()->getCombo() : '';
         }
-
         return $this->render('tasks/show.html.twig', [
-            'task' => $task,
-            'techs' => $task->getTechsCounter() .': '. implode( ', ', $techs),
-            'oses' => $task->getOsesCounter() .': '. implode( ', ', $oses),
-            'combos' => $task->getInstanceTypesCounter() .': '. implode( ', ', $combos),
+                    'task' => $task,
+                    'techs' => $task->getTechsCounter() . ': ' . implode(', ', $techs),
+                    'oses' => $task->getOsesCounter() . ': ' . implode(', ', $oses),
+                    'combos' => $task->getInstanceTypesCounter() . ': ' . implode(', ', $combos),
         ]);
     }
 

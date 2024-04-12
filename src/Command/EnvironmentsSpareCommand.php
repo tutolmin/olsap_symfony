@@ -68,34 +68,36 @@ class EnvironmentsSpareCommand extends Command
 //        ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-      $io = new SymfonyStyle($input, $output);
+    protected function execute(InputInterface $input, OutputInterface $output): int {
+        $io = new SymfonyStyle($input, $output);
 
-      // find all tasks
-      $tasks = $this->taskRepository->findAll();
+        // find all tasks
+        $tasks = $this->taskRepository->findAll();
 
-      foreach( $tasks as $task) {
+        foreach ($tasks as $task) {
 
-        // TODO: make sure task exists, and there are not enough spare envs for a task
-        $environments = $this->environmentRepository->findAllDeployed($task->getId());
+            // TODO: make sure task exists, and there are not enough spare envs for a task
+            $environments = $this->environmentRepository->findAllDeployed(
+                    $task->getId() ? $task->getId() : -1);
 
-        $io->note(sprintf("Specified task: " . $task . ", spare envs #: " . count($environments)));
+            $io->note(sprintf("Specified task: " . $task . ", spare envs #: " . 
+                    ($environments ? count($environments) : "0")));
 
-	// Only add new envs if there are not enough
-	if(count($environments) < $_ENV['APP_SPARE_ENVS'])
+            $env_num = $environments ? count($environments) : 0;
+            
+            // Only add new envs if there are not enough
+            if ($env_num < $_ENV['APP_SPARE_ENVS']){
+                
+                for ($i = 0; $i < $_ENV['APP_SPARE_ENVS'] - $env_num; $i++) {
 
-	for( $i=0; $i<$_ENV['APP_SPARE_ENVS']-count($environments);$i++) {
+                    $io->note(sprintf("Sending message to create a new spare environment"));
 
-          $io->note(sprintf("Sending message to create a new spare environment"));
+                    $this->sessionBus->dispatch(new SessionAction(["action" => "createSpareEnvironment",
+                                "task_id" => $task->getId()]));
+                }
+            }
+        }
 
-          $this->sessionBus->dispatch(new SessionAction(["action" => "createSpareEnvironment",
-                "task_id" => $task->getId()]));
-
-	}
-
-      }
-
-      return Command::SUCCESS;
+        return Command::SUCCESS;
     }
 }

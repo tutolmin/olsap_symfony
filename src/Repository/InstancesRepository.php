@@ -81,7 +81,9 @@ class InstancesRepository extends ServiceEntityRepository
 
         $status = $this->instanceStatusesRepository->findOneByStatus($status_string);
 
-	// TODO: check for valid result
+        if(!$status){
+            return null;
+        }
 
         return $this->createQueryBuilder('i')
             ->where('i.status = :status')
@@ -97,14 +99,18 @@ class InstancesRepository extends ServiceEntityRepository
     /**
      * 
      * @param int $instance_type_id
-     * @return array<Instances>
+     * @return array<Instances>|null
      */
-    public function findAllSpare($instance_type_id): array {
+    public function findAllSpare($instance_type_id) {
         $this->logger->debug(__METHOD__);
 
         $status_started = $this->instanceStatusesRepository->findOneByStatus("Started");
         $status_stopped = $this->instanceStatusesRepository->findOneByStatus("Stopped");
 
+        if(!$status_started || !$status_stopped){
+            return null;
+        }
+        
         return $this->createQueryBuilder('i')
             ->where('i.instance_type = :instance_type')
             ->andWhere('(i.status = :status_started OR i.status = :status_stopped)')
