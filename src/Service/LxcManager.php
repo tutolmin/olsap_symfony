@@ -38,7 +38,7 @@ class LxcManager
     private MessageBusInterface $environmentActionBus;
 
 //    private LxdClient $lxcService;
-    private $lxcService;
+    private $lxcService;  /* @phpstan-ignore-line */
     private int $timeout;
     private bool $wait;
 
@@ -538,8 +538,12 @@ class LxcManager
 
             if (!empty($info)) {
 
-                if (!$this->deleteObject($info['name'], $force)) {
-                    $result = false;
+                if (is_string($info['name'])) {
+                    
+                    if (!$this->deleteObject($info['name'], $force)) {
+                    
+                        $result = false;
+                    }
                 }
             }
         }

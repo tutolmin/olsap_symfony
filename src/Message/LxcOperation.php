@@ -54,10 +54,10 @@ final class LxcOperation {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, int|string|null> $message
      */
     public function __construct($message) {
-        $this->command = $message['command'];
+        $this->command = strval($message['command']);
         $this->name = array_key_exists('name', $message) ? strval($message['name']) : "";
         $this->operating_system = array_key_exists('os', $message) ? strval($message['os']) : "";
         $this->hardware_profile = array_key_exists('hp', $message) ? strval($message['hp']) : "";

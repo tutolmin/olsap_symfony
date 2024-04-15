@@ -57,7 +57,7 @@ class EnvironmentsDeleteCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $io = new SymfonyStyle($input, $output);
-        $env_id = $input->getArgument('id');
+        $env_id = is_int($input->getArgument('id')) ? $input->getArgument('id') : -1;
 
         if ($env_id) {
             $io->note(sprintf('You passed an argument: %s', $env_id));

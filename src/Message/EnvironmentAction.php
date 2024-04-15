@@ -36,10 +36,10 @@ final class EnvironmentAction {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, int|string|null> $message
      */
     public function __construct($message) {
-        $this->action = $message['action'];
+        $this->action = strval($message['action']);
         $this->env_id = array_key_exists('env_id', $message) ? intval($message['env_id']) : -1;
         $this->instance_name = array_key_exists('instance_name', $message) ? strval($message['instance_name']) : "";
         $this->task_id = array_key_exists('task_id', $message) ? intval($message['task_id']) : -1;

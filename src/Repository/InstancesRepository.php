@@ -75,25 +75,29 @@ class InstancesRepository extends ServiceEntityRepository
      * @param string $status_string
      * @return Instances|null
      */
-    public function findOneByTypeAndStatus($instance_type_id, $status_string): ?Instances
-    {
+    public function findOneByTypeAndStatus($instance_type_id, $status_string): ?Instances {
         $this->logger->debug(__METHOD__);
 
         $status = $this->instanceStatusesRepository->findOneByStatus($status_string);
 
-        if(!$status){
+        if (!$status) {
             return null;
         }
 
-        return $this->createQueryBuilder('i')
-            ->where('i.status = :status')
-            ->andWhere('i.instance_type = :instance_type')
-            ->setParameter('status', $status->getId())
-            ->setParameter('instance_type', $instance_type_id)
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult()
+        $instances = $this->createQueryBuilder('i')
+                ->where('i.status = :status')
+                ->andWhere('i.instance_type = :instance_type')
+                ->setParameter('status', $status->getId())
+                ->setParameter('instance_type', $instance_type_id)
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getOneOrNullResult()
         ;
+        // Check if suitable instance has been found
+        if (is_array($instances)) {
+            return reset($instances);
+        }
+        return null;
     }
 
     /**
@@ -101,7 +105,7 @@ class InstancesRepository extends ServiceEntityRepository
      * @param int $instance_type_id
      * @return array<Instances>|null
      */
-    public function findAllSpare($instance_type_id) {
+    public function findAllSpare($instance_type_id): ?array {
         $this->logger->debug(__METHOD__);
 
         $status_started = $this->instanceStatusesRepository->findOneByStatus("Started");

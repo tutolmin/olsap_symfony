@@ -38,8 +38,8 @@ class AwxPlaybookController extends AbstractController
 
         // Dispatch AWX event message
 	$this->awxEventBus->dispatch(new AwxEvent(["event" => "playbook", 
-            "id" => $request->getPayload()->get('id'), 
-            "status" => $request->getPayload()->get('status')]));
+            "id" => (int)$request->getPayload()->get('id'), 
+            "status" => (string)$request->getPayload()->get('status')]));
 
         return $this->render('awx_web_hook/index.html.twig', [
             'controller_name' => 'AwxPlaybookController',

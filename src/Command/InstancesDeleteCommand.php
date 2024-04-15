@@ -77,8 +77,8 @@ class InstancesDeleteCommand extends Command
     private function parseParams(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
-        $this->name = $input->getArgument('name');
-        $this->force = $input->getOption('force');
+        $this->name = is_string($input->getArgument('name')) ? strval($input->getArgument('name')) : "";
+        $this->force = is_bool($input->getOption('force')) ? $input->getOption('force') : false;
 
         if ($this->name) {
             $this->io->note(sprintf('You passed an argument: %s', $this->name));

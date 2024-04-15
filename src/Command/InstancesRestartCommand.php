@@ -49,7 +49,7 @@ class InstancesRestartCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $name = $input->getArgument('name');
+        $name = is_string($input->getArgument('name')) ? strval($input->getArgument('name')) : "";
 
         if ($name) {
             $io->note(sprintf('You passed an argument: %s', $name));

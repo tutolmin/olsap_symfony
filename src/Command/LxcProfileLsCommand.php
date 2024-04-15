@@ -57,7 +57,7 @@ class LxcProfileLsCommand extends Command {
                 #echo "sdfs";
                 $info = $this->lxcService->getProfileInfo($value);
 //          var_dump( $info);
-                $io->note(sprintf('Name: %s', $info['name']));
+                $io->note(sprintf('Name: %s', is_string($info['name']) ? $info['name'] : ""));
             }
         }
         return Command::SUCCESS;

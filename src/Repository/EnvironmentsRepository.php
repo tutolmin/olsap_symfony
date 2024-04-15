@@ -121,7 +121,7 @@ class EnvironmentsRepository extends ServiceEntityRepository
             return null;
         }
         
-        return $this->createQueryBuilder('e')
+        $environments = $this->createQueryBuilder('e')
         ->where('e.session is null')
         ->andWhere('e.task = :task_id')
         ->andWhere('e.status = :status_id')
@@ -131,6 +131,12 @@ class EnvironmentsRepository extends ServiceEntityRepository
         ->getQuery()
         ->getOneOrNullResult()
         ;
+        
+        // Check if suitable environment has been found
+        if (is_array($environments)) {
+            return reset($environments);
+        }
+        return null;
     }
 
     /**

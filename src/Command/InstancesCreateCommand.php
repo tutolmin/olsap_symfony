@@ -69,8 +69,8 @@ class InstancesCreateCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->os_alias = $input->getArgument('os');
-        $this->hp_name = $input->getArgument('profile');
+        $this->os_alias = is_string($input->getArgument('os')) ? $input->getArgument('os') : "";
+        $this->hp_name = is_string($input->getArgument('profile')) ? $input->getArgument('profile') : "";
 
         if ($this->os_alias && $this->hp_name) {
             $this->io->note(sprintf('You passed os alias: %s and profile name: %s', 
@@ -80,7 +80,7 @@ class InstancesCreateCommand extends Command
         $this->number = 1;
         if ($input->getArgument('number')) {
             $this->io->note(sprintf('You passed number of instances: %s', $this->number));
-            $this->number = intval($input->getArgument('number'));
+            $this->number = is_int($input->getArgument('number')) ? intval($input->getArgument('number')) : -1;
         }
     }
 

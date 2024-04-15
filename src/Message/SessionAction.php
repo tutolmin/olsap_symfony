@@ -30,10 +30,10 @@ final class SessionAction {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, int|string|null> $message
      */
     public function __construct($message) {
-        $this->action = $message['action'];
+        $this->action = strval($message['action']);
         $this->task_id = array_key_exists('task_id', $message) ? intval($message['task_id']) : -1;
         $this->session_id = array_key_exists('session_id', $message) ? intval($message['session_id']) : -1;
         $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;

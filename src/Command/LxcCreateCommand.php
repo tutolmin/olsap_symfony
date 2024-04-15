@@ -68,8 +68,8 @@ class LxcCreateCommand extends Command {
     {
         $this->io = new SymfonyStyle($input, $output);
 
-        $this->os_alias = $input->getArgument('os');
-        $this->hp_name = $input->getArgument('profile');
+        $this->os_alias = is_string($input->getArgument('os')) ? $input->getArgument('os') : "";
+        $this->hp_name = is_string($input->getArgument('profile')) ? $input->getArgument('profile') : "";
 
         if ($this->os_alias && $this->hp_name) {
             $this->io->note(sprintf('You passed os alias: %s and profile name: %s', 
@@ -79,7 +79,7 @@ class LxcCreateCommand extends Command {
         $this->object_number = 1;
         if ($input->getArgument('number')) {
             $this->io->note(sprintf('You passed number of objects: %s', $this->object_number));
-            $this->object_number = intval($input->getArgument('number'));
+            $this->object_number = is_int($input->getArgument('number')) ? $input->getArgument('number') : -1;
         }
     }
 
@@ -90,8 +90,8 @@ class LxcCreateCommand extends Command {
         $this->io->note(sprintf('Creating new LXC object(s): %s %s',
                         $this->os_alias, $this->hp_name));
         for ($i = 0; $i < $this->object_number; $i++) {
-            if ($this->lxcService->create($this->os_alias, $this->hp_name,
-                    null, $input->getOption('async'))) {
+            if ($this->lxcService->create($this->os_alias, $this->hp_name, null, 
+                    is_bool($input->getOption('async')) ? $input->getOption('async') : false)) {
                 $this->io->success('Object created successfully!');
             } else {
                 $this->io->error(sprintf('Object creation failure!'));

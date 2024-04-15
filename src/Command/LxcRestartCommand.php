@@ -37,7 +37,7 @@ class LxcRestartCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $name = $input->getArgument('name');
+        $name = is_string($input->getArgument('name')) ? $input->getArgument('name') : "";
 
         if ($name) {
             $io->note(sprintf('You passed an argument: %s', $name));
@@ -45,7 +45,8 @@ class LxcRestartCommand extends Command
 
         $io->note(sprintf('Restarting LXC object: %s', $name));
 
-        if (!$this->lxcService->restart($name, false, $input->getOption('async'))) {
+        if (!$this->lxcService->restart($name, false, 
+                is_bool($input->getOption('async')) ? $input->getOption('async') : true)) {
             $io->error('Failure! Check object name and status.');
             return Command::FAILURE;
         }

@@ -49,8 +49,8 @@ class PortsAddCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $min = intval($input->getArgument('min'));
-        $max = intval($input->getArgument('max'));
+        $min = is_int($input->getArgument('min')) ? $input->getArgument('min') : -1;
+        $max = is_int($input->getArgument('max')) ? $input->getArgument('max') : -1;
 
         if ($min<0 || $min>$max) {
             $io->error(sprintf('You passed invalid arguments: %d and %d', $min, $max));

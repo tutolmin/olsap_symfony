@@ -56,7 +56,7 @@ class LxcLsCommand extends Command {
     private function listItems($objects): void {
         foreach ($objects as $object) {
             $info = $this->lxcService->getObjectInfo($object);
-            if ($info) {
+            if ($info && is_string($info['name']) && is_string($info['status'])) {
                 $this->io->note(sprintf('Name: %s, status: %s', $info['name'], $info['status']));
             }
         }
@@ -70,7 +70,7 @@ class LxcLsCommand extends Command {
     private function listOrphanItems($objects): void {
         foreach ($objects as $object) {
             $info = $this->lxcService->getObjectInfo($object);
-            if ($info) {
+            if ($info && is_array($info)) {
                 $this->showOrphanItem($info);
             }
         }

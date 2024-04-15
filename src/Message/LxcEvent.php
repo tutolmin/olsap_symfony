@@ -18,10 +18,10 @@ final class LxcEvent {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, string|int|null> $message
      */
     public function __construct($message) {
-        $this->event = $message['event'];
+        $this->event = strval($message['event']);
         $this->name = array_key_exists('name', $message) ? strval($message['name']) : "";
     }
 

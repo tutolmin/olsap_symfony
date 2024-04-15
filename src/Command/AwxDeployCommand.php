@@ -63,7 +63,7 @@ class AwxDeployCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $env_id = intval($input->getArgument('env_id'));
+        $env_id = is_int($input->getArgument('env_id')) ? intval($input->getArgument('env_id')) : -1;
 
         if ($env_id) {
             $io->note(sprintf('You passed a env id: %s', $env_id));

@@ -18,10 +18,10 @@ final class AwxAction {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, string|int|null> $message
      */
     public function __construct(array $message) {
-        $this->action = $message['name'];
+        $this->action = strval($message['name']);
         $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;
     }
 

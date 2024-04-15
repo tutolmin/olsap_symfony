@@ -112,7 +112,7 @@ class InstancesLsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->io = new SymfonyStyle($input, $output);
-        $status = $input->getArgument('status');
+        $status = is_string($input->getArgument('status')) ? $input->getArgument('status') : "";
         
 	if ($status) {
 

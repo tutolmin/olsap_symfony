@@ -74,9 +74,9 @@ class LxcDeleteCommand extends Command {
     private function parseParams(InputInterface $input, OutputInterface $output): void
     {
         $this->io = new SymfonyStyle($input, $output);
-        $this->name = $input->getArgument('name');
-        $this->force = $input->getOption('force');
-        $this->async = $input->getOption('async');
+        $this->name = is_string($input->getArgument('name')) ? $input->getArgument('name') : "";
+        $this->force = is_bool($input->getOption('force')) ? $input->getOption('force') : true;
+        $this->async = is_bool($input->getOption('async')) ? $input->getOption('async') : true;
 
         if ($this->name) {
             $this->io->note(sprintf('You passed an argument: %s', $this->name));

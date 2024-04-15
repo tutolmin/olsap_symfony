@@ -18,10 +18,10 @@ final class EnvironmentEvent {
 
     /**
      * 
-     * @param array<string, mixed> $message
+     * @param array<string, string|int|null> $message
      */
     public function __construct($message) {
-        $this->event = $message['event'];
+        $this->event = strval($message['event']);
         $this->id = array_key_exists('id', $message) ? intval($message['id']) : -1;
     }
 

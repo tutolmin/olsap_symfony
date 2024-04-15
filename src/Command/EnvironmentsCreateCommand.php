@@ -67,19 +67,19 @@ class EnvironmentsCreateCommand extends Command {
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $io = new SymfonyStyle($input, $output);
-        $task_path = $input->getArgument('task');
+        $task_path = is_string($input->getArgument('task')) ? $input->getArgument('task') : "";
 //       $session_id = intval($input->getArgument('session_id'));
 
-        if ($task_path) {
+        if (strlen($task_path) > 0) {
             $io->note(sprintf('You passed a Task: %s', $task_path));
         }
         // Check the number of objects requested
         $this->envs_number = 1;
         if ($input->getArgument('number')) {
             $io->note(sprintf('You passed number of objects: %s', $this->envs_number));
-            $this->envs_number = intval($input->getArgument('number'));
+            $this->envs_number = is_int($input->getArgument('number')) ? intval($input->getArgument('number')) : -1;
         }
-        // Check if the task exists
+        // Check if the task existst
         $task = $this->taskRepository->findOneByPath($task_path);
         
         if (!$task) {
@@ -87,17 +87,16 @@ class EnvironmentsCreateCommand extends Command {
             return Command::FAILURE;
         }
         
-        $environments = $this->environmentRepository->findAllDeployed(
-                $task->getId() ? $task->getId() : -1);
+        $task_id = $task->getId() ? $task->getId() : -1;
+        $environments = $this->environmentRepository->findAllDeployed($task_id);
 
         $io->note("Specified task: " . $task . ", spare envs #: " . 
                 ($environments ? count($environments) : "0"));
 
         for ($i = 0; $i < $this->envs_number; $i++) {
             // Create an environment and underlying LXC instance
-            $this->environmentService->createEnvironment(
-                    $task->getId() ? $task->getId() : -1,
-                    -1, $input->getOption('async'));
+            $this->environmentService->createEnvironment($task_id, -1, 
+                    is_bool($input->getOption('async')) ? $input->getOption('async') : true);
             $io->success('Environment creation initiated.');
         }
         // TODO: handle exception

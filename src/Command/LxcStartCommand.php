@@ -36,7 +36,7 @@ class LxcStartCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $io = new SymfonyStyle($input, $output);
-        $name = $input->getArgument('name');
+        $name = is_string($input->getArgument('name')) ? $input->getArgument('name') : "";
 
         if ($name) {
             $io->note(sprintf('You passed an argument: %s', $name));
@@ -44,7 +44,8 @@ class LxcStartCommand extends Command
 
         $io->note(sprintf('Starting LXC object: %s', $name));
 
-        if (!$this->lxcService->start($name, false, $input->getOption('async'))) {
+        if (!$this->lxcService->start($name, false, 
+                is_bool($input->getOption('async')) ? $input->getOption('async') : true)) {
             $io->error('Failure! Check object name and status.');
             return Command::FAILURE;
         }
