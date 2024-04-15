@@ -81,15 +81,15 @@ class Sessions
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
-        return $this->getTestee()->getEmail()." at ".$this->getCreatedAt()->format('Y-m-d H:i:s');
+        return $this->getTestee()?$this->getTestee()->getEmail():"nobody"." at ".$this->getCreatedAt()->format('Y-m-d H:i:s');
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->created_at;
     }
@@ -144,8 +144,9 @@ class Sessions
 
     public function setTestee(?Testees $testee): self
     {
-        $this->testee = $testee;
-
+        if($testee){
+            $this->testee = $testee;
+        }
         return $this;
     }
 
@@ -171,9 +172,12 @@ class Sessions
     {
         if ($this->sessionOses->removeElement($os)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($os->getSession() === $this) {
                 $os->setSession(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -206,9 +210,12 @@ class Sessions
     {
         if ($this->sessionTechs->removeElement($sessionTech)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($sessionTech->getSession() === $this) {
                 $sessionTech->setSession(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -261,8 +268,9 @@ class Sessions
 
     public function setStatus(?SessionStatuses $status): self
     {
-        $this->status = $status;
-
+        if($status){
+            $this->status = $status;
+        }
         return $this;
     }
 

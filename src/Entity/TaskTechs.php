@@ -24,29 +24,29 @@ class TaskTechs
     #[ORM\JoinColumn(nullable: false)]
     private Technologies $tech;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTask(): ?Tasks
+    public function getTask(): Tasks
     {
         return $this->task;
     }
 
-    public function setTask(?Tasks $task): self
+    public function setTask(Tasks $task): self
     {
         $this->task = $task;
 
         return $this;
     }
 
-    public function getTech(): ?Technologies
+    public function getTech(): Technologies
     {
         return $this->tech;
     }
 
-    public function setTech(?Technologies $tech): self
+    public function setTech(Technologies $tech): self
     {
         $this->tech = $tech;
 

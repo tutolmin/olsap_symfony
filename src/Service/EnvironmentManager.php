@@ -182,8 +182,9 @@ class EnvironmentManager
         // stop instance for the time being
 //	$this->stopInstance($instance);
         
+        $status_str = $instance->getStatus() ? $instance->getStatus()->getStatus() : "New";
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "setInstanceStatus",
-            "name" => $instance->getName(), "status" => $instance->getStatus()->getStatus()]));
+            "name" => $instance->getName(), "status" => $status_str]));
         
 //        $this->lxcService->setInstanceStatus($instance->getId(), 
 //                $instance->getStatus()->getStatus());
@@ -517,8 +518,11 @@ class EnvironmentManager
         }
 
         // Get the suitable InstanceType for a task
-        $instance_type = $this->findSuitableInstanceType($task);
-
+        $instance_type = null;
+        if($task){
+            $instance_type = $this->findSuitableInstanceType($task);
+        }
+        
         if (!$instance_type) {
             $this->logger->debug('No suitable instance types are available for task: ' . $task);
             return null;
@@ -591,14 +595,18 @@ class EnvironmentManager
 
 	$this->logger->debug('Verifying: ' . $env);
 
-        $task_id = $env->getTask()->getVerify();
-	if($task_id) {
+        $task = $env->getTask();
+        $task_id = -1;
+        if ($task) {
+            $task_id = $task->getVerify();
+        }
+        if($task_id>0) {
 
 	  // Limit execution on single host only
-	  $body["limit"] = $env->getInstance()->getName();
+//	  $body["limit"] = $env->getInstance()->getName();
 
 	  // return the the account api
-	  $result = $this->awxService->runJobTemplate($env->getTask()->getVerify(), $body);
+//	  $result = $this->awxService->runJobTemplate($env->getTask()->getVerify(), $body);
 /*
 	  $this->logger->debug('Status: ' . $result->status);
 #	  $this->logger->debug('Status: ' . (($result->status == "successful")?1:0));
@@ -638,7 +646,7 @@ class EnvironmentManager
         $this->logger->debug(__METHOD__);
 
 	$this->logger->debug('Solving: ' . $env);
-
+/*
         $task_id = $env->getTask()->getSolve();
 	if($task_id) {
 
@@ -658,7 +666,7 @@ class EnvironmentManager
 
 	  $this->logger->debug('Deploy job template with id `' . $task_id . '` was NOT found.');
 	}
-
+*/
 	return false;
     }
 
@@ -674,17 +682,27 @@ class EnvironmentManager
 
 	$this->logger->debug('Deploying: ' . $env);
 
-        $task_id = $env->getTask()->getDeploy();
-	if($task_id) {
+        $task = $env->getTask();
+        $task_id = -1;
+        if ($task) {
+            $task_id = $task->getDeploy();
+        }
+        if($task_id>0) {
 
-	  // Limit execution on single host only
-	  $body["limit"] = $env->getInstance()->getName();
+            $instance = $env->getInstance();
+            
+            if ($instance) {
+                // Limit execution on single host only
+                $body["limit"] = $instance->getName();
+            } else {
+                $body["limit"] = "unavaliable";
+            }
 
-	  // Deploy test user credentials
+            // Deploy test user credentials
 //          $this->awxService->runJobTemplate(55, $body);
 
 	  // Deploy actual environment
-	  $this->awxService->runJobTemplate($env->getTask()->getDeploy(), $body);
+	  $this->awxService->runJobTemplate($task_id, $body);
 /*
 	  $env->setDeployment($result->id);
 	  $this->entityManager->flush();
@@ -731,18 +749,22 @@ class EnvironmentManager
      * @param Tasks $task
      * @return InstanceTypes|null
      */
-    public function findSuitableInstanceType(Tasks $task): ?InstanceTypes
-    {  
+    public function findSuitableInstanceType(Tasks $task): ?InstanceTypes {
         $this->logger->debug(__METHOD__);
 
-	$instanceTypes = $task->getTaskInstanceTypes();
+        // Get all instance types
+        $instanceTypes = $task->getTaskInstanceTypes();
 
-	if (count($instanceTypes)) {
-            return $task->getTaskInstanceTypes()[0]->getInstanceType();
+        if (count($instanceTypes)) {
+            $instanceType = reset($instanceTypes);
+            if ($instanceType) {
+                return $instanceType->getInstanceType();
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
     }
-
 }
 

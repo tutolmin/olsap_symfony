@@ -24,29 +24,29 @@ class TaskInstanceTypes
     #[ORM\JoinColumn(nullable: false)]
     private InstanceTypes $instance_type;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTask(): ?Tasks
+    public function getTask(): Tasks
     {
         return $this->task;
     }
 
-    public function setTask(?Tasks $task): self
+    public function setTask(Tasks $task): self
     {
         $this->task = $task;
 
         return $this;
     }
 
-    public function getInstanceType(): ?InstanceTypes
+    public function getInstanceType(): InstanceTypes
     {
         return $this->instance_type;
     }
 
-    public function setInstanceType(?InstanceTypes $instance_type): self
+    public function setInstanceType(InstanceTypes $instance_type): self
     {
         $this->instance_type = $instance_type;
 

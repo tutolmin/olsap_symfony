@@ -129,142 +129,142 @@ final class LxcOperationHandler
         }
 
         // Switch command to serve
-	switch( $message->getCommand()) {
-/*
-	// Binding some orphan instance to an env
-	case "bind":
+        switch ($message->getCommand()) {
+            /*
+              // Binding some orphan instance to an env
+              case "bind":
 
-	  // REQUIRED: EnvID and InstanceTypeId
-	  if(!$instance_type || !$environment) {
-            $this->logger->error( "Instance type ID and Env ID are required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+              // REQUIRED: EnvID and InstanceTypeId
+              if(!$instance_type || !$environment) {
+              $this->logger->error( "Instance type ID and Env ID are required for `" . $message->getCommand() . "` LXD command");
+              break;
+              }
 
-	  // Try to find an available Instance
-	  $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
-          $instance = $this->instanceRepository->findOneBy(["instance_type_id" => $instance_type->getId(),
-		"instance_status_id" => $instance_status->getId()]);
+              // Try to find an available Instance
+              $instance_status = $this->instanceStatusRepository->findOneByStatus("Started");
+              $instance = $this->instanceRepository->findOneBy(["instance_type_id" => $instance_type->getId(),
+              "instance_status_id" => $instance_status->getId()]);
 
-	  // Started instance of necessary type was found
-	  if($instance) {
+              // Started instance of necessary type was found
+              if($instance) {
 
-	    // Bind an instance to an environment
-	    $environment->setInstance($instance);
+              // Bind an instance to an environment
+              $environment->setInstance($instance);
 
-	    // Store item into the DB
-	    $this->entityManager->persist($environment);
-	    $this->entityManager->flush();
+              // Store item into the DB
+              $this->entityManager->persist($environment);
+              $this->entityManager->flush();
 
-	  } else {
+              } else {
 
-	      // Send message to request creation of the instance of the certain type
+              // Send message to request creation of the instance of the certain type
               $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "create",
-                "environment_id" => $environment->getId(),
-                "instance_type_id" => $instance_type->getId()]));
+              "environment_id" => $environment->getId(),
+              "instance_type_id" => $instance_type->getId()]));
 
-	      // Send message to request deployment of the env
+              // Send message to request deployment of the env
               $this->awxBus->dispatch(new RunPlaybook(["name" => "deploy",
-                "environment_id" => $environment->getId()]));
-	  }
+              "environment_id" => $environment->getId()]));
+              }
 
-	  break;
-*/
-	// Creating new LXC object
-	case "create":
+              break;
+             */
+            // Creating new LXC object
+            case "create":
 
-	  if(!$operating_system || !$hardware_profile) {
-            $this->logger->error( "OS & HP is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+                if (!$operating_system || !$hardware_profile) {
+                    $this->logger->error("OS & HP is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
 
-	  $this->logger->debug( "Creating LXC object, OS alias: `" . $operating_system . 
-                  "`, HW profile: `" . $hardware_profile . "`");
-	  $this->lxcService->create($operating_system, $hardware_profile, $environment_id, false);
+                $this->logger->debug("Creating LXC object, OS alias: `" . $operating_system .
+                        "`, HW profile: `" . $hardware_profile . "`");
+                $this->lxcService->create($operating_system, $hardware_profile, $environment_id, false);
 
-	  break;
-          
-	case "restart":
+                break;
 
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+            case "restart":
 
-	  # TODO: Check state: can not stop already stopped unless forced
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->restart($name, false, false);    
-          
-	  break;
-          
-	case "start":
+                # TODO: Check state: can not stop already stopped unless forced
 
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+                $responce = $this->lxcService->restart($name, false, false);
 
-	  # TODO: Check state: can not stop already stopped unless forced
+                break;
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->start($name, false, false);
-            
-	  break;
-          
-	case "stop":
+            case "start":
 
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
 
-	  # TODO: Check state: can not stop already stopped unless forced
+                # TODO: Check state: can not stop already stopped unless forced
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->stop($name, false, false);
-  
-	  break;
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+                $responce = $this->lxcService->start($name, false, false);
 
-	case "delete":
-            
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+                break;
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->deleteObject($name);	
+            case "stop":
 
-	  break;
-        
-	case "deleteAll":
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command");
-	  $responce = $this->lxcService->deleteAllObjects(true);	
+                # TODO: Check state: can not stop already stopped unless forced
 
-	  break;
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+                $responce = $this->lxcService->stop($name, false, false);
 
-        case "setInstanceStatus":
+                break;
 
-	  // REQUIRED: name
-	  if(!$name) {
-            $this->logger->error( "Name is required for `" . $message->getCommand() . "` LXD command");
-	    break;
-	  }
+            case "delete":
 
-	  $this->logger->debug( "Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
-	  $responce = $this->lxcService->setInstanceStatus($name, $instance_status);	            
-          
-          break;
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
 
-	default:
-            $this->logger->debug( "Unknown command: `" . $message->getCommand() . "`");
-	  break;
-	}
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+                $responce = $this->lxcService->deleteObject($name);
+
+                break;
+
+            case "deleteAll":
+
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command");
+                $responce = $this->lxcService->deleteAllObjects(true);
+
+                break;
+
+            case "setInstanceStatus":
+
+                // REQUIRED: name
+                if (!$name) {
+                    $this->logger->error("Name is required for `" . $message->getCommand() . "` LXD command");
+                    break;
+                }
+
+                $this->logger->debug("Handling `" . $message->getCommand() . "` command for LXC object: `" . $name . "`");
+                $responce = $this->lxcService->setInstanceStatus($name, $instance_status ? $instance_status->getStatus() : "");
+
+                break;
+
+            default:
+                $this->logger->debug("Unknown command: `" . $message->getCommand() . "`");
+                break;
+        }
 
         // do something with your message
     }

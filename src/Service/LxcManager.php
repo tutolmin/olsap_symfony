@@ -154,7 +154,9 @@ class LxcManager
 
         // It is New/Started by sefault
         $instance_status = $this->instanceStatusesRepository->findOneByStatus("New");
-        $instance->setStatus($instance_status);
+        if($instance_status){
+            $instance->setStatus($instance_status);
+        }
         $instance->setInstanceType($instance_type);
         $instance->setName(bin2hex(random_bytes(10)));
         $this->logger->debug("Generated Instance name: " . $instance->getName());
@@ -728,10 +730,11 @@ class LxcManager
             // Special statuses for bound instances
             $target_status = $this->tweakInstanceStatus($instance->getId(), $status_str);
 
-            $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
+            if($target_status){
+                $this->logger->debug('Changing instance ' . $instance . ' status to: ' . $target_status);
 
-            $instance->setStatus($target_status);
-
+                $instance->setStatus($target_status);
+            }
             // Store item into the DB
 //	  $this->entityManager->persist($instance);
             $this->entityManager->flush();

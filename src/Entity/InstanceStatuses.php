@@ -40,12 +40,12 @@ class InstanceStatuses
         return $this->status;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -91,9 +91,12 @@ class InstanceStatuses
     {
         if ($this->instances->removeElement($instance)) {
             // set the owning side to null (unless already changed)
+/*            
             if ($instance->getStatus() === $this) {
                 $instance->setStatus(null);
             }
+ * 
+ */
         }
 
         return $this;

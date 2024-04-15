@@ -84,10 +84,10 @@ class Environments
         return $this->task;
     }
 
-    public function setTask(?Tasks $task): self
-    {
-        $this->task = $task;
-
+    public function setTask(?Tasks $task): self {
+        if ($task) {
+            $this->task = $task;
+        }
         return $this;
     }
 
@@ -180,22 +180,22 @@ class Environments
         return $this->status;
     }
 
-    public function setStatus(?EnvironmentStatuses $status): self
-    {
-        $this->status = $status;
-
+    public function setStatus(?EnvironmentStatuses $status): self {
+        if ($status) {
+            $this->status = $status;
+        }
         return $this;
     }
 
-    public function getHash(): ?string
+    public function getHash(): string
     {
         return $this->hash;
     }
 
-    public function setHash(?string $hash): self
-    {
-        $this->hash = $hash;
-
+    public function setHash(?string $hash): self {
+        if ($hash) {
+            $this->hash = $hash;
+        }
         return $this;
     }
 }

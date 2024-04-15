@@ -76,9 +76,12 @@ class Breeds
     {
         if ($this->operatingSystems->removeElement($operatingSystem)) {
             // set the owning side to null (unless already changed)
+/*            
             if ($operatingSystem->getBreed() === $this) {
                 $operatingSystem->setBreed(null);
             }
+ * 
+ */
         }
 
         return $this;

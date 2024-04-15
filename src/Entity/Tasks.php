@@ -155,9 +155,12 @@ class Tasks
     {
         if ($this->taskOses->removeElement($taskOse)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($taskOse->getTask() === $this) {
                 $taskOse->setTask(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -185,9 +188,12 @@ class Tasks
     {
         if ($this->taskTechs->removeElement($taskTech)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($taskTech->getTask() === $this) {
                 $taskTech->setTask(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -230,9 +236,12 @@ class Tasks
     {
         if ($this->taskInstanceTypes->removeElement($taskInstanceType)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($taskInstanceType->getTask() === $this) {
                 $taskInstanceType->setTask(null);
             }
+             * 
+             */
         }
 
         return $this;

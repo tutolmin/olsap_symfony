@@ -29,24 +29,24 @@ class SessionOses
         return $this->id;
     }
 
-    public function getSession(): ?Sessions
+    public function getSession(): Sessions
     {
         return $this->session;
     }
 
-    public function setSession(?Sessions $session): self
+    public function setSession(Sessions $session): self
     {
         $this->session = $session;
 
         return $this;
     }
 
-    public function getOs(): ?OperatingSystems
+    public function getOs(): OperatingSystems
     {
         return $this->os;
     }
 
-    public function setOs(?OperatingSystems $os): self
+    public function setOs(OperatingSystems $os): self
     {
         $this->os = $os;
 

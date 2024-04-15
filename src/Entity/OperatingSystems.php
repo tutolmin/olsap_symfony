@@ -169,9 +169,12 @@ class OperatingSystems
     {
         if ($this->osSessions->removeElement($session)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($session->getOs() === $this) {
                 $session->setOs(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -199,20 +202,23 @@ class OperatingSystems
     {
         if ($this->osTasks->removeElement($osTask)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($osTask->getOs() === $this) {
                 $osTask->setOs(null);
             }
+             * 
+             */
         }
 
         return $this;
     }
 
-    public function getBreed(): ?Breeds
+    public function getBreed(): Breeds
     {
         return $this->breed;
     }
 
-    public function setBreed(?Breeds $breed): self
+    public function setBreed(Breeds $breed): self
     {
         $this->breed = $breed;
 

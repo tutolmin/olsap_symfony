@@ -64,11 +64,11 @@ class TasksController extends AbstractController
 
         $oses = array();
         foreach ($task->getTaskOses()->getValues() as $to) {
-            $oses[] = $to->getOs() ? $to->getOs()->getAlias() : '';
+            $oses[] = $to->getOs()->getAlias();
         }
         $combos = array();
         foreach ($task->getTaskInstanceTypes()->getValues() as $tit) {
-            $combos[] = $tit->getInstanceType() ? $tit->getInstanceType()->getCombo() : '';
+            $combos[] = $tit->getInstanceType()->getCombo();
         }
         return $this->render('tasks/show.html.twig', [
                     'task' => $task,

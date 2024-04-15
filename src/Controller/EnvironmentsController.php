@@ -81,16 +81,18 @@ class EnvironmentsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->logger->debug("Number of Environments to create: " . $form->get('number')->getData());
 
-            $this->logger->debug("Selected Task: " . $environment->getTask() .
-                    " Session: " . $environment->getSession());
+            $task_id = $environment->getTask() ? $environment->getTask()->getId() : -1;
+            $session_id = $environment->getSession() ? $environment->getSession()->getId() : -1;
+
+            $this->logger->debug("Selected Task: " . $task_id .
+                    " Session: " . $session_id);
 
             for ($i = 0; $i < $form->get('number')->getData(); $i++) {
 
                 if ($environment->getSession()) {
-                    $this->environmentService->createEnvironment($environment->getTask()->getId(),
-                            $environment->getSession()->getId());
+                    $this->environmentService->createEnvironment($task_id, $session_id);
                 } else {
-                    $this->environmentService->createEnvironment($environment->getTask()->getId());
+                    $this->environmentService->createEnvironment($task_id);
                 }
             }
 
@@ -103,54 +105,72 @@ class EnvironmentsController extends AbstractController
         ]);
     }
 
+    /**
+     * 
+     * @param Environments $environment
+     * @return int
+     */
+    private function getPortStr(Environments $environment): int {
+        $port = -1;
+        if ($environment->getInstance()) {
+            $addresses = $environment->getInstance()->getAddresses();
+            $address = reset($addresses);
+            if ($address && $address->getPort()) {
+                $port = $address->getPort()->getNumber();
+            }
+        }
+        return $port;
+    }
+    
     #[Route('/{hash}', name: 'app_environments_display', methods: ['GET'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function display(Environments $environment): Response
-    {
+    public function display(Environments $environment): Response {
         $this->logger->debug(__METHOD__);
 
-	$this->environmentService->setEnvironmentTimestamp($environment, "started");
+        $this->environmentService->setEnvironmentTimestamp($environment, "started");
 
-	// Some envs (Skipped/Verified) might not have linked instances
-	$port = "";
-	if($environment->getInstance()){
-	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
-        }
         $session_url = "_session";
-        if($environment->getSession()){
+        if ($environment->getSession()) {
             $session_url = $environment->getSession()->getHash();
         }
+
+        $description = $environment->getTask() ? $environment->getTask()->getDescription() : "";
+
         return $this->render('environments/display.html.twig', [
-            'environment' => $environment,
-            'test_username' => $this->getParameter('app.username'),
-	    'skip_limit' => $this->getParameter('app.skip_envs'),
-            'public_ip' => $this->getParameter('app.public_ip'),
-            'port' => $port,
-	    'task_description' => $environment->getTask()->getDescription(),
-	    'session_url' => $session_url,
+                    'environment' => $environment,
+                    'test_username' => $this->getParameter('app.username'),
+                    'skip_limit' => $this->getParameter('app.skip_envs'),
+                    'public_ip' => $this->getParameter('app.public_ip'),
+                    'port' => $this->getPortStr($environment),
+                    'task_description' => $description,
+                    'session_url' => $session_url,
         ]);
     }
 
     #[Route('/{hash}/skip', name: 'app_environments_skip', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
-    public function skip(Request $request, Environments $environment): Response
-    {
+    public function skip(Request $request, Environments $environment): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('skip'.$environment->getHash(), strval($request->request->get('_token')))) {
+        if ($this->isCsrfTokenValid('skip' . $environment->getHash(), strval($request->request->get('_token')))) {
 
-	  // Release instance
-	  $instance = $environment->getInstance();
-	  $this->environmentService->releaseInstance($instance);
+            // Release instance
+            $instance = $environment->getInstance();
+            if ($instance) {
+                $this->environmentService->releaseInstance($instance);
+            }
 
-	  $this->environmentService->setEnvironmentStatus($environment, "Skipped");
+            $this->environmentService->setEnvironmentStatus($environment, "Skipped");
 
- 	  $this->environmentService->setEnvironmentTimestamp($environment, "skipped");
+            $this->environmentService->setEnvironmentTimestamp($environment, "skipped");
 
-	  // Allocate new environment for a session
-	  $this->sessionManager->allocateEnvironment($environment->getSession());
+            // Allocate new environment for a session
+            $session = $environment->getSession();
+            if ($session) {
+                $this->sessionManager->allocateEnvironment($session);
+                return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
+            }
 //        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $environment->getSession()->getId()]));
-	}
-
-        return $this->redirectToRoute('app_sessions_display', ['hash' => $environment->getSession()->getHash()], Response::HTTP_SEE_OTHER);
+        }
+        return $this->redirectToRoute('app_environments_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{hash}/verify', name: 'app_environments_verify', methods: ['POST'], requirements: ['hash' => '[\d\w]{8}'])]
@@ -169,9 +189,14 @@ class EnvironmentsController extends AbstractController
 
 	  // Allocate new environment for a session
 //        $this->bus->dispatch(new SessionAction(["action" => "allocateEnvironment", "session_id" => $environment->getSession()->getId()]));
-	}
+        }
 
-        return $this->redirectToRoute('app_sessions_display', ['hash' => $environment->getSession()->getHash()], Response::HTTP_SEE_OTHER);
+        $session = $environment->getSession();
+        if ($session) {
+            return $this->redirectToRoute('app_sessions_display', ['hash' => $session->getHash()], Response::HTTP_SEE_OTHER);
+        }
+        
+        return $this->redirectToRoute('app_environments_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}', name: 'app_environments_show', methods: ['GET'])]
@@ -179,15 +204,10 @@ class EnvironmentsController extends AbstractController
     {
         $this->logger->debug(__METHOD__);
 
-	// Some envs (Skipped/Verified) might not have linked instances
-	$port = "";
-	if($environment->getInstance()){
-	  $port = $environment->getInstance()->getAddresses()[0]->getPort();
-        }
         return $this->render('environments/show.html.twig', [
             'test_username' => $this->getParameter('app.username'),            
             'public_ip' => $this->getParameter('app.public_ip'),
-            'port' => $port,
+            'port' => $this->getPortStr($environment),
             'environment' => $environment,
         ]);
     }

@@ -66,10 +66,10 @@ class InstanceTypes
         return $this->os;
     }
 
-    public function setOs(?OperatingSystems $os): self
-    {
-        $this->os = $os;
-
+    public function setOs(?OperatingSystems $os): self {
+        if ($os) {
+            $this->os = $os;
+        }
         return $this;
     }
 
@@ -78,10 +78,10 @@ class InstanceTypes
         return $this->hw_profile;
     }
 
-    public function setHwProfile(?HardwareProfiles $hw_profile): self
-    {
-        $this->hw_profile = $hw_profile;
-
+    public function setHwProfile(?HardwareProfiles $hw_profile): self {
+        if ($hw_profile) {
+            $this->hw_profile = $hw_profile;
+        }
         return $this;
     }
 
@@ -147,9 +147,12 @@ class InstanceTypes
     {
         if ($this->instanceTypeTasks->removeElement($instanceTypeTask)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($instanceTypeTask->getInstanceType() === $this) {
                 $instanceTypeTask->setInstanceType(null);
             }
+             * 
+             */
         }
 
         return $this;

@@ -91,9 +91,11 @@ class Domains
     {
         if ($this->technologies->removeElement($technology)) {
             // set the owning side to null (unless already changed)
-            if ($technology->getDomain() === $this) {
+/*            if ($technology->getDomain() === $this) {
                 $technology->setDomain(null);
             }
+ * 
+ */
         }
 
         return $this;

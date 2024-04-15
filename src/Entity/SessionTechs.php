@@ -29,24 +29,24 @@ class SessionTechs
         return $this->id;
     }
 
-    public function getSession(): ?Sessions
+    public function getSession(): Sessions
     {
         return $this->session;
     }
 
-    public function setSession(?Sessions $session): self
+    public function setSession(Sessions $session): self
     {
         $this->session = $session;
 
         return $this;
     }
 
-    public function getTech(): ?Technologies
+    public function getTech(): Technologies
     {
         return $this->tech;
     }
 
-    public function setTech(?Technologies $tech): self
+    public function setTech(Technologies $tech): self
     {
         $this->tech = $tech;
 

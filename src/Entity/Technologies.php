@@ -85,12 +85,12 @@ class Technologies
         return $this;
     }
 
-    public function getDomain(): ?Domains
+    public function getDomain(): Domains
     {
         return $this->domain;
     }
 
-    public function setDomain(?Domains $domain): self
+    public function setDomain(Domains $domain): self
     {
         $this->domain = $domain;
 
@@ -119,9 +119,12 @@ class Technologies
     {
         if ($this->techSessions->removeElement($techSession)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($techSession->getTech() === $this) {
                 $techSession->setTech(null);
             }
+             * 
+             */
         }
 
         return $this;
@@ -149,9 +152,12 @@ class Technologies
     {
         if ($this->techTasks->removeElement($techTask)) {
             // set the owning side to null (unless already changed)
+            /*
             if ($techTask->getTech() === $this) {
                 $techTask->setTech(null);
             }
+             *
+             */
         }
 
         return $this;

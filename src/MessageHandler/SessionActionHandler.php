@@ -131,86 +131,91 @@ final class SessionActionHandler
 
           break;
 */
-        // create spare environment for a task
-        case "createSpareEnvironment":
+            // create spare environment for a task
+            case "createSpareEnvironment":
 
-	  // TODO: make sure task exists, and there are not enough spare envs for a task
-          $environments = $this->environmentRepository->findAllDeployed($task->getId());
+                if (!$task) {
+                    $this->logger->error("Task is required for spare env creation.");
+                    break;
+                }
 
-	  $this->logger->debug( "Specified task: " . $task . ", spare envs #: " . count($environments));
-	
-	  if(!is_numeric($task->getDeploy())) {
+                // TODO: make sure task exists, and there are not enough spare envs for a task
+                $environments = $this->environmentRepository->findAllDeployed($task->getId());
+                $env_counter = count($environments?$environments:[]);
 
-	    $this->logger->warning( "Task does NOT have deployment template. Skipping deployment!");
+                $this->logger->debug("Specified task: " . $task . ", spare envs #: " . $env_counter);
 
-	    break;
-    	  }
+                if (!is_numeric($task->getDeploy())) {
 
-	  // Only add new envs if there are not enough
-        if(count($environments) < $_ENV['APP_SPARE_ENVS']) {
+                    $this->logger->warning("Task does NOT have deployment template. Skipping deployment!");
+                }
+
+                // Only add new envs if there are not enough
+                if ($env_counter < $_ENV['APP_SPARE_ENVS']) {
 //              && is_numeric($task->getDeploy())) {
 //              $task->getDeploy()) {
-         
 
-	    $environment = $this->envManager->createEnvironment($task->getId());
-  #            $this->logger->debug( "Created environment: " . $environment);
 
-	    if($environment) {
+                    $environment = $this->envManager->createEnvironment($task->getId());
+                    #            $this->logger->debug( "Created environment: " . $environment);
 
-	      $result = $this->envManager->deployEnvironment($environment);
-  #              $this->logger->debug( "Environment deployed successfully!");
-	    } else {
+                    if ($environment) {
 
-  #              $this->logger->debug( "Environment deployment failure!");
-	    }
-	  }
+                        $result = $this->envManager->deployEnvironment($environment);
+                        #              $this->logger->debug( "Environment deployed successfully!");
+                    } else {
 
-          break;
+                        #              $this->logger->debug( "Environment deployment failure!");
+                    }
+                }
 
-        // Binding some orphan instance to an env
-        case "createEnvironment":
+                break;
 
-	  // Task has not been specified, get random
-	  if(!$task)
+            // Binding some orphan instance to an env
+            case "createEnvironment":
 
-	    // Session has been specified
-	    if($session)
+                // Task has not been specified, get random
+                if (!$task) {
 
-	      $task = $this->sessionManager->getNextTask($session);
+                    // Session has been specified
+                    if ($session) {
+                        $task = $this->sessionManager->getNextTask($session);
+                    } else {
+                        $task = $this->sessionManager->getRandomTask();
+                    }
+                }
+                $this->logger->debug("Selected task: " . $task);
 
-	    else
+                if (!is_numeric($task->getDeploy())) {
 
-	      $task = $this->sessionManager->getRandomTask();
+                    $this->logger->warning("Task does NOT have deployment template. Skipping deployment!");
 
-	  $this->logger->debug( "Selected task: " . $task);
-	
-	  if(!is_numeric($task->getDeploy())) {
+                    break;
+                }
 
-	    $this->logger->warning( "Task does NOT have deployment template. Skipping deployment!");
-
-	    break;
-    	  }
-
-	  $environment = $this->envManager->createEnvironment($task->getId(),$session->getId());
+                $environment = $this->envManager->createEnvironment($task->getId(),
+                        $session ? $session->getId() : -1);
 #            $this->logger->debug( "Created environment: " . $environment);
 
-	  if($environment) {
+                if ($environment) {
 
-	    $result = $this->envManager->deployEnvironment($environment);
+                    $result = $this->envManager->deployEnvironment($environment);
 #              $this->logger->debug( "Environment deployed successfully!");
-	  } else {
+                } else {
 
 #              $this->logger->debug( "Environment deployment failure!");
-	  }
+                }
 
-          break;
-
-        // Verify the environment
-        case "verifyEnvironment":
+                break;
 
             // Verify the environment
-	  $result = $this->envManager->verifyEnvironment($environment);
-/*
+        case "verifyEnvironment":
+
+        if($environment){
+            // Verify the environment
+	  $this->envManager->verifyEnvironment($environment);
+        }
+          /*
 	  // Allocate new environment instead of verified one
 	  $this->sessionManager->allocateEnvironment($environment->getSession());
 */

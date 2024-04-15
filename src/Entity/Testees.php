@@ -46,12 +46,12 @@ class Testees
         return $this->email;
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -63,7 +63,7 @@ class Testees
         return $this;
     }
 
-    public function getOauthToken(): ?string
+    public function getOauthToken(): string
     {
         return $this->oauth_token;
     }
@@ -75,7 +75,7 @@ class Testees
         return $this;
     }
 
-    public function getRegisteredAt(): ?\DateTimeImmutable
+    public function getRegisteredAt(): \DateTimeImmutable
     {
         return $this->registered_at;
     }

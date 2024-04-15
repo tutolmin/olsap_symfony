@@ -32,12 +32,11 @@ final class AwxEventHandler
     public function __invoke(AwxEvent $message): void {
         
         // Get passed optional parameters
-        $id = null;
-        if ($message->getId()>0) {
-            $id = $message->getId();
+        $id = $message->getId();
+        if ($id>0) {
             $this->logger->debug("Provided ID: " . $id);
-        }
-        
+        }      
+
         // Switch event to handle
         switch ($message->getEvent()) {
 

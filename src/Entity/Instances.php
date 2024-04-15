@@ -83,10 +83,10 @@ class Instances
         return $this->instance_type;
     }
 
-    public function setInstanceType(?InstanceTypes $instance_type): self
-    {
-        $this->instance_type = $instance_type;
-
+    public function setInstanceType(?InstanceTypes $instance_type): self {
+        if ($instance_type) {
+            $this->instance_type = $instance_type;
+        }
         return $this;
     }
 
@@ -117,10 +117,8 @@ class Instances
         return $this->status;
     }
 
-    public function setStatus(?InstanceStatuses $status): self
-    {
+    public function setStatus(InstanceStatuses $status): self {
         $this->status = $status;
-
         return $this;
     }
 
@@ -173,6 +171,6 @@ class Instances
     
     public function getEnvHash(): string
     {
-        return $this->getEnvs()?$this->getEnvs()->getHash():'';
+        return $this->getEnvs()?$this->getEnvs()->getHash():"";
     }
 }

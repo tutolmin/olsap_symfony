@@ -24,29 +24,29 @@ class TaskOses
     #[ORM\JoinColumn(nullable: false)]
     private OperatingSystems $os;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTask(): ?Tasks
+    public function getTask(): Tasks
     {
         return $this->task;
     }
 
-    public function setTask(?Tasks $task): self
+    public function setTask(Tasks $task): self
     {
         $this->task = $task;
 
         return $this;
     }
 
-    public function getOs(): ?OperatingSystems
+    public function getOs(): OperatingSystems
     {
         return $this->os;
     }
 
-    public function setOs(?OperatingSystems $os): self
+    public function setOs(OperatingSystems $os): self
     {
         $this->os = $os;
 
