@@ -41,7 +41,7 @@ class LxcCreateCommand extends Command {
      * 
      * @var int
      */
-    private $object_number;
+    private $object_number = 1;
 
     // Dependency injection of the EntityManagerInterface entity
     public function __construct(LxcManager $lxcService) {
@@ -79,7 +79,7 @@ class LxcCreateCommand extends Command {
         $this->object_number = 1;
         if ($input->getArgument('number')) {
             $this->io->note(sprintf('You passed number of objects: %s', $this->object_number));
-            $this->object_number = is_int($input->getArgument('number')) ? $input->getArgument('number') : -1;
+            $this->object_number = is_numeric($input->getArgument('number')) ? intval($input->getArgument('number')) : 1;
         }
     }
 

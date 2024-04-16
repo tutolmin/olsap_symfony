@@ -13,7 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Domains|null find($id, $lockMode = null, $lockVersion = null)
  * @method Domains|null findOneBy(array $criteria, array $orderBy = null)
- * @method Domains[]    findAll()
  * @method Domains[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class DomainsRepository extends ServiceEntityRepository
@@ -49,6 +48,10 @@ class DomainsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<Domains>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

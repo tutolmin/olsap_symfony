@@ -13,7 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method OperatingSystems|null find($id, $lockMode = null, $lockVersion = null)
  * @method OperatingSystems|null findOneBy(array $criteria, array $orderBy = null)
- * @method OperatingSystems[]    findAll()
  * @method OperatingSystems[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class OperatingSystemsRepository extends ServiceEntityRepository
@@ -50,6 +49,10 @@ class OperatingSystemsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<OperatingSystems>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

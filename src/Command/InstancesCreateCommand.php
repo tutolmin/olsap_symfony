@@ -39,7 +39,7 @@ class InstancesCreateCommand extends Command
      * 
      * @var int
      */
-    private $number;
+    private $number = 1;
     
     private LxcManager $lxcService;
 
@@ -80,7 +80,7 @@ class InstancesCreateCommand extends Command
         $this->number = 1;
         if ($input->getArgument('number')) {
             $this->io->note(sprintf('You passed number of instances: %s', $this->number));
-            $this->number = is_int($input->getArgument('number')) ? intval($input->getArgument('number')) : -1;
+            $this->number = is_numeric($input->getArgument('number')) ? intval($input->getArgument('number')) : 1;
         }
     }
 

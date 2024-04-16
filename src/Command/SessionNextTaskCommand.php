@@ -57,7 +57,7 @@ class SessionNextTaskCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $session_id = is_int($input->getArgument('session_id')) ? $input->getArgument('session_id'): -1;
+        $session_id = is_numeric($input->getArgument('session_id')) ? $input->getArgument('session_id'): -1;
 
         if ($session_id) {
             $io->note(sprintf('You passed an argument: %s', $session_id));

@@ -57,7 +57,7 @@ class AddressesAddCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $subnet = is_int($input->getArgument('subnet')) ? intval($input->getArgument('subnet')) : -1;
+        $subnet = is_numeric($input->getArgument('subnet')) ? intval($input->getArgument('subnet')) : -1;
 
         if ($subnet<0 || $subnet>254) {
             $io->error(sprintf('You passed invalid argument: %d', $subnet));

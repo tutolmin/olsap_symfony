@@ -50,6 +50,10 @@ class TechnologiesRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<Technologies>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

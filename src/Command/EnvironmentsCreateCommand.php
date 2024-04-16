@@ -34,9 +34,9 @@ class EnvironmentsCreateCommand extends Command {
 
     /**
      * 
-     * @var int
+     * @var mixed
      */
-    private $envs_number;
+    private $envs_number = 1;
     
     /**
      * 
@@ -74,10 +74,9 @@ class EnvironmentsCreateCommand extends Command {
             $io->note(sprintf('You passed a Task: %s', $task_path));
         }
         // Check the number of objects requested
-        $this->envs_number = 1;
         if ($input->getArgument('number')) {
+            $this->envs_number = is_numeric($input->getArgument('number')) ? intval($input->getArgument('number')) : 1;
             $io->note(sprintf('You passed number of objects: %s', $this->envs_number));
-            $this->envs_number = is_int($input->getArgument('number')) ? intval($input->getArgument('number')) : -1;
         }
         // Check if the task existst
         $task = $this->taskRepository->findOneByPath($task_path);

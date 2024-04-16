@@ -13,7 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method TaskTechs|null find($id, $lockMode = null, $lockVersion = null)
  * @method TaskTechs|null findOneBy(array $criteria, array $orderBy = null)
- * @method TaskTechs[]    findAll()
  * @method TaskTechs[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class TaskTechsRepository extends ServiceEntityRepository
@@ -54,6 +53,10 @@ class TaskTechsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<TaskTechs>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

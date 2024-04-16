@@ -160,7 +160,10 @@ class EnvironmentManager
             $this->releaseInstance($instance);
         }
         $this->environmentRepository->remove($environment, true);
-
+/*        
+        $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "deleted", 
+            "id" => $env->getId()]));
+*/        
         return;
     }
 
@@ -541,7 +544,7 @@ class EnvironmentManager
         $this->entityManager->persist($env);
 //            $this->entityManager->flush();
 
-        $this->logger->debug('Environment `' . $env . '` was created.');
+        $this->logger->debug('Environment `' . $env->getHash() . '` was created.');
         
         $this->environmentEventBus->dispatch(new EnvironmentEvent(["event" => "created", 
             "id" => $env->getId()]));
@@ -756,7 +759,7 @@ class EnvironmentManager
         $instanceTypes = $task->getTaskInstanceTypes();
 
         if (count($instanceTypes)) {
-            $instanceType = reset($instanceTypes);
+            $instanceType = $instanceTypes->first();
             if ($instanceType) {
                 return $instanceType->getInstanceType();
             } else {

@@ -70,6 +70,10 @@ class TasksRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<Tasks>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

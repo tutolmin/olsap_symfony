@@ -13,7 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Breeds|null find($id, $lockMode = null, $lockVersion = null)
  * @method Breeds|null findOneBy(array $criteria, array $orderBy = null)
- * @method Breeds[]    findAll()
  * @method Breeds[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class BreedsRepository extends ServiceEntityRepository
@@ -49,6 +48,10 @@ class BreedsRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * 
+     * @return array<Breeds>
+     */
     public function findAll()
     {
         $this->logger->debug(__METHOD__);

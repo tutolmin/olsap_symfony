@@ -53,7 +53,7 @@ class TaskInstanceTypeCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $task_id = is_int($input->getArgument('task_id')) ? $input->getArgument('task_id') : -1;
+        $task_id = is_numeric($input->getArgument('task_id')) ? $input->getArgument('task_id') : -1;
 
         if ($task_id) {
             $io->note(sprintf('You passed an argument: %s', $task_id));

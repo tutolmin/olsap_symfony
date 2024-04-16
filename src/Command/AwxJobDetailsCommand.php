@@ -65,7 +65,7 @@ class AwxJobDetailsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $job_id = is_int($input->getArgument('job_id')) ? intval($input->getArgument('job_id')) : -1;
+        $job_id = is_numeric($input->getArgument('job_id')) ? intval($input->getArgument('job_id')) : -1;
 
         if ($job_id) {
             $io->note(sprintf('You passed a Job id: %s', $job_id));

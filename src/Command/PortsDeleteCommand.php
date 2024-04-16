@@ -49,8 +49,8 @@ class PortsDeleteCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $min = is_int($input->getArgument('min')) ? $input->getArgument('min') : -1;
-        $max = is_int($input->getArgument('max')) ? $input->getArgument('max') : -1;
+        $min = is_numeric($input->getArgument('min')) ? intval($input->getArgument('min')) : -1;
+        $max = is_numeric($input->getArgument('max')) ? intval($input->getArgument('max')) : -1;
 
         if ($min<0 || $min>$max) {
             $io->error(sprintf('You passed invalid arguments: %d and %d', $min, $max));

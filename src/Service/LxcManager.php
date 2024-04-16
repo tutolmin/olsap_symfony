@@ -233,23 +233,24 @@ class LxcManager
         //Catch exception
         // Get the name for the reply
         $name = explode("/", $responce["resources"]["containers"][0]);
-
-        $this->logger->debug("Created object: " . $name[3]);
+        $name_str = $name[3];
+        
+        $this->logger->debug("Created object: " . $name_str);
 
         $this->logger->debug('Dispatching LXC event message');
-        $this->lxcEventBus->dispatch(new LxcEvent(["event" => "created", "name" => $name[3]]));
+        $this->lxcEventBus->dispatch(new LxcEvent(["event" => "created", "name" => $name_str]));
             
-        $instance->setName($name[3]);
+        $instance->setName($name_str);
 
         // Store item into the DB
 //        $this->entityManager->persist($instance);
         $this->entityManager->flush();
                 
         // Starting the instance
-        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name[3]]));
+        $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "start", "name" => $name_str]));
 
         // Deploy test user
-//        $this->awxActionBus->dispatch(new AwxAction(["action" => "deployTestUser", "name" => $name[3]]));
+//        $this->awxActionBus->dispatch(new AwxAction(["action" => "deployTestUser", "name" => $name_str]));
 
         // Environment id has been specified, bind to it
         if($env_id){
@@ -265,7 +266,7 @@ class LxcManager
 
 //            $this->environmentService->bindInstance($environment, $instance);
             $this->environmentActionBus->dispatch(new EnvironmentAction(["action" => "bind",
-                        "env_id" => $environment->getId(), "instance" => $instance->getName()]));
+                        "env_id" => $environment->getId(), "instance" => $name_str]));
         }
         
         return true;
