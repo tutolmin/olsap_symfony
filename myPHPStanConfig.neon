@@ -15,3 +15,7 @@ parameters:
 #            - '#^Property [a-zA-Z0-9\\_]+::\$environmentService has no type specified\.$#'
     doctrine:
         objectManagerLoader: tests/object-manager.php
+    level: 9
+    paths:
+        - src/
+        - tests/

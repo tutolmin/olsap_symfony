@@ -6,14 +6,19 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class AwxMeCommandTest extends KernelTestCase
+class AwxProjectListCommandTest extends KernelTestCase
 {
     public function testExecute(): void
     {
+        // Stop here and mark this test as incomplete.
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
+/*
         self::bootKernel();
         $application = new Application(self::$kernel);
 
-        $command = $application->find('awx:me');
+        $command = $application->find('awx:project:list');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             // pass arguments to the helper
@@ -34,7 +39,7 @@ class AwxMeCommandTest extends KernelTestCase
         // the output of the command in the console
         $output = $commandTester->getDisplay();
         $this->assertStringContainsString('[OK] AWX username: symfony', $output);
-
+*/
         // ...
     }
 }

@@ -6,14 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class AwxProjectListCommandTest extends KernelTestCase
+class AwxMeCommandTest extends KernelTestCase
 {
-    public function testExecute(): void
+    public function testAwxMeIsSymfony(): void
     {
         self::bootKernel();
         $application = new Application(self::$kernel);
 
-        $command = $application->find('awx:project:list');
+        $command = $application->find('awx:me');
         $commandTester = new CommandTester($command);
         $commandTester->execute([
             // pass arguments to the helper
