@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tests>
+  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="0.572188706" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.002381044" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.179047987" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.015363461" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.014306538" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.008122417" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypes" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types" status="3" time="0.014935846" size="-1" groups="default" exceptionLine="114" exceptionMessage="Failed asserting that an array is not empty.">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testSomething" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Something" status="0" time="0.004892562" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\MessengerTest" methodName="testSomething" prettifiedClassName="Messenger (App\Tests\Messenger)" prettifiedMethodName="Something" status="0" time="0.000340775" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="3" time="0.013312621" size="-1" groups="default" exceptionLine="60" exceptionMessage="Failed asserting that an array is not empty.">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="3" time="0.009427874" size="-1" groups="default" exceptionLine="72" exceptionMessage="Failed asserting that an array is not empty.">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypes" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types" status="1" time="0" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+</tests>

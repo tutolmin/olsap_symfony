@@ -1,0 +1,88 @@
+
+##teamcity[testCount count='12' flowId='27439']
+
+##teamcity[testSuiteStarted name='App Test Suite' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='27439']
+
+##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='27439']
+
+##teamcity[testFinished name='testAwxMeIsSymfony' duration='572' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='27439']
+
+##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='27439']
+
+##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='2' flowId='27439']
+
+##teamcity[testFinished name='testExecute' duration='2' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='27439']
+
+##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='27439']
+
+##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='179' flowId='27439']
+
+##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='27439']
+
+##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='15' flowId='27439']
+
+##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='27439']
+
+##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='14' flowId='27439']
+
+##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='27439']
+
+##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='8' flowId='27439']
+
+##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypes' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypes' flowId='27439']
+
+##teamcity[testFailed name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypes' message='Failed asserting that an array is not empty.' details=' /srv/app/tests/HardwareProfilesTest.php:114|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='15' flowId='27439']
+
+##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypes' duration='15' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='27439']
+
+##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testSomething' flowId='27439']
+
+##teamcity[testFinished name='testSomething' duration='5' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\MessengerTest' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest' flowId='27439']
+
+##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest::testSomething' flowId='27439']
+
+##teamcity[testFinished name='testSomething' duration='0' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\MessengerTest' flowId='27439']
+
+##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='27439']
+
+##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='27439']
+
+##teamcity[testFailed name='testOperatingSystemsListIsNotEmpty' message='Failed asserting that an array is not empty.' details=' /srv/app/tests/OperatingSystemsTest.php:60|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='13' flowId='27439']
+
+##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='13' flowId='27439']
+
+##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='27439']
+
+##teamcity[testFailed name='testSupportedOperatingSystemsListIsNotEmpty' message='Failed asserting that an array is not empty.' details=' /srv/app/tests/OperatingSystemsTest.php:72|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='9' flowId='27439']
+
+##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='9' flowId='27439']
+
+##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypes' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypes' flowId='27439']
+
+##teamcity[testIgnored name='testEachSupportedOsHasCorrespondingInstanceTypes' message='This test depends on "App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='27439']
+
+##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypes' duration='0' flowId='27439']
+
+##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='27439']
+
+##teamcity[testSuiteFinished name='App Test Suite' flowId='27439']

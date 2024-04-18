@@ -1,0 +1,24 @@
+Awx Me Command (App\Tests\Command\AwxMeCommand)
+ [x] Awx me is symfony
+
+Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
+ [ ] Execute
+
+Hardware Profiles (App\Tests\HardwareProfiles)
+ [x] Hardware profiles list is not empty
+ [x] Container hardware profiles list is not empty
+ [x] Vm hardware profiles list is not empty
+ [x] Supported hardware profiles list is not empty
+ [ ] Each supported hardware profile has corresponding instance types
+
+Instance Types (App\Tests\InstanceTypes)
+ [x] Something
+
+Messenger (App\Tests\Messenger)
+ [x] Something
+
+Operating Systems (App\Tests\OperatingSystems)
+ [ ] Operating systems list is not empty
+ [ ] Supported operating systems list is not empty
+ [ ] Each supported os has corresponding instance types
+

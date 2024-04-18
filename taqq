@@ -1,0 +1,64 @@
+PHPUnit 9.6.19 by Sebastian Bergmann and contributors.
+
+Testing 
+Awx Me Command (App\Tests\Command\AwxMeCommand)
+ ✔ Awx me is symfony
+
+Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
+ ∅ Execute
+
+Hardware Profiles (App\Tests\HardwareProfiles)
+ ✘ Each supported os has corresponding instance types
+   │
+   │ Failed asserting that an array is not empty.
+   │
+   │ /srv/app/tests/HardwareProfilesTest.php:107
+   │ /srv/app/vendor/phpunit/phpunit/phpunit:107
+   │
+
+Instance Types (App\Tests\InstanceTypes)
+ ✔ Something
+
+Messenger (App\Tests\Messenger)
+ ✔ Something
+
+Operating Systems (App\Tests\OperatingSystems)
+ ✘ Each supported os has corresponding instance types
+   │
+   │ Failed asserting that an array is not empty.
+   │
+   │ /srv/app/tests/OperatingSystemsTest.php:95
+   │ /srv/app/vendor/phpunit/phpunit/phpunit:107
+   │
+
+Time: 00:00.903, Memory: 30.00 MB
+
+Summary of non-successful tests:
+
+Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
+ ∅ Execute
+
+Hardware Profiles (App\Tests\HardwareProfiles)
+ ✘ Each supported os has corresponding instance types
+   │
+   │ Failed asserting that an array is not empty.
+   │
+   │ /srv/app/tests/HardwareProfilesTest.php:107
+   │ /srv/app/vendor/phpunit/phpunit/phpunit:107
+   │
+
+Operating Systems (App\Tests\OperatingSystems)
+ ✘ Each supported os has corresponding instance types
+   │
+   │ Failed asserting that an array is not empty.
+   │
+   │ /srv/app/tests/OperatingSystemsTest.php:95
+   │ /srv/app/vendor/phpunit/phpunit/phpunit:107
+   │
+
+FAILURES!
+Tests: 6, Assertions: 7, Failures: 2, Incomplete: 1.
+
+Remaining indirect deprecation notices (7)
+
+Other deprecation notices (4)

@@ -16,10 +16,15 @@ class TechnologiesFixtures extends Fixture
 
     public function __construct(LoggerInterface $logger)
     {
+//        parent::__construct();
+        
         $this->logger = $logger;
+        $this->logger->debug(__METHOD__);
     }
 
     public function load(ObjectManager $manager): void {
+        $this->logger->debug(__METHOD__);
+        
         $techs = array(
             "LVM" => ["Storage", "Logical Volume Manager configuration, managing and troubleshooting."],
             "Ceph" => ["Storage", "Configuring and troubleshooting Ceph storage."],
