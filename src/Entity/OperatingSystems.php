@@ -14,7 +14,7 @@ use App\Entity\TaskOses;
 #[ORM\Entity(repositoryClass: OperatingSystemsRepository::class)]
 #[ORM\UniqueConstraint(name: "operating_systems_combo", columns: ["breed_id", "release"])]
 #[ORM\Index(name: 'operating_systems_supported', columns: ['supported'])]
-#[ORM\Index(name: 'operating_systems_breed', columns: ['breed'])]
+#[ORM\Index(name: 'operating_systems_breed', columns: ['breed_id'])]
 class OperatingSystems
 {
     #[ORM\Id]
