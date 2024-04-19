@@ -12,6 +12,7 @@ use App\Entity\TaskTechs;
 
 #[ORM\Entity(repositoryClass: TechnologiesRepository::class)]
 #[ORM\UniqueConstraint(name: "technologies_name", columns: ["name"])]
+#[ORM\Index(name: "technologies_domain", columns: ["domain_id"])]
 class Technologies
 {
     #[ORM\Id]
@@ -19,7 +20,7 @@ class Technologies
     #[ORM\Column(type: 'integer')]
     private int $id;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: false)]
     private string $name;
 
     #[ORM\Column(type: 'text', nullable: true)]
@@ -61,7 +62,7 @@ class Technologies
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

@@ -1,39 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="0.572188706" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testBreedsListIsNotEmpty" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breeds list is not empty" status="0" time="0.47154382" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.002381044" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddBreedWithoutName" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add breed without name" status="0" time="0.018316133" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.179047987" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanAddAndRemoveDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can add and remove dummy breed" status="0" time="0.013523226" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.015363461" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddDuplicateBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add duplicate breed" status="0" time="0.010391811" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.014306538" size="-1" groups="default">
+  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="0.590115962" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.008122417" size="-1" groups="default">
+  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.001538124" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypes" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types" status="3" time="0.014935846" size="-1" groups="default" exceptionLine="114" exceptionMessage="Failed asserting that an array is not empty.">
+  <test className="App\Tests\DomainsTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domains list is not empty" status="0" time="0.016480623" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testSomething" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Something" status="0" time="0.004892562" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDomainWithoutName" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add domain without name" status="0" time="0.008204009" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\MessengerTest" methodName="testSomething" prettifiedClassName="Messenger (App\Tests\Messenger)" prettifiedMethodName="Something" status="0" time="0.000340775" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanAddAndRemoveDummyDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can add and remove dummy domain" status="0" time="0.013390847" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="3" time="0.013312621" size="-1" groups="default" exceptionLine="60" exceptionMessage="Failed asserting that an array is not empty.">
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDuplicateDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add duplicate domain" status="0" time="0.010343807" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="3" time="0.009427874" size="-1" groups="default" exceptionLine="72" exceptionMessage="Failed asserting that an array is not empty.">
+  <test className="App\Tests\DomainsTest" methodName="testDomainRemovalLeadsToLinkedTechnologiesDeletion" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domain removal leads to linked technologies deletion" status="0" time="0.063084406" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypes" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types" status="1" time="0" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.01674933" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.006580395" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.007126363" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.007401337" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types for all supported os" status="3" time="0.010140725" size="-1" groups="default" exceptionLine="110" exceptionMessage="Failed asserting that an array is not empty.">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddHardwareProfileWithoutNameOrType" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add hardware profile without name or type" status="0" time="0.008815696" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddAndRemoveDummyHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add and remove dummy hardware profile" status="0" time="0.014729281" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddAndRemoveDummySupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add and remove dummy supported hardware profile" status="2" time="0.005199308" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddDuplicateHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add duplicate hardware profile" status="0" time="0.009642321" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testSomething" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Something" status="0" time="0.003954877" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\MessengerTest" methodName="testSomething" prettifiedClassName="Messenger (App\Tests\Messenger)" prettifiedMethodName="Something" status="0" time="0.001090633" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="3" time="0.007436874" size="-1" groups="default" exceptionLine="66" exceptionMessage="Failed asserting that an array is not empty.">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="1" time="0" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types for all supported hardware profiles" status="1" time="0" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddOperatingSystemWithoutNameOrBreed" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add operating system without name or breed" status="0" time="0.012115866" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddAndRemoveDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add and remove dummy operating system" status="0" time="0.018618849" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddAndRemoveDummySupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add and remove dummy supported operating system" status="1" time="0" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddDuplicateOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add duplicate operating system" status="1" time="0" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.016888824" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddTechnologyWithoutNameOrDomain" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add technology without name or domain" status="0" time="0.009327819" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanAddAndRemoveDummyTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can add and remove dummy technology" status="0" time="0.012787983" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddDuplicateTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add duplicate technology" status="0" time="0.008909127" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

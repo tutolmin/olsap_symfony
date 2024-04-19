@@ -13,6 +13,8 @@ use App\Entity\TaskOses;
 
 #[ORM\Entity(repositoryClass: OperatingSystemsRepository::class)]
 #[ORM\UniqueConstraint(name: "operating_systems_combo", columns: ["breed_id", "release"])]
+#[ORM\Index(name: 'operating_systems_supported', columns: ['supported'])]
+#[ORM\Index(name: 'operating_systems_breed', columns: ['breed'])]
 class OperatingSystems
 {
     #[ORM\Id]
@@ -26,7 +28,7 @@ class OperatingSystems
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $description;
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $supported;
 
     /**
@@ -75,7 +77,7 @@ class OperatingSystems
         return $this->id;
     }
 
-    public function getRelease(): ?string
+    public function getRelease(): string
     {
         return $this->release;
     }
@@ -99,7 +101,7 @@ class OperatingSystems
         return $this;
     }
 
-    public function isSupported(): ?bool
+    public function isSupported(): bool
     {
         return $this->supported;
     }

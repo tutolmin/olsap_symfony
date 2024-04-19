@@ -1,52 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="" tests="12" assertions="11" errors="0" warnings="0" failures="3" skipped="2" time="0.834320">
-    <testsuite name="App Test Suite" tests="12" assertions="11" errors="0" warnings="0" failures="3" skipped="2" time="0.834320">
-      <testsuite name="App\Tests\Command\AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.572189">
-        <testcase name="testAwxMeIsSymfony" class="App\Tests\Command\AwxMeCommandTest" classname="App.Tests.Command.AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" line="11" assertions="2" time="0.572189"/>
+  <testsuite name="" tests="33" assertions="32" errors="0" warnings="0" failures="2" skipped="6" time="1.394448">
+    <testsuite name="App Test Suite" tests="33" assertions="32" errors="0" warnings="0" failures="2" skipped="6" time="1.394448">
+      <testsuite name="App\Tests\BreedsTest" file="/srv/app/tests/BreedsTest.php" tests="4" assertions="4" errors="0" warnings="0" failures="0" skipped="0" time="0.513775">
+        <testcase name="testBreedsListIsNotEmpty" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="39" assertions="1" time="0.471544"/>
+        <testcase name="testCanNotAddBreedWithoutName" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="44" assertions="1" time="0.018316"/>
+        <testcase name="testCanAddAndRemoveDummyBreed" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="50" assertions="0" time="0.013523"/>
+        <testcase name="testCanNotAddDuplicateBreed" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="64" assertions="2" time="0.010392"/>
       </testsuite>
-      <testsuite name="App\Tests\Command\AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" tests="1" assertions="0" errors="0" warnings="0" failures="0" skipped="1" time="0.002381">
-        <testcase name="testExecute" class="App\Tests\Command\AwxProjectListCommandTest" classname="App.Tests.Command.AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" line="11" assertions="0" time="0.002381">
+      <testsuite name="App\Tests\Command\AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="0.590116">
+        <testcase name="testAwxMeIsSymfony" class="App\Tests\Command\AwxMeCommandTest" classname="App.Tests.Command.AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" line="11" assertions="2" time="0.590116"/>
+      </testsuite>
+      <testsuite name="App\Tests\Command\AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" tests="1" assertions="0" errors="0" warnings="0" failures="0" skipped="1" time="0.001538">
+        <testcase name="testExecute" class="App\Tests\Command\AwxProjectListCommandTest" classname="App.Tests.Command.AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" line="11" assertions="0" time="0.001538">
           <skipped/>
         </testcase>
       </testsuite>
-      <testsuite name="App\Tests\HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" tests="5" assertions="5" errors="0" warnings="0" failures="1" skipped="0" time="0.231776">
-        <testcase name="testHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="46" assertions="1" time="0.179048"/>
-        <testcase name="testContainerHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="56" assertions="1" time="0.015363"/>
-        <testcase name="testVmHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="70" assertions="1" time="0.014307"/>
-        <testcase name="testSupportedHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="84" assertions="1" time="0.008122"/>
-        <testcase name="testEachSupportedHardwareProfileHasCorrespondingInstanceTypes" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="100" assertions="1" time="0.014936">
-          <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypes
+      <testsuite name="App\Tests\DomainsTest" file="/srv/app/tests/DomainsTest.php" tests="5" assertions="7" errors="0" warnings="0" failures="0" skipped="0" time="0.111504">
+        <testcase name="testDomainsListIsNotEmpty" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="48" assertions="1" time="0.016481"/>
+        <testcase name="testCanNotAddDomainWithoutName" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="53" assertions="1" time="0.008204"/>
+        <testcase name="testCanAddAndRemoveDummyDomain" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="59" assertions="0" time="0.013391"/>
+        <testcase name="testCanNotAddDuplicateDomain" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="73" assertions="2" time="0.010344"/>
+        <testcase name="testDomainRemovalLeadsToLinkedTechnologiesDeletion" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="89" assertions="3" time="0.063084"/>
+      </testsuite>
+      <testsuite name="App\Tests\HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" tests="9" assertions="9" errors="0" warnings="0" failures="1" skipped="1" time="0.086385">
+        <testcase name="testHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="57" assertions="1" time="0.016749"/>
+        <testcase name="testContainerHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="66" assertions="1" time="0.006580"/>
+        <testcase name="testVmHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="79" assertions="1" time="0.007126"/>
+        <testcase name="testSupportedHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="92" assertions="1" time="0.007401"/>
+        <testcase name="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="106" assertions="1" time="0.010141">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs
 Failed asserting that an array is not empty.
 
-/srv/app/tests/HardwareProfilesTest.php:114
+/srv/app/tests/HardwareProfilesTest.php:110
 /srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
         </testcase>
+        <testcase name="testCanNotAddHardwareProfileWithoutNameOrType" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="126" assertions="1" time="0.008816"/>
+        <testcase name="testCanAddAndRemoveDummyHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="135" assertions="1" time="0.014729"/>
+        <testcase name="testCanAddAndRemoveDummySupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="152" assertions="0" time="0.005199">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanNotAddDuplicateHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="163" assertions="2" time="0.009642"/>
       </testsuite>
-      <testsuite name="App\Tests\InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.004893">
-        <testcase name="testSomething" class="App\Tests\InstanceTypesTest" classname="App.Tests.InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" line="9" assertions="1" time="0.004893"/>
+      <testsuite name="App\Tests\InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003955">
+        <testcase name="testSomething" class="App\Tests\InstanceTypesTest" classname="App.Tests.InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" line="9" assertions="1" time="0.003955"/>
       </testsuite>
-      <testsuite name="App\Tests\MessengerTest" file="/srv/app/tests/MessengerTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.000341">
-        <testcase name="testSomething" class="App\Tests\MessengerTest" classname="App.Tests.MessengerTest" file="/srv/app/tests/MessengerTest.php" line="46" assertions="1" time="0.000341"/>
+      <testsuite name="App\Tests\MessengerTest" file="/srv/app/tests/MessengerTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.001091">
+        <testcase name="testSomething" class="App\Tests\MessengerTest" classname="App.Tests.MessengerTest" file="/srv/app/tests/MessengerTest.php" line="46" assertions="1" time="0.001091"/>
       </testsuite>
-      <testsuite name="App\Tests\OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" tests="3" assertions="2" errors="0" warnings="0" failures="2" skipped="1" time="0.022740">
-        <testcase name="testOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="57" assertions="1" time="0.013313">
+      <testsuite name="App\Tests\OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" tests="7" assertions="3" errors="0" warnings="0" failures="1" skipped="4" time="0.038172">
+        <testcase name="testOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="63" assertions="1" time="0.007437">
           <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty
 Failed asserting that an array is not empty.
 
-/srv/app/tests/OperatingSystemsTest.php:60
+/srv/app/tests/OperatingSystemsTest.php:66
 /srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
         </testcase>
-        <testcase name="testSupportedOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="67" assertions="1" time="0.009428">
-          <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty
-Failed asserting that an array is not empty.
-
-/srv/app/tests/OperatingSystemsTest.php:72
-/srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
-        </testcase>
-        <testcase name="testEachSupportedOsHasCorrespondingInstanceTypes" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="83" assertions="0" time="0.000000">
+        <testcase name="testSupportedOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="73" assertions="0" time="0.000000">
           <skipped/>
         </testcase>
+        <testcase name="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="89" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanNotAddOperatingSystemWithoutNameOrBreed" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="109" assertions="1" time="0.012116"/>
+        <testcase name="testCanAddAndRemoveDummyOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="118" assertions="1" time="0.018619"/>
+        <testcase name="testCanAddAndRemoveDummySupportedOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="135" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanNotAddDuplicateOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="146" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Tests\TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" tests="4" assertions="5" errors="0" warnings="0" failures="0" skipped="0" time="0.047914">
+        <testcase name="testTechnologiesListIsNotEmpty" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="48" assertions="1" time="0.016889"/>
+        <testcase name="testCanNotAddTechnologyWithoutNameOrDomain" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="53" assertions="1" time="0.009328"/>
+        <testcase name="testCanAddAndRemoveDummyTechnology" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="59" assertions="1" time="0.012788"/>
+        <testcase name="testCanNotAddDuplicateTechnology" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="75" assertions="2" time="0.008909"/>
       </testsuite>
     </testsuite>
   </testsuite>

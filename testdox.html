@@ -51,6 +51,13 @@
         </style>
     </head>
     <body>
+        <h2>Breeds (App\Tests\Breeds)</h2>
+        <ul>
+            <li class="success">Breeds list is not empty</li>
+            <li class="success">Can not add breed without name</li>
+            <li class="success">Can add and remove dummy breed</li>
+            <li class="success">Can not add duplicate breed</li>
+        </ul>
         <h2>Awx Me Command (App\Tests\Command\AwxMeCommand)</h2>
         <ul>
             <li class="success">Awx me is symfony</li>
@@ -59,13 +66,25 @@
         <ul>
             <li class="defect">Execute</li>
         </ul>
+        <h2>Domains (App\Tests\Domains)</h2>
+        <ul>
+            <li class="success">Domains list is not empty</li>
+            <li class="success">Can not add domain without name</li>
+            <li class="success">Can add and remove dummy domain</li>
+            <li class="success">Can not add duplicate domain</li>
+            <li class="success">Domain removal leads to linked technologies deletion</li>
+        </ul>
         <h2>Hardware Profiles (App\Tests\HardwareProfiles)</h2>
         <ul>
             <li class="success">Hardware profiles list is not empty</li>
             <li class="success">Container hardware profiles list is not empty</li>
             <li class="success">Vm hardware profiles list is not empty</li>
             <li class="success">Supported hardware profiles list is not empty</li>
-            <li class="defect">Each supported hardware profile has corresponding instance types</li>
+            <li class="defect">Each supported hardware profile has corresponding instance types for all supported os</li>
+            <li class="success">Can not add hardware profile without name or type</li>
+            <li class="success">Can add and remove dummy hardware profile</li>
+            <li class="defect">Can add and remove dummy supported hardware profile</li>
+            <li class="success">Can not add duplicate hardware profile</li>
         </ul>
         <h2>Instance Types (App\Tests\InstanceTypes)</h2>
         <ul>
@@ -79,7 +98,18 @@
         <ul>
             <li class="defect">Operating systems list is not empty</li>
             <li class="defect">Supported operating systems list is not empty</li>
-            <li class="defect">Each supported os has corresponding instance types</li>
+            <li class="defect">Each supported os has corresponding instance types for all supported hardware profiles</li>
+            <li class="success">Can not add operating system without name or breed</li>
+            <li class="success">Can add and remove dummy operating system</li>
+            <li class="defect">Can add and remove dummy supported operating system</li>
+            <li class="defect">Can not add duplicate operating system</li>
+        </ul>
+        <h2>Technologies (App\Tests\Technologies)</h2>
+        <ul>
+            <li class="success">Technologies list is not empty</li>
+            <li class="success">Can not add technology without name or domain</li>
+            <li class="success">Can add and remove dummy technology</li>
+            <li class="success">Can not add duplicate technology</li>
         </ul>
     </body>
 </html>

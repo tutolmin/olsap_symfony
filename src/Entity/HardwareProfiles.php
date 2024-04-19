@@ -10,6 +10,9 @@ use App\Entity\InstanceTypes;
 
 #[ORM\Entity(repositoryClass: HardwareProfilesRepository::class)]
 #[ORM\UniqueConstraint(name: "hardware_profiles_name", columns: ["name"])]
+#[ORM\Index(name: 'hardware_profiles_supported', columns: ['supported'])]
+#[ORM\Index(name: 'hardware_profiles_cost', columns: ['cost'])]
+#[ORM\Index(name: 'hardware_profiles_type', columns: ['type'])]
 class HardwareProfiles
 {
     #[ORM\Id]
@@ -30,13 +33,13 @@ class HardwareProfiles
     #[ORM\OneToMany(mappedBy: 'hw_profile', targetEntity: InstanceTypes::class, orphanRemoval: true)]
     private $instanceTypes;
 
-    #[ORM\Column(type: 'integer')]
-    private int $cost;
+    #[ORM\Column(type: 'integer', options: ['default' => 100])]
+    private int $cost = 100;
 
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
-    #[ORM\Column(options: ['default' => false])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
     private bool $supported = false;
 
     public function __construct()
@@ -49,12 +52,12 @@ class HardwareProfiles
         return $this->getDescription() ? $this->getDescription() : '';
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function isType(): ?bool
+    public function isType(): bool
     {
         return $this->type;
     }
@@ -120,7 +123,7 @@ class HardwareProfiles
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -132,7 +135,7 @@ class HardwareProfiles
         return $this;
     }
 
-    public function isSupported(): ?bool
+    public function isSupported(): bool
     {
         return $this->supported;
     }
