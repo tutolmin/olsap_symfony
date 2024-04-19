@@ -52,17 +52,17 @@ class DomainsTest extends KernelTestCase
 
     public function testCanNotAddDomainWithoutName(): void {
         
-        $this->expectException(NotNullConstraintViolationException::class);
-        $this->domainsRepository->add(new Domains(), true);
+#        $this->expectException(NotNullConstraintViolationException::class);
+        $this->assertFalse($this->domainsRepository->add(new Domains(), true));
     }
     
     public function testCanAddAndRemoveDummyDomain(): void {
         
-        $this->expectNotToPerformAssertions();
+#        $this->expectNotToPerformAssertions();
 
         $domain = new Domains();
         $domain->setName($this->dummy['name']);
-        $this->domainsRepository->add($domain, true);
+        $this->assertTrue($this->domainsRepository->add($domain, true));
         $this->domainsRepository->remove($domain, true);
     }
 
@@ -72,14 +72,15 @@ class DomainsTest extends KernelTestCase
      */
     public function testCanNotAddDuplicateDomain(): void {
         
-        $this->expectException(UniqueConstraintViolationException::class);
+#        $this->expectException(UniqueConstraintViolationException::class);
      
         $domain = $this->domainsRepository->findOneBy(array());
         $this->assertNotNull($domain);
       
         $new_domain = new Domains();
         $new_domain->setName($domain->getName());
-        $this->domainsRepository->add($new_domain, true);
+#        $this->domainsRepository->add($new_domain, true);
+        $this->assertFalse($this->domainsRepository->add($new_domain, true));
     }
     
     /**
@@ -96,7 +97,7 @@ class DomainsTest extends KernelTestCase
         $technology = new Technologies();
         $technology->setName($this->dummy['name']);
         $technology->setDomain($domain);
-        $this->technologiesRepository->add($technology, true);
+        $this->assertTrue($this->technologiesRepository->add($technology, true));
         
         $this->assertNotEmpty($technology = $this->technologiesRepository->findOneByDomain($domain));
         
