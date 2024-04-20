@@ -11,14 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\OperatingSystemsManager;
 
 #[Route('/operating/systems')]
 class OperatingSystemsController extends AbstractController
 {
-    private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+	private LoggerInterface $logger;
+	private OperatingSystemsManager $osManager;
+	public function __construct(LoggerInterface $logger,
+	OperatingSystemsManager $osManager)
     {
         $this->logger = $logger;
+        $this->osManager = $osManager;
         $this->logger->debug(__METHOD__);
     }
 
@@ -42,7 +46,11 @@ class OperatingSystemsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $operatingSystemsRepository->add($operatingSystem, true);
+
+		$this->osManager->addOs($operatingSystem);
+
+   //         $operatingSystemsRepository->add($operatingSystem, true);
+
 
             return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -73,7 +81,8 @@ class OperatingSystemsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $operatingSystemsRepository->add($operatingSystem, true);
+//            $operatingSystemsRepository->add($operatingSystem, true);
+		$this->osManager->editOs($operatingSystem);
 
             return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
         }

@@ -7,6 +7,10 @@ use Psr\Log\LoggerInterface;
 use App\Entity\OperatingSystems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+use App\Repository\InstanceTypesRepository;
+use App\Repository\HardwareProfilesRepository;
 
 /**
  * @extends ServiceEntityRepository<OperatingSystems>
@@ -27,15 +31,33 @@ class OperatingSystemsRepository extends ServiceEntityRepository
         parent::__construct($registry, OperatingSystems::class);
     }
 
-    public function add(OperatingSystems $entity, bool $flush = false): void
+    public function add(OperatingSystems $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+          try{
+                  $this->getEntityManager()->flush();
+          }
+          catch (UniqueConstraintViolationException $e) {
+        $this->logger->error("Attempted to insert duplicate item.");
+        return false;
+          }
+          catch (NotNullConstraintViolationException $e) {
+        $this->logger->error("Mandatory parameter has NOT been set.");
+        return false;
+          }
         }
+
+	// Record additioin or modification was successful
+	// Make sure corresponding instance type exists
+	// If we are working with supported item
+	
+
+        return true;
+
     }
 
     public function remove(OperatingSystems $entity, bool $flush = false): void
