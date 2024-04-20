@@ -12,8 +12,8 @@ use App\Entity\OperatingSystems;
 use App\Entity\InstanceTypes;
 use App\Entity\Breeds;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+#use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+#use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class OperatingSystemsTest extends KernelTestCase
 {    
@@ -108,8 +108,8 @@ class OperatingSystemsTest extends KernelTestCase
     
     public function testCanNotAddOperatingSystemWithoutNameOrBreed(): void {
         
-        $this->expectException(NotNullConstraintViolationException::class);
-        $this->osRepository->add(new OperatingSystems(), true);
+        #$this->expectException(NotNullConstraintViolationException::class);
+        $this->assertFalse($this->osRepository->add(new OperatingSystems(), true));
     }
     
     /**
@@ -124,7 +124,7 @@ class OperatingSystemsTest extends KernelTestCase
         $os->setSupported(false);
         $os->setBreed($breed);
         $os->setRelease($this->dummy['name']);
-        $this->osRepository->add($os, true);
+        $this->assertTrue($this->osRepository->add($os, true));
         $this->osRepository->remove($os, true);
     }
 
@@ -145,7 +145,7 @@ class OperatingSystemsTest extends KernelTestCase
      */
     public function testCanNotAddDuplicateOperatingSystem(): void {
         
-        $this->expectException(UniqueConstraintViolationException::class);
+#        $this->expectException(UniqueConstraintViolationException::class);
         
         $os = $this->osRepository->findOneBy(array());
         $this->assertNotNull($os);
@@ -154,6 +154,6 @@ class OperatingSystemsTest extends KernelTestCase
         $new_os->setSupported($os->isSupported());
         $new_os->setBreed($os->getBreed());
         $new_os->setRelease($os->getRelease());
-        $this->osRepository->add($new_os, true);
+        $this->assertFalse($this->osRepository->add($new_os, true));
     }    
 }

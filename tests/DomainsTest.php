@@ -8,8 +8,8 @@ use App\Entity\Domains;
 use App\Entity\Technologies;
 use App\Repository\DomainsRepository;
 use App\Repository\TechnologiesRepository;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+#use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+#use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class DomainsTest extends KernelTestCase
 {

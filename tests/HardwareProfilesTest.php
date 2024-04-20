@@ -10,8 +10,8 @@ use App\Entity\HardwareProfiles;
 use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+#use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+#use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class HardwareProfilesTest extends KernelTestCase
 {    
@@ -125,8 +125,8 @@ class HardwareProfilesTest extends KernelTestCase
     
     public function testCanNotAddHardwareProfileWithoutNameOrType(): void {
         
-        $this->expectException(NotNullConstraintViolationException::class);
-        $this->hpRepository->add(new HardwareProfiles(), true);
+        #$this->expectException(NotNullConstraintViolationException::class);
+        $this->assertFalse($this->hpRepository->add(new HardwareProfiles(), true));
     }
     
     /**
@@ -141,7 +141,7 @@ class HardwareProfilesTest extends KernelTestCase
         $hp->setName($this->dummy['name']);
         $hp->setSupported(false);
         $hp->setType(false);
-        $this->hpRepository->add($hp, true);
+        $this->assertTrue($this->hpRepository->add($hp, true));
         $this->hpRepository->remove($hp, true);
     }
 
@@ -162,7 +162,7 @@ class HardwareProfilesTest extends KernelTestCase
      */
     public function testCanNotAddDuplicateHardwareProfile(): void {
         
-        $this->expectException(UniqueConstraintViolationException::class);
+#        $this->expectException(UniqueConstraintViolationException::class);
         
         $hp = $this->hpRepository->findOneBy(array());
         $this->assertNotNull($hp);
@@ -171,6 +171,6 @@ class HardwareProfilesTest extends KernelTestCase
         $new_hp->setName($hp->getName());
         $new_hp->setSupported($hp->isSupported());
         $new_hp->setType($hp->isType());
-        $this->hpRepository->add($new_hp, true);
+        $this->assertFalse($this->hpRepository->add($new_hp, true));
     }
 }
