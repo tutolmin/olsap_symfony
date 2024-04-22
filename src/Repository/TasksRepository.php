@@ -10,6 +10,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Environments;
 use App\Repository\EnvironmentsRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 /**
  * @extends ServiceEntityRepository<Tasks>
@@ -42,15 +44,24 @@ class TasksRepository extends ServiceEntityRepository
         $this->environmentRepository = $entityManager->getRepository( Environments::class);
     }
 
-    public function add(Tasks $entity, bool $flush = false): void
+    public function add(Tasks $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            try {
+                $this->getEntityManager()->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
+            }
         }
+        return true;
     }
 
     public function remove(Tasks $entity, bool $flush = false): void

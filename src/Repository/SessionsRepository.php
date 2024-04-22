@@ -7,6 +7,8 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Sessions;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 /**
  * @extends ServiceEntityRepository<Sessions>
@@ -28,15 +30,24 @@ class SessionsRepository extends ServiceEntityRepository
         parent::__construct($registry, Sessions::class);
     }
 
-    public function add(Sessions $entity, bool $flush = false): void
+    public function add(Sessions $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            try {
+                $this->getEntityManager()->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
+            }
         }
+        return true;
     }
 
     public function remove(Sessions $entity, bool $flush = false): void

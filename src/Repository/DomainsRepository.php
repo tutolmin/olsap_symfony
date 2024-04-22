@@ -34,20 +34,18 @@ class DomainsRepository extends ServiceEntityRepository
 
         $this->getEntityManager()->persist($entity);
 
-	if ($flush) {
-	  try{	
-		  $this->getEntityManager()->flush();	
-	  }
-	  catch (UniqueConstraintViolationException $e) {
-        $this->logger->error("Attempted to insert duplicate item.");
-	return false;
-	  }
-	  catch (NotNullConstraintViolationException $e) {
-        $this->logger->error("Mandatory parameter has NOT been set.");
-	return false;
-	  }
-	}
-	return true;
+        if ($flush) {
+            try {
+                $this->getEntityManager()->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
+            }
+        }
+        return true;
     }
 
     public function remove(Domains $entity, bool $flush = false): void

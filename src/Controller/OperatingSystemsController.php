@@ -14,13 +14,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\OperatingSystemsManager;
 
 #[Route('/operating/systems')]
-class OperatingSystemsController extends AbstractController
-{
-	private LoggerInterface $logger;
-	private OperatingSystemsManager $osManager;
-	public function __construct(LoggerInterface $logger,
-	OperatingSystemsManager $osManager)
-    {
+class OperatingSystemsController extends AbstractController {
+
+    private LoggerInterface $logger;
+    private OperatingSystemsManager $osManager;
+
+    public function __construct(LoggerInterface $logger,
+            OperatingSystemsManager $osManager) {
         $this->logger = $logger;
         $this->osManager = $osManager;
         $this->logger->debug(__METHOD__);
@@ -37,8 +37,7 @@ class OperatingSystemsController extends AbstractController
     }
 
     #[Route('/new', name: 'app_operating_systems_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, OperatingSystemsRepository $operatingSystemsRepository): Response
-    {
+    public function new(Request $request): Response {
         $this->logger->debug(__METHOD__);
 
         $operatingSystem = new OperatingSystems();
@@ -46,12 +45,7 @@ class OperatingSystemsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-		$this->osManager->addOs($operatingSystem);
-
-   //         $operatingSystemsRepository->add($operatingSystem, true);
-
-
+            $this->osManager->addOperatingSystem($operatingSystem);
             return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -73,7 +67,7 @@ class OperatingSystemsController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_operating_systems_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, OperatingSystems $operatingSystem, OperatingSystemsRepository $operatingSystemsRepository): Response
+    public function edit(Request $request, OperatingSystems $operatingSystem): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -81,9 +75,7 @@ class OperatingSystemsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $operatingSystemsRepository->add($operatingSystem, true);
-		$this->osManager->editOs($operatingSystem);
-
+            $this->osManager->editOperatingSystem($operatingSystem);
             return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -94,11 +86,13 @@ class OperatingSystemsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_operating_systems_delete', methods: ['POST'])]
-    public function delete(Request $request, OperatingSystems $operatingSystem, OperatingSystemsRepository $operatingSystemsRepository): Response
+    public function delete(Request $request, OperatingSystems $operatingSystem, 
+            OperatingSystemsRepository $operatingSystemsRepository): Response
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$operatingSystem->getId(), strval($request->request->get('_token')))) {
+        if ($this->isCsrfTokenValid('delete'.$operatingSystem->getId(), 
+                strval($request->request->get('_token')))) {
             $operatingSystemsRepository->remove($operatingSystem, true);
         }
 

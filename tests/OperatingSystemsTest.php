@@ -12,8 +12,7 @@ use App\Entity\OperatingSystems;
 use App\Entity\InstanceTypes;
 use App\Entity\Breeds;
 use Doctrine\ORM\EntityManagerInterface;
-#use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-#use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+use App\Service\OperatingSystemsManager;
 
 class OperatingSystemsTest extends KernelTestCase
 {    
@@ -49,6 +48,12 @@ class OperatingSystemsTest extends KernelTestCase
      * @var BreedsRepository
      */
     private $breedsRepository;
+
+    /**
+     * 
+     * @var OperatingSystemsManager
+     */
+    private $osManager;
     
     protected function setUp(): void {
         self::bootKernel();
@@ -58,10 +63,10 @@ class OperatingSystemsTest extends KernelTestCase
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->breedsRepository = $this->entityManager->getRepository(Breeds::class);
+        $this->osManager = static::getContainer()->get('App\Service\OperatingSystemsManager');        
     }
 
     public function testOperatingSystemsListIsNotEmpty(): void {
-//        $this->logger->debug(__METHOD__);
 
         $this->assertNotEmpty($this->osRepository->findAll());
     }
@@ -71,7 +76,6 @@ class OperatingSystemsTest extends KernelTestCase
      * @return array<OperatingSystems>
      */
     public function testSupportedOperatingSystemsListIsNotEmpty() {
-//        $this->logger->debug(__METHOD__);
 
         $oses = $this->osRepository->findBySupported(true);
 
@@ -82,40 +86,62 @@ class OperatingSystemsTest extends KernelTestCase
     
     /**
      * 
+     * @return array<HardwareProfiles>
+     */
+    private function getSupportedHardwareProfiles(): array {
+        // Get the supported HP list
+	$hw_profiles = $this->hpRepository->findBySupported(true);
+        $this->assertNotEmpty($hw_profiles); 
+        return $hw_profiles;       
+    }
+    
+    /**
+     * 
      * @param array<OperatingSystems> $oses
      * @depends testSupportedOperatingSystemsListIsNotEmpty
      * @return void
      */
     public function testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles( array $oses): void {
 
-        // Get the supported HP list
-	$hw_profiles = $this->hpRepository->findBySupported(1);
-        $this->assertNotEmpty($hw_profiles);
+	$hw_profiles = $this->getSupportedHardwareProfiles();
 
         // Iterate through all the OSes
         foreach ($oses as &$os) {
 
             foreach ($hw_profiles as &$hp) {
 
-            // Try to find existing Instance type
-            $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
-
-            $this->assertNotEmpty($it);
-
+                // Try to find existing Instance type
+                $this->assertNotEmpty($this->itRepository->findBy(
+                                ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
             }
         }
     }
     
-    public function testCanNotAddOperatingSystemWithoutNameOrBreed(): void {
+    public function testCanNotAddOperatingSystemWithoutReleaseOrBreed(): void {
         
-        #$this->expectException(NotNullConstraintViolationException::class);
-        $this->assertFalse($this->osRepository->add(new OperatingSystems(), true));
+        $this->assertFalse($this->osManager->addOperatingSystem(new OperatingSystems()));
     }
+
+    /**
+     * @depends testOperatingSystemsListIsNotEmpty
+     * @return void
+     */
+    public function testCanNotAddDuplicateOperatingSystem(): void {
+                
+        $os = $this->osRepository->findOneBy(array());
+        $this->assertNotNull($os);
+      
+        $new_os = new OperatingSystems();
+        $new_os->setSupported($os->isSupported());
+        $new_os->setBreed($os->getBreed());
+        $new_os->setRelease($os->getRelease());
+        $this->assertFalse($this->osManager->addOperatingSystem($new_os));
+    }    
     
     /**
      * @return void
      */    
-    public function testCanAddAndRemoveDummyOperatingSystem(): void {
+    public function testCanAddDummyOperatingSystem(): void {
 
         $breed = $this->breedsRepository->findOneBy(array());
         $this->assertNotNull($breed);
@@ -124,36 +150,117 @@ class OperatingSystemsTest extends KernelTestCase
         $os->setSupported(false);
         $os->setBreed($breed);
         $os->setRelease($this->dummy['name']);
-        $this->assertTrue($this->osRepository->add($os, true));
-        $this->osRepository->remove($os, true);
+        $this->assertTrue($this->osManager->addOperatingSystem($os));
     }
 
     /**
      * @depends testSupportedOperatingSystemsListIsNotEmpty
      * @return void
      */
-    public function testCanAddAndRemoveDummySupportedOperatingSystem(): void {
-        // Stop here and mark this test as incomplete.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.',
-        );
+    public function testCanAddDummySupportedOperatingSystem(): void {
+        
+        $breed = $this->breedsRepository->findOneBy(array());
+        $this->assertNotNull($breed);
+        
+        // Adding dummy os
+        $os = new OperatingSystems();
+        $os->setRelease($this->dummy['name']);
+        $os->setSupported(true);
+        $os->setBreed($breed);
+        $this->assertTrue($this->osManager->addOperatingSystem($os));
+
+        $hw_profiles = $this->getSupportedHardwareProfiles();
+
+        // Iterate through all the HPs
+        foreach ($hw_profiles as &$hp) {
+
+            // Try to find existing Instance type
+            $this->assertNotEmpty($this->itRepository->findBy(
+                            ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
+        }
     }
     
     /**
      * @depends testOperatingSystemsListIsNotEmpty
      * @return void
-     */
-    public function testCanNotAddDuplicateOperatingSystem(): void {
-        
-#        $this->expectException(UniqueConstraintViolationException::class);
-        
-        $os = $this->osRepository->findOneBy(array());
+     */    
+    public function testCanRemoveUnsupportedOperatingSystem(): void {
+
+        $os = $this->osRepository->findOneBySupported(false);
         $this->assertNotNull($os);
-      
-        $new_os = new OperatingSystems();
-        $new_os->setSupported($os->isSupported());
-        $new_os->setBreed($os->getBreed());
-        $new_os->setRelease($os->getRelease());
-        $this->assertFalse($this->osRepository->add($new_os, true));
+
+        $this->assertTrue($this->osManager->removeOperatingSystem($os));
+    }
+        
+    /**
+     * @depends testSupportedOperatingSystemsListIsNotEmpty
+     * @return void
+     */    
+    public function testCanRemoveSupportedOperatingSystem(): void {
+
+        $os = $this->osRepository->findOneBySupported(true);
+        $this->assertNotNull($os);
+        
+        $os_id = $os->getId();
+
+        $this->assertTrue($this->osManager->removeOperatingSystem($os));
+
+	$hw_profiles = $this->getSupportedHardwareProfiles();
+        
+        // Iterate through all the HPs
+        foreach ($hw_profiles as &$hp) {
+
+            // Try to find existing Instance type
+            $this->assertEmpty($this->itRepository->findBy(
+                            ['os' => $os_id, 'hw_profile' => $hp->getId()]));
+        }
+    }
+    
+    /**
+     * @depends testOperatingSystemsListIsNotEmpty
+     * @return void
+     */    
+    public function testCanMakeOperatingSystemSupported(): void {
+
+        $os = $this->osRepository->findOneBySupported(false);
+        $this->assertNotNull($os);
+        
+        $os->setSupported(true);
+        
+        $this->osManager->editOperatingSystem($os);
+
+	$hw_profiles = $this->getSupportedHardwareProfiles();
+        
+        // Iterate through all the HPs
+        foreach ($hw_profiles as &$hp) {
+
+            // Try to find existing Instance type
+            $this->assertNotEmpty($this->itRepository->findBy(
+                            ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
+        }
+    }
+    
+    /**
+     * @depends testSupportedOperatingSystemsListIsNotEmpty
+     * @return void
+     */    
+    public function testCanMakeOperatingSystemUnsupported(): void {
+
+        $os = $this->osRepository->findOneBySupported(true);
+        $this->assertNotNull($os);
+        
+        $os->setSupported(false);
+        
+        $this->osManager->editOperatingSystem($os);
+
+	$hw_profiles = $this->getSupportedHardwareProfiles();
+        
+        // Iterate through all the HPs
+        foreach ($hw_profiles as &$hp) {
+
+            // Try to find existing Instance type
+            $this->assertEmpty($this->itRepository->findBy(
+                            ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
+        }
     }    
 }

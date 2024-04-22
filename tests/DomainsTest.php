@@ -8,8 +8,6 @@ use App\Entity\Domains;
 use App\Entity\Technologies;
 use App\Repository\DomainsRepository;
 use App\Repository\TechnologiesRepository;
-#use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-#use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class DomainsTest extends KernelTestCase
 {
@@ -52,13 +50,10 @@ class DomainsTest extends KernelTestCase
 
     public function testCanNotAddDomainWithoutName(): void {
         
-#        $this->expectException(NotNullConstraintViolationException::class);
         $this->assertFalse($this->domainsRepository->add(new Domains(), true));
     }
     
     public function testCanAddAndRemoveDummyDomain(): void {
-        
-#        $this->expectNotToPerformAssertions();
 
         $domain = new Domains();
         $domain->setName($this->dummy['name']);
@@ -72,14 +67,11 @@ class DomainsTest extends KernelTestCase
      */
     public function testCanNotAddDuplicateDomain(): void {
         
-#        $this->expectException(UniqueConstraintViolationException::class);
-     
         $domain = $this->domainsRepository->findOneBy(array());
         $this->assertNotNull($domain);
       
         $new_domain = new Domains();
         $new_domain->setName($domain->getName());
-#        $this->domainsRepository->add($new_domain, true);
         $this->assertFalse($this->domainsRepository->add($new_domain, true));
     }
     
@@ -99,12 +91,12 @@ class DomainsTest extends KernelTestCase
         $technology->setDomain($domain);
         $this->assertTrue($this->technologiesRepository->add($technology, true));
         
-        $this->assertNotEmpty($technology = $this->technologiesRepository->findOneByDomain($domain));
+        $this->assertNotEmpty($this->technologiesRepository->findOneByDomain($domain));
         
         // Remove domain
         $this->domainsRepository->remove($domain, true);
         
         // Make sure no technologies for this domain present
-        $this->assertEmpty($technology = $this->technologiesRepository->findOneByDomain($domain));
+        $this->assertEmpty($this->technologiesRepository->findOneByDomain($domain));
     }
 }

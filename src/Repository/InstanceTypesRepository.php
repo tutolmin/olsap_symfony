@@ -7,6 +7,8 @@ use Psr\Log\LoggerInterface;
 use App\Entity\InstanceTypes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 /**
  * @extends ServiceEntityRepository<InstanceTypes>
@@ -27,8 +29,7 @@ class InstanceTypesRepository extends ServiceEntityRepository
         parent::__construct($registry, InstanceTypes::class);
     }
 
-    public function add(InstanceTypes $entity, bool $flush = false): void
-    {
+    public function add(InstanceTypes $entity, bool $flush = false): bool {
         $this->logger->debug(__METHOD__);
 
         $this->getEntityManager()->persist($entity);
@@ -36,10 +37,15 @@ class InstanceTypesRepository extends ServiceEntityRepository
         if ($flush) {
             try {
                 $this->getEntityManager()->flush();
-            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex) {
-//                echo "Exception Found - " . $ex->getMessage() . "<br/>";
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
             }
         }
+        return true;
     }
 
     public function remove(InstanceTypes $entity, bool $flush = false): void

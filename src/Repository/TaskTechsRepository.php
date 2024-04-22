@@ -7,6 +7,8 @@ use Psr\Log\LoggerInterface;
 use App\Entity\TaskTechs;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 /**
  * @extends ServiceEntityRepository<TaskTechs>
@@ -27,7 +29,7 @@ class TaskTechsRepository extends ServiceEntityRepository
         parent::__construct($registry, TaskTechs::class);
     }
 
-    public function add(TaskTechs $entity, bool $flush = false): void
+    public function add(TaskTechs $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -36,10 +38,15 @@ class TaskTechsRepository extends ServiceEntityRepository
         if ($flush) {
             try {
                 $this->getEntityManager()->flush();
-            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex) {
-//                echo "Exception Found - " . $ex->getMessage() . "<br/>";
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
             }
         }
+        return true;
     }
 
     public function remove(TaskTechs $entity, bool $flush = false): void

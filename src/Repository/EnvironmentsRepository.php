@@ -10,6 +10,8 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EnvironmentStatusesRepository;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 // Can NOT import service into repository
 // Fatal error: Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in Unknown on line 0
@@ -47,7 +49,7 @@ class EnvironmentsRepository extends ServiceEntityRepository
         $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
     }
 
-    public function add(Environments $entity, bool $flush = false): void
+    public function add(Environments $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -58,8 +60,17 @@ class EnvironmentsRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-            $this->getEntityManager()->flush();
+            try {
+                $this->getEntityManager()->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
+            }
         }
+        return true;
     }
 
     public function remove(Environments $entity, bool $flush = false): void

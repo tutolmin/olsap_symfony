@@ -7,6 +7,8 @@ use Psr\Log\LoggerInterface;
 use App\Entity\TaskInstanceTypes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 /**
  * @extends ServiceEntityRepository<TaskInstanceTypes>
@@ -28,7 +30,7 @@ class TaskInstanceTypesRepository extends ServiceEntityRepository
         parent::__construct($registry, TaskInstanceTypes::class);
     }
 
-    public function add(TaskInstanceTypes $entity, bool $flush = false): void
+    public function add(TaskInstanceTypes $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -37,10 +39,15 @@ class TaskInstanceTypesRepository extends ServiceEntityRepository
         if ($flush) {
             try {
                 $this->getEntityManager()->flush();
-            } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $ex) {
-//                echo "Exception Found - " . $ex->getMessage() . "<br/>";
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
             }
         }
+        return true;
     }
 
     public function remove(TaskInstanceTypes $entity, bool $flush = false): void

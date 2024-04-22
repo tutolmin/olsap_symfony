@@ -8,8 +8,6 @@ use App\Entity\Technologies;
 use App\Entity\Domains;
 use App\Repository\TechnologiesRepository;
 use App\Repository\DomainsRepository;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
-use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
 class TechnologiesTest extends KernelTestCase
 {
@@ -52,8 +50,7 @@ class TechnologiesTest extends KernelTestCase
 
     public function testCanNotAddTechnologyWithoutNameOrDomain(): void {
         
-        $this->expectException(NotNullConstraintViolationException::class);
-        $this->technologiesRepository->add(new Technologies(), true);
+        $this->assertFalse($this->technologiesRepository->add(new Technologies(), true));
     }
     
     public function testCanAddAndRemoveDummyTechnology(): void {
@@ -64,7 +61,7 @@ class TechnologiesTest extends KernelTestCase
         $technology = new Technologies();
         $technology->setName($this->dummy['name']);
         $technology->setDomain($domain);
-        $this->technologiesRepository->add($technology, true);
+        $this->assertTrue($this->technologiesRepository->add($technology, true));
         $this->technologiesRepository->remove($technology, true);
     }
 
@@ -73,15 +70,13 @@ class TechnologiesTest extends KernelTestCase
      * @return void
      */
     public function testCanNotAddDuplicateTechnology(): void {
-        
-        $this->expectException(UniqueConstraintViolationException::class);
-        
+                
         $technology = $this->technologiesRepository->findOneBy(array());
         $this->assertNotNull($technology);
       
         $new_tech = new Technologies();
         $new_tech->setName($technology->getName());
         $new_tech->setDomain($technology->getDomain());
-        $this->technologiesRepository->add($new_tech, true);
+        $this->assertFalse($this->technologiesRepository->add($new_tech, true));
     }
 }

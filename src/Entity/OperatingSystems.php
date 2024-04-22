@@ -29,7 +29,7 @@ class OperatingSystems
     private ?string $description;
 
     #[ORM\Column(type: 'boolean', options: ['default' => false])]
-    private bool $supported;
+    private bool $supported = false;
 
     /**
      * 

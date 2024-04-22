@@ -11,14 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\HardwareProfilesManager;
 
 #[Route('/hardware/profiles')]
-class HardwareProfilesController extends AbstractController
-{
+class HardwareProfilesController extends AbstractController {
+
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
-    {
+    private HardwareProfilesManager $hpManager;
+
+    public function __construct(LoggerInterface $logger,
+            HardwareProfilesManager $hpManager) {
         $this->logger = $logger;
+        $this->hpManager = $hpManager;
         $this->logger->debug(__METHOD__);
     }
 
@@ -33,7 +37,7 @@ class HardwareProfilesController extends AbstractController
     }
 
     #[Route('/new', name: 'app_hardware_profiles_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, HardwareProfilesRepository $hardwareProfilesRepository): Response
+    public function new(Request $request): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -42,8 +46,7 @@ class HardwareProfilesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hardwareProfilesRepository->add($hardwareProfile, true);
-
+            $this->hpManager->addHardwareProfile($hardwareProfile);
             return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -64,7 +67,7 @@ class HardwareProfilesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_hardware_profiles_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, HardwareProfiles $hardwareProfile, HardwareProfilesRepository $hardwareProfilesRepository): Response
+    public function edit(Request $request, HardwareProfiles $hardwareProfile): Response
     {
         $this->logger->debug(__METHOD__);
 
@@ -72,8 +75,7 @@ class HardwareProfilesController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $hardwareProfilesRepository->add($hardwareProfile, true);
-
+            $this->hpManager->editHardwareProfile($hardwareProfile);
             return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -84,11 +86,13 @@ class HardwareProfilesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_hardware_profiles_delete', methods: ['POST'])]
-    public function delete(Request $request, HardwareProfiles $hardwareProfile, HardwareProfilesRepository $hardwareProfilesRepository): Response
+    public function delete(Request $request, HardwareProfiles $hardwareProfile, 
+            HardwareProfilesRepository $hardwareProfilesRepository): Response
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$hardwareProfile->getId(), strval($request->request->get('_token')))) {
+        if ($this->isCsrfTokenValid('delete'.$hardwareProfile->getId(), 
+                strval($request->request->get('_token')))) {
             $hardwareProfilesRepository->remove($hardwareProfile, true);
         }
 

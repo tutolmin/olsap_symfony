@@ -1,190 +1,58 @@
 
-##teamcity[testCount count='33' flowId='19378']
+##teamcity[testCount count='13' flowId='5121']
 
-##teamcity[testSuiteStarted name='App Test Suite' flowId='19378']
+##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='5121']
 
-##teamcity[testSuiteStarted name='App\Tests\BreedsTest' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest' flowId='19378']
+##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='5121']
 
-##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedsListIsNotEmpty' flowId='19378']
+##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='246' flowId='5121']
 
-##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='472' flowId='19378']
+##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='5121']
 
-##teamcity[testStarted name='testCanNotAddBreedWithoutName' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddBreedWithoutName' flowId='19378']
+##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='16' flowId='5121']
 
-##teamcity[testFinished name='testCanNotAddBreedWithoutName' duration='18' flowId='19378']
+##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='5121']
 
-##teamcity[testStarted name='testCanAddAndRemoveDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanAddAndRemoveDummyBreed' flowId='19378']
+##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='9' flowId='5121']
 
-##teamcity[testFinished name='testCanAddAndRemoveDummyBreed' duration='14' flowId='19378']
+##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='5121']
 
-##teamcity[testStarted name='testCanNotAddDuplicateBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddDuplicateBreed' flowId='19378']
+##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='9' flowId='5121']
 
-##teamcity[testFinished name='testCanNotAddDuplicateBreed' duration='10' flowId='19378']
+##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' flowId='5121']
 
-##teamcity[testSuiteFinished name='App\Tests\BreedsTest' flowId='19378']
+##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' duration='31' flowId='5121']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='19378']
+##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='5121']
 
-##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='19378']
+##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='22' flowId='5121']
 
-##teamcity[testFinished name='testAwxMeIsSymfony' duration='590' flowId='19378']
+##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='5121']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='19378']
+##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='16' flowId='5121']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='19378']
+##teamcity[testStarted name='testCanAddDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummyHardwareProfile' flowId='5121']
 
-##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='19378']
+##teamcity[testFinished name='testCanAddDummyHardwareProfile' duration='11' flowId='5121']
 
-##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='2' flowId='19378']
+##teamcity[testStarted name='testCanAddDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummySupportedHardwareProfile' flowId='5121']
 
-##teamcity[testFinished name='testExecute' duration='2' flowId='19378']
+##teamcity[testFinished name='testCanAddDummySupportedHardwareProfile' duration='26' flowId='5121']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='19378']
+##teamcity[testStarted name='testCanRemoveUnsupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveUnsupportedHardwareProfile' flowId='5121']
 
-##teamcity[testSuiteStarted name='App\Tests\DomainsTest' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest' flowId='19378']
+##teamcity[testFinished name='testCanRemoveUnsupportedHardwareProfile' duration='13' flowId='5121']
 
-##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainsListIsNotEmpty' flowId='19378']
+##teamcity[testStarted name='testCanRemoveSupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveSupportedHardwareProfile' flowId='5121']
 
-##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='16' flowId='19378']
+##teamcity[testFinished name='testCanRemoveSupportedHardwareProfile' duration='43' flowId='5121']
 
-##teamcity[testStarted name='testCanNotAddDomainWithoutName' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDomainWithoutName' flowId='19378']
+##teamcity[testStarted name='testCanMakeHardwareProfileSupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileSupported' flowId='5121']
 
-##teamcity[testFinished name='testCanNotAddDomainWithoutName' duration='8' flowId='19378']
+##teamcity[testFinished name='testCanMakeHardwareProfileSupported' duration='25' flowId='5121']
 
-##teamcity[testStarted name='testCanAddAndRemoveDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanAddAndRemoveDummyDomain' flowId='19378']
+##teamcity[testStarted name='testCanMakeHardwareProfileUnsupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileUnsupported' flowId='5121']
 
-##teamcity[testFinished name='testCanAddAndRemoveDummyDomain' duration='13' flowId='19378']
+##teamcity[testFinished name='testCanMakeHardwareProfileUnsupported' duration='39' flowId='5121']
 
-##teamcity[testStarted name='testCanNotAddDuplicateDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDuplicateDomain' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddDuplicateDomain' duration='10' flowId='19378']
-
-##teamcity[testStarted name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainRemovalLeadsToLinkedTechnologiesDeletion' flowId='19378']
-
-##teamcity[testFinished name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' duration='63' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\DomainsTest' flowId='19378']
-
-##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='19378']
-
-##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='19378']
-
-##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='17' flowId='19378']
-
-##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='19378']
-
-##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='7' flowId='19378']
-
-##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='19378']
-
-##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='7' flowId='19378']
-
-##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='19378']
-
-##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='7' flowId='19378']
-
-##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs' flowId='19378']
-
-##teamcity[testFailed name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs' message='Failed asserting that an array is not empty.' details=' /srv/app/tests/HardwareProfilesTest.php:110|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='10' flowId='19378']
-
-##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOs' duration='10' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='9' flowId='19378']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddAndRemoveDummyHardwareProfile' flowId='19378']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummyHardwareProfile' duration='15' flowId='19378']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddAndRemoveDummySupportedHardwareProfile' flowId='19378']
-
-##teamcity[testIgnored name='testCanAddAndRemoveDummySupportedHardwareProfile' message='This test has not been implemented yet.' details=' /srv/app/tests/HardwareProfilesTest.php:155|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='5' flowId='19378']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummySupportedHardwareProfile' duration='5' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='10' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='19378']
-
-##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='19378']
-
-##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testSomething' flowId='19378']
-
-##teamcity[testFinished name='testSomething' duration='4' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='19378']
-
-##teamcity[testSuiteStarted name='App\Tests\MessengerTest' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest' flowId='19378']
-
-##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest::testSomething' flowId='19378']
-
-##teamcity[testFinished name='testSomething' duration='1' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\MessengerTest' flowId='19378']
-
-##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='19378']
-
-##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='19378']
-
-##teamcity[testFailed name='testOperatingSystemsListIsNotEmpty' message='Failed asserting that an array is not empty.' details=' /srv/app/tests/OperatingSystemsTest.php:66|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='19378']
-
-##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='7' flowId='19378']
-
-##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='19378']
-
-##teamcity[testIgnored name='testSupportedOperatingSystemsListIsNotEmpty' message='This test depends on "App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='19378']
-
-##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='0' flowId='19378']
-
-##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='19378']
-
-##teamcity[testIgnored name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' message='This test depends on "App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='19378']
-
-##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='0' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutNameOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutNameOrBreed' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutNameOrBreed' duration='12' flowId='19378']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddAndRemoveDummyOperatingSystem' flowId='19378']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummyOperatingSystem' duration='19' flowId='19378']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddAndRemoveDummySupportedOperatingSystem' flowId='19378']
-
-##teamcity[testIgnored name='testCanAddAndRemoveDummySupportedOperatingSystem' message='This test depends on "App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='19378']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummySupportedOperatingSystem' duration='0' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='19378']
-
-##teamcity[testIgnored name='testCanNotAddDuplicateOperatingSystem' message='This test depends on "App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='0' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='19378']
-
-##teamcity[testSuiteStarted name='App\Tests\TechnologiesTest' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest' flowId='19378']
-
-##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testTechnologiesListIsNotEmpty' flowId='19378']
-
-##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='17' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddTechnologyWithoutNameOrDomain' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddTechnologyWithoutNameOrDomain' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddTechnologyWithoutNameOrDomain' duration='9' flowId='19378']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummyTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanAddAndRemoveDummyTechnology' flowId='19378']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummyTechnology' duration='13' flowId='19378']
-
-##teamcity[testStarted name='testCanNotAddDuplicateTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddDuplicateTechnology' flowId='19378']
-
-##teamcity[testFinished name='testCanNotAddDuplicateTechnology' duration='9' flowId='19378']
-
-##teamcity[testSuiteFinished name='App\Tests\TechnologiesTest' flowId='19378']
-
-##teamcity[testSuiteFinished name='App Test Suite' flowId='19378']
+##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='5121']

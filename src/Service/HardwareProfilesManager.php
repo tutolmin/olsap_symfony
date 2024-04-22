@@ -11,14 +11,14 @@ use App\Repository\OperatingSystemsRepository;
 use App\Repository\InstanceTypesRepository;
 use App\Repository\HardwareProfilesRepository;
 
-class OperatingSystemsManager {
+class HardwareProfilesManager {
 
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
     private InstanceTypesRepository $itRepository;
     private OperatingSystemsRepository $osRepository;
     private HardwareProfilesRepository $hpRepository;
-
+  
     public function __construct(
             LoggerInterface $logger, EntityManagerInterface $em
     ) {
@@ -33,11 +33,11 @@ class OperatingSystemsManager {
 
     /**
      * 
-     * @param OperatingSystems $os
+     * @param HardwareProfiles $hp
      * @return bool
      */
-    public function removeOperatingSystem(OperatingSystems $os): bool {
-        if ($this->osRepository->remove($os, true)) {
+    public function removeHardwareProfile(HardwareProfiles $hp): bool {
+        if ($this->hpRepository->remove($hp, true)) {
             return true;
         }
         return false;
@@ -45,19 +45,18 @@ class OperatingSystemsManager {
 
     /**
      * 
-     * @param OperatingSystems $os
+     * @param HardwareProfiles $hp
      * @return bool
      */
-    public function addOperatingSystem(OperatingSystems $os): bool {
-        if ($this->osRepository->add($os, true)) {
+    public function addHardwareProfile(HardwareProfiles $hp): bool {
+        if ($this->hpRepository->add($hp, true)) {
 
-
-            // Record additioin or modification was successful
+            // Record addition or modification was successful
             // Make sure corresponding instance type exists
             // If we are working with supported item
 
-            if ($os->isSupported()) {
-                $this->addInstanceTypes($os);
+            if ($hp->isSupported()) {
+                $this->addInstanceTypes($hp);
             }
 
             return true;
@@ -68,14 +67,14 @@ class OperatingSystemsManager {
 
     /**
      * 
-     * @param OperatingSystems $os
+     * @param HardwareProfiles $hp
      * @return void
      */
-    private function addInstanceTypes(OperatingSystems $os): void {
-        // Get the supported HP list
-        $hw_profiles = $this->hpRepository->findBySupported(1);
+    private function addInstanceTypes(HardwareProfiles $hp): void {
+        // Get the supported OS list
+        $oses = $this->osRepository->findBySupported(1);
 
-        foreach ($hw_profiles as &$hp) {
+        foreach ($oses as &$os) {
 
             $it = $this->itRepository->findBy(['os' => $os->getId(), 'hw_profile' => $hp->getId()]);
 
@@ -90,11 +89,11 @@ class OperatingSystemsManager {
 
     /**
      * 
-     * @param OperatingSystems $os
+     * @param HardwareProfiles $hp
      * @return void
      */
-    private function removeInstanceTypes(OperatingSystems $os): void {
-        $instance_types = $this->itRepository->findBy(['os' => $os->getId()]);
+    private function removeInstanceTypes(HardwareProfiles $hp): void {
+        $instance_types = $this->itRepository->findBy(['hw_profile' => $hp->getId()]);
 
         foreach ($instance_types as &$it) {
             $this->itRepository->remove($it, true);
@@ -103,17 +102,17 @@ class OperatingSystemsManager {
 
     /**
      * 
-     * @param OperatingSystems $os
+     * @param HardwareProfiles $hp
      * @return void
      */
-    public function editOperatingSystem(OperatingSystems $os): void {
+    public function editHardwareProfile(HardwareProfiles $hp): void {
 
-        if ($this->addOperatingSystem($os)) {
+        if ($this->addHardwareProfile($hp)) {
 
             // Record modification was successfull
-            // If OS became unsupported delete corresponding instance types
-            if (!$os->isSupported()) {
-                $this->removeInstanceTypes($os);
+            // If HP became unsupported delete corresponding instance types
+            if (!$hp->isSupported()) {
+                $this->removeInstanceTypes($hp);
             }
         }
     }

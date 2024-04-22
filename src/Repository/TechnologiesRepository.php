@@ -37,17 +37,15 @@ class TechnologiesRepository extends ServiceEntityRepository
         $this->getEntityManager()->persist($entity);
 
         if ($flush) {
-          try{
-                  $this->getEntityManager()->flush();
-          }
-          catch (UniqueConstraintViolationException $e) {
-        $this->logger->error("Attempted to insert duplicate item.");
-        return false;
-          }
-          catch (NotNullConstraintViolationException $e) {
-        $this->logger->error("Mandatory parameter has NOT been set.");
-        return false;
-          }
+            try {
+                $this->getEntityManager()->flush();
+            } catch (UniqueConstraintViolationException $e) {
+                $this->logger->error("Attempted to insert duplicate item.");
+                return false;
+            } catch (NotNullConstraintViolationException $e) {
+                $this->logger->error("Mandatory parameter has NOT been set.");
+                return false;
+            }
         }
         return true;
     }
