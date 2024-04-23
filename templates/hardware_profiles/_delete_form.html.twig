@@ -2,3 +2,7 @@
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ hardware_profile.id) }}">
     <button class="btn">Delete</button>
 </form>
+<form method="post" action="{{ path('app_hardware_profiles_delete_cascade', {'id': hardware_profile.id}) }}" onsubmit="return confirm('Are you sure you want to cascade delete this item and corresponding records?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete_cascade' ~ hardware_profile.id) }}">
+    <button class="btn">Cascade Delete</button>
+</form>

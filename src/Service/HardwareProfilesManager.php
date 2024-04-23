@@ -36,7 +36,18 @@ class HardwareProfilesManager {
      * @param HardwareProfiles $hp
      * @return bool
      */
-    public function removeHardwareProfile(HardwareProfiles $hp): bool {
+    public function removeHardwareProfile(HardwareProfiles $hp, 
+            bool $cascade = false): bool {
+
+        $this->logger->debug(__METHOD__);
+
+        $instance_types = $this->itRepository->findBy(['hw_profile' => $hp->getId()]);
+
+        if ($instance_types && !$cascade) {
+            $this->logger->debug("Can't delete corresponding InstanceTypes without cascade flag.");
+            return false;
+        }
+
         if ($this->hpRepository->remove($hp, true)) {
             return true;
         }
@@ -49,6 +60,9 @@ class HardwareProfilesManager {
      * @return bool
      */
     public function addHardwareProfile(HardwareProfiles $hp): bool {
+
+        $this->logger->debug(__METHOD__);
+
         if ($this->hpRepository->add($hp, true)) {
 
             // Record addition or modification was successful
@@ -58,10 +72,8 @@ class HardwareProfilesManager {
             if ($hp->isSupported()) {
                 $this->addInstanceTypes($hp);
             }
-
             return true;
         }
-
         return false;
     }
 
@@ -71,6 +83,9 @@ class HardwareProfilesManager {
      * @return void
      */
     private function addInstanceTypes(HardwareProfiles $hp): void {
+        
+        $this->logger->debug(__METHOD__);
+        
         // Get the supported OS list
         $oses = $this->osRepository->findBySupported(1);
 
@@ -93,6 +108,9 @@ class HardwareProfilesManager {
      * @return void
      */
     private function removeInstanceTypes(HardwareProfiles $hp): void {
+        
+        $this->logger->debug(__METHOD__);
+        
         $instance_types = $this->itRepository->findBy(['hw_profile' => $hp->getId()]);
 
         foreach ($instance_types as &$it) {
@@ -107,6 +125,8 @@ class HardwareProfilesManager {
      */
     public function editHardwareProfile(HardwareProfiles $hp): void {
 
+        $this->logger->debug(__METHOD__);
+        
         if ($this->addHardwareProfile($hp)) {
 
             // Record modification was successfull

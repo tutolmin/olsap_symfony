@@ -208,19 +208,31 @@ class HardwareProfilesTest extends KernelTestCase {
 
         $this->assertTrue($this->hpManager->removeHardwareProfile($hp));
     }
-        
+            
     /**
      * @depends testSupportedHardwareProfilesListIsNotEmpty
      * @return void
      */    
-    public function testCanRemoveSupportedHardwareProfile(): void {
+    public function testCanNotRemoveSupportedHardwareProfile(): void {
+
+        $hw_profile = $this->hpRepository->findOneBySupported(true);
+        $this->assertNotNull($hw_profile);
+        
+        $this->assertFalse($this->hpManager->removeHardwareProfile($hw_profile));
+    }
+            
+    /**
+     * @depends testSupportedHardwareProfilesListIsNotEmpty
+     * @return void
+     */    
+    public function testCanRemoveSupportedHardwareProfileWithCascadeFlag(): void {
 
         $hw_profile = $this->hpRepository->findOneBySupported(true);
         $this->assertNotNull($hw_profile);
         
         $hp_id = $hw_profile->getId();
 
-        $this->assertTrue($this->hpManager->removeHardwareProfile($hw_profile));
+        $this->assertTrue($this->hpManager->removeHardwareProfile($hw_profile, true));
 
 	$oses = $this->getSupportedOperatingSystems();
         
@@ -232,7 +244,7 @@ class HardwareProfilesTest extends KernelTestCase {
                             ['os' => $os->getId(), 'hw_profile' => $hp_id]));
         }
     }
-    
+
     /**
      * @depends testHardwareProfilesListIsNotEmpty
      * @return void

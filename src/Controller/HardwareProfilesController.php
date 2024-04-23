@@ -86,14 +86,24 @@ class HardwareProfilesController extends AbstractController {
     }
 
     #[Route('/{id}', name: 'app_hardware_profiles_delete', methods: ['POST'])]
-    public function delete(Request $request, HardwareProfiles $hardwareProfile, 
-            HardwareProfilesRepository $hardwareProfilesRepository): Response
-    {
+    public function delete(Request $request, HardwareProfiles $hardwareProfile): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$hardwareProfile->getId(), 
-                strval($request->request->get('_token')))) {
-            $hardwareProfilesRepository->remove($hardwareProfile, true);
+        if ($this->isCsrfTokenValid('delete' . $hardwareProfile->getId(),
+                        strval($request->request->get('_token')))) {
+            $this->hpManager->removeHardwareProfile($hardwareProfile);
+        }
+
+        return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}', name: 'app_hardware_profiles_delete_cascade', methods: ['POST'])]
+    public function delete_cascade(Request $request, HardwareProfiles $hardwareProfile): Response {
+        $this->logger->debug(__METHOD__);
+
+        if ($this->isCsrfTokenValid('delete_cascade' . $hardwareProfile->getId(),
+                        strval($request->request->get('_token')))) {
+            $this->hpManager->removeHardwareProfile($hardwareProfile, true);
         }
 
         return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);

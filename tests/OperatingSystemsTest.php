@@ -191,19 +191,31 @@ class OperatingSystemsTest extends KernelTestCase
 
         $this->assertTrue($this->osManager->removeOperatingSystem($os));
     }
-        
+    
     /**
      * @depends testSupportedOperatingSystemsListIsNotEmpty
      * @return void
      */    
-    public function testCanRemoveSupportedOperatingSystem(): void {
+    public function testCanNotRemoveSupportedOperatingSystem(): void {
+
+        $os = $this->osRepository->findOneBySupported(true);
+        $this->assertNotNull($os);
+
+        $this->assertFalse($this->osManager->removeOperatingSystem($os));
+    }
+            
+    /**
+     * @depends testSupportedOperatingSystemsListIsNotEmpty
+     * @return void
+     */    
+    public function testCanRemoveSupportedOperatingSystemWithCascadeFlag(): void {
 
         $os = $this->osRepository->findOneBySupported(true);
         $this->assertNotNull($os);
         
         $os_id = $os->getId();
 
-        $this->assertTrue($this->osManager->removeOperatingSystem($os));
+        $this->assertTrue($this->osManager->removeOperatingSystem($os, true));
 
 	$hw_profiles = $this->getSupportedHardwareProfiles();
         
@@ -215,7 +227,7 @@ class OperatingSystemsTest extends KernelTestCase
                             ['os' => $os_id, 'hw_profile' => $hp->getId()]));
         }
     }
-    
+
     /**
      * @depends testOperatingSystemsListIsNotEmpty
      * @return void
