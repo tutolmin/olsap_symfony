@@ -1,22 +1,3 @@
-Breeds (App\Tests\Breeds)
- [x] Breeds list is not empty
- [x] Can not add breed without name
- [x] Can add and remove dummy breed
- [x] Can not add duplicate breed
-
-Awx Me Command (App\Tests\Command\AwxMeCommand)
- [x] Awx me is symfony
-
-Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
- [ ] Execute
-
-Domains (App\Tests\Domains)
- [x] Domains list is not empty
- [x] Can not add domain without name
- [x] Can add and remove dummy domain
- [x] Can not add duplicate domain
- [x] Domain removal leads to linked technologies deletion
-
 Hardware Profiles (App\Tests\HardwareProfiles)
  [x] Hardware profiles list is not empty
  [x] Container hardware profiles list is not empty
@@ -27,35 +8,9 @@ Hardware Profiles (App\Tests\HardwareProfiles)
  [x] Can not add duplicate hardware profile
  [x] Can add dummy hardware profile
  [x] Can add dummy supported hardware profile
- [x] Can remove unsupported hardware profile
+ [ ] Can remove unsupported hardware profile
  [x] Can not remove supported hardware profile
- [x] Can remove supported hardware profile with cascade flag
+ [ ] Can remove supported hardware profile with cascade flag
  [x] Can make hardware profile supported
  [x] Can make hardware profile unsupported
-
-Instance Types (App\Tests\InstanceTypes)
- [x] Something
-
-Messenger (App\Tests\Messenger)
- [x] Something
-
-Operating Systems (App\Tests\OperatingSystems)
- [x] Operating systems list is not empty
- [x] Supported operating systems list is not empty
- [x] Each supported os has corresponding instance types for all supported hardware profiles
- [x] Can not add operating system without release or breed
- [x] Can not add duplicate operating system
- [x] Can add dummy operating system
- [x] Can add dummy supported operating system
- [x] Can remove unsupported operating system
- [x] Can not remove supported operating system
- [x] Can remove supported operating system with cascade flag
- [x] Can make operating system supported
- [x] Can make operating system unsupported
-
-Technologies (App\Tests\Technologies)
- [x] Technologies list is not empty
- [x] Can not add technology without name or domain
- [x] Can add and remove dummy technology
- [x] Can not add duplicate technology
 

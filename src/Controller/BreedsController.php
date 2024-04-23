@@ -11,14 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\BreedsManager;
 
 #[Route('/breeds')]
 class BreedsController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    private BreedsManager $breedsManager;
+    
+    public function __construct(LoggerInterface $logger,
+            BreedsManager $breedsManager)
     {
         $this->logger = $logger;
+        $this->breedsManager = $breedsManager;
         $this->logger->debug(__METHOD__);
     }
 
@@ -83,15 +88,31 @@ class BreedsController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_breeds_delete', methods: ['POST'])]
-    public function delete(Request $request, Breeds $breed, BreedsRepository $breedsRepository): Response
+    #[Route('/{id}/delete', name: 'app_breeds_delete', methods: ['POST'])]
+    public function delete(Request $request, Breeds $breed): Response
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$breed->getId(), strval($request->request->get('_token')))) {
-            $breedsRepository->remove($breed, true);
+        if ($this->isCsrfTokenValid('delete'.$breed->getId(), 
+                strval($request->request->get('_token')))) {
+            $this->breedsManager->removeBreed($breed);
         }
 
         return $this->redirectToRoute('app_breeds_index', [], Response::HTTP_SEE_OTHER);
     }
+/*    
+    #[Route('/{id}/delete_cascade', name: 'app_breeds_delete_cascade', methods: ['POST'])]
+    public function delete_cascade(Request $request, Breeds $breed): Response
+    {
+        $this->logger->debug(__METHOD__);
+
+        if ($this->isCsrfTokenValid('delete_cascade'.$breed->getId(), 
+                strval($request->request->get('_token')))) {
+            $this->breedsManager->removeBreed($breed, true);
+        }
+
+        return $this->redirectToRoute('app_breeds_index', [], Response::HTTP_SEE_OTHER);
+    }
+ * 
+ */
 }

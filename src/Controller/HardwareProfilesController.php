@@ -85,7 +85,7 @@ class HardwareProfilesController extends AbstractController {
         ]);
     }
 
-    #[Route('/{id}', name: 'app_hardware_profiles_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_hardware_profiles_delete', methods: ['POST'])]
     public function delete(Request $request, HardwareProfiles $hardwareProfile): Response {
         $this->logger->debug(__METHOD__);
 
@@ -96,7 +96,7 @@ class HardwareProfilesController extends AbstractController {
 
         return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);
     }
-
+/*
     #[Route('/{id}', name: 'app_hardware_profiles_delete_cascade', methods: ['POST'])]
     public function delete_cascade(Request $request, HardwareProfiles $hardwareProfile): Response {
         $this->logger->debug(__METHOD__);
@@ -108,4 +108,6 @@ class HardwareProfilesController extends AbstractController {
 
         return $this->redirectToRoute('app_hardware_profiles_index', [], Response::HTTP_SEE_OTHER);
     }
+ * 
+ */
 }
