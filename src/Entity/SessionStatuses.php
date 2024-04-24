@@ -42,7 +42,7 @@ class SessionStatuses
         return $this->id;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
