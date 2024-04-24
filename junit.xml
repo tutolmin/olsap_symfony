@@ -1,23 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" tests="14" assertions="31" errors="0" warnings="0" failures="0" skipped="2" time="0.488506">
-    <testcase name="testHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="63" assertions="1" time="0.246162"/>
-    <testcase name="testContainerHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="72" assertions="1" time="0.015546"/>
-    <testcase name="testVmHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="85" assertions="1" time="0.009201"/>
-    <testcase name="testSupportedHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="98" assertions="1" time="0.008145"/>
-    <testcase name="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="123" assertions="7" time="0.030523"/>
-    <testcase name="testCanNotAddHardwareProfileWithoutNameOrType" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="141" assertions="1" time="0.021043"/>
-    <testcase name="testCanNotAddDuplicateHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="150" assertions="2" time="0.013888"/>
-    <testcase name="testCanAddDummyHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="162" assertions="1" time="0.009405"/>
-    <testcase name="testCanAddDummySupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="171" assertions="5" time="0.025791"/>
-    <testcase name="testCanRemoveUnsupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="197" assertions="0" time="0.010382">
-      <skipped/>
-    </testcase>
-    <testcase name="testCanNotRemoveSupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="215" assertions="1" time="0.010432"/>
-    <testcase name="testCanRemoveSupportedHardwareProfileWithCascadeFlag" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="225" assertions="0" time="0.009943">
-      <skipped/>
-    </testcase>
-    <testcase name="testCanMakeHardwareProfileSupported" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="255" assertions="5" time="0.026333"/>
-    <testcase name="testCanMakeHardwareProfileUnsupported" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="280" assertions="5" time="0.051712"/>
+  <testsuite name="" tests="53" assertions="89" errors="0" warnings="0" failures="1" skipped="8" time="3.794460">
+    <testsuite name="App Test Suite" tests="53" assertions="89" errors="0" warnings="0" failures="1" skipped="8" time="3.794460">
+      <testsuite name="App\Tests\BreedsTest" file="/srv/app/tests/BreedsTest.php" tests="7" assertions="6" errors="0" warnings="0" failures="0" skipped="1" time="0.570836">
+        <testcase name="testBreedsListIsNotEmpty" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="58" assertions="1" time="0.468239"/>
+        <testcase name="testBreedHasOperatingSystemsReference" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="72" assertions="1" time="0.037578"/>
+        <testcase name="testCanNotAddBreedWithoutName" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="85" assertions="1" time="0.026037"/>
+        <testcase name="testCanNotAddDuplicateBreed" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="96" assertions="1" time="0.013511"/>
+        <testcase name="testCanAddDummyBreed" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="103" assertions="1" time="0.011573"/>
+        <testcase name="testCanNotRemoveReferencedBreed" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="116" assertions="1" time="0.007525"/>
+        <testcase name="testCanRemoveBreedWithCascadeFlag" class="App\Tests\BreedsTest" classname="App.Tests.BreedsTest" file="/srv/app/tests/BreedsTest.php" line="126" assertions="0" time="0.006373">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Tests\Command\AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" tests="1" assertions="2" errors="0" warnings="0" failures="0" skipped="0" time="2.610051">
+        <testcase name="testAwxMeIsSymfony" class="App\Tests\Command\AwxMeCommandTest" classname="App.Tests.Command.AwxMeCommandTest" file="/srv/app/tests/Command/AwxMeCommandTest.php" line="11" assertions="2" time="2.610051"/>
+      </testsuite>
+      <testsuite name="App\Tests\Command\AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" tests="1" assertions="0" errors="0" warnings="0" failures="0" skipped="1" time="0.001389">
+        <testcase name="testExecute" class="App\Tests\Command\AwxProjectListCommandTest" classname="App.Tests.Command.AwxProjectListCommandTest" file="/srv/app/tests/Command/AwxProjectListCommandTest.php" line="11" assertions="0" time="0.001389">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Tests\DomainsTest" file="/srv/app/tests/DomainsTest.php" tests="5" assertions="9" errors="0" warnings="0" failures="0" skipped="0" time="0.131513">
+        <testcase name="testDomainsListIsNotEmpty" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="46" assertions="1" time="0.017980"/>
+        <testcase name="testCanNotAddDomainWithoutName" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="51" assertions="1" time="0.010745"/>
+        <testcase name="testCanAddAndRemoveDummyDomain" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="56" assertions="1" time="0.012957"/>
+        <testcase name="testCanNotAddDuplicateDomain" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="68" assertions="2" time="0.023315"/>
+        <testcase name="testDomainRemovalLeadsToLinkedTechnologiesDeletion" class="App\Tests\DomainsTest" classname="App.Tests.DomainsTest" file="/srv/app/tests/DomainsTest.php" line="82" assertions="4" time="0.066516"/>
+      </testsuite>
+      <testsuite name="App\Tests\HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" tests="14" assertions="31" errors="0" warnings="0" failures="0" skipped="2" time="0.219787">
+        <testcase name="testHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="63" assertions="1" time="0.011376"/>
+        <testcase name="testContainerHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="72" assertions="1" time="0.008342"/>
+        <testcase name="testVmHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="85" assertions="1" time="0.007119"/>
+        <testcase name="testSupportedHardwareProfilesListIsNotEmpty" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="98" assertions="1" time="0.006940"/>
+        <testcase name="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="123" assertions="7" time="0.026782"/>
+        <testcase name="testCanNotAddHardwareProfileWithoutNameOrType" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="141" assertions="1" time="0.011279"/>
+        <testcase name="testCanNotAddDuplicateHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="150" assertions="2" time="0.011058"/>
+        <testcase name="testCanAddDummyHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="162" assertions="1" time="0.007729"/>
+        <testcase name="testCanAddDummySupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="171" assertions="5" time="0.026533"/>
+        <testcase name="testCanRemoveUnsupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="197" assertions="0" time="0.005878">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanNotRemoveSupportedHardwareProfile" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="215" assertions="1" time="0.011661"/>
+        <testcase name="testCanRemoveSupportedHardwareProfileWithCascadeFlag" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="225" assertions="0" time="0.008194">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanMakeHardwareProfileSupported" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="255" assertions="5" time="0.029594"/>
+        <testcase name="testCanMakeHardwareProfileUnsupported" class="App\Tests\HardwareProfilesTest" classname="App.Tests.HardwareProfilesTest" file="/srv/app/tests/HardwareProfilesTest.php" line="280" assertions="5" time="0.047305"/>
+      </testsuite>
+      <testsuite name="App\Tests\InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" tests="7" assertions="5" errors="0" warnings="0" failures="1" skipped="2" time="0.048250">
+        <testcase name="testInstanceStatusesListIsNotEmpty" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="44" assertions="1" time="0.008203"/>
+        <testcase name="testInstanceStatusHasInstancesReference" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="58" assertions="1" time="0.013577">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\InstanceStatusesTest::testInstanceStatusHasInstancesReference
+Failed asserting that false is true.
+
+/srv/app/tests/InstanceStatusesTest.php:67
+/srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
+        </testcase>
+        <testcase name="testCanNotAddInstanceStatusWithoutStatusString" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="71" assertions="1" time="0.010084"/>
+        <testcase name="testCanNotAddDuplicateInstanceStatus" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="83" assertions="1" time="0.008778"/>
+        <testcase name="testCanAddDummyInstanceStatus" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="92" assertions="1" time="0.007607"/>
+        <testcase name="testCanNotRemoveReferencedInstanceStatus" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="105" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanRemoveInstanceStatusWithCascadeFlag" class="App\Tests\InstanceStatusesTest" classname="App.Tests.InstanceStatusesTest" file="/srv/app/tests/InstanceStatusesTest.php" line="116" assertions="0" time="0.000000">
+          <skipped/>
+        </testcase>
+      </testsuite>
+      <testsuite name="App\Tests\InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.003096">
+        <testcase name="testSomething" class="App\Tests\InstanceTypesTest" classname="App.Tests.InstanceTypesTest" file="/srv/app/tests/InstanceTypesTest.php" line="9" assertions="1" time="0.003096"/>
+      </testsuite>
+      <testsuite name="App\Tests\MessengerTest" file="/srv/app/tests/MessengerTest.php" tests="1" assertions="1" errors="0" warnings="0" failures="0" skipped="0" time="0.000491">
+        <testcase name="testSomething" class="App\Tests\MessengerTest" classname="App.Tests.MessengerTest" file="/srv/app/tests/MessengerTest.php" line="46" assertions="1" time="0.000491"/>
+      </testsuite>
+      <testsuite name="App\Tests\OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" tests="12" assertions="28" errors="0" warnings="0" failures="0" skipped="2" time="0.162954">
+        <testcase name="testOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="80" assertions="1" time="0.010812"/>
+        <testcase name="testSupportedOperatingSystemsListIsNotEmpty" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="89" assertions="1" time="0.007835"/>
+        <testcase name="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="104" assertions="7" time="0.014987"/>
+        <testcase name="testCanNotAddOperatingSystemWithoutReleaseOrBreed" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="120" assertions="1" time="0.010879"/>
+        <testcase name="testCanNotAddDuplicateOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="129" assertions="2" time="0.016127"/>
+        <testcase name="testCanAddDummyOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="144" assertions="2" time="0.011041"/>
+        <testcase name="testCanAddDummySupportedOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="156" assertions="5" time="0.021317"/>
+        <testcase name="testCanRemoveUnsupportedOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="183" assertions="0" time="0.006289">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanNotRemoveSupportedOperatingSystem" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="203" assertions="1" time="0.008273"/>
+        <testcase name="testCanRemoveSupportedOperatingSystemWithCascadeFlag" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="213" assertions="0" time="0.005373">
+          <skipped/>
+        </testcase>
+        <testcase name="testCanMakeOperatingSystemSupported" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="243" assertions="4" time="0.021037"/>
+        <testcase name="testCanMakeOperatingSystemUnsupported" class="App\Tests\OperatingSystemsTest" classname="App.Tests.OperatingSystemsTest" file="/srv/app/tests/OperatingSystemsTest.php" line="268" assertions="4" time="0.028982"/>
+      </testsuite>
+      <testsuite name="App\Tests\TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" tests="4" assertions="6" errors="0" warnings="0" failures="0" skipped="0" time="0.046093">
+        <testcase name="testTechnologiesListIsNotEmpty" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="46" assertions="1" time="0.012638"/>
+        <testcase name="testCanNotAddTechnologyWithoutNameOrDomain" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="51" assertions="1" time="0.011525"/>
+        <testcase name="testCanAddAndRemoveDummyTechnology" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="56" assertions="2" time="0.011472"/>
+        <testcase name="testCanNotAddDuplicateTechnology" class="App\Tests\TechnologiesTest" classname="App.Tests.TechnologiesTest" file="/srv/app/tests/TechnologiesTest.php" line="72" assertions="2" time="0.010459"/>
+      </testsuite>
+    </testsuite>
   </testsuite>
 </testsuites>

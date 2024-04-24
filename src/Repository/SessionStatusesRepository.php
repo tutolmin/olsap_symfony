@@ -50,7 +50,7 @@ class SessionStatusesRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(SessionStatuses $entity, bool $flush = false): void
+    public function remove(SessionStatuses $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -59,6 +59,7 @@ class SessionStatusesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+        return true;
     }
 
 //    /**

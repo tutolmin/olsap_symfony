@@ -51,7 +51,7 @@ class InstanceStatusesRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(InstanceStatuses $entity, bool $flush = false): void
+    public function remove(InstanceStatuses $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -60,6 +60,7 @@ class InstanceStatusesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+        return true;
     }
 
 //    /**
