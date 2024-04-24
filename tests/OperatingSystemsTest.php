@@ -69,12 +69,13 @@ class OperatingSystemsTest extends KernelTestCase
     protected function setUp(): void {
         self::bootKernel();
 
-        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->breedsRepository = $this->entityManager->getRepository(Breeds::class);
-        $this->osManager = static::getContainer()->get('App\Service\OperatingSystemsManager');        
+        $this->osManager = static::getContainer()->get(OperatingSystemsManager::class);        
     }
 
     public function testOperatingSystemsListIsNotEmpty(): void {

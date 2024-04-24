@@ -38,7 +38,8 @@ class DomainsTest extends KernelTestCase
     protected function setUp(): void {
         self::bootKernel();
 
-        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+	$this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->domainsRepository = $this->entityManager->getRepository(Domains::class);
         $this->technologiesRepository = $this->entityManager->getRepository(Technologies::class);        
     }

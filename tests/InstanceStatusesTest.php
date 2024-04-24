@@ -32,7 +32,8 @@ class InstanceStatusesTest extends KernelTestCase
     protected function setUp(): void {
         self::bootKernel();
 
-        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->instanceStatusesRepository = $this->entityManager->getRepository(InstanceStatuses::class);
 //        $this->instancesRepository = $this->entityManager->getRepository(Instances::class);
     }

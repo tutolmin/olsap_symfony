@@ -53,11 +53,12 @@ class HardwareProfilesTest extends KernelTestCase {
     protected function setUp(): void {
         self::bootKernel();
 
-        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
+//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
         $this->hpRepository = $this->entityManager->getRepository(HardwareProfiles::class);
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
-        $this->hpManager = static::getContainer()->get('App\Service\HardwareProfilesManager');
+        $this->hpManager = static::getContainer()->get(HardwareProfilesManager::class);
     }
 
     public function testHardwareProfilesListIsNotEmpty(): void {

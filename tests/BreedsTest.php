@@ -45,10 +45,11 @@ class BreedsTest extends KernelTestCase
     protected function setUp(): void {
         self::bootKernel();
 
-        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
+        $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->breedsRepository = $this->entityManager->getRepository(Breeds::class);
 //        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
-        $this->breedsManager = static::getContainer()->get('App\Service\BreedsManager');        
+//        $this->breedsManager = static::getContainer()->get('App\Service\BreedsManager');        
+        $this->breedsManager = static::getContainer()->get(BreedsManager::class);        
     }
     
     /**
