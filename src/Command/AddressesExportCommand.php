@@ -63,7 +63,7 @@ class AddressesExportCommand extends Command
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $csvContent = $serializer->serialize($addresses, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id','ip','mac']]);
+                [AbstractNormalizer::ATTRIBUTES => ['ip','mac']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

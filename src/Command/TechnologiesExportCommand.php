@@ -64,7 +64,7 @@ class TechnologiesExportCommand extends Command
 
         $csvContent = $serializer->serialize($technologies, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
-                    ['id', 'name', 'domain' => ['name'], 'description']]);
+                    ['name', 'domain' => ['name'], 'description']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

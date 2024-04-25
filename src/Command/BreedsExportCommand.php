@@ -60,7 +60,7 @@ class BreedsExportCommand extends Command {
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $csvContent = $serializer->serialize($breeds, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id', 'name']]);
+                [AbstractNormalizer::ATTRIBUTES => ['name']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

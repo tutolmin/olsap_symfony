@@ -63,7 +63,7 @@ class DomainsExportCommand extends Command
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $csvContent = $serializer->serialize($domains, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id','name','description']]);
+                [AbstractNormalizer::ATTRIBUTES => ['name','description']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

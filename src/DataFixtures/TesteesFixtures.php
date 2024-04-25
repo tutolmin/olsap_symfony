@@ -32,12 +32,14 @@ $obj = $serializer->denormalize(
 );
 
 dump($obj->getInner()->foo); // 'foo'        
+new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)),
+                [new ObjectNormalizer(null, null, null, new ReflectionExtractor()), new ArrayDenormalizer(), new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601))],
 */        
         $serializer = new Serializer(
-                [new ObjectNormalizer(null, null, null, new ReflectionExtractor()), new ArrayDenormalizer(), new DateTimeNormalizer()],
+                [new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)), new ObjectNormalizer(null, null, null, new ReflectionExtractor()), new ArrayDenormalizer()],
                 [new CsvEncoder()]);
         
-        $testees = $serializer->deserialize($csvContents, 'App\Entity\Testees[]', 'csv');
+	$testees = $serializer->deserialize($csvContents, 'App\Entity\Testees[]', 'csv');
 
         foreach ($testees as $testee) {
 //echo $testee->getRegisteredAt()->format('Y-m-d H:i:s');

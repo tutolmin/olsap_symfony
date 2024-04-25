@@ -64,7 +64,7 @@ class OperatingSystemsExportCommand extends Command
 
         $csvContent = $serializer->serialize($oses, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
-                    ['id', 'release', 'breed' => ['name'], 'description', 'supported', 'alias']]);
+                    ['release', 'breed' => ['name'], 'description', 'supported', 'alias']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

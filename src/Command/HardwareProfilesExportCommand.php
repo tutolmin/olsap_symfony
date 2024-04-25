@@ -64,7 +64,7 @@ class HardwareProfilesExportCommand extends Command
 
         $csvContent = $serializer->serialize($hardwareProfiles, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
-                    ['id','name','description','type','supported','cost']]);
+                    ['name','description','type','supported','cost']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

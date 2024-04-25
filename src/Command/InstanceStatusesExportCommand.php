@@ -63,7 +63,7 @@ class InstanceStatusesExportCommand extends Command
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $csvContent = $serializer->serialize($domains, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id','status','description']]);
+                [AbstractNormalizer::ATTRIBUTES => ['status','description']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

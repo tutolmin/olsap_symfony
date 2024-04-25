@@ -63,7 +63,7 @@ class PortsExportCommand extends Command
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
         $csvContent = $serializer->serialize($ports, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id','address' => ['id'],'number']]);
+                [AbstractNormalizer::ATTRIBUTES => ['address' => ['ip'], 'number']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

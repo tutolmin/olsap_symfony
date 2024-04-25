@@ -17,6 +17,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 //use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -60,7 +61,7 @@ class TesteesExportCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
         $testees = $this->testeesRepository->findAll();
-
+/*
         // all callback parameters are optional (you can omit the ones you don't use)
         $dateCallback = function (object $innerObject, object $outerObject, string $attributeName, ?string $format = null, array $context = []): string {
             return $innerObject instanceof \DateTimeImmutable ? $innerObject->format(\DateTimeImmutable::ISO8601) : '';
@@ -73,19 +74,26 @@ class TesteesExportCommand extends Command
         ];
 
         $normalizer = new GetSetMethodNormalizer(null, null, null, null, null, $defaultContext);
-
         $serializer = new Serializer([$normalizer], [new CsvEncoder()]);
-//        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
         foreach ($testees as $testee) {
             $io->note($testee->getOauthToken());
         }
-        
+	        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+
+	        $csvContent = $serializer->serialize($domains, 'csv',
+			                [AbstractNormalizer::ATTRIBUTES => ['id','name','description']]);
+ */        
+
+//        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $serializer = new Serializer([new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)),new GetSetMethodNormalizer()], [new CsvEncoder()]);
+//        $normalizer = new GetSetMethodNormalizer(null, null, null, null, null, $defaultContext);
+//        $serializer = new Serializer([$normalizer], [new CsvEncoder()]);
         // registeredAt is an object 
         // https://symfony.com/doc/6.4/components/serializer.html#using-callbacks-to-serialize-properties-with-object-instances
         //
         $csvContent = $serializer->serialize($testees, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['id','email','oauthToken','registeredAt']]);
-        $io->note($csvContent);
+		[AbstractNormalizer::ATTRIBUTES => ['email','oauthToken','registeredAt']]); 
+	$io->note($csvContent);
 
         $filesystem = new Filesystem();
 
