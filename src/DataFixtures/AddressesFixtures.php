@@ -9,24 +9,23 @@ use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-class InstanceStatusesFixtures extends Fixture {
-    
-    public function load(ObjectManager $manager): void {
-        
-        $csvContents = file_get_contents('/var/tmp/instance-statuses.csv');
+class AddressesFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+        $csvContents = file_get_contents('/var/tmp/addresses.csv');
 
         $serializer = new Serializer(
                 [new ObjectNormalizer(), new ArrayDenormalizer()],
                 [new CsvEncoder()]);
         
-        $sessionStatuses = $serializer->deserialize($csvContents, 
-                'App\Entity\InstanceStatuses[]', 'csv');
+        $addresses = $serializer->deserialize($csvContents, 'App\Entity\Addresses[]', 'csv');
 
-        foreach ($sessionStatuses as $sessionStatus) {
+        foreach ($addresses as $address) {
 
-            $manager->persist($sessionStatus);
+            $manager->persist($address);
         }
-
+        
         $manager->flush();
     }
 }

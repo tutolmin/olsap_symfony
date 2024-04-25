@@ -6,11 +6,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Domains;
 use App\Entity\Technologies;
-//use Doctrine\ORM\EntityManagerInterface;
-//use App\Repository\DomainsRepository;
 use Psr\Log\LoggerInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class TechnologiesFixtures extends Fixture
+class TechnologiesFixtures extends Fixture implements DependentFixtureInterface
 {
     private LoggerInterface $logger;
 
@@ -21,7 +20,18 @@ class TechnologiesFixtures extends Fixture
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
     }
-
+    
+    /**
+     * 
+     * @return array<int, string>
+     */
+    public function getDependencies()
+    {
+        return [
+            DomainsFixtures::class,
+        ];
+    }
+    
     public function load(ObjectManager $manager): void {
         $this->logger->debug(__METHOD__);
         

@@ -4,33 +4,28 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Domains;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class DomainsFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $domains = array(
-            "Software" => "yum, dnf, rpm",
-            "Virtualization" => "docker, LXC",
-            "Security" => "SELinux, passwords, kerberos, openssl, file permissions, ACLs, etc.",
-            "Hardware" => "lspci, dmidecode",
-            "Automation" => "Collection of tasks related to automating repeating work.",
-            "Monitoring" => "Get system running status and metrics.",
-            "Network" => "Tasks related to network configuration, monitoring and troubleshooting.",
-            "Performance" => "Tuning system parameters.",
-            "Storage" => "Everything related to storage subsystem, including volume managers, working with block devices, mounting, formatting, etc.",
-            "System management" => "systemd, processes",
-        );
-        
-        foreach ($domains as $name => $desc) {
-            
-        $domain = new Domains();
-        $domain->setName($name);
-        $domain->setDescription($desc);
-        $manager->persist($domain); 
-        }
+        $csvContents = file_get_contents('/var/tmp/domains.csv');
 
+        $serializer = new Serializer(
+                [new ObjectNormalizer(), new ArrayDenormalizer()],
+                [new CsvEncoder()]);
+        
+        $domains = $serializer->deserialize($csvContents, 'App\Entity\Domains[]', 'csv');
+
+        foreach ($domains as $domain) {
+
+            $manager->persist($domain);
+        }
+        
         $manager->flush();
     }
 }

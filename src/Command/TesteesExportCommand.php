@@ -10,38 +10,39 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\OperatingSystems;
-use App\Repository\OperatingSystemsRepository;
+use App\Entity\Testees;
+use App\Repository\TesteesRepository;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+//use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
-    name: 'app:operating-systems:export',
-    description: 'Exports Operating Systems in CSV format',
+    name: 'app:testees:export',
+    description: 'Exports Testees in CSV format',
 )]
-class OperatingSystemsExportCommand extends Command
+class TesteesExportCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'operating-systems.csv';
+    private string $filename = 'testees.csv';
 
     /**
      *
-     * @var OperatingSystemsRepository
+     * @var TesteesRepository
      */
-    private $osRepository;
+    private $testeesRepository;
 	
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
+        $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
     }
 
     protected function configure(): void
@@ -58,13 +59,32 @@ class OperatingSystemsExportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        $oses = $this->osRepository->findAll();
+        $testees = $this->testeesRepository->findAll();
 
-        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        // all callback parameters are optional (you can omit the ones you don't use)
+        $dateCallback = function (object $innerObject, object $outerObject, string $attributeName, ?string $format = null, array $context = []): string {
+            return $innerObject instanceof \DateTimeImmutable ? $innerObject->format(\DateTimeImmutable::ISO8601) : '';
+        };
 
-        $csvContent = $serializer->serialize($oses, 'csv',
-                [AbstractNormalizer::ATTRIBUTES =>
-                    ['id', 'release', 'breed' => ['name'], 'description', 'supported', 'alias']]);
+        $defaultContext = [
+            AbstractNormalizer::CALLBACKS => [
+                'registeredAt' => $dateCallback,
+            ],
+        ];
+
+        $normalizer = new GetSetMethodNormalizer(null, null, null, null, null, $defaultContext);
+
+        $serializer = new Serializer([$normalizer], [new CsvEncoder()]);
+//        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        foreach ($testees as $testee) {
+            $io->note($testee->getOauthToken());
+        }
+        
+        // registeredAt is an object 
+        // https://symfony.com/doc/6.4/components/serializer.html#using-callbacks-to-serialize-properties-with-object-instances
+        //
+        $csvContent = $serializer->serialize($testees, 'csv', 
+                [AbstractNormalizer::ATTRIBUTES => ['id','email','oauthToken','registeredAt']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

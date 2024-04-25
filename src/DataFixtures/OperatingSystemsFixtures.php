@@ -8,8 +8,9 @@ use App\Entity\OperatingSystems;
 use App\Entity\Breeds;
 use Psr\Log\LoggerInterface;
 use App\Service\OperatingSystemsManager;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class OperatingSystemsFixtures extends Fixture
+class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterface
 {
     private LoggerInterface $logger;
     private OperatingSystemsManager $osManager;
@@ -23,7 +24,18 @@ class OperatingSystemsFixtures extends Fixture
         $this->osManager = $osManager;
         $this->logger->debug(__METHOD__);
     }
-
+    
+    /**
+     * 
+     * @return array<int, string>
+     */
+    public function getDependencies()
+    {
+        return [
+            BreedsFixtures::class,
+        ];
+    }
+    
     public function load(ObjectManager $manager): void
     {
         $operating_systems = array(
@@ -50,9 +62,9 @@ class OperatingSystemsFixtures extends Fixture
             
             if ($breed) {
                 $os->setBreed($breed);
+                $this->osManager->addOperatingSystem($os);
             }
 
-            $this->osManager->addOperatingSystem($os);
             /*
             $manager->persist($os);
 

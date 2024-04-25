@@ -22,10 +22,10 @@ class Testees
     private string $email;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private string $oauth_token;
+    private string $oauthToken;
 
-    #[ORM\Column(type: 'datetime_immutable')]
-    private DateTimeImmutable $registered_at;
+    #[ORM\Column(type: 'datetime_immutable', options: ["default" => "CURRENT_TIMESTAMP"])]
+    private DateTimeImmutable $registeredAt;
 
     /**
      * 
@@ -65,24 +65,24 @@ class Testees
 
     public function getOauthToken(): string
     {
-        return $this->oauth_token;
+        return $this->oauthToken;
     }
 
     public function setOauthToken(string $oauth_token): self
     {
-        $this->oauth_token = $oauth_token;
+        $this->oauthToken = $oauth_token;
 
         return $this;
     }
 
     public function getRegisteredAt(): \DateTimeImmutable
     {
-        return $this->registered_at;
+        return $this->registeredAt;
     }
 
     public function setRegisteredAt(\DateTimeImmutable $registered_at): self
     {
-        $this->registered_at = $registered_at;
+        $this->registeredAt = $registered_at;
 
         return $this;
     }

@@ -4,30 +4,27 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\EnvironmentStatuses;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer; 
 
 class EnvironmentStatusesFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $env_statuses = array(
-            "Complete" => null,
-            "Verified" => null,
-            "Solved" => null,
-            "Skipped" => "User clicked Skipped button during test Session",
-            "Deployed" => "Deployment playbook has been run for the Environment",
-            "New" => "New Environment entity not linked to Session",
-            "Created" => "Instance has been bound",
-        );
+        $csvContents = file_get_contents('/var/tmp/environment-statuses.csv');
 
-        foreach ($env_statuses as $name => $desc) {
+        $serializer = new Serializer(
+                [new ObjectNormalizer(), new ArrayDenormalizer()],
+                [new CsvEncoder()]);
 
-            $env_status = new EnvironmentStatuses();
-            $env_status->setStatus($name);
-            if ($desc) {
-                $env_status->setDescription($desc);
-            }
-            $manager->persist($env_status);
+        $sessionStatuses = $serializer->deserialize($csvContents, 
+                'App\Entity\EnvironmentStatuses[]', 'csv');
+
+        foreach ($sessionStatuses as $sessionStatus) {
+
+            $manager->persist($sessionStatus);
         }
 
         $manager->flush();

@@ -10,8 +10,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\OperatingSystems;
-use App\Repository\OperatingSystemsRepository;
+use App\Entity\EnvironmentStatuses;
+use App\Repository\EnvironmentStatusesRepository;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
@@ -20,28 +20,28 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
-    name: 'app:operating-systems:export',
-    description: 'Exports Operating Systems in CSV format',
+    name: 'app:environment-statuses:export',
+    description: 'Exports Environment Statuses in CSV format',
 )]
-class OperatingSystemsExportCommand extends Command
+class EnvironmentStatusesExportCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'operating-systems.csv';
+    private string $filename = 'environment-statuses.csv';
 
     /**
      *
-     * @var OperatingSystemsRepository
+     * @var EnvironmentStatusesRepository
      */
-    private $osRepository;
+    private $esRepository;
 	
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
+        $this->esRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
     }
 
     protected function configure(): void
@@ -57,14 +57,13 @@ class OperatingSystemsExportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-
-        $oses = $this->osRepository->findAll();
-
+        
+        $domains = $this->esRepository->findAll();
+        
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
-        $csvContent = $serializer->serialize($oses, 'csv',
-                [AbstractNormalizer::ATTRIBUTES =>
-                    ['id', 'release', 'breed' => ['name'], 'description', 'supported', 'alias']]);
+        $csvContent = $serializer->serialize($domains, 'csv', 
+                [AbstractNormalizer::ATTRIBUTES => ['id','status','description']]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();
