@@ -14,6 +14,9 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 //use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 //use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 //use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Doctrine\ORM\EntityManagerInterface;
+
+ini_set('memory_limit', '256M');
 
 class AddressesFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -27,6 +30,13 @@ class AddressesFixtures extends Fixture implements DependentFixtureInterface
             PortsFixtures::class,
         ];
     }
+
+private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager) {
+
+$this->entityManager = $entityManager;
+}
     
     public function load(ObjectManager $manager): void
     {
@@ -49,7 +59,7 @@ class AddressesFixtures extends Fixture implements DependentFixtureInterface
 */        
 
         $normalizers = [
-            new AddressesDenormalizer(),
+            new AddressesDenormalizer(new ObjectNormalizer(), $this->entityManager),
 //            new ObjectNormalizer(),
             new ArrayDenormalizer()
         ];

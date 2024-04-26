@@ -23,8 +23,10 @@ class AddressesNormalizer implements NormalizerInterface
                 [AbstractNormalizer::ATTRIBUTES => ['ip','mac']]);
         if($topic instanceof Addresses) {
         
+		if(is_array($data)){
             $data['port'] = $topic->getPort();
-        }
+		}
+	}
         
         return $data;
     }
@@ -34,7 +36,7 @@ class AddressesNormalizer implements NormalizerInterface
     {
         return $data instanceof Addresses;
     }
-     
+   /*  
     public function getSupportedTypes(?string $format): array
     {
         return [
@@ -43,4 +45,5 @@ class AddressesNormalizer implements NormalizerInterface
             Addresses::class => true, // Supports MyCustomClass and result is cacheable
         ];
     }
+    */
 }
