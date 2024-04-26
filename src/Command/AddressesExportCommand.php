@@ -18,6 +18,7 @@ use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use App\Serializer\Normalizer\AddressesNormalizer;
 
 #[AsCommand(
     name: 'app:addresses:export',
@@ -60,10 +61,12 @@ class AddressesExportCommand extends Command
         
         $addresses = $this->addressesRepository->findAll();
         
-        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $serializer = new Serializer([new AddressesNormalizer(new ObjectNormalizer())], [new CsvEncoder()]);
+//        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
-        $csvContent = $serializer->serialize($addresses, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['ip','mac','port' => ['number']]]);
+//        $csvContent = $serializer->serialize($addresses, 'csv', 
+//                [AbstractNormalizer::ATTRIBUTES => ['ip','mac','port' => ['number']]]);
+        $csvContent = $serializer->serialize($addresses, 'csv');
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

@@ -85,7 +85,9 @@ class TesteesExportCommand extends Command
  */        
 
 //        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
-        $serializer = new Serializer([new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)),new GetSetMethodNormalizer()], [new CsvEncoder()]);
+        $serializer = new Serializer(
+                [new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)), new GetSetMethodNormalizer()], 
+                [new CsvEncoder()]);
 //        $normalizer = new GetSetMethodNormalizer(null, null, null, null, null, $defaultContext);
 //        $serializer = new Serializer([$normalizer], [new CsvEncoder()]);
         // registeredAt is an object 
