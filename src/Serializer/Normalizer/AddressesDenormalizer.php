@@ -14,9 +14,13 @@ class AddressesDenormalizer implements DenormalizerInterface
     public function denormalize(mixed $data, string $type, string $format = null, array $context = []): Addresses
     {
         $address = new Addresses();
-        $address->setIp($data['ip']);
-        $address->setMac($data['mac']);
-        
+        if (is_array($data) && array_key_exists('ip', $data)) {
+            $address->setIp($data['ip']);
+        }
+        if (is_array($data) && array_key_exists('mac', $data)) {
+
+            $address->setMac($data['mac']);
+        }
         return $address;
     }
 
