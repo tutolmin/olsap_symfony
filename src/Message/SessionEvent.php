@@ -4,20 +4,26 @@ namespace App\Message;
 
 final class SessionEvent
 {
-    /*
-     * Add whatever properties and methods you need
-     * to hold the data for this message class.
+    /**
+     * 
+     * @var string
      */
+    private $event;
 
-//     private $name;
+    /**
+     * 
+     * @param array<string, string|int|null> $message
+     */
+    public function __construct($message) {
+        $this->event = strval($message['event']);
+    }
+    
+    public function __toString() {
+        return "Session " . $this->event . " action" .
+            "";
+    }
 
-//     public function __construct(string $name)
-//     {
-//         $this->name = $name;
-//     }
-
-//    public function getName(): string
-//    {
-//        return $this->name;
-//    }
+    public function getEvent(): string {
+        return $this->event;
+    }
 }

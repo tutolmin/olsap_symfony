@@ -191,7 +191,7 @@ class LxcManager
      * @param bool $async
      * @return bool
      */
-    public function create($os_alias, $hp_name, $env_id = null, $async = true): bool {
+    public function create($os_alias, $hp_name, $env_id = -1, $async = true): bool {
         $this->logger->debug(__METHOD__);
 
         if ($async) {
@@ -253,22 +253,22 @@ class LxcManager
 //        $this->awxActionBus->dispatch(new AwxAction(["action" => "deployTestUser", "name" => $name_str]));
 
         // Environment id has been specified, bind to it
-        if($env_id){
+        if ($env_id > 0) {
 
             $environment = $this->environmentRepository->findOneById($env_id);
-            
-            if(!$environment){
+
+            if (!$environment) {
                 $this->logger->error("Environment id wasn't found " . $env_id);
                 return false;
             }
-            
+
             $this->logger->debug("Binding instance to the environment: `" . $environment);
 
 //            $this->environmentService->bindInstance($environment, $instance);
             $this->environmentActionBus->dispatch(new EnvironmentAction(["action" => "bind",
-                        "env_id" => $environment->getId(), "instance" => $name_str]));
+                        "env_id" => $environment->getId(), "instance_name" => $name_str]));
         }
-        
+
         return true;
     }
 
@@ -374,7 +374,7 @@ class LxcManager
      * @param bool $force
      * @return bool
      */
-    public function deleteObject($name, $force = false) {//: ?InstanceTypes
+    public function deleteObject($name, $force = false) {
         $this->logger->debug(__METHOD__);
 
         if ($this->wipeInstance($name, $force)) {
@@ -400,7 +400,7 @@ class LxcManager
      * @param bool $async
      * @return bool
      */
-    public function deleteInstance($name, $force = false, bool $async = true) {//: ?InstanceTypes
+    public function deleteInstance($name, $force = false, bool $async = true) {
         $this->logger->debug(__METHOD__);
 
         if ($async) {

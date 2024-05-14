@@ -59,7 +59,8 @@ $this->entityManager = $entityManager;
 */        
 
         $normalizers = [
-            new AddressesDenormalizer(new ObjectNormalizer(), $this->entityManager),
+//            new AddressesDenormalizer(new ObjectNormalizer(), $this->entityManager),
+            new AddressesDenormalizer($this->entityManager),
 //            new ObjectNormalizer(),
             new ArrayDenormalizer()
         ];

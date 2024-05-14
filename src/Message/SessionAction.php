@@ -38,6 +38,14 @@ final class SessionAction {
         $this->session_id = array_key_exists('session_id', $message) ? intval($message['session_id']) : -1;
         $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;
     }
+    
+    public function __toString() {
+        return "Session " . $this->action . " action" .
+                ($this->environment_id !== -1 ? ", Environment ID: " . $this->environment_id : "") .
+                ($this->task_id !== -1 ? ", Task ID: " . $this->task_id : "") .
+                ($this->session_id !== -1 ? ", Session ID: " . $this->session_id : "") .
+            "";
+    }
 
     public function getAction(): string {
         return $this->action;

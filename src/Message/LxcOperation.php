@@ -67,6 +67,18 @@ final class LxcOperation {
         $this->instance_id = array_key_exists('instance_id', $message) ? intval($message['instance_id']) : -1;
     }
 
+    public function __toString() {
+        return "LXC " . $this->command . " operation" .
+                (strlen($this->name) > 0 ? " for " . $this->name : "") .
+                (strlen($this->operating_system) > 0 ? ", OS: " . $this->operating_system : "") .
+                (strlen($this->hardware_profile) > 0 ? ", HW profile: " . $this->hardware_profile : "") .
+                ($this->environment_id !== -1 ? ", Environment ID: " . $this->environment_id : "") .
+                (strlen($this->status) > 0 ? ", Status: " . $this->status : "") .
+                ($this->instance_type_id !== -1 ? ", Instance Type ID: " . $this->instance_type_id : "") .
+                ($this->instance_id !== -1 ? ", Instance ID: " . $this->instance_id : "") .
+            "";
+    }
+
     public function getCommand(): string {
         return $this->command;
     }

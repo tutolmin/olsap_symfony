@@ -84,7 +84,8 @@ class EnvironmentsController extends AbstractController
 
             $task_id = $environment->getTask() ? $environment->getTask()->getId() : -1;
             
-            $session_id = is_int($form->get('session')->getData()) ? $form->get('session')->getData() : -1;
+            $session_id = $environment->getSession() ? $environment->getSession()->getId() : -1;
+//            $session_id = is_int($form->get('session')->getData()) ? $form->get('session')->getData() : -1;
                 
             $this->logger->debug("Selected Task: " . $task_id . " Session: " . $session_id);
 

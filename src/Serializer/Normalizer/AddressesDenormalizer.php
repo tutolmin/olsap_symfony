@@ -6,26 +6,27 @@ use App\Entity\Addresses;
 use App\Entity\Ports;
 //use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use App\Repository\PortsRepository;
+#use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+#use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+#use App\Repository\PortsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 #use Doctrine\Persistence\ObjectManager;
 
 class AddressesDenormalizer implements DenormalizerInterface
 {
     private EntityManagerInterface $entityManager;
-    private ObjectNormalizer $objectNormalizer;
+#    private ObjectNormalizer $objectNormalizer;
 
 #    private ObjectManager $objectManager;
 
-    public function __construct(ObjectNormalizer $objectNormalizer, 
+    public function __construct(
+#            ObjectNormalizer $objectNormalizer, 
 
 #	ObjectManager $objectManager,
 EntityManagerInterface $entityManager
 )
     {
-        $this->objectNormalizer = $objectNormalizer;
+#        $this->objectNormalizer = $objectNormalizer;
         $this->entityManager = $entityManager;
 #       $this->objectManager = $objectManager;
     }

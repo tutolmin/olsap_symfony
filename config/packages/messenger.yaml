@@ -1,6 +1,14 @@
 framework:
     messenger:
-
+        serializer:
+#            default_serializer: messenger.transport.symfony_serializer
+#            symfony_serializer:
+#                format: csv
+# bug with symfony serializer
+# https://github.com/symfony/symfony/issues/33394
+#                format: json
+#                context: { }
+                
         # The bus that is going to be injected when injecting MessageBusInterface
         default_bus: session.action.bus
         buses:
@@ -50,7 +58,10 @@ framework:
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
-            async: '%env(MESSENGER_TRANSPORT_DSN)%'
+            async: 
+              dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+#              serializer: messenger.transport.symfony_serializer
+              serializer: App\Serializer\JsonMessageSerializer
             failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
 

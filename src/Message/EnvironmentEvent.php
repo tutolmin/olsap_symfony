@@ -24,6 +24,12 @@ final class EnvironmentEvent {
         $this->event = strval($message['event']);
         $this->id = array_key_exists('id', $message) ? intval($message['id']) : -1;
     }
+    
+    public function __toString() {
+        return "Evironment " . $this->event . " event" .
+                ($this->id !== -1 ? " for ID " . $this->id : "") .
+                "";
+    }
 
     public function getEvent(): string {
         return $this->event;

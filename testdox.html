@@ -77,6 +77,16 @@
             <li class="success">Can not add duplicate domain</li>
             <li class="success">Domain removal leads to linked technologies deletion</li>
         </ul>
+        <h2>Environment Statuses (App\Tests\EnvironmentStatuses)</h2>
+        <ul>
+            <li class="success">Environment statuses list is not empty</li>
+            <li class="defect">Environment status has environments reference</li>
+            <li class="success">Can not add environment status without status string</li>
+            <li class="success">Can not add duplicate environment status</li>
+            <li class="success">Can add dummy environment status</li>
+            <li class="defect">Can not remove referenced environment status</li>
+            <li class="defect">Can remove environment status with cascade flag</li>
+        </ul>
         <h2>Hardware Profiles (App\Tests\HardwareProfiles)</h2>
         <ul>
             <li class="success">Hardware profiles list is not empty</li>
@@ -126,6 +136,16 @@
             <li class="defect">Can remove supported operating system with cascade flag</li>
             <li class="success">Can make operating system supported</li>
             <li class="success">Can make operating system unsupported</li>
+        </ul>
+        <h2>Session Statuses (App\Tests\SessionStatuses)</h2>
+        <ul>
+            <li class="success">Session statuses list is not empty</li>
+            <li class="defect">Session status has sessions reference</li>
+            <li class="success">Can not add session status without status string</li>
+            <li class="success">Can not add duplicate session status</li>
+            <li class="success">Can add dummy session status</li>
+            <li class="defect">Can not remove referenced session status</li>
+            <li class="defect">Can remove session status with cascade flag</li>
         </ul>
         <h2>Technologies (App\Tests\Technologies)</h2>
         <ul>

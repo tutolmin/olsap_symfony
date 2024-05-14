@@ -24,6 +24,12 @@ final class AwxAction {
         $this->action = strval($message['name']);
         $this->environment_id = array_key_exists('environment_id', $message) ? intval($message['environment_id']) : -1;
     }
+   
+    public function __toString() {
+        return "AWX " . $this->action . " action" .
+                ($this->environment_id !== -1 ? ", Environment ID: " . $this->environment_id : "") .
+            "";
+    }
 
     public function getAction(): string {
         return $this->action;

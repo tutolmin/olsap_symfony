@@ -108,7 +108,7 @@ final class LxcOperationHandler
 	if (strlen($message->getHP())) {
             $hardware_profile = $message->getHP();
         }
-        $environment_id = null;
+        $environment_id = -1;
 	if ($message->getEnvironmentId()>0) {
             $environment_id = $message->getEnvironmentId();
         }

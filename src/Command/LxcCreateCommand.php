@@ -90,7 +90,7 @@ class LxcCreateCommand extends Command {
         $this->io->note(sprintf('Creating new LXC object(s): %s %s',
                         $this->os_alias, $this->hp_name));
         for ($i = 0; $i < $this->object_number; $i++) {
-            if ($this->lxcService->create($this->os_alias, $this->hp_name, null, 
+            if ($this->lxcService->create($this->os_alias, $this->hp_name, -1, 
                     is_bool($input->getOption('async')) ? $input->getOption('async') : false)) {
                 $this->io->success('Object created successfully!');
             } else {

@@ -24,6 +24,12 @@ final class LxcEvent {
         $this->event = strval($message['event']);
         $this->name = array_key_exists('name', $message) ? strval($message['name']) : "";
     }
+    
+    public function __toString() {
+        return "LXC " . $this->event . " event" .
+                (strlen($this->name) > 0 ? " for " . $this->name : "") .
+                "";
+    }
 
     public function getEvent(): string {
         return $this->event;
