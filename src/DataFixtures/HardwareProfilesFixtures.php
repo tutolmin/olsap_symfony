@@ -23,7 +23,6 @@ class HardwareProfilesFixtures extends Fixture {
                 'App\Entity\HardwareProfiles[]', 'csv');
 
         foreach ($sessionStatuses as $sessionStatus) {
-
             $manager->persist($sessionStatus);
         }
         

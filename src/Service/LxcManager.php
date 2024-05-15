@@ -10,6 +10,7 @@ use App\Repository\InstanceStatusesRepository;
 use GuzzleHttp\Client as GuzzleClient;
 use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use App\Entity\Addresses;
+use App\Entity\Breeds;
 use App\Entity\Instances;
 use App\Entity\InstanceStatuses;
 use App\Entity\InstanceTypes;
@@ -24,6 +25,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use App\Message\LxcEvent;
 use App\Message\LxcOperation;
 use App\Message\EnvironmentAction;
+use App\Repository\BreedsRepository;
 use App\Repository\OperatingSystemsRepository;
 use App\Repository\HardwareProfilesRepository;
 use App\Repository\AddressesRepository;
@@ -44,6 +46,7 @@ class LxcManager
 
     private EntityManagerInterface $entityManager;
     private InstanceTypesRepository $itRepository;
+    private BreedsRepository $breedRepository;
     private InstanceStatusesRepository $instanceStatusesRepository;
     private InstancesRepository $instanceRepository;
     private OperatingSystemsRepository $osRepository;
@@ -63,21 +66,14 @@ class LxcManager
 
         $this->entityManager = $entityManager;
 
-        // get the InstanceTypes repository
+        // Repositories
         $this->itRepository = $this->entityManager->getRepository( InstanceTypes::class);
         $this->instanceStatusesRepository = $this->entityManager->getRepository(InstanceStatuses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
-
-        // get the OperatingSystems repository
         $this->osRepository = $this->entityManager->getRepository( OperatingSystems::class);
-
-        // get the HardwareProfiles repository
+        $this->breedRepository = $this->entityManager->getRepository(Breeds::class);
         $this->hpRepository = $this->entityManager->getRepository( HardwareProfiles::class);
-
-        // get the Addresses repository
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
-        
-        // get the Environment repository
         $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
                 
 //        $this->environmentService = $environmentService;
@@ -146,7 +142,7 @@ class LxcManager
 
         // Both OS and HW profile objects found
         if (!$instance_type) {
-            $this->logger->debug("Instance type id was not found in the database for valid OS and HW profile. Run `app:instance-types:populate` command");
+            $this->logger->debug("Instance type id was not found in the database for valid OS and HW profile.");
             return null;
         }
 
@@ -622,6 +618,86 @@ class LxcManager
         } else {
             return null;
         }
+    }
+    
+    /**
+     * 
+     * @param array<mixed> $info
+     * @return bool
+     */
+    public function importInstance($info): bool {
+        
+        if (!array_key_exists('config', $info) || !is_array($info['config'])) {
+            $this->logger->debug("Invalid LXC object information structure provided.");
+            return false;
+        }
+        
+        $hp = $this->hpRepository->findOneByName(is_array($info['profiles']) ? $info['profiles'][0] : "");
+        $breed = $this->breedRepository->findOneByName($info['config']['image.os']);
+        $os = $this->osRepository->findOneBy(['breed' => $breed ? $breed->getId() : -1,
+            'release' => $info['config']['image.release']]);
+            
+        $this->logger->debug("OS: ". $os . ", breed: ". $breed . ", hp: ". $hp);
+
+        if (!$os || !$hp) {
+            $this->logger->debug("Unknown OS or HW profile provided.");
+            return false;
+        }
+
+        // look for the instance type
+        $instance_type = $this->itRepository->findOneBy(array('os' => $os->getId(), 'hw_profile' => $hp->getId()));
+        if (!$instance_type) {
+            $this->logger->debug("Instance type id was not found in the database for valid OS and HW profile.");
+            return false;
+        }
+
+        $address = $this->addressRepository->findOneByMac($info['config']['volatile.eth0.hwaddr']);
+        if(!$address){
+            $this->logger->debug("Unknown address provided.");
+            return false;
+        }
+        
+        $instance_status = $this->instanceStatusesRepository->findOneByStatus(
+                is_string($info['status']) ? $info['status'] : "New");
+        if(!$instance_status){
+            $this->logger->debug("Instance status invalid.");
+            return false;
+        }
+        
+        $this->logger->debug("Name: `" . (is_string($info['name']) ? $info['name'] : "") .
+                "`, HP: `" . $hp . "`, " . " status: `" . $instance_status .
+                "`, OS: `" . $os . "`, " . "Address: `" . $address . "`");
+
+        $instance = new Instances;
+        $instance->setStatus($instance_status);
+        $instance->setInstanceType($instance_type);
+        $instance->setName(is_string($info['name']) ? $info['name'] : bin2hex(random_bytes(10)));
+//        $this->logger->debug("Instance name: " . $instance->getName());
+        $this->entityManager->persist($instance);
+
+        $address->setInstance($instance);
+
+        // TODO: catch no address available exception
+        // TODO: same address can be allocated to multiple new instances on a race condidion
+
+//        $this->logger->debug("Selected address: " . $address->getIp() . ", MAC: " . $address->getMac());
+
+        $this->entityManager->flush();
+     
+        
+        /*
+ *         $obj = $this->instanceRepository->findOneByName($info['name']);
+        if (!$obj && array_key_exists('config', $info) && is_array($info['config'])) {
+            $this->io->note(sprintf('Name: %s, status: %s, type: %s, os: %s, release: %s, profile: %s, MAC: %s',
+                            is_string($info['name']) ? $info['name'] : "",
+                            is_string($info['status']) ? $info['status'] : "",
+                            is_string($info['type']) ? $info['type'] : "",
+                            $info['config']['image.os'],
+                            $info['config']['image.release'],
+                            is_array($info['profiles']) ? $info['profiles'][0] : "",
+                            $info['config']['volatile.lxcbr0.hwaddr']));
+ */  
+                            return true;
     }
     
     /**

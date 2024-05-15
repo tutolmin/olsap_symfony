@@ -45,6 +45,7 @@ class LxcLsCommand extends Command {
 
         $this
                 ->addOption('orphans', null, InputOption::VALUE_NONE, 'Show orphan objects which does NOT have corresponding instances')
+                ->addOption('import', null, InputOption::VALUE_NONE, 'import orphan objects into Instances')
         ;
     }
 
@@ -67,28 +68,38 @@ class LxcLsCommand extends Command {
      * @param array<string> $objects
      * @return void
      */
-    private function listOrphanItems($objects): void {
+    private function listOrphanItems($objects, bool $import): void {
         foreach ($objects as $object) {
             $info = $this->lxcService->getObjectInfo($object);
             if ($info && is_array($info)) {
-                $this->showOrphanItem($info);
+                $this->showOrphanItem($info, $import);
             }
         }
     }
     
     /**
      * 
-     * @param array<string> $info
+     * @param array<string, mixed> $info
      */
-    private function showOrphanItem(array $info): void {
+    private function showOrphanItem(array $info, bool $import): void {
         // look for a specific instance type object
         $obj = $this->instanceRepository->findOneByName($info['name']);
-        if (!$obj) {
-            $this->io->note(sprintf('Name: %s, status: %s',
-                            $info['name'], $info['status']));
+        if (!$obj && array_key_exists('config', $info) && is_array($info['config'])) {
+//            var_dump($info);
+            $this->io->note(sprintf('Name: %s, status: %s, type: %s, os: %s, release: %s, profile: %s, MAC: %s',
+                            is_string($info['name']) ? $info['name'] : "",
+                            is_string($info['status']) ? $info['status'] : "",
+                            is_string($info['type']) ? $info['type'] : "",
+                            $info['config']['image.os'],
+                            $info['config']['image.release'],
+                            is_array($info['profiles']) ? $info['profiles'][0] : "",
+                            $info['config']['volatile.eth0.hwaddr']));
+            if($import) {
+                $this->lxcService->importInstance( $info);
+            }
         }
     }
-
+    
     protected function execute(InputInterface $input, OutputInterface $output): int {
         $this->io = new SymfonyStyle($input, $output);
 
@@ -100,7 +111,8 @@ class LxcLsCommand extends Command {
         }
 
         if ($input->getOption('orphans')) {
-            $this->listOrphanItems($objects);
+            $this->listOrphanItems($objects, 
+                    $input->getOption('import') ? true : false);
         } else {
             $this->listItems($objects);
         }

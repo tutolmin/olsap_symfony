@@ -43,11 +43,11 @@ Hardware Profiles (App\Tests\HardwareProfiles)
  [x] Can not remove supported hardware profile
  [ ] Can remove supported hardware profile with cascade flag
  [x] Can make hardware profile supported
- [x] Can make hardware profile unsupported
+ [ ] Can make hardware profile unsupported
 
 Instance Statuses (App\Tests\InstanceStatuses)
  [x] Instance statuses list is not empty
- [ ] Instance status has instances reference
+ [x] Instance status has instances reference
  [x] Can not add instance status without status string
  [x] Can not add duplicate instance status
  [x] Can add dummy instance status
@@ -72,7 +72,7 @@ Operating Systems (App\Tests\OperatingSystems)
  [x] Can not remove supported operating system
  [ ] Can remove supported operating system with cascade flag
  [x] Can make operating system supported
- [x] Can make operating system unsupported
+ [ ] Can make operating system unsupported
 
 Session Statuses (App\Tests\SessionStatuses)
  [x] Session statuses list is not empty

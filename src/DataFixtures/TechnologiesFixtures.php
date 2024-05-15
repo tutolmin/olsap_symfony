@@ -4,88 +4,57 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\Domains;
-use App\Entity\Technologies;
 use Psr\Log\LoggerInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use App\Serializer\Normalizer\TechnologiesDenormalizer;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
 
-class TechnologiesFixtures extends Fixture implements DependentFixtureInterface
-{
+class TechnologiesFixtures extends Fixture implements DependentFixtureInterface {
+
     private LoggerInterface $logger;
+    private EntityManagerInterface $entityManager;
 
-    public function __construct(LoggerInterface $logger)
-    {
+    public function __construct(LoggerInterface $logger,
+            EntityManagerInterface $entityManager
+    ) {
 //        parent::__construct();
-        
+
         $this->logger = $logger;
+        $this->entityManager = $entityManager;
         $this->logger->debug(__METHOD__);
     }
-    
+
     /**
      * 
      * @return array<int, string>
      */
-    public function getDependencies()
-    {
+    public function getDependencies() {
         return [
             DomainsFixtures::class,
         ];
     }
-    
+
     public function load(ObjectManager $manager): void {
         $this->logger->debug(__METHOD__);
-        
-        $techs = array(
-            "LVM" => ["Storage", "Logical Volume Manager configuration, managing and troubleshooting."],
-            "Ceph" => ["Storage", "Configuring and troubleshooting Ceph storage."],
-            "Netplan" => ["Network", "Configuring the network with netplan."],
-            "NetworkManager" => ["Network", "Configuring the network with NetworkManager."],
-            "Bonding" => ["Network", "Configure interface bonding."],
-            "ACL" => ["Security", "Setting and removing file ACLs"],
-            "Permissions" => ["Security", "Changing file permissions on filesystems."],
-            "Ansible" => ["Automation", "Configuration management."],
-            "Tuned" => ["Performance", "Special profiles for system parameters"],
-            "Filesystems" => ["Storage", "creating, resizing, repairing"],
-            "RPM" => ["Software", null],
-            "DNF" => ["Software", null],
-            "docker" => ["Virtualization", null],
-            "APT" => ["Software", null],
-            "Files and directories" => ["System management", null],
-            "NFS" => ["Storage", null],
-            "Systemd" => ["System management", null],
-            "Firewall" => ["Network", null],
-            "Remote access" => ["System management", "Access via SSH"],
-            "Network traffic" => ["Monitoring", "capture, analyze network traffic."],
-            "View processes" => ["Monitoring", "top, nmon, etc."],
-            "I/O activity" => ["Monitoring", "view I/O activity, iostat"],
-            "Dpkg" => ["Software", "use debian package manager"],
-            "dmidecode" => ["Hardware", "dmidecode  is a tool for dumping a computer's DMI (some say SMBIOS) table contents in a human-readable format."],
-            "Network Settings" => ["Network", "Network subsystem settings"],
-            "Archiving" => ["System management", "ZIP, GZip, TAR, etc."],
-            "Users and groups" => ["System management", "Adding, removing, managing users and groups"],
-        );
-        foreach ($techs as $name => $tech_arr) {
 
-//            $this->logger->debug("Tech: " . $name);
+        $csvContents = file_get_contents('/var/tmp/technologies.csv');
 
-            $tech = new Technologies();
-            $tech->setName($name);
+        $normalizers = [
+            new TechnologiesDenormalizer($this->entityManager),
+            new ArrayDenormalizer()
+        ];
 
-            if ($tech_arr[1]) {
-                $tech->setDescription($tech_arr[1]);
-            }
-//            $this->logger->debug("Domain: " . $tech_arr[0]);
+        $serializer = new Serializer($normalizers, [new CsvEncoder()]);
 
-            $domainsRepository = $manager->getRepository(Domains::class);
-            $domain = $domainsRepository->findOneByName($tech_arr[0]);
+        $technologies = $serializer->deserialize($csvContents,
+                'App\Entity\Technologies[]', 'csv');
 
-            $this->logger->debug("Domain: " . $domain);
-
-            if ($domain) {
-                $tech->setDomain($domain);
-            }
-
-            $manager->persist($tech);
+        foreach ($technologies as $technology) {
+            $manager->persist($technology);
         }
 
         $manager->flush();

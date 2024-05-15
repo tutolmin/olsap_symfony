@@ -2,9 +2,3 @@
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ breed.id) }}">
     <button class="btn">Delete</button>
 </form>
-<!--    
-<form method="post" action="{{ path('app_breeds_delete_cascade', {'id': breed.id}) }}" onsubmit="return confirm('Are you sure you want to cascade delete this item and corresponding records?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete_cascade' ~ breed.id) }}">
-    <button class="btn">Cascade Delete</button>
-</form>
--->

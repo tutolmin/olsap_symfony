@@ -19,7 +19,8 @@ class PortsFixtures extends Fixture
                 [new ObjectNormalizer(), new ArrayDenormalizer()],
                 [new CsvEncoder()]);
         
-        $ports = $serializer->deserialize($csvContents, 'App\Entity\Ports[]', 'csv');
+        $ports = $serializer->deserialize($csvContents, 
+                'App\Entity\Ports[]', 'csv');
 
         foreach ($ports as $port) {
 

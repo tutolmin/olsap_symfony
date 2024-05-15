@@ -4,76 +4,60 @@ namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use App\Entity\OperatingSystems;
-use App\Entity\Breeds;
 use Psr\Log\LoggerInterface;
 use App\Service\OperatingSystemsManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use App\Serializer\Normalizer\OperatingSystemsDenormalizer;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
 
-class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterface
-{
+class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterface {
+
     private LoggerInterface $logger;
     private OperatingSystemsManager $osManager;
-    
+    private EntityManagerInterface $entityManager;
+
     public function __construct(LoggerInterface $logger,
-            OperatingSystemsManager $osManager)
-    {
+            OperatingSystemsManager $osManager,
+            EntityManagerInterface $entityManager
+    ) {
 //        parent::__construct();
-        
+
         $this->logger = $logger;
         $this->osManager = $osManager;
+        $this->entityManager = $entityManager;
         $this->logger->debug(__METHOD__);
     }
-    
+
     /**
      * 
      * @return array<int, string>
      */
-    public function getDependencies()
-    {
+    public function getDependencies() {
         return [
             BreedsFixtures::class,
         ];
     }
-    
-    public function load(ObjectManager $manager): void
-    {
-        $operating_systems = array(
-            ["18.04 LTS", "Major version", true, "Ubuntu", "bionic"],
-            ["33", "Older version", false, "Fedora", "f33"],
-            ["22.04 LTS", "Modern version", false, "Ubuntu", "jammy"],
-            ["20.04 LTS", "Current version", true, "Ubuntu", "focal"],
-            ["38", "New version", true, "Fedora", "f38"],
-            ["39", "Latest version", false, "Fedora", "f39"],
-        );
+
+    public function load(ObjectManager $manager): void {
+        
+        $csvContents = file_get_contents('/var/tmp/operating-systems.csv');
+
+        $normalizers = [
+            new OperatingSystemsDenormalizer($this->entityManager),
+            new ArrayDenormalizer()
+        ];
+
+        $serializer = new Serializer($normalizers, [new CsvEncoder()]);
+
+        $operating_systems = $serializer->deserialize($csvContents, 
+                 'App\Entity\OperatingSystems[]', 'csv');
 
         foreach ($operating_systems as $operating_system) {
-
-            $os = new OperatingSystems();
-            $os->setRelease($operating_system[0]);
-            $os->setDescription($operating_system[1]);
-            $os->setSupported($operating_system[2]);
-            $os->setAlias($operating_system[4]);
-            
-            $breedsRepository = $manager->getRepository(Breeds::class);
-            $breed = $breedsRepository->findOneByName($operating_system[3]);
-
-            $this->logger->debug("Breed: " . $breed);
-            
-            if ($breed) {
-                $os->setBreed($breed);
-                $this->osManager->addOperatingSystem($os);
-            }
-
-            /*
-            $manager->persist($os);
-
-            // Add corresponding instance types
-            if ($os->isSupported()) {
-                $this->osManager->addInstanceTypes($os);
-            }
- * 
- */
+            $this->osManager->addOperatingSystem($operating_system);
         }
 
         $manager->flush();
