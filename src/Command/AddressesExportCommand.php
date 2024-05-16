@@ -22,7 +22,7 @@ use App\Serializer\Normalizer\AddressesNormalizer;
 
 #[AsCommand(
     name: 'app:addresses:export',
-    description: 'Exports addresses in CSV format',
+    description: 'Exports Addresses in CSV format',
 )]
 class AddressesExportCommand extends Command
 {

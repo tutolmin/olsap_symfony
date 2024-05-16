@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:environment-statuses:export',
-    description: 'Exports Environment Statuses in CSV format',
+    description: 'Exports EnvironmentStatuses in CSV format',
 )]
 class EnvironmentStatusesExportCommand extends Command
 {

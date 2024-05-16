@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:hardware-profiles:export',
-    description: 'Exports Hardware Profiles in CSV format',
+    description: 'Exports HardwareProfiles in CSV format',
 )]
 class HardwareProfilesExportCommand extends Command
 {

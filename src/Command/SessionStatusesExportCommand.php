@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:session-statuses:export',
-    description: 'Exports Session Statuses in CSV format',
+    description: 'Exports SessionStatuses in CSV format',
 )]
 class SessionStatusesExportCommand extends Command
 {

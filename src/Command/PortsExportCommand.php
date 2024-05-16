@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:ports:export',
-    description: 'Exports ports in CSV format',
+    description: 'Exports Ports in CSV format',
 )]
 class PortsExportCommand extends Command
 {

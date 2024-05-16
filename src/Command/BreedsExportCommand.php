@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
             name: 'app:breeds:export',
-            description: 'Exports breeds in CSV format',
+            description: 'Exports Breeds in CSV format',
     )]
 class BreedsExportCommand extends Command {
 

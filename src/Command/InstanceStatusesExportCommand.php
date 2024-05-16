@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:instance-statuses:export',
-    description: 'Exports Instance Statuses in CSV format',
+    description: 'Exports InstanceStatuses in CSV format',
 )]
 class InstanceStatusesExportCommand extends Command
 {

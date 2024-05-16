@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:technologies:export',
-    description: 'Exports OSes in CSV format',
+    description: 'Exports Technologies in CSV format',
 )]
 class TechnologiesExportCommand extends Command
 {

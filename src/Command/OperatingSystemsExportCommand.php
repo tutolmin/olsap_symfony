@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
     name: 'app:operating-systems:export',
-    description: 'Exports Operating Systems in CSV format',
+    description: 'Exports OperatingSystems in CSV format',
 )]
 class OperatingSystemsExportCommand extends Command
 {

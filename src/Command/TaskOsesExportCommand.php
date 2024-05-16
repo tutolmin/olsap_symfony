@@ -10,8 +10,8 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Domains;
-use App\Repository\DomainsRepository;
+use App\Entity\TaskOses;
+use App\Repository\TaskOsesRepository;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
@@ -20,28 +20,28 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
-    name: 'app:domains:export',
-    description: 'Exports Domains in CSV format',
+    name: 'app:task-oses:export',
+    description: 'Exports TaskOses in CSV format',
 )]
-class DomainsExportCommand extends Command
+class TaskOsesExportCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'domains.csv';
+    private string $filename = 'task-oses.csv';
 
     /**
      *
-     * @var DomainsRepository
+     * @var TaskOsesRepository
      */
-    private $domainsRepository;
+    private $taskOsesRepository;
 	
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->domainsRepository = $this->entityManager->getRepository(Domains::class);
+        $this->taskOsesRepository = $this->entityManager->getRepository(TaskOses::class);
     }
 
     protected function configure(): void
@@ -58,12 +58,13 @@ class DomainsExportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         
-        $domains = $this->domainsRepository->findAll();
-        
+        $taskTechs = $this->taskOsesRepository->findAll();
+
         $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
-        $csvContent = $serializer->serialize($domains, 'csv', 
-                [AbstractNormalizer::ATTRIBUTES => ['name','description']]);
+        $csvContent = $serializer->serialize($taskTechs, 'csv',
+                [AbstractNormalizer::ATTRIBUTES =>
+                    ['task' => ['path'], 'os' => ['alias']]]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();
