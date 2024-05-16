@@ -41,7 +41,7 @@ class TaskOsesFixtures extends Fixture implements DependentFixtureInterface, Fix
     }
 
     public static function getGroups(): array {
-        return ['tasks','oses'];
+        return ['oses'];
     }
 
     public function load(ObjectManager $manager): void {

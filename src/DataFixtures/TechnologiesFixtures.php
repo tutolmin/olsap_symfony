@@ -12,8 +12,9 @@ use Symfony\Component\Serializer\Serializer;
 use App\Serializer\Normalizer\TechnologiesDenormalizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class TechnologiesFixtures extends Fixture implements DependentFixtureInterface {
+class TechnologiesFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
 
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
@@ -36,6 +37,10 @@ class TechnologiesFixtures extends Fixture implements DependentFixtureInterface 
         return [
             DomainsFixtures::class,
         ];
+    }
+
+    public static function getGroups(): array {
+        return ['technologies'];
     }
 
     public function load(ObjectManager $manager): void {

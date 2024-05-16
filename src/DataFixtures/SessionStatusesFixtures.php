@@ -8,9 +8,14 @@ use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class SessionStatusesFixtures extends Fixture {
+class SessionStatusesFixtures extends Fixture implements FixtureGroupInterface {
 
+    public static function getGroups(): array {
+        return ['sessions'];
+    }
+    
     public function load(ObjectManager $manager): void {
         
         $csvContents = file_get_contents('/var/tmp/session-statuses.csv');

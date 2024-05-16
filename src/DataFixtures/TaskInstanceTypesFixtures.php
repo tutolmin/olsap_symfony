@@ -42,7 +42,7 @@ class TaskInstanceTypesFixtures extends Fixture implements DependentFixtureInter
     }
 
     public static function getGroups(): array {
-        return ['tasks','technologies'];
+        return ['tasks'];
     }
 
     public function load(ObjectManager $manager): void {

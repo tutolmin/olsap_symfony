@@ -13,8 +13,9 @@ use Symfony\Component\Serializer\Serializer;
 use App\Serializer\Normalizer\OperatingSystemsDenormalizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterface {
+class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
 
     private LoggerInterface $logger;
     private OperatingSystemsManager $osManager;
@@ -42,6 +43,10 @@ class OperatingSystemsFixtures extends Fixture implements DependentFixtureInterf
         ];
     }
 
+    public static function getGroups(): array {
+        return ['oses'];
+    }
+    
     public function load(ObjectManager $manager): void {
         
         $csvContents = file_get_contents('/var/tmp/operating-systems.csv');

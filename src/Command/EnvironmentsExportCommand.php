@@ -10,38 +10,40 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\TaskOses;
-use App\Repository\TaskOsesRepository;
+use App\Entity\Environments;
+use App\Repository\EnvironmentsRepository;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+//use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
-    name: 'app:task-oses:export',
-    description: 'Exports TaskOses in CSV format',
+    name: 'app:environments:export',
+    description: 'Exports Environments in CSV format',
 )]
-class TaskOsesExportCommand extends Command
+class EnvironmentsExportCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'task-oses.csv';
+    private string $filename = 'environments.csv';
 
     /**
      *
-     * @var TaskOsesRepository
+     * @var EnvironmentsRepository
      */
-    private $taskOsesRepository;
+    private $environmentsRepository;
 	
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->taskOsesRepository = $this->entityManager->getRepository(TaskOses::class);
+        $this->environmentsRepository = $this->entityManager->getRepository(Environments::class);
     }
 
     protected function configure(): void
@@ -58,13 +60,17 @@ class TaskOsesExportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         
-        $taskOses = $this->taskOsesRepository->findAll();
+        $environments = $this->environmentsRepository->findAll();
 
-        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $serializer = new Serializer(
+               // [new ObjectNormalizer()],
+                [new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)), new GetSetMethodNormalizer()],
+                [new CsvEncoder()]);
 
-        $csvContent = $serializer->serialize($taskOses, 'csv',
+        $csvContent = $serializer->serialize($environments, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
-                    ['task' => ['path'], 'os' => ['alias']]]);
+                    ['hash', 'task' => ['path'], 'instance' => ['name'], 'startedAt', 'finishedAt',
+                        'status' => ['status'], 'valid','deployed','verification', 'session' => ['hash']]]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

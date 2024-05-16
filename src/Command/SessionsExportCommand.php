@@ -10,38 +10,40 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\TaskOses;
-use App\Repository\TaskOsesRepository;
+use App\Entity\Sessions;
+use App\Repository\SessionsRepository;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+//use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 #[AsCommand(
-    name: 'app:task-oses:export',
-    description: 'Exports TaskOses in CSV format',
+    name: 'app:sessions:export',
+    description: 'Exports Sessions in CSV format',
 )]
-class TaskOsesExportCommand extends Command
+class SessionsExportCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'task-oses.csv';
+    private string $filename = 'sessions.csv';
 
     /**
      *
-     * @var TaskOsesRepository
+     * @var SessionsRepository
      */
-    private $taskOsesRepository;
+    private $sessionsRepository;
 	
     public function __construct(EntityManagerInterface $entityManager)
     {
         parent::__construct();
 
         $this->entityManager = $entityManager;
-        $this->taskOsesRepository = $this->entityManager->getRepository(TaskOses::class);
+        $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
     }
 
     protected function configure(): void
@@ -58,13 +60,17 @@ class TaskOsesExportCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         
-        $taskOses = $this->taskOsesRepository->findAll();
+        $sessions = $this->sessionsRepository->findAll();
 
-        $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+        $serializer = new Serializer(
+               // [new ObjectNormalizer()],
+                [new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)), new GetSetMethodNormalizer()],
+                [new CsvEncoder()]);
 
-        $csvContent = $serializer->serialize($taskOses, 'csv',
+        $csvContent = $serializer->serialize($sessions, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
-                    ['task' => ['path'], 'os' => ['alias']]]);
+                    ['hash', 'createdAt', 'startedAt','finishedAt',
+                        'status' => ['status'], 'testee' => ['oauthToken']]]);
         $io->note($csvContent);
 
         $filesystem = new Filesystem();
