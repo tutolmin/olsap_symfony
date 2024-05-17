@@ -17,9 +17,10 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-//use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use App\Serializer\Normalizer\EnvironmentsNormalizer;
 
 #[AsCommand(
     name: 'app:environments:export',
@@ -62,6 +63,8 @@ class EnvironmentsExportCommand extends Command
         
         $environments = $this->environmentsRepository->findAll();
 
+        $serializer = new Serializer([new EnvironmentsNormalizer(new ObjectNormalizer())], [new CsvEncoder()]);
+/*
         $serializer = new Serializer(
                // [new ObjectNormalizer()],
                 [new DateTimeNormalizer(array('datetime_format' => \DateTimeImmutable::ISO8601)), new GetSetMethodNormalizer()],
@@ -69,8 +72,13 @@ class EnvironmentsExportCommand extends Command
 
         $csvContent = $serializer->serialize($environments, 'csv',
                 [AbstractNormalizer::ATTRIBUTES =>
+    ['hash', 'task' => ['path'], 'status' => ['status'], 'session' => ['id'], 'valid']]);
+                /*
                     ['hash', 'task' => ['path'], 'instance' => ['name'], 'startedAt', 'finishedAt',
-                        'status' => ['status'], 'valid','deployed','verification', 'session' => ['hash']]]);
+                        'status' => ['status'], 'valid','deployment','verification', 'session' => ['hash']]]);
+                 * 
+                 */
+        $csvContent = $serializer->serialize($environments, 'csv');
         $io->note($csvContent);
 
         $filesystem = new Filesystem();

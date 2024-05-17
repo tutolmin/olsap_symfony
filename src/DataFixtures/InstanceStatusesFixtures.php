@@ -8,8 +8,13 @@ use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class InstanceStatusesFixtures extends Fixture {
+class InstanceStatusesFixtures extends Fixture implements FixtureGroupInterface {
+
+    public static function getGroups(): array {
+        return ['instances'];
+    }
     
     public function load(ObjectManager $manager): void {
         

@@ -671,6 +671,7 @@ class LxcManager
         $instance = new Instances;
         $instance->setStatus($instance_status);
         $instance->setInstanceType($instance_type);
+        $instance->setCreatedAt(new \DateTimeImmutable($info['created_at']));
         $instance->setName(is_string($info['name']) ? $info['name'] : bin2hex(random_bytes(10)));
 //        $this->logger->debug("Instance name: " . $instance->getName());
         $this->entityManager->persist($instance);

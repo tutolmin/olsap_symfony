@@ -22,7 +22,7 @@ class OperatingSystemsDenormalizer implements DenormalizerInterface {
         if (is_array($data) && array_key_exists('release', $data)) {
             $os->setRelease($data['release']);
         }
-        if (is_array($data) && array_key_exists('description', $data)) {
+        if (is_array($data) && array_key_exists('description', $data) && $data['description']) {
             $os->setDescription($data['description']);
         }
         if (is_array($data) && array_key_exists('supported', $data)) {

@@ -10,8 +10,9 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use App\Service\LxcManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class InstancesFixtures extends Fixture implements DependentFixtureInterface {
+class InstancesFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
 
     private LxcManager $lxcService;
 
@@ -28,7 +29,14 @@ class InstancesFixtures extends Fixture implements DependentFixtureInterface {
     {
         return [
             OperatingSystemsFixtures::class,
+            HardwareProfilesFixtures::class,
+            InstanceStatusesFixtures::class,
+            AddressesFixtures::class,
         ];
+    }
+
+    public static function getGroups(): array {
+        return ['instances'];
     }
 
     public function load(ObjectManager $manager): void {

@@ -9,12 +9,12 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use App\Serializer\Normalizer\TaskOsesDenormalizer;
+use App\Serializer\Normalizer\EnvironmentsDenormalizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class TaskOsesFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
+class EnvironmentsFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
 
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
@@ -35,32 +35,34 @@ class TaskOsesFixtures extends Fixture implements DependentFixtureInterface, Fix
      */
     public function getDependencies() {
         return [
-            TasksFixtures::class,
-            OperatingSystemsFixtures::class,
+            SessionsFixtures::class, 
+            TasksFixtures::class, 
+            InstancesFixtures::class, 
+            EnvironmentStatusesFixtures::class
         ];
     }
 
     public static function getGroups(): array {
-        return ['tasks','oses'];
+        return ['environments'];
     }
 
     public function load(ObjectManager $manager): void {
         $this->logger->debug(__METHOD__);
 
-        $csvContents = file_get_contents('/var/tmp/task-oses.csv');
+        $csvContents = file_get_contents('/var/tmp/environments.csv');
 
         $normalizers = [
-            new TaskOsesDenormalizer($this->entityManager),
+            new EnvironmentsDenormalizer($this->entityManager),
             new ArrayDenormalizer()
         ];
 
         $serializer = new Serializer($normalizers, [new CsvEncoder()]);
 
-        $taskOses = $serializer->deserialize($csvContents,
-                'App\Entity\TaskOses[]', 'csv');
+        $environments = $serializer->deserialize($csvContents,
+                'App\Entity\Environments[]', 'csv');
 
-        foreach ($taskOses as $taskOs) {
-            $manager->persist($taskOs);
+        foreach ($environments as $environment) {
+            $manager->persist($environment);
         }
 
         $manager->flush();

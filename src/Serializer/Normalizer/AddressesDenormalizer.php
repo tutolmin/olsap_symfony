@@ -38,7 +38,6 @@ EntityManagerInterface $entityManager
             $address->setIp($data['ip']);
         }
         if (is_array($data) && array_key_exists('mac', $data)) {
-
             $address->setMac($data['mac']);
         }
 

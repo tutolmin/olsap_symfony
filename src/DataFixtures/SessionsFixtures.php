@@ -9,12 +9,12 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use App\Serializer\Normalizer\TaskOsesDenormalizer;
+use App\Serializer\Normalizer\SessionsDenormalizer;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 
-class TaskOsesFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
+class SessionsFixtures extends Fixture implements DependentFixtureInterface, FixtureGroupInterface {
 
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
@@ -35,32 +35,32 @@ class TaskOsesFixtures extends Fixture implements DependentFixtureInterface, Fix
      */
     public function getDependencies() {
         return [
-            TasksFixtures::class,
-            OperatingSystemsFixtures::class,
+            TesteesFixtures::class, 
+            SessionStatusesFixtures::class
         ];
     }
 
     public static function getGroups(): array {
-        return ['tasks','oses'];
+        return ['sessions'];
     }
 
     public function load(ObjectManager $manager): void {
         $this->logger->debug(__METHOD__);
 
-        $csvContents = file_get_contents('/var/tmp/task-oses.csv');
+        $csvContents = file_get_contents('/var/tmp/sessions.csv');
 
         $normalizers = [
-            new TaskOsesDenormalizer($this->entityManager),
+            new SessionsDenormalizer($this->entityManager),
             new ArrayDenormalizer()
         ];
 
         $serializer = new Serializer($normalizers, [new CsvEncoder()]);
 
-        $taskOses = $serializer->deserialize($csvContents,
-                'App\Entity\TaskOses[]', 'csv');
+        $sessions = $serializer->deserialize($csvContents,
+                'App\Entity\Sessions[]', 'csv');
 
-        foreach ($taskOses as $taskOs) {
-            $manager->persist($taskOs);
+        foreach ($sessions as $session) {
+            $manager->persist($session);
         }
 
         $manager->flush();

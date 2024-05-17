@@ -28,7 +28,7 @@ class SessionTechsExportCommand extends Command
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
 
-    private string $filename = 'task-techs.csv';
+    private string $filename = 'session-techs.csv';
 
     /**
      *

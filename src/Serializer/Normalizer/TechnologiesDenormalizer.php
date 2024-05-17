@@ -22,7 +22,7 @@ class TechnologiesDenormalizer implements DenormalizerInterface {
         if (is_array($data) && array_key_exists('name', $data)) {
             $technology->setName($data['name']);
         }
-        if (is_array($data) && array_key_exists('description', $data)) {
+        if (is_array($data) && array_key_exists('description', $data) && $data['description']) {
             $technology->setDescription($data['description']);
         }
         if (is_array($data) && array_key_exists('domain', $data) && 
