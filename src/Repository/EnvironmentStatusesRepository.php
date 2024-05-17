@@ -9,6 +9,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
+use Doctrine\ORM\ORMInvalidArgumentException;
 
 /**
  * @extends ServiceEntityRepository<EnvironmentStatuses>
@@ -60,6 +61,18 @@ class EnvironmentStatusesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+        
+        /*
+        if ($flush) {
+            try {
+                $this->getEntityManager()->flush();
+            } catch (ORMInvalidArgumentException $ex) {
+                $this->logger->error("Attempted to remove referenced value.");
+                return false;
+            }
+        }
+ * 
+ */
         return true;
     }
 

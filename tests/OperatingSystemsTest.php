@@ -154,7 +154,7 @@ class OperatingSystemsTest extends KernelTestCase
         $this->assertTrue($this->osManager->addOperatingSystem($os));
     }
 
-    public function testCanAddDummySupportedOperatingSystem(): void {
+    public function testCanAddDummySupportedOperatingSystem(): OperatingSystems {
         
         $breed = $this->breedsRepository->findOneBy(array());
         $this->assertNotNull($breed);
@@ -175,6 +175,7 @@ class OperatingSystemsTest extends KernelTestCase
             $this->assertNotEmpty($this->itRepository->findBy(
                             ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
         }
+        return $os;
     }
     
     /**
@@ -262,18 +263,15 @@ class OperatingSystemsTest extends KernelTestCase
     }
     
     /**
-     * @depends testSupportedOperatingSystemsListIsNotEmpty
-     * @param array<OperatingSystems> $oses
+     * @depends testCanAddDummySupportedOperatingSystem
+     * @param OperatingSystems $supported_os
      * @return void
      */    
-    public function testCanMakeOperatingSystemUnsupported(array $oses): void {
+    public function testCanMakeOperatingSystemUnsupported( $supported_os): void {
 
-        $os = $this->osRepository->findOneById($oses[0]->getId());
-        $this->assertNotNull($os);
-
-        $os->setSupported(false);
+        $supported_os->setSupported(false);
         
-        $this->osManager->editOperatingSystem($os);
+        $this->osManager->editOperatingSystem($supported_os);
 
 	$hw_profiles = $this->getSupportedHardwareProfiles();
         
@@ -282,7 +280,7 @@ class OperatingSystemsTest extends KernelTestCase
 
             // Try to find existing Instance type
             $this->assertEmpty($this->itRepository->findBy(
-                            ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
+                            ['os' => $supported_os->getId(), 'hw_profile' => $hp->getId()]));
         }
     }    
 }

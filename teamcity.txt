@@ -1,354 +1,60 @@
 
-##teamcity[testCount count='67' flowId='9303']
+##teamcity[testCount count='12' flowId='4896']
 
-##teamcity[testSuiteStarted name='App Test Suite' flowId='9303']
+##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='4896']
 
-##teamcity[testSuiteStarted name='App\Tests\BreedsTest' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest' flowId='9303']
+##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='4896']
 
-##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedsListIsNotEmpty' flowId='9303']
+##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='291' flowId='4896']
 
-##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='502' flowId='9303']
+##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='4896']
 
-##teamcity[testStarted name='testBreedHasOperatingSystemsReference' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedHasOperatingSystemsReference' flowId='9303']
+##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='17' flowId='4896']
 
-##teamcity[testFinished name='testBreedHasOperatingSystemsReference' duration='32' flowId='9303']
+##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='4896']
 
-##teamcity[testStarted name='testCanNotAddBreedWithoutName' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddBreedWithoutName' flowId='9303']
+##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='31' flowId='4896']
 
-##teamcity[testFinished name='testCanNotAddBreedWithoutName' duration='25' flowId='9303']
+##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutReleaseOrBreed' flowId='4896']
 
-##teamcity[testStarted name='testCanNotAddDuplicateBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddDuplicateBreed' flowId='9303']
+##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' duration='20' flowId='4896']
 
-##teamcity[testFinished name='testCanNotAddDuplicateBreed' duration='12' flowId='9303']
+##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='4896']
 
-##teamcity[testStarted name='testCanAddDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanAddDummyBreed' flowId='9303']
+##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='14' flowId='4896']
 
-##teamcity[testFinished name='testCanAddDummyBreed' duration='13' flowId='9303']
+##teamcity[testStarted name='testCanAddDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummyOperatingSystem' flowId='4896']
 
-##teamcity[testStarted name='testCanNotRemoveReferencedBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotRemoveReferencedBreed' flowId='9303']
+##teamcity[testFinished name='testCanAddDummyOperatingSystem' duration='12' flowId='4896']
 
-##teamcity[testFinished name='testCanNotRemoveReferencedBreed' duration='9' flowId='9303']
+##teamcity[testStarted name='testCanAddDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummySupportedOperatingSystem' flowId='4896']
 
-##teamcity[testStarted name='testCanRemoveBreedWithCascadeFlag' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveBreedWithCascadeFlag' flowId='9303']
+##teamcity[testFinished name='testCanAddDummySupportedOperatingSystem' duration='28' flowId='4896']
 
-##teamcity[testIgnored name='testCanRemoveBreedWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/BreedsTest.php:129|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='9303']
+##teamcity[testStarted name='testCanRemoveUnsupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveUnsupportedOperatingSystem' flowId='4896']
 
-##teamcity[testFinished name='testCanRemoveBreedWithCascadeFlag' duration='7' flowId='9303']
+##teamcity[testIgnored name='testCanRemoveUnsupportedOperatingSystem' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:188|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='4896']
 
-##teamcity[testSuiteFinished name='App\Tests\BreedsTest' flowId='9303']
+##teamcity[testFinished name='testCanRemoveUnsupportedOperatingSystem' duration='6' flowId='4896']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='9303']
+##teamcity[testStarted name='testCanNotRemoveSupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotRemoveSupportedOperatingSystem' flowId='4896']
 
-##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='9303']
+##teamcity[testFinished name='testCanNotRemoveSupportedOperatingSystem' duration='9' flowId='4896']
 
-##teamcity[testFinished name='testAwxMeIsSymfony' duration='4991' flowId='9303']
+##teamcity[testStarted name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveSupportedOperatingSystemWithCascadeFlag' flowId='4896']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='9303']
+##teamcity[testIgnored name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:218|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='4896']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='9303']
+##teamcity[testFinished name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' duration='7' flowId='4896']
 
-##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='9303']
+##teamcity[testStarted name='testCanMakeOperatingSystemSupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemSupported' flowId='4896']
 
-##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='1' flowId='9303']
+##teamcity[testFinished name='testCanMakeOperatingSystemSupported' duration='24' flowId='4896']
 
-##teamcity[testFinished name='testExecute' duration='1' flowId='9303']
+##teamcity[testStarted name='testCanMakeOperatingSystemUnsupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemUnsupported' flowId='4896']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='9303']
+##teamcity[testFailed name='testCanMakeOperatingSystemUnsupported' message='Doctrine\ORM\ORMInvalidArgumentException : A new entity was found through the relationship |'App\Entity\OperatingSystems#breed|' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={"persist"}).' details=' /srv/app/vendor/doctrine/orm/src/ORMInvalidArgumentException.php:103|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:3860|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:417|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/OperatingSystemsRepository.php:40|n /srv/app/src/Service/OperatingSystemsManager.php:86|n /srv/app/src/Service/OperatingSystemsManager.php:148|n /srv/app/tests/OperatingSystemsTest.php:274|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='11' flowId='4896']
 
-##teamcity[testSuiteStarted name='App\Tests\DomainsTest' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest' flowId='9303']
+##teamcity[testFinished name='testCanMakeOperatingSystemUnsupported' duration='11' flowId='4896']
 
-##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainsListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='18' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDomainWithoutName' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDomainWithoutName' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDomainWithoutName' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanAddAndRemoveDummyDomain' flowId='9303']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummyDomain' duration='15' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDuplicateDomain' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateDomain' duration='12' flowId='9303']
-
-##teamcity[testStarted name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainRemovalLeadsToLinkedTechnologiesDeletion' flowId='9303']
-
-##teamcity[testFinished name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' duration='57' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\DomainsTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\EnvironmentStatusesTest' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest' flowId='9303']
-
-##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='15' flowId='9303']
-
-##teamcity[testStarted name='testEnvironmentStatusHasEnvironmentsReference' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusHasEnvironmentsReference' flowId='9303']
-
-##teamcity[testFailed name='testEnvironmentStatusHasEnvironmentsReference' message='Failed asserting that false is true.' details=' /srv/app/tests/EnvironmentStatusesTest.php:68|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='19' flowId='9303']
-
-##teamcity[testFinished name='testEnvironmentStatusHasEnvironmentsReference' duration='19' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddEnvironmentStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddEnvironmentStatusWithoutStatusString' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddEnvironmentStatusWithoutStatusString' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddDuplicateEnvironmentStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateEnvironmentStatus' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummyEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanAddDummyEnvironmentStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummyEnvironmentStatus' duration='10' flowId='9303']
-
-##teamcity[testStarted name='testCanNotRemoveReferencedEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotRemoveReferencedEnvironmentStatus' flowId='9303']
-
-##teamcity[testIgnored name='testCanNotRemoveReferencedEnvironmentStatus' message='This test depends on "App\Tests\EnvironmentStatusesTest::testEnvironmentStatusHasEnvironmentsReference" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='9303']
-
-##teamcity[testFinished name='testCanNotRemoveReferencedEnvironmentStatus' duration='0' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveEnvironmentStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanRemoveEnvironmentStatusWithCascadeFlag' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveEnvironmentStatusWithCascadeFlag' message='This test depends on "App\Tests\EnvironmentStatusesTest::testEnvironmentStatusHasEnvironmentsReference" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveEnvironmentStatusWithCascadeFlag' duration='0' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\EnvironmentStatusesTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='9303']
-
-##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='13' flowId='9303']
-
-##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='8' flowId='9303']
-
-##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' flowId='9303']
-
-##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' duration='25' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='13' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='18' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummyHardwareProfile' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummyHardwareProfile' duration='11' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummySupportedHardwareProfile' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummySupportedHardwareProfile' duration='48' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveUnsupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveUnsupportedHardwareProfile' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveUnsupportedHardwareProfile' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:200|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveUnsupportedHardwareProfile' duration='6' flowId='9303']
-
-##teamcity[testStarted name='testCanNotRemoveSupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotRemoveSupportedHardwareProfile' flowId='9303']
-
-##teamcity[testFinished name='testCanNotRemoveSupportedHardwareProfile' duration='12' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveSupportedHardwareProfileWithCascadeFlag' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:229|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='8' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' duration='8' flowId='9303']
-
-##teamcity[testStarted name='testCanMakeHardwareProfileSupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileSupported' flowId='9303']
-
-##teamcity[testFinished name='testCanMakeHardwareProfileSupported' duration='45' flowId='9303']
-
-##teamcity[testStarted name='testCanMakeHardwareProfileUnsupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileUnsupported' flowId='9303']
-
-##teamcity[testFailed name='testCanMakeHardwareProfileUnsupported' message='Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException : An exception occurred while executing a query: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|nDETAIL:  Key (id)=(17) is still referenced from table "addresses".' details=' /srv/app/vendor/doctrine/dbal/src/Driver/API/PostgreSQL/ExceptionConverter.php:50|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1939|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1881|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1213|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/HardwareProfilesManager.php:117|n /srv/app/src/Service/HardwareProfilesManager.php:135|n /srv/app/tests/HardwareProfilesTest.php:288|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(17) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:28|n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:132|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/HardwareProfilesManager.php:117|n /srv/app/src/Service/HardwareProfilesManager.php:135|n /srv/app/tests/HardwareProfilesTest.php:288|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n PDOException: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(17) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:130|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/HardwareProfilesManager.php:117|n /srv/app/src/Service/HardwareProfilesManager.php:135|n /srv/app/tests/HardwareProfilesTest.php:288|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='46' flowId='9303']
-
-##teamcity[testFinished name='testCanMakeHardwareProfileUnsupported' duration='46' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\InstanceStatusesTest' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest' flowId='9303']
-
-##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='11' flowId='9303']
-
-##teamcity[testStarted name='testInstanceStatusHasInstancesReference' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusHasInstancesReference' flowId='9303']
-
-##teamcity[testFinished name='testInstanceStatusHasInstancesReference' duration='18' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddInstanceStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddInstanceStatusWithoutStatusString' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddInstanceStatusWithoutStatusString' duration='13' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddDuplicateInstanceStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateInstanceStatus' duration='10' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummyInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanAddDummyInstanceStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummyInstanceStatus' duration='11' flowId='9303']
-
-##teamcity[testStarted name='testCanNotRemoveReferencedInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotRemoveReferencedInstanceStatus' flowId='9303']
-
-##teamcity[testFailed name='testCanNotRemoveReferencedInstanceStatus' message='Doctrine\ORM\ORMInvalidArgumentException : Detached entity cosmic-possum cannot be removed' details=' /srv/app/vendor/doctrine/orm/src/ORMInvalidArgumentException.php:178|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:2154|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:2723|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:2132|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:2105|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:695|n /srv/app/src/Repository/InstanceStatusesRepository.php:58|n /srv/app/tests/InstanceStatusesTest.php:109|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='11' flowId='9303']
-
-##teamcity[testFinished name='testCanNotRemoveReferencedInstanceStatus' duration='11' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveInstanceStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanRemoveInstanceStatusWithCascadeFlag' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveInstanceStatusWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/InstanceStatusesTest.php:120|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='9' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveInstanceStatusWithCascadeFlag' duration='9' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\InstanceStatusesTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='9303']
-
-##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testSomething' flowId='9303']
-
-##teamcity[testFinished name='testSomething' duration='4' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\MessengerTest' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest' flowId='9303']
-
-##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest::testSomething' flowId='9303']
-
-##teamcity[testFinished name='testSomething' duration='0' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\MessengerTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='9303']
-
-##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='14' flowId='9303']
-
-##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='9303']
-
-##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='21' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutReleaseOrBreed' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' duration='11' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='16' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummyOperatingSystem' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummyOperatingSystem' duration='16' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummySupportedOperatingSystem' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummySupportedOperatingSystem' duration='27' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveUnsupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveUnsupportedOperatingSystem' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveUnsupportedOperatingSystem' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:187|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveUnsupportedOperatingSystem' duration='7' flowId='9303']
-
-##teamcity[testStarted name='testCanNotRemoveSupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotRemoveSupportedOperatingSystem' flowId='9303']
-
-##teamcity[testFinished name='testCanNotRemoveSupportedOperatingSystem' duration='9' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveSupportedOperatingSystemWithCascadeFlag' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:217|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' duration='7' flowId='9303']
-
-##teamcity[testStarted name='testCanMakeOperatingSystemSupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemSupported' flowId='9303']
-
-##teamcity[testFinished name='testCanMakeOperatingSystemSupported' duration='29' flowId='9303']
-
-##teamcity[testStarted name='testCanMakeOperatingSystemUnsupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemUnsupported' flowId='9303']
-
-##teamcity[testFailed name='testCanMakeOperatingSystemUnsupported' message='Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException : An exception occurred while executing a query: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|nDETAIL:  Key (id)=(17) is still referenced from table "addresses".' details=' /srv/app/vendor/doctrine/dbal/src/Driver/API/PostgreSQL/ExceptionConverter.php:50|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1939|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1881|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1213|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/OperatingSystemsManager.php:135|n /srv/app/src/Service/OperatingSystemsManager.php:153|n /srv/app/tests/OperatingSystemsTest.php:276|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(17) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:28|n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:132|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/OperatingSystemsManager.php:135|n /srv/app/src/Service/OperatingSystemsManager.php:153|n /srv/app/tests/OperatingSystemsTest.php:276|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n PDOException: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(17) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:130|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:58|n /srv/app/src/Service/OperatingSystemsManager.php:135|n /srv/app/src/Service/OperatingSystemsManager.php:153|n /srv/app/tests/OperatingSystemsTest.php:276|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='27' flowId='9303']
-
-##teamcity[testFinished name='testCanMakeOperatingSystemUnsupported' duration='27' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\SessionStatusesTest' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest' flowId='9303']
-
-##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='10' flowId='9303']
-
-##teamcity[testStarted name='testSessionStatusHasSessionsReference' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusHasSessionsReference' flowId='9303']
-
-##teamcity[testFailed name='testSessionStatusHasSessionsReference' message='Failed asserting that false is true.' details=' /srv/app/tests/SessionStatusesTest.php:68|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='16' flowId='9303']
-
-##teamcity[testFinished name='testSessionStatusHasSessionsReference' duration='16' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddSessionStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddSessionStatusWithoutStatusString' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddSessionStatusWithoutStatusString' duration='10' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddDuplicateSessionStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateSessionStatus' duration='13' flowId='9303']
-
-##teamcity[testStarted name='testCanAddDummySessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanAddDummySessionStatus' flowId='9303']
-
-##teamcity[testFinished name='testCanAddDummySessionStatus' duration='16' flowId='9303']
-
-##teamcity[testStarted name='testCanNotRemoveReferencedSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotRemoveReferencedSessionStatus' flowId='9303']
-
-##teamcity[testIgnored name='testCanNotRemoveReferencedSessionStatus' message='This test depends on "App\Tests\SessionStatusesTest::testSessionStatusHasSessionsReference" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='9303']
-
-##teamcity[testFinished name='testCanNotRemoveReferencedSessionStatus' duration='0' flowId='9303']
-
-##teamcity[testStarted name='testCanRemoveSessionStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanRemoveSessionStatusWithCascadeFlag' flowId='9303']
-
-##teamcity[testIgnored name='testCanRemoveSessionStatusWithCascadeFlag' message='This test depends on "App\Tests\SessionStatusesTest::testSessionStatusHasSessionsReference" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='9303']
-
-##teamcity[testFinished name='testCanRemoveSessionStatusWithCascadeFlag' duration='0' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\SessionStatusesTest' flowId='9303']
-
-##teamcity[testSuiteStarted name='App\Tests\TechnologiesTest' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest' flowId='9303']
-
-##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testTechnologiesListIsNotEmpty' flowId='9303']
-
-##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='19' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddTechnologyWithoutNameOrDomain' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddTechnologyWithoutNameOrDomain' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddTechnologyWithoutNameOrDomain' duration='12' flowId='9303']
-
-##teamcity[testStarted name='testCanAddAndRemoveDummyTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanAddAndRemoveDummyTechnology' flowId='9303']
-
-##teamcity[testFinished name='testCanAddAndRemoveDummyTechnology' duration='28' flowId='9303']
-
-##teamcity[testStarted name='testCanNotAddDuplicateTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddDuplicateTechnology' flowId='9303']
-
-##teamcity[testFinished name='testCanNotAddDuplicateTechnology' duration='19' flowId='9303']
-
-##teamcity[testSuiteFinished name='App\Tests\TechnologiesTest' flowId='9303']
-
-##teamcity[testSuiteFinished name='App Test Suite' flowId='9303']
+##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='4896']

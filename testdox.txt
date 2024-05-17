@@ -1,65 +1,3 @@
-Breeds (App\Tests\Breeds)
- [x] Breeds list is not empty
- [x] Breed has operating systems reference
- [x] Can not add breed without name
- [x] Can not add duplicate breed
- [x] Can add dummy breed
- [x] Can not remove referenced breed
- [ ] Can remove breed with cascade flag
-
-Awx Me Command (App\Tests\Command\AwxMeCommand)
- [x] Awx me is symfony
-
-Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
- [ ] Execute
-
-Domains (App\Tests\Domains)
- [x] Domains list is not empty
- [x] Can not add domain without name
- [x] Can add and remove dummy domain
- [x] Can not add duplicate domain
- [x] Domain removal leads to linked technologies deletion
-
-Environment Statuses (App\Tests\EnvironmentStatuses)
- [x] Environment statuses list is not empty
- [ ] Environment status has environments reference
- [x] Can not add environment status without status string
- [x] Can not add duplicate environment status
- [x] Can add dummy environment status
- [ ] Can not remove referenced environment status
- [ ] Can remove environment status with cascade flag
-
-Hardware Profiles (App\Tests\HardwareProfiles)
- [x] Hardware profiles list is not empty
- [x] Container hardware profiles list is not empty
- [x] Vm hardware profiles list is not empty
- [x] Supported hardware profiles list is not empty
- [x] Each supported hardware profile has corresponding instance types for all supported oses
- [x] Can not add hardware profile without name or type
- [x] Can not add duplicate hardware profile
- [x] Can add dummy hardware profile
- [x] Can add dummy supported hardware profile
- [ ] Can remove unsupported hardware profile
- [x] Can not remove supported hardware profile
- [ ] Can remove supported hardware profile with cascade flag
- [x] Can make hardware profile supported
- [ ] Can make hardware profile unsupported
-
-Instance Statuses (App\Tests\InstanceStatuses)
- [x] Instance statuses list is not empty
- [x] Instance status has instances reference
- [x] Can not add instance status without status string
- [x] Can not add duplicate instance status
- [x] Can add dummy instance status
- [ ] Can not remove referenced instance status
- [ ] Can remove instance status with cascade flag
-
-Instance Types (App\Tests\InstanceTypes)
- [x] Something
-
-Messenger (App\Tests\Messenger)
- [x] Something
-
 Operating Systems (App\Tests\OperatingSystems)
  [x] Operating systems list is not empty
  [x] Supported operating systems list is not empty
@@ -73,19 +11,4 @@ Operating Systems (App\Tests\OperatingSystems)
  [ ] Can remove supported operating system with cascade flag
  [x] Can make operating system supported
  [ ] Can make operating system unsupported
-
-Session Statuses (App\Tests\SessionStatuses)
- [x] Session statuses list is not empty
- [ ] Session status has sessions reference
- [x] Can not add session status without status string
- [x] Can not add duplicate session status
- [x] Can add dummy session status
- [ ] Can not remove referenced session status
- [ ] Can remove session status with cascade flag
-
-Technologies (App\Tests\Technologies)
- [x] Technologies list is not empty
- [x] Can not add technology without name or domain
- [x] Can add and remove dummy technology
- [x] Can not add duplicate technology
 
