@@ -5,6 +5,7 @@ namespace App\Repository;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\InstanceTypes;
+use App\Entity\OperatingSystems;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;

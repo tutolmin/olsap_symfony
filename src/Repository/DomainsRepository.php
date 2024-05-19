@@ -48,7 +48,7 @@ class DomainsRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(Domains $entity, bool $flush = false): void
+    public function remove(Domains $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
 
@@ -57,6 +57,7 @@ class DomainsRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+        return true;
     }
 
     /**

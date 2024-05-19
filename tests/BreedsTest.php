@@ -101,13 +101,28 @@ class BreedsTest extends KernelTestCase
         $this->assertFalse($this->breedsRepository->add($new_breed, true));
     }
 
-    public function testCanAddDummyBreed(): void {
+    /**
+     * 
+     * @return Breeds
+     */
+    public function testCanAddDummyBreed(): Breeds {
         
         $breed = new Breeds();
         $breed->setName($this->dummy['name']);
         $this->assertTrue($this->breedsRepository->add($breed, true));
+        return $breed;
     }
-    
+
+    /**
+     * @depends testCanAddDummyBreed
+     * @param Breeds $breed
+     * @return void
+     */
+    public function testCanRemoveDummyBreed(Breeds $breed): void {
+        
+        $this->assertTrue($this->breedsManager->removeBreed($breed));
+    }
+            
     /**
      * 
      * @depends testBreedHasOperatingSystemsReference

@@ -44,24 +44,41 @@ class DomainsTest extends KernelTestCase
         $this->technologiesRepository = $this->entityManager->getRepository(Technologies::class);        
     }
     
-    public function testDomainsListIsNotEmpty(): void {
+    /**
+     * 
+     * @return array<Domains>
+     */
+    public function testDomainsListIsNotEmpty(): array {
 
-        $this->assertNotEmpty($this->domainsRepository->findAll());
+        $domains = $this->domainsRepository->findAll();
+        $this->assertNotEmpty($domains);
+        return $domains;
     }
-
+    
+    /**
+     * 
+     * @depends testDomainsListIsNotEmpty
+     * @param array<Domains> $domains
+     * @return Domains|null
+     */
+    public function testDomainHasTechnologiesReference(array $domains): ?Domains {
+        
+        foreach ($domains as $domain) {
+            if($domain->getTechnologies()->first()){
+                $this->assertTrue(true);
+                return $domain;
+            }
+        }
+        
+        $this->assertTrue(false);
+        return null;
+    }
+    
     public function testCanNotAddDomainWithoutName(): void {
         
         $this->assertFalse($this->domainsRepository->add(new Domains(), true));
     }
     
-    public function testCanAddAndRemoveDummyDomain(): void {
-
-        $domain = new Domains();
-        $domain->setName($this->dummy['name']);
-        $this->assertTrue($this->domainsRepository->add($domain, true));
-        $this->domainsRepository->remove($domain, true);
-    }
-
     /**
      * @depends testDomainsListIsNotEmpty
      * @return void
@@ -74,6 +91,28 @@ class DomainsTest extends KernelTestCase
         $new_domain = new Domains();
         $new_domain->setName($domain->getName());
         $this->assertFalse($this->domainsRepository->add($new_domain, true));
+    }
+    
+    /**
+     * 
+     * @return Domains
+     */
+    public function testCanAddDummyDomain(): Domains {
+
+        $domain = new Domains();
+        $domain->setName($this->dummy['name']);
+        $this->assertTrue($this->domainsRepository->add($domain, true));
+        return $domain;
+    }
+
+    /**
+     * @depends testCanAddDummyDomain
+     * @param Domains $domain
+     * @return void
+     */
+    public function testCanRemoveDummyDomain(Domains $domain): void {
+        
+        $this->assertTrue($this->domainsRepository->remove($domain));
     }
     
     /**
