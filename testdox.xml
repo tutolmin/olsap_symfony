@@ -1,39 +1,294 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="0" time="0.291238962" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testAddressesListIsNotEmpty" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Addresses list is not empty" status="0" time="0.592585949" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="0" time="0.016866151" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutIp" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without ip" status="0" time="0.019791317" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types for all supported hardware profiles" status="0" time="0.031167668" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutMac" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without mac" status="0" time="0.014211561" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddOperatingSystemWithoutReleaseOrBreed" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add operating system without release or breed" status="0" time="0.020339281" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddDuplicateAddresses" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add duplicate addresses" status="0" time="0.028117128" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddDuplicateOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add duplicate operating system" status="0" time="0.013721373" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testSpareAddressesAreAvailable" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Spare addresses are available" status="0" time="0.276117887" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy operating system" status="0" time="0.011794053" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testEachInstanceHasAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Each instance has address" status="0" time="0.071892971" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummySupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy supported operating system" status="0" time="0.028414558" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanAddDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can add dummy address" status="0" time="0.014820339" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveUnsupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove unsupported operating system" status="1" time="0.006252504" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanRemoveDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can remove dummy address" status="0" time="0.008763648" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotRemoveSupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not remove supported operating system" status="0" time="0.009226163" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testBreedsListIsNotEmpty" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breeds list is not empty" status="0" time="0.018194004" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveSupportedOperatingSystemWithCascadeFlag" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove supported operating system with cascade flag" status="1" time="0.00674777" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testBreedHasOperatingSystemsReference" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breed has operating systems reference" status="0" time="0.01674438" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemSupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system supported" status="0" time="0.024208925" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddBreedWithoutName" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add breed without name" status="0" time="0.015003456" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemUnsupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system unsupported" status="4" time="0.011126162" size="-1" groups="default" exceptionLine="274" exceptionMessage="A new entity was found through the relationship 'App\Entity\OperatingSystems#breed' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={&quot;persist&quot;}).">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddDuplicateBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add duplicate breed" status="0" time="0.01279986" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\BreedsTest" methodName="testCanAddDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can add dummy breed" status="0" time="0.011254615" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\BreedsTest" methodName="testCanRemoveDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove dummy breed" status="0" time="0.010529569" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\BreedsTest" methodName="testCanNotRemoveReferencedBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not remove referenced breed" status="0" time="0.00933708" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\BreedsTest" methodName="testCanRemoveBreedWithCascadeFlag" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove breed with cascade flag" status="1" time="0.008105664" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="3.066800223" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.001354546" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domains list is not empty" status="0" time="0.01503014" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testDomainHasTechnologiesReference" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domain has technologies reference" status="0" time="0.01487807" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDomainWithoutName" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add domain without name" status="0" time="0.015006435" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDuplicateDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add duplicate domain" status="0" time="0.017528789" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testCanAddDummyDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can add dummy domain" status="0" time="0.01546017" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testCanRemoveDummyDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can remove dummy domain" status="0" time="0.008536722" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\DomainsTest" methodName="testDomainRemovalLeadsToLinkedTechnologiesDeletion" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domain removal leads to linked technologies deletion" status="0" time="0.029406538" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testEnvironmentStatusesListIsNotEmpty" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Environment statuses list is not empty" status="0" time="0.009629827" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testEnvironmentStatusHasEnvironmentsReference" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Environment status has environments reference" status="0" time="0.013690701" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddEnvironmentStatusWithoutStatusString" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add environment status without status string" status="0" time="0.012372341" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddDuplicateEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add duplicate environment status" status="0" time="0.013307758" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanAddDummyEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can add dummy environment status" status="0" time="0.009329475" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanRemoveDummyEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can remove dummy environment status" status="0" time="0.008412541" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotRemoveReferencedEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not remove referenced environment status" status="1" time="0.007097485" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanRemoveEnvironmentStatusWithCascadeFlag" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can remove environment status with cascade flag" status="1" time="0.006970562" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.012231032" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.008601256" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.009318801" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.008605946" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types for all supported oses" status="0" time="0.023169181" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddHardwareProfileWithoutNameOrType" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add hardware profile without name or type" status="0" time="0.015121873" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddDuplicateHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add duplicate hardware profile" status="0" time="0.014554275" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummyHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy hardware profile" status="0" time="0.010661005" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummySupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy supported hardware profile" status="0" time="0.038651631" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveUnsupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove unsupported hardware profile" status="0" time="0.023152763" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotRemoveSupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not remove supported hardware profile" status="0" time="0.012800129" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveSupportedHardwareProfileWithCascadeFlag" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove supported hardware profile with cascade flag" status="1" time="0.009409051" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileSupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile supported" status="0" time="0.035156191" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileUnsupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile unsupported" status="1" time="0.009193023" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testInstanceStatusesListIsNotEmpty" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Instance statuses list is not empty" status="0" time="0.009571194" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testInstanceStatusHasInstancesReference" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Instance status has instances reference" status="0" time="0.016992267" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddInstanceStatusWithoutStatusString" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add instance status without status string" status="0" time="0.0205707" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddDuplicateInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add duplicate instance status" status="0" time="0.014911271" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanAddDummyInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can add dummy instance status" status="0" time="0.009942205" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanRemoveDummyInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can remove dummy instance status" status="0" time="0.00796127" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotRemoveReferencedInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not remove referenced instance status" status="1" time="0.007238972" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanRemoveInstanceStatusWithCascadeFlag" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can remove instance status with cascade flag" status="1" time="0.008005584" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testInstanceTypesListIsNotEmpty" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Instance types list is not empty" status="0" time="0.009559205" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutOperatingSystem" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without operating system" status="0" time="0.016051178" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutHardwareProfile" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without hardware profile" status="0" time="0.018537805" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddDuplicateInstanceTypes" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add duplicate instance types" status="0" time="0.022985391" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\MessengerTest" methodName="testSomething" prettifiedClassName="Messenger (App\Tests\Messenger)" prettifiedMethodName="Something" status="0" time="0.000243095" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="0" time="0.016275653" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="0" time="0.010255149" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types for all supported hardware profiles" status="0" time="0.026111476" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddOperatingSystemWithoutReleaseOrBreed" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add operating system without release or breed" status="0" time="0.017984709" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddDuplicateOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add duplicate operating system" status="0" time="0.021897908" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy operating system" status="0" time="0.014879896" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummySupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy supported operating system" status="0" time="0.025899584" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveUnsupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove unsupported operating system" status="1" time="0.010205819" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotRemoveSupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not remove supported operating system" status="0" time="0.009443337" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveSupportedOperatingSystemWithCascadeFlag" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove supported operating system with cascade flag" status="1" time="0.009207395" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemSupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system supported" status="0" time="0.021899016" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemUnsupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system unsupported" status="4" time="0.013539381" size="-1" groups="default" exceptionLine="274" exceptionMessage="A new entity was found through the relationship 'App\Entity\OperatingSystems#breed' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={&quot;persist&quot;}).">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testPortsListIsNotEmpty" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Ports list is not empty" status="0" time="0.183368565" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testCanNotAddPortWithoutPortNumber" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add port without port number" status="0" time="0.014501879" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testCanNotAddDuplicatePorts" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add duplicate ports" status="0" time="0.018358659" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testSparePortsAreAvailable" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Spare ports are available" status="0" time="0.013121815" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testEachAddressHasPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Each address has port" status="0" time="2.349254188" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testCanAddDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can add dummy port" status="0" time="0.014491146" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\PortsTest" methodName="testCanRemoveDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can remove dummy port" status="0" time="0.014064409" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testSessionStatusesListIsNotEmpty" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Session statuses list is not empty" status="0" time="0.010642375" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testSessionStatusHasSessionsReference" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Session status has sessions reference" status="0" time="0.014757042" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddSessionStatusWithoutStatusString" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add session status without status string" status="0" time="0.016027053" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddDuplicateSessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add duplicate session status" status="0" time="0.020989389" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanAddDummySessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can add dummy session status" status="0" time="0.011383851" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanRemoveDummySessionStatuses" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can remove dummy session statuses" status="0" time="0.008666643" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotRemoveReferencedSessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not remove referenced session status" status="1" time="0.007051092" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanRemoveSessionStatusWithCascadeFlag" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can remove session status with cascade flag" status="1" time="0.0068563" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.013359424" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutName" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without name" status="0" time="0.01605241" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutPath" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without path" status="0" time="0.016492132" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddDuplicateTasks" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add duplicate tasks" status="0" time="0.021431828" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testCanAddDummyTask" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can add dummy task" status="0" time="0.017170645" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TasksTest" methodName="testCanRemoveDummyTask" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can remove dummy task" status="0" time="0.008315976" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.010562024" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddTechnologyWithoutNameOrDomain" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add technology without name or domain" status="0" time="0.013909442" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanAddAndRemoveDummyTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can add and remove dummy technology" status="0" time="0.021593985" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddDuplicateTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add duplicate technology" status="0" time="0.019154204" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

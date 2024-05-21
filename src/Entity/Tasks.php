@@ -97,7 +97,7 @@ class Tasks
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -121,7 +121,7 @@ class Tasks
         return $this;
     }
 
-    public function getPath(): ?string
+    public function getPath(): string
     {
         return $this->path;
     }

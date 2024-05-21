@@ -63,6 +63,41 @@ class InstanceTypesTest extends KernelTestCase
         return $instance_types;
     }
 
+    /**
+     * @depends testInstanceTypesListIsNotEmpty
+     * @param array<InstanceTypes> $instance_types
+     * @return void
+     */
+    public function testCanNotAddInstanceTypeWithoutOperatingSystem(array $instance_types): void {
+
+        $it = $instance_types[0];
+
+        $hp = $this->hpRepository->findOneById($it->getHwProfile()->getId());
+        $this->assertNotNull($hp);
+
+        $new_it = new InstanceTypes();
+        $new_it->setHwProfile($hp);
+
+        $this->assertFalse($this->itRepository->add($new_it, true));
+    }
+
+    /**
+     * @depends testInstanceTypesListIsNotEmpty
+     * @param array<InstanceTypes> $instance_types
+     * @return void
+     */
+    public function testCanNotAddInstanceTypeWithoutHardwareProfile(array $instance_types): void {
+
+        $it = $instance_types[0];
+
+        $os = $this->osRepository->findOneById($it->getOs()->getId());
+        $this->assertNotNull($os);
+
+        $new_it = new InstanceTypes();
+        $new_it->setOs($os);
+
+        $this->assertFalse($this->itRepository->add($new_it, true));
+    }
     
     /**
      * @depends testInstanceTypesListIsNotEmpty

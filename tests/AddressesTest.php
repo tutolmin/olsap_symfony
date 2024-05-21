@@ -5,9 +5,9 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
-//use App\Entity\OperatingSystems;
+use App\Entity\Instances;
 use App\Repository\AddressesRepository;
-//use App\Repository\OperatingSystemsRepository;
+use App\Repository\InstancesRepository;
 
 class AddressesTest extends KernelTestCase
 {
@@ -29,11 +29,18 @@ class AddressesTest extends KernelTestCase
      */
     private $addressesRepository;
 
+    /**
+     * 
+     * @var InstancesRepository
+     */
+    private $instanceRepository;
+    
     protected function setUp(): void {
         self::bootKernel();
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->addressesRepository = $this->entityManager->getRepository(Addresses::class);
+        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
     }
     
     /**
@@ -80,4 +87,51 @@ class AddressesTest extends KernelTestCase
 
         $this->assertFalse($this->addressesRepository->add($new_address, true));
     }    
+    
+    /**
+     * @depends testAddressesListIsNotEmpty
+     * @return void
+     */
+    public function testSpareAddressesAreAvailable(): void {
+        
+        $this->assertNotEmpty($this->addressesRepository->findByInstance(null));
+    }
+    
+    /**
+     * @depends testAddressesListIsNotEmpty
+     * @return void
+     */
+    public function testEachInstanceHasAddress(): void {
+
+        $instances = $this->instanceRepository->findAll();
+        $this->assertNotNull($instances);
+
+        foreach ($instances as $instance) {
+            $this->assertNotEmpty($this->addressesRepository->findOneByInstance($instance->getId()));
+        }
+    }
+    
+    /**
+     * 
+     * @return Addresses
+     */
+    public function testCanAddDummyAddress(): Addresses {
+        
+        $address = new Addresses();
+        $address->setIp($this->dummy['ip']);
+        $address->setMac($this->dummy['mac']);
+        $this->assertTrue($this->addressesRepository->add($address, true));
+        return $address;
+    }
+
+    /**
+     * @depends testCanAddDummyAddress
+     * @param Addresses $address
+     * @return void
+     */
+    public function testCanRemoveDummyAddress(Addresses $address): void {
+        
+        $this->assertTrue($this->addressesRepository->remove($address));
+    }
+            
 }
