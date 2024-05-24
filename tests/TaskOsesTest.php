@@ -62,7 +62,36 @@ class TaskOsesTest extends KernelTestCase
         $this->assertNotEmpty($task_oses);
         return $task_oses;
     }
+    
+    /**
+     * @depends testTaskOsesListIsNotEmpty
+     * @param array<TaskOses> $task_os
+     * @return void
+     */
+    public function testCanRemoveRandomTaskOs( array $task_os): void {
 
+        $to = $this->toRepository->findOneById($task_os[0]->getId());
+        $this->assertNotNull($to);
+        $id = $to->getId();
+    
+        $this->toRepository->remove($to, true);
+        
+        $removed_to = $this->toRepository->findOneById($id);
+        $this->assertNull($removed_to);
+    } 
+     
+    /**
+     * @depends testTaskOsesListIsNotEmpty
+     * @return void
+     */
+    public function testCanRemoveAllTaskOses(): void {
+    
+        $this->toRepository->deleteAll();
+        
+        $task_oses = $this->toRepository->findAll();
+        $this->assertEmpty($task_oses);        
+    }
+    
     /**
      * @depends testTaskOsesListIsNotEmpty
      * @param array<TaskOses> $task_oses

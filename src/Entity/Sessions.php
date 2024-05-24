@@ -81,7 +81,7 @@ class Sessions
 
     // https://ourcodeworld.com/articles/read/1386/how-to-generate-the-entities-from-a-database-and-create-the-crud-automatically-in-symfony-5
     public function __toString() {
-        return $this->getTestee()?$this->getTestee()->getEmail():"nobody"." at ".$this->getCreatedAt()->format('Y-m-d H:i:s');
+        return $this->getTestee()->getEmail()." at ".$this->getCreatedAt()->format('Y-m-d H:i:s');
     }
 
     public function getId(): int
@@ -125,7 +125,7 @@ class Sessions
         return $this;
     }
 
-    public function getHash(): ?string
+    public function getHash(): string
     {
         return $this->hash;
     }
@@ -137,7 +137,7 @@ class Sessions
         return $this;
     }
 
-    public function getTestee(): ?Testees
+    public function getTestee(): Testees
     {
         return $this->testee;
     }
@@ -261,7 +261,7 @@ class Sessions
         return $this;
     }
 
-    public function getStatus(): ?SessionStatuses
+    public function getStatus(): SessionStatuses
     {
         return $this->status;
     }

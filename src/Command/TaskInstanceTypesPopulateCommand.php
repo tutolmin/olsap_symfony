@@ -72,6 +72,8 @@ class TaskInstanceTypesPopulateCommand extends Command
         $io = new SymfonyStyle($input, $output);
 
 	if($input->getOption('purge')) {
+            
+          $io->warning(sprintf('Purging database'));
 
   	  // Truncate the InstanceType table first
 	  $this->ttRepository->deleteAll();

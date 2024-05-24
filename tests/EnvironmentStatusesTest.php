@@ -109,7 +109,7 @@ class EnvironmentStatusesTest extends KernelTestCase
      */
     public function testCanRemoveDummyEnvironmentStatus(EnvironmentStatuses $environment_status): void {
         
-        $this->assertTrue($this->environmentStatusesRepository->remove($environment_status));
+        $this->assertTrue($this->environmentStatusesRepository->remove($environment_status, true));
     }
         
     /**

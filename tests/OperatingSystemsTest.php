@@ -140,9 +140,10 @@ class OperatingSystemsTest extends KernelTestCase
     }    
     
     /**
-     * @return void
-     */    
-    public function testCanAddDummyOperatingSystem(): void {
+     * 
+     * @return OperatingSystems
+     */ 
+    public function testCanAddDummyOperatingSystem(): OperatingSystems {
 
         $breed = $this->breedsRepository->findOneBy(array());
         $this->assertNotNull($breed);
@@ -152,8 +153,20 @@ class OperatingSystemsTest extends KernelTestCase
         $os->setBreed($breed);
         $os->setRelease($this->dummy['name']);
         $this->assertTrue($this->osManager->addOperatingSystem($os));
+        
+        return $os;
     }
 
+    /**
+     * @depends testCanAddDummyOperatingSystem
+     * @param OperatingSystems $operating_system
+     * @return void
+     */
+    public function testCanRemoveDummyOperatingSystem(OperatingSystems $operating_system): void {
+        
+        $this->assertTrue($this->osRepository->remove($operating_system, true));
+    }
+    
     public function testCanAddDummySupportedOperatingSystem(): OperatingSystems {
         
         $breed = $this->breedsRepository->findOneBy(array());
@@ -176,24 +189,6 @@ class OperatingSystemsTest extends KernelTestCase
                             ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
         }
         return $os;
-    }
-    
-    /**
-     * @depends testOperatingSystemsListIsNotEmpty
-     * @return void
-     */    
-    public function testCanRemoveUnsupportedOperatingSystem(): void {
-
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-/*
-        $os = $this->osRepository->findOneBySupported(false);
-        $this->assertNotNull($os);
-
-        $this->assertTrue($this->osManager->removeOperatingSystem($os));
- * 
- */
     }
   
     /**

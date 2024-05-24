@@ -44,17 +44,23 @@ class TechnologiesTest extends KernelTestCase
         $this->domainsRepository = $this->entityManager->getRepository(Domains::class);
     }
     
-    public function testTechnologiesListIsNotEmpty(): void {
+    /**
+     * 
+     * @return array<Technologies>
+     */
+    public function testTechnologiesListIsNotEmpty(): array {
 
-        $this->assertNotEmpty($this->technologiesRepository->findAll());
+        $techs = $this->technologiesRepository->findAll();
+        $this->assertNotEmpty($techs);
+        return $techs;
     }
 
-    public function testCanNotAddTechnologyWithoutNameOrDomain(): void {
+    public function testCanNotAddTechnologyWithoutMandatoryFields(): void {
         
         $this->assertFalse($this->technologiesRepository->add(new Technologies(), true));
     }
     
-    public function testCanAddAndRemoveDummyTechnology(): void {
+    public function testCanAddDummyTechnology(): void {
 
         $domain = $this->domainsRepository->findOneBy(array());
         $this->assertNotNull($domain);
@@ -63,9 +69,25 @@ class TechnologiesTest extends KernelTestCase
         $technology->setName($this->dummy['name']);
         $technology->setDomain($domain);
         $this->assertTrue($this->technologiesRepository->add($technology, true));
-        $this->technologiesRepository->remove($technology, true);
     }
 
+    /**
+     * @depends testTechnologiesListIsNotEmpty
+     * @param array<Technologies> $techs
+     * @return void
+     */
+    public function testCanRemoveRandomTechnology( array $techs): void {
+
+        $tech = $this->technologiesRepository->findOneById($techs[0]->getId());
+        $this->assertNotNull($tech);
+        $id = $tech->getId();
+    
+        $this->technologiesRepository->remove($tech, true);
+        
+        $removed_tech = $this->technologiesRepository->findOneById($id);
+        $this->assertNull($removed_tech);
+    }
+    
     /**
      * @depends testTechnologiesListIsNotEmpty
      * @return void

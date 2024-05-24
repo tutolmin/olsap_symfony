@@ -68,6 +68,35 @@ class TaskInstanceTypesTest extends KernelTestCase
      * @param array<TaskInstanceTypes> $task_instance_types
      * @return void
      */
+    public function testCanRemoveRandomTaskInstanceType( array $task_instance_types): void {
+
+        $tit = $this->ttRepository->findOneById($task_instance_types[0]->getId());
+        $this->assertNotNull($tit);
+        $id = $tit->getId();
+    
+        $this->ttRepository->remove($tit, true);
+        
+        $removed_tit = $this->ttRepository->findOneById($id);
+        $this->assertNull($removed_tit);
+    } 
+        
+    /**
+     * @depends testTaskInstanceTypesListIsNotEmpty
+     * @return void
+     */
+    public function testCanRemoveAllTaskInstanceTypes(): void {
+    
+        $this->ttRepository->deleteAll();
+        
+        $task_instance_types = $this->ttRepository->findAll();
+        $this->assertEmpty($task_instance_types);        
+    }
+    
+    /**
+     * @depends testTaskInstanceTypesListIsNotEmpty
+     * @param array<TaskInstanceTypes> $task_instance_types
+     * @return void
+     */
     public function testCanNotAddTaskInstanceTypeWithoutTask(array $task_instance_types): void {
 
         $tt = $task_instance_types[0];

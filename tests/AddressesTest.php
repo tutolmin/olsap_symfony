@@ -131,7 +131,7 @@ class AddressesTest extends KernelTestCase
      */
     public function testCanRemoveDummyAddress(Addresses $address): void {
         
-        $this->assertTrue($this->addressesRepository->remove($address));
+        $this->assertTrue($this->addressesRepository->remove($address, true));
     }
             
 }

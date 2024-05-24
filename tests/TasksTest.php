@@ -93,13 +93,19 @@ class TasksTest extends KernelTestCase
     }
 
     /**
-     * @depends testCanAddDummyTask
-     * @param Tasks $address
+     * @depends testTasksListIsNotEmpty
+     * @param array<Tasks> $tasks
      * @return void
      */
-    public function testCanRemoveDummyTask(Tasks $address): void {
+    public function testCanRemoveRandomTask( array $tasks): void {
+
+        $task = $this->tasksRepository->findOneById($tasks[0]->getId());
+        $this->assertNotNull($task);
+        $id = $task->getId();
+    
+        $this->tasksRepository->remove($task, true);
         
-        $this->assertTrue($this->tasksRepository->remove($address));
-    }
-            
+        $removed_task = $this->tasksRepository->findOneById($id);
+        $this->assertNull($removed_task);
+    }           
 }

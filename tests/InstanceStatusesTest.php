@@ -105,7 +105,7 @@ class InstanceStatusesTest extends KernelTestCase
      */
     public function testCanRemoveDummyInstanceStatus(InstanceStatuses $instance_status): void {
         
-        $this->assertTrue($this->instanceStatusesRepository->remove($instance_status));
+        $this->assertTrue($this->instanceStatusesRepository->remove($instance_status, true));
     }
            
     /**
@@ -114,8 +114,7 @@ class InstanceStatusesTest extends KernelTestCase
      * @param InstanceStatuses $instance_statuses
      * @return void
      */
-    public function testCanNotRemoveReferencedInstanceStatus(
-            InstanceStatuses $instance_statuses): void {
+    public function testCanNotRemoveReferencedInstanceStatus(InstanceStatuses $instance_statuses): void {
         $this->markTestSkipped("references are not easy to delete"
             );
 //        $this->assertTrue($this->instanceStatusesRepository->remove($instance_statuses, true));

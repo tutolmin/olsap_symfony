@@ -59,15 +59,7 @@ class TesteesRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
-            try {
-                $this->getEntityManager()->flush();
-            } catch (UniqueConstraintViolationException $e) {
-                $this->logger->error("Attempted to insert duplicate item.");
-                return false;
-            } catch (NotNullConstraintViolationException $e) {
-                $this->logger->error("Mandatory parameter has NOT been set.");
-                return false;
-            }
+            $this->getEntityManager()->flush();
         }
         return true;
     }

@@ -74,6 +74,8 @@ class TaskOsesPopulateCommand extends Command
 
 	if($input->getOption('purge')) {
 
+          $io->warning(sprintf('Purging database'));
+            
   	  // Truncate the InstanceType table first
 	  $this->toRepository->deleteAll();
 	}

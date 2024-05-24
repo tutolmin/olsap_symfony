@@ -68,9 +68,9 @@ class TaskInstanceTypesRepository extends ServiceEntityRepository
     {
         $this->logger->debug(__METHOD__);
 
-        $qb = $this->createQueryBuilder('tt');
+        $qb = $this->createQueryBuilder('tt')->delete();
 
-        $qb->delete();
+        $qb->getQuery()->execute();
 
 //        return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }

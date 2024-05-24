@@ -51,11 +51,209 @@
         </style>
     </head>
     <body>
+        <h2>Addresses (App\Tests\Addresses)</h2>
+        <ul>
+            <li class="success">Addresses list is not empty</li>
+            <li class="success">Can not add address without ip</li>
+            <li class="success">Can not add address without mac</li>
+            <li class="success">Can not add duplicate addresses</li>
+            <li class="success">Spare addresses are available</li>
+            <li class="success">Each instance has address</li>
+            <li class="success">Can add dummy address</li>
+            <li class="success">Can remove dummy address</li>
+        </ul>
+        <h2>Breeds (App\Tests\Breeds)</h2>
+        <ul>
+            <li class="success">Breeds list is not empty</li>
+            <li class="success">Breed has operating systems reference</li>
+            <li class="success">Can not add breed without name</li>
+            <li class="success">Can not add duplicate breed</li>
+            <li class="success">Can add dummy breed</li>
+            <li class="success">Can remove dummy breed</li>
+            <li class="success">Can not remove referenced breed</li>
+            <li class="defect">Can remove breed with cascade flag</li>
+        </ul>
+        <h2>Awx Me Command (App\Tests\Command\AwxMeCommand)</h2>
+        <ul>
+            <li class="success">Awx me is symfony</li>
+        </ul>
+        <h2>Awx Project List Command (App\Tests\Command\AwxProjectListCommand)</h2>
+        <ul>
+            <li class="defect">Execute</li>
+        </ul>
+        <h2>Domains (App\Tests\Domains)</h2>
+        <ul>
+            <li class="success">Domains list is not empty</li>
+            <li class="success">Domain has technologies reference</li>
+            <li class="success">Can not add domain without name</li>
+            <li class="success">Can not add duplicate domain</li>
+            <li class="success">Can add dummy domain</li>
+            <li class="success">Can remove dummy domain</li>
+            <li class="success">Domain removal leads to linked technologies deletion</li>
+        </ul>
+        <h2>Environment Statuses (App\Tests\EnvironmentStatuses)</h2>
+        <ul>
+            <li class="success">Environment statuses list is not empty</li>
+            <li class="success">Environment status has environments reference</li>
+            <li class="success">Can not add environment status without status string</li>
+            <li class="success">Can not add duplicate environment status</li>
+            <li class="success">Can add dummy environment status</li>
+            <li class="success">Can remove dummy environment status</li>
+            <li class="defect">Can not remove referenced environment status</li>
+            <li class="defect">Can remove environment status with cascade flag</li>
+        </ul>
+        <h2>Hardware Profiles (App\Tests\HardwareProfiles)</h2>
+        <ul>
+            <li class="success">Hardware profiles list is not empty</li>
+            <li class="success">Container hardware profiles list is not empty</li>
+            <li class="success">Vm hardware profiles list is not empty</li>
+            <li class="success">Supported hardware profiles list is not empty</li>
+            <li class="success">Each supported hardware profile has corresponding instance types for all supported oses</li>
+            <li class="success">Can not add hardware profile without name or type</li>
+            <li class="success">Can not add duplicate hardware profile</li>
+            <li class="success">Can add dummy hardware profile</li>
+            <li class="success">Can add dummy supported hardware profile</li>
+            <li class="success">Can remove unsupported hardware profile</li>
+            <li class="success">Can not remove supported hardware profile</li>
+            <li class="defect">Can remove supported hardware profile with cascade flag</li>
+            <li class="success">Can make hardware profile supported</li>
+            <li class="defect">Can make hardware profile unsupported</li>
+        </ul>
+        <h2>Instance Statuses (App\Tests\InstanceStatuses)</h2>
+        <ul>
+            <li class="success">Instance statuses list is not empty</li>
+            <li class="success">Instance status has instances reference</li>
+            <li class="success">Can not add instance status without status string</li>
+            <li class="success">Can not add duplicate instance status</li>
+            <li class="success">Can add dummy instance status</li>
+            <li class="success">Can remove dummy instance status</li>
+            <li class="defect">Can not remove referenced instance status</li>
+            <li class="defect">Can remove instance status with cascade flag</li>
+        </ul>
+        <h2>Instance Types (App\Tests\InstanceTypes)</h2>
+        <ul>
+            <li class="success">Instance types list is not empty</li>
+            <li class="success">Can not add instance type without operating system</li>
+            <li class="success">Can not add instance type without hardware profile</li>
+            <li class="success">Can not add duplicate instance types</li>
+        </ul>
+        <h2>Lucky Number (App\Tests\LuckyNumber)</h2>
+        <ul>
+            <li class="success">Lucky number</li>
+        </ul>
+        <h2>Messenger (App\Tests\Messenger)</h2>
+        <ul>
+            <li class="success">Something</li>
+        </ul>
+        <h2>Operating Systems (App\Tests\OperatingSystems)</h2>
+        <ul>
+            <li class="success">Operating systems list is not empty</li>
+            <li class="success">Supported operating systems list is not empty</li>
+            <li class="success">Each supported os has corresponding instance types for all supported hardware profiles</li>
+            <li class="success">Can not add operating system without release or breed</li>
+            <li class="success">Can not add duplicate operating system</li>
+            <li class="success">Can add dummy operating system</li>
+            <li class="success">Can remove dummy operating system</li>
+            <li class="success">Can add dummy supported operating system</li>
+            <li class="success">Can not remove supported operating system</li>
+            <li class="defect">Can remove supported operating system with cascade flag</li>
+            <li class="success">Can make operating system supported</li>
+            <li class="defect">Can make operating system unsupported</li>
+        </ul>
+        <h2>Ports (App\Tests\Ports)</h2>
+        <ul>
+            <li class="success">Ports list is not empty</li>
+            <li class="success">Can not add port without port number</li>
+            <li class="success">Can not add duplicate ports</li>
+            <li class="success">Spare ports are available</li>
+            <li class="success">Each address has port</li>
+            <li class="success">Can add dummy port</li>
+            <li class="success">Can remove dummy port</li>
+        </ul>
+        <h2>Session Oses (App\Tests\SessionOses)</h2>
+        <ul>
+            <li class="success">Session oses list is not empty</li>
+            <li class="success">Can not add session os without session</li>
+            <li class="success">Can not add session os without operating system</li>
+            <li class="success">Can not add duplicate session oses</li>
+            <li class="success">Can remove random session os</li>
+        </ul>
+        <h2>Session Statuses (App\Tests\SessionStatuses)</h2>
+        <ul>
+            <li class="success">Session statuses list is not empty</li>
+            <li class="success">Session status has sessions reference</li>
+            <li class="success">Can not add session status without status string</li>
+            <li class="success">Can not add duplicate session status</li>
+            <li class="success">Can add dummy session status</li>
+            <li class="defect">Can not remove referenced session status</li>
+            <li class="defect">Can remove session status with cascade flag</li>
+            <li class="success">Can remove random session status</li>
+        </ul>
+        <h2>Session Techs (App\Tests\SessionTechs)</h2>
+        <ul>
+            <li class="success">Session techs list is not empty</li>
+            <li class="success">Can not add session tech without session</li>
+            <li class="success">Can not add session tech without technology</li>
+            <li class="success">Can not add duplicate session techs</li>
+            <li class="success">Can remove random session tech</li>
+        </ul>
+        <h2>Sessions (App\Tests\Sessions)</h2>
+        <ul>
+            <li class="success">Sessions list is not empty</li>
+            <li class="success">Can not add session without mandatory fields</li>
+            <li class="success">Can add dummy session</li>
+            <li class="success">Can remove random session</li>
+            <li class="success">Can not add duplicate session</li>
+        </ul>
+        <h2>Task Instance Types (App\Tests\TaskInstanceTypes)</h2>
+        <ul>
+            <li class="success">Task instance types list is not empty</li>
+            <li class="success">Can remove random task instance type</li>
+            <li class="success">Can remove all task instance types</li>
+            <li class="success">Can not add task instance type without task</li>
+            <li class="success">Can not add task instance type without instance type</li>
+            <li class="success">Can not add duplicate task instance types</li>
+        </ul>
+        <h2>Task Oses (App\Tests\TaskOses)</h2>
+        <ul>
+            <li class="success">Task oses list is not empty</li>
+            <li class="success">Can remove random task os</li>
+            <li class="success">Can remove all task oses</li>
+            <li class="success">Can not add task os without task</li>
+            <li class="success">Can not add task os without operating system</li>
+            <li class="success">Can not add duplicate task oses</li>
+        </ul>
+        <h2>Task Techs (App\Tests\TaskTechs)</h2>
+        <ul>
+            <li class="success">Task techs list is not empty</li>
+            <li class="success">Can remove random task tech</li>
+            <li class="success">Can not add task tech without task</li>
+            <li class="success">Can not add task tech without technology</li>
+            <li class="success">Can not add duplicate task techs</li>
+        </ul>
+        <h2>Tasks (App\Tests\Tasks)</h2>
+        <ul>
+            <li class="success">Tasks list is not empty</li>
+            <li class="success">Can not add task without name</li>
+            <li class="success">Can not add task without path</li>
+            <li class="success">Can not add duplicate tasks</li>
+            <li class="success">Can add dummy task</li>
+            <li class="success">Can remove random task</li>
+        </ul>
+        <h2>Technologies (App\Tests\Technologies)</h2>
+        <ul>
+            <li class="success">Technologies list is not empty</li>
+            <li class="success">Can not add technology without mandatory fields</li>
+            <li class="success">Can add dummy technology</li>
+            <li class="success">Can remove random technology</li>
+            <li class="success">Can not add duplicate technology</li>
+        </ul>
         <h2>ees (App\Tests\ees)</h2>
         <ul>
             <li class="success">Testees list is not empty</li>
-            <li class="success">Can not add testee without email or auth token</li>
-            <li class="success">Can add and remove dummy testee</li>
+            <li class="success">Can not add testee without mandatory fields</li>
+            <li class="success">Can add dummy testee</li>
+            <li class="success">Can remove random testee</li>
             <li class="success">Can not add duplicate testee</li>
         </ul>
     </body>

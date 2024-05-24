@@ -68,6 +68,23 @@ class TaskTechsTest extends KernelTestCase
      * @param array<TaskTechs> $task_techs
      * @return void
      */
+    public function testCanRemoveRandomTaskTech( array $task_techs): void {
+
+        $task_tech = $this->ttRepository->findOneById($task_techs[0]->getId());
+        $this->assertNotNull($task_tech);
+        $id = $task_tech->getId();
+    
+        $this->ttRepository->remove($task_tech, true);
+        
+        $removed_tt = $this->ttRepository->findOneById($id);
+        $this->assertNull($removed_tt);
+    } 
+     
+    /**
+     * @depends testTaskTechsListIsNotEmpty
+     * @param array<TaskTechs> $task_techs
+     * @return void
+     */
     public function testCanNotAddTaskTechWithoutTask(array $task_techs): void {
 
         $tt = $task_techs[0];

@@ -35,17 +35,23 @@ class TesteesTest extends KernelTestCase
         $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
     }
     
-    public function testTesteesListIsNotEmpty(): void {
+    /**
+     * 
+     * @return array<Testees>
+     */
+    public function testTesteesListIsNotEmpty(): array {
 
-        $this->assertNotEmpty($this->testeesRepository->findAll());
+        $testees = $this->testeesRepository->findAll();
+        $this->assertNotEmpty($testees);
+        return $testees;
     }
 
-    public function testCanNotAddTesteeWithoutEmailOrAuthToken(): void {
+    public function testCanNotAddTesteeWithoutMandatoryFields(): void {
         
         $this->assertFalse($this->testeesRepository->add(new Testees(), true));
     }
     
-    public function testCanAddAndRemoveDummyTestee(): void {
+    public function testCanAddDummyTestee(): void {
 
         $new_testee = new Testees();
         $new_testee->setEmail($this->dummy['email']);
@@ -53,9 +59,25 @@ class TesteesTest extends KernelTestCase
         $new_testee->setRegisteredAt(new \DateTimeImmutable('now'));
 
         $this->assertTrue($this->testeesRepository->add($new_testee, true));
-        $this->testeesRepository->remove($new_testee, true);
     }
 
+    /**
+     * @depends testTesteesListIsNotEmpty
+     * @param array<Testees> $testees
+     * @return void
+     */
+    public function testCanRemoveRandomTestee( array $testees): void {
+
+        $testee = $this->testeesRepository->findOneById($testees[0]->getId());
+        $this->assertNotNull($testee);
+        $id = $testee->getId();
+    
+        $this->testeesRepository->remove($testee, true);
+        
+        $removed_testee = $this->testeesRepository->findOneById($id);
+        $this->assertNull($removed_testee);
+    }
+    
     /**
      * @depends testTesteesListIsNotEmpty
      * @return void

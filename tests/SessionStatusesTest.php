@@ -99,16 +99,6 @@ class SessionStatusesTest extends KernelTestCase
     }
 
     /**
-     * @depends testCanAddDummySessionStatus
-     * @param SessionStatuses $session_status
-     * @return void
-     */
-    public function testCanRemoveDummySessionStatuses(SessionStatuses $session_status): void {
-        
-        $this->assertTrue($this->sessionStatusesRepository->remove($session_status));
-    }
-        
-    /**
      * 
      * @depends testSessionStatusHasSessionsReference
      * @param SessionStatuses $session_statuses
@@ -142,4 +132,21 @@ class SessionStatusesTest extends KernelTestCase
          * 
          */
     }
+    
+    /**
+     * @depends testSessionStatusesListIsNotEmpty
+     * @param array<SessionStatuses> $session_statuses
+     * @return void
+     */
+    public function testCanRemoveRandomSessionStatus( array $session_statuses): void {
+
+        $ss = $this->sessionStatusesRepository->findOneById($session_statuses[0]->getId());
+        $this->assertNotNull($ss);
+        $id = $ss->getId();
+    
+        $this->sessionStatusesRepository->remove($ss, true);
+        
+        $removed_ss = $this->sessionStatusesRepository->findOneById($id);
+        $this->assertNull($removed_ss);
+    } 
 }

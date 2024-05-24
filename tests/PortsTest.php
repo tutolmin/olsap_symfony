@@ -121,7 +121,7 @@ class PortsTest extends KernelTestCase
      */
     public function testCanRemoveDummyPort(Ports $port): void {
         
-        $this->assertTrue($this->portsRepository->remove($port));
+        $this->assertTrue($this->portsRepository->remove($port, true));
     }
             
 }

@@ -68,9 +68,9 @@ class TaskOsesRepository extends ServiceEntityRepository
     {
         $this->logger->debug(__METHOD__);
 
-        $qb = $this->createQueryBuilder('to');
+        $qb = $this->createQueryBuilder('to')->delete();
 
-        $qb->delete();
+        $qb->getQuery()->execute();
 
 //      return $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
