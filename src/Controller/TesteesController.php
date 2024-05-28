@@ -11,15 +11,25 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\TesteesManager;
 
 #[Route('/testees')]
 class TesteesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    /**
+     * 
+     * @var TesteesManager
+     */
+    private $testeesManager;
+        
+    public function __construct(LoggerInterface $logger,
+            TesteesManager $testeesManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        
+        $this->testeesManager = $testeesManager;
     }
 
     #[Route('/', name: 'app_testees_index', methods: ['GET'])]
@@ -97,12 +107,13 @@ class TesteesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_testees_delete', methods: ['POST'])]
-    public function delete(Request $request, Testees $testee, TesteesRepository $testeesRepository): Response
+    public function delete(Request $request, Testees $testee): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$testee->getId(), strval($request->request->get('_token')))) {
-            $testeesRepository->remove($testee, true);
+//            $testeesRepository->remove($testee, true);
+            $this->testeesManager->removeTestee($testee);
         }
 
         return $this->redirectToRoute('app_testees_index', [], Response::HTTP_SEE_OTHER);

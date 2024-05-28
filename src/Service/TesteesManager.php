@@ -1,6 +1,5 @@
 <?php
 
-// src/Service/TesteesManager.php
 namespace App\Service;
 
 use Psr\Log\LoggerInterface;
@@ -12,7 +11,6 @@ use App\Service\SessionManager;
 class TesteesManager
 {
     private LoggerInterface $logger;
-
     private EntityManagerInterface $entityManager;
     private TesteesRepository $testeeRepository;
 
@@ -25,18 +23,15 @@ class TesteesManager
     public function __construct( LoggerInterface $logger, EntityManagerInterface $em, 
             SessionManager $sessionManager, 
 )
-
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
 	$this->sessionManager = $sessionManager;
-
         $this->testeeRepository = $this->entityManager->getRepository( Testees::class);
     }
 
-    
     /**
      * 
      * @param Testees $testee
