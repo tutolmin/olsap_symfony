@@ -6,6 +6,7 @@ namespace App\Service;
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SessionStatusesRepository;
+use App\Repository\SessionsRepository;
 use App\Repository\TasksRepository;
 use App\Repository\EnvironmentsRepository;
 
@@ -35,6 +36,7 @@ class SessionManager
 //    private InstancesRepository $instanceRepository;
 //    private $instanceStatusesRepository;
     private SessionStatusesRepository $sessionStatusesRepository;
+    private SessionsRepository $sessionsRepository;
     private EnvironmentsRepository $environmentRepository;
 //    private $environmentStatusesRepository;
 
@@ -80,6 +82,7 @@ class SessionManager
         $this->environmentRepository = $this->entityManager->getRepository( Environments::class);
 //        $this->environmentStatusesRepository = $this->entityManager->getRepository( EnvironmentStatuses::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository( SessionStatuses::class);
+        $this->sessionsRepository = $this->entityManager->getRepository( Sessions::class);
     }
 /*
     public function createInstance(InstanceTypes $instance_type, bool $async = true): ?Instances {
@@ -479,8 +482,10 @@ class SessionManager
         // Environment has been found
 	if($environment) {
 
-	  $environment->setSession($session);
+//	  $environment->setSession($session);
 
+          $session->allocateEnvironment($environment);
+                  
 	  // Store item into the DB
 //	  $this->entityManager->persist($environment);
 	  $this->entityManager->flush();
@@ -498,6 +503,25 @@ class SessionManager
 	  return false;	
 	}
 	return true;	
+    }
+    
+    /**
+     * 
+     * @param Sessions $session
+     * @return bool
+     */
+    public function removeSession(Sessions $session): bool {
+
+        if ($session->getEnvsCounter() > 0) {
+
+            foreach ($session->getEnvs() as $env) {
+                $session->releaseEnvironment($env);
+            }
+        }
+
+        $this->sessionsRepository->remove($session, true);
+
+        return true;
     }
 /*
     public function createEnvironment(Tasks $task, Sessions $session = null, bool $async = true): ?Environments {

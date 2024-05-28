@@ -111,7 +111,8 @@ class Testees
 
         return $this;
     }
-
+/* 
+ * Use TesteeManager instead
     public function removeSession(Sessions $session): self
     {
         if ($this->sessions->removeElement($session)) {
@@ -120,7 +121,8 @@ class Testees
                 $session->setTestee(null);
             }
         }
-
         return $this;
     }
+ * 
+ */
 }

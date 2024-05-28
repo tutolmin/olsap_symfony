@@ -239,12 +239,12 @@ class SessionsController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_sessions_delete', methods: ['POST'])]
-    public function delete(Request $request, Sessions $session, SessionsRepository $sessionsRepository): Response
+    public function delete(Request $request, Sessions $session): Response
     {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$session->getId(), strval($request->request->get('_token')))) {
-            $sessionsRepository->remove($session, true);
+        if ($this->isCsrfTokenValid('delete' . $session->getId(), strval($request->request->get('_token')))) {
+            $this->sessionManager->removeSession($session);
         }
 
         return $this->redirectToRoute('app_sessions_index', [], Response::HTTP_SEE_OTHER);

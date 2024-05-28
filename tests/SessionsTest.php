@@ -10,6 +10,7 @@ use App\Entity\SessionStatuses;
 use App\Repository\SessionsRepository;
 use App\Repository\TesteesRepository;
 use App\Repository\SessionStatusesRepository;
+use App\Service\SessionManager;
 
 class SessionsTest extends KernelTestCase
 {
@@ -43,6 +44,12 @@ class SessionsTest extends KernelTestCase
      */
     private $sessionsStatusesRepository;
     
+    /**
+     * 
+     * @var SessionManager
+     */
+    private $sessionManager;
+    
     protected function setUp(): void {
         self::bootKernel();
 
@@ -51,6 +58,8 @@ class SessionsTest extends KernelTestCase
         $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
         $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
         $this->sessionsStatusesRepository = $this->entityManager->getRepository(SessionStatuses::class);
+
+        $this->sessionManager = static::getContainer()->get(SessionManager::class);        
     }
     
     /**
@@ -93,22 +102,26 @@ class SessionsTest extends KernelTestCase
     }
 
     /**
+     * 
      * @depends testSessionsListIsNotEmpty
      * @param array<Sessions> $sessions
      * @return void
      */
-    public function testCanRemoveRandomSession( array $sessions): void {
+    public function testCanRemoveAllSessions(array $sessions): void { 
 
-        $session = $this->sessionsRepository->findOneById($sessions[0]->getId());
-        $this->assertNotNull($session);
-        $id = $session->getId();
-    
-        $this->sessionsRepository->remove($session, true);
-        
-        $removed_session = $this->sessionsRepository->findOneById($id);
-        $this->assertNull($removed_session);
-    } 
-    
+        foreach ($sessions as $s) {
+            
+            $session = $this->sessionsRepository->findOneById($s);
+            $this->assertNotNull($session);
+            $id = $session->getId();
+
+            $this->sessionManager->removeSession($session);
+            
+            $removed_session = $this->sessionsRepository->findOneById($id);
+            $this->assertNull($removed_session);
+        }
+    }
+
     /**
      * @depends testSessionsListIsNotEmpty
      * @param array<Sessions> $sessions

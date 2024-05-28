@@ -52,7 +52,7 @@ class TesteesRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(Testees $entity, bool $flush = false): bool
+    public function remove(Testees $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
 
@@ -61,7 +61,6 @@ class TesteesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-        return true;
     }
 
 //    /**

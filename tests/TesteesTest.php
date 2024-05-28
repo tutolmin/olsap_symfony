@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Testees;
 use App\Repository\TesteesRepository;
+use App\Service\TesteesManager;
 
 class TesteesTest extends KernelTestCase
 {
@@ -26,13 +27,21 @@ class TesteesTest extends KernelTestCase
      * @var TesteesRepository
      */
     private $testeesRepository;
-    
+
+    /**
+     * 
+     * @var TesteesManager
+     */
+    private $testeesManager;
+        
     protected function setUp(): void {
         self::bootKernel();
 
 //        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
+        
+        $this->testeesManager = static::getContainer()->get(TesteesManager::class);        
     }
     
     /**
@@ -62,22 +71,26 @@ class TesteesTest extends KernelTestCase
     }
 
     /**
+     * 
      * @depends testTesteesListIsNotEmpty
      * @param array<Testees> $testees
      * @return void
      */
-    public function testCanRemoveRandomTestee( array $testees): void {
+    public function testCanRemoveAllTestees(array $testees): void {
 
-        $testee = $this->testeesRepository->findOneById($testees[0]->getId());
-        $this->assertNotNull($testee);
-        $id = $testee->getId();
-    
-        $this->testeesRepository->remove($testee, true);
-        
-        $removed_testee = $this->testeesRepository->findOneById($id);
-        $this->assertNull($removed_testee);
+        foreach ($testees as $t) {
+
+            $testee = $this->testeesRepository->findOneById($t);
+            $this->assertNotNull($testee);
+            $id = $testee->getId();
+
+            $this->testeesManager->removeTestee($testee);
+
+            $removed_testee = $this->testeesRepository->findOneById($id);
+            $this->assertNull($removed_testee);
+        }
     }
-    
+
     /**
      * @depends testTesteesListIsNotEmpty
      * @return void

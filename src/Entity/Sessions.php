@@ -167,22 +167,19 @@ class Sessions
 
         return $this;
     }
-
-    public function removeOs(SessionOses $os): self
+/*
+    public function removeOs(SessionOses $session_os): self
     {
-        if ($this->sessionOses->removeElement($os)) {
+        if ($this->sessionOses->removeElement($session_os)) {
             // set the owning side to null (unless already changed)
-            /*
-            if ($os->getSession() === $this) {
-                $os->setSession(null);
+            if ($session_os->getSession() === $this) {
+                $session_os->setSession(null);
             }
-             * 
-             */
         }
 
         return $this;
     }
-
+*/
     public function getOsesCounter(): int
     {
         return count( $this->getSessionOses());
@@ -239,7 +236,7 @@ class Sessions
         return count( $this->getEnvs());
     }
 
-    public function addEnv(Environments $env): self
+    public function allocateEnvironment(Environments $env): self
     {
         if (!$this->envs->contains($env)) {
             $this->envs[] = $env;
@@ -249,7 +246,7 @@ class Sessions
         return $this;
     }
 
-    public function removeEnv(Environments $env): self
+    public function releaseEnvironment(Environments $env): self
     {
         if ($this->envs->removeElement($env)) {
             // set the owning side to null (unless already changed)
