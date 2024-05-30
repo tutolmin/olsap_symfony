@@ -163,7 +163,12 @@ class Technologies
 
         return $this;
     }
-
+    
+    public function getSessionsCounter(): int
+    {   
+        return count( $this->getTechSessions());
+    }
+    
     public function getTasksCounter(): int
     {   
         return count( $this->getTechTasks());

@@ -116,18 +116,13 @@ class SessionTechsTest extends KernelTestCase
     
     /**
      * @depends testSessionTechsListIsNotEmpty
-     * @param array<SessionTechs> $session_techs
      * @return void
      */
-    public function testCanRemoveRandomSessionTech( array $session_techs): void {
-
-        $st = $this->sessionTechsRepository->findOneById($session_techs[0]->getId());
-        $this->assertNotNull($st);
-        $id = $st->getId();
+    public function testCanRemoveAllSessionTechs(): void {
     
-        $this->sessionTechsRepository->remove($st, true);
+        $this->sessionTechsRepository->deleteAll();
         
-        $removed_st = $this->sessionTechsRepository->findOneById($id);
-        $this->assertNull($removed_st);
-    }    
+        $session_techs = $this->sessionTechsRepository->findAll();
+        $this->assertEmpty($session_techs);        
+    }  
 }

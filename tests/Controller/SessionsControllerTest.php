@@ -73,7 +73,7 @@ class SessionsControllerTest extends WebTestCase
      * @param array<Sessions> $sessions
      * @return void
      */
-    public function testTesteeDisplayWebPageContainsData($sessions): void {
+    public function testSessionDisplayWebPageContainsData($sessions): void {
         
         foreach ($sessions as $t) {
 

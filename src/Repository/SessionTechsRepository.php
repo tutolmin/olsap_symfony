@@ -60,7 +60,20 @@ class SessionTechsRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    /**
+     * @return void
+     */
+    public function deleteAll(): void
+    {
+        $this->logger->debug(__METHOD__);
 
+        $qb = $this->createQueryBuilder('st')->delete();
+
+        $qb->getQuery()->execute();
+
+//      return $qb->getQuery()->getSingleScalarResult() ?? 0;
+    }
 //    /**
 //     * @return SessionTechs[] Returns an array of SessionTechs objects
 //     */

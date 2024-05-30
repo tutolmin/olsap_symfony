@@ -11,15 +11,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\TechnologiesManager;
 
 #[Route('/technologies')]
 class TechnologiesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    
+    /**
+     * 
+     * @var TechnologiesManager
+     */
+    private $technologiesManager;
+        
+    public function __construct(LoggerInterface $logger, TechnologiesManager $techManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        $this->technologiesManager = $techManager;
     }
 
     #[Route('/', name: 'app_technologies_index', methods: ['GET'])]
@@ -95,7 +104,8 @@ class TechnologiesController extends AbstractController
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$technology->getId(), strval($request->request->get('_token')))) {
-            $technologiesRepository->remove($technology, true);
+//            $technologiesRepository->remove($technology, true);
+            $this->technologiesManager->removeTechnology($technology);
         }
 
         return $this->redirectToRoute('app_technologies_index', [], Response::HTTP_SEE_OTHER);

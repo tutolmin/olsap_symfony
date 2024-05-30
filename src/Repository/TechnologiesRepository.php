@@ -71,7 +71,7 @@ class TechnologiesRepository extends ServiceEntityRepository
 
         return $this->findBy(array(), array('domain' => 'ASC', 'name' => 'ASC'));
     }
-
+    
 //    /**
 //     * @return Technologies[] Returns an array of Technologies objects
 //     */

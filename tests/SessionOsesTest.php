@@ -113,21 +113,16 @@ class SessionOsesTest extends KernelTestCase
 
         $this->assertFalse($this->soRepository->add($new_so, true));
     }
-    
+
     /**
      * @depends testSessionOsesListIsNotEmpty
-     * @param array<SessionOses> $session_oses
      * @return void
      */
-    public function testCanRemoveRandomSessionOs( array $session_oses): void {
-
-        $so = $this->soRepository->findOneById($session_oses[0]->getId());
-        $this->assertNotNull($so);
-        $id = $so->getId();
+    public function testCanRemoveAllSessionOses(): void {
     
-        $this->soRepository->remove($so, true);
+        $this->soRepository->deleteAll();
         
-        $removed_so = $this->soRepository->findOneById($id);
-        $this->assertNull($removed_so);
-    } 
+        $session_oses = $this->soRepository->findAll();
+        $this->assertEmpty($session_oses);        
+    }
 }

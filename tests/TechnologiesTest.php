@@ -8,6 +8,7 @@ use App\Entity\Technologies;
 use App\Entity\Domains;
 use App\Repository\TechnologiesRepository;
 use App\Repository\DomainsRepository;
+use App\Service\TechnologiesManager;
 
 class TechnologiesTest extends KernelTestCase
 {
@@ -35,6 +36,12 @@ class TechnologiesTest extends KernelTestCase
      */
     private $domainsRepository;
     
+    /**
+     * 
+     * @var TechnologiesManager
+     */
+    private $technologiesManager;
+          
     protected function setUp(): void {
         self::bootKernel();
 
@@ -42,6 +49,8 @@ class TechnologiesTest extends KernelTestCase
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->technologiesRepository = $this->entityManager->getRepository(Technologies::class);
         $this->domainsRepository = $this->entityManager->getRepository(Domains::class);
+
+        $this->technologiesManager = static::getContainer()->get(TechnologiesManager::class);        
     }
     
     /**
@@ -72,20 +81,24 @@ class TechnologiesTest extends KernelTestCase
     }
 
     /**
+     * 
      * @depends testTechnologiesListIsNotEmpty
-     * @param array<Technologies> $techs
+     * @param array<Technologies> $technologies
      * @return void
      */
-    public function testCanRemoveRandomTechnology( array $techs): void {
+    public function testCanRemoveAllTechnologies(array $technologies): void {
 
-        $tech = $this->technologiesRepository->findOneById($techs[0]->getId());
-        $this->assertNotNull($tech);
-        $id = $tech->getId();
-    
-        $this->technologiesRepository->remove($tech, true);
-        
-        $removed_tech = $this->technologiesRepository->findOneById($id);
-        $this->assertNull($removed_tech);
+        foreach ($technologies as $t) {
+
+            $technology = $this->technologiesRepository->findOneById($t);
+            $this->assertNotNull($technology);
+            $id = $technology->getId();
+
+            $this->technologiesManager->removeTechnology($technology);
+
+            $removed_technology = $this->technologiesRepository->findOneById($id);
+            $this->assertNull($removed_technology);
+        }
     }
     
     /**

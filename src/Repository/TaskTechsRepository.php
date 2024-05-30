@@ -61,6 +61,20 @@ class TaskTechsRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return void
+     */
+    public function deleteAll(): void
+    {
+        $this->logger->debug(__METHOD__);
+
+        $qb = $this->createQueryBuilder('tt')->delete();
+
+        $qb->getQuery()->execute();
+
+//      return $qb->getQuery()->getSingleScalarResult() ?? 0;
+    }
+    
+    /**
      * 
      * @return array<TaskTechs>
      */

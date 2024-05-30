@@ -59,7 +59,20 @@ class SessionOsesRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    
+    /**
+     * @return void
+     */
+    public function deleteAll(): void
+    {
+        $this->logger->debug(__METHOD__);
 
+        $qb = $this->createQueryBuilder('so')->delete();
+
+        $qb->getQuery()->execute();
+
+//      return $qb->getQuery()->getSingleScalarResult() ?? 0;
+    }
 //    /**
 //     * @return SessionOses[] Returns an array of SessionOses objects
 //     */

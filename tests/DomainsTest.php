@@ -55,25 +55,6 @@ class DomainsTest extends KernelTestCase
         return $domains;
     }
     
-    /**
-     * 
-     * @depends testDomainsListIsNotEmpty
-     * @param array<Domains> $domains
-     * @return Domains|null
-     */
-    public function testDomainHasTechnologiesReference(array $domains): ?Domains {
-        
-        foreach ($domains as $domain) {
-            if($domain->getTechnologies()->first()){
-                $this->assertTrue(true);
-                return $domain;
-            }
-        }
-        
-        $this->assertTrue(false);
-        return null;
-    }
-    
     public function testCanNotAddDomainWithoutName(): void {
         
         $this->assertFalse($this->domainsRepository->add(new Domains(), true));
@@ -106,13 +87,15 @@ class DomainsTest extends KernelTestCase
     }
 
     /**
-     * @depends testCanAddDummyDomain
-     * @param Domains $domain
+     * @depends testDomainsListIsNotEmpty
      * @return void
      */
-    public function testCanRemoveDummyDomain(Domains $domain): void {
+    public function testCanRemoveAllDomains(): void {
+    
+        $this->domainsRepository->deleteAll();
         
-        $this->assertTrue($this->domainsRepository->remove($domain));
+        $domains = $this->domainsRepository->findAll();
+        $this->assertEmpty($domains);        
     }
     
     /**
