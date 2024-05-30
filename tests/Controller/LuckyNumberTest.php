@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LuckyNumberTest extends WebTestCase
+class LuckyNumberControllerTest extends WebTestCase
 {
     public function testLuckyNumber(): void
     {

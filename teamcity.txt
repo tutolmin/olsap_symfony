@@ -1,36 +1,712 @@
 
-##teamcity[testCount count='5' flowId='31160']
+##teamcity[testCount count='145' flowId='11351']
 
-##teamcity[testSuiteStarted name='App\Tests\TesteesTest' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest' flowId='31160']
+##teamcity[testSuiteStarted name='App Test Suite' flowId='11351']
 
-##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testTesteesListIsNotEmpty' flowId='31160']
+##teamcity[testSuiteStarted name='App\Tests\AddressesTest' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest' flowId='11351']
 
-##teamcity[testFailed name='testTesteesListIsNotEmpty' message='Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException : The "App\Service\TesteesManager" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.' details=' /srv/app/vendor/symfony/dependency-injection/Container.php:249|n /srv/app/vendor/symfony/dependency-injection/Container.php:211|n /srv/app/vendor/symfony/framework-bundle/Test/TestContainer.php:94|n /srv/app/tests/TesteesTest.php:44|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='216' flowId='31160']
+##teamcity[testStarted name='testAddressesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testAddressesListIsNotEmpty' flowId='11351']
 
-##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='216' flowId='31160']
+##teamcity[testFinished name='testAddressesListIsNotEmpty' duration='951' flowId='11351']
 
-##teamcity[testStarted name='testCanNotAddTesteeWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddTesteeWithoutMandatoryFields' flowId='31160']
+##teamcity[testStarted name='testCanNotAddAddressWithoutIp' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutIp' flowId='11351']
 
-##teamcity[testFailed name='testCanNotAddTesteeWithoutMandatoryFields' message='Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException : The "App\Service\TesteesManager" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.' details=' /srv/app/vendor/symfony/dependency-injection/Container.php:249|n /srv/app/vendor/symfony/dependency-injection/Container.php:211|n /srv/app/vendor/symfony/framework-bundle/Test/TestContainer.php:94|n /srv/app/tests/TesteesTest.php:44|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='31160']
+##teamcity[testFinished name='testCanNotAddAddressWithoutIp' duration='34' flowId='11351']
 
-##teamcity[testFinished name='testCanNotAddTesteeWithoutMandatoryFields' duration='7' flowId='31160']
+##teamcity[testStarted name='testCanNotAddAddressWithoutMac' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutMac' flowId='11351']
 
-##teamcity[testStarted name='testCanAddDummyTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanAddDummyTestee' flowId='31160']
+##teamcity[testFinished name='testCanNotAddAddressWithoutMac' duration='13' flowId='11351']
 
-##teamcity[testFailed name='testCanAddDummyTestee' message='Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException : The "App\Service\TesteesManager" service or alias has been removed or inlined when the container was compiled. You should either make it public, or stop using the container directly and use dependency injection instead.' details=' /srv/app/vendor/symfony/dependency-injection/Container.php:249|n /srv/app/vendor/symfony/dependency-injection/Container.php:211|n /srv/app/vendor/symfony/framework-bundle/Test/TestContainer.php:94|n /srv/app/tests/TesteesTest.php:44|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='31160']
+##teamcity[testStarted name='testCanNotAddDuplicateAddresses' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddDuplicateAddresses' flowId='11351']
 
-##teamcity[testFinished name='testCanAddDummyTestee' duration='6' flowId='31160']
+##teamcity[testFinished name='testCanNotAddDuplicateAddresses' duration='35' flowId='11351']
 
-##teamcity[testStarted name='testCanRemoveAllTestees' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanRemoveAllTestees' flowId='31160']
+##teamcity[testStarted name='testSpareAddressesAreAvailable' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testSpareAddressesAreAvailable' flowId='11351']
 
-##teamcity[testIgnored name='testCanRemoveAllTestees' message='This test depends on "App\Tests\TesteesTest::testTesteesListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='31160']
+##teamcity[testFinished name='testSpareAddressesAreAvailable' duration='526' flowId='11351']
 
-##teamcity[testFinished name='testCanRemoveAllTestees' duration='0' flowId='31160']
+##teamcity[testStarted name='testEachInstanceHasAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testEachInstanceHasAddress' flowId='11351']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddDuplicateTestee' flowId='31160']
+##teamcity[testFinished name='testEachInstanceHasAddress' duration='102' flowId='11351']
 
-##teamcity[testIgnored name='testCanNotAddDuplicateTestee' message='This test depends on "App\Tests\TesteesTest::testTesteesListIsNotEmpty" to pass.' details=' /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='0' flowId='31160']
+##teamcity[testStarted name='testCanAddDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanAddDummyAddress' flowId='11351']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTestee' duration='0' flowId='31160']
+##teamcity[testFinished name='testCanAddDummyAddress' duration='14' flowId='11351']
 
-##teamcity[testSuiteFinished name='App\Tests\TesteesTest' flowId='31160']
+##teamcity[testStarted name='testCanRemoveDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanRemoveDummyAddress' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyAddress' duration='8' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\AddressesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\BreedsTest' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest' flowId='11351']
+
+##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='17' flowId='11351']
+
+##teamcity[testStarted name='testBreedHasOperatingSystemsReference' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedHasOperatingSystemsReference' flowId='11351']
+
+##teamcity[testFinished name='testBreedHasOperatingSystemsReference' duration='21' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddBreedWithoutName' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddBreedWithoutName' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddBreedWithoutName' duration='15' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddDuplicateBreed' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateBreed' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanAddDummyBreed' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyBreed' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveDummyBreed' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyBreed' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveReferencedBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotRemoveReferencedBreed' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveReferencedBreed' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveBreedWithCascadeFlag' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveBreedWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveBreedWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/BreedsTest.php:144|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='14' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveBreedWithCascadeFlag' duration='14' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\BreedsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='11351']
+
+##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='11351']
+
+##teamcity[testFinished name='testAwxMeIsSymfony' duration='603' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='11351']
+
+##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='11351']
+
+##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='1' flowId='11351']
+
+##teamcity[testFinished name='testExecute' duration='1' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\Controller\LuckyNumberControllerTest' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberTest.php::\App\Tests\Controller\LuckyNumberControllerTest' flowId='11351']
+
+##teamcity[testStarted name='testLuckyNumber' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberTest.php::\App\Tests\Controller\LuckyNumberControllerTest::testLuckyNumber' flowId='11351']
+
+##teamcity[testFinished name='testLuckyNumber' duration='162' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\Controller\LuckyNumberControllerTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\Controller\SessionsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest' flowId='11351']
+
+##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='22' flowId='11351']
+
+##teamcity[testStarted name='testSessionsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsWebPageListContainsAllRecords' flowId='11351']
+
+##teamcity[testFinished name='testSessionsWebPageListContainsAllRecords' duration='170' flowId='11351']
+
+##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testTesteeDisplayWebPageContainsData' flowId='11351']
+
+##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='204' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllSessionsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testCanRemoveAllSessionsByClickingDeleteButton' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllSessionsByClickingDeleteButton' duration='320' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\Controller\SessionsControllerTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\Controller\TesteesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest' flowId='11351']
+
+##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testTesteesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesWebPageListContainsAllRecords' flowId='11351']
+
+##teamcity[testFinished name='testTesteesWebPageListContainsAllRecords' duration='74' flowId='11351']
+
+##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteeDisplayWebPageContainsData' flowId='11351']
+
+##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='126' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllTesteesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanRemoveAllTesteesByClickingDeleteButton' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllTesteesByClickingDeleteButton' duration='336' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\Controller\TesteesControllerTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\DomainsTest' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest' flowId='11351']
+
+##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testDomainHasTechnologiesReference' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainHasTechnologiesReference' flowId='11351']
+
+##teamcity[testFinished name='testDomainHasTechnologiesReference' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDomainWithoutName' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDomainWithoutName' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDomainWithoutName' duration='20' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDuplicateDomain' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateDomain' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanAddDummyDomain' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyDomain' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanRemoveDummyDomain' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyDomain' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainRemovalLeadsToLinkedTechnologiesDeletion' flowId='11351']
+
+##teamcity[testFinished name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' duration='57' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\DomainsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\EnvironmentStatusesTest' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest' flowId='11351']
+
+##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testEnvironmentStatusHasEnvironmentsReference' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusHasEnvironmentsReference' flowId='11351']
+
+##teamcity[testFinished name='testEnvironmentStatusHasEnvironmentsReference' duration='19' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddEnvironmentStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddEnvironmentStatusWithoutStatusString' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddEnvironmentStatusWithoutStatusString' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddDuplicateEnvironmentStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateEnvironmentStatus' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanAddDummyEnvironmentStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyEnvironmentStatus' duration='15' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanRemoveDummyEnvironmentStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyEnvironmentStatus' duration='7' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveReferencedEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotRemoveReferencedEnvironmentStatus' flowId='11351']
+
+##teamcity[testIgnored name='testCanNotRemoveReferencedEnvironmentStatus' message='references are not easy to delete' details=' /srv/app/tests/EnvironmentStatusesTest.php:123|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='5' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveReferencedEnvironmentStatus' duration='5' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveEnvironmentStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanRemoveEnvironmentStatusWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveEnvironmentStatusWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/EnvironmentStatusesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveEnvironmentStatusWithCascadeFlag' duration='7' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\EnvironmentStatusesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='11351']
+
+##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' flowId='11351']
+
+##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' duration='32' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='18' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='18' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummyHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyHardwareProfile' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummySupportedHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummySupportedHardwareProfile' duration='51' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveUnsupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveUnsupportedHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveUnsupportedHardwareProfile' duration='18' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveSupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotRemoveSupportedHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveSupportedHardwareProfile' duration='32' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveSupportedHardwareProfileWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:224|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' duration='6' flowId='11351']
+
+##teamcity[testStarted name='testCanMakeHardwareProfileSupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileSupported' flowId='11351']
+
+##teamcity[testFinished name='testCanMakeHardwareProfileSupported' duration='47' flowId='11351']
+
+##teamcity[testStarted name='testCanMakeHardwareProfileUnsupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileUnsupported' flowId='11351']
+
+##teamcity[testIgnored name='testCanMakeHardwareProfileUnsupported' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:278|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='11351']
+
+##teamcity[testFinished name='testCanMakeHardwareProfileUnsupported' duration='6' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\InstanceStatusesTest' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest' flowId='11351']
+
+##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testInstanceStatusHasInstancesReference' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusHasInstancesReference' flowId='11351']
+
+##teamcity[testFinished name='testInstanceStatusHasInstancesReference' duration='25' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddInstanceStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddInstanceStatusWithoutStatusString' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddInstanceStatusWithoutStatusString' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddDuplicateInstanceStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateInstanceStatus' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanAddDummyInstanceStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyInstanceStatus' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanRemoveDummyInstanceStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyInstanceStatus' duration='7' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveReferencedInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotRemoveReferencedInstanceStatus' flowId='11351']
+
+##teamcity[testIgnored name='testCanNotRemoveReferencedInstanceStatus' message='references are not easy to delete' details=' /srv/app/tests/InstanceStatusesTest.php:118|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='5' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveReferencedInstanceStatus' duration='5' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveInstanceStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanRemoveInstanceStatusWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveInstanceStatusWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/InstanceStatusesTest.php:132|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveInstanceStatusWithCascadeFlag' duration='6' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\InstanceStatusesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='11351']
+
+##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testInstanceTypesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutOperatingSystem' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutHardwareProfile' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutHardwareProfile' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutHardwareProfile' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddDuplicateInstanceTypes' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateInstanceTypes' duration='18' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanRemoveInstanceTypes' flowId='11351']
+
+##teamcity[testFailed name='testCanRemoveInstanceTypes' message='Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException : An exception occurred while executing a query: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|nDETAIL:  Key (id)=(225) is still referenced from table "addresses".' details=' /srv/app/vendor/doctrine/dbal/src/Driver/API/PostgreSQL/ExceptionConverter.php:50|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1939|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1881|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1213|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(225) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:28|n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:132|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n PDOException: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(225) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:130|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='32' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveInstanceTypes' duration='32' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\MessengerTest' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest' flowId='11351']
+
+##teamcity[testStarted name='testSomething' locationHint='php_qn:///srv/app/tests/MessengerTest.php::\App\Tests\MessengerTest::testSomething' flowId='11351']
+
+##teamcity[testFinished name='testSomething' duration='0' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\MessengerTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='11351']
+
+##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='11351']
+
+##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='20' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutReleaseOrBreed' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummyOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyOperatingSystem' duration='21' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveDummyOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyOperatingSystem' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummySupportedOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummySupportedOperatingSystem' duration='37' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveSupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotRemoveSupportedOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveSupportedOperatingSystem' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveSupportedOperatingSystemWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:213|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='9' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanMakeOperatingSystemSupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemSupported' flowId='11351']
+
+##teamcity[testFinished name='testCanMakeOperatingSystemSupported' duration='29' flowId='11351']
+
+##teamcity[testStarted name='testCanMakeOperatingSystemUnsupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemUnsupported' flowId='11351']
+
+##teamcity[testFailed name='testCanMakeOperatingSystemUnsupported' message='Doctrine\ORM\ORMInvalidArgumentException : A new entity was found through the relationship |'App\Entity\OperatingSystems#breed|' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={"persist"}).' details=' /srv/app/vendor/doctrine/orm/src/ORMInvalidArgumentException.php:103|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:3860|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:417|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/OperatingSystemsRepository.php:40|n /srv/app/src/Service/OperatingSystemsManager.php:86|n /srv/app/src/Service/OperatingSystemsManager.php:148|n /srv/app/tests/OperatingSystemsTest.php:269|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='13' flowId='11351']
+
+##teamcity[testFinished name='testCanMakeOperatingSystemUnsupported' duration='13' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\PortsTest' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest' flowId='11351']
+
+##teamcity[testStarted name='testPortsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testPortsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testPortsListIsNotEmpty' duration='320' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddPortWithoutPortNumber' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddPortWithoutPortNumber' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddPortWithoutPortNumber' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicatePorts' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddDuplicatePorts' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicatePorts' duration='19' flowId='11351']
+
+##teamcity[testStarted name='testSparePortsAreAvailable' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testSparePortsAreAvailable' flowId='11351']
+
+##teamcity[testFinished name='testSparePortsAreAvailable' duration='31' flowId='11351']
+
+##teamcity[testStarted name='testEachAddressHasPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testEachAddressHasPort' flowId='11351']
+
+##teamcity[testFinished name='testEachAddressHasPort' duration='2927' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanAddDummyPort' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyPort' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanRemoveDummyPort' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveDummyPort' duration='17' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\PortsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\SessionOsesTest' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest' flowId='11351']
+
+##teamcity[testStarted name='testSessionOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testSessionOsesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSessionOsesListIsNotEmpty' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionOsWithoutSession' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutSession' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionOsWithoutSession' duration='15' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionOsWithoutOperatingSystem' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateSessionOses' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddDuplicateSessionOses' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateSessionOses' duration='22' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomSessionOs' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanRemoveRandomSessionOs' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomSessionOs' duration='15' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\SessionOsesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\SessionStatusesTest' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest' flowId='11351']
+
+##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='8' flowId='11351']
+
+##teamcity[testStarted name='testSessionStatusHasSessionsReference' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusHasSessionsReference' flowId='11351']
+
+##teamcity[testFinished name='testSessionStatusHasSessionsReference' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddSessionStatusWithoutStatusString' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionStatusWithoutStatusString' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddDuplicateSessionStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateSessionStatus' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummySessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanAddDummySessionStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummySessionStatus' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanNotRemoveReferencedSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotRemoveReferencedSessionStatus' flowId='11351']
+
+##teamcity[testIgnored name='testCanNotRemoveReferencedSessionStatus' message='references are not easy to delete' details=' /srv/app/tests/SessionStatusesTest.php:109|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6' flowId='11351']
+
+##teamcity[testFinished name='testCanNotRemoveReferencedSessionStatus' duration='6' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveSessionStatusWithCascadeFlag' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanRemoveSessionStatusWithCascadeFlag' flowId='11351']
+
+##teamcity[testIgnored name='testCanRemoveSessionStatusWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/SessionStatusesTest.php:123|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='8' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveSessionStatusWithCascadeFlag' duration='8' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanRemoveRandomSessionStatus' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomSessionStatus' duration='13' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\SessionStatusesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\SessionTechsTest' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest' flowId='11351']
+
+##teamcity[testStarted name='testSessionTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testSessionTechsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSessionTechsListIsNotEmpty' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionTechWithoutSession' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutSession' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionTechWithoutSession' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutTechnology' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionTechWithoutTechnology' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateSessionTechs' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddDuplicateSessionTechs' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateSessionTechs' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomSessionTech' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanRemoveRandomSessionTech' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomSessionTech' duration='14' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\SessionTechsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\SessionsTest' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest' flowId='11351']
+
+##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testSessionsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddSessionWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddSessionWithoutMandatoryFields' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddSessionWithoutMandatoryFields' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummySession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanAddDummySession' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummySession' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllSessions' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanRemoveAllSessions' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllSessions' duration='60' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateSession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddDuplicateSession' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateSession' duration='17' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\SessionsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TaskInstanceTypesTest' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest' flowId='11351']
+
+##teamcity[testStarted name='testTaskInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testTaskInstanceTypesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTaskInstanceTypesListIsNotEmpty' duration='21' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomTaskInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveRandomTaskInstanceType' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomTaskInstanceType' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveAllTaskInstanceTypes' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllTaskInstanceTypes' duration='87' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutTask' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutTask' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutTask' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutInstanceType' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutInstanceType' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddDuplicateTaskInstanceTypes' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTaskInstanceTypes' duration='15' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TaskInstanceTypesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TaskOsesTest' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest' flowId='11351']
+
+##teamcity[testStarted name='testTaskOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testTaskOsesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTaskOsesListIsNotEmpty' duration='20' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomTaskOs' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanRemoveRandomTaskOs' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomTaskOs' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanRemoveAllTaskOses' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllTaskOses' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskOsWithoutTask' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutTask' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskOsWithoutTask' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutOperatingSystem' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskOsWithoutOperatingSystem' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddDuplicateTaskOses' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTaskOses' duration='16' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TaskOsesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TaskTechsTest' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest' flowId='11351']
+
+##teamcity[testStarted name='testTaskTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testTaskTechsListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTaskTechsListIsNotEmpty' duration='21' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomTaskTech' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanRemoveRandomTaskTech' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomTaskTech' duration='17' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskTechWithoutTask' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTask' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskTechWithoutTask' duration='15' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTechnology' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskTechWithoutTechnology' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTaskTechs' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddDuplicateTaskTechs' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTaskTechs' duration='15' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TaskTechsTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TasksTest' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest' flowId='11351']
+
+##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testTasksListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTasksListIsNotEmpty' duration='16' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskWithoutName' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutName' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskWithoutName' duration='13' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTaskWithoutPath' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutPath' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTaskWithoutPath' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTasks' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddDuplicateTasks' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTasks' duration='17' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyTask' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanAddDummyTask' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyTask' duration='10' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomTask' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanRemoveRandomTask' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomTask' duration='36' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TasksTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TechnologiesTest' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest' flowId='11351']
+
+##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testTechnologiesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='14' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTechnologyWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddTechnologyWithoutMandatoryFields' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTechnologyWithoutMandatoryFields' duration='9' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanAddDummyTechnology' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyTechnology' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveRandomTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanRemoveRandomTechnology' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveRandomTechnology' duration='17' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddDuplicateTechnology' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTechnology' duration='11' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TechnologiesTest' flowId='11351']
+
+##teamcity[testSuiteStarted name='App\Tests\TesteesTest' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest' flowId='11351']
+
+##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testTesteesListIsNotEmpty' flowId='11351']
+
+##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='11' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddTesteeWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddTesteeWithoutMandatoryFields' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddTesteeWithoutMandatoryFields' duration='15' flowId='11351']
+
+##teamcity[testStarted name='testCanAddDummyTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanAddDummyTestee' flowId='11351']
+
+##teamcity[testFinished name='testCanAddDummyTestee' duration='12' flowId='11351']
+
+##teamcity[testStarted name='testCanRemoveAllTestees' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanRemoveAllTestees' flowId='11351']
+
+##teamcity[testFinished name='testCanRemoveAllTestees' duration='74' flowId='11351']
+
+##teamcity[testStarted name='testCanNotAddDuplicateTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddDuplicateTestee' flowId='11351']
+
+##teamcity[testFinished name='testCanNotAddDuplicateTestee' duration='13' flowId='11351']
+
+##teamcity[testSuiteFinished name='App\Tests\TesteesTest' flowId='11351']
+
+##teamcity[testSuiteFinished name='App Test Suite' flowId='11351']

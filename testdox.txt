@@ -1,7 +1,195 @@
+Addresses (App\Tests\Addresses)
+ [x] Addresses list is not empty
+ [x] Can not add address without ip
+ [x] Can not add address without mac
+ [x] Can not add duplicate addresses
+ [x] Spare addresses are available
+ [x] Each instance has address
+ [x] Can add dummy address
+ [x] Can remove dummy address
+
+Breeds (App\Tests\Breeds)
+ [x] Breeds list is not empty
+ [x] Breed has operating systems reference
+ [x] Can not add breed without name
+ [x] Can not add duplicate breed
+ [x] Can add dummy breed
+ [x] Can remove dummy breed
+ [x] Can not remove referenced breed
+ [ ] Can remove breed with cascade flag
+
+Awx Me Command (App\Tests\Command\AwxMeCommand)
+ [x] Awx me is symfony
+
+Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
+ [ ] Execute
+
+Lucky Number Controller (App\Tests\Controller\LuckyNumberController)
+ [x] Lucky number
+
+Sessions Controller (App\Tests\Controller\SessionsController)
+ [x] Sessions list is not empty
+ [x] Sessions web page list contains all records
+ [x] Testee display web page contains data
+ [x] Can remove all sessions by clicking delete button
+
+ees Controller (App\Tests\Controller\eesController)
+ [x] Testees list is not empty
+ [x] Testees web page list contains all records
+ [x] Testee display web page contains data
+ [x] Can remove all testees by clicking delete button
+
+Domains (App\Tests\Domains)
+ [x] Domains list is not empty
+ [x] Domain has technologies reference
+ [x] Can not add domain without name
+ [x] Can not add duplicate domain
+ [x] Can add dummy domain
+ [x] Can remove dummy domain
+ [x] Domain removal leads to linked technologies deletion
+
+Environment Statuses (App\Tests\EnvironmentStatuses)
+ [x] Environment statuses list is not empty
+ [x] Environment status has environments reference
+ [x] Can not add environment status without status string
+ [x] Can not add duplicate environment status
+ [x] Can add dummy environment status
+ [x] Can remove dummy environment status
+ [ ] Can not remove referenced environment status
+ [ ] Can remove environment status with cascade flag
+
+Hardware Profiles (App\Tests\HardwareProfiles)
+ [x] Hardware profiles list is not empty
+ [x] Container hardware profiles list is not empty
+ [x] Vm hardware profiles list is not empty
+ [x] Supported hardware profiles list is not empty
+ [x] Each supported hardware profile has corresponding instance types for all supported oses
+ [x] Can not add hardware profile without name or type
+ [x] Can not add duplicate hardware profile
+ [x] Can add dummy hardware profile
+ [x] Can add dummy supported hardware profile
+ [x] Can remove unsupported hardware profile
+ [x] Can not remove supported hardware profile
+ [ ] Can remove supported hardware profile with cascade flag
+ [x] Can make hardware profile supported
+ [ ] Can make hardware profile unsupported
+
+Instance Statuses (App\Tests\InstanceStatuses)
+ [x] Instance statuses list is not empty
+ [x] Instance status has instances reference
+ [x] Can not add instance status without status string
+ [x] Can not add duplicate instance status
+ [x] Can add dummy instance status
+ [x] Can remove dummy instance status
+ [ ] Can not remove referenced instance status
+ [ ] Can remove instance status with cascade flag
+
+Instance Types (App\Tests\InstanceTypes)
+ [x] Instance types list is not empty
+ [x] Can not add instance type without operating system
+ [x] Can not add instance type without hardware profile
+ [x] Can not add duplicate instance types
+ [ ] Can remove instance types
+
+Messenger (App\Tests\Messenger)
+ [x] Something
+
+Operating Systems (App\Tests\OperatingSystems)
+ [x] Operating systems list is not empty
+ [x] Supported operating systems list is not empty
+ [x] Each supported os has corresponding instance types for all supported hardware profiles
+ [x] Can not add operating system without release or breed
+ [x] Can not add duplicate operating system
+ [x] Can add dummy operating system
+ [x] Can remove dummy operating system
+ [x] Can add dummy supported operating system
+ [x] Can not remove supported operating system
+ [ ] Can remove supported operating system with cascade flag
+ [x] Can make operating system supported
+ [ ] Can make operating system unsupported
+
+Ports (App\Tests\Ports)
+ [x] Ports list is not empty
+ [x] Can not add port without port number
+ [x] Can not add duplicate ports
+ [x] Spare ports are available
+ [x] Each address has port
+ [x] Can add dummy port
+ [x] Can remove dummy port
+
+Session Oses (App\Tests\SessionOses)
+ [x] Session oses list is not empty
+ [x] Can not add session os without session
+ [x] Can not add session os without operating system
+ [x] Can not add duplicate session oses
+ [x] Can remove random session os
+
+Session Statuses (App\Tests\SessionStatuses)
+ [x] Session statuses list is not empty
+ [x] Session status has sessions reference
+ [x] Can not add session status without status string
+ [x] Can not add duplicate session status
+ [x] Can add dummy session status
+ [ ] Can not remove referenced session status
+ [ ] Can remove session status with cascade flag
+ [x] Can remove random session status
+
+Session Techs (App\Tests\SessionTechs)
+ [x] Session techs list is not empty
+ [x] Can not add session tech without session
+ [x] Can not add session tech without technology
+ [x] Can not add duplicate session techs
+ [x] Can remove random session tech
+
+Sessions (App\Tests\Sessions)
+ [x] Sessions list is not empty
+ [x] Can not add session without mandatory fields
+ [x] Can add dummy session
+ [x] Can remove all sessions
+ [x] Can not add duplicate session
+
+Task Instance Types (App\Tests\TaskInstanceTypes)
+ [x] Task instance types list is not empty
+ [x] Can remove random task instance type
+ [x] Can remove all task instance types
+ [x] Can not add task instance type without task
+ [x] Can not add task instance type without instance type
+ [x] Can not add duplicate task instance types
+
+Task Oses (App\Tests\TaskOses)
+ [x] Task oses list is not empty
+ [x] Can remove random task os
+ [x] Can remove all task oses
+ [x] Can not add task os without task
+ [x] Can not add task os without operating system
+ [x] Can not add duplicate task oses
+
+Task Techs (App\Tests\TaskTechs)
+ [x] Task techs list is not empty
+ [x] Can remove random task tech
+ [x] Can not add task tech without task
+ [x] Can not add task tech without technology
+ [x] Can not add duplicate task techs
+
+Tasks (App\Tests\Tasks)
+ [x] Tasks list is not empty
+ [x] Can not add task without name
+ [x] Can not add task without path
+ [x] Can not add duplicate tasks
+ [x] Can add dummy task
+ [x] Can remove random task
+
+Technologies (App\Tests\Technologies)
+ [x] Technologies list is not empty
+ [x] Can not add technology without mandatory fields
+ [x] Can add dummy technology
+ [x] Can remove random technology
+ [x] Can not add duplicate technology
+
 ees (App\Tests\ees)
- [ ] Testees list is not empty
- [ ] Can not add testee without mandatory fields
- [ ] Can add dummy testee
- [ ] Can remove all testees
- [ ] Can not add duplicate testee
+ [x] Testees list is not empty
+ [x] Can not add testee without mandatory fields
+ [x] Can add dummy testee
+ [x] Can remove all testees
+ [x] Can not add duplicate testee
 

@@ -119,4 +119,25 @@ class InstanceTypesTest extends KernelTestCase
 
         $this->assertFalse($this->itRepository->add($new_it, true));
     }
+    
+    /**
+     * 
+     * @depends testInstanceTypesListIsNotEmpty
+     * @param array<InstanceTypes> $instance_types
+     * @return void
+     */
+    public function testCanRemoveInstanceTypes(array $instance_types): void {
+
+        foreach ($instance_types as $t) {
+
+            $it = $this->itRepository->findOneById($t->getId());
+            $this->assertNotNull($it);
+            $id = $it->getId();
+
+            $this->itRepository->remove($it, true);
+
+            $removed_it = $this->itRepository->findOneById($id);
+            $this->assertNull($removed_it);
+        }
+    }
 }
