@@ -11,15 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\TasksManager;
 
 #[Route('/tasks')]
 class TasksController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    private TasksManager $tasksManager;
+    public function __construct(LoggerInterface $logger,
+            TasksManager $tasksManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        $this->tasksManager = $tasksManager;
     }
 
     #[Route('/', name: 'app_tasks_index', methods: ['GET'])]
@@ -99,12 +103,13 @@ class TasksController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_tasks_delete', methods: ['POST'])]
-    public function delete(Request $request, Tasks $task, TasksRepository $tasksRepository): Response
+    public function delete(Request $request, Tasks $task): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$task->getId(), strval($request->request->get('_token')))) {
-            $tasksRepository->remove($task, true);
+//            $tasksRepository->remove($task, true);
+            $this->tasksManager->removeTask($task);
         }
 
         return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);

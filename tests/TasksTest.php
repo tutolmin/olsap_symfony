@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Tasks;
 use App\Repository\TasksRepository;
+use App\Service\TasksManager;
 
 class TasksTest extends KernelTestCase
 {
@@ -26,12 +27,15 @@ class TasksTest extends KernelTestCase
      * @var TasksRepository
      */
     private $tasksRepository;
+    
+    private TasksManager $tasksManager;
 
     protected function setUp(): void {
         self::bootKernel();
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->tasksRepository = $this->entityManager->getRepository(Tasks::class);
+        $this->tasksManager = static::getContainer()->get(TasksManager::class);        
     }
     
     /**
@@ -97,15 +101,18 @@ class TasksTest extends KernelTestCase
      * @param array<Tasks> $tasks
      * @return void
      */
-    public function testCanRemoveRandomTask( array $tasks): void {
+    public function testCanRemoveAllTasks(array $tasks): void {
 
-        $task = $this->tasksRepository->findOneById($tasks[0]->getId());
-        $this->assertNotNull($task);
-        $id = $task->getId();
-    
-        $this->tasksRepository->remove($task, true);
-        
-        $removed_task = $this->tasksRepository->findOneById($id);
-        $this->assertNull($removed_task);
-    }           
+        foreach ($tasks as $s) {
+
+            $task = $this->tasksRepository->findOneById($s);
+            $this->assertNotNull($task);
+            $id = $task->getId();
+
+            $this->tasksManager->removeTask($task);
+
+            $removed_task = $this->tasksRepository->findOneById($id);
+            $this->assertNull($removed_task);
+        }
+    }
 }

@@ -7,9 +7,9 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Tasks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Environments;
-use App\Repository\EnvironmentsRepository;
+//use Doctrine\ORM\EntityManagerInterface;
+//use App\Entity\Environments;
+//use App\Repository\EnvironmentsRepository;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 
@@ -24,14 +24,9 @@ use Doctrine\DBAL\Exception\NotNullConstraintViolationException;
 class TasksRepository extends ServiceEntityRepository
 {
     private LoggerInterface $logger;
-//    private EntityManagerInterface $entityManager;
-    /**
-     * 
-     * @var EnvironmentsRepository
-     */
-    private $environmentRepository;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, LoggerInterface $logger)
+    public function __construct(ManagerRegistry $registry,
+            LoggerInterface $logger)
     {
         $this->logger = $logger;
 
@@ -41,7 +36,7 @@ class TasksRepository extends ServiceEntityRepository
 
 //        $this->entityManager = $entityManager;
 
-        $this->environmentRepository = $entityManager->getRepository( Environments::class);
+//        $this->environmentRepository = $entityManager->getRepository( Environments::class);
     }
 
     public function add(Tasks $entity, bool $flush = false): bool
@@ -64,22 +59,22 @@ class TasksRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(Tasks $entity, bool $flush = false): bool
+    public function remove(Tasks $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
-
+/*
         // Fetch all linked Environments and delete them
         $envs = $entity->getEnvs();
 
         foreach($envs as $env)
             $this->environmentRepository->remove($env);
+*/
 
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {
             $this->getEntityManager()->flush();
         } 
-        return true;
     }
 
     /**
