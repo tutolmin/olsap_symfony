@@ -32,20 +32,15 @@ class EnvironmentsNormalizer implements NormalizerInterface {
 
             if (is_array($data)) {
 
+                $data['status'] = $topic->getStatus()->getStatus();
+                $data['task'] = $topic->getTask()->getPath();
+
                 if ($topic->getSession()) {
                     $data['session'] = $topic->getSession()->getHash();
                 }
 
                 if ($topic->getInstance()) {
                     $data['instance'] = $topic->getInstance()->getName();
-                }
-
-                if ($topic->getStatus()) {
-                    $data['status'] = $topic->getStatus()->getStatus();
-                }
-
-                if ($topic->getTask()) {
-                    $data['task'] = $topic->getTask()->getPath();
                 }
 
                 if ($topic->getStartedAt()) {

@@ -84,7 +84,7 @@ class EnvironmentsRepository extends ServiceEntityRepository
 //       $this->sessionManager->releaseInstance($instance);
 
         // Fetch linked Instances and release them
-	$entity->setInstance(null);
+//	$entity->setInstance(null);
 
         $this->getEntityManager()->remove($entity);
 

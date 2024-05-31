@@ -52,7 +52,7 @@ class EnvironmentStatusesRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(EnvironmentStatuses $entity, bool $flush = false): bool
+    public function remove(EnvironmentStatuses $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
 
@@ -73,7 +73,6 @@ class EnvironmentStatusesRepository extends ServiceEntityRepository
         }
  * 
  */
-        return true;
     }
 
 //    /**

@@ -82,7 +82,7 @@ class EnvironmentsController extends AbstractController
             $this->logger->debug("Number of Environments to create: " . 
                     $form->get('number')->getData());
 
-            $task_id = $environment->getTask() ? $environment->getTask()->getId() : -1;
+            $task_id = $environment->getTask()->getId();
             
             $session_id = $environment->getSession() ? $environment->getSession()->getId() : -1;
 //            $session_id = is_int($form->get('session')->getData()) ? $form->get('session')->getData() : -1;
@@ -131,7 +131,7 @@ class EnvironmentsController extends AbstractController
             $session_url = $environment->getSession()->getHash();
         }
 
-        $description = $environment->getTask() ? $environment->getTask()->getDescription() : "";
+        $description = $environment->getTask()->getDescription();
 
         return $this->render('environments/display.html.twig', [
                     'environment' => $environment,

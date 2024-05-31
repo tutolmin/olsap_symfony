@@ -11,15 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\SessionStatusesManager;
 
 #[Route('/session/statuses')]
 class SessionStatusesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    private SessionStatusesManager $sessionStatusesManager;
+    public function __construct(LoggerInterface $logger,
+            SessionStatusesManager $sessionStatusesManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        $this->sessionStatusesManager = $sessionStatusesManager;
     }
 
     #[Route('/', name: 'app_session_statuses_index', methods: ['GET'])]
@@ -84,12 +88,12 @@ class SessionStatusesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_session_statuses_delete', methods: ['POST'])]
-    public function delete(Request $request, SessionStatuses $sessionStatus, SessionStatusesRepository $sessionStatusesRepository): Response
-    {
+    public function delete(Request $request, SessionStatuses $sessionStatus): Response {
         $this->logger->debug(__METHOD__);
 
-        if ($this->isCsrfTokenValid('delete'.$sessionStatus->getId(), strval($request->request->get('_token')))) {
-            $sessionStatusesRepository->remove($sessionStatus, true);
+        if ($this->isCsrfTokenValid('delete' . $sessionStatus->getId(), strval($request->request->get('_token')))) {
+//            $sessionStatusesRepository->remove($sessionStatus, true);
+            $this->sessionStatusesManager->removeSessionStatus($sessionStatus);
         }
 
         return $this->redirectToRoute('app_session_statuses_index', [], Response::HTTP_SEE_OTHER);

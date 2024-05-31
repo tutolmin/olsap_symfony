@@ -88,6 +88,20 @@
             <li class="success">Domain display web page contains data</li>
             <li class="success">Can remove all domains by clicking delete button</li>
         </ul>
+        <h2>Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)</h2>
+        <ul>
+            <li class="success">Environment statuses list is not empty</li>
+            <li class="success">Environment statuses web page list contains all records</li>
+            <li class="success">Environment status display web page contains data</li>
+            <li class="success">Can remove all environment statuses by clicking delete button</li>
+        </ul>
+        <h2>Environments Controller (App\Tests\Controller\EnvironmentsController)</h2>
+        <ul>
+            <li class="success">Environments list is not empty</li>
+            <li class="success">Environments web page list contains all records</li>
+            <li class="success">Environment display web page contains data</li>
+            <li class="success">Can remove all environments by clicking delete button</li>
+        </ul>
         <h2>Lucky Number Controller (App\Tests\Controller\LuckyNumberController)</h2>
         <ul>
             <li class="success">Lucky number</li>
@@ -98,6 +112,13 @@
             <li class="success">Session oses web page list contains all records</li>
             <li class="success">Session os display web page contains data</li>
             <li class="success">Can remove all session oses by clicking delete button</li>
+        </ul>
+        <h2>Session Statuses Controller (App\Tests\Controller\SessionStatusesController)</h2>
+        <ul>
+            <li class="success">Session statuses list is not empty</li>
+            <li class="success">Session statuses web page list contains all records</li>
+            <li class="success">Session status display web page contains data</li>
+            <li class="success">Can remove all session statuses by clicking delete button</li>
         </ul>
         <h2>Session Techs Controller (App\Tests\Controller\SessionTechsController)</h2>
         <ul>
@@ -146,13 +167,18 @@
         <h2>Environment Statuses (App\Tests\EnvironmentStatuses)</h2>
         <ul>
             <li class="success">Environment statuses list is not empty</li>
-            <li class="success">Environment status has environments reference</li>
             <li class="success">Can not add environment status without status string</li>
             <li class="success">Can not add duplicate environment status</li>
             <li class="success">Can add dummy environment status</li>
-            <li class="success">Can remove dummy environment status</li>
-            <li class="defect">Can not remove referenced environment status</li>
-            <li class="defect">Can remove environment status with cascade flag</li>
+            <li class="success">Can remove all environment statuses</li>
+        </ul>
+        <h2>Environments (App\Tests\Environments)</h2>
+        <ul>
+            <li class="success">Environments list is not empty</li>
+            <li class="success">Can not add environment without mandatory fields</li>
+            <li class="success">Can add dummy environment</li>
+            <li class="success">Can remove all environments</li>
+            <li class="success">Can not add duplicate environment</li>
         </ul>
         <h2>Hardware Profiles (App\Tests\HardwareProfiles)</h2>
         <ul>
@@ -230,13 +256,10 @@
         <h2>Session Statuses (App\Tests\SessionStatuses)</h2>
         <ul>
             <li class="success">Session statuses list is not empty</li>
-            <li class="success">Session status has sessions reference</li>
             <li class="success">Can not add session status without status string</li>
             <li class="success">Can not add duplicate session status</li>
             <li class="success">Can add dummy session status</li>
-            <li class="defect">Can not remove referenced session status</li>
-            <li class="defect">Can remove session status with cascade flag</li>
-            <li class="success">Can remove random session status</li>
+            <li class="success">Can remove all session statuses</li>
         </ul>
         <h2>Session Techs (App\Tests\SessionTechs)</h2>
         <ul>
@@ -286,7 +309,7 @@
             <li class="success">Can not add task without path</li>
             <li class="success">Can not add duplicate tasks</li>
             <li class="success">Can add dummy task</li>
-            <li class="success">Can remove random task</li>
+            <li class="defect">Can remove random task</li>
         </ul>
         <h2>Technologies (App\Tests\Technologies)</h2>
         <ul>

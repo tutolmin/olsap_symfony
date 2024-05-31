@@ -5,9 +5,8 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\EnvironmentStatuses;
-//use App\Entity\Environments;
 use App\Repository\EnvironmentStatusesRepository;
-//use App\Repository\EnvironmentsRepository;
+use App\Service\EnvironmentStatusesManager;
 
 class EnvironmentStatusesTest extends KernelTestCase
 {
@@ -29,13 +28,14 @@ class EnvironmentStatusesTest extends KernelTestCase
      */
     private $environmentStatusesRepository;
 
+    private EnvironmentStatusesManager $environmentStatusesManager;
+
     protected function setUp(): void {
         self::bootKernel();
 
-//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
-//        $this->environmentsRepository = $this->entityManager->getRepository(Environments::class);
+        $this->environmentStatusesManager = static::getContainer()->get(EnvironmentStatusesManager::class);        
     }
     
     /**
@@ -49,26 +49,7 @@ class EnvironmentStatusesTest extends KernelTestCase
         
         return $environment_statuses;
     }
-    
-    /**
-     * 
-     * @depends testEnvironmentStatusesListIsNotEmpty
-     * @param array<EnvironmentStatuses> $environment_statuses
-     * @return EnvironmentStatuses|null
-     */
-    public function testEnvironmentStatusHasEnvironmentsReference(
-            array $environment_statuses): ?EnvironmentStatuses {
-        
-        foreach ($environment_statuses as $environment_status) {
-            if($environment_status->getEnvironments()->first()){
-                $this->assertTrue(true);
-                return $environment_status;
-            }
-        }
-        $this->assertTrue(false);
-        return null;
-    }
-    
+
     public function testCanNotAddEnvironmentStatusWithoutStatusString(): void {
         
         $this->assertFalse($this->environmentStatusesRepository->add(
@@ -101,49 +82,25 @@ class EnvironmentStatusesTest extends KernelTestCase
         $this->assertTrue($this->environmentStatusesRepository->add($environment_status, true));
         return $environment_status;
     }
-
-    /**
-     * @depends testCanAddDummyEnvironmentStatus
-     * @param EnvironmentStatuses $environment_status
-     * @return void
-     */
-    public function testCanRemoveDummyEnvironmentStatus(EnvironmentStatuses $environment_status): void {
-        
-        $this->assertTrue($this->environmentStatusesRepository->remove($environment_status, true));
-    }
         
     /**
      * 
-     * @depends testEnvironmentStatusHasEnvironmentsReference
-     * @param EnvironmentStatuses $environment_statuses
+     * @depends testEnvironmentStatusesListIsNotEmpty
+     * @param array<EnvironmentStatuses> $environment_statuses
      * @return void
      */
-    public function testCanNotRemoveReferencedEnvironmentStatus(
-            EnvironmentStatuses $environment_statuses): void {
-        $this->markTestSkipped("references are not easy to delete"
-            );
+    public function testCanRemoveAllEnvironmentStatuses($environment_statuses): void {
+    
+         foreach ($environment_statuses as $s) {
+            
+            $item = $this->environmentStatusesRepository->findOneById($s);
+            $this->assertNotNull($item);
+            $id = $item->getId();
 
-//        $this->assertFalse($this->environmentStatusesRepository->remove($environment_statuses, true));
-    }
-
-    /**
-     * @depends testEnvironmentStatusHasEnvironmentsReference
-     * @param EnvironmentStatuses $environment_status
-     * @return void
-     */
-    public function testCanRemoveEnvironmentStatusWithCascadeFlag(
-            EnvironmentStatuses $environment_status): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
-        $breed_id = $breed->getId();
-
-        $this->assertTrue($this->breedsManager->removeEnvironmentStatus($breed, true));
-
-        // Try to find existing OS
-        $this->assertEmpty($this->osRepository->findBy(['breed' => $breed_id]));
-         * 
-         */
+            $this->environmentStatusesManager->removeEnvironmentStatus($item);
+            
+            $removed_item = $this->environmentStatusesRepository->findOneById($id);
+            $this->assertNull($removed_item);
+        }
     }
 }

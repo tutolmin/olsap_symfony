@@ -79,7 +79,7 @@ class Environments
         return $this->id;
     }
 
-    public function getTask(): ?Tasks
+    public function getTask(): Tasks
     {
         return $this->task;
     }
@@ -175,7 +175,7 @@ class Environments
         return $this;
     }
 
-    public function getStatus(): ?EnvironmentStatuses
+    public function getStatus(): EnvironmentStatuses
     {
         return $this->status;
     }

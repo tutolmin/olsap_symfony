@@ -598,11 +598,7 @@ class EnvironmentManager
 
 	$this->logger->debug('Verifying: ' . $env);
 
-        $task = $env->getTask();
-        $task_id = -1;
-        if ($task) {
-            $task_id = $task->getVerify();
-        }
+        $task_id = $env->getTask()->getVerify();
         if($task_id>0) {
 
 	  // Limit execution on single host only
@@ -685,11 +681,8 @@ class EnvironmentManager
 
 	$this->logger->debug('Deploying: ' . $env);
 
-        $task = $env->getTask();
-        $task_id = -1;
-        if ($task) {
-            $task_id = $task->getDeploy();
-        }
+        $task_id = $env->getTask()->getDeploy();
+
         if($task_id>0) {
 
             $instance = $env->getInstance();

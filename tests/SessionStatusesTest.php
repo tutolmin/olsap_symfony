@@ -5,9 +5,8 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\SessionStatuses;
-//use App\Entity\Sessions;
 use App\Repository\SessionStatusesRepository;
-//use App\Repository\SessionsRepository;
+use App\Service\SessionStatusesManager;
 
 class SessionStatusesTest extends KernelTestCase
 {
@@ -29,13 +28,15 @@ class SessionStatusesTest extends KernelTestCase
      */
     private $sessionStatusesRepository;
 
+    private SessionStatusesManager $sessionStatusesManager;
+    
     protected function setUp(): void {
         self::bootKernel();
 
-//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository(SessionStatuses::class);
-//        $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
+        
+        $this->sessionStatusesManager = static::getContainer()->get(SessionStatusesManager::class);        
     }
     
     /**
@@ -48,25 +49,6 @@ class SessionStatusesTest extends KernelTestCase
         $this->assertNotEmpty($session_statuses);
         
         return $session_statuses;
-    }
-    
-    /**
-     * 
-     * @depends testSessionStatusesListIsNotEmpty
-     * @param array<SessionStatuses> $session_statuses
-     * @return SessionStatuses|null
-     */
-    public function testSessionStatusHasSessionsReference(
-            array $session_statuses): ?SessionStatuses {
-        
-        foreach ($session_statuses as $session_status) {
-            if($session_status->getSessions()->first()){
-                $this->assertTrue(true);
-                return $session_status;
-            }
-        }
-        $this->assertTrue(false);
-        return null;
     }
     
     public function testCanNotAddSessionStatusWithoutStatusString(): void {
@@ -97,56 +79,25 @@ class SessionStatusesTest extends KernelTestCase
         $this->assertTrue($this->sessionStatusesRepository->add($session_status, true));
         return $session_status;
     }
-
-    /**
-     * 
-     * @depends testSessionStatusHasSessionsReference
-     * @param SessionStatuses $session_statuses
-     * @return void
-     */
-    public function testCanNotRemoveReferencedSessionStatus(
-            SessionStatuses $session_statuses): void {
-        $this->markTestSkipped("references are not easy to delete"
-            );
-        
-//        $this->assertTrue($this->sessionStatusesRepository->remove($session_statuses, true));
-    }
             
     /**
-     * @depends testSessionStatusHasSessionsReference
-     * @param SessionStatuses $session_status
-     * @return void
-     */
-    public function testCanRemoveSessionStatusWithCascadeFlag(
-            SessionStatuses $session_status): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
-        $breed_id = $breed->getId();
-
-        $this->assertTrue($this->breedsManager->removeSessionStatus($breed, true));
-
-        // Try to find existing OS
-        $this->assertEmpty($this->osRepository->findBy(['breed' => $breed_id]));
-         * 
-         */
-    }
-    
-    /**
+     * 
      * @depends testSessionStatusesListIsNotEmpty
      * @param array<SessionStatuses> $session_statuses
      * @return void
      */
-    public function testCanRemoveRandomSessionStatus( array $session_statuses): void {
+    public function testCanRemoveAllSessionStatuses(array $session_statuses): void { 
 
-        $ss = $this->sessionStatusesRepository->findOneById($session_statuses[0]->getId());
-        $this->assertNotNull($ss);
-        $id = $ss->getId();
-    
-        $this->sessionStatusesRepository->remove($ss, true);
-        
-        $removed_ss = $this->sessionStatusesRepository->findOneById($id);
-        $this->assertNull($removed_ss);
-    } 
+        foreach ($session_statuses as $s) {
+            
+            $session_status = $this->sessionStatusesRepository->findOneById($s);
+            $this->assertNotNull($session_status);
+            $id = $session_status->getId();
+
+            $this->sessionStatusesManager->removeSessionStatus($session_status);
+            
+            $removed_session_status = $this->sessionStatusesRepository->findOneById($id);
+            $this->assertNull($removed_session_status);
+        }
+    }
 }

@@ -30,6 +30,18 @@ Domains Controller (App\Tests\Controller\DomainsController)
  [x] Domain display web page contains data
  [x] Can remove all domains by clicking delete button
 
+Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)
+ [x] Environment statuses list is not empty
+ [x] Environment statuses web page list contains all records
+ [x] Environment status display web page contains data
+ [x] Can remove all environment statuses by clicking delete button
+
+Environments Controller (App\Tests\Controller\EnvironmentsController)
+ [x] Environments list is not empty
+ [x] Environments web page list contains all records
+ [x] Environment display web page contains data
+ [x] Can remove all environments by clicking delete button
+
 Lucky Number Controller (App\Tests\Controller\LuckyNumberController)
  [x] Lucky number
 
@@ -38,6 +50,12 @@ Session Oses Controller (App\Tests\Controller\SessionOsesController)
  [x] Session oses web page list contains all records
  [x] Session os display web page contains data
  [x] Can remove all session oses by clicking delete button
+
+Session Statuses Controller (App\Tests\Controller\SessionStatusesController)
+ [x] Session statuses list is not empty
+ [x] Session statuses web page list contains all records
+ [x] Session status display web page contains data
+ [x] Can remove all session statuses by clicking delete button
 
 Session Techs Controller (App\Tests\Controller\SessionTechsController)
  [x] Session techs list is not empty
@@ -79,13 +97,17 @@ Domains (App\Tests\Domains)
 
 Environment Statuses (App\Tests\EnvironmentStatuses)
  [x] Environment statuses list is not empty
- [x] Environment status has environments reference
  [x] Can not add environment status without status string
  [x] Can not add duplicate environment status
  [x] Can add dummy environment status
- [x] Can remove dummy environment status
- [ ] Can not remove referenced environment status
- [ ] Can remove environment status with cascade flag
+ [x] Can remove all environment statuses
+
+Environments (App\Tests\Environments)
+ [x] Environments list is not empty
+ [x] Can not add environment without mandatory fields
+ [x] Can add dummy environment
+ [x] Can remove all environments
+ [x] Can not add duplicate environment
 
 Hardware Profiles (App\Tests\HardwareProfiles)
  [x] Hardware profiles list is not empty
@@ -155,13 +177,10 @@ Session Oses (App\Tests\SessionOses)
 
 Session Statuses (App\Tests\SessionStatuses)
  [x] Session statuses list is not empty
- [x] Session status has sessions reference
  [x] Can not add session status without status string
  [x] Can not add duplicate session status
  [x] Can add dummy session status
- [ ] Can not remove referenced session status
- [ ] Can remove session status with cascade flag
- [x] Can remove random session status
+ [x] Can remove all session statuses
 
 Session Techs (App\Tests\SessionTechs)
  [x] Session techs list is not empty
@@ -205,7 +224,7 @@ Tasks (App\Tests\Tasks)
  [x] Can not add task without path
  [x] Can not add duplicate tasks
  [x] Can add dummy task
- [x] Can remove random task
+ [ ] Can remove random task
 
 Technologies (App\Tests\Technologies)
  [x] Technologies list is not empty
