@@ -462,7 +462,7 @@ class LxcManager
      * @param bool $force
      * @return bool
      */
-    private function wipeInstance($name, $force = false)
+    public function wipeInstance($name, $force = false)
     {
         $this->logger->debug(__METHOD__);
 

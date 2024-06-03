@@ -139,7 +139,8 @@ class InstancesTest extends KernelTestCase
      * @depends testInstancesListIsNotEmpty
      * @param array<Instances> $instances
      * @return void
-    public function testCanRemoveAllInstances(array $instances): void { 
+     */
+    public function testCanWipeAllInstancesFromDatabase(array $instances): void { 
 
         foreach ($instances as $s) {
             
@@ -147,7 +148,7 @@ class InstancesTest extends KernelTestCase
             $this->assertNotNull($instance);
             $id = $instance->getId();
 
-            $this->lxcManager->removeInstance($instance);
+            $this->lxdService->wipeInstance($instance->getName(), $force = true);
             
             $removed_instance = $this->instancesRepository->findOneById($id);
             $this->assertNull($removed_instance);
