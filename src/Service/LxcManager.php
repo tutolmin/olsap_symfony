@@ -494,24 +494,27 @@ class LxcManager
                 $this->logger->debug("Force opiton specified");
             }
         }
+        /*
+          // Unbind an instance from env so it can be used again
+          $instance->setEnvs(null);
 
-        // Unbind an instance from env so it can be used again
-        $instance->setEnvs(null);
+          // Fetch all linked Addresses and release them
+          $addresses = $instance->getAddresses();
+          foreach ($addresses as $address) {
+          $address->setInstance(null);
+          //            $this->entityManager->flush();
+          }
 
-        // Fetch all linked Addresses and release them
-        $addresses = $instance->getAddresses();
-        foreach ($addresses as $address) {
-            $address->setInstance(null);
-//            $this->entityManager->flush();
-        }
-
-        // Delete item from the DB
-        $this->entityManager->remove($instance);
-        $this->entityManager->flush();
+          // Delete item from the DB
+          $this->entityManager->remove($instance);
+          $this->entityManager->flush();
+         */
+        
+        $this->instanceRepository->remove($instance, $flush = true);
         
         return true;
     }
-    
+
     /**
      * 
      * @param bool $force
