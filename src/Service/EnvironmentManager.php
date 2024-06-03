@@ -185,9 +185,8 @@ class EnvironmentManager
         // stop instance for the time being
 //	$this->stopInstance($instance);
         
-        $status_str = $instance->getStatus() ? $instance->getStatus()->getStatus() : "New";
         $this->lxcOperationBus->dispatch(new LxcOperation(["command" => "setInstanceStatus",
-            "name" => $instance->getName(), "status" => $status_str]));
+            "name" => $instance->getName(), "status" => $instance->getStatus()]));
         
 //        $this->lxcService->setInstanceStatus($instance->getId(), 
 //                $instance->getStatus()->getStatus());

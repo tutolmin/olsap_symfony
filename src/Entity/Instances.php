@@ -112,7 +112,7 @@ class Instances
         return $this;
     }
 
-    public function getStatus(): ?InstanceStatuses
+    public function getStatus(): InstanceStatuses
     {
         return $this->status;
     }

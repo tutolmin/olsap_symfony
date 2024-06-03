@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.278190485" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testInstancesListIsNotEmpty" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instances list is not empty" status="0" time="0.333731064" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksWebPageListContainsAllRecords" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks web page list contains all records" status="0" time="0.348804813" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanNotAddInstanceWithoutMandatoryFields" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add instance without mandatory fields" status="0" time="0.020163266" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testEnvironmentDisplayWebPageContainsData" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Environment display web page contains data" status="0" time="0.877676331" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanAddDummyInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can add dummy instance" status="0" time="0.033205181" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testCanRemoveAllTasksByClickingDeleteButton" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Can remove all tasks by clicking delete button" status="0" time="1.653925319" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testInstanceListHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instance list has no orphans" status="0" time="0.221890685" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstancesTest" methodName="testLxcInventoryHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Lxc inventory has no orphans" status="0" time="0.26349044" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\InstancesTest" methodName="testCanNotAddDuplicateInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add duplicate instance" status="0" time="0.013547813" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

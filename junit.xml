@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\Controller\TasksControllerTest" file="/srv/app/tests/Controller/TasksControllerTest.php" tests="4" assertions="152" errors="0" warnings="0" failures="0" skipped="0" time="3.158597">
-    <testcase name="testTasksListIsNotEmpty" class="App\Tests\Controller\TasksControllerTest" classname="App.Tests.Controller.TasksControllerTest" file="/srv/app/tests/Controller/TasksControllerTest.php" line="42" assertions="1" time="0.278190"/>
-    <testcase name="testTasksWebPageListContainsAllRecords" class="App\Tests\Controller\TasksControllerTest" classname="App.Tests.Controller.TasksControllerTest" file="/srv/app/tests/Controller/TasksControllerTest.php" line="55" assertions="46" time="0.348805"/>
-    <testcase name="testEnvironmentDisplayWebPageContainsData" class="App\Tests\Controller\TasksControllerTest" classname="App.Tests.Controller.TasksControllerTest" file="/srv/app/tests/Controller/TasksControllerTest.php" line="76" assertions="60" time="0.877676"/>
-    <testcase name="testCanRemoveAllTasksByClickingDeleteButton" class="App\Tests\Controller\TasksControllerTest" classname="App.Tests.Controller.TasksControllerTest" file="/srv/app/tests/Controller/TasksControllerTest.php" line="96" assertions="45" time="1.653925"/>
+  <testsuite name="App\Tests\InstancesTest" file="/srv/app/tests/InstancesTest.php" tests="6" assertions="57" errors="0" warnings="0" failures="0" skipped="0" time="0.886028">
+    <testcase name="testInstancesListIsNotEmpty" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="69" assertions="1" time="0.333731"/>
+    <testcase name="testCanNotAddInstanceWithoutMandatoryFields" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="76" assertions="1" time="0.020163"/>
+    <testcase name="testCanAddDummyInstance" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="85" assertions="3" time="0.033205"/>
+    <testcase name="testInstanceListHasNoOrphans" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="110" assertions="16" time="0.221891"/>
+    <testcase name="testLxcInventoryHasNoOrphans" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="121" assertions="33" time="0.263490"/>
+    <testcase name="testCanNotAddDuplicateInstance" class="App\Tests\InstancesTest" classname="App.Tests.InstancesTest" file="/srv/app/tests/InstancesTest.php" line="162" assertions="3" time="0.013548"/>
   </testsuite>
 </testsuites>

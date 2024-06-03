@@ -1,22 +1,30 @@
 
-##teamcity[testCount count='4' flowId='3746']
+##teamcity[testCount count='6' flowId='16675']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TasksControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest' flowId='3746']
+##teamcity[testSuiteStarted name='App\Tests\InstancesTest' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest' flowId='16675']
 
-##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksListIsNotEmpty' flowId='3746']
+##teamcity[testStarted name='testInstancesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstancesListIsNotEmpty' flowId='16675']
 
-##teamcity[testFinished name='testTasksListIsNotEmpty' duration='278' flowId='3746']
+##teamcity[testFinished name='testInstancesListIsNotEmpty' duration='334' flowId='16675']
 
-##teamcity[testStarted name='testTasksWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksWebPageListContainsAllRecords' flowId='3746']
+##teamcity[testStarted name='testCanNotAddInstanceWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddInstanceWithoutMandatoryFields' flowId='16675']
 
-##teamcity[testFinished name='testTasksWebPageListContainsAllRecords' duration='349' flowId='3746']
+##teamcity[testFinished name='testCanNotAddInstanceWithoutMandatoryFields' duration='20' flowId='16675']
 
-##teamcity[testStarted name='testEnvironmentDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testEnvironmentDisplayWebPageContainsData' flowId='3746']
+##teamcity[testStarted name='testCanAddDummyInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanAddDummyInstance' flowId='16675']
 
-##teamcity[testFinished name='testEnvironmentDisplayWebPageContainsData' duration='878' flowId='3746']
+##teamcity[testFinished name='testCanAddDummyInstance' duration='33' flowId='16675']
 
-##teamcity[testStarted name='testCanRemoveAllTasksByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testCanRemoveAllTasksByClickingDeleteButton' flowId='3746']
+##teamcity[testStarted name='testInstanceListHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstanceListHasNoOrphans' flowId='16675']
 
-##teamcity[testFinished name='testCanRemoveAllTasksByClickingDeleteButton' duration='1654' flowId='3746']
+##teamcity[testFinished name='testInstanceListHasNoOrphans' duration='222' flowId='16675']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\TasksControllerTest' flowId='3746']
+##teamcity[testStarted name='testLxcInventoryHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testLxcInventoryHasNoOrphans' flowId='16675']
+
+##teamcity[testFinished name='testLxcInventoryHasNoOrphans' duration='263' flowId='16675']
+
+##teamcity[testStarted name='testCanNotAddDuplicateInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddDuplicateInstance' flowId='16675']
+
+##teamcity[testFinished name='testCanNotAddDuplicateInstance' duration='14' flowId='16675']
+
+##teamcity[testSuiteFinished name='App\Tests\InstancesTest' flowId='16675']

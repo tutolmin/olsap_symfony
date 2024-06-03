@@ -1,6 +1,8 @@
-Tasks Controller (App\Tests\Controller\TasksController)
- [x] Tasks list is not empty
- [x] Tasks web page list contains all records
- [x] Environment display web page contains data
- [x] Can remove all tasks by clicking delete button
+Instances (App\Tests\Instances)
+ [x] Instances list is not empty
+ [x] Can not add instance without mandatory fields
+ [x] Can add dummy instance
+ [x] Instance list has no orphans
+ [x] Lxc inventory has no orphans
+ [x] Can not add duplicate instance
 
