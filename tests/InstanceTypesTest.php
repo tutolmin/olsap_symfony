@@ -126,7 +126,7 @@ class InstanceTypesTest extends KernelTestCase
      * @param array<InstanceTypes> $instance_types
      * @return void
      */
-    public function testCanRemoveInstanceTypes(array $instance_types): void {
+    public function testCanRemoveAllInstanceTypes(array $instance_types): void {
 
         foreach ($instance_types as $t) {
 

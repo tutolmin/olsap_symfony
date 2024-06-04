@@ -1,573 +1,582 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\AddressesTest" methodName="testAddressesListIsNotEmpty" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Addresses list is not empty" status="0" time="0.943812203" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testAddressesListIsNotEmpty" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Addresses list is not empty" status="0" time="0.993508689" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutIp" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without ip" status="0" time="0.033748582" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutIp" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without ip" status="0" time="0.032102198" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutMac" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without mac" status="0" time="0.01308401" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutMac" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without mac" status="0" time="0.009468812" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddDuplicateAddresses" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add duplicate addresses" status="0" time="0.034674803" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanNotAddDuplicateAddresses" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add duplicate addresses" status="0" time="0.029875389" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testSpareAddressesAreAvailable" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Spare addresses are available" status="0" time="0.498880981" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testSpareAddressesAreAvailable" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Spare addresses are available" status="0" time="0.50637642" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testEachInstanceHasAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Each instance has address" status="0" time="0.09883397" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testEachInstanceHasAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Each instance has address" status="0" time="0.100019521" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanAddDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can add dummy address" status="0" time="0.012186392" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanAddDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can add dummy address" status="0" time="0.012421829" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanRemoveDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can remove dummy address" status="0" time="0.007689861" size="-1" groups="default">
+  <test className="App\Tests\AddressesTest" methodName="testCanRemoveDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can remove dummy address" status="0" time="0.008078613" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testBreedsListIsNotEmpty" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breeds list is not empty" status="0" time="0.015992653" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testBreedsListIsNotEmpty" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breeds list is not empty" status="0" time="0.01701823" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testBreedHasOperatingSystemsReference" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breed has operating systems reference" status="0" time="0.015243691" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testBreedHasOperatingSystemsReference" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Breed has operating systems reference" status="0" time="0.019849367" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanNotAddBreedWithoutName" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add breed without name" status="0" time="0.013384038" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddBreedWithoutName" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add breed without name" status="0" time="0.015820628" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanNotAddDuplicateBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add duplicate breed" status="0" time="0.010511029" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotAddDuplicateBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not add duplicate breed" status="0" time="0.013771545" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanAddDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can add dummy breed" status="0" time="0.00958181" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanAddDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can add dummy breed" status="0" time="0.00898304" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanRemoveDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove dummy breed" status="0" time="0.01253698" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanRemoveDummyBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove dummy breed" status="0" time="0.00851856" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanNotRemoveReferencedBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not remove referenced breed" status="0" time="0.012923651" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanNotRemoveReferencedBreed" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can not remove referenced breed" status="0" time="0.010729344" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\BreedsTest" methodName="testCanRemoveBreedWithCascadeFlag" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove breed with cascade flag" status="1" time="0.007360203" size="-1" groups="default">
+  <test className="App\Tests\BreedsTest" methodName="testCanRemoveBreedWithCascadeFlag" prettifiedClassName="Breeds (App\Tests\Breeds)" prettifiedMethodName="Can remove breed with cascade flag" status="1" time="0.007476891" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="0.671122763" size="-1" groups="default">
+  <test className="App\Tests\Command\AwxMeCommandTest" methodName="testAwxMeIsSymfony" prettifiedClassName="Awx Me Command (App\Tests\Command\AwxMeCommand)" prettifiedMethodName="Awx me is symfony" status="0" time="0.535743806" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.001802107" size="-1" groups="default">
+  <test className="App\Tests\Command\AwxProjectListCommandTest" methodName="testExecute" prettifiedClassName="Awx Project List Command (App\Tests\Command\AwxProjectListCommand)" prettifiedMethodName="Execute" status="2" time="0.001819364" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domains list is not empty" status="0" time="0.024190981" size="-1" groups="default">
+  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domains list is not empty" status="0" time="0.026258675" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainsWebPageListContainsAllRecords" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domains web page list contains all records" status="0" time="0.427817236" size="-1" groups="default">
+  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainsWebPageListContainsAllRecords" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domains web page list contains all records" status="0" time="0.435698595" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainDisplayWebPageContainsData" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domain display web page contains data" status="0" time="0.398696524" size="-1" groups="default">
+  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testDomainDisplayWebPageContainsData" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Domain display web page contains data" status="0" time="0.569589069" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testCanRemoveAllDomainsByClickingDeleteButton" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Can remove all domains by clicking delete button" status="0" time="0.809905624" size="-1" groups="default">
+  <test className="App\Tests\Controller\DomainsControllerTest" methodName="testCanRemoveAllDomainsByClickingDeleteButton" prettifiedClassName="Domains Controller (App\Tests\Controller\DomainsController)" prettifiedMethodName="Can remove all domains by clicking delete button" status="0" time="1.011829728" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusesListIsNotEmpty" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment statuses list is not empty" status="0" time="0.014805829" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusesListIsNotEmpty" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment statuses list is not empty" status="0" time="0.011141201" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusesWebPageListContainsAllRecords" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment statuses web page list contains all records" status="0" time="0.094324856" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusesWebPageListContainsAllRecords" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment statuses web page list contains all records" status="0" time="0.070692219" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusDisplayWebPageContainsData" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment status display web page contains data" status="0" time="0.280798275" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testEnvironmentStatusDisplayWebPageContainsData" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Environment status display web page contains data" status="0" time="0.278637924" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testCanRemoveAllEnvironmentStatusesByClickingDeleteButton" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Can remove all environment statuses by clicking delete button" status="0" time="0.687765978" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentStatusesControllerTest" methodName="testCanRemoveAllEnvironmentStatusesByClickingDeleteButton" prettifiedClassName="Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)" prettifiedMethodName="Can remove all environment statuses by clicking delete button" status="0" time="0.740325069" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentsListIsNotEmpty" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environments list is not empty" status="0" time="0.018714356" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentsListIsNotEmpty" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environments list is not empty" status="0" time="0.018638267" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentsWebPageListContainsAllRecords" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environments web page list contains all records" status="0" time="0.141581923" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentsWebPageListContainsAllRecords" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environments web page list contains all records" status="0" time="0.176244354" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentDisplayWebPageContainsData" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environment display web page contains data" status="0" time="0.379663417" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testEnvironmentDisplayWebPageContainsData" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Environment display web page contains data" status="0" time="0.491221495" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testCanRemoveAllEnvironmentsByClickingDeleteButton" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Can remove all environments by clicking delete button" status="0" time="0.858792551" size="-1" groups="default">
+  <test className="App\Tests\Controller\EnvironmentsControllerTest" methodName="testCanRemoveAllEnvironmentsByClickingDeleteButton" prettifiedClassName="Environments Controller (App\Tests\Controller\EnvironmentsController)" prettifiedMethodName="Can remove all environments by clicking delete button" status="0" time="0.776677236" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusesListIsNotEmpty" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance statuses list is not empty" status="0" time="0.013764488" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusesListIsNotEmpty" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance statuses list is not empty" status="0" time="0.011754878" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusesWebPageListContainsAllRecords" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance statuses web page list contains all records" status="0" time="0.132842718" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusesWebPageListContainsAllRecords" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance statuses web page list contains all records" status="0" time="0.131364794" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusDisplayWebPageContainsData" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance status display web page contains data" status="0" time="0.342655312" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testInstanceStatusDisplayWebPageContainsData" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Instance status display web page contains data" status="0" time="0.408599052" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testCanRemoveAllInstanceStatusesByClickingDeleteButton" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Can remove all instance statuses by clicking delete button" status="0" time="0.747704393" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceStatusesControllerTest" methodName="testCanRemoveAllInstanceStatusesByClickingDeleteButton" prettifiedClassName="Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)" prettifiedMethodName="Can remove all instance statuses by clicking delete button" status="0" time="0.991713324" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstancesListIsNotEmpty" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instances list is not empty" status="0" time="0.018288123" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypesListIsNotEmpty" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance types list is not empty" status="0" time="0.023073434" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstancesWebPageListContainsAllRecords" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instances web page list contains all records" status="0" time="0.267056698" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypesWebPageListContainsAllRecords" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance types web page list contains all records" status="0" time="0.211095708" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstanceDisplayWebPageContainsData" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instance display web page contains data" status="0" time="0.981881072" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypeDisplayWebPageContainsData" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance type display web page contains data" status="0" time="0.424666734" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testDeleteButtonDoesNotDeleteInstanceInstantly" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Delete button does not delete instance instantly" status="0" time="1.821628248" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstancesListIsNotEmpty" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instances list is not empty" status="0" time="0.02071172" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\LuckyNumberControllerTest" methodName="testLuckyNumber" prettifiedClassName="Lucky Number Controller (App\Tests\Controller\LuckyNumberController)" prettifiedMethodName="Lucky number" status="0" time="0.025788099" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstancesWebPageListContainsAllRecords" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instances web page list contains all records" status="0" time="0.321921694" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsesListIsNotEmpty" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session oses list is not empty" status="0" time="0.009360484" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testInstanceDisplayWebPageContainsData" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Instance display web page contains data" status="0" time="1.434817563" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsesWebPageListContainsAllRecords" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session oses web page list contains all records" status="0" time="0.081244658" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstancesControllerTest" methodName="testDeleteButtonDoesNotDeleteInstanceInstantly" prettifiedClassName="Instances Controller (App\Tests\Controller\InstancesController)" prettifiedMethodName="Delete button does not delete instance instantly" status="0" time="2.234580191" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsDisplayWebPageContainsData" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session os display web page contains data" status="0" time="0.339628392" size="-1" groups="default">
+  <test className="App\Tests\Controller\LuckyNumberControllerTest" methodName="testLuckyNumber" prettifiedClassName="Lucky Number Controller (App\Tests\Controller\LuckyNumberController)" prettifiedMethodName="Lucky number" status="0" time="0.039746445" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testCanRemoveAllSessionOsesByClickingDeleteButton" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Can remove all session oses by clicking delete button" status="0" time="0.473284677" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsesListIsNotEmpty" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session oses list is not empty" status="0" time="0.015642326" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusesListIsNotEmpty" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session statuses list is not empty" status="0" time="0.015566585" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsesWebPageListContainsAllRecords" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session oses web page list contains all records" status="0" time="0.120784074" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusesWebPageListContainsAllRecords" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session statuses web page list contains all records" status="0" time="0.082667985" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testSessionOsDisplayWebPageContainsData" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Session os display web page contains data" status="0" time="0.418430005" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusDisplayWebPageContainsData" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session status display web page contains data" status="0" time="0.362245909" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionOsesControllerTest" methodName="testCanRemoveAllSessionOsesByClickingDeleteButton" prettifiedClassName="Session Oses Controller (App\Tests\Controller\SessionOsesController)" prettifiedMethodName="Can remove all session oses by clicking delete button" status="0" time="0.516452327" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testCanRemoveAllSessionStatusesByClickingDeleteButton" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Can remove all session statuses by clicking delete button" status="0" time="0.544136584" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusesListIsNotEmpty" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session statuses list is not empty" status="0" time="0.012919069" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testSessionTechsListIsNotEmpty" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session techs list is not empty" status="0" time="0.011259479" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusesWebPageListContainsAllRecords" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session statuses web page list contains all records" status="0" time="0.070538624" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testSessionTechsWebPageListContainsAllRecords" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session techs web page list contains all records" status="0" time="0.082319471" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testSessionStatusDisplayWebPageContainsData" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Session status display web page contains data" status="0" time="0.326377445" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testsessionTechDisplayWebPageContainsData" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session tech display web page contains data" status="0" time="0.379175329" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionStatusesControllerTest" methodName="testCanRemoveAllSessionStatusesByClickingDeleteButton" prettifiedClassName="Session Statuses Controller (App\Tests\Controller\SessionStatusesController)" prettifiedMethodName="Can remove all session statuses by clicking delete button" status="0" time="0.693808108" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testCanRemoveAllSessionTechsByClickingDeleteButton" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Can remove all session techs by clicking delete button" status="0" time="0.658244668" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testSessionTechsListIsNotEmpty" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session techs list is not empty" status="0" time="0.020490114" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionsListIsNotEmpty" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Sessions list is not empty" status="0" time="0.012048066" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testSessionTechsWebPageListContainsAllRecords" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session techs web page list contains all records" status="0" time="0.132874421" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionsWebPageListContainsAllRecords" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Sessions web page list contains all records" status="0" time="0.083667782" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testsessionTechDisplayWebPageContainsData" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Session tech display web page contains data" status="0" time="0.576414616" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionDisplayWebPageContainsData" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Session display web page contains data" status="0" time="0.204863975" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionTechsControllerTest" methodName="testCanRemoveAllSessionTechsByClickingDeleteButton" prettifiedClassName="Session Techs Controller (App\Tests\Controller\SessionTechsController)" prettifiedMethodName="Can remove all session techs by clicking delete button" status="0" time="0.766340137" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testCanRemoveAllSessionsByClickingDeleteButton" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Can remove all sessions by clicking delete button" status="0" time="0.368467361" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionsListIsNotEmpty" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Sessions list is not empty" status="0" time="0.020587418" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testTaskTechsListIsNotEmpty" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task techs list is not empty" status="0" time="0.016821244" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionsWebPageListContainsAllRecords" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Sessions web page list contains all records" status="0" time="0.140313341" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testTaskTechsWebPageListContainsAllRecords" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task techs web page list contains all records" status="0" time="0.22289289" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testSessionDisplayWebPageContainsData" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Session display web page contains data" status="0" time="0.301002289" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testtaskTechDisplayWebPageContainsData" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task tech display web page contains data" status="0" time="1.068986607" size="-1" groups="default">
+  <test className="App\Tests\Controller\SessionsControllerTest" methodName="testCanRemoveAllSessionsByClickingDeleteButton" prettifiedClassName="Sessions Controller (App\Tests\Controller\SessionsController)" prettifiedMethodName="Can remove all sessions by clicking delete button" status="0" time="0.570629963" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testCanRemoveAllTaskTechsByClickingDeleteButton" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Can remove all task techs by clicking delete button" status="0" time="1.61104557" size="-1" groups="default">
+  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testTaskTechsListIsNotEmpty" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task techs list is not empty" status="0" time="0.025394527" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.016118476" size="-1" groups="default">
+  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testTaskTechsWebPageListContainsAllRecords" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task techs web page list contains all records" status="0" time="0.250456307" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksWebPageListContainsAllRecords" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks web page list contains all records" status="0" time="0.23731855" size="-1" groups="default">
+  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testtaskTechDisplayWebPageContainsData" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Task tech display web page contains data" status="0" time="1.069496866" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTaskDisplayWebPageContainsData" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Task display web page contains data" status="0" time="1.405335916" size="-1" groups="default">
+  <test className="App\Tests\Controller\TaskTechsControllerTest" methodName="testCanRemoveAllTaskTechsByClickingDeleteButton" prettifiedClassName="Task Techs Controller (App\Tests\Controller\TaskTechsController)" prettifiedMethodName="Can remove all task techs by clicking delete button" status="0" time="2.468115311" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TasksControllerTest" methodName="testCanRemoveAllTasksByClickingDeleteButton" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Can remove all tasks by clicking delete button" status="0" time="2.112277869" size="-1" groups="default">
+  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.039500455" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.014236186" size="-1" groups="default">
+  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTasksWebPageListContainsAllRecords" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Tasks web page list contains all records" status="0" time="0.46093006" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologiesWebPageListContainsAllRecords" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technologies web page list contains all records" status="0" time="0.314877588" size="-1" groups="default">
+  <test className="App\Tests\Controller\TasksControllerTest" methodName="testTaskDisplayWebPageContainsData" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Task display web page contains data" status="0" time="1.713500087" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologyDisplayWebPageContainsData" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technology display web page contains data" status="0" time="1.443658714" size="-1" groups="default">
+  <test className="App\Tests\Controller\TasksControllerTest" methodName="testCanRemoveAllTasksByClickingDeleteButton" prettifiedClassName="Tasks Controller (App\Tests\Controller\TasksController)" prettifiedMethodName="Can remove all tasks by clicking delete button" status="0" time="3.146185222" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testCanRemoveAllTechnologiesByClickingDeleteButton" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Can remove all technologies by clicking delete button" status="0" time="2.634398114" size="-1" groups="default">
+  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.019263783" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees list is not empty" status="0" time="0.017621427" size="-1" groups="default">
+  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologiesWebPageListContainsAllRecords" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technologies web page list contains all records" status="0" time="0.476684287" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesWebPageListContainsAllRecords" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees web page list contains all records" status="0" time="0.093475624" size="-1" groups="default">
+  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testTechnologyDisplayWebPageContainsData" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Technology display web page contains data" status="0" time="1.657425546" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteeDisplayWebPageContainsData" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testee display web page contains data" status="0" time="0.17905871" size="-1" groups="default">
+  <test className="App\Tests\Controller\TechnologiesControllerTest" methodName="testCanRemoveAllTechnologiesByClickingDeleteButton" prettifiedClassName="Technologies Controller (App\Tests\Controller\TechnologiesController)" prettifiedMethodName="Can remove all technologies by clicking delete button" status="0" time="2.572033833" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanRemoveAllTesteesByClickingDeleteButton" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can remove all testees by clicking delete button" status="0" time="0.310825372" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees list is not empty" status="0" time="0.012880904" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domains list is not empty" status="0" time="0.011291528" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesWebPageListContainsAllRecords" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees web page list contains all records" status="0" time="0.062836523" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDomainWithoutName" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add domain without name" status="0" time="0.010270459" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteeDisplayWebPageContainsData" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testee display web page contains data" status="0" time="0.188130949" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDuplicateDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add duplicate domain" status="0" time="0.011621046" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanRemoveAllTesteesByClickingDeleteButton" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can remove all testees by clicking delete button" status="0" time="0.312539597" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testCanAddDummyDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can add dummy domain" status="0" time="0.008962223" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testDomainsListIsNotEmpty" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domains list is not empty" status="0" time="0.015376419" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testCanRemoveAllDomains" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can remove all domains" status="0" time="0.209642301" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDomainWithoutName" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add domain without name" status="0" time="0.016025013" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\DomainsTest" methodName="testDomainRemovalLeadsToLinkedTechnologiesDeletion" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domain removal leads to linked technologies deletion" status="0" time="0.024112816" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanNotAddDuplicateDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can not add duplicate domain" status="0" time="0.0150578" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentStatusesTest" methodName="testEnvironmentStatusesListIsNotEmpty" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Environment statuses list is not empty" status="0" time="0.010571193" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanAddDummyDomain" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can add dummy domain" status="0" time="0.01128089" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddEnvironmentStatusWithoutStatusString" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add environment status without status string" status="0" time="0.013833527" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testCanRemoveAllDomains" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Can remove all domains" status="0" time="0.222073055" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddDuplicateEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add duplicate environment status" status="0" time="0.015618926" size="-1" groups="default">
+  <test className="App\Tests\DomainsTest" methodName="testDomainRemovalLeadsToLinkedTechnologiesDeletion" prettifiedClassName="Domains (App\Tests\Domains)" prettifiedMethodName="Domain removal leads to linked technologies deletion" status="0" time="0.034769428" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanAddDummyEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can add dummy environment status" status="0" time="0.014639737" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testEnvironmentStatusesListIsNotEmpty" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Environment statuses list is not empty" status="0" time="0.013528543" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanRemoveAllEnvironmentStatuses" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can remove all environment statuses" status="0" time="0.141492572" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddEnvironmentStatusWithoutStatusString" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add environment status without status string" status="0" time="0.015631461" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentsTest" methodName="testEnvironmentsListIsNotEmpty" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Environments list is not empty" status="0" time="0.014420531" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanNotAddDuplicateEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can not add duplicate environment status" status="0" time="0.017837955" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentsTest" methodName="testCanNotAddEnvironmentWithoutMandatoryFields" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can not add environment without mandatory fields" status="0" time="0.01522528" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanAddDummyEnvironmentStatus" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can add dummy environment status" status="0" time="0.016786287" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentsTest" methodName="testCanAddDummyEnvironment" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can add dummy environment" status="0" time="0.019204731" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentStatusesTest" methodName="testCanRemoveAllEnvironmentStatuses" prettifiedClassName="Environment Statuses (App\Tests\EnvironmentStatuses)" prettifiedMethodName="Can remove all environment statuses" status="0" time="0.16997171" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentsTest" methodName="testCanRemoveAllEnvironments" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can remove all environments" status="0" time="0.136738787" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentsTest" methodName="testEnvironmentsListIsNotEmpty" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Environments list is not empty" status="0" time="0.016165524" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\EnvironmentsTest" methodName="testCanNotAddDuplicateEnvironment" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can not add duplicate environment" status="0" time="0.023779081" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentsTest" methodName="testCanNotAddEnvironmentWithoutMandatoryFields" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can not add environment without mandatory fields" status="0" time="0.015626632" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.01470198" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentsTest" methodName="testCanAddDummyEnvironment" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can add dummy environment" status="0" time="0.020989682" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.014609498" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentsTest" methodName="testCanRemoveAllEnvironments" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can remove all environments" status="0" time="0.165336142" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.011197182" size="-1" groups="default">
+  <test className="App\Tests\EnvironmentsTest" methodName="testCanNotAddDuplicateEnvironment" prettifiedClassName="Environments (App\Tests\Environments)" prettifiedMethodName="Can not add duplicate environment" status="0" time="0.02470235" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.009645409" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Hardware profiles list is not empty" status="0" time="0.015126867" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types for all supported oses" status="0" time="0.023846915" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testContainerHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Container hardware profiles list is not empty" status="0" time="0.009462121" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddHardwareProfileWithoutNameOrType" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add hardware profile without name or type" status="0" time="0.013419815" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testVmHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Vm hardware profiles list is not empty" status="0" time="0.010810099" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddDuplicateHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add duplicate hardware profile" status="0" time="0.013646884" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testSupportedHardwareProfilesListIsNotEmpty" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Supported hardware profiles list is not empty" status="0" time="0.010825485" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummyHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy hardware profile" status="0" time="0.012965001" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Each supported hardware profile has corresponding instance types for all supported oses" status="0" time="0.024148577" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummySupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy supported hardware profile" status="0" time="0.054303278" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddHardwareProfileWithoutNameOrType" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add hardware profile without name or type" status="0" time="0.012921725" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveUnsupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove unsupported hardware profile" status="0" time="0.01639018" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotAddDuplicateHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not add duplicate hardware profile" status="0" time="0.014076117" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotRemoveSupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not remove supported hardware profile" status="0" time="0.014794675" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummyHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy hardware profile" status="0" time="0.013252468" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveSupportedHardwareProfileWithCascadeFlag" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove supported hardware profile with cascade flag" status="1" time="0.008423032" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanAddDummySupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can add dummy supported hardware profile" status="0" time="0.048480027" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileSupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile supported" status="0" time="0.048313853" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveUnsupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove unsupported hardware profile" status="0" time="0.015935418" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileUnsupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile unsupported" status="1" time="0.006831286" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanNotRemoveSupportedHardwareProfile" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can not remove supported hardware profile" status="0" time="0.014610118" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceStatusesTest" methodName="testInstanceStatusesListIsNotEmpty" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Instance statuses list is not empty" status="0" time="0.012551849" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanRemoveSupportedHardwareProfileWithCascadeFlag" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can remove supported hardware profile with cascade flag" status="1" time="0.011022827" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddInstanceStatusWithoutStatusString" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add instance status without status string" status="0" time="0.015472891" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileSupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile supported" status="0" time="0.048739124" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddDuplicateInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add duplicate instance status" status="0" time="0.015403012" size="-1" groups="default">
+  <test className="App\Tests\HardwareProfilesTest" methodName="testCanMakeHardwareProfileUnsupported" prettifiedClassName="Hardware Profiles (App\Tests\HardwareProfiles)" prettifiedMethodName="Can make hardware profile unsupported" status="1" time="0.007211652" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceStatusesTest" methodName="testCanAddDummyInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can add dummy instance status" status="0" time="0.013799078" size="-1" groups="default">
+  <test className="App\Tests\InstanceStatusesTest" methodName="testInstanceStatusesListIsNotEmpty" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Instance statuses list is not empty" status="0" time="0.013717781" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceStatusesTest" methodName="testCanRemoveAllInstanceStatuses" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can remove all instance statuses" status="0" time="0.255196201" size="-1" groups="default">
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddInstanceStatusWithoutStatusString" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add instance status without status string" status="0" time="0.025597442" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testInstanceTypesListIsNotEmpty" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Instance types list is not empty" status="0" time="0.012061051" size="-1" groups="default">
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanNotAddDuplicateInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can not add duplicate instance status" status="0" time="0.017093629" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutOperatingSystem" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without operating system" status="0" time="0.015303626" size="-1" groups="default">
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanAddDummyInstanceStatus" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can add dummy instance status" status="0" time="0.01652091" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutHardwareProfile" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without hardware profile" status="0" time="0.013524963" size="-1" groups="default">
+  <test className="App\Tests\InstanceStatusesTest" methodName="testCanRemoveAllInstanceStatuses" prettifiedClassName="Instance Statuses (App\Tests\InstanceStatuses)" prettifiedMethodName="Can remove all instance statuses" status="0" time="0.262083303" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddDuplicateInstanceTypes" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add duplicate instance types" status="0" time="0.017310662" size="-1" groups="default">
+  <test className="App\Tests\InstanceTypesTest" methodName="testInstanceTypesListIsNotEmpty" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Instance types list is not empty" status="0" time="0.020591985" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstanceTypesTest" methodName="testCanRemoveInstanceTypes" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can remove instance types" status="4" time="0.036551" size="-1" groups="default" exceptionLine="137" exceptionMessage="An exception occurred while executing a query: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table &quot;instances&quot; violates foreign key constraint &quot;fk_6fca75163a51721d&quot; on table &quot;addresses&quot;&#10;DETAIL:  Key (id)=(225) is still referenced from table &quot;addresses&quot;.">
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutOperatingSystem" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without operating system" status="0" time="0.024955919" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testInstancesListIsNotEmpty" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instances list is not empty" status="0" time="0.02988737" size="-1" groups="default">
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddInstanceTypeWithoutHardwareProfile" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add instance type without hardware profile" status="0" time="0.021584368" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testCanNotAddInstanceWithoutMandatoryFields" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add instance without mandatory fields" status="0" time="0.021211863" size="-1" groups="default">
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanNotAddDuplicateInstanceTypes" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can not add duplicate instance types" status="0" time="0.025739165" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testCanAddDummyInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can add dummy instance" status="0" time="0.027267836" size="-1" groups="default">
+  <test className="App\Tests\InstanceTypesTest" methodName="testCanRemoveAllInstanceTypes" prettifiedClassName="Instance Types (App\Tests\InstanceTypes)" prettifiedMethodName="Can remove all instance types" status="4" time="0.061816171" size="-1" groups="default" exceptionLine="137" exceptionMessage="An exception occurred while executing a query: SQLSTATE[23503]: Foreign key violation: 7 ERROR:  update or delete on table &quot;instances&quot; violates foreign key constraint &quot;fk_6fca75163a51721d&quot; on table &quot;addresses&quot;&#10;DETAIL:  Key (id)=(225) is still referenced from table &quot;addresses&quot;.">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testInstanceListHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instance list has no orphans" status="0" time="0.242415796" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testInstancesListIsNotEmpty" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instances list is not empty" status="0" time="0.03511004" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testLxcInventoryHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Lxc inventory has no orphans" status="0" time="0.272260977" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanNotAddInstanceWithoutMandatoryFields" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add instance without mandatory fields" status="0" time="0.023775637" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testCanWipeAllInstancesFromDatabase" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can wipe all instances from database" status="0" time="0.233765639" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanAddDummyInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can add dummy instance" status="0" time="0.027243161" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\InstancesTest" methodName="testCanNotAddDuplicateInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add duplicate instance" status="0" time="0.026582082" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testInstanceListHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Instance list has no orphans" status="0" time="0.234411323" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\MessengerMessagesTest" methodName="testMessengerMessagesListIsEmpty" prettifiedClassName="Messenger Messages (App\Tests\MessengerMessages)" prettifiedMethodName="Messenger messages list is empty" status="0" time="0.01163461" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testLxcInventoryHasNoOrphans" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Lxc inventory has no orphans" status="0" time="0.261646589" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="0" time="0.014260711" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanWipeAllInstancesFromDatabase" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can wipe all instances from database" status="0" time="0.263019096" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="0" time="0.01906388" size="-1" groups="default">
+  <test className="App\Tests\InstancesTest" methodName="testCanNotAddDuplicateInstance" prettifiedClassName="Instances (App\Tests\Instances)" prettifiedMethodName="Can not add duplicate instance" status="0" time="0.020985588" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types for all supported hardware profiles" status="0" time="0.031120613" size="-1" groups="default">
+  <test className="App\Tests\MessengerMessagesTest" methodName="testMessengerMessagesListIsEmpty" prettifiedClassName="Messenger Messages (App\Tests\MessengerMessages)" prettifiedMethodName="Messenger messages list is empty" status="0" time="0.012440219" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddOperatingSystemWithoutReleaseOrBreed" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add operating system without release or breed" status="0" time="0.015646226" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Operating systems list is not empty" status="0" time="0.016354315" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddDuplicateOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add duplicate operating system" status="0" time="0.019539856" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testSupportedOperatingSystemsListIsNotEmpty" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Supported operating systems list is not empty" status="0" time="0.011049858" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy operating system" status="0" time="0.017770592" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Each supported os has corresponding instance types for all supported hardware profiles" status="0" time="0.025197736" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove dummy operating system" status="0" time="0.010531479" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddOperatingSystemWithoutReleaseOrBreed" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add operating system without release or breed" status="0" time="0.014069148" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummySupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy supported operating system" status="0" time="0.030217281" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotAddDuplicateOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not add duplicate operating system" status="0" time="0.020167581" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotRemoveSupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not remove supported operating system" status="0" time="0.010751119" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy operating system" status="0" time="0.018096152" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveSupportedOperatingSystemWithCascadeFlag" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove supported operating system with cascade flag" status="1" time="0.007430092" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveDummyOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove dummy operating system" status="0" time="0.013927762" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemSupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system supported" status="0" time="0.026764691" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanAddDummySupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can add dummy supported operating system" status="0" time="0.035694447" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemUnsupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system unsupported" status="4" time="0.01569332" size="-1" groups="default" exceptionLine="269" exceptionMessage="A new entity was found through the relationship 'App\Entity\OperatingSystems#breed' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={&quot;persist&quot;}).">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanNotRemoveSupportedOperatingSystem" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can not remove supported operating system" status="0" time="0.015641194" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testPortsListIsNotEmpty" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Ports list is not empty" status="0" time="0.41378204" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanRemoveSupportedOperatingSystemWithCascadeFlag" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can remove supported operating system with cascade flag" status="1" time="0.013307833" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testCanNotAddPortWithoutPortNumber" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add port without port number" status="0" time="0.014961152" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemSupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system supported" status="0" time="0.04553891" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testCanNotAddDuplicatePorts" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add duplicate ports" status="0" time="0.017940666" size="-1" groups="default">
+  <test className="App\Tests\OperatingSystemsTest" methodName="testCanMakeOperatingSystemUnsupported" prettifiedClassName="Operating Systems (App\Tests\OperatingSystems)" prettifiedMethodName="Can make operating system unsupported" status="4" time="0.018545447" size="-1" groups="default" exceptionLine="269" exceptionMessage="A new entity was found through the relationship 'App\Entity\OperatingSystems#breed' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={&quot;persist&quot;}).">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testSparePortsAreAvailable" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Spare ports are available" status="0" time="0.023416401" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testPortsListIsNotEmpty" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Ports list is not empty" status="0" time="0.54703919" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testEachAddressHasPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Each address has port" status="0" time="3.473032625" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testCanNotAddPortWithoutPortNumber" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add port without port number" status="0" time="0.018695574" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testCanAddDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can add dummy port" status="0" time="0.013250605" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testCanNotAddDuplicatePorts" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can not add duplicate ports" status="0" time="0.021877174" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\PortsTest" methodName="testCanRemoveDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can remove dummy port" status="0" time="0.012170588" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testSparePortsAreAvailable" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Spare ports are available" status="0" time="0.02734235" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionOsesTest" methodName="testSessionOsesListIsNotEmpty" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Session oses list is not empty" status="0" time="0.010678128" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testEachAddressHasPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Each address has port" status="0" time="3.388882557" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddSessionOsWithoutSession" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add session os without session" status="0" time="0.021419211" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testCanAddDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can add dummy port" status="0" time="0.012285817" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddSessionOsWithoutOperatingSystem" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add session os without operating system" status="0" time="0.017800057" size="-1" groups="default">
+  <test className="App\Tests\PortsTest" methodName="testCanRemoveDummyPort" prettifiedClassName="Ports (App\Tests\Ports)" prettifiedMethodName="Can remove dummy port" status="0" time="0.011471369" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddDuplicateSessionOses" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add duplicate session oses" status="0" time="0.018955842" size="-1" groups="default">
+  <test className="App\Tests\SessionOsesTest" methodName="testSessionOsesListIsNotEmpty" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Session oses list is not empty" status="0" time="0.013782032" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionOsesTest" methodName="testCanRemoveAllSessionOses" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can remove all session oses" status="0" time="0.113405201" size="-1" groups="default">
+  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddSessionOsWithoutSession" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add session os without session" status="0" time="0.021304791" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionStatusesTest" methodName="testSessionStatusesListIsNotEmpty" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Session statuses list is not empty" status="0" time="0.012309646" size="-1" groups="default">
+  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddSessionOsWithoutOperatingSystem" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add session os without operating system" status="0" time="0.019155619" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddSessionStatusWithoutStatusString" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add session status without status string" status="0" time="0.015960775" size="-1" groups="default">
+  <test className="App\Tests\SessionOsesTest" methodName="testCanNotAddDuplicateSessionOses" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can not add duplicate session oses" status="0" time="0.024786594" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddDuplicateSessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add duplicate session status" status="0" time="0.014160811" size="-1" groups="default">
+  <test className="App\Tests\SessionOsesTest" methodName="testCanRemoveAllSessionOses" prettifiedClassName="Session Oses (App\Tests\SessionOses)" prettifiedMethodName="Can remove all session oses" status="0" time="0.138714183" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionStatusesTest" methodName="testCanAddDummySessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can add dummy session status" status="0" time="0.01318722" size="-1" groups="default">
+  <test className="App\Tests\SessionStatusesTest" methodName="testSessionStatusesListIsNotEmpty" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Session statuses list is not empty" status="0" time="0.012940522" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionStatusesTest" methodName="testCanRemoveAllSessionStatuses" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can remove all session statuses" status="0" time="0.111254437" size="-1" groups="default">
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddSessionStatusWithoutStatusString" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add session status without status string" status="0" time="0.017061227" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionTechsTest" methodName="testSessionTechsListIsNotEmpty" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Session techs list is not empty" status="0" time="0.015450204" size="-1" groups="default">
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanNotAddDuplicateSessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can not add duplicate session status" status="0" time="0.013120064" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddSessionTechWithoutSession" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add session tech without session" status="0" time="0.02286046" size="-1" groups="default">
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanAddDummySessionStatus" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can add dummy session status" status="0" time="0.014082529" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddSessionTechWithoutTechnology" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add session tech without technology" status="0" time="0.018276978" size="-1" groups="default">
+  <test className="App\Tests\SessionStatusesTest" methodName="testCanRemoveAllSessionStatuses" prettifiedClassName="Session Statuses (App\Tests\SessionStatuses)" prettifiedMethodName="Can remove all session statuses" status="0" time="0.094968113" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddDuplicateSessionTechs" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add duplicate session techs" status="0" time="0.018075543" size="-1" groups="default">
+  <test className="App\Tests\SessionTechsTest" methodName="testSessionTechsListIsNotEmpty" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Session techs list is not empty" status="0" time="0.013501721" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionTechsTest" methodName="testCanRemoveAllSessionTechs" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can remove all session techs" status="0" time="0.009878591" size="-1" groups="default">
+  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddSessionTechWithoutSession" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add session tech without session" status="0" time="0.021681558" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionsTest" methodName="testSessionsListIsNotEmpty" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Sessions list is not empty" status="0" time="0.015146306" size="-1" groups="default">
+  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddSessionTechWithoutTechnology" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add session tech without technology" status="0" time="0.017529235" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionsTest" methodName="testCanNotAddSessionWithoutMandatoryFields" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can not add session without mandatory fields" status="0" time="0.025284514" size="-1" groups="default">
+  <test className="App\Tests\SessionTechsTest" methodName="testCanNotAddDuplicateSessionTechs" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can not add duplicate session techs" status="0" time="0.02270333" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionsTest" methodName="testCanAddDummySession" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can add dummy session" status="0" time="0.032232886" size="-1" groups="default">
+  <test className="App\Tests\SessionTechsTest" methodName="testCanRemoveAllSessionTechs" prettifiedClassName="Session Techs (App\Tests\SessionTechs)" prettifiedMethodName="Can remove all session techs" status="0" time="0.014639817" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionsTest" methodName="testCanRemoveAllSessions" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can remove all sessions" status="0" time="0.09504106" size="-1" groups="default">
+  <test className="App\Tests\SessionsTest" methodName="testSessionsListIsNotEmpty" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Sessions list is not empty" status="0" time="0.018209985" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\SessionsTest" methodName="testCanNotAddDuplicateSession" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can not add duplicate session" status="0" time="0.020011716" size="-1" groups="default">
+  <test className="App\Tests\SessionsTest" methodName="testCanNotAddSessionWithoutMandatoryFields" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can not add session without mandatory fields" status="0" time="0.018940752" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testTaskInstanceTypesListIsNotEmpty" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Task instance types list is not empty" status="0" time="0.022789098" size="-1" groups="default">
+  <test className="App\Tests\SessionsTest" methodName="testCanAddDummySession" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can add dummy session" status="0" time="0.023908592" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanRemoveRandomTaskInstanceType" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can remove random task instance type" status="0" time="0.01508393" size="-1" groups="default">
+  <test className="App\Tests\SessionsTest" methodName="testCanRemoveAllSessions" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can remove all sessions" status="0" time="0.087396418" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanRemoveAllTaskInstanceTypes" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can remove all task instance types" status="0" time="0.010687459" size="-1" groups="default">
+  <test className="App\Tests\SessionsTest" methodName="testCanNotAddDuplicateSession" prettifiedClassName="Sessions (App\Tests\Sessions)" prettifiedMethodName="Can not add duplicate session" status="0" time="0.026064872" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddTaskInstanceTypeWithoutTask" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add task instance type without task" status="0" time="0.016107425" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testTaskInstanceTypesListIsNotEmpty" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Task instance types list is not empty" status="0" time="0.034447604" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddTaskInstanceTypeWithoutInstanceType" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add task instance type without instance type" status="0" time="0.020772127" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanRemoveRandomTaskInstanceType" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can remove random task instance type" status="0" time="0.016886435" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddDuplicateTaskInstanceTypes" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add duplicate task instance types" status="0" time="0.016034695" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanRemoveAllTaskInstanceTypes" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can remove all task instance types" status="0" time="0.013765648" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskOsesTest" methodName="testTaskOsesListIsNotEmpty" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Task oses list is not empty" status="0" time="0.017583849" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddTaskInstanceTypeWithoutTask" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add task instance type without task" status="0" time="0.015616622" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskOsesTest" methodName="testCanRemoveAllTaskOses" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can remove all task oses" status="0" time="0.013034302" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddTaskInstanceTypeWithoutInstanceType" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add task instance type without instance type" status="0" time="0.015558112" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddTaskOsWithoutTask" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add task os without task" status="0" time="0.016964346" size="-1" groups="default">
+  <test className="App\Tests\TaskInstanceTypesTest" methodName="testCanNotAddDuplicateTaskInstanceTypes" prettifiedClassName="Task Instance Types (App\Tests\TaskInstanceTypes)" prettifiedMethodName="Can not add duplicate task instance types" status="0" time="0.021569293" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddTaskOsWithoutOperatingSystem" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add task os without operating system" status="0" time="0.015709117" size="-1" groups="default">
+  <test className="App\Tests\TaskOsesTest" methodName="testTaskOsesListIsNotEmpty" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Task oses list is not empty" status="0" time="0.018677362" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddDuplicateTaskOses" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add duplicate task oses" status="0" time="0.023372115" size="-1" groups="default">
+  <test className="App\Tests\TaskOsesTest" methodName="testCanRemoveAllTaskOses" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can remove all task oses" status="0" time="0.010046706" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskTechsTest" methodName="testTaskTechsListIsNotEmpty" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Task techs list is not empty" status="0" time="0.014598976" size="-1" groups="default">
+  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddTaskOsWithoutTask" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add task os without task" status="0" time="0.014570099" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskTechsTest" methodName="testCanRemoveAllTaskTechs" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can remove all task techs" status="0" time="0.009273167" size="-1" groups="default">
+  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddTaskOsWithoutOperatingSystem" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add task os without operating system" status="0" time="0.01806907" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddTaskTechWithoutTask" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add task tech without task" status="0" time="0.017884006" size="-1" groups="default">
+  <test className="App\Tests\TaskOsesTest" methodName="testCanNotAddDuplicateTaskOses" prettifiedClassName="Task Oses (App\Tests\TaskOses)" prettifiedMethodName="Can not add duplicate task oses" status="0" time="0.026314142" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddTaskTechWithoutTechnology" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add task tech without technology" status="0" time="0.013842146" size="-1" groups="default">
+  <test className="App\Tests\TaskTechsTest" methodName="testTaskTechsListIsNotEmpty" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Task techs list is not empty" status="0" time="0.018775299" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddDuplicateTaskTechs" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add duplicate task techs" status="0" time="0.017904059" size="-1" groups="default">
+  <test className="App\Tests\TaskTechsTest" methodName="testCanRemoveAllTaskTechs" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can remove all task techs" status="0" time="0.01416318" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.02045385" size="-1" groups="default">
+  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddTaskTechWithoutTask" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add task tech without task" status="0" time="0.015507423" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutName" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without name" status="0" time="0.018496027" size="-1" groups="default">
+  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddTaskTechWithoutTechnology" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add task tech without technology" status="0" time="0.015714574" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutPath" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without path" status="0" time="0.017655526" size="-1" groups="default">
+  <test className="App\Tests\TaskTechsTest" methodName="testCanNotAddDuplicateTaskTechs" prettifiedClassName="Task Techs (App\Tests\TaskTechs)" prettifiedMethodName="Can not add duplicate task techs" status="0" time="0.016602568" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testCanNotAddDuplicateTasks" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add duplicate tasks" status="0" time="0.024388783" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testTasksListIsNotEmpty" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Tasks list is not empty" status="0" time="0.022430246" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testCanAddDummyTask" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can add dummy task" status="0" time="0.01522265" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutName" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without name" status="0" time="0.02023833" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TasksTest" methodName="testCanRemoveAllTasks" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can remove all tasks" status="0" time="0.419533791" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddTaskWithoutPath" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add task without path" status="0" time="0.015235981" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TechnologiesTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.012851914" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testCanNotAddDuplicateTasks" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can not add duplicate tasks" status="0" time="0.018472466" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddTechnologyWithoutMandatoryFields" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add technology without mandatory fields" status="0" time="0.012471951" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testCanAddDummyTask" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can add dummy task" status="0" time="0.014466616" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TechnologiesTest" methodName="testCanAddDummyTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can add dummy technology" status="0" time="0.016764179" size="-1" groups="default">
+  <test className="App\Tests\TasksTest" methodName="testCanRemoveAllTasks" prettifiedClassName="Tasks (App\Tests\Tasks)" prettifiedMethodName="Can remove all tasks" status="0" time="0.460579129" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TechnologiesTest" methodName="testCanRemoveAllTechnologies" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can remove all technologies" status="0" time="0.393806458" size="-1" groups="default">
+  <test className="App\Tests\TechnologiesTest" methodName="testTechnologiesListIsNotEmpty" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Technologies list is not empty" status="0" time="0.016231749" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddDuplicateTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add duplicate technology" status="0" time="0.015243203" size="-1" groups="default">
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddTechnologyWithoutMandatoryFields" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add technology without mandatory fields" status="0" time="0.013376789" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TesteesTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Testees list is not empty" status="0" time="0.010728263" size="-1" groups="default">
+  <test className="App\Tests\TechnologiesTest" methodName="testCanAddDummyTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can add dummy technology" status="0" time="0.012666098" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TesteesTest" methodName="testCanNotAddTesteeWithoutMandatoryFields" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can not add testee without mandatory fields" status="0" time="0.014449123" size="-1" groups="default">
+  <test className="App\Tests\TechnologiesTest" methodName="testCanRemoveAllTechnologies" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can remove all technologies" status="0" time="0.269464947" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TesteesTest" methodName="testCanAddDummyTestee" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can add dummy testee" status="0" time="0.014969523" size="-1" groups="default">
+  <test className="App\Tests\TechnologiesTest" methodName="testCanNotAddDuplicateTechnology" prettifiedClassName="Technologies (App\Tests\Technologies)" prettifiedMethodName="Can not add duplicate technology" status="0" time="0.014043163" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TesteesTest" methodName="testCanRemoveAllTestees" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can remove all testees" status="0" time="0.091897954" size="-1" groups="default">
+  <test className="App\Tests\TesteesTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Testees list is not empty" status="0" time="0.018283395" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\TesteesTest" methodName="testCanNotAddDuplicateTestee" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can not add duplicate testee" status="0" time="0.020159428" size="-1" groups="default">
+  <test className="App\Tests\TesteesTest" methodName="testCanNotAddTesteeWithoutMandatoryFields" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can not add testee without mandatory fields" status="0" time="0.014274832" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TesteesTest" methodName="testCanAddDummyTestee" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can add dummy testee" status="0" time="0.012068236" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TesteesTest" methodName="testCanRemoveAllTestees" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can remove all testees" status="0" time="0.067787034" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\TesteesTest" methodName="testCanNotAddDuplicateTestee" prettifiedClassName="ees (App\Tests\ees)" prettifiedMethodName="Can not add duplicate testee" status="0" time="0.014166493" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

@@ -48,6 +48,11 @@ Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)
  [x] Instance status display web page contains data
  [x] Can remove all instance statuses by clicking delete button
 
+Instance Types Controller (App\Tests\Controller\InstanceTypesController)
+ [x] Instance types list is not empty
+ [x] Instance types web page list contains all records
+ [x] Instance type display web page contains data
+
 Instances Controller (App\Tests\Controller\InstancesController)
  [x] Instances list is not empty
  [x] Instances web page list contains all records
@@ -155,7 +160,7 @@ Instance Types (App\Tests\InstanceTypes)
  [x] Can not add instance type without operating system
  [x] Can not add instance type without hardware profile
  [x] Can not add duplicate instance types
- [ ] Can remove instance types
+ [ ] Can remove all instance types
 
 Instances (App\Tests\Instances)
  [x] Instances list is not empty
