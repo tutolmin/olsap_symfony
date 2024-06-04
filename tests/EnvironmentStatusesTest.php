@@ -5,7 +5,9 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\EnvironmentStatuses;
+use App\Entity\Environments;
 use App\Repository\EnvironmentStatusesRepository;
+use App\Repository\EnvironmentsRepository;
 use App\Service\EnvironmentStatusesManager;
 
 class EnvironmentStatusesTest extends KernelTestCase
@@ -27,6 +29,12 @@ class EnvironmentStatusesTest extends KernelTestCase
      * @var EnvironmentStatusesRepository
      */
     private $environmentStatusesRepository;
+    
+    /**
+     * 
+     * @var EnvironmentsRepository
+     */
+    private $environmentsRepository;
 
     private EnvironmentStatusesManager $environmentStatusesManager;
 
@@ -35,6 +43,7 @@ class EnvironmentStatusesTest extends KernelTestCase
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->environmentStatusesRepository = $this->entityManager->getRepository(EnvironmentStatuses::class);
+        $this->environmentsRepository = $this->entityManager->getRepository(Environments::class);
         $this->environmentStatusesManager = static::getContainer()->get(EnvironmentStatusesManager::class);        
     }
     
@@ -91,16 +100,18 @@ class EnvironmentStatusesTest extends KernelTestCase
      */
     public function testCanRemoveAllEnvironmentStatuses($environment_statuses): void {
     
-         foreach ($environment_statuses as $s) {
-            
+        foreach ($environment_statuses as $s) {
+
             $item = $this->environmentStatusesRepository->findOneById($s);
             $this->assertNotNull($item);
             $id = $item->getId();
 
             $this->environmentStatusesManager->removeEnvironmentStatus($item);
-            
+
             $removed_item = $this->environmentStatusesRepository->findOneById($id);
             $this->assertNull($removed_item);
         }
+
+        $this->assertEmpty($this->environmentsRepository->findAll());
     }
 }

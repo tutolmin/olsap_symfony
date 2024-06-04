@@ -11,15 +11,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\InstanceStatusesManager;
 
 #[Route('/instance/statuses')]
 class InstanceStatusesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    private InstanceStatusesManager $instanceStatusesManager;
+    public function __construct(LoggerInterface $logger,
+            InstanceStatusesManager $instanceStatusesManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        
+        $this->instanceStatusesManager = $instanceStatusesManager;
     }
 
     #[Route('/', name: 'app_instance_statuses_index', methods: ['GET'])]
@@ -84,12 +89,12 @@ class InstanceStatusesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_instance_statuses_delete', methods: ['POST'])]
-    public function delete(Request $request, InstanceStatuses $instanceStatus, InstanceStatusesRepository $instanceStatusesRepository): Response
+    public function delete(Request $request, InstanceStatuses $instanceStatus): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$instanceStatus->getId(), strval($request->request->get('_token')))) {
-            $instanceStatusesRepository->remove($instanceStatus, true);
+            $this->instanceStatusesManager->removeInstanceStatus($instanceStatus);
         }
 
         return $this->redirectToRoute('app_instance_statuses_index', [], Response::HTTP_SEE_OTHER);

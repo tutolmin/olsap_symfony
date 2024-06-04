@@ -5,7 +5,9 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\SessionStatuses;
+use App\Entity\Sessions;
 use App\Repository\SessionStatusesRepository;
+use App\Repository\SessionsRepository;
 use App\Service\SessionStatusesManager;
 
 class SessionStatusesTest extends KernelTestCase
@@ -27,6 +29,12 @@ class SessionStatusesTest extends KernelTestCase
      * @var SessionStatusesRepository
      */
     private $sessionStatusesRepository;
+    
+    /**
+     * 
+     * @var SessionsRepository
+     */
+    private $sessionsRepository;
 
     private SessionStatusesManager $sessionStatusesManager;
     
@@ -35,6 +43,7 @@ class SessionStatusesTest extends KernelTestCase
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->sessionStatusesRepository = $this->entityManager->getRepository(SessionStatuses::class);
+        $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
         
         $this->sessionStatusesManager = static::getContainer()->get(SessionStatusesManager::class);        
     }
@@ -86,18 +95,20 @@ class SessionStatusesTest extends KernelTestCase
      * @param array<SessionStatuses> $session_statuses
      * @return void
      */
-    public function testCanRemoveAllSessionStatuses(array $session_statuses): void { 
+    public function testCanRemoveAllSessionStatuses(array $session_statuses): void {
 
         foreach ($session_statuses as $s) {
-            
+
             $session_status = $this->sessionStatusesRepository->findOneById($s);
             $this->assertNotNull($session_status);
             $id = $session_status->getId();
 
             $this->sessionStatusesManager->removeSessionStatus($session_status);
-            
+
             $removed_session_status = $this->sessionStatusesRepository->findOneById($id);
             $this->assertNull($removed_session_status);
         }
+        
+        $this->assertEmpty($this->sessionsRepository->findAll());
     }
 }
