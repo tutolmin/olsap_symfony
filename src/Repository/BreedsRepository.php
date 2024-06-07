@@ -48,7 +48,7 @@ class BreedsRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(Breeds $entity, bool $flush = false): bool
+    public function remove(Breeds $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
 
@@ -57,7 +57,6 @@ class BreedsRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-        return true;
     }
 
     /**

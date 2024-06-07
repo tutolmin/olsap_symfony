@@ -69,9 +69,7 @@
             <li class="success">Can not add breed without name</li>
             <li class="success">Can not add duplicate breed</li>
             <li class="success">Can add dummy breed</li>
-            <li class="success">Can remove dummy breed</li>
-            <li class="success">Can not remove referenced breed</li>
-            <li class="defect">Can remove breed with cascade flag</li>
+            <li class="success">Can remove all breeds</li>
         </ul>
         <h2>Awx Me Command (App\Tests\Command\AwxMeCommand)</h2>
         <ul>
@@ -80,6 +78,13 @@
         <h2>Awx Project List Command (App\Tests\Command\AwxProjectListCommand)</h2>
         <ul>
             <li class="defect">Execute</li>
+        </ul>
+        <h2>Breeds Controller (App\Tests\Controller\BreedsController)</h2>
+        <ul>
+            <li class="success">Breeds list is not empty</li>
+            <li class="success">Breeds web page list contains all records</li>
+            <li class="success">Breed display web page contains data</li>
+            <li class="success">Can remove all breeds by clicking delete button</li>
         </ul>
         <h2>Domains Controller (App\Tests\Controller\DomainsController)</h2>
         <ul>
@@ -125,6 +130,13 @@
         <h2>Lucky Number Controller (App\Tests\Controller\LuckyNumberController)</h2>
         <ul>
             <li class="success">Lucky number</li>
+        </ul>
+        <h2>Operating Systems Controller (App\Tests\Controller\OperatingSystemsController)</h2>
+        <ul>
+            <li class="success">Operating systems list is not empty</li>
+            <li class="success">Operating systems web page list contains all records</li>
+            <li class="success">Operating system display web page contains data</li>
+            <li class="success">Can remove all operating systems by clicking delete button</li>
         </ul>
         <h2>Session Oses Controller (App\Tests\Controller\SessionOsesController)</h2>
         <ul>
@@ -218,11 +230,9 @@
             <li class="success">Can not add duplicate hardware profile</li>
             <li class="success">Can add dummy hardware profile</li>
             <li class="success">Can add dummy supported hardware profile</li>
-            <li class="success">Can remove unsupported hardware profile</li>
-            <li class="success">Can not remove supported hardware profile</li>
-            <li class="defect">Can remove supported hardware profile with cascade flag</li>
+            <li class="success">Can remove all hardware profiles</li>
             <li class="success">Can make hardware profile supported</li>
-            <li class="defect">Can make hardware profile unsupported</li>
+            <li class="success">Can make hardware profile unsupported</li>
         </ul>
         <h2>Instance Statuses (App\Tests\InstanceStatuses)</h2>
         <ul>
@@ -238,7 +248,7 @@
             <li class="success">Can not add instance type without operating system</li>
             <li class="success">Can not add instance type without hardware profile</li>
             <li class="success">Can not add duplicate instance types</li>
-            <li class="defect">Can remove all instance types</li>
+            <li class="success">Can remove all instance types</li>
         </ul>
         <h2>Instances (App\Tests\Instances)</h2>
         <ul>
@@ -262,12 +272,10 @@
             <li class="success">Can not add operating system without release or breed</li>
             <li class="success">Can not add duplicate operating system</li>
             <li class="success">Can add dummy operating system</li>
-            <li class="success">Can remove dummy operating system</li>
             <li class="success">Can add dummy supported operating system</li>
-            <li class="success">Can not remove supported operating system</li>
-            <li class="defect">Can remove supported operating system with cascade flag</li>
+            <li class="success">Can remove all operating systems</li>
             <li class="success">Can make operating system supported</li>
-            <li class="defect">Can make operating system unsupported</li>
+            <li class="success">Can make operating system unsupported</li>
         </ul>
         <h2>Ports (App\Tests\Ports)</h2>
         <ul>

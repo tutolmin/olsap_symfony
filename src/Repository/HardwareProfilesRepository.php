@@ -51,7 +51,7 @@ class HardwareProfilesRepository extends ServiceEntityRepository
         return true;
     }
 
-    public function remove(HardwareProfiles $entity, bool $flush = false): bool
+    public function remove(HardwareProfiles $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
 
@@ -60,7 +60,6 @@ class HardwareProfilesRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-        return true;
     }
 
 //    /**

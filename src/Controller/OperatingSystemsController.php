@@ -96,18 +96,4 @@ class OperatingSystemsController extends AbstractController {
 
         return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
     }
-/*
-    #[Route('/{id}/delete_cascade', name: 'app_operating_systems_delete_cascade', methods: ['POST'])]
-    public function delete_cascade(Request $request, OperatingSystems $operatingSystem): Response {
-        $this->logger->debug(__METHOD__);
-
-        if ($this->isCsrfTokenValid('delete_cascade' . $operatingSystem->getId(),
-                        strval($request->request->get('_token')))) {
-            $this->osManager->removeOperatingSystem($operatingSystem, true);
-        }
-
-        return $this->redirectToRoute('app_operating_systems_index', [], Response::HTTP_SEE_OTHER);
-    }
- * 
- */
 }

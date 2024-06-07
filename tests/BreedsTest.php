@@ -5,9 +5,9 @@ namespace App\Tests;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Breeds;
-//use App\Entity\OperatingSystems;
+use App\Entity\OperatingSystems;
 use App\Repository\BreedsRepository;
-//use App\Repository\OperatingSystemsRepository;
+use App\Repository\OperatingSystemsRepository;
 use App\Service\BreedsManager;
 
 class BreedsTest extends KernelTestCase
@@ -34,7 +34,7 @@ class BreedsTest extends KernelTestCase
      * 
      * @var OperatingSystemsRepository
      */
-//    private $osRepository;
+    private $osRepository;
     
     /**
      * 
@@ -47,8 +47,7 @@ class BreedsTest extends KernelTestCase
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->breedsRepository = $this->entityManager->getRepository(Breeds::class);
-//        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
-//        $this->breedsManager = static::getContainer()->get('App\Service\BreedsManager');        
+        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->breedsManager = static::getContainer()->get(BreedsManager::class);        
     }
     
@@ -112,45 +111,27 @@ class BreedsTest extends KernelTestCase
         $this->assertTrue($this->breedsRepository->add($breed, true));
         return $breed;
     }
-
-    /**
-     * @depends testCanAddDummyBreed
-     * @param Breeds $breed
-     * @return void
-     */
-    public function testCanRemoveDummyBreed(Breeds $breed): void {
         
-        $this->assertTrue($this->breedsManager->removeBreed($breed));
-    }
             
     /**
-     * 
-     * @depends testBreedHasOperatingSystemsReference
-     * @param Breeds $breed
+     * @depends testBreedsListIsNotEmpty
+     * @param array<Breeds> $breeds
      * @return void
-     */
-    public function testCanNotRemoveReferencedBreed(Breeds $breed): void {
+     */    
+    public function testCanRemoveAllBreeds($breeds): void {
 
-        $this->assertFalse($this->breedsManager->removeBreed($breed));
-    }
-            
-    /**
-     * @depends testBreedHasOperatingSystemsReference
-     * @param Breeds $breed
-     * @return void
-     */
-    public function testCanRemoveBreedWithCascadeFlag(Breeds $breed): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
-        $breed_id = $breed->getId();
+        foreach ($breeds as $s) {
 
-        $this->assertTrue($this->breedsManager->removeBreed($breed, true));
+            $item = $this->breedsRepository->findOneById($s);
+            $this->assertNotNull($item);
+            $id = $item->getId();
 
-        // Try to find existing OS
-        $this->assertEmpty($this->osRepository->findBy(['breed' => $breed_id]));
-         * 
-         */
-    }
+            $this->breedsManager->removeBreed($item);
+
+            $removed_item = $this->breedsRepository->findOneById($id);
+            $this->assertNull($removed_item);
+        }
+
+        $this->assertEmpty($this->osRepository->findAll());
+    }    
 }

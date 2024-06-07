@@ -10,6 +10,7 @@ use App\Entity\InstanceTypes;
 use App\Entity\OperatingSystems;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use App\Service\InstanceTypesManager;
 
 class InstanceTypesTest extends KernelTestCase
 {
@@ -43,6 +44,8 @@ class InstanceTypesTest extends KernelTestCase
      */
     private $osRepository;
 
+    private InstanceTypesManager $instanceTypesManager;
+
     protected function setUp(): void {
         self::bootKernel();
 
@@ -50,6 +53,7 @@ class InstanceTypesTest extends KernelTestCase
         $this->hpRepository = $this->entityManager->getRepository(HardwareProfiles::class);
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
+        $this->instanceTypesManager = static::getContainer()->get(InstanceTypesManager::class);        
     }
 
     /**
@@ -133,8 +137,8 @@ class InstanceTypesTest extends KernelTestCase
             $it = $this->itRepository->findOneById($t->getId());
             $this->assertNotNull($it);
             $id = $it->getId();
-
-            $this->itRepository->remove($it, true);
+            
+            $this->instanceTypesManager->removeInstanceType($it);
 
             $removed_it = $this->itRepository->findOneById($id);
             $this->assertNull($removed_it);

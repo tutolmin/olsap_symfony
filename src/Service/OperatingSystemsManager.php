@@ -12,8 +12,9 @@ use App\Entity\HardwareProfiles;
 use App\Repository\OperatingSystemsRepository;
 use App\Repository\InstanceTypesRepository;
 use App\Repository\HardwareProfilesRepository;
-use App\Repository\TaskOsesRepository;
-use App\Repository\SessionOsesRepository;
+//use App\Repository\TaskOsesRepository;
+//use App\Repository\SessionOsesRepository;
+use App\Service\InstanceTypesManager;
 
 class OperatingSystemsManager {
 
@@ -22,11 +23,13 @@ class OperatingSystemsManager {
     private InstanceTypesRepository $itRepository;
     private OperatingSystemsRepository $osRepository;
     private HardwareProfilesRepository $hpRepository;
-    private TaskOsesRepository $toRepository;
-    private SessionOsesRepository $soRepository;
+//    private TaskOsesRepository $toRepository;
+//    private SessionOsesRepository $soRepository;
+    private InstanceTypesManager $instanceTypesManager;
 
     public function __construct(
-            LoggerInterface $logger, EntityManagerInterface $em
+            LoggerInterface $logger, EntityManagerInterface $em,
+            InstanceTypesManager $instanceTypesManager
     ) {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -35,28 +38,23 @@ class OperatingSystemsManager {
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->hpRepository = $this->entityManager->getRepository(HardwareProfiles::class);
-        $this->toRepository = $this->entityManager->getRepository(TaskOses::class);
-        $this->soRepository = $this->entityManager->getRepository(SessionOses::class);
+//        $this->toRepository = $this->entityManager->getRepository(TaskOses::class);
+//        $this->soRepository = $this->entityManager->getRepository(SessionOses::class);
+        $this->instanceTypesManager = $instanceTypesManager;
     }
 
     /**
      * 
      * @param OperatingSystems $os
-     * @param bool $cascade
-     * @return bool
      */
-    public function removeOperatingSystem(OperatingSystems $os, 
-            bool $cascade = false): bool {
+    public function removeOperatingSystem(OperatingSystems $os): void {
 
         $this->logger->debug(__METHOD__);
 
-        $instance_types = $this->itRepository->findBy(['os' => $os->getId()]);
-
-        if ($instance_types && !$cascade) {
-            $this->logger->debug("Can't delete corresponding InstanceTypes without cascade flag.");
-            return false;
+        foreach ($os->getInstanceTypes() as $it) {
+            $this->instanceTypesManager->removeInstanceType($it);
         }
-
+/*        
         $task_oses = $this->toRepository->findBy(['os' => $os->getId()]);
 
         if ($task_oses && !$cascade) {
@@ -70,11 +68,8 @@ class OperatingSystemsManager {
             $this->logger->debug("Can't delete corresponding SessionOses without cascade flag.");
             return false;
         }   
-        
-        if ($this->osRepository->remove($os, true)) {
-            return true;
-        }
-        return false;
+*/        
+        $this->osRepository->remove($os, true);
     }
 
     /**
@@ -83,9 +78,10 @@ class OperatingSystemsManager {
      * @return bool
      */
     public function addOperatingSystem(OperatingSystems $os): bool {
-        if ($this->osRepository->add($os, true)) {
 
-            $this->logger->debug(__METHOD__);
+        $this->logger->debug(__METHOD__);
+
+        if ($this->osRepository->add($os, true)) {
 
             if ($os->isSupported()) {
                 $this->addInstanceTypes($os);
@@ -132,7 +128,7 @@ class OperatingSystemsManager {
         $instance_types = $this->itRepository->findBy(['os' => $os->getId()]);
 
         foreach ($instance_types as &$it) {
-            $this->itRepository->remove($it, true);
+            $this->instanceTypesManager->removeInstanceType($it);
         }
     }
 

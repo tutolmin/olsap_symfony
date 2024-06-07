@@ -61,7 +61,7 @@ services:
             $lxc_url:           '%lxc.url%'
             
     # explicitly configure the service
-#    App\Service\TesteesManager:
+#    App\Service\InstanceTypesManager:
 #        public: true
                         
     App\MessageHandler\SessionActionHandler:

@@ -157,16 +157,6 @@ class OperatingSystemsTest extends KernelTestCase
         return $os;
     }
 
-    /**
-     * @depends testCanAddDummyOperatingSystem
-     * @param OperatingSystems $operating_system
-     * @return void
-     */
-    public function testCanRemoveDummyOperatingSystem(OperatingSystems $operating_system): void {
-        
-        $this->assertTrue($this->osRepository->remove($operating_system, true));
-    }
-    
     public function testCanAddDummySupportedOperatingSystem(): OperatingSystems {
         
         $breed = $this->breedsRepository->findOneBy(array());
@@ -190,48 +180,28 @@ class OperatingSystemsTest extends KernelTestCase
         }
         return $os;
     }
-  
-    /**
-     * 
-     * @depends testSupportedOperatingSystemsListIsNotEmpty
-     * @param array<OperatingSystems> $oses
-     * @return void
-     */
-    public function testCanNotRemoveSupportedOperatingSystem(array $oses): void {
-
-        $this->assertFalse($this->osManager->removeOperatingSystem($oses[0]));
-    }
             
     /**
      * @depends testSupportedOperatingSystemsListIsNotEmpty
      * @param array<OperatingSystems> $oses
      * @return void
      */    
-    public function testCanRemoveSupportedOperatingSystemWithCascadeFlag(
-            array $oses): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
-        $os = $this->osRepository->findOneBySupported(true);
-        $this->assertNotNull($os);
-        
-        $os_id = $os->getId();
+    public function testCanRemoveAllOperatingSystems($oses): void {
 
-        $this->assertTrue($this->osManager->removeOperatingSystem($os, true));
+        foreach ($oses as $s) {
 
-	$hw_profiles = $this->getSupportedHardwareProfiles();
-        
-        // Iterate through all the HPs
-        foreach ($hw_profiles as &$hp) {
+            $item = $this->osRepository->findOneById($s);
+            $this->assertNotNull($item);
+            $id = $item->getId();
 
-            // Try to find existing Instance type
-            $this->assertEmpty($this->itRepository->findBy(
-                            ['os' => $os_id, 'hw_profile' => $hp->getId()]));
+            $this->osManager->removeOperatingSystem($item);
+
+            $removed_item = $this->osRepository->findOneById($id);
+            $this->assertNull($removed_item);
         }
-         * 
-         */
-    }
+
+        $this->assertEmpty($this->itRepository->findAll());
+    }    
 
     /**
      * @depends testOperatingSystemsListIsNotEmpty
@@ -258,15 +228,18 @@ class OperatingSystemsTest extends KernelTestCase
     }
     
     /**
-     * @depends testCanAddDummySupportedOperatingSystem
-     * @param OperatingSystems $supported_os
+     * @depends testSupportedOperatingSystemsListIsNotEmpty
+     * @param array<OperatingSystems> $oses
      * @return void
      */    
-    public function testCanMakeOperatingSystemUnsupported( $supported_os): void {
+    public function testCanMakeOperatingSystemUnsupported( $oses): void {
 
-        $supported_os->setSupported(false);
+        $item = $this->osRepository->findOneById($oses[0]);
+        $this->assertNotNull($item);
+
+        $item->setSupported(false);
         
-        $this->osManager->editOperatingSystem($supported_os);
+        $this->osManager->editOperatingSystem($item);
 
 	$hw_profiles = $this->getSupportedHardwareProfiles();
         
@@ -275,7 +248,7 @@ class OperatingSystemsTest extends KernelTestCase
 
             // Try to find existing Instance type
             $this->assertEmpty($this->itRepository->findBy(
-                            ['os' => $supported_os->getId(), 'hw_profile' => $hp->getId()]));
+                            ['os' => $item->getId(), 'hw_profile' => $hp->getId()]));
         }
     }    
 }

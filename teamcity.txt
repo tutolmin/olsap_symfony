@@ -1,948 +1,952 @@
 
-##teamcity[testCount count='193' flowId='17004']
+##teamcity[testCount count='195' flowId='2655']
 
-##teamcity[testSuiteStarted name='App Test Suite' flowId='17004']
+##teamcity[testSuiteStarted name='App Test Suite' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\AddressesTest' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\AddressesTest' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest' flowId='2655']
 
-##teamcity[testStarted name='testAddressesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testAddressesListIsNotEmpty' flowId='17004']
+##teamcity[testStarted name='testAddressesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testAddressesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testAddressesListIsNotEmpty' duration='994' flowId='17004']
+##teamcity[testFinished name='testAddressesListIsNotEmpty' duration='636' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddAddressWithoutIp' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutIp' flowId='17004']
+##teamcity[testStarted name='testCanNotAddAddressWithoutIp' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutIp' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddAddressWithoutIp' duration='32' flowId='17004']
+##teamcity[testFinished name='testCanNotAddAddressWithoutIp' duration='16' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddAddressWithoutMac' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutMac' flowId='17004']
+##teamcity[testStarted name='testCanNotAddAddressWithoutMac' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutMac' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddAddressWithoutMac' duration='9' flowId='17004']
+##teamcity[testFinished name='testCanNotAddAddressWithoutMac' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateAddresses' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddDuplicateAddresses' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateAddresses' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddDuplicateAddresses' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateAddresses' duration='30' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateAddresses' duration='19' flowId='2655']
 
-##teamcity[testStarted name='testSpareAddressesAreAvailable' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testSpareAddressesAreAvailable' flowId='17004']
+##teamcity[testStarted name='testSpareAddressesAreAvailable' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testSpareAddressesAreAvailable' flowId='2655']
 
-##teamcity[testFinished name='testSpareAddressesAreAvailable' duration='506' flowId='17004']
+##teamcity[testFinished name='testSpareAddressesAreAvailable' duration='362' flowId='2655']
 
-##teamcity[testStarted name='testEachInstanceHasAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testEachInstanceHasAddress' flowId='17004']
+##teamcity[testStarted name='testEachInstanceHasAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testEachInstanceHasAddress' flowId='2655']
 
-##teamcity[testFinished name='testEachInstanceHasAddress' duration='100' flowId='17004']
+##teamcity[testFinished name='testEachInstanceHasAddress' duration='76' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanAddDummyAddress' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanAddDummyAddress' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyAddress' duration='12' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyAddress' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanRemoveDummyAddress' flowId='17004']
+##teamcity[testStarted name='testCanRemoveDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanRemoveDummyAddress' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveDummyAddress' duration='8' flowId='17004']
+##teamcity[testFinished name='testCanRemoveDummyAddress' duration='6' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\AddressesTest' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\AddressesTest' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\BreedsTest' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\BreedsTest' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest' flowId='2655']
 
-##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedsListIsNotEmpty' flowId='17004']
+##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='17' flowId='17004']
+##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='54' flowId='2655']
 
-##teamcity[testStarted name='testBreedHasOperatingSystemsReference' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedHasOperatingSystemsReference' flowId='17004']
+##teamcity[testStarted name='testBreedHasOperatingSystemsReference' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testBreedHasOperatingSystemsReference' flowId='2655']
 
-##teamcity[testFinished name='testBreedHasOperatingSystemsReference' duration='20' flowId='17004']
+##teamcity[testFinished name='testBreedHasOperatingSystemsReference' duration='19' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddBreedWithoutName' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddBreedWithoutName' flowId='17004']
+##teamcity[testStarted name='testCanNotAddBreedWithoutName' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddBreedWithoutName' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddBreedWithoutName' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanNotAddBreedWithoutName' duration='14' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddDuplicateBreed' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotAddDuplicateBreed' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateBreed' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateBreed' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanAddDummyBreed' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanAddDummyBreed' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyBreed' duration='9' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyBreed' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveDummyBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveDummyBreed' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllBreeds' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveAllBreeds' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveDummyBreed' duration='9' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllBreeds' duration='481' flowId='2655']
 
-##teamcity[testStarted name='testCanNotRemoveReferencedBreed' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanNotRemoveReferencedBreed' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\BreedsTest' flowId='2655']
 
-##teamcity[testFinished name='testCanNotRemoveReferencedBreed' duration='11' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveBreedWithCascadeFlag' locationHint='php_qn:///srv/app/tests/BreedsTest.php::\App\Tests\BreedsTest::testCanRemoveBreedWithCascadeFlag' flowId='17004']
+##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='2655']
 
-##teamcity[testIgnored name='testCanRemoveBreedWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/BreedsTest.php:144|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='17004']
+##teamcity[testFinished name='testAwxMeIsSymfony' duration='1385' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveBreedWithCascadeFlag' duration='7' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\BreedsTest' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxMeCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest' flowId='17004']
+##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='2655']
 
-##teamcity[testStarted name='testAwxMeIsSymfony' locationHint='php_qn:///srv/app/tests/Command/AwxMeCommandTest.php::\App\Tests\Command\AwxMeCommandTest::testAwxMeIsSymfony' flowId='17004']
+##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='1' flowId='2655']
 
-##teamcity[testFinished name='testAwxMeIsSymfony' duration='536' flowId='17004']
+##teamcity[testFinished name='testExecute' duration='1' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxMeCommandTest' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AwxProjectListCommandTest' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\BreedsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/BreedsControllerTest.php::\App\Tests\Controller\BreedsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testExecute' locationHint='php_qn:///srv/app/tests/Command/AwxProjectListCommandTest.php::\App\Tests\Command\AwxProjectListCommandTest::testExecute' flowId='17004']
+##teamcity[testStarted name='testBreedsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/BreedsControllerTest.php::\App\Tests\Controller\BreedsControllerTest::testBreedsListIsNotEmpty' flowId='2655']
 
-##teamcity[testIgnored name='testExecute' message='This test has not been implemented yet.' details=' /srv/app/tests/Command/AwxProjectListCommandTest.php:15|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='2' flowId='17004']
+##teamcity[testFinished name='testBreedsListIsNotEmpty' duration='8' flowId='2655']
 
-##teamcity[testFinished name='testExecute' duration='2' flowId='17004']
+##teamcity[testStarted name='testBreedsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/BreedsControllerTest.php::\App\Tests\Controller\BreedsControllerTest::testBreedsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AwxProjectListCommandTest' flowId='17004']
+##teamcity[testFinished name='testBreedsWebPageListContainsAllRecords' duration='186' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\DomainsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest' flowId='17004']
+##teamcity[testStarted name='testBreedDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/BreedsControllerTest.php::\App\Tests\Controller\BreedsControllerTest::testBreedDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testBreedDisplayWebPageContainsData' duration='99' flowId='2655']
 
-##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='26' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllBreedsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/BreedsControllerTest.php::\App\Tests\Controller\BreedsControllerTest::testCanRemoveAllBreedsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testDomainsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainsWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllBreedsByClickingDeleteButton' duration='604' flowId='2655']
 
-##teamcity[testFinished name='testDomainsWebPageListContainsAllRecords' duration='436' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\BreedsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testDomainDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\DomainsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testDomainDisplayWebPageContainsData' duration='570' flowId='17004']
+##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllDomainsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testCanRemoveAllDomainsByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='17' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllDomainsByClickingDeleteButton' duration='1012' flowId='17004']
+##teamcity[testStarted name='testDomainsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\DomainsControllerTest' flowId='17004']
+##teamcity[testFinished name='testDomainsWebPageListContainsAllRecords' duration='93' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\EnvironmentStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest' flowId='17004']
+##teamcity[testStarted name='testDomainDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testDomainDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testDomainDisplayWebPageContainsData' duration='311' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='11' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllDomainsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/DomainsControllerTest.php::\App\Tests\Controller\DomainsControllerTest::testCanRemoveAllDomainsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllDomainsByClickingDeleteButton' duration='743' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentStatusesWebPageListContainsAllRecords' duration='71' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\DomainsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\EnvironmentStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentStatusDisplayWebPageContainsData' duration='279' flowId='17004']
+##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' duration='740' flowId='17004']
+##teamcity[testStarted name='testEnvironmentStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\EnvironmentStatusesControllerTest' flowId='17004']
+##teamcity[testFinished name='testEnvironmentStatusesWebPageListContainsAllRecords' duration='53' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\EnvironmentsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest' flowId='17004']
+##teamcity[testStarted name='testEnvironmentStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testEnvironmentStatusDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testEnvironmentStatusDisplayWebPageContainsData' duration='210' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentsListIsNotEmpty' duration='19' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentStatusesControllerTest.php::\App\Tests\Controller\EnvironmentStatusesControllerTest::testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentsWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllEnvironmentStatusesByClickingDeleteButton' duration='510' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentsWebPageListContainsAllRecords' duration='176' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\EnvironmentStatusesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\EnvironmentsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentDisplayWebPageContainsData' duration='491' flowId='17004']
+##teamcity[testStarted name='testEnvironmentsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllEnvironmentsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testCanRemoveAllEnvironmentsByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testEnvironmentsListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllEnvironmentsByClickingDeleteButton' duration='777' flowId='17004']
+##teamcity[testStarted name='testEnvironmentsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\EnvironmentsControllerTest' flowId='17004']
+##teamcity[testFinished name='testEnvironmentsWebPageListContainsAllRecords' duration='129' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\InstanceStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest' flowId='17004']
+##teamcity[testStarted name='testEnvironmentDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testEnvironmentDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testEnvironmentDisplayWebPageContainsData' duration='330' flowId='2655']
 
-##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='12' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllEnvironmentsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/EnvironmentsControllerTest.php::\App\Tests\Controller\EnvironmentsControllerTest::testCanRemoveAllEnvironmentsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testInstanceStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllEnvironmentsByClickingDeleteButton' duration='602' flowId='2655']
 
-##teamcity[testFinished name='testInstanceStatusesWebPageListContainsAllRecords' duration='131' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\EnvironmentsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testInstanceStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\InstanceStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testInstanceStatusDisplayWebPageContainsData' duration='409' flowId='17004']
+##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllInstanceStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testCanRemoveAllInstanceStatusesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='8' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllInstanceStatusesByClickingDeleteButton' duration='992' flowId='17004']
+##teamcity[testStarted name='testInstanceStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\InstanceStatusesControllerTest' flowId='17004']
+##teamcity[testFinished name='testInstanceStatusesWebPageListContainsAllRecords' duration='51' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\InstanceTypesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest' flowId='17004']
+##teamcity[testStarted name='testInstanceStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testInstanceStatusDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testInstanceStatusDisplayWebPageContainsData' duration='261' flowId='2655']
 
-##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='23' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllInstanceStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/InstanceStatusesControllerTest.php::\App\Tests\Controller\InstanceStatusesControllerTest::testCanRemoveAllInstanceStatusesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testInstanceTypesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllInstanceStatusesByClickingDeleteButton' duration='640' flowId='2655']
 
-##teamcity[testFinished name='testInstanceTypesWebPageListContainsAllRecords' duration='211' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\InstanceStatusesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testInstanceTypeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypeDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\InstanceTypesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testInstanceTypeDisplayWebPageContainsData' duration='425' flowId='17004']
+##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesListIsNotEmpty' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\InstanceTypesControllerTest' flowId='17004']
+##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='15' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\InstancesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest' flowId='17004']
+##teamcity[testStarted name='testInstanceTypesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testStarted name='testInstancesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstancesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testInstanceTypesWebPageListContainsAllRecords' duration='95' flowId='2655']
 
-##teamcity[testFinished name='testInstancesListIsNotEmpty' duration='21' flowId='17004']
+##teamcity[testStarted name='testInstanceTypeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypeDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testInstancesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstancesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testInstanceTypeDisplayWebPageContainsData' duration='284' flowId='2655']
 
-##teamcity[testFinished name='testInstancesWebPageListContainsAllRecords' duration='322' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\InstanceTypesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testInstanceDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstanceDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\InstancesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testInstanceDisplayWebPageContainsData' duration='1435' flowId='17004']
+##teamcity[testStarted name='testInstancesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstancesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testDeleteButtonDoesNotDeleteInstanceInstantly' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testDeleteButtonDoesNotDeleteInstanceInstantly' flowId='17004']
+##teamcity[testFinished name='testInstancesListIsNotEmpty' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testDeleteButtonDoesNotDeleteInstanceInstantly' duration='2235' flowId='17004']
+##teamcity[testStarted name='testInstancesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstancesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\InstancesControllerTest' flowId='17004']
+##teamcity[testFinished name='testInstancesWebPageListContainsAllRecords' duration='214' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\LuckyNumberControllerTest' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberControllerTest.php::\App\Tests\Controller\LuckyNumberControllerTest' flowId='17004']
+##teamcity[testStarted name='testInstanceDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testInstanceDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testLuckyNumber' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberControllerTest.php::\App\Tests\Controller\LuckyNumberControllerTest::testLuckyNumber' flowId='17004']
+##teamcity[testFinished name='testInstanceDisplayWebPageContainsData' duration='981' flowId='2655']
 
-##teamcity[testFinished name='testLuckyNumber' duration='40' flowId='17004']
+##teamcity[testStarted name='testDeleteButtonDoesNotDeleteInstanceInstantly' locationHint='php_qn:///srv/app/tests/Controller/InstancesControllerTest.php::\App\Tests\Controller\InstancesControllerTest::testDeleteButtonDoesNotDeleteInstanceInstantly' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\LuckyNumberControllerTest' flowId='17004']
+##teamcity[testFinished name='testDeleteButtonDoesNotDeleteInstanceInstantly' duration='1351' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\SessionOsesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\InstancesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testSessionOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\LuckyNumberControllerTest' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberControllerTest.php::\App\Tests\Controller\LuckyNumberControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionOsesListIsNotEmpty' duration='16' flowId='17004']
+##teamcity[testStarted name='testLuckyNumber' locationHint='php_qn:///srv/app/tests/Controller/LuckyNumberControllerTest.php::\App\Tests\Controller\LuckyNumberControllerTest::testLuckyNumber' flowId='2655']
 
-##teamcity[testStarted name='testSessionOsesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testLuckyNumber' duration='17' flowId='2655']
 
-##teamcity[testFinished name='testSessionOsesWebPageListContainsAllRecords' duration='121' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\LuckyNumberControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testSessionOsDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\OperatingSystemsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/OperatingSystemsControllerTest.php::\App\Tests\Controller\OperatingSystemsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionOsDisplayWebPageContainsData' duration='418' flowId='17004']
+##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/OperatingSystemsControllerTest.php::\App\Tests\Controller\OperatingSystemsControllerTest::testOperatingSystemsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionOsesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testCanRemoveAllSessionOsesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionOsesByClickingDeleteButton' duration='516' flowId='17004']
+##teamcity[testStarted name='testOperatingSystemsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/OperatingSystemsControllerTest.php::\App\Tests\Controller\OperatingSystemsControllerTest::testOperatingSystemsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\SessionOsesControllerTest' flowId='17004']
+##teamcity[testFinished name='testOperatingSystemsWebPageListContainsAllRecords' duration='74' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\SessionStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest' flowId='17004']
+##teamcity[testStarted name='testOperatingSystemDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/OperatingSystemsControllerTest.php::\App\Tests\Controller\OperatingSystemsControllerTest::testOperatingSystemDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testOperatingSystemDisplayWebPageContainsData' duration='244' flowId='2655']
 
-##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='13' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllOperatingSystemsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/OperatingSystemsControllerTest.php::\App\Tests\Controller\OperatingSystemsControllerTest::testCanRemoveAllOperatingSystemsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testSessionStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllOperatingSystemsByClickingDeleteButton' duration='807' flowId='2655']
 
-##teamcity[testFinished name='testSessionStatusesWebPageListContainsAllRecords' duration='71' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\OperatingSystemsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testSessionStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\SessionOsesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionStatusDisplayWebPageContainsData' duration='326' flowId='17004']
+##teamcity[testStarted name='testSessionOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testCanRemoveAllSessionStatusesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testSessionOsesListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionStatusesByClickingDeleteButton' duration='694' flowId='17004']
+##teamcity[testStarted name='testSessionOsesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\SessionStatusesControllerTest' flowId='17004']
+##teamcity[testFinished name='testSessionOsesWebPageListContainsAllRecords' duration='81' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\SessionTechsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest' flowId='17004']
+##teamcity[testStarted name='testSessionOsDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testSessionOsDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testSessionTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testSessionTechsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testSessionOsDisplayWebPageContainsData' duration='216' flowId='2655']
 
-##teamcity[testFinished name='testSessionTechsListIsNotEmpty' duration='20' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionOsesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionOsesControllerTest.php::\App\Tests\Controller\SessionOsesControllerTest::testCanRemoveAllSessionOsesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testSessionTechsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testSessionTechsWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionOsesByClickingDeleteButton' duration='358' flowId='2655']
 
-##teamcity[testFinished name='testSessionTechsWebPageListContainsAllRecords' duration='133' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\SessionOsesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testsessionTechDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testsessionTechDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\SessionStatusesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testsessionTechDisplayWebPageContainsData' duration='576' flowId='17004']
+##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionTechsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testCanRemoveAllSessionTechsByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionTechsByClickingDeleteButton' duration='766' flowId='17004']
+##teamcity[testStarted name='testSessionStatusesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\SessionTechsControllerTest' flowId='17004']
+##teamcity[testFinished name='testSessionStatusesWebPageListContainsAllRecords' duration='61' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\SessionsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest' flowId='17004']
+##teamcity[testStarted name='testSessionStatusDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testSessionStatusDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testSessionStatusDisplayWebPageContainsData' duration='227' flowId='2655']
 
-##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='21' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionStatusesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionStatusesControllerTest.php::\App\Tests\Controller\SessionStatusesControllerTest::testCanRemoveAllSessionStatusesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testSessionsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionStatusesByClickingDeleteButton' duration='452' flowId='2655']
 
-##teamcity[testFinished name='testSessionsWebPageListContainsAllRecords' duration='140' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\SessionStatusesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testSessionDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\SessionTechsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionDisplayWebPageContainsData' duration='301' flowId='17004']
+##teamcity[testStarted name='testSessionTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testSessionTechsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testCanRemoveAllSessionsByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testSessionTechsListIsNotEmpty' duration='8' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionsByClickingDeleteButton' duration='571' flowId='17004']
+##teamcity[testStarted name='testSessionTechsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testSessionTechsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\SessionsControllerTest' flowId='17004']
+##teamcity[testFinished name='testSessionTechsWebPageListContainsAllRecords' duration='65' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TaskTechsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest' flowId='17004']
+##teamcity[testStarted name='testsessionTechDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testsessionTechDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testTaskTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testTaskTechsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testsessionTechDisplayWebPageContainsData' duration='330' flowId='2655']
 
-##teamcity[testFinished name='testTaskTechsListIsNotEmpty' duration='25' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionTechsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionTechsControllerTest.php::\App\Tests\Controller\SessionTechsControllerTest::testCanRemoveAllSessionTechsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testTaskTechsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testTaskTechsWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionTechsByClickingDeleteButton' duration='480' flowId='2655']
 
-##teamcity[testFinished name='testTaskTechsWebPageListContainsAllRecords' duration='250' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\SessionTechsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testtaskTechDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testtaskTechDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\SessionsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testtaskTechDisplayWebPageContainsData' duration='1069' flowId='17004']
+##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTaskTechsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testCanRemoveAllTaskTechsByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTaskTechsByClickingDeleteButton' duration='2468' flowId='17004']
+##teamcity[testStarted name='testSessionsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\TaskTechsControllerTest' flowId='17004']
+##teamcity[testFinished name='testSessionsWebPageListContainsAllRecords' duration='94' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TasksControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest' flowId='17004']
+##teamcity[testStarted name='testSessionDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testSessionDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testSessionDisplayWebPageContainsData' duration='178' flowId='2655']
 
-##teamcity[testFinished name='testTasksListIsNotEmpty' duration='40' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/SessionsControllerTest.php::\App\Tests\Controller\SessionsControllerTest::testCanRemoveAllSessionsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testTasksWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionsByClickingDeleteButton' duration='271' flowId='2655']
 
-##teamcity[testFinished name='testTasksWebPageListContainsAllRecords' duration='461' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\SessionsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testTaskDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTaskDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\TaskTechsControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testTaskDisplayWebPageContainsData' duration='1714' flowId='17004']
+##teamcity[testStarted name='testTaskTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testTaskTechsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTasksByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testCanRemoveAllTasksByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testTaskTechsListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTasksByClickingDeleteButton' duration='3146' flowId='17004']
+##teamcity[testStarted name='testTaskTechsWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testTaskTechsWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\TasksControllerTest' flowId='17004']
+##teamcity[testFinished name='testTaskTechsWebPageListContainsAllRecords' duration='135' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TechnologiesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest' flowId='17004']
+##teamcity[testStarted name='testtaskTechDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testtaskTechDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologiesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testtaskTechDisplayWebPageContainsData' duration='666' flowId='2655']
 
-##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='19' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTaskTechsByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TaskTechsControllerTest.php::\App\Tests\Controller\TaskTechsControllerTest::testCanRemoveAllTaskTechsByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testTechnologiesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologiesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTaskTechsByClickingDeleteButton' duration='1223' flowId='2655']
 
-##teamcity[testFinished name='testTechnologiesWebPageListContainsAllRecords' duration='477' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\TaskTechsControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testTechnologyDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologyDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\TasksControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testTechnologyDisplayWebPageContainsData' duration='1657' flowId='17004']
+##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTechnologiesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testCanRemoveAllTechnologiesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testTasksListIsNotEmpty' duration='14' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTechnologiesByClickingDeleteButton' duration='2572' flowId='17004']
+##teamcity[testStarted name='testTasksWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTasksWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\TechnologiesControllerTest' flowId='17004']
+##teamcity[testFinished name='testTasksWebPageListContainsAllRecords' duration='200' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TesteesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest' flowId='17004']
+##teamcity[testStarted name='testTaskDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testTaskDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testTaskDisplayWebPageContainsData' duration='927' flowId='2655']
 
-##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='13' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTasksByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TasksControllerTest.php::\App\Tests\Controller\TasksControllerTest::testCanRemoveAllTasksByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testTesteesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesWebPageListContainsAllRecords' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTasksByClickingDeleteButton' duration='1657' flowId='2655']
 
-##teamcity[testFinished name='testTesteesWebPageListContainsAllRecords' duration='63' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\TasksControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteeDisplayWebPageContainsData' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\TechnologiesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='188' flowId='17004']
+##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologiesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTesteesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanRemoveAllTesteesByClickingDeleteButton' flowId='17004']
+##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTesteesByClickingDeleteButton' duration='313' flowId='17004']
+##teamcity[testStarted name='testTechnologiesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologiesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\Controller\TesteesControllerTest' flowId='17004']
+##teamcity[testFinished name='testTechnologiesWebPageListContainsAllRecords' duration='356' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\DomainsTest' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest' flowId='17004']
+##teamcity[testStarted name='testTechnologyDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testTechnologyDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testTechnologyDisplayWebPageContainsData' duration='1106' flowId='2655']
 
-##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='15' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTechnologiesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TechnologiesControllerTest.php::\App\Tests\Controller\TechnologiesControllerTest::testCanRemoveAllTechnologiesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDomainWithoutName' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDomainWithoutName' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTechnologiesByClickingDeleteButton' duration='1783' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDomainWithoutName' duration='16' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\TechnologiesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDuplicateDomain' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\Controller\TesteesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateDomain' duration='15' flowId='17004']
+##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanAddDummyDomain' flowId='17004']
+##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyDomain' duration='11' flowId='17004']
+##teamcity[testStarted name='testTesteesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesWebPageListContainsAllRecords' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllDomains' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanRemoveAllDomains' flowId='17004']
+##teamcity[testFinished name='testTesteesWebPageListContainsAllRecords' duration='57' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllDomains' duration='222' flowId='17004']
+##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteeDisplayWebPageContainsData' flowId='2655']
 
-##teamcity[testStarted name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainRemovalLeadsToLinkedTechnologiesDeletion' flowId='17004']
+##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='178' flowId='2655']
 
-##teamcity[testFinished name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' duration='35' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTesteesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanRemoveAllTesteesByClickingDeleteButton' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\DomainsTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTesteesByClickingDeleteButton' duration='222' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\EnvironmentStatusesTest' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\Controller\TesteesControllerTest' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\DomainsTest' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='14' flowId='17004']
+##teamcity[testStarted name='testDomainsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddEnvironmentStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddEnvironmentStatusWithoutStatusString' flowId='17004']
+##teamcity[testFinished name='testDomainsListIsNotEmpty' duration='8' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddEnvironmentStatusWithoutStatusString' duration='16' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDomainWithoutName' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDomainWithoutName' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddDuplicateEnvironmentStatus' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDomainWithoutName' duration='8' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateEnvironmentStatus' duration='18' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanNotAddDuplicateDomain' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanAddDummyEnvironmentStatus' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateDomain' duration='10' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyEnvironmentStatus' duration='17' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyDomain' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanAddDummyDomain' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllEnvironmentStatuses' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanRemoveAllEnvironmentStatuses' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyDomain' duration='7' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllEnvironmentStatuses' duration='170' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllDomains' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testCanRemoveAllDomains' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\EnvironmentStatusesTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllDomains' duration='115' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\EnvironmentsTest' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest' flowId='17004']
+##teamcity[testStarted name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' locationHint='php_qn:///srv/app/tests/DomainsTest.php::\App\Tests\DomainsTest::testDomainRemovalLeadsToLinkedTechnologiesDeletion' flowId='2655']
 
-##teamcity[testStarted name='testEnvironmentsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testEnvironmentsListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testDomainRemovalLeadsToLinkedTechnologiesDeletion' duration='19' flowId='2655']
 
-##teamcity[testFinished name='testEnvironmentsListIsNotEmpty' duration='16' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\DomainsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddEnvironmentWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanNotAddEnvironmentWithoutMandatoryFields' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\EnvironmentStatusesTest' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddEnvironmentWithoutMandatoryFields' duration='16' flowId='17004']
+##teamcity[testStarted name='testEnvironmentStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testEnvironmentStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyEnvironment' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanAddDummyEnvironment' flowId='17004']
+##teamcity[testFinished name='testEnvironmentStatusesListIsNotEmpty' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyEnvironment' duration='21' flowId='17004']
+##teamcity[testStarted name='testCanNotAddEnvironmentStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddEnvironmentStatusWithoutStatusString' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllEnvironments' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanRemoveAllEnvironments' flowId='17004']
+##teamcity[testFinished name='testCanNotAddEnvironmentStatusWithoutStatusString' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllEnvironments' duration='165' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanNotAddDuplicateEnvironmentStatus' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateEnvironment' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanNotAddDuplicateEnvironment' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateEnvironmentStatus' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateEnvironment' duration='25' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyEnvironmentStatus' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanAddDummyEnvironmentStatus' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\EnvironmentsTest' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyEnvironmentStatus' duration='8' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllEnvironmentStatuses' locationHint='php_qn:///srv/app/tests/EnvironmentStatusesTest.php::\App\Tests\EnvironmentStatusesTest::testCanRemoveAllEnvironmentStatuses' flowId='2655']
 
-##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllEnvironmentStatuses' duration='114' flowId='2655']
 
-##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='15' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\EnvironmentStatusesTest' flowId='2655']
 
-##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\EnvironmentsTest' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest' flowId='2655']
 
-##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='9' flowId='17004']
+##teamcity[testStarted name='testEnvironmentsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testEnvironmentsListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testEnvironmentsListIsNotEmpty' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='11' flowId='17004']
+##teamcity[testStarted name='testCanNotAddEnvironmentWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanNotAddEnvironmentWithoutMandatoryFields' flowId='2655']
 
-##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testCanNotAddEnvironmentWithoutMandatoryFields' duration='13' flowId='2655']
 
-##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='11' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyEnvironment' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanAddDummyEnvironment' flowId='2655']
 
-##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyEnvironment' duration='15' flowId='2655']
 
-##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' duration='24' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllEnvironments' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanRemoveAllEnvironments' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllEnvironments' duration='98' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='13' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateEnvironment' locationHint='php_qn:///srv/app/tests/EnvironmentsTest.php::\App\Tests\EnvironmentsTest::testCanNotAddDuplicateEnvironment' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateEnvironment' duration='18' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='14' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\EnvironmentsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummyHardwareProfile' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\HardwareProfilesTest' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyHardwareProfile' duration='13' flowId='17004']
+##teamcity[testStarted name='testHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testHardwareProfilesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummySupportedHardwareProfile' flowId='17004']
+##teamcity[testFinished name='testHardwareProfilesListIsNotEmpty' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummySupportedHardwareProfile' duration='48' flowId='17004']
+##teamcity[testStarted name='testContainerHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testContainerHardwareProfilesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveUnsupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveUnsupportedHardwareProfile' flowId='17004']
+##teamcity[testFinished name='testContainerHardwareProfilesListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveUnsupportedHardwareProfile' duration='16' flowId='17004']
+##teamcity[testStarted name='testVmHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testVmHardwareProfilesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanNotRemoveSupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotRemoveSupportedHardwareProfile' flowId='17004']
+##teamcity[testFinished name='testVmHardwareProfilesListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testFinished name='testCanNotRemoveSupportedHardwareProfile' duration='15' flowId='17004']
+##teamcity[testStarted name='testSupportedHardwareProfilesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testSupportedHardwareProfilesListIsNotEmpty' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveSupportedHardwareProfileWithCascadeFlag' flowId='17004']
+##teamcity[testFinished name='testSupportedHardwareProfilesListIsNotEmpty' duration='12' flowId='2655']
 
-##teamcity[testIgnored name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:224|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='11' flowId='17004']
+##teamcity[testStarted name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveSupportedHardwareProfileWithCascadeFlag' duration='11' flowId='17004']
+##teamcity[testFinished name='testEachSupportedHardwareProfileHasCorrespondingInstanceTypesForAllSupportedOses' duration='24' flowId='2655']
 
-##teamcity[testStarted name='testCanMakeHardwareProfileSupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileSupported' flowId='17004']
+##teamcity[testStarted name='testCanNotAddHardwareProfileWithoutNameOrType' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddHardwareProfileWithoutNameOrType' flowId='2655']
 
-##teamcity[testFinished name='testCanMakeHardwareProfileSupported' duration='49' flowId='17004']
+##teamcity[testFinished name='testCanNotAddHardwareProfileWithoutNameOrType' duration='14' flowId='2655']
 
-##teamcity[testStarted name='testCanMakeHardwareProfileUnsupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileUnsupported' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanNotAddDuplicateHardwareProfile' flowId='2655']
 
-##teamcity[testIgnored name='testCanMakeHardwareProfileUnsupported' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/HardwareProfilesTest.php:278|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='7' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateHardwareProfile' duration='15' flowId='2655']
 
-##teamcity[testFinished name='testCanMakeHardwareProfileUnsupported' duration='7' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummyHardwareProfile' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyHardwareProfile' duration='9' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\InstanceStatusesTest' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest' flowId='17004']
+##teamcity[testStarted name='testCanAddDummySupportedHardwareProfile' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanAddDummySupportedHardwareProfile' flowId='2655']
 
-##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testCanAddDummySupportedHardwareProfile' duration='33' flowId='2655']
 
-##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='14' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllHardwareProfiles' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanRemoveAllHardwareProfiles' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddInstanceStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddInstanceStatusWithoutStatusString' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllHardwareProfiles' duration='351' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddInstanceStatusWithoutStatusString' duration='26' flowId='17004']
+##teamcity[testStarted name='testCanMakeHardwareProfileSupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileSupported' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddDuplicateInstanceStatus' flowId='17004']
+##teamcity[testFinished name='testCanMakeHardwareProfileSupported' duration='44' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateInstanceStatus' duration='17' flowId='17004']
+##teamcity[testStarted name='testCanMakeHardwareProfileUnsupported' locationHint='php_qn:///srv/app/tests/HardwareProfilesTest.php::\App\Tests\HardwareProfilesTest::testCanMakeHardwareProfileUnsupported' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanAddDummyInstanceStatus' flowId='17004']
+##teamcity[testFinished name='testCanMakeHardwareProfileUnsupported' duration='242' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyInstanceStatus' duration='17' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\HardwareProfilesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllInstanceStatuses' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanRemoveAllInstanceStatuses' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\InstanceStatusesTest' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllInstanceStatuses' duration='262' flowId='17004']
+##teamcity[testStarted name='testInstanceStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testInstanceStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\InstanceStatusesTest' flowId='17004']
+##teamcity[testFinished name='testInstanceStatusesListIsNotEmpty' duration='8' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddInstanceStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddInstanceStatusWithoutStatusString' flowId='2655']
 
-##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testInstanceTypesListIsNotEmpty' flowId='17004']
+##teamcity[testFinished name='testCanNotAddInstanceStatusWithoutStatusString' duration='9' flowId='2655']
 
-##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='21' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanNotAddDuplicateInstanceStatus' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutOperatingSystem' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateInstanceStatus' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutOperatingSystem' duration='25' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyInstanceStatus' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanAddDummyInstanceStatus' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutHardwareProfile' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutHardwareProfile' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyInstanceStatus' duration='9' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutHardwareProfile' duration='22' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllInstanceStatuses' locationHint='php_qn:///srv/app/tests/InstanceStatusesTest.php::\App\Tests\InstanceStatusesTest::testCanRemoveAllInstanceStatuses' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddDuplicateInstanceTypes' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllInstanceStatuses' duration='237' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateInstanceTypes' duration='26' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\InstanceStatusesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanRemoveAllInstanceTypes' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\InstanceTypesTest' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest' flowId='2655']
 
-##teamcity[testFailed name='testCanRemoveAllInstanceTypes' message='Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException : An exception occurred while executing a query: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|nDETAIL:  Key (id)=(225) is still referenced from table "addresses".' details=' /srv/app/vendor/doctrine/dbal/src/Driver/API/PostgreSQL/ExceptionConverter.php:50|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1939|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1881|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1213|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(225) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:28|n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:132|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n |n Caused by|n PDOException: SQLSTATE|[23503|]: Foreign key violation: 7 ERROR:  update or delete on table "instances" violates foreign key constraint "fk_6fca75163a51721d" on table "addresses"|n DETAIL:  Key (id)=(225) is still referenced from table "addresses".|n |n /srv/app/vendor/doctrine/dbal/src/Driver/PDO/Statement.php:130|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/doctrine/dbal/src/Logging/Statement.php:98|n /srv/app/vendor/doctrine/dbal/src/Driver/Middleware/AbstractStatementMiddleware.php:69|n /srv/app/vendor/symfony/doctrine-bridge/Middleware/Debug/DBAL3/Statement.php:70|n /srv/app/vendor/doctrine/dbal/src/Connection.php:1207|n /srv/app/vendor/doctrine/dbal/src/Connection.php:701|n /srv/app/vendor/doctrine/orm/src/Persisters/Entity/BasicEntityPersister.php:609|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:1302|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:472|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/InstanceTypesRepository.php:59|n /srv/app/tests/InstanceTypesTest.php:137|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='62' flowId='17004']
+##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testInstanceTypesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllInstanceTypes' duration='62' flowId='17004']
+##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutOperatingSystem' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\InstancesTest' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutOperatingSystem' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testInstancesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstancesListIsNotEmpty' flowId='17004']
+##teamcity[testStarted name='testCanNotAddInstanceTypeWithoutHardwareProfile' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddInstanceTypeWithoutHardwareProfile' flowId='2655']
 
-##teamcity[testFinished name='testInstancesListIsNotEmpty' duration='35' flowId='17004']
+##teamcity[testFinished name='testCanNotAddInstanceTypeWithoutHardwareProfile' duration='18' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddInstanceWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddInstanceWithoutMandatoryFields' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanNotAddDuplicateInstanceTypes' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddInstanceWithoutMandatoryFields' duration='24' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateInstanceTypes' duration='18' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanAddDummyInstance' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllInstanceTypes' locationHint='php_qn:///srv/app/tests/InstanceTypesTest.php::\App\Tests\InstanceTypesTest::testCanRemoveAllInstanceTypes' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyInstance' duration='27' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllInstanceTypes' duration='383' flowId='2655']
 
-##teamcity[testStarted name='testInstanceListHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstanceListHasNoOrphans' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\InstanceTypesTest' flowId='2655']
 
-##teamcity[testFinished name='testInstanceListHasNoOrphans' duration='234' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\InstancesTest' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest' flowId='2655']
 
-##teamcity[testStarted name='testLxcInventoryHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testLxcInventoryHasNoOrphans' flowId='17004']
+##teamcity[testStarted name='testInstancesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstancesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testLxcInventoryHasNoOrphans' duration='262' flowId='17004']
+##teamcity[testFinished name='testInstancesListIsNotEmpty' duration='19' flowId='2655']
 
-##teamcity[testStarted name='testCanWipeAllInstancesFromDatabase' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanWipeAllInstancesFromDatabase' flowId='17004']
+##teamcity[testStarted name='testCanNotAddInstanceWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddInstanceWithoutMandatoryFields' flowId='2655']
 
-##teamcity[testFinished name='testCanWipeAllInstancesFromDatabase' duration='263' flowId='17004']
+##teamcity[testFinished name='testCanNotAddInstanceWithoutMandatoryFields' duration='15' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddDuplicateInstance' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanAddDummyInstance' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateInstance' duration='21' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyInstance' duration='14' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\InstancesTest' flowId='17004']
+##teamcity[testStarted name='testInstanceListHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testInstanceListHasNoOrphans' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\MessengerMessagesTest' locationHint='php_qn:///srv/app/tests/MessengerMessagesTest.php::\App\Tests\MessengerMessagesTest' flowId='17004']
+##teamcity[testFinished name='testInstanceListHasNoOrphans' duration='206' flowId='2655']
 
-##teamcity[testStarted name='testMessengerMessagesListIsEmpty' locationHint='php_qn:///srv/app/tests/MessengerMessagesTest.php::\App\Tests\MessengerMessagesTest::testMessengerMessagesListIsEmpty' flowId='17004']
+##teamcity[testStarted name='testLxcInventoryHasNoOrphans' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testLxcInventoryHasNoOrphans' flowId='2655']
 
-##teamcity[testFinished name='testMessengerMessagesListIsEmpty' duration='12' flowId='17004']
+##teamcity[testFinished name='testLxcInventoryHasNoOrphans' duration='190' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\MessengerMessagesTest' flowId='17004']
+##teamcity[testStarted name='testCanWipeAllInstancesFromDatabase' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanWipeAllInstancesFromDatabase' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='17004']
+##teamcity[testFinished name='testCanWipeAllInstancesFromDatabase' duration='209' flowId='2655']
 
-##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateInstance' locationHint='php_qn:///srv/app/tests/InstancesTest.php::\App\Tests\InstancesTest::testCanNotAddDuplicateInstance' flowId='2655']
 
-##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateInstance' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\InstancesTest' flowId='2655']
 
-##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='11' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\MessengerMessagesTest' locationHint='php_qn:///srv/app/tests/MessengerMessagesTest.php::\App\Tests\MessengerMessagesTest' flowId='2655']
 
-##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='17004']
+##teamcity[testStarted name='testMessengerMessagesListIsEmpty' locationHint='php_qn:///srv/app/tests/MessengerMessagesTest.php::\App\Tests\MessengerMessagesTest::testMessengerMessagesListIsEmpty' flowId='2655']
 
-##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='25' flowId='17004']
+##teamcity[testFinished name='testMessengerMessagesListIsEmpty' duration='8' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutReleaseOrBreed' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\MessengerMessagesTest' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' duration='14' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\OperatingSystemsTest' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testOperatingSystemsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='20' flowId='17004']
+##teamcity[testFinished name='testOperatingSystemsListIsNotEmpty' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummyOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testSupportedOperatingSystemsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testSupportedOperatingSystemsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyOperatingSystem' duration='18' flowId='17004']
+##teamcity[testFinished name='testSupportedOperatingSystemsListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveDummyOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveDummyOperatingSystem' duration='14' flowId='17004']
+##teamcity[testFinished name='testEachSupportedOsHasCorrespondingInstanceTypesForAllSupportedHardwareProfiles' duration='18' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummySupportedOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddOperatingSystemWithoutReleaseOrBreed' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummySupportedOperatingSystem' duration='36' flowId='17004']
+##teamcity[testFinished name='testCanNotAddOperatingSystemWithoutReleaseOrBreed' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanNotRemoveSupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotRemoveSupportedOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanNotAddDuplicateOperatingSystem' flowId='2655']
 
-##teamcity[testFinished name='testCanNotRemoveSupportedOperatingSystem' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateOperatingSystem' duration='13' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveSupportedOperatingSystemWithCascadeFlag' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummyOperatingSystem' flowId='2655']
 
-##teamcity[testIgnored name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' message='Cascade delete is way to complicated with all the references' details=' /srv/app/tests/OperatingSystemsTest.php:213|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='13' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyOperatingSystem' duration='12' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveSupportedOperatingSystemWithCascadeFlag' duration='13' flowId='17004']
+##teamcity[testStarted name='testCanAddDummySupportedOperatingSystem' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanAddDummySupportedOperatingSystem' flowId='2655']
 
-##teamcity[testStarted name='testCanMakeOperatingSystemSupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemSupported' flowId='17004']
+##teamcity[testFinished name='testCanAddDummySupportedOperatingSystem' duration='26' flowId='2655']
 
-##teamcity[testFinished name='testCanMakeOperatingSystemSupported' duration='46' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllOperatingSystems' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanRemoveAllOperatingSystems' flowId='2655']
 
-##teamcity[testStarted name='testCanMakeOperatingSystemUnsupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemUnsupported' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllOperatingSystems' duration='370' flowId='2655']
 
-##teamcity[testFailed name='testCanMakeOperatingSystemUnsupported' message='Doctrine\ORM\ORMInvalidArgumentException : A new entity was found through the relationship |'App\Entity\OperatingSystems#breed|' that was not configured to cascade persist operations for entity: fedora. To solve this issue: Either explicitly call EntityManager#persist() on this unknown entity or configure cascade persist this association in the mapping for example @ManyToOne(..,cascade={"persist"}).' details=' /srv/app/vendor/doctrine/orm/src/ORMInvalidArgumentException.php:103|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:3860|n /srv/app/vendor/doctrine/orm/src/UnitOfWork.php:417|n /srv/app/vendor/doctrine/orm/src/EntityManager.php:403|n /srv/app/src/Repository/OperatingSystemsRepository.php:40|n /srv/app/src/Service/OperatingSystemsManager.php:86|n /srv/app/src/Service/OperatingSystemsManager.php:148|n /srv/app/tests/OperatingSystemsTest.php:269|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='19' flowId='17004']
+##teamcity[testStarted name='testCanMakeOperatingSystemSupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemSupported' flowId='2655']
 
-##teamcity[testFinished name='testCanMakeOperatingSystemUnsupported' duration='19' flowId='17004']
+##teamcity[testFinished name='testCanMakeOperatingSystemSupported' duration='21' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='17004']
+##teamcity[testStarted name='testCanMakeOperatingSystemUnsupported' locationHint='php_qn:///srv/app/tests/OperatingSystemsTest.php::\App\Tests\OperatingSystemsTest::testCanMakeOperatingSystemUnsupported' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\PortsTest' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest' flowId='17004']
+##teamcity[testFinished name='testCanMakeOperatingSystemUnsupported' duration='169' flowId='2655']
 
-##teamcity[testStarted name='testPortsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testPortsListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\OperatingSystemsTest' flowId='2655']
 
-##teamcity[testFinished name='testPortsListIsNotEmpty' duration='547' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\PortsTest' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddPortWithoutPortNumber' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddPortWithoutPortNumber' flowId='17004']
+##teamcity[testStarted name='testPortsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testPortsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddPortWithoutPortNumber' duration='19' flowId='17004']
+##teamcity[testFinished name='testPortsListIsNotEmpty' duration='295' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicatePorts' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddDuplicatePorts' flowId='17004']
+##teamcity[testStarted name='testCanNotAddPortWithoutPortNumber' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddPortWithoutPortNumber' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicatePorts' duration='22' flowId='17004']
+##teamcity[testFinished name='testCanNotAddPortWithoutPortNumber' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testSparePortsAreAvailable' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testSparePortsAreAvailable' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicatePorts' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanNotAddDuplicatePorts' flowId='2655']
 
-##teamcity[testFinished name='testSparePortsAreAvailable' duration='27' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicatePorts' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testEachAddressHasPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testEachAddressHasPort' flowId='17004']
+##teamcity[testStarted name='testSparePortsAreAvailable' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testSparePortsAreAvailable' flowId='2655']
 
-##teamcity[testFinished name='testEachAddressHasPort' duration='3389' flowId='17004']
+##teamcity[testFinished name='testSparePortsAreAvailable' duration='14' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanAddDummyPort' flowId='17004']
+##teamcity[testStarted name='testEachAddressHasPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testEachAddressHasPort' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyPort' duration='12' flowId='17004']
+##teamcity[testFinished name='testEachAddressHasPort' duration='2492' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanRemoveDummyPort' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanAddDummyPort' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveDummyPort' duration='11' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyPort' duration='7' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\PortsTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveDummyPort' locationHint='php_qn:///srv/app/tests/PortsTest.php::\App\Tests\PortsTest::testCanRemoveDummyPort' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\SessionOsesTest' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveDummyPort' duration='6' flowId='2655']
 
-##teamcity[testStarted name='testSessionOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testSessionOsesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\PortsTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionOsesListIsNotEmpty' duration='14' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\SessionOsesTest' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionOsWithoutSession' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutSession' flowId='17004']
+##teamcity[testStarted name='testSessionOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testSessionOsesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionOsWithoutSession' duration='21' flowId='17004']
+##teamcity[testFinished name='testSessionOsesListIsNotEmpty' duration='6' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionOsWithoutSession' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutSession' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionOsWithoutOperatingSystem' duration='19' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionOsWithoutSession' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateSessionOses' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddDuplicateSessionOses' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddSessionOsWithoutOperatingSystem' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateSessionOses' duration='25' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionOsWithoutOperatingSystem' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionOses' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanRemoveAllSessionOses' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateSessionOses' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanNotAddDuplicateSessionOses' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionOses' duration='139' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateSessionOses' duration='14' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\SessionOsesTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionOses' locationHint='php_qn:///srv/app/tests/SessionOsesTest.php::\App\Tests\SessionOsesTest::testCanRemoveAllSessionOses' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\SessionStatusesTest' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionOses' duration='56' flowId='2655']
 
-##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\SessionOsesTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='13' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\SessionStatusesTest' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddSessionStatusWithoutStatusString' flowId='17004']
+##teamcity[testStarted name='testSessionStatusesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testSessionStatusesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionStatusWithoutStatusString' duration='17' flowId='17004']
+##teamcity[testFinished name='testSessionStatusesListIsNotEmpty' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddDuplicateSessionStatus' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionStatusWithoutStatusString' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddSessionStatusWithoutStatusString' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateSessionStatus' duration='13' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionStatusWithoutStatusString' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummySessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanAddDummySessionStatus' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateSessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanNotAddDuplicateSessionStatus' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummySessionStatus' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateSessionStatus' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionStatuses' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanRemoveAllSessionStatuses' flowId='17004']
+##teamcity[testStarted name='testCanAddDummySessionStatus' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanAddDummySessionStatus' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionStatuses' duration='95' flowId='17004']
+##teamcity[testFinished name='testCanAddDummySessionStatus' duration='10' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\SessionStatusesTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionStatuses' locationHint='php_qn:///srv/app/tests/SessionStatusesTest.php::\App\Tests\SessionStatusesTest::testCanRemoveAllSessionStatuses' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\SessionTechsTest' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionStatuses' duration='89' flowId='2655']
 
-##teamcity[testStarted name='testSessionTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testSessionTechsListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\SessionStatusesTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionTechsListIsNotEmpty' duration='14' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\SessionTechsTest' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionTechWithoutSession' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutSession' flowId='17004']
+##teamcity[testStarted name='testSessionTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testSessionTechsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionTechWithoutSession' duration='22' flowId='17004']
+##teamcity[testFinished name='testSessionTechsListIsNotEmpty' duration='6' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutTechnology' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionTechWithoutSession' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutSession' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionTechWithoutTechnology' duration='18' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionTechWithoutSession' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateSessionTechs' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddDuplicateSessionTechs' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddSessionTechWithoutTechnology' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateSessionTechs' duration='23' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionTechWithoutTechnology' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessionTechs' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanRemoveAllSessionTechs' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateSessionTechs' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanNotAddDuplicateSessionTechs' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessionTechs' duration='15' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateSessionTechs' duration='15' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\SessionTechsTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessionTechs' locationHint='php_qn:///srv/app/tests/SessionTechsTest.php::\App\Tests\SessionTechsTest::testCanRemoveAllSessionTechs' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\SessionsTest' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessionTechs' duration='6' flowId='2655']
 
-##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testSessionsListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\SessionTechsTest' flowId='2655']
 
-##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='18' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\SessionsTest' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddSessionWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddSessionWithoutMandatoryFields' flowId='17004']
+##teamcity[testStarted name='testSessionsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testSessionsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddSessionWithoutMandatoryFields' duration='19' flowId='17004']
+##teamcity[testFinished name='testSessionsListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummySession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanAddDummySession' flowId='17004']
+##teamcity[testStarted name='testCanNotAddSessionWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddSessionWithoutMandatoryFields' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummySession' duration='24' flowId='17004']
+##teamcity[testFinished name='testCanNotAddSessionWithoutMandatoryFields' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllSessions' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanRemoveAllSessions' flowId='17004']
+##teamcity[testStarted name='testCanAddDummySession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanAddDummySession' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllSessions' duration='87' flowId='17004']
+##teamcity[testFinished name='testCanAddDummySession' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateSession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddDuplicateSession' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllSessions' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanRemoveAllSessions' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateSession' duration='26' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllSessions' duration='49' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\SessionsTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateSession' locationHint='php_qn:///srv/app/tests/SessionsTest.php::\App\Tests\SessionsTest::testCanNotAddDuplicateSession' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TaskInstanceTypesTest' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateSession' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testTaskInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testTaskInstanceTypesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\SessionsTest' flowId='2655']
 
-##teamcity[testFinished name='testTaskInstanceTypesListIsNotEmpty' duration='34' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TaskInstanceTypesTest' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveRandomTaskInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveRandomTaskInstanceType' flowId='17004']
+##teamcity[testStarted name='testTaskInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testTaskInstanceTypesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveRandomTaskInstanceType' duration='17' flowId='17004']
+##teamcity[testFinished name='testTaskInstanceTypesListIsNotEmpty' duration='20' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveAllTaskInstanceTypes' flowId='17004']
+##teamcity[testStarted name='testCanRemoveRandomTaskInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveRandomTaskInstanceType' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTaskInstanceTypes' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanRemoveRandomTaskInstanceType' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutTask' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutTask' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanRemoveAllTaskInstanceTypes' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutTask' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTaskInstanceTypes' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutInstanceType' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutTask' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutTask' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutInstanceType' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutTask' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddDuplicateTaskInstanceTypes' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskInstanceTypeWithoutInstanceType' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddTaskInstanceTypeWithoutInstanceType' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTaskInstanceTypes' duration='22' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskInstanceTypeWithoutInstanceType' duration='10' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TaskInstanceTypesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTaskInstanceTypes' locationHint='php_qn:///srv/app/tests/TaskInstanceTypesTest.php::\App\Tests\TaskInstanceTypesTest::testCanNotAddDuplicateTaskInstanceTypes' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TaskOsesTest' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTaskInstanceTypes' duration='13' flowId='2655']
 
-##teamcity[testStarted name='testTaskOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testTaskOsesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\TaskInstanceTypesTest' flowId='2655']
 
-##teamcity[testFinished name='testTaskOsesListIsNotEmpty' duration='19' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TaskOsesTest' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanRemoveAllTaskOses' flowId='17004']
+##teamcity[testStarted name='testTaskOsesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testTaskOsesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTaskOses' duration='10' flowId='17004']
+##teamcity[testFinished name='testTaskOsesListIsNotEmpty' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskOsWithoutTask' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutTask' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanRemoveAllTaskOses' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskOsWithoutTask' duration='15' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTaskOses' duration='7' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutOperatingSystem' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskOsWithoutTask' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutTask' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskOsWithoutOperatingSystem' duration='18' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskOsWithoutTask' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddDuplicateTaskOses' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskOsWithoutOperatingSystem' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddTaskOsWithoutOperatingSystem' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTaskOses' duration='26' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskOsWithoutOperatingSystem' duration='12' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TaskOsesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTaskOses' locationHint='php_qn:///srv/app/tests/TaskOsesTest.php::\App\Tests\TaskOsesTest::testCanNotAddDuplicateTaskOses' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TaskTechsTest' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTaskOses' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testTaskTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testTaskTechsListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\TaskOsesTest' flowId='2655']
 
-##teamcity[testFinished name='testTaskTechsListIsNotEmpty' duration='19' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TaskTechsTest' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTaskTechs' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanRemoveAllTaskTechs' flowId='17004']
+##teamcity[testStarted name='testTaskTechsListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testTaskTechsListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTaskTechs' duration='14' flowId='17004']
+##teamcity[testFinished name='testTaskTechsListIsNotEmpty' duration='13' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskTechWithoutTask' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTask' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTaskTechs' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanRemoveAllTaskTechs' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskTechWithoutTask' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTaskTechs' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTechnology' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskTechWithoutTask' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTask' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskTechWithoutTechnology' duration='16' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskTechWithoutTask' duration='13' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTaskTechs' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddDuplicateTaskTechs' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskTechWithoutTechnology' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddTaskTechWithoutTechnology' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTaskTechs' duration='17' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskTechWithoutTechnology' duration='9' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TaskTechsTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTaskTechs' locationHint='php_qn:///srv/app/tests/TaskTechsTest.php::\App\Tests\TaskTechsTest::testCanNotAddDuplicateTaskTechs' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TasksTest' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTaskTechs' duration='16' flowId='2655']
 
-##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testTasksListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\TaskTechsTest' flowId='2655']
 
-##teamcity[testFinished name='testTasksListIsNotEmpty' duration='22' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TasksTest' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskWithoutName' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutName' flowId='17004']
+##teamcity[testStarted name='testTasksListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testTasksListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskWithoutName' duration='20' flowId='17004']
+##teamcity[testFinished name='testTasksListIsNotEmpty' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTaskWithoutPath' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutPath' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskWithoutName' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutName' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTaskWithoutPath' duration='15' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskWithoutName' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTasks' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddDuplicateTasks' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTaskWithoutPath' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddTaskWithoutPath' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTasks' duration='18' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTaskWithoutPath' duration='11' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyTask' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanAddDummyTask' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTasks' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanNotAddDuplicateTasks' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyTask' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTasks' duration='15' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTasks' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanRemoveAllTasks' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyTask' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanAddDummyTask' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTasks' duration='461' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyTask' duration='13' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TasksTest' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTasks' locationHint='php_qn:///srv/app/tests/TasksTest.php::\App\Tests\TasksTest::testCanRemoveAllTasks' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TechnologiesTest' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTasks' duration='423' flowId='2655']
 
-##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testTechnologiesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\TasksTest' flowId='2655']
 
-##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='16' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TechnologiesTest' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTechnologyWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddTechnologyWithoutMandatoryFields' flowId='17004']
+##teamcity[testStarted name='testTechnologiesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testTechnologiesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTechnologyWithoutMandatoryFields' duration='13' flowId='17004']
+##teamcity[testFinished name='testTechnologiesListIsNotEmpty' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanAddDummyTechnology' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTechnologyWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddTechnologyWithoutMandatoryFields' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyTechnology' duration='13' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTechnologyWithoutMandatoryFields' duration='8' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTechnologies' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanRemoveAllTechnologies' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanAddDummyTechnology' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTechnologies' duration='269' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyTechnology' duration='12' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddDuplicateTechnology' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTechnologies' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanRemoveAllTechnologies' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTechnology' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTechnologies' duration='184' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TechnologiesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTechnology' locationHint='php_qn:///srv/app/tests/TechnologiesTest.php::\App\Tests\TechnologiesTest::testCanNotAddDuplicateTechnology' flowId='2655']
 
-##teamcity[testSuiteStarted name='App\Tests\TesteesTest' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTechnology' duration='9' flowId='2655']
 
-##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testTesteesListIsNotEmpty' flowId='17004']
+##teamcity[testSuiteFinished name='App\Tests\TechnologiesTest' flowId='2655']
 
-##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='18' flowId='17004']
+##teamcity[testSuiteStarted name='App\Tests\TesteesTest' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddTesteeWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddTesteeWithoutMandatoryFields' flowId='17004']
+##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testTesteesListIsNotEmpty' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddTesteeWithoutMandatoryFields' duration='14' flowId='17004']
+##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='7' flowId='2655']
 
-##teamcity[testStarted name='testCanAddDummyTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanAddDummyTestee' flowId='17004']
+##teamcity[testStarted name='testCanNotAddTesteeWithoutMandatoryFields' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddTesteeWithoutMandatoryFields' flowId='2655']
 
-##teamcity[testFinished name='testCanAddDummyTestee' duration='12' flowId='17004']
+##teamcity[testFinished name='testCanNotAddTesteeWithoutMandatoryFields' duration='10' flowId='2655']
 
-##teamcity[testStarted name='testCanRemoveAllTestees' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanRemoveAllTestees' flowId='17004']
+##teamcity[testStarted name='testCanAddDummyTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanAddDummyTestee' flowId='2655']
 
-##teamcity[testFinished name='testCanRemoveAllTestees' duration='68' flowId='17004']
+##teamcity[testFinished name='testCanAddDummyTestee' duration='8' flowId='2655']
 
-##teamcity[testStarted name='testCanNotAddDuplicateTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddDuplicateTestee' flowId='17004']
+##teamcity[testStarted name='testCanRemoveAllTestees' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanRemoveAllTestees' flowId='2655']
 
-##teamcity[testFinished name='testCanNotAddDuplicateTestee' duration='14' flowId='17004']
+##teamcity[testFinished name='testCanRemoveAllTestees' duration='56' flowId='2655']
 
-##teamcity[testSuiteFinished name='App\Tests\TesteesTest' flowId='17004']
+##teamcity[testStarted name='testCanNotAddDuplicateTestee' locationHint='php_qn:///srv/app/tests/TesteesTest.php::\App\Tests\TesteesTest::testCanNotAddDuplicateTestee' flowId='2655']
 
-##teamcity[testSuiteFinished name='App Test Suite' flowId='17004']
+##teamcity[testFinished name='testCanNotAddDuplicateTestee' duration='13' flowId='2655']
+
+##teamcity[testSuiteFinished name='App\Tests\TesteesTest' flowId='2655']
+
+##teamcity[testSuiteFinished name='App Test Suite' flowId='2655']

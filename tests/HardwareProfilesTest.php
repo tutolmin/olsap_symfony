@@ -54,16 +54,21 @@ class HardwareProfilesTest extends KernelTestCase {
         self::bootKernel();
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
-//        $this->entityManager = static::getContainer()->get('Doctrine\ORM\EntityManagerInterface');
         $this->hpRepository = $this->entityManager->getRepository(HardwareProfiles::class);
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->hpManager = static::getContainer()->get(HardwareProfilesManager::class);
     }
 
-    public function testHardwareProfilesListIsNotEmpty(): void {
+    /**
+     * 
+     * @return array<HardwareProfiles>
+     */
+    public function testHardwareProfilesListIsNotEmpty(): array {
 
-        $this->assertNotEmpty($this->hpRepository->findAll());
+        $items = $this->hpRepository->findAll();
+        $this->assertNotEmpty($items);
+        return $items;
     }
 
     /**
@@ -194,7 +199,7 @@ class HardwareProfilesTest extends KernelTestCase {
     /**
      * @depends testHardwareProfilesListIsNotEmpty
      * @return void
-     */    
+       
     public function testCanRemoveUnsupportedHardwareProfile(): void {
 
         $hp = $this->hpRepository->findOneBySupported(false);
@@ -202,47 +207,39 @@ class HardwareProfilesTest extends KernelTestCase {
 
         $this->assertTrue($this->hpManager->removeHardwareProfile($hp));
     }
-            
+    */        
     /**
      * @depends testSupportedHardwareProfilesListIsNotEmpty
      * @param array<HardwareProfiles> $hw_profiles 
      * @return void
-     */    
+         
     public function testCanNotRemoveSupportedHardwareProfile(array $hw_profiles): void {
         
         $this->assertFalse($this->hpManager->removeHardwareProfile($hw_profiles[0]));
     }
-            
+    */
     /**
-     * @depends testSupportedHardwareProfilesListIsNotEmpty
-     * @param array<HardwareProfiles> $hw_profiles 
+     * 
+     * @depends testHardwareProfilesListIsNotEmpty
+     * @param array<HardwareProfiles> $hardware_profiles
      * @return void
-     */    
-    public function testCanRemoveSupportedHardwareProfileWithCascadeFlag(
-            array $hw_profiles): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
-        $hw_profile = $this->hpRepository->findOneBySupported(true);
-        $this->assertNotNull($hw_profile);
-        
-        $hp_id = $hw_profile->getId();
+     */
+    public function testCanRemoveAllHardwareProfiles($hardware_profiles): void {
 
-        $this->assertTrue($this->hpManager->removeHardwareProfile($hw_profile, true));
+        foreach ($hardware_profiles as $s) {
 
-	$oses = $this->getSupportedOperatingSystems();
-        
-        // Iterate through all the OSes
-        foreach ($oses as &$os) {
+            $item = $this->hpRepository->findOneById($s);
+            $this->assertNotNull($item);
+            $id = $item->getId();
 
-            // Try to find existing Instance type
-            $this->assertEmpty($this->itRepository->findBy(
-                            ['os' => $os->getId(), 'hw_profile' => $hp_id]));
+            $this->hpManager->removeHardwareProfile($item);
+
+            $removed_item = $this->hpRepository->findOneById($id);
+            $this->assertNull($removed_item);
         }
-         * 
-         */
-    }
+
+        $this->assertEmpty($this->itRepository->findAll());
+    }    
 
     /**
      * @depends testHardwareProfilesListIsNotEmpty
@@ -274,10 +271,7 @@ class HardwareProfilesTest extends KernelTestCase {
      * @return void
      */    
     public function testCanMakeHardwareProfileUnsupported(array $hw_profiles): void {
-        $this->markTestSkipped(
-                'Cascade delete is way to complicated with all the references',
-            );
-        /*
+
         $hp = $this->hpRepository->findOneById($hw_profiles[0]->getId());
         $this->assertNotNull($hp);
         
@@ -294,7 +288,5 @@ class HardwareProfilesTest extends KernelTestCase {
             $this->assertEmpty($this->itRepository->findBy(
                             ['os' => $os->getId(), 'hw_profile' => $hp->getId()]));
         }
-         * 
-         */
     }    
 }

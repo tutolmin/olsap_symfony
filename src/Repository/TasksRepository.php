@@ -62,13 +62,6 @@ class TasksRepository extends ServiceEntityRepository
     public function remove(Tasks $entity, bool $flush = false): void
     {
         $this->logger->debug(__METHOD__);
-/*
-        // Fetch all linked Environments and delete them
-        $envs = $entity->getEnvs();
-
-        foreach($envs as $env)
-            $this->environmentRepository->remove($env);
-*/
 
         $this->getEntityManager()->remove($entity);
 

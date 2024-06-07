@@ -10,6 +10,7 @@ use App\Entity\HardwareProfiles;
 use App\Repository\OperatingSystemsRepository;
 use App\Repository\InstanceTypesRepository;
 use App\Repository\HardwareProfilesRepository;
+use App\Service\InstanceTypesManager;
 
 class HardwareProfilesManager {
 
@@ -18,9 +19,11 @@ class HardwareProfilesManager {
     private InstanceTypesRepository $itRepository;
     private OperatingSystemsRepository $osRepository;
     private HardwareProfilesRepository $hpRepository;
+    private InstanceTypesManager $instanceTypesManager;
   
     public function __construct(
-            LoggerInterface $logger, EntityManagerInterface $em
+            LoggerInterface $logger, EntityManagerInterface $em,
+            InstanceTypesManager $instanceTypesManager
     ) {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
@@ -29,29 +32,23 @@ class HardwareProfilesManager {
         $this->itRepository = $this->entityManager->getRepository(InstanceTypes::class);
         $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
         $this->hpRepository = $this->entityManager->getRepository(HardwareProfiles::class);
+        
+        $this->instanceTypesManager = $instanceTypesManager;
     }
 
     /**
      * 
      * @param HardwareProfiles $hp
-     * @return bool
      */
-    public function removeHardwareProfile(HardwareProfiles $hp, 
-            bool $cascade = false): bool {
+    public function removeHardwareProfile(HardwareProfiles $hp): void {
 
         $this->logger->debug(__METHOD__);
 
-        $instance_types = $this->itRepository->findBy(['hw_profile' => $hp->getId()]);
-
-        if ($instance_types && !$cascade) {
-            $this->logger->debug("Can't delete corresponding InstanceTypes without cascade flag.");
-            return false;
+        foreach ($hp->getInstanceTypes() as $it) {
+            $this->instanceTypesManager->removeInstanceType($it);
         }
 
-        if ($this->hpRepository->remove($hp, true)) {
-            return true;
-        }
-        return false;
+        $this->hpRepository->remove($hp, true);
     }
 
     /**
@@ -114,7 +111,7 @@ class HardwareProfilesManager {
         $instance_types = $this->itRepository->findBy(['hw_profile' => $hp->getId()]);
 
         foreach ($instance_types as &$it) {
-            $this->itRepository->remove($it, true);
+            $this->instanceTypesManager->removeInstanceType($it);
         }
     }
 

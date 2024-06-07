@@ -11,15 +11,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\InstanceTypesManager;
 
 #[Route('/instance/types')]
 class InstanceTypesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    private InstanceTypesManager $instanceTypesManager;
+    public function __construct(LoggerInterface $logger,
+            InstanceTypesManager $instanceTypesManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        $this->instanceTypesManager = $instanceTypesManager;
     }
 
     #[Route('/', name: 'app_instance_types_index', methods: ['GET'])]
@@ -84,12 +88,12 @@ class InstanceTypesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_instance_types_delete', methods: ['POST'])]
-    public function delete(Request $request, InstanceTypes $instanceType, InstanceTypesRepository $instanceTypesRepository): Response
+    public function delete(Request $request, InstanceTypes $instanceType): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$instanceType->getId(), strval($request->request->get('_token')))) {
-            $instanceTypesRepository->remove($instanceType, true);
+            $this->instanceTypesManager->removeInstanceType($instanceType);
         }
 
         return $this->redirectToRoute('app_instance_types_index', [], Response::HTTP_SEE_OTHER);
