@@ -23,7 +23,7 @@ class TaskTechsTest extends KernelTestCase
      * 
      * @var array<string>
      */
-//    private $dummy = array('name' => 'Dummy');
+    private $dummy = array('name' => 'Dummy', 'path'=>'dummy');
 
     /**
      * 
@@ -131,4 +131,39 @@ class TaskTechsTest extends KernelTestCase
 
         $this->assertFalse($this->ttRepository->add($new_tt, true));
     }
+
+    /**
+     * 
+     * @return Tasks
+     */
+    private function addDummyTask(): Tasks {
+            
+        $task = new Tasks();
+        $task->setName($this->dummy['name']);
+        $task->setPath($this->dummy['path']);
+        $this->assertTrue($this->tasksRepository->add($task, true));
+        
+        return $task;
+    }
+    
+    /**
+     * @depends testTaskTechsListIsNotEmpty
+     * @param array<TaskTechs> $task_techs
+     * @return TaskTechs
+     */
+    public function testCanAddDummyTaskTech($task_techs): TaskTechs {
+
+        $task = $this->addDummyTask();
+
+        $tt = $task_techs[0];
+        $technology = $this->techsRepository->findOneById($tt->getTech()->getId());
+        $this->assertNotNull($technology);
+        
+        $taskTech = new TaskTechs();
+        $taskTech->setTask($task);
+        $taskTech->setTech($technology);
+        $this->assertTrue($this->ttRepository->add($taskTech, true));
+
+        return $taskTech;
+    }        
 }

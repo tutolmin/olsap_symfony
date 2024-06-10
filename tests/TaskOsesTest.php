@@ -23,7 +23,7 @@ class TaskOsesTest extends KernelTestCase
      * 
      * @var array<string>
      */
-//    private $dummy = array('name' => 'Dummy');
+    private $dummy = array('name' => 'Dummy');
 
     /**
      * 
@@ -131,4 +131,39 @@ class TaskOsesTest extends KernelTestCase
 
         $this->assertFalse($this->toRepository->add($new_to, true));
     }
+
+    /**
+     * 
+     * @return Tasks
+     */
+    private function addDummyTask(): Tasks {
+            
+        $task = new Tasks();
+        $task->setName($this->dummy['name']);
+        $task->setPath($this->dummy['path']);
+        $this->assertTrue($this->tasksRepository->add($task, true));
+        
+        return $task;
+    }
+    
+    /**
+     * @depends testTaskOsesListIsNotEmpty
+     * @param array<TaskOses> $task_oses
+     * @return TaskOses
+     */
+    public function testCanAddDummyTaskOs($task_oses): TaskOses {
+
+        $task = $this->addDummyTask();
+
+        $to = $task_oses[0];
+        $os = $this->osRepository->findOneById($to->getOs()->getId());
+        $this->assertNotNull($os);
+        
+        $taskOses = new TaskOses();
+        $taskOses->setTask($task);
+        $taskOses->setOs($os);
+        $this->assertTrue($this->toRepository->add($taskOses, true));
+
+        return $taskOses;
+    }       
 }

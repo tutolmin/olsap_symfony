@@ -6,7 +6,11 @@ use App\Repository\SessionTechsRepository;
 use App\Repository\SessionsRepository;
 use App\Repository\TechnologiesRepository;
 use App\Entity\Sessions;
+use App\Entity\SessionStatuses;
 use App\Entity\SessionTechs;
+use App\Entity\Testees;
+use App\Repository\SessionStatusesRepository;
+use App\Repository\TesteesRepository;
 use App\Entity\Technologies;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -18,13 +22,31 @@ class SessionTechsTest extends KernelTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-
+    
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy', 'hash'=>'dummy');
+    
     /**
      * 
      * @var SessionsRepository
      */
     private $sessionsRepository;
 
+    /**
+     * 
+     * @var TesteesRepository
+     */
+    private $testeesRepository;
+        
+    /**
+     * 
+     * @var SessionStatusesRepository
+     */
+    private $sessionsStatusesRepository;
+    
     /**
      * 
      * @var SessionTechsRepository
@@ -44,6 +66,8 @@ class SessionTechsTest extends KernelTestCase
         $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
         $this->sessionTechsRepository = $this->entityManager->getRepository(SessionTechs::class);
         $this->techsRepository = $this->entityManager->getRepository(Technologies::class);
+        $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
+        $this->sessionsStatusesRepository = $this->entityManager->getRepository(SessionStatuses::class);
     }
 
     /**
@@ -125,4 +149,47 @@ class SessionTechsTest extends KernelTestCase
         $session_techs = $this->sessionTechsRepository->findAll();
         $this->assertEmpty($session_techs);        
     }  
+    
+    /**
+     * 
+     * @return Sessions
+     */
+    private function addDummySession(): Sessions {
+
+        $sessionStatus = $this->sessionsStatusesRepository->findOneByStatus('New');
+        $this->assertNotNull($sessionStatus);
+
+        $testee = $this->testeesRepository->findOneBy(array());
+        $this->assertNotNull($testee);
+
+        $session = new Sessions();
+        $session->setHash($this->dummy['hash']);
+        $session->setStatus($sessionStatus);
+        $session->setTestee($testee);
+        $session->setCreatedAt(new \DateTimeImmutable('now'));
+        
+        $this->assertTrue($this->sessionsRepository->add($session, true));
+
+        return $session;
+    }
+
+    /**
+     * @depends testSessionTechsListIsNotEmpty
+     * @param array<SessionTechs> $session_techs
+     * @return SessionTechs
+     */
+    public function testCanAddDummySessionTech(array $session_techs): SessionTechs {
+
+        $session = $this->addDummySession();
+        $st = $session_techs[0];
+        $technology = $this->techsRepository->findOneById($st->getTech()->getId());
+        $this->assertNotNull($technology);
+        
+        $sessionTech = new SessionTechs();
+        $sessionTech->setSession($session);
+        $sessionTech->setTech($technology);
+        $this->assertTrue($this->sessionTechsRepository->add($sessionTech, true));
+
+        return $sessionTech;
+    }    
 }

@@ -23,7 +23,7 @@ class TaskInstanceTypesTest extends KernelTestCase
      * 
      * @var array<string>
      */
-//    private $dummy = array('name' => 'Dummy');
+    private $dummy = array('name' => 'Dummy', 'path'=>'dummy');
 
     /**
      * 
@@ -148,4 +148,39 @@ class TaskInstanceTypesTest extends KernelTestCase
 
         $this->assertFalse($this->ttRepository->add($new_tt, true));
     }
+
+    /**
+     * 
+     * @return Tasks
+     */
+    private function addDummyTask(): Tasks {
+            
+        $task = new Tasks();
+        $task->setName($this->dummy['name']);
+        $task->setPath($this->dummy['path']);
+        $this->assertTrue($this->tasksRepository->add($task, true));
+        
+        return $task;
+    }
+    
+    /**
+     * @depends testTaskInstanceTypesListIsNotEmpty
+     * @param array<TaskInstanceTypes> $task_instance_types
+     * @return TaskInstanceTypes
+     */
+    public function testCanAddDummyTaskInstanceType(array $task_instance_types): TaskInstanceTypes {
+
+        $task = $this->addDummyTask();
+        
+        $tt = $task_instance_types[0];
+        $it = $this->itRepository->findOneById($tt->getInstanceType()->getId());
+        $this->assertNotNull($it);
+        
+        $taskInstanceType = new TaskInstanceTypes();
+        $taskInstanceType->setTask($task);
+        $taskInstanceType->setInstanceType($it);
+        $this->assertTrue($this->ttRepository->add($taskInstanceType, true));
+
+        return $taskInstanceType;
+    }    
 }

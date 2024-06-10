@@ -209,6 +209,7 @@ Session Oses (App\Tests\SessionOses)
  [x] Can not add session os without operating system
  [x] Can not add duplicate session oses
  [x] Can remove all session oses
+ [x] Can add dummy session os
 
 Session Statuses (App\Tests\SessionStatuses)
  [x] Session statuses list is not empty
@@ -223,6 +224,7 @@ Session Techs (App\Tests\SessionTechs)
  [x] Can not add session tech without technology
  [x] Can not add duplicate session techs
  [x] Can remove all session techs
+ [x] Can add dummy session tech
 
 Sessions (App\Tests\Sessions)
  [x] Sessions list is not empty
@@ -238,6 +240,7 @@ Task Instance Types (App\Tests\TaskInstanceTypes)
  [x] Can not add task instance type without task
  [x] Can not add task instance type without instance type
  [x] Can not add duplicate task instance types
+ [x] Can add dummy task instance type
 
 Task Oses (App\Tests\TaskOses)
  [x] Task oses list is not empty
@@ -252,6 +255,7 @@ Task Techs (App\Tests\TaskTechs)
  [x] Can not add task tech without task
  [x] Can not add task tech without technology
  [x] Can not add duplicate task techs
+ [x] Can add dummy task tech
 
 Tasks (App\Tests\Tasks)
  [x] Tasks list is not empty

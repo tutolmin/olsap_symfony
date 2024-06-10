@@ -15,7 +15,7 @@ class TasksManager {
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
     private EnvironmentsRepository $environmentRepository;
-    private TasksRepository $environmentStatusesRepository;
+    private TasksRepository $tasksRepository;
     private EnvironmentManager $environmentManager;
     
     public function __construct(
@@ -27,7 +27,7 @@ class TasksManager {
 
         $this->entityManager = $em;
         $this->environmentRepository = $this->entityManager->getRepository(Environments::class);
-        $this->environmentStatusesRepository = $this->entityManager->getRepository(Tasks::class);
+        $this->tasksRepository = $this->entityManager->getRepository(Tasks::class);
         $this->environmentManager = $environmentManager;
     }
 
@@ -47,6 +47,6 @@ class TasksManager {
             }
         }
 
-        $this->environmentStatusesRepository->remove($task, true);
+        $this->tasksRepository->remove($task, true);
     }
 }
