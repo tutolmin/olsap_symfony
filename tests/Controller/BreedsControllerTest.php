@@ -60,10 +60,10 @@ class BreedsControllerTest extends WebTestCase
         
         foreach ($breeds as $t) {
 
-            $tech = $this->breedsRepository->findOneById($t);
-            $this->assertNotNull($tech);
+            $breed = $this->breedsRepository->findOneById($t);
+            $this->assertNotNull($breed);
 
-            $this->assertAnySelectorTextContains('table tr td', $tech->getName());
+            $this->assertAnySelectorTextContains('table tr td', $breed->getName());
         }        
     }
     
@@ -77,13 +77,13 @@ class BreedsControllerTest extends WebTestCase
         
         foreach ($breeds as $t) {
 
-            $tech = $this->breedsRepository->findOneById($t);
-            $this->assertNotNull($tech);
+            $breed = $this->breedsRepository->findOneById($t);
+            $this->assertNotNull($breed);
             
-            $this->client->request('GET', '/breeds/' . $tech->getId());
+            $this->client->request('GET', '/breeds/' . $breed->getId());
             $this->assertResponseIsSuccessful();
 
-            $this->assertAnySelectorTextContains('table tr td', $tech->getName());
+            $this->assertAnySelectorTextContains('table tr td', $breed->getName());
         }
     }
     

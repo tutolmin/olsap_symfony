@@ -8,6 +8,7 @@ use App\Entity\Addresses;
 use App\Entity\Instances;
 use App\Repository\AddressesRepository;
 use App\Repository\InstancesRepository;
+use App\Service\AddressesManager;
 
 class AddressesTest extends KernelTestCase
 {
@@ -35,12 +36,19 @@ class AddressesTest extends KernelTestCase
      */
     private $instanceRepository;
     
+    /**
+     * 
+     * @var AddressesManager
+     */
+    private $addressManager;
+        
     protected function setUp(): void {
         self::bootKernel();
 
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->addressesRepository = $this->entityManager->getRepository(Addresses::class);
         $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
+        $this->addressManager = static::getContainer()->get(AddressesManager::class);        
     }
     
     /**
@@ -129,9 +137,31 @@ class AddressesTest extends KernelTestCase
      * @param Addresses $address
      * @return void
      */
-    public function testCanRemoveDummyAddress(Addresses $address): void {
-        
-        $this->assertTrue($this->addressesRepository->remove($address, true));
-    }
             
+    /**
+     * @depends testAddressesListIsNotEmpty
+     * @param array<Addresses> $addresses
+     * @return void
+     */    
+    public function testCanRemoveAllAddresses($addresses): void {
+
+        $counter = 0;
+        foreach ($addresses as $a) {
+
+            $item = $this->addressesRepository->findOneById($a);
+            $this->assertNotNull($item);
+            $id = $item->getId();
+
+            $this->addressManager->removeAddress($item);
+
+            $removed_item = $this->addressesRepository->findOneById($id);
+            $this->assertNull($removed_item);
+              
+            if($counter++>10){
+                break;
+            }
+        }
+
+        $this->assertEmpty($this->addressesRepository->findAll());
+    }          
 }

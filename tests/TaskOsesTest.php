@@ -23,7 +23,7 @@ class TaskOsesTest extends KernelTestCase
      * 
      * @var array<string>
      */
-    private $dummy = array('name' => 'Dummy');
+    private $dummy = array('name' => 'Dummy', 'path'=>'dummy');
 
     /**
      * 

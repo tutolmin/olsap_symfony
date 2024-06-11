@@ -52,7 +52,10 @@ class AddressesRepository extends ServiceEntityRepository
     public function remove(Addresses $entity, bool $flush = false): bool
     {
         $this->logger->debug(__METHOD__);
-
+        
+        // Unbind an port from address so it can be used again
+        $entity->setPort(null);
+        
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

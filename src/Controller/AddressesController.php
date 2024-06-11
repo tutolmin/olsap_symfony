@@ -11,15 +11,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\AddressesManager;
 
 #[Route('/addresses')]
 class AddressesController extends AbstractController
 {
     private LoggerInterface $logger;
-    public function __construct(LoggerInterface $logger)
+    /**
+     * 
+     * @var AddressesManager
+     */
+    private $addressManager;
+       
+    public function __construct(LoggerInterface $logger,
+            AddressesManager $addressManager)
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
+        $this->addressManager = $addressManager;
     }
 
     #[Route('/', name: 'app_addresses_index', methods: ['GET'])]
@@ -84,12 +93,13 @@ class AddressesController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_addresses_delete', methods: ['POST'])]
-    public function delete(Request $request, Addresses $address, AddressesRepository $addressesRepository): Response
+    public function delete(Request $request, Addresses $address): Response
     {
         $this->logger->debug(__METHOD__);
 
         if ($this->isCsrfTokenValid('delete'.$address->getId(), strval($request->request->get('_token')))) {
-            $addressesRepository->remove($address, true);
+//            $addressesRepository->remove($address, true);
+            $this->addressManager->removeAddress($address);
         }
 
         return $this->redirectToRoute('app_addresses_index', [], Response::HTTP_SEE_OTHER);

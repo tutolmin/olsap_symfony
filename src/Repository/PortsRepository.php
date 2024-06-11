@@ -61,7 +61,18 @@ class PortsRepository extends ServiceEntityRepository
         }
         return true;
     }
+    
+    /**
+     * @return void
+     */
+    public function deleteAll(): void
+    {
+        $this->logger->debug(__METHOD__);
 
+        $qb = $this->createQueryBuilder('p')->delete();
+
+        $qb->getQuery()->execute();
+    }
 //    /**
 //     * @return Ports[] Returns an array of Ports objects
 //     */
