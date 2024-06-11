@@ -1,38 +1,26 @@
 
-##teamcity[testCount count='8' flowId='25514']
+##teamcity[testCount count='5' flowId='8044']
 
-##teamcity[testSuiteStarted name='App\Tests\AddressesTest' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest' flowId='25514']
+##teamcity[testSuiteStarted name='App\Tests\Controller\TesteesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest' flowId='8044']
 
-##teamcity[testStarted name='testAddressesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testAddressesListIsNotEmpty' flowId='25514']
+##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesListIsNotEmpty' flowId='8044']
 
-##teamcity[testFinished name='testAddressesListIsNotEmpty' duration='546' flowId='25514']
+##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='323' flowId='8044']
 
-##teamcity[testStarted name='testCanNotAddAddressWithoutIp' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutIp' flowId='25514']
+##teamcity[testStarted name='testTesteesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesWebPageListContainsAllRecords' flowId='8044']
 
-##teamcity[testFinished name='testCanNotAddAddressWithoutIp' duration='30' flowId='25514']
+##teamcity[testFinished name='testTesteesWebPageListContainsAllRecords' duration='281' flowId='8044']
 
-##teamcity[testStarted name='testCanNotAddAddressWithoutMac' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddAddressWithoutMac' flowId='25514']
+##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteeDisplayWebPageContainsData' flowId='8044']
 
-##teamcity[testFinished name='testCanNotAddAddressWithoutMac' duration='15' flowId='25514']
+##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='127' flowId='8044']
 
-##teamcity[testStarted name='testCanNotAddDuplicateAddresses' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanNotAddDuplicateAddresses' flowId='25514']
+##teamcity[testStarted name='testCanRemoveAllTesteesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanRemoveAllTesteesByClickingDeleteButton' flowId='8044']
 
-##teamcity[testFinished name='testCanNotAddDuplicateAddresses' duration='29' flowId='25514']
+##teamcity[testFinished name='testCanRemoveAllTesteesByClickingDeleteButton' duration='281' flowId='8044']
 
-##teamcity[testStarted name='testSpareAddressesAreAvailable' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testSpareAddressesAreAvailable' flowId='25514']
+##teamcity[testStarted name='testCanAddDummyTesteeBySubmittingForm' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanAddDummyTesteeBySubmittingForm' flowId='8044']
 
-##teamcity[testFinished name='testSpareAddressesAreAvailable' duration='267' flowId='25514']
+##teamcity[testFinished name='testCanAddDummyTesteeBySubmittingForm' duration='867' flowId='8044']
 
-##teamcity[testStarted name='testEachInstanceHasAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testEachInstanceHasAddress' flowId='25514']
-
-##teamcity[testFinished name='testEachInstanceHasAddress' duration='70' flowId='25514']
-
-##teamcity[testStarted name='testCanAddDummyAddress' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanAddDummyAddress' flowId='25514']
-
-##teamcity[testFinished name='testCanAddDummyAddress' duration='17' flowId='25514']
-
-##teamcity[testStarted name='testCanRemoveAllAddresses' locationHint='php_qn:///srv/app/tests/AddressesTest.php::\App\Tests\AddressesTest::testCanRemoveAllAddresses' flowId='25514']
-
-##teamcity[testFinished name='testCanRemoveAllAddresses' duration='71063' flowId='25514']
-
-##teamcity[testSuiteFinished name='App\Tests\AddressesTest' flowId='25514']
+##teamcity[testSuiteFinished name='App\Tests\Controller\TesteesControllerTest' flowId='8044']

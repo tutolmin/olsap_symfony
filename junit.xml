@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\AddressesTest" file="/srv/app/tests/AddressesTest.php" tests="8" assertions="4613" errors="0" warnings="0" failures="0" skipped="0" time="72.037099">
-    <testcase name="testAddressesListIsNotEmpty" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="58" assertions="1" time="0.546260"/>
-    <testcase name="testCanNotAddAddressWithoutIp" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="66" assertions="1" time="0.029665"/>
-    <testcase name="testCanNotAddAddressWithoutMac" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="74" assertions="1" time="0.014645"/>
-    <testcase name="testCanNotAddDuplicateAddresses" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="87" assertions="2" time="0.029470"/>
-    <testcase name="testSpareAddressesAreAvailable" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="103" assertions="1" time="0.267326"/>
-    <testcase name="testEachInstanceHasAddress" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="112" assertions="17" time="0.069612"/>
-    <testcase name="testCanAddDummyAddress" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="126" assertions="1" time="0.016726"/>
-    <testcase name="testCanRemoveAllAddresses" class="App\Tests\AddressesTest" classname="App.Tests.AddressesTest" file="/srv/app/tests/AddressesTest.php" line="146" assertions="4589" time="71.063394"/>
+  <testsuite name="App\Tests\Controller\TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" tests="5" assertions="33" errors="0" warnings="0" failures="0" skipped="0" time="1.879215">
+    <testcase name="testTesteesListIsNotEmpty" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="48" assertions="1" time="0.323435"/>
+    <testcase name="testTesteesWebPageListContainsAllRecords" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="61" assertions="10" time="0.281098"/>
+    <testcase name="testTesteeDisplayWebPageContainsData" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="82" assertions="12" time="0.126684"/>
+    <testcase name="testCanRemoveAllTesteesByClickingDeleteButton" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="102" assertions="9" time="0.281210"/>
+    <testcase name="testCanAddDummyTesteeBySubmittingForm" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="131" assertions="1" time="0.866788"/>
   </testsuite>
 </testsuites>

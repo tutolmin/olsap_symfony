@@ -15,7 +15,13 @@ class SessionStatusesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+        
     /**
      * 
      * @var SessionStatusesRepository
@@ -117,4 +123,28 @@ class SessionStatusesControllerTest extends WebTestCase
             $this->assertNull($removed_item);            
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummySessionStatusBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/session/statuses/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['session_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->sessionStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }    
 }

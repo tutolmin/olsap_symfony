@@ -15,7 +15,13 @@ class BreedsControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+        
     /**
      * 
      * @var BreedsRepository
@@ -116,5 +122,29 @@ class BreedsControllerTest extends WebTestCase
             $removed_item = $this->breedsRepository->findOneById($id);
             $this->assertNull($removed_item);            
         }
+    }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyBreedBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/breeds/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['breeds[name]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->breedsRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
     }
 }

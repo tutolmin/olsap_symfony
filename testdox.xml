@@ -1,27 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\AddressesTest" methodName="testAddressesListIsNotEmpty" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Addresses list is not empty" status="0" time="0.546260128" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees list is not empty" status="0" time="0.323434802" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutIp" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without ip" status="0" time="0.029664602" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesWebPageListContainsAllRecords" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees web page list contains all records" status="0" time="0.281098116" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddAddressWithoutMac" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add address without mac" status="0" time="0.014644641" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteeDisplayWebPageContainsData" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testee display web page contains data" status="0" time="0.126683597" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanNotAddDuplicateAddresses" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can not add duplicate addresses" status="0" time="0.029470452" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanRemoveAllTesteesByClickingDeleteButton" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can remove all testees by clicking delete button" status="0" time="0.281210385" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\AddressesTest" methodName="testSpareAddressesAreAvailable" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Spare addresses are available" status="0" time="0.26732613" size="-1" groups="default">
-    <group name="default"/>
-  </test>
-  <test className="App\Tests\AddressesTest" methodName="testEachInstanceHasAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Each instance has address" status="0" time="0.069612433" size="-1" groups="default">
-    <group name="default"/>
-  </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanAddDummyAddress" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can add dummy address" status="0" time="0.016726373" size="-1" groups="default">
-    <group name="default"/>
-  </test>
-  <test className="App\Tests\AddressesTest" methodName="testCanRemoveAllAddresses" prettifiedClassName="Addresses (App\Tests\Addresses)" prettifiedMethodName="Can remove all addresses" status="0" time="71.063394377" size="-1" groups="default">
+  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanAddDummyTesteeBySubmittingForm" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can add dummy testee by submitting form" status="0" time="0.866788365" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

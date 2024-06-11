@@ -15,7 +15,13 @@ class InstanceStatusesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+        
     /**
      * 
      * @var InstanceStatusesRepository
@@ -116,5 +122,29 @@ class InstanceStatusesControllerTest extends WebTestCase
             $removed_item = $this->instanceStatusesRepository->findOneById($id);
             $this->assertNull($removed_item);           
         }
+    }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyInstanceStatusBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/instance/statuses/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['instance_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->instanceStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
     }
 }

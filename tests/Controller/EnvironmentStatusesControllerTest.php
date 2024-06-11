@@ -15,7 +15,13 @@ class EnvironmentStatusesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+      
     /**
      * 
      * @var EnvironmentStatusesRepository
@@ -116,5 +122,29 @@ class EnvironmentStatusesControllerTest extends WebTestCase
             $removed_item = $this->environmentStatusesRepository->findOneById($id);
             $this->assertNull($removed_item);            
         }
+    }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyEnvironmentStatusBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/environment/statuses/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['environment_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->environmentStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
     }
 }

@@ -15,7 +15,13 @@ class TesteesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('email'=>'dummy@dummy.net', 'oauth_token'=>'dummy');
+       
     /**
      * 
      * @var TesteesRepository
@@ -117,4 +123,31 @@ class TesteesControllerTest extends WebTestCase
             $this->assertNull($removed_testee);            
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyTesteeBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/testees/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['testees[email]'] = $this->dummy['email'];
+        $form['testees[oauth_token]'] = $this->dummy['oauth_token'];
+        $registeredAt = new \DateTimeImmutable('now');
+        $form['testees[registered_at]'] = $registeredAt->format('Y-m-d H:i:s');
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->testeesRepository->findOneByEmail($this->dummy['email']);
+        $this->assertNotNull($item);        
+    }   
 }

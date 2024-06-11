@@ -15,7 +15,13 @@ class DomainsControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+     
     /**
      * 
      * @var DomainsRepository
@@ -116,5 +122,29 @@ class DomainsControllerTest extends WebTestCase
             $removed_item = $this->domainsRepository->findOneById($id);
             $this->assertNull($removed_item);            
         }
+    }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyDomainBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/domains/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['domains[name]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->domainsRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
     }
 }

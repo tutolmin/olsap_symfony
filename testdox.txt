@@ -1,10 +1,7 @@
-Addresses (App\Tests\Addresses)
- [x] Addresses list is not empty
- [x] Can not add address without ip
- [x] Can not add address without mac
- [x] Can not add duplicate addresses
- [x] Spare addresses are available
- [x] Each instance has address
- [x] Can add dummy address
- [x] Can remove all addresses
+ees Controller (App\Tests\Controller\eesController)
+ [x] Testees list is not empty
+ [x] Testees web page list contains all records
+ [x] Testee display web page contains data
+ [x] Can remove all testees by clicking delete button
+ [x] Can add dummy testee by submitting form
 

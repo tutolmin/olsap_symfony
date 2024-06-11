@@ -6,6 +6,7 @@ use App\Entity\Testees;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 
 class TesteesType extends AbstractType
 {
@@ -14,7 +15,9 @@ class TesteesType extends AbstractType
         $builder
             ->add('email')
             ->add('oauth_token')
-//            ->add('registered_at')
+            ->add('registered_at', DateTimeType::class, [
+                'widget' => 'single_text'
+            ])
         ;
     }
 
