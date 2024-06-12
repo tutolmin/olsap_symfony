@@ -1,0 +1,2367 @@
+[33mcommit 249c6fd401584840a2087fff9182ca1d00509626[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 11 18:02:15 2024 +0300
+
+    Few form tests
+
+[33mcommit aadcd9ae4b216f88d965f66559cca6c62f42524d[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 11 14:47:14 2024 +0300
+
+    Addresses/Ports controller tests
+
+[33mcommit c46b645274a4fa72ec990e3737df2c012b218a93[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 10 17:25:59 2024 +0300
+
+    minor tests for coverage
+
+[33mcommit dd7d67802a19fc0ef655dca8854bb5d888d52168[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jun 7 17:06:43 2024 +0300
+
+    tests for Breeds and OSes
+
+[33mcommit 3acf779e629fbf6d6efb4b81e2c44a0c7e224807[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 4 17:26:43 2024 +0300
+
+    InstanceTypes controller tests
+
+[33mcommit 65b9e5d5a3f0c8ca984041035febcfc531dd404f[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 4 14:47:11 2024 +0300
+
+    Instance statuses tests and Messenger dummy test
+
+[33mcommit 1ba7e5f12c957dfe2197807231a7012966952855[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 3 17:03:08 2024 +0300
+
+    Minor change for instance remove routine
+
+[33mcommit 08045ac3aec351270e35094aa4b18a181c627e66[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 3 16:51:16 2024 +0300
+
+    Instances Controller tests
+
+[33mcommit 1c3c06074817135aa31f4bf85ebe62e05dc830b6[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 3 14:29:47 2024 +0300
+
+    Basic Instances tests
+
+[33mcommit 4d34f622ccaa2c402f38d63b05499c2bcf5cd3b5[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri May 31 14:00:33 2024 +0300
+
+    Tasks tests update
+
+[33mcommit fff82a463132947f33b8d1c54bc5cfd170de7e97[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri May 31 13:15:54 2024 +0300
+
+    Environments and Statuses tests
+
+[33mcommit 0a8472ffd2e239ae5263b72bc89eb3072fbec811[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu May 30 17:29:43 2024 +0300
+
+    Few more controller tests
+
+[33mcommit 441c59d38ae4de1aa81085f8f3501839e4691712[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu May 30 14:44:44 2024 +0300
+
+    Basic tests for Sessions/Testees controllers
+
+[33mcommit 941c18e82f93589ace36bae8a8f16b8306b25780[m[33m ([m[1;31morigin/testees[m[33m, [m[1;32mtestees[m[33m)[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Tue May 28 22:08:24 2024 +0300
+
+    Testees tests and service
+
+[33mcommit 11061244b47531d68de3672e744933f56102c2c2[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue May 28 17:27:38 2024 +0300
+
+    remove methods in services
+
+[33mcommit bf3f1650034151bac8c6695b29c7af7430b8a3fe[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri May 24 17:19:32 2024 +0300
+
+    Few more tests
+
+[33mcommit 4ce1ccd29b82fbe4a26e9727bb3d99725ef98aa2[m[33m ([m[1;31morigin/lucky[m[33m, [m[1;32mlucky[m[33m)[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed May 22 23:03:51 2024 +0300
+
+    Lucky web test case
+
+[33mcommit f942a43fd8d4d3743492820f4c77b33bebc2412e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed May 22 14:57:23 2024 +0300
+
+    Basic Tasks and Testees tests
+
+[33mcommit 763d30c5a08266f7205128cb833fdcefd345ceec[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue May 21 18:06:56 2024 +0300
+
+    few more simple tests
+
+[33mcommit 88dbd7d9da0030d6355e25148660a743c4d1b39a[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sun May 19 04:14:56 2024 +0300
+
+    few more unit tests
+
+[33mcommit 37e203feeebd5f621c3963269ae74b2b9ae2aa40[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri May 17 17:14:35 2024 +0300
+
+    few test fixes
+
+[33mcommit 48d64e4475181afa79729601cf99e8b0c9503cfb[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri May 17 15:35:39 2024 +0300
+
+    Session related and Environment related data export and fixtures load
+
+[33mcommit 09f66be95bdabde0683fa01f27dbea4ed26a75f9[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu May 16 16:34:47 2024 +0300
+
+    Export everything Envs and Sessions related tables
+
+[33mcommit d8b908ad204b3e606d6a508c2159a0e40a25351b[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu May 16 15:27:31 2024 +0300
+
+    All Tasks related tables export and fixture load
+
+[33mcommit 9e024cc82dcbe17e9e68b86613044200d4101a7a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu May 16 13:58:55 2024 +0300
+
+    Task and related export and fixture load
+
+[33mcommit 6aa2b5243965c5de60a145004e81f3e31e321d94[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed May 15 15:00:28 2024 +0300
+
+    Fixtures for OperatingSystems/Technologies
+    Import routine for LXC objects into Instances
+    Fixture for Instances using import
+
+[33mcommit 76af3cebf53e93edd19f2caaeac558d6996e3ff6[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue May 14 15:08:13 2024 +0300
+
+    Debug messenger messages with command using custom serializer
+
+[33mcommit 1fc5a208cd19d92d7dbf5cc79662fea86787de78[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Apr 26 22:25:14 2024 +0300
+
+    Address/Port fixtures load success wit h256M
+
+[33mcommit f392574d3472820b5954c74bfc8f0d82b960b4dc[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 26 18:03:43 2024 +0300
+
+    few minor fixes
+
+[33mcommit 865d8272eabb968a9d14ce05299aa018ad62637f[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 26 17:26:50 2024 +0300
+
+    normalizer/denormalizer for Addresses
+
+[33mcommit ba68475eb0a05b1e7dbab86a1544549202072799[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Apr 26 07:04:57 2024 +0300
+
+    address/port export changes
+
+[33mcommit df26e50f6303da33c0edf1f61f432b843cc581d1[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Apr 26 00:50:13 2024 +0300
+
+    Testees datetime fix
+
+[33mcommit c1d1ba36b65d95ee4d6767cd20237c23da270945[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Apr 25 17:27:22 2024 +0300
+
+    Exporting to CSV and more fixtures
+
+[33mcommit ab8e3f6b44df3d46ffd206a21cecd53a8be3ac58[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Thu Apr 25 07:36:21 2024 +0300
+
+    Few more CSV export commands
+
+[33mcommit 938e4c8f450a5c2a5f62aa6991e9e1c9a2d71e60[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Apr 24 18:09:55 2024 +0300
+
+    Export in CSV via serializer
+
+[33mcommit 1dd56d792edb7b8862855a9f3e50f951470c40d3[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Apr 24 11:13:16 2024 +0300
+
+    Add basic Statuses tests
+
+[33mcommit a733f27086a69c129780fc12b13836ce622cf23a[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Apr 24 10:45:03 2024 +0300
+
+    inject srvices properly into tests
+
+[33mcommit 7f400947a786e3044d8c0d348d56e17f408b55fb[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Apr 24 03:10:49 2024 +0300
+
+    instance statuses tests
+
+[33mcommit 6cb8becadc9aa0d4f0d4c528c58c270c18dc44d1[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Apr 24 02:44:56 2024 +0300
+
+    cascading delete is too difficult
+
+[33mcommit 4b4367f3673d81c4dd1786d13f87e2e2b54b2522[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Apr 23 20:44:00 2024 +0300
+
+    Deleted InstanceTypesPopulateCommand
+    Introduced cascade delete button for OS/HW
+
+[33mcommit 2b854150238cd5df9ba1fe758b553c448d7467fa[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Apr 22 18:30:23 2024 +0300
+
+    OS/HW profiles tests
+
+[33mcommit 9fc596fff2a02b938211e77bb893cc64073d4285[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sun Apr 21 01:54:04 2024 +0300
+
+    Tests update to delete excepions
+
+[33mcommit 7f74ecde45fdf172341ccb8ec7c8db25f28e137a[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sun Apr 21 01:39:14 2024 +0300
+
+    OS addition leads to Instance type creatioin if necessary
+
+[33mcommit f0d96119bbb8008de36747450acbf526a59a5746[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Apr 19 21:31:14 2024 +0300
+
+    Repos should catch exceptions while tests will get return value for add operation
+
+[33mcommit 66d67759f1b9c2ab6c0609e1b60517c6ce6ad640[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 19 16:04:31 2024 +0300
+
+    quick index fix for OS
+
+[33mcommit af73f321962b814455222374e3632d1e31706fa7[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 19 16:01:39 2024 +0300
+
+    basic tests for Breeds/HW/OS/Domains/Techs
+
+[33mcommit 82f99f6d2534df415e3b93ebcec21bc6716d48f4[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Apr 18 17:14:22 2024 +0300
+
+    Some simple basic tests
+
+[33mcommit 6b898807de33fb0a4a2b64dad87c1097201dd082[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Apr 17 16:19:49 2024 +0300
+
+    Data fixtures for tests
+
+[33mcommit 4691e6615ca14cb38b041b4e010d336e9cd8076f[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Apr 16 18:11:41 2024 +0300
+
+    PHPUnit
+
+[33mcommit d390bd820315e120a1f8ea8294173a165fa686dc[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Apr 15 16:49:54 2024 +0300
+
+    PHPstan max level compiance
+
+[33mcommit bd796a5f4edbbce3e6382011a26ffdf3f5f4fc93[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Apr 15 14:19:50 2024 +0300
+
+    PHPstan upto level8
+
+[33mcommit 83dd3d2cb76c91666ff82325387fefbb7662b29c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 12 15:45:20 2024 +0300
+
+    work towards phpstan level 8
+
+[33mcommit f1607331496c906f9d940cb73423e1d3d357923b[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Apr 11 17:38:04 2024 +0300
+
+    phpstan comply to seventh level
+
+[33mcommit fd9c44152890efaa73661f61bb8f5a5f7a37509c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Apr 11 16:11:34 2024 +0300
+
+    final fixes for phpstan level six
+
+[33mcommit acc453b04ab15a6d165ac46463dfbf95ce2a4802[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Apr 10 18:48:01 2024 +0300
+
+    immense work to comply to phpstan 6th level
+
+[33mcommit 7ad97bbace36609ce5a2caeabf4b92bcd067e60f[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Mon Apr 8 22:13:38 2024 +0300
+
+    lntval vs strval for ids in messaages
+
+[33mcommit e0cf0b53f1a985b43909d600206c5e78643c02c4[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Mon Apr 8 21:51:54 2024 +0300
+
+    composer update
+
+[33mcommit b7bf48bc37845218bd0b14cd1bcd866639fd9405[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 5 18:12:21 2024 +0300
+
+    few minor fixes for event handlers
+
+[33mcommit 3b95bee87cb72df4e7998d11fed0accd4a5054c9[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Apr 5 17:15:45 2024 +0300
+
+    phpstan upto 6th level plus refactoring
+
+[33mcommit 5dc5b41c793c6398dadb7bcb8b986fc1ef740ad3[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Apr 4 16:04:14 2024 +0300
+
+    PHPstan cleanup upto fifth level
+    
+    docker-compose exec php vendor/bin/phpstan analyse src -l5 --memory-limit 256M -c myPHPStanConfig.neon
+
+[33mcommit 8e52ccad75099113925d1ab56203338250273809[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Apr 2 16:30:28 2024 +0300
+
+    composer update
+
+[33mcommit 7a66203605740969076caedef3425c9e4066cd37[m
+Merge: 27ae76a 8a357c2
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Apr 2 16:29:37 2024 +0300
+
+    Merge branch 'main' of github.com:tutolmin/olsap_symfony into main
+
+[33mcommit 27ae76a9cb4c7747a7add8be13c08add64ebd26c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Apr 2 16:27:05 2024 +0300
+
+    Env action bus updates
+
+[33mcommit 8a357c2b1555368e730d15cd638f9128874914a6[m
+Merge: 911e8e6 8b72b3e
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Mar 29 21:37:50 2024 +0300
+
+    Merge branch 'main' of github.com:tutolmin/olsap_symfony into main
+
+[33mcommit 911e8e60a428bf94fa02bead3180e47465189109[m[33m ([m[1;31morigin/ports[m[33m)[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Mar 29 21:31:02 2024 +0300
+
+    docker-compose changes?
+
+[33mcommit 8b72b3eba7469b66b70c05c1cc5f6f9b386aed86[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Mar 29 11:50:11 2024 +0300
+
+    Handle unique constraint exceptions
+
+[33mcommit 09db2d7aa10de1b5a97d63cf11b4c9708405e503[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Mar 28 15:26:49 2024 +0300
+
+    show env hash on instance page
+
+[33mcommit 4267c1cef304450c300cab0d59df448e22b21748[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Mar 28 15:24:37 2024 +0300
+
+    show env hash on instance index
+
+[33mcommit 2073452d6e4be7dff3234865cf675439a0dc8844[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 30 15:09:39 2024 +0300
+
+    AWX job details command
+
+[33mcommit b79d8b302229e9aebfbc43de86830be008d80ed1[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jan 26 16:19:33 2024 +0300
+
+    fixes
+
+[33mcommit b4a908761814eacf5d73416244beb09dc5db32c7[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Jan 24 21:28:40 2024 +0000
+
+    AWX web hooks
+
+[33mcommit 60288a5193bca62baa68d594813184493a75c9aa[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 23 18:33:05 2024 +0300
+
+    AWX web hook controller
+
+[33mcommit 9ceb48360006f1dc7ed47e763b29c2bfeee53a74[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 23 12:36:58 2024 +0300
+
+    Index page for dummy user
+
+[33mcommit 752e065905327a86e58773c06b7f3d57527f8b69[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jan 19 18:47:30 2024 +0300
+
+    work in progress with AWX buses
+
+[33mcommit 79339a8e0f15ea868d7c2939e324651c6dcff48a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Jan 18 14:50:40 2024 +0300
+
+    AWX2
+
+[33mcommit b867d1d1ca49a55acde0b79c8fddc323d3df6ba8[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 16 14:30:12 2024 +0300
+
+    AWX
+
+[33mcommit 06269039c60360719c3dde8faa628d88e9a8628e[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sun Jan 14 07:45:07 2024 +0000
+
+    converted hashes to links for easy navigation
+
+[33mcommit 6e31a323db746fcf64862ec11128700b4ef12895[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Jan 12 21:48:36 2024 +0000
+
+    Basic session management
+
+[33mcommit 08b3387d2bebe23bf31bbd8438a1125f50404193[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jan 12 18:45:14 2024 +0300
+
+    hash fix
+
+[33mcommit 508d82fa88d2fff5afb7bc9d478421fd1a4a5c51[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Thu Jan 11 22:28:52 2024 +0000
+
+    Environment deletion functions
+
+[33mcommit 0583b20471df86a23899388a5197d3427c8a60bd[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Jan 10 21:23:55 2024 +0000
+
+    instances:spare
+    
+    command to create spare instances for each instance type
+
+[33mcommit 1d4b84139ea173829ce344bb3bb7dccbd9867263[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Jan 10 05:57:51 2024 +0300
+
+    Env creation command, form and controller
+
+[33mcommit f345af3487bffdf0d21218edc9471bcbc1c384a8[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Jan 10 02:34:09 2024 +0300
+
+    Few LXC service fixes
+
+[33mcommit 26ffb0498dddde38cfd5ce9ed138a4e98b0c8d9a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Jan 10 02:17:30 2024 +0300
+
+    LXC service optimization
+
+[33mcommit 2edf50723f3d52f29092ecdd5af314fb57c61b07[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 9 16:45:22 2024 +0300
+
+    Work in progress
+
+[33mcommit 97bce65a640dd2a50ebad3589e8dbd4790ec73ef[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jan 9 01:39:38 2024 +0300
+
+    Few more buses, work in progress
+
+[33mcommit 59b526ed9eda6b56d5aec9f765e524512edbafad[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sun Jan 7 17:02:18 2024 +0300
+
+    Environment creation command
+
+[33mcommit e6150ffe333b68a153568021a39029db352d259f[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sat Jan 6 22:04:49 2024 +0000
+
+    Instances creation feature
+    
+    It is now possible to create a new Instances via Admin interface
+
+[33mcommit 61eeb67aa52e24ac34d757cf9e60761d58e85297[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Jan 5 22:46:26 2024 +0000
+
+    Few status changing fixes
+
+[33mcommit 7f86130d4c2cd28f951f1d413c50fc6e5f768462[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sun Dec 31 01:05:45 2023 +0300
+
+    Refactoring Instances/Objects
+
+[33mcommit c7b53dc3ddb844f836a4acc937858e78ad8e3865[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sat Dec 30 00:36:23 2023 +0300
+
+    delete instances funcions
+
+[33mcommit 8fa635e2e9c13dadc3ad66a8a4260107dc6660fa[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Dec 29 06:49:53 2023 +0000
+
+    Instance sync fix
+
+[33mcommit 80c91b426165d47f620fa3f9602ad1b52a5f261c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Dec 28 18:46:46 2023 +0300
+
+    Instance sync command
+
+[33mcommit 2d3580b5f27670692fd71bf4c230b57c4d0da87e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Dec 27 18:54:23 2023 +0300
+
+    LXC operations changes
+
+[33mcommit 07beb53e4abecc3303035121e68e3b8b0c923a29[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Dec 26 16:04:56 2023 +0300
+
+    Two message buses for LXC operations/events
+
+[33mcommit eb7f407a966534b6002b4c0b7bed9bf568c9ef69[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Dec 25 15:21:48 2023 +0300
+
+    Fix some IDE warnings
+
+[33mcommit f6795cbd94734685ecfdaf15048e49cdf68a91cf[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Dec 25 14:17:21 2023 +0300
+
+    Show orphans for LXC and instances
+
+[33mcommit 78961677b127fd77096bec94ee10bbe82acb482b[m
+Merge: f4cf340 20c3d18
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Dec 25 11:19:19 2023 +0300
+
+    Merge branch 'exception' into main
+
+[33mcommit f4cf340fa7cd5f880d33dec6024343d8a9935816[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Dec 25 11:08:59 2023 +0300
+
+    fixes
+
+[33mcommit 20c3d185a44730f3626903980112249aeb0424fb[m[33m ([m[1;31morigin/exception[m[33m)[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Sat Dec 23 09:22:47 2023 +0000
+
+    exception handling
+
+[33mcommit d7937f4fa6abe21b46c617f75453c8fb881a986b[m
+Merge: d41fe90 068ce1b
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Fri Dec 22 08:36:14 2023 +0000
+
+    Merge branch 'main' of github.com:tutolmin/olsap_symfony into main
+
+[33mcommit 068ce1b8a76b24ba039e3dea530d39fce96d6db7[m
+Merge: 1a23d4c 2e71a76
+Author: Andrey Tutolmin <45759479+tutolmin@users.noreply.github.com>
+Date:   Fri Mar 10 14:45:25 2023 +0300
+
+    Merge pull request #1 from tutolmin/env_id
+    
+    Env
+
+[33mcommit 2e71a76eb9d9a452010cbadef9b399a5fa9dd069[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Mar 10 14:42:18 2023 +0300
+
+    Show env ID in console
+
+[33mcommit d41fe90f30d7432a3480b4197cd76c1d082f45db[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Mon Feb 6 11:09:27 2023 +0000
+
+    changes
+
+[33mcommit 2c4f1fbd1d9f55c827b4e16aa5aa38ff5aec97e8[m[33m ([m[1;31morigin/symfony62[m[33m)[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Feb 2 00:06:37 2023 +0300
+
+    Upgraded to symfony62
+
+[33mcommit 1c18f2c97b9f0e8494dbb9007fa8d1b601482c24[m[33m ([m[1;31morigin/message_queues[m[33m, [m[1;32mmessage_queues[m[33m)[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Dec 28 11:56:44 2022 +0300
+
+    new dump with sequences
+
+[33mcommit 3b242ae213907b7da1ea511089abfbb12ba25712[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Dec 21 20:17:34 2022 +0300
+
+    php version changes 8.1.7
+
+[33mcommit c621b68a7f89621b738cb07328a0cbe5a14a75b2[m
+Author: Andrei Tutolmin <andrei@olsap.tutolmin.com>
+Date:   Wed Dec 21 14:10:01 2022 +0000
+
+    8.1.7
+
+[33mcommit 265ab6ddc82a3efc41febe55ab13ab9b31f84920[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Oct 31 17:24:36 2022 +0300
+
+    different message buses
+
+[33mcommit d362c3a3207d449f7f9d0de78942b53f126eca1b[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Oct 28 16:10:03 2022 +0300
+
+    ORM annotations in sync with DB schema
+
+[33mcommit e9e7578f873c1f228e20e08d6aeeecd945452e43[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Oct 27 09:16:39 2022 +0300
+
+    status descriptions, composer update
+
+[33mcommit 1a23d4c981a03402e0216da51a4da458be7a1964[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Oct 24 16:53:12 2022 +0300
+
+    stop/start LXD instances on demand
+
+[33mcommit 7e1acea76963db23e29392bded13c718f9a63578[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Oct 17 19:46:39 2022 +0300
+
+    proactive spare env deployment
+
+[33mcommit 2c7f66f4ca9a13555a1177bae276b473ab77a734[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Oct 17 15:19:16 2022 +0300
+
+    automatic environment deployment
+
+[33mcommit 92dba6f122762362287203f4e6af871e5ced538c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Oct 11 14:06:58 2022 +0300
+
+    set status of the session
+
+[33mcommit 6bd91e351cb7453e14f1ef3375c256894fc64311[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Oct 10 16:45:06 2022 +0300
+
+    Some wording
+
+[33mcommit e64199adeddc7ee12c826f277ae387afed8be42a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Oct 6 19:22:52 2022 +0300
+
+    records AWX jobs ids. shows number of task for each technology
+
+[33mcommit 99603e88a99cb68ffec8bdf858e96852c48d390d[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Oct 5 16:53:37 2022 +0300
+
+    verification flag and timestamps
+
+[33mcommit 3ed7782d48902e21cb6533daa436ee40d3100a4e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Sep 30 14:43:01 2022 +0300
+
+    fast ssh connection string
+
+[33mcommit 02a5d723d62515e89b2e1dfca215c0533e353c8e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Sep 29 17:02:39 2022 +0300
+
+    Mikrotik MAC workaround
+
+[33mcommit e978070a3d18cc51fd7594c9e99e907fc8849cad[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Sep 28 17:02:48 2022 +0300
+
+    Automatic allocation of precreated environments
+
+[33mcommit d35fe7d1e78ac656c056d453793e33563c09775c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Sep 26 17:33:59 2022 +0300
+
+    More logging and some fixes
+
+[33mcommit 71dbf7cf47ea5cdb4663707ff44ddc02a5b0963d[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sat Sep 24 12:03:24 2022 +0300
+
+    More logging
+
+[33mcommit 54e69dd4460e733801b5569958631f93f5e145f9[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Sep 21 20:06:26 2022 +0300
+
+    Delete task and remove corresponding environments
+
+[33mcommit 8c595077afb575829056123294b02d2b73d1ffc4[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Sep 20 08:07:18 2022 +0300
+
+    Instance Start/Stop/Restart controller
+
+[33mcommit 6807bcba8cf613af5192ed18cfe414d2e94ef200[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Sep 16 10:34:50 2022 +0300
+
+    Skip/Verify buttons and methods for Env
+
+[33mcommit 33e19d549687d25ba73ec534e0784e6773eebe58[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Sep 15 21:38:27 2022 +0300
+
+    Starting session, message handler, clean up, fixes
+
+[33mcommit c55945cdc4c72200ec6cc8f68c9f56f76ff721da[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sat Sep 10 11:46:14 2022 +0300
+
+    Status changes and redirects
+
+[33mcommit c4b7060e9a519fd15d450a789a339f22ff2f921e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Sep 9 19:54:50 2022 +0300
+
+    Start/Finish buttons for session and Verify for envs
+
+[33mcommit 8f6cacb021e563ac6317b2378dd752248a469e52[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Sep 9 18:54:03 2022 +0300
+
+    Two user space pages: session and env, accessible by hash
+
+[33mcommit 756997e5017877ca251aeaf1905fe9e83847def7[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Wed Sep 7 19:11:54 2022 +0300
+
+    Major AWX commands such as deployEnv, listProjects/Templates
+
+[33mcommit 3fe43eac8998e2f242ef5977acc19879b0fdd40b[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Sep 1 15:41:44 2022 +0300
+
+    Many changes to the commands due to transfer operations to Services methods
+
+[33mcommit c4c60443c5243e0c20106b2cc4c167bca24a3ad7[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sat Aug 27 22:10:11 2022 +0300
+
+    Simple LXC command wrappers
+
+[33mcommit fa5db1123eb78b363ee3c0ac6898f8e0381b816e[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sat Aug 27 13:17:38 2022 +0300
+
+    New services AWX/LXC, HW supported flag and command updates
+
+[33mcommit 505ba02e62bccb5347e0d6f708f59d137bd869a6[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Aug 19 22:10:33 2022 +0300
+
+    Session manager service and few dummy commands
+
+[33mcommit 9c3826b380e4768ebed6cf7b96c9ca69b01ef21c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Aug 12 19:45:59 2022 +0300
+
+    Addresses and Ports entities and few commands
+
+[33mcommit 66854c7c0411228bcfe5bb2e92969216b762454a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Aug 8 00:14:07 2022 +0300
+
+    Run AWX playbooks from Symfony command to connect to LXD container
+
+[33mcommit 06f18f1e5063f2eeba880b08fdf00f54a64d830a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jul 29 19:51:04 2022 +0300
+
+    Instance commands and LXC handler action
+
+[33mcommit 032f4a4fb928b75d3a056bf37982222e37ec9155[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jul 19 17:04:14 2022 +0300
+
+    Few simple LXC commands
+
+[33mcommit 610ba60821cec887b9eef253e7cd916b2b6739fd[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jul 8 10:10:28 2022 +0300
+
+    LxcOperation message handler for messages like: {create,bind,delete}Instance
+
+[33mcommit a2f57f0f83dbe3271fcf797d1b669c2aebd40b7c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Fri Jul 8 00:25:11 2022 +0300
+
+    Instances and Environments CRUD, Unique mappings
+
+[33mcommit 7235a5d24878cedeb8e9350a14c528da9f45d59a[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jul 5 09:44:45 2022 +0300
+
+    InstanceTypes CRUD, OS sessions counter, populate InstanceType command update
+
+[33mcommit 2b4023605cbe894f0e3fe4a080a5258b1c71f03c[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jul 5 01:00:00 2022 +0300
+
+    Sessions CRUD with auxiliary tables
+
+[33mcommit a16b2e4e4f5b246d4f78a4ee6e98ac62ee35d4df[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sun Jul 3 21:11:06 2022 +0300
+
+    Tasks CRUD
+
+[33mcommit d12d76dafe5659ef7c23ece8dd1183e771ee69fb[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Sun Jul 3 18:16:15 2022 +0300
+
+    InstanceType population command and few CRUDs for various statuses
+
+[33mcommit a36eeba171443447373697a9de0b750cb6834975[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Thu Jun 30 15:22:49 2022 +0300
+
+    Breeds table instead of simple array field.
+
+[33mcommit 2901b2501b4ec39bfd79fac02661b3fef0b2db56[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 21 10:04:42 2022 +0300
+
+    Few simple forms
+
+[33mcommit 60e40dbb9f20eb378b8fa711900abb751833ea36[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 20 15:44:54 2022 +0300
+
+    DB schema complete and migrated
+
+[33mcommit d3744dce96e7ff535c0cb1f19a56fd81790e0dff[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Tue Jun 14 23:14:45 2022 +0300
+
+    Database schema implementation, phase 1
+
+[33mcommit 4da1a7003e0128c68d73bd31d4d9c95bb754a112[m
+Author: Andrei Tutolmin <tutolmin@gmail.com>
+Date:   Mon Jun 13 14:34:05 2022 +0300
+
+    adminer, profiler and messenger
+
+[33mcommit d3d40c44856f3fdcac15906ccaa91680e855e8f6[m
+Author: root <root@vaio.ttl.lcl>
+Date:   Fri Jun 10 20:18:59 2022 +0300
+
+    OK, lets start coding
+
+[33mcommit 33deaeb484afceb32efb63aa63fe701edb15bff2[m
+Author: Douglas Silva <doug.hs@protonmail.ch>
+Date:   Sat Mar 12 18:28:49 2022 -0300
+
+    Remove iconv workaround
+
+[33mcommit f97d1ce163e398f24f3fe19d0ca8ef00bdd22273[m
+Author: Dezső BICZÓ <mxr576@users.noreply.github.com>
+Date:   Tue Mar 15 10:40:02 2022 +0100
+
+    Typo fix
+
+[33mcommit 8de8127aba915545588fd16c13a0cff3706ee18d[m
+Author: Michael Fitzpatrick <fitz@michaelfitzpatrick.co.uk>
+Date:   Sun Mar 6 22:29:31 2022 +0000
+
+    Check for for files in subdirectories of migrations/
+
+[33mcommit fcff96b69136c0acf731084cb64d32ad32b92733[m
+Author: Kévin Dunglas <kevin@dunglas.fr>
+Date:   Wed Dec 22 12:06:26 2021 +0100
+
+    docs(xdebug): fix host on Linux
+
+[33mcommit 8a9b8c8e263c5c74f0408b0511bb6c0105ef54fd[m
+Author: Pieter Eggink <info@kniggesoftware.nl>
+Date:   Wed Dec 15 15:58:20 2021 +0100
+
+    fix: multistage alias from lower to uppercase
+
+[33mcommit 28624621ca484a1f293f19a1710830d982d59636[m
+Author: Martin Güthler <relthyg@users.noreply.github.com>
+Date:   Fri Dec 10 19:00:31 2021 +0100
+
+    feat: make HTTP ports variable (#195)
+
+[33mcommit 49e28e8c8659f7a2273a087bc004041d52bfa838[m
+Author: Kévin Dunglas <kevin@dunglas.fr>
+Date:   Fri Dec 3 10:37:02 2021 +0100
+
+    feat: upgrade to PHP 8.1 (#193)
+
+[33mcommit aba3961ff2f1468bddcf2f556145413b2abd019b[m
+Author: Rowan Parker <rowanparker@gmail.com>
+Date:   Mon Nov 22 03:12:28 2021 +1100
+
+    Sync Docker and composer PHP versions in new projects (#190)
+
+[33mcommit 1364979af6ce230a4b1b97756841211aff0d3ab8[m
+Author: Manuele Menozzi <manuele.menozzi@gmail.com>
+Date:   Fri Nov 5 22:36:11 2021 +0100
+
+    Do not run composer install in prod (#188)
+
+[33mcommit d4c3b50e682386b5fc82898d8e237bd8ef5701ad[m
+Author: Loïc Vernet <vernet.loic@gmail.com>
+Date:   Thu Oct 28 12:27:40 2021 +0200
+
+    doc: precision about makefile (#185)
+
+[33mcommit 97ae6ef106b8ee46040ff9bb72bf8ab6fa1c2489[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Mon Oct 25 20:41:11 2021 +0200
+
+    docs: Add new extra services availables (#183)
+
+[33mcommit 3d7f6c4ce2692fc3af5a1e1072de6ba329020d01[m
+Author: Kévin Dunglas <kevin@dunglas.fr>
+Date:   Wed Oct 13 22:28:04 2021 +0200
+
+    fix: prevent installing another Mercure hub (#181)
+
+[33mcommit 2e31a39382e75306e3ec02d7c24ff3136978aed9[m
+Author: Loïc Vernet <vernet.loic@gmail.com>
+Date:   Thu Oct 7 13:48:05 2021 +0200
+
+    Added a Makefile (#180)
+
+[33mcommit 1d4f00d64fd0f097814ac14ecc933dd57cb38747[m
+Author: darthf1 <darthf1@users.noreply.github.com>
+Date:   Mon Sep 6 17:00:16 2021 +0200
+
+    fix: set php-fpm process_control_timeout (#176)
+    
+    Copied from https://github.com/api-platform/api-platform/pull/1997
+
+[33mcommit 9d192405e001d802a9cd65dffdb5758345f660fa[m
+Author: Romain Monteil <monteil.romain@gmail.com>
+Date:   Wed Jun 23 10:36:31 2021 +0200
+
+    docs: Improve Xdebug configuration documentation with PHPStorm (#162)
+
+[33mcommit a1a9ceb2549fef4042720a90439578bb7be48818[m
+Author: Abdouni Abdelkarim <abdounikarim@gmail.com>
+Date:   Fri Jun 18 18:47:46 2021 +0200
+
+    docs: add a section for xdebug in PHPStorm (#160)
+
+[33mcommit 35519d553bb340ff3a6536bfd3ad8e2e42148bea[m
+Author: Abdouni Abdelkarim <abdounikarim@gmail.com>
+Date:   Fri Jun 18 18:47:07 2021 +0200
+
+    docs: fix typo in xdebug.md (#159)
+
+[33mcommit 9e559b7556ae061dfb7c794cdb18c4517c46fb2f[m
+Author: Jacob Dreesen <jacob@hdreesen.de>
+Date:   Fri Jun 18 16:17:56 2021 +0200
+
+    Fix typos in the docs (#158)
+
+[33mcommit 33dd118a61ada847fb73967ab9e084e32281456e[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Jun 18 14:40:11 2021 +0200
+
+    fix: download the correct skeleton in the Dockerfile (#157)
+
+[33mcommit 74d44b8cc01a24e22649ecc2d742e3c18dd99b1f[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Jun 18 14:39:55 2021 +0200
+
+    docs: explain how to use SF Docker with an existing project (#156)
+
+[33mcommit cd0c78438775c616d239c1085d578e6b188209d5[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 17 17:02:46 2021 +0200
+
+    docs: add docker-compose build (#155)
+
+[33mcommit bbf416c14907fe6cd16262a0f4b9c2a4f5fb8ca0[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 14 15:15:01 2021 +0200
+
+    fix: healthcheck (#154)
+
+[33mcommit c99c188211a8b30857dee430f0625cb5a558ae46[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 14 15:12:18 2021 +0200
+
+    feat: allow to install the website skeleton (#152)
+    
+    * feat: allow to install the website skeleton
+    
+    * wip
+    
+    * wip
+    
+    * cleanup
+    
+    * revert rename in docs
+    
+    * cleanup
+
+[33mcommit a0192fdac473618dd7c515f2e30dfbb3ff89c2aa[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 10 23:08:58 2021 +0200
+
+    docs: remove Messenger from the list of supported packages (#151)
+
+[33mcommit 1942af61f2b79f2b5dc7a880838bf70bf7d01002[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 10 23:08:42 2021 +0200
+
+    feat: compat with MercureBundle 0.3 (#128)
+    
+    * feat: compat with MercureBundle 0.3
+    
+    * fix: review
+
+[33mcommit 24b9c904ea48773e92c38f4471ed2716eb5f8994[m
+Author: Michael Käfer <michael.kaefer1@gmx.at>
+Date:   Thu Jun 3 15:01:10 2021 +0200
+
+    Fix comment and add another comment (#148)
+    
+    This comment seems to got wrong over time:
+    
+    The config made sense first: https://github.com/dunglas/symfony-docker/commit/df6286b2e91213100ff36dae25c8fac6384ef804#diff-e45e45baeda1c1e73482975a664062aa56f20c03dd9d64a827aba57775bed0d3
+    
+    Then the config became obsolete: https://github.com/dunglas/symfony-docker/commit/4e258087dc131307e84f95a5020db553259eb063
+    
+    Then the config became a (I think wrong) comment: https://github.com/dunglas/symfony-docker/commit/0167334910d6f7c56c9dc9d68c9773dd35207ef3#diff-e45e45baeda1c1e73482975a664062aa56f20c03dd9d64a827aba57775bed0d3
+    
+    I don't use Mac so I don't know but maybe the whole comment could be removed completely since the `cached` option was introduced.
+
+[33mcommit 0abc295461d2b03ea807e638282ea748e368cb39[m
+Author: Torben Brümmer <torben@jicodo.com>
+Date:   Fri May 7 10:46:43 2021 +0200
+
+    feat: update apcu version to 5.1.20 (#140)
+
+[33mcommit 994a8a2fa3caa8b97f12f204a91565552f1e5327[m
+Author: Torben Brümmer <torben@jicodo.com>
+Date:   Fri May 7 10:44:45 2021 +0200
+
+    feat: update xdebug version to 3.0.4 (#141)
+
+[33mcommit 7f46e721a3a06b3840b88ba20ef76fa8e83132ab[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Apr 20 23:00:54 2021 +0200
+
+    fix: add Vulcain back (#133)
+
+[33mcommit 73d29b5723e17078256a0102910e492393c31a2a[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Apr 20 00:30:48 2021 +0200
+
+    fix: ensure that the latest version of Mercure and Vulcain are always used. (#131)
+    
+    * fix: ensure that the latest version of Mercure and Vulcain are always used
+    
+    * fix: temporarily disable Vulcain
+
+[33mcommit 2749ad62e31c0e2d7c6d4e42edea238a6ff09de7[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Apr 4 00:58:21 2021 +0200
+
+    fix: issue preventing Caddy to start (#125)
+    
+    * fix: issue preventing Caddy to start
+    
+    * ci: remove counter-productive Docker Compose cache action
+
+[33mcommit 1a286f124fad0f2250850e91a6f7e1e88ddd6da9[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Mar 28 18:05:06 2021 +0200
+
+    fix: backport latest changes made in API Platform (#121)
+
+[33mcommit 2e9d893de248cf271dbced7e22046ead09dc86f9[m
+Merge: 9a27dd1 4b283dd
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Mar 28 18:01:43 2021 +0200
+
+    Merge pull request #120 from dunglas/revert
+    
+    Revert #118 and #119
+
+[33mcommit 4b283dd253811792b008a6546c37147237d5031f[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Mar 28 17:51:27 2021 +0200
+
+    Revert "fix: error message : run: adapting config using caddyfile: /etc/caddy/Caddyfile:5: unrecognized global option: servers (#118)"
+    
+    This reverts commit 9a27dd102f93f02617f9bf1f143d547afdcc54cd.
+
+[33mcommit 4ec07393d92c53bdeec0477c6b4c99cdade10101[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Mar 28 17:51:13 2021 +0200
+
+    Revert "feat: Try to create empty database at startup, in order to avoid the error message : "The database is not up or not reachable" if database doesnt exist. (#119)"
+    
+    This reverts commit cb77bd16f39a0ae8230c1efc8a811416e966af3d.
+
+[33mcommit 9a27dd102f93f02617f9bf1f143d547afdcc54cd[m
+Author: Guillaume Ponty <34276317+gponty@users.noreply.github.com>
+Date:   Thu Mar 25 17:21:19 2021 +0100
+
+    fix: error message : run: adapting config using caddyfile: /etc/caddy/Caddyfile:5: unrecognized global option: servers (#118)
+
+[33mcommit cb77bd16f39a0ae8230c1efc8a811416e966af3d[m
+Author: Guillaume Ponty <34276317+gponty@users.noreply.github.com>
+Date:   Thu Mar 25 17:20:06 2021 +0100
+
+    feat: Try to create empty database at startup, in order to avoid the error message : "The database is not up or not reachable" if database doesnt exist. (#119)
+
+[33mcommit 4bc3a1a45262472140b6e1818117886355e4465d[m
+Author: Torben Brümmer <torben@jicodo.com>
+Date:   Thu Mar 18 17:06:21 2021 +0100
+
+    feat: Add expose_php = Off (#116)
+
+[33mcommit d6f3e7653fbbfbb0847850b6627cb08004850e7e[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Feb 9 10:42:17 2021 +0100
+
+    feat: synchronize with API Platform's definition (#113)
+
+[33mcommit 235f6f8edcf2a25b28b68087f83cd3ed2be49220[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Feb 8 15:41:03 2021 +0100
+
+    Create FUNDING.yml
+
+[33mcommit 5feeabc3ac77d96c6ff466b40cb51030040ad5c9[m
+Author: Emanuele Panzeri <thePanz@users.noreply.github.com>
+Date:   Fri Jan 22 17:15:50 2021 +0100
+
+    fix: do not check DB availability if code errors (#110)
+    
+    * fix: do not check DB availability if code errors
+    
+    Do not wait for the DB to be available if there are other errors blocking the access to it.
+    
+    * Update docker-entrypoint.sh
+    
+    Co-authored-by: Kévin Dunglas <dunglas@gmail.com>
+
+[33mcommit 3445aac4c6610ffef99b5aced2fb97ff34d91f23[m
+Author: Emanuele Panzeri <thePanz@users.noreply.github.com>
+Date:   Thu Jan 14 22:02:29 2021 +0100
+
+    fix: properly check for DB environment (#107)
+    
+    Make sure the `DATABASE_URL` is checked without comments :)
+
+[33mcommit 80dc4fbed5c047bc9bf3247fc12f7bc0d1e2bcc8[m
+Author: Emanuele Panzeri <thePanz@users.noreply.github.com>
+Date:   Wed Jan 13 12:58:42 2021 +0100
+
+    fix: experimental_http3 moved under server.protocol to fix deprecation notice (#105)
+
+[33mcommit 6cbb384d8b772454a5a1d39770d42446dff4f9d4[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Jan 5 13:50:12 2021 +0100
+
+    fix: ensure bin/console is always executable (#100)
+
+[33mcommit 0727ddf2bcf5c92926e5dc4601851edce62bad08[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jan 4 20:21:12 2021 +0100
+
+    fix: .editorconfig xml definition (#99)
+
+[33mcommit e319f769235f3ea6734ba10438d71319d2f290b0[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jan 4 20:05:15 2021 +0100
+
+    feat: add .editorconfig and fix indent of some files (#98)
+
+[33mcommit 5ea2920e2bf9ffae89abdc80c80558becf2fe7b4[m
+Merge: 3612057 07c4602
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Mon Dec 21 20:53:53 2020 +0100
+
+    Merge pull request #96 from GaryPEGEOT/patch-3
+    
+    feat: Update doc for Xdebug 3
+
+[33mcommit 07c4602412c9b32e11605e1469532345ba0f8dea[m
+Author: Gary PEGEOT <garypegeot@gmail.com>
+Date:   Mon Dec 21 17:42:57 2020 +0000
+
+    Typo fix
+
+[33mcommit 542d37e21740c5733f8f06806411123906f9b4e8[m
+Author: Gary PEGEOT <garypegeot@gmail.com>
+Date:   Fri Dec 18 11:16:37 2020 +0000
+
+    Update doc for Xdebug 3
+
+[33mcommit 3612057ac0890e21fd97ebd43bc0e58241b16db8[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Dec 8 21:26:49 2020 +0100
+
+    docs: add HTTP/3 to README.md
+
+[33mcommit 8efe315479755076cfc6ad737ce5300486d9a9f8[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Dec 8 21:19:31 2020 +0100
+
+    feat: upgrade to PHP 8 (#92)
+    
+    * feat: upgrade to PHP 8
+    
+    * fix: preload
+
+[33mcommit 4837e7f335730cf2298dd3011d6bec4db1d2d6ef[m
+Merge: 7cb8668 2d9638f
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Fri Dec 4 21:34:06 2020 +0100
+
+    Merge pull request #93 from dunglas/ssl-issue
+    
+    fix: update SSL trust issue
+
+[33mcommit 2d9638f3ae81f9305a7b92b3fa5f5f76eb253a47[m
+Author: Maxime Hélias <maximehelias16@gmail.com>
+Date:   Mon Nov 16 13:49:16 2020 +0100
+
+    fix: update SSL trust issue
+
+[33mcommit 7cb8668cb20f8c19086d128392dc487e997e806f[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Dec 2 00:29:12 2020 +0100
+
+     feat: add built-in Mercure support  (#89)
+    
+    * feat: Mercure support
+    
+    * feat: add native Mercure support
+    
+    * improvements
+    
+    * feat: add Mercure UI
+    
+    * fix: typo
+    
+    * finish
+
+[33mcommit 05d7a189deb872ac18c65782263d2581b60b82c3[m
+Merge: 8cd3d48 be50d14
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Mon Nov 30 21:52:40 2020 +0100
+
+    Merge pull request #86 from thePanz/patch-1
+    
+    docs: Mention HTTPs redirect fix in documentation
+
+[33mcommit be50d1457c5c391b1d612b621b03ad999cdba7db[m
+Author: Emanuele Panzeri <thePanz@users.noreply.github.com>
+Date:   Mon Nov 30 09:50:30 2020 +0100
+
+    Update troubleshooting.md
+
+[33mcommit 8cd3d48a3a658fb2befbc40b1ce6b61f8ccd08ce[m
+Merge: 2ea0c47 991d8e2
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Nov 25 22:30:25 2020 +0100
+
+    Merge pull request #90 from dunglas/composer2
+    
+    Deprecated option on composer v2
+
+[33mcommit 991d8e290d6764dd9acc5ba3e3324cfff9d0d5ac[m
+Author: Maxime Hélias <maximehelias16@gmail.com>
+Date:   Wed Nov 25 19:21:52 2020 +0100
+
+    fix: deprecated option on composer v2
+
+[33mcommit 2ea0c474c32e056515ae9772629d337f004546a7[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Nov 25 00:38:08 2020 +0100
+
+    docs: symfony/orm-pack now installs a Postgres service
+
+[33mcommit e3643b282347ece1ef3ca2f78ca9cf24bd712aeb[m
+Merge: a6a1f77 af76729
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 24 23:38:25 2020 +0100
+
+    Merge pull request #88 from dunglas/fix/database-url
+    
+    fix: DATABASE_URL env var
+
+[33mcommit af76729281b02b52182ec9016e2e46fce3cd5b75[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 24 22:23:16 2020 +0100
+
+    fix: DATABASE_URL env var
+
+[33mcommit a6a1f7711ed42e53ecc866b275bcd798569cd613[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 24 22:10:43 2020 +0100
+
+    feat: add support for Doctrine ORM (#74)
+    
+    * feat: add support for Doctrine ORM
+    
+    * feat: wait for DB and handle migrations if necessary
+    
+    * feat: automatically use the MARIADB password
+    
+    * fix cs
+    
+    * feat: switch to postgres
+    
+    * feat: switch to Postgres
+
+[33mcommit 24e5a85265c65dc808f9445d59a531fbabfc062b[m
+Merge: cff7fe6 d0c514e
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 17 09:48:21 2020 +0100
+
+    Merge pull request #87 from fabpot/global-flex-removal
+    
+    Remove global Flex as it's not needed anymore with Composer 2
+
+[33mcommit d0c514e4f117ba9e2bf6371aa47b23565a2d7341[m
+Author: Fabien Potencier <fabien@potencier.org>
+Date:   Tue Nov 17 09:35:09 2020 +0100
+
+    Remove global Flex as it's not needed with Composer 2
+
+[33mcommit 7f019b76c08341bcf609f4743d2e6a5507f9b3ea[m
+Author: Emanuele Panzeri <thePanz@users.noreply.github.com>
+Date:   Mon Nov 16 15:17:00 2020 +0100
+
+    Mention HTTPs redirect fix in documentation
+
+[33mcommit cff7fe63f7dad61669baf765ab6d967090073dbb[m
+Merge: b0a1609 41287fd
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Nov 14 11:16:49 2020 +0100
+
+    Merge pull request #84 from kevinmartins25/patch-1
+    
+    oversight 'docker-compose'
+
+[33mcommit 41287fd7b6e2db7900391dfbd643c2f8ec0437a0[m
+Author: kevinmartins25 <kevin.martins@me.com>
+Date:   Sat Nov 14 00:21:40 2020 +0100
+
+    oversight 'docker-compose'
+
+[33mcommit b0a160912d92bd8887ab8d25d049be6e50329507[m
+Merge: 442e8f7 0a72956
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 10 12:30:07 2020 +0100
+
+    Merge pull request #83 from dunglas/fix/no-suggest
+    
+    fix: remove use of deprecated Composer flag --no-suggest
+
+[33mcommit 0a72956444991922b52bb5fc78d9c580dd813d6a[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 10 12:23:44 2020 +0100
+
+    fix: remove use of deprecated Composer flag --no-suggest
+
+[33mcommit 442e8f70f773cc8f68ff740fa664bd74c006ef3c[m
+Merge: 163a2d2 c40453e
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Nov 9 10:06:26 2020 +0100
+
+    Merge pull request #81 from dunglas/fix/comment
+    
+    fix: a comment in docker-compose.override.yml
+
+[33mcommit c40453e18b3636a19561b7d812af0486035a7897[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Nov 9 10:00:42 2020 +0100
+
+    fix: a comment in docker-compose.override.yml
+
+[33mcommit 163a2d268cbb1104784692f4103fc2bafa7f1f17[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 28 09:34:55 2020 +0100
+
+    Fix typo in production.md
+
+[33mcommit eba2207c6eb0540e6c94d06b1fd1e5b8ef6ced77[m
+Merge: c507a1a 88a7208
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 21 16:46:13 2020 +0200
+
+    Merge pull request #77 from dunglas/docs
+    
+    docs: refactor and add a doc explaining how to deploy in prod
+
+[33mcommit c507a1a10bcb37400cb2c1c8ef098075e912428b[m
+Merge: cc03d09 1b9d78f
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 21 11:35:17 2020 +0200
+
+    Merge pull request #78 from dunglas/fix/static-files
+    
+    fix: static files server configuration
+
+[33mcommit 1b9d78f463bdbd3834058aef1bd317707890b2ae[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 21 11:30:28 2020 +0200
+
+    fix: static files server configuration
+
+[33mcommit 88a7208acfab79b168a92cf63287779a95afc0d2[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Oct 16 13:08:20 2020 +0200
+
+    docs: refactor and add a doc explaining how to deploy in prod
+
+[33mcommit cc03d09fa6a75fae260e02f030196679199afb89[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Oct 19 15:30:43 2020 +0200
+
+    feat: Use Caddy server (#75)
+    
+    * feat: Use Caddy server
+    
+    * cs
+
+[33mcommit 087d65f032897baec356a302535a144dffaeef43[m
+Merge: 07e4f08 d9554a6
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 15 07:54:52 2020 +0200
+
+    Merge pull request #73 from dunglas/feat/prod
+    
+     feat: split dev and prod docker-compose files
+
+[33mcommit d9554a6f008200c47c9aa546ddd96c01a261f543[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 14 23:03:21 2020 +0200
+
+    feat: split dev and prod docker-compose files
+
+[33mcommit 07e4f08f31ee25c4b0c9a0359766a4df34172eda[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 14 22:44:46 2020 +0200
+
+    feat: switch to GitHub Actions (#72)
+    
+    * feat: switch to GitHub Actions
+    
+    * feat: add docker compose cache
+    
+    * docs: add GH actions badge
+
+[33mcommit 745c22b323189779be53c626456113683825ef7e[m
+Merge: 7ab611a 0167334
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 14 22:20:38 2020 +0200
+
+    Merge pull request #71 from dunglas/feat/preloading
+    
+    feat: add support for PHP preloading
+
+[33mcommit 0167334910d6f7c56c9dc9d68c9773dd35207ef3[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Oct 14 22:14:41 2020 +0200
+
+    feat: add support for PHP preloading
+
+[33mcommit 7ab611a755f8d08a2873ff0303396ff700b8cd53[m
+Merge: 1395930 293cc27
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Jun 20 13:23:18 2020 +0200
+
+    Merge pull request #62 from maxhelias/docs
+    
+    Add docs for customize server name
+
+[33mcommit 139593083df55ee6330f3e4aeadedd66e0d53dad[m
+Author: maxhelias <maximehelias16@gmail.com>
+Date:   Sat Jun 20 01:27:16 2020 +0200
+
+    Adapt installation for dump env var
+
+[33mcommit 967f3f270afada310fb37d1033d325ea5ff80865[m
+Author: maxhelias <maximehelias16@gmail.com>
+Date:   Fri Jun 19 19:37:13 2020 +0200
+
+    Missing install for prod mode
+
+[33mcommit 293cc27ca4eca3afbf3b281e116730987fd467fb[m
+Author: maxhelias <maximehelias16@gmail.com>
+Date:   Thu Jun 11 19:46:15 2020 +0200
+
+    Add docs for customize server name
+
+[33mcommit eaf5639e411c0de38cfc96c40612bb959d7facae[m
+Merge: ea55aa6 e19d3ce
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Thu Jun 11 19:25:11 2020 +0200
+
+    Merge pull request #58 from loftninjas/master
+    
+    Customize Server Name + Chrome/Brave SSL Fix
+
+[33mcommit ea55aa6283ff6d879ade661e6445593d396168ad[m
+Merge: 60f87ee 8c6bd7d
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Tue May 12 15:52:50 2020 +0200
+
+    Merge pull request #60 from maxhelias/missing-proxy-option
+    
+    Add missing proxy options
+
+[33mcommit 8c6bd7d7d8d4f43d1000242b9bcced1327b917bc[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Tue May 12 15:09:20 2020 +0200
+
+    Add missing proxy options
+
+[33mcommit e19d3cea29644903f4b34337aec7ae8bc77ef074[m
+Author: Ben Meynell <ben@loftninjas.com>
+Date:   Fri Apr 10 19:05:11 2020 -0400
+
+    added ability to define custom server name; fixed chrome/brave ssl issues using subjectAltName
+
+[33mcommit 60f87eed188616a0898ec28f707157a96417dd04[m
+Merge: 05cff5d ded0500
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Dec 21 00:11:45 2019 +0100
+
+    Merge pull request #57 from maxhelias/upgrade-docker
+    
+    Fix --with-libzip
+
+[33mcommit ded05004d7207c38d8568c50de0b5c7512f9db76[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Fri Dec 20 23:18:01 2019 +0100
+
+    Fix --with-libzip
+
+[33mcommit 05cff5dd7b039b2bbc95cf3d7350b57ff0b4953e[m
+Merge: af583bc 59b584a
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Fri Dec 20 18:13:44 2019 +0100
+
+    Merge pull request #51 from dunglas/upgrade-docker
+    
+    Upgrade Dockerfile
+
+[33mcommit 59b584a576f99c6cb6019cc12e7d43d1b18ef8db[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Tue Dec 3 21:00:08 2019 +0100
+
+    Upgrade Dockerfile
+
+[33mcommit af583bc6fd0f804c42682b94d0061adb761345b5[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Sep 30 23:15:09 2019 +0200
+
+    Add Max to credits section
+
+[33mcommit e8be05dfd54ca9d32c3b897312a0cb4363c8b1d8[m
+Merge: f14a977 c012047
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sun Sep 29 18:46:12 2019 +0200
+
+    Merge pull request #53 from itsazzad/patch-1
+    
+    Solution to issues/52 - Fix install with Symfony version
+
+[33mcommit c012047a8f0451f9adf0d6714b2a1ed8017ca648[m
+Author: Sazzad Hossain (Tushar) Khan <itsazzad@gmail.com>
+Date:   Sun Sep 29 21:52:54 2019 +0600
+
+    Solution to issues/52
+    
+    https://github.com/dunglas/symfony-docker/issues/52
+    Solved
+
+[33mcommit 1f61df9cf008f4f7bd3f1c5a9f4ea415174dcd66[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 27 12:03:08 2019 +0200
+
+    Upgrade Dockerfile
+
+[33mcommit f14a97774781e277d2f33996a039e426ba7e446e[m
+Merge: 4e521ca 36c7735
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Apr 28 07:03:55 2019 +0100
+
+    Merge pull request #49 from dunglas/flex-docker
+    
+    Add the extra.symfony.docker flag
+
+[33mcommit 36c77352819e8697946cd90f91eb2c978e52f03d[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Apr 27 19:18:26 2019 +0100
+
+    Add the extra.symfony.docker flag
+
+[33mcommit 4e521cac9e0603b784994d05dfcd8e7cba47513c[m
+Merge: d5cc265 024100d
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Apr 27 19:05:36 2019 +0100
+
+    Merge pull request #46 from jevillard/fix-warning-intl
+    
+    Removing the warning for the PHP Intl extension
+
+[33mcommit 024100d97a3a834dc7e78401781bf108ad59627c[m
+Author: Jérémy Villard <villard.je@gmail.com>
+Date:   Tue Mar 19 16:18:11 2019 +0100
+
+    remove warning intl
+
+[33mcommit d5cc26520a156731110e5c3cf486d2aa056ff5e9[m
+Merge: 028f1e0 c236516
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Fri Jan 25 15:06:42 2019 +0100
+
+    Merge pull request #44 from gmsantos/patch-1
+    
+    Simplify docker-compose command with override file
+
+[33mcommit 028f1e05a91b4ff47d32a29ff942980c5668573d[m
+Merge: af96d4b 154b211
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Jan 25 14:48:43 2019 +0100
+
+    Merge pull request #43 from dunglas/replace-prestissimo
+    
+    Replace Prestissimo by Flex
+
+[33mcommit c2365164e7e417a4f57bc843e80d5c84e3f4a17f[m
+Author: Gabriel Machado <gabriel.ms1@hotmail.com>
+Date:   Fri Jan 25 11:15:50 2019 -0200
+
+    simplify docker-compose command with override file
+
+[33mcommit 154b2113a0d19743118973cb822650fd05ed62ac[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Jan 25 09:53:06 2019 +0100
+
+    Replace Prestissimo by Flex
+
+[33mcommit af96d4b76effc55ffbe5741cc724ab9b27c70479[m
+Merge: e89cb01 06b8926
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jan 17 13:54:04 2019 +0100
+
+    Merge pull request #42 from FabienSalles/patch-1
+    
+    fix service name in docker-compose command
+
+[33mcommit 06b892657fce57ead1d58dfe14f49b2741d2f6c8[m
+Author: Fabien Salles <blacked19@gmail.com>
+Date:   Thu Jan 17 12:55:51 2019 +0100
+
+    fix service name in docker-compose command
+    
+    Replace the service name in docker-compose command with the correct one
+
+[33mcommit e89cb01d939533065ca2a709b44ecc7dd89f9b24[m
+Merge: 8172034 bd3d8c6
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jan 7 00:12:15 2019 +0100
+
+    Merge pull request #40 from maxhelias/php-init
+    
+    Use php.ini depending on env
+
+[33mcommit 8172034260bc11f6dc22b737d8244000b8594eb7[m
+Merge: 5f2d1f3 09f4ff6
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jan 7 00:10:49 2019 +0100
+
+    Merge pull request #41 from maxhelias/travis
+    
+    Adding Travis integration
+
+[33mcommit 09f4ff68cd53f0d7f92387a10d9e10d0fc252e91[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Nov 10 18:03:46 2018 +0100
+
+    Adding Travis integration
+
+[33mcommit bd3d8c654238c701fc944816cd7313694b38bfe9[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sun Jan 6 13:48:24 2019 +0100
+
+    Use php.ini depending on env
+
+[33mcommit 5f2d1f3a2d57142251d5b2c0fa9c339b8e9a3bf2[m
+Merge: 8632436 1d1ec89
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sun Nov 25 15:54:20 2018 +0100
+
+    Merge pull request #39 from maxhelias/fix-readme
+    
+    Fixed xdebug guide
+
+[33mcommit 1d1ec89a7fd4672b864cdaf2a8bcf2aeaa75de50[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Mon Nov 19 09:59:44 2018 +0100
+
+    Fixed xdebug guide
+
+[33mcommit 8632436724093c5c8196f9f7b94acd6628be234b[m
+Author: Alberto Avon <alberto.avon@gmail.com>
+Date:   Tue Nov 6 17:31:09 2018 +0100
+
+    Updated readme to include a note about linux users (#37)
+    
+    * Updated readme to include a note about linux users
+    
+    * Fixed typo and moved section before Credits
+    
+    * Updated section title
+    
+    * Use title case in the title
+
+[33mcommit ccda89026039412c957e2db25d61e9db85943fc4[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Nov 6 10:55:50 2018 +0100
+
+    Improve README.md
+
+[33mcommit 66ff768285e4548e70fbe680fc1231c47764649e[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Fri Oct 26 14:00:12 2018 +0200
+
+    Add missing depends_on section
+
+[33mcommit bfab752c5d79df44257830401d67f94c5d214d30[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 25 14:40:54 2018 +0200
+
+    Fix reverse proxy
+
+[33mcommit 29e0646a9b1988d8311388848bb1aed48ee7ba43[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 25 14:31:05 2018 +0200
+
+    Prevent some warnings related to env vars
+
+[33mcommit d4e0a54415ad2588e7c5cc6964dfc8a295a68067[m
+Merge: 1152e3a bee938e
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Oct 13 09:09:24 2018 +0200
+
+    Merge pull request #36 from maxhelias/bump
+    
+    Bump version
+
+[33mcommit 1152e3a6ad258e646b28f612b1d0fa7e483415c0[m
+Merge: 76aaa44 e5e170d
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Oct 13 09:09:02 2018 +0200
+
+    Merge pull request #35 from maxhelias/xdebug
+    
+    Add documentation for debugging
+
+[33mcommit bee938e8186287702f96705573bf926204340c05[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Oct 13 02:13:23 2018 +0200
+
+    Bump version
+
+[33mcommit e5e170dc71a55196140d218f3b54678433b7d5ab[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Oct 13 02:08:57 2018 +0200
+
+    Add documentation for debugging
+
+[33mcommit 76aaa4429392f5ab885a352f758a1ccbaee1d37c[m
+Merge: 8ba7db5 4f21421
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Aug 25 23:46:35 2018 +0200
+
+    Merge pull request #33 from maxhelias/fix-dc
+    
+    Fix docker-compose after all dockerfile in one
+
+[33mcommit 4f21421d5f8e923db2c627bf17e2de304d70e32c[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Sat Aug 25 22:33:44 2018 +0200
+
+    Fix docker-compose after all dockerfile in one
+
+[33mcommit 8ba7db5320e5b0fc455611b5d9677fdcfc57ae85[m
+Merge: 29cc31c deb4cb0
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Aug 23 15:39:06 2018 +0200
+
+    Merge pull request #31 from borNfreee/patch-1
+    
+    Fix typo
+
+[33mcommit deb4cb0d36cdb99a34443df23790a31d778ae644[m
+Author: Maks Rafalko <b0rn@list.ru>
+Date:   Thu Aug 23 16:38:25 2018 +0300
+
+    Fix typo
+
+[33mcommit 29cc31c3ded0d08264148728a91ca28389c31dd5[m
+Author: Mateusz Sip <mateusz.sip@gmail.com>
+Date:   Thu Aug 23 15:36:55 2018 +0200
+
+    Basic readme telling how to select symfony version (#23)
+    
+    * Basic readme telling how to select symfony version
+    
+    * Describe installing symfony with custom stability
+    
+    * Update README.md
+
+[33mcommit 3ee156cb97e2ebd72f44f258b8b7f61614fe9803[m
+Merge: d16662b 6d77b4b
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Aug 23 15:27:52 2018 +0200
+
+    Merge pull request #26 from maxhelias/all-in-one-dockerfile
+    
+    Gather all Dockerfile in one
+
+[33mcommit d16662b102f407b7e57589a2d9f06bc3dd9b6d1d[m
+Merge: 49a016a 08cba38
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Aug 23 15:27:14 2018 +0200
+
+    Merge pull request #30 from maxhelias/fix/stability
+    
+    Fix the STABILITY env
+
+[33mcommit 08cba3870f1be2f2e3ed1a76137416abb9811f78[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Thu Aug 23 15:17:35 2018 +0200
+
+    Fix the STABILITY env
+
+[33mcommit 6d77b4b788177c75f46697aa40cbc64a32cc1f7a[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Mon Jun 25 00:21:05 2018 +0200
+
+    Gather all Dockerfile in one
+
+[33mcommit 49a016af2cc497b51ec0201b4b6b1311a8c5f809[m
+Merge: 6a34874 4e25808
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Jun 30 12:23:48 2018 +0200
+
+    Merge pull request #27 from scaule/scaule-patch-cached
+    
+    Performance tuning for app volume
+
+[33mcommit 4e258087dc131307e84f95a5020db553259eb063[m
+Author: Caule Simon <caule.simon@gmail.com>
+Date:   Sat Jun 30 12:20:46 2018 +0200
+
+    Performance tuning for app volume
+    
+    Use cached strategy on volume  ( the host’s view is authoritative (permit delays before updates on the host appear in the container) to optimize container performance.
+    
+    Docker documentation on this : https://docs.docker.com/docker-for-mac/osxfs-caching/#tuning-with-consistent-cached-and-delegated-configurations
+
+[33mcommit 6a348748e767a9c4df238edee612da577b23dc82[m
+Merge: d8dc263 53a2f01
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Jun 26 09:14:16 2018 +0200
+
+    Merge pull request #21 from maxhelias/proxy-nginx
+    
+    Reverse proxy with nginx
+
+[33mcommit d8dc263f999725e04dd6d1dc6142e0d8e1714ee4[m
+Merge: f7a01ec eac9be8
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Jun 26 09:12:47 2018 +0200
+
+    Merge pull request #24 from ajardin/master
+    
+    Improve OPcache settings
+
+[33mcommit f7a01ec27dc719ea42771222a16e616d605fb355[m
+Merge: 34f3d70 0822852
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Jun 26 09:11:48 2018 +0200
+
+    Merge pull request #25 from kejwmen/fix/pass-stability-to-dockerfile
+    
+    Pass stability from env variable to dockerfile
+
+[33mcommit 08228525ebd83ea1f85e7de0d01098d3e38b09c6[m
+Author: Mateusz Sip <mateusz.sip@gmail.com>
+Date:   Mon Jun 25 21:33:53 2018 +0200
+
+    Pass stability from env variable
+
+[33mcommit eac9be81fae61e37b436cfa20bff83fd965b4696[m
+Author: Alexandre Jardin <info@ajardin.fr>
+Date:   Mon Jun 25 10:09:10 2018 +0200
+
+    Improve OPcache settings
+
+[33mcommit 34f3d704f343a770992c5f27842622959389cb77[m
+Merge: d9541dc bd86544
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sun Jun 24 16:27:23 2018 +0200
+
+    Merge pull request #22 from kejwmen/fix/installing-specific-version
+    
+    Use SYMFONY_VERSION as a variable name everywhere to avoid mistakes
+
+[33mcommit bd86544c3ebba44ae85d200b29b245e45ba44527[m
+Author: Mateusz Sip <mateusz.sip@gmail.com>
+Date:   Sat Jun 23 21:58:44 2018 +0200
+
+    Use SYMFONY_VERSION as a variable name everywhere to avoid mistakes
+
+[33mcommit 53a2f01ac5e64b39b3408780c7316598d7f5aee4[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Thu Jun 21 23:20:17 2018 +0200
+
+    Reverse proxy with nginx
+
+[33mcommit d9541dc3f864f4c43b0651bd4f3d2369f9d3eb0d[m
+Merge: 5f03437 00a6167
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Jun 16 11:30:27 2018 +0200
+
+    Merge pull request #18 from maxhelias/fix-auto-script
+    
+    Fix the build of app with auto-script like recipe framework-bundle
+
+[33mcommit 5f034376d64760d458e66fdeff58f547509d90b5[m
+Merge: 27429c7 0ab47a2
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Jun 16 11:29:39 2018 +0200
+
+    Merge pull request #11 from kejwmen/feature/select-skeleton-version
+    
+    Support building using specific symfony version
+
+[33mcommit 0ab47a2b751be0400b38a80764a3ecaf364b2088[m
+Author: Mateusz Sip <mateusz.sip@gmail.com>
+Date:   Thu Oct 26 14:51:56 2017 +0200
+
+    Support specific version
+
+[33mcommit 00a61678aafd02d3baab28c72fcc979907125f4c[m
+Author: Maxime Helias <maximehelias16@gmail.com>
+Date:   Thu Jun 14 14:55:46 2018 +0200
+
+    Fix the build of app with auto-script like recipe framework-bundle
+
+[33mcommit 27429c7c3a79272efcceb4dfd6ec5dd229334f1b[m
+Merge: 722cdaa 6e0a00d
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 14 18:41:29 2018 +0200
+
+    Merge pull request #17 from jorge07/patch-1
+    
+    Remove composer as first parent layer
+
+[33mcommit 6e0a00d0662527dd75c73e3fce2e9c780e5fcd4f[m
+Author: Jorge Arco <jorge.arcoma@gmail.com>
+Date:   Thu Jun 14 13:43:23 2018 +0200
+
+    Remove composer as first parent layer
+
+[33mcommit 722cdaa61b81801b927be42d8910e7cf4186f533[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 14 13:07:20 2018 +0200
+
+    Bump dependencies
+
+[33mcommit 0160ba3ccd00abc8c2fbb90c7be5d66eedfc815d[m
+Merge: 8bf475a eb1ce5c
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jun 14 13:04:03 2018 +0200
+
+    Merge pull request #16 from boite/develop
+    
+    Use php:7.2-fpm-alpine image
+
+[33mcommit eb1ce5cc59ac74a9ec1e4f8316ce4fde47d09fdf[m
+Author: boite <boite@users.noreply.github.com>
+Date:   Tue May 8 12:15:06 2018 +0100
+
+    Use php:7.2-fpm-alpine image
+    
+    which allows FPM to listen on all interfaces even when IPv6 is
+    disabled.
+    
+    See https://github.com/docker-library/php/pull/562
+
+[33mcommit 8bf475a8af800affd5cc86e15773a4d5cd2cc667[m
+Merge: 92fc962 d5617fa
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Nov 22 10:42:09 2017 +0100
+
+    Merge pull request #15 from dunglas/group-steps
+    
+    Use multi-stage build to install Composer
+
+[33mcommit d5617fa646a62b5a8b730d2e3f6ddd3e943946a0[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Nov 22 08:52:31 2017 +0100
+
+    Use multi-stage build
+
+[33mcommit 92fc9622a34bd47c4b97b2dc7cd49f3c4ca242c4[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 22:47:07 2017 +0200
+
+    Fix .gitignore
+
+[33mcommit 6ae9dc04f96556b3c90ee7acaad549ddfa7c891e[m
+Merge: ce2ed96 34bfe40
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 22:46:27 2017 +0200
+
+    Merge pull request #10 from dunglas/build-arg
+    
+    Allow to use Symfony 4
+
+[33mcommit 34bfe4071796d3312504b22504a420f6c4f004df[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 22:32:57 2017 +0200
+
+    Allow to use Symfony 4
+
+[33mcommit ce2ed9636074a45f4802b2338b8f46eb68629807[m
+Merge: f4ee1f1 6ac9cd8
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 22:23:15 2017 +0200
+
+    Merge pull request #9 from dunglas/fix-first-start
+    
+    Wait for the PHP container to start Nginx
+
+[33mcommit 6ac9cd8564c0d4103a9191e8b976e6558851ab1d[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 22:22:03 2017 +0200
+
+    Wait for the PHP container to start Nginx
+
+[33mcommit f4ee1f18b9ab4a167854f5ed4d0f864d723f2bd7[m
+Merge: 313bda6 0f965c4
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 16:47:09 2017 +0200
+
+    Merge pull request #6 from dunglas/h2
+    
+    HTTP/2 and HTTPS support
+
+[33mcommit 0f965c41a1f03e20a650682ea43cc03bb7b4c623[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Oct 19 14:03:21 2017 +0200
+
+    Use composer create-project
+
+[33mcommit 33daa22c7a05fb66f218b15f94846ce24fb2a02d[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Oct 16 14:46:43 2017 +0200
+
+    h2 and HTTPS support
+
+[33mcommit 313bda6b7a96ef3eb5dea4bb9d59b8dff01b3122[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Sep 13 22:14:52 2017 +0200
+
+    Fix typo
+
+[33mcommit 3dea20249d72398ff4c4f597b23d86648f6e4e64[m
+Merge: 3b0893c 10962ea
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jul 17 08:47:51 2017 +0200
+
+    Merge pull request #5 from dunglas/autoinstall
+    
+    Just type "docker-compose up" to install a Flex project (major refactoring)
+
+[33mcommit 10962ea40b52e2f166bea96571a1a6c250ef0f7c[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jul 17 08:42:52 2017 +0200
+
+    Dynamic resolution
+
+[33mcommit 6d5bf66804a28b197542fea637071640d1612eb1[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jul 6 00:28:13 2017 +0200
+
+    Just type "docker-compose up" to install a Flex project (major refactoring)
+
+[33mcommit 3b0893ce1c179ed4ea2892975b9fe078fea6772b[m
+Merge: 051cee5 8976e1f
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Tue Jul 11 23:21:33 2017 +0200
+
+    Merge pull request #4 from dunglas/some_fixes
+    
+    Various fixes
+
+[33mcommit 8976e1f9c29b9516c289bbe99d510b64403566d2[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Thu Jul 6 00:28:13 2017 +0200
+
+    Various fixes
+
+[33mcommit 051cee501bdca248c97efc8f23916158f7ef803a[m
+Merge: 4dc7eba 8ff420c
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Wed Jul 5 23:47:14 2017 +0200
+
+    Merge pull request #3 from mickaelandrieu/patch-2
+    
+    Make specific access on dev environment optional
+
+[33mcommit 8ff420c686785d0a77e554662bb16ca5d3b4d405[m
+Author: Mickaël Andrieu <andrieu.travail@gmail.com>
+Date:   Sun Jun 18 00:38:46 2017 +0200
+
+    Removed IP checks block from front controller
+
+[33mcommit 4dc7ebac470a5b4e49a3994b87409dffb7ddc900[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 12 13:45:08 2017 +0200
+
+    Add missing 'make' dependency
+
+[33mcommit 50d5268c4a6d67c7c75dbb028c48a82f4491b9c7[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 12 13:26:54 2017 +0200
+
+    Fix docker-compose.yml
+
+[33mcommit 2d6d2ecd59996174b5c236e6cbc49be6998a32f5[m
+Merge: 10b49ac df6286b
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 12 10:37:12 2017 +0200
+
+    Merge pull request #2 from dunglas/upgrade
+    
+    Upgrade the Docker setup and dependencies
+
+[33mcommit df6286b2e91213100ff36dae25c8fac6384ef804[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Mon Jun 12 10:21:33 2017 +0200
+
+    Upgrade the Docker setup and dependencies
+
+[33mcommit 10b49ace3daefb2ea926f781a9ce3a0b3a098a3b[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Apr 22 20:35:59 2017 +0200
+
+    Remove the Dotenv component
+
+[33mcommit c22d64cacc5d7bb70920b124e7aa2fe53d313b92[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Apr 22 20:32:38 2017 +0200
+
+    Update package name
+
+[33mcommit 7145ec03cfe82f9b03130e25209deaff1f3fef30[m
+Author: Kévin Dunglas <dunglas@gmail.com>
+Date:   Sat Apr 22 20:29:25 2017 +0200
+
+    Add Docker support
+
+[33mcommit 22d07b2f399edd9cec06d2d105be3b5eaedb7f2f[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Wed Mar 15 13:39:37 2017 -0700
+
+    -
+
+[33mcommit 153e79a057aee954d6cf20d9b65ede7f5b26c7ac[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Wed Apr 19 17:05:13 2017 -0600
+
+    renamed the flex section to symfony
+
+[33mcommit e1c67b940219809913a1ba73e4b1d8a29a07559a[m
+Merge: 95d854e 6958a71
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Wed Apr 19 11:47:33 2017 -0600
+
+    minor #5 Remove useless conflict (curry684)
+    
+    This PR was merged into the master branch.
+    
+    Discussion
+    ----------
+    
+    Remove useless conflict
+    
+    Not much use to depend on `symfony/framework-bundle:3.3.x-dev` and then declare a conflict with `<3.3`.
+    
+    Commits
+    -------
+    
+    6958a71 Remove useless conflict
+
+[33mcommit 95d854e39874fb86f43fb17897c2fb4eb8571ec4[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Wed Apr 19 11:44:06 2017 -0600
+
+    reworked the flex section under extra
+
+[33mcommit 6958a717d373aa933cb3e27f9966d8cd516a44c5[m
+Author: Niels Keurentjes <niels@keurentjes.nl>
+Date:   Thu Apr 13 17:13:41 2017 +0200
+
+    Remove useless conflict
+    
+    Not much use to depend on `symfony/framework-bundle:3.3.x-dev` and then declare a conflict with `<3.3`.
+
+[33mcommit c12debbf5bc357af6c6705ecb0ffa5c92fb827e3[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Mon Apr 10 19:26:33 2017 -0700
+
+    bumped min version to 7.1
+
+[33mcommit 2c1dbbbd055bc2e9648696f9bc6b47ff94436392[m
+Merge: 5e6a09b d97e8a3
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Mon Mar 20 11:20:44 2017 -0700
+
+    bug #4 Move flex-id to extra settings (Pierstoval)
+    
+    This PR was merged into the master branch.
+    
+    Discussion
+    ----------
+    
+    Move flex-id to extra settings
+    
+    As said by @stof in [this comment](https://github.com/symfony/skeleton/commit/beb77b84667a3338cf3156a10e9511cf040fdda1#commitcomment-21397542), even if `config` part is not validated by `composer validate`, custom settings should still be under `extra` to avoid `composer config` to fail update/modify/remove this value
+    
+    Commits
+    -------
+    
+    d97e8a3 Move flex-id to extra settings
+
+[33mcommit d97e8a3a75b2b1428e16100c2f84a60e01f5f6f0[m
+Author: Alex Rock Ancelet <pierstoval@gmail.com>
+Date:   Mon Mar 20 16:27:53 2017 +0100
+
+    Move flex-id to extra settings
+
+[33mcommit 5e6a09b4d78f4165c25f417b046705d48e1abcf9[m
+Merge: fa4fbc0 69c465d
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Mon Mar 20 06:57:12 2017 -0700
+
+    bug #3 Autoload tests only in the dev environment (stof)
+    
+    This PR was merged into the master branch.
+    
+    Discussion
+    ----------
+    
+    Autoload tests only in the dev environment
+    
+    Tests don't need to be registered in the production autoloader.
+    
+    Commits
+    -------
+    
+    69c465d Autoload tests only in the dev environment
+
+[33mcommit 69c465d96fc6c3a38365617256af274229e5a559[m
+Author: Christophe Coevoet <stof@notk.org>
+Date:   Mon Mar 20 14:03:02 2017 +0100
+
+    Autoload tests only in the dev environment
+    
+    Tests don't need to be registered in the production autoloader.
+
+[33mcommit fa4fbc0730e8076a39c3778b3e724edb44dbed93[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Wed Mar 15 20:56:24 2017 -0700
+
+    added preferred-install to dist
+
+[33mcommit beb77b84667a3338cf3156a10e9511cf040fdda1[m
+Author: Fabien Potencier <fabien.potencier@gmail.com>
+Date:   Fri Mar 10 15:09:58 2017 -0800
+
+    added the first version of the skeleton

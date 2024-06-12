@@ -152,6 +152,7 @@ class OperatingSystemsTest extends KernelTestCase
         $os->setSupported(false);
         $os->setBreed($breed);
         $os->setRelease($this->dummy['name']);
+        $os->setAlias($this->dummy['name']);
         $this->assertTrue($this->osManager->addOperatingSystem($os));
         
         return $os;

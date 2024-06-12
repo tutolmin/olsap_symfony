@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Ports index</h1>
 
+    <a href="{{ path('app_ports_new') }}">Create new</a>
+    
     <table class="table">
         <thead>
             <tr>
@@ -31,5 +33,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_ports_new') }}">Create new</a>
 {% endblock %}

@@ -15,7 +15,13 @@ class OperatingSystemsControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
+     
     /**
      * 
      * @var OperatingSystemsRepository
@@ -117,4 +123,30 @@ class OperatingSystemsControllerTest extends WebTestCase
             $this->assertNull($removed_operatingSystem);            
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyOperatingSystemBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/operating/systems/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['operating_systems[release]'] = $this->dummy['name'];
+        $form['operating_systems[alias]'] = $this->dummy['name'];
+        $form['operating_systems[supported]'] = 1;
+        
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->operatingSystemsRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    } 
 }

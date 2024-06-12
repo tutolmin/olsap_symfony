@@ -15,6 +15,12 @@ class TasksControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy', 'path'=>'dummy');
     
     /**
      * 
@@ -116,5 +122,30 @@ class TasksControllerTest extends WebTestCase
             $removed_task = $this->tasksRepository->findOneById($id);
             $this->assertNull($removed_task);            
         }
+    }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyTaskBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/tasks/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['tasks[name]'] = $this->dummy['name'];
+        $form['tasks[path]'] = $this->dummy['path'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->tasksRepository->findOneByPath($this->dummy['path']);
+        $this->assertNotNull($item);        
     }
 }

@@ -117,4 +117,31 @@ class SessionsControllerTest extends WebTestCase
             $this->assertNull($removed_session);            
         }
     }
+    
+    /**
+     * 
+     * @return void
+
+    public function testCanAddDummyTaskBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/tasks/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['tasks[name]'] = $this->dummy['name'];
+        $form['tasks[path]'] = $this->dummy['path'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->tasksRepository->findOneByPath($this->dummy['path']);
+        $this->assertNotNull($item);        
+    }
+     */
+    
 }

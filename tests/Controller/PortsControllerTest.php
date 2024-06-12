@@ -15,6 +15,12 @@ class PortsControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
+
+    /**
+     * 
+     * @var array<string, int>
+     */
+    private $dummy = array('number'=>7500);
     
     /**
      * 
@@ -132,4 +138,28 @@ class PortsControllerTest extends WebTestCase
             }
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyPortBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/ports/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['ports[number]'] = $this->dummy['number'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->portsRepository->findOneByNumber($this->dummy['number']);
+        $this->assertNotNull($item);        
+    }   
 }

@@ -15,6 +15,12 @@ class TechnologiesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy');
     
     /**
      * 
@@ -117,4 +123,28 @@ class TechnologiesControllerTest extends WebTestCase
             $this->assertNull($removed_testee);            
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyTechnologyBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/technologies/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['technologies[name]'] = $this->dummy['number'];
+        
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->technologiesRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    } 
 }
