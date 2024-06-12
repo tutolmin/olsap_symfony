@@ -141,7 +141,7 @@ class OperatingSystemsControllerTest extends WebTestCase
         // set values on a form object
         $form['operating_systems[release]'] = $this->dummy['name'];
         $form['operating_systems[alias]'] = $this->dummy['name'];
-        $form['operating_systems[supported]'] = true;
+        $form['operating_systems[supported]'] = '1';
         
         // submit the Form object
         $this->client->submit($form);

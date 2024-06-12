@@ -21,7 +21,7 @@ class AddressesType extends AbstractType
                        array('class' => 'Ports',
                              'query_builder' => function(EntityRepository $er) {
                                                    return $er->createQueryBuilder('p')
-                                                             ->where('p_address_id is NULL');
+                                                             ->where('p.address_id is NULL');
                              }))
             ->add('instance')
         ;
