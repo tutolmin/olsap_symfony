@@ -139,7 +139,7 @@ class HardwareProfilesControllerTest extends WebTestCase
         $form = $buttonCrawlerNode->form();
 
         // set values on a form object
-        $form['hardware_profiles[name]'] = $this->dummy['number'];
+        $form['hardware_profiles[name]'] = $this->dummy['name'];
         $form['hardware_profiles[supported]'] = '1';
         $form['hardware_profiles[type]'] = '1';
         

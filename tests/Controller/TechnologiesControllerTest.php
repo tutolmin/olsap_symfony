@@ -139,7 +139,7 @@ class TechnologiesControllerTest extends WebTestCase
         $form = $buttonCrawlerNode->form();
 
         // set values on a form object
-        $form['technologies[name]'] = $this->dummy['number'];
+        $form['technologies[name]'] = $this->dummy['name'];
         
         // submit the Form object
         $this->client->submit($form);
