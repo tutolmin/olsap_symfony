@@ -20,7 +20,7 @@ class PortsControllerTest extends WebTestCase
      * 
      * @var array<string, int>
      */
-    private $dummy = array('number'=>7500);
+    private $dummy = array('number'=>'7500');
     
     /**
      * 

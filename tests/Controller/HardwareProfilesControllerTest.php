@@ -140,8 +140,8 @@ class HardwareProfilesControllerTest extends WebTestCase
 
         // set values on a form object
         $form['hardware_profiles[name]'] = $this->dummy['number'];
-        $form['hardware_profiles[supported]'] = 1;
-        $form['hardware_profiles[type]'] = 1;
+        $form['hardware_profiles[supported]'] = true;
+        $form['hardware_profiles[type]'] = true;
         
         // submit the Form object
         $this->client->submit($form);
