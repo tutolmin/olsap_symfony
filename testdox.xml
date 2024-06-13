@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesListIsNotEmpty" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees list is not empty" status="0" time="0.323434802" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypesListIsNotEmpty" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance types list is not empty" status="0" time="0.277844874" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteesWebPageListContainsAllRecords" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testees web page list contains all records" status="0" time="0.281098116" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypesWebPageListContainsAllRecords" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance types web page list contains all records" status="0" time="0.240357644" size="-1" groups="default">
     <group name="default"/>
   </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testTesteeDisplayWebPageContainsData" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Testee display web page contains data" status="0" time="0.126683597" size="-1" groups="default">
-    <group name="default"/>
-  </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanRemoveAllTesteesByClickingDeleteButton" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can remove all testees by clicking delete button" status="0" time="0.281210385" size="-1" groups="default">
-    <group name="default"/>
-  </test>
-  <test className="App\Tests\Controller\TesteesControllerTest" methodName="testCanAddDummyTesteeBySubmittingForm" prettifiedClassName="ees Controller (App\Tests\Controller\eesController)" prettifiedMethodName="Can add dummy testee by submitting form" status="0" time="0.866788365" size="-1" groups="default">
+  <test className="App\Tests\Controller\InstanceTypesControllerTest" methodName="testInstanceTypeDisplayWebPageContainsData" prettifiedClassName="Instance Types Controller (App\Tests\Controller\InstanceTypesController)" prettifiedMethodName="Instance type display web page contains data" status="0" time="0.323374332" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

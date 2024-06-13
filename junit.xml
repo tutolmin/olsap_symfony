@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\Controller\TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" tests="5" assertions="33" errors="0" warnings="0" failures="0" skipped="0" time="1.879215">
-    <testcase name="testTesteesListIsNotEmpty" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="48" assertions="1" time="0.323435"/>
-    <testcase name="testTesteesWebPageListContainsAllRecords" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="61" assertions="10" time="0.281098"/>
-    <testcase name="testTesteeDisplayWebPageContainsData" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="82" assertions="12" time="0.126684"/>
-    <testcase name="testCanRemoveAllTesteesByClickingDeleteButton" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="102" assertions="9" time="0.281210"/>
-    <testcase name="testCanAddDummyTesteeBySubmittingForm" class="App\Tests\Controller\TesteesControllerTest" classname="App.Tests.Controller.TesteesControllerTest" file="/srv/app/tests/Controller/TesteesControllerTest.php" line="131" assertions="1" time="0.866788"/>
+  <testsuite name="App\Tests\Controller\InstanceTypesControllerTest" file="/srv/app/tests/Controller/InstanceTypesControllerTest.php" tests="3" assertions="58" errors="0" warnings="0" failures="0" skipped="0" time="0.841577">
+    <testcase name="testInstanceTypesListIsNotEmpty" class="App\Tests\Controller\InstanceTypesControllerTest" classname="App.Tests.Controller.InstanceTypesControllerTest" file="/srv/app/tests/Controller/InstanceTypesControllerTest.php" line="42" assertions="1" time="0.277845"/>
+    <testcase name="testInstanceTypesWebPageListContainsAllRecords" class="App\Tests\Controller\InstanceTypesControllerTest" classname="App.Tests.Controller.InstanceTypesControllerTest" file="/srv/app/tests/Controller/InstanceTypesControllerTest.php" line="55" assertions="25" time="0.240358"/>
+    <testcase name="testInstanceTypeDisplayWebPageContainsData" class="App\Tests\Controller\InstanceTypesControllerTest" classname="App.Tests.Controller.InstanceTypesControllerTest" file="/srv/app/tests/Controller/InstanceTypesControllerTest.php" line="76" assertions="32" time="0.323374"/>
   </testsuite>
 </testsuites>

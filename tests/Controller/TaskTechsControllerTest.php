@@ -8,6 +8,8 @@ use App\Repository\TasksRepository;
 use App\Entity\Tasks;
 use App\Entity\TaskTechs;
 use App\Repository\TaskTechsRepository;
+use App\Entity\Technologies;
+use App\Repository\TechnologiesRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class TaskTechsControllerTest extends WebTestCase
@@ -17,7 +19,13 @@ class TaskTechsControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('name'=>'Dummy', 'path'=>'dummy');
+        
     /**
      * 
      * @var TaskTechsRepository
@@ -29,6 +37,12 @@ class TaskTechsControllerTest extends WebTestCase
      * @var TasksRepository
      */
     private $tasksRepository;
+    
+    /**
+     * 
+     * @var TechnologiesRepository
+     */
+    private $technologiesRepository;
 
     /**
      * 
@@ -42,6 +56,7 @@ class TaskTechsControllerTest extends WebTestCase
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->taskTechsRepository = $this->entityManager->getRepository(TaskTechs::class);
         $this->tasksRepository = $this->entityManager->getRepository(Tasks::class);
+        $this->technologiesRepository = $this->entityManager->getRepository(Technologies::class);
     }
 
     /**
@@ -149,23 +164,27 @@ class TaskTechsControllerTest extends WebTestCase
         
         $task = $this->addDummyTask();
         $this->assertNotNull($task);
-
-        $crawler = $this->client->request('GET', '/tasks/techs/new');
+        
+        $tech = $this->technologiesRepository->findOneBy([]);
+        $this->assertNotNull($tech);
+        
+        $crawler = $this->client->request('GET', '/task/techs/new');
 
         // select the button
         $buttonCrawlerNode = $crawler->selectButton('Save');
 
         // retrieve the Form object for the form belonging to this button
         $form = $buttonCrawlerNode->form();
-        $tech = $form->get('tech')->getValue();
-        
+
         // set values on a form object
-        $form['task_techs[task]'] = $task->getId();
+        $form['task_techs[task]'] = strval($task->getId());
+        $form['task_techs[tech]'] = strval($tech->getId());
 
         // submit the Form object
         $this->client->submit($form);
         
-        $item = $this->taskTechsRepository->findOneByPath($this->dummy['path']);
+        $item = $this->taskTechsRepository->findOneBy(
+                ['task' => $task->getId(), 'tech' => $tech->getId()]);
         $this->assertNotNull($item);        
     }    
 }

@@ -1,7 +1,5 @@
-ees Controller (App\Tests\Controller\eesController)
- [x] Testees list is not empty
- [x] Testees web page list contains all records
- [x] Testee display web page contains data
- [x] Can remove all testees by clicking delete button
- [x] Can add dummy testee by submitting form
+Instance Types Controller (App\Tests\Controller\InstanceTypesController)
+ [x] Instance types list is not empty
+ [x] Instance types web page list contains all records
+ [x] Instance type display web page contains data
 

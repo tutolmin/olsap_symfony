@@ -6,6 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\SessionOses;
 use App\Repository\SessionOsesRepository;
+use App\Entity\Sessions;
+use App\Entity\Testees;
+use App\Entity\SessionStatuses;
+use App\Repository\OperatingSystemsRepository;
+use App\Entity\OperatingSystems;
+use App\Repository\SessionsRepository;
+use App\Repository\TesteesRepository;
+use App\Repository\SessionStatusesRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class SessionOsesControllerTest extends WebTestCase
@@ -24,6 +32,36 @@ class SessionOsesControllerTest extends WebTestCase
 
     /**
      * 
+     * @var array<string>
+     */
+    private $dummy = array('hash'=>'dummy');
+    
+    /**
+     * 
+     * @var SessionsRepository
+     */
+    private $sessionsRepository;
+
+    /**
+     * 
+     * @var TesteesRepository
+     */
+    private $testeesRepository;
+        
+    /**
+     * 
+     * @var SessionStatusesRepository
+     */
+    private $sessionsStatusesRepository;
+
+    /**
+     * 
+     * @var OperatingSystemsRepository
+     */
+    private $osRepository;
+
+    /**
+     * 
      * @var KernelBrowser
      */
     private $client;
@@ -33,6 +71,10 @@ class SessionOsesControllerTest extends WebTestCase
         $this->client = static::createClient();
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
         $this->sessionOsesRepository = $this->entityManager->getRepository(SessionOses::class);
+        $this->sessionsRepository = $this->entityManager->getRepository(Sessions::class);
+        $this->testeesRepository = $this->entityManager->getRepository(Testees::class);
+        $this->sessionsStatusesRepository = $this->entityManager->getRepository(SessionStatuses::class);
+        $this->osRepository = $this->entityManager->getRepository(OperatingSystems::class);
     }
 
     /**
@@ -117,4 +159,59 @@ class SessionOsesControllerTest extends WebTestCase
             $this->assertNull($removed_session);            
         }
     }
+   
+    /**
+     * 
+     * @return Sessions
+     */
+    private function addDummySession(): Sessions {
+
+        $sessionStatus = $this->sessionsStatusesRepository->findOneByStatus('New');
+        $this->assertNotNull($sessionStatus);
+
+        $testee = $this->testeesRepository->findOneBy(array());
+        $this->assertNotNull($testee);
+
+        $session = new Sessions();
+        $session->setHash($this->dummy['hash']);
+        $session->setStatus($sessionStatus);
+        $session->setTestee($testee);
+        $session->setCreatedAt(new \DateTimeImmutable('now'));
+        
+        $this->assertTrue($this->sessionsRepository->add($session, true));
+
+        return $session;
+    }    
+
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummySessionOsBySubmittingForm(): void {
+        
+        $session = $this->addDummySession();
+        $this->assertNotNull($session);
+        
+        $os = $this->osRepository->findOneBy([]);
+        $this->assertNotNull($os);
+        
+        $crawler = $this->client->request('GET', '/session/oses/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['session_oses[session]'] = strval($session->getId());
+        $form['session_oses[os]'] = strval($os->getId());
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->sessionOsesRepository->findOneBy(
+                ['session' => $session->getId(), 'os' => $os->getId()]);
+        $this->assertNotNull($item);        
+    }    
 }

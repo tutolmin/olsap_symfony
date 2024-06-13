@@ -1,26 +1,18 @@
 
-##teamcity[testCount count='5' flowId='8044']
+##teamcity[testCount count='3' flowId='21540']
 
-##teamcity[testSuiteStarted name='App\Tests\Controller\TesteesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest' flowId='8044']
+##teamcity[testSuiteStarted name='App\Tests\Controller\InstanceTypesControllerTest' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest' flowId='21540']
 
-##teamcity[testStarted name='testTesteesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesListIsNotEmpty' flowId='8044']
+##teamcity[testStarted name='testInstanceTypesListIsNotEmpty' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesListIsNotEmpty' flowId='21540']
 
-##teamcity[testFinished name='testTesteesListIsNotEmpty' duration='323' flowId='8044']
+##teamcity[testFinished name='testInstanceTypesListIsNotEmpty' duration='278' flowId='21540']
 
-##teamcity[testStarted name='testTesteesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteesWebPageListContainsAllRecords' flowId='8044']
+##teamcity[testStarted name='testInstanceTypesWebPageListContainsAllRecords' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypesWebPageListContainsAllRecords' flowId='21540']
 
-##teamcity[testFinished name='testTesteesWebPageListContainsAllRecords' duration='281' flowId='8044']
+##teamcity[testFinished name='testInstanceTypesWebPageListContainsAllRecords' duration='240' flowId='21540']
 
-##teamcity[testStarted name='testTesteeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testTesteeDisplayWebPageContainsData' flowId='8044']
+##teamcity[testStarted name='testInstanceTypeDisplayWebPageContainsData' locationHint='php_qn:///srv/app/tests/Controller/InstanceTypesControllerTest.php::\App\Tests\Controller\InstanceTypesControllerTest::testInstanceTypeDisplayWebPageContainsData' flowId='21540']
 
-##teamcity[testFinished name='testTesteeDisplayWebPageContainsData' duration='127' flowId='8044']
+##teamcity[testFinished name='testInstanceTypeDisplayWebPageContainsData' duration='323' flowId='21540']
 
-##teamcity[testStarted name='testCanRemoveAllTesteesByClickingDeleteButton' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanRemoveAllTesteesByClickingDeleteButton' flowId='8044']
-
-##teamcity[testFinished name='testCanRemoveAllTesteesByClickingDeleteButton' duration='281' flowId='8044']
-
-##teamcity[testStarted name='testCanAddDummyTesteeBySubmittingForm' locationHint='php_qn:///srv/app/tests/Controller/TesteesControllerTest.php::\App\Tests\Controller\TesteesControllerTest::testCanAddDummyTesteeBySubmittingForm' flowId='8044']
-
-##teamcity[testFinished name='testCanAddDummyTesteeBySubmittingForm' duration='867' flowId='8044']
-
-##teamcity[testSuiteFinished name='App\Tests\Controller\TesteesControllerTest' flowId='8044']
+##teamcity[testSuiteFinished name='App\Tests\Controller\InstanceTypesControllerTest' flowId='21540']
