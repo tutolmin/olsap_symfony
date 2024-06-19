@@ -116,5 +116,5 @@ class InstancesControllerTest extends WebTestCase
             $removed_instance = $this->instancesRepository->findOneById($id);
             $this->assertNotNull($removed_instance);            
         }
-    }
+    }   
 }

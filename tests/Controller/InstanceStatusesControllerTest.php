@@ -147,4 +147,33 @@ class InstanceStatusesControllerTest extends WebTestCase
         $item = $this->instanceStatusesRepository->findOneByStatus($this->dummy['name']);
         $this->assertNotNull($item);        
     }
+    
+    /**
+     * @depends testInstanceStatusesListIsNotEmpty
+     * @param array<InstanceStatuses> $instance_statuses
+     * @return void
+     */
+    public function testCanEditInstanceStatusBySubmittingForm($instance_statuses): void {
+
+        $instance_status = $this->instanceStatusesRepository->findOneById($instance_statuses[0]);
+        $this->assertNotNull($instance_status);
+            
+        $crawler = $this->client->request('GET', '/instance/statuses/'.$instance_status->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['instance_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->instanceStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
+    } 
 }
+    

@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class InstanceTypesType extends AbstractType
 {
+/*    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -23,4 +24,6 @@ class InstanceTypesType extends AbstractType
             'data_class' => InstanceTypes::class,
         ]);
     }
+ * 
+ */
 }

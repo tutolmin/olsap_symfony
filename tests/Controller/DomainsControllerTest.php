@@ -147,4 +147,32 @@ class DomainsControllerTest extends WebTestCase
         $item = $this->domainsRepository->findOneByName($this->dummy['name']);
         $this->assertNotNull($item);        
     }
+    
+    /**
+     * @depends testDomainsListIsNotEmpty
+     * @param array<Domains> $domains
+     * @return void
+     */
+    public function testCanEditDomainBySubmittingForm($domains): void {
+
+        $domain = $this->domainsRepository->findOneById($domains[0]);
+        $this->assertNotNull($domain);
+            
+        $crawler = $this->client->request('GET', '/domains/'.$domain->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['domains[name]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->domainsRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }
 }

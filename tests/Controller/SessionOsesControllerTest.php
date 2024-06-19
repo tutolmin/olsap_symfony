@@ -213,5 +213,38 @@ class SessionOsesControllerTest extends WebTestCase
         $item = $this->sessionOsesRepository->findOneBy(
                 ['session' => $session->getId(), 'os' => $os->getId()]);
         $this->assertNotNull($item);        
-    }    
+    }   
+    
+    /**
+     * @depends testSessionOsesListIsNotEmpty
+     * @param array<SessionOses> $sessionOses
+     * @return void
+     */
+    public function testCanEditSessionOsBySubmittingForm($sessionOses): void {
+        
+        $session = $this->addDummySession();
+        $this->assertNotNull($session);
+        
+        $sessionOs = $this->sessionOsesRepository->findOneById($sessionOses[0]);
+        $this->assertNotNull($sessionOs);
+            
+        $crawler = $this->client->request('GET', '/session/oses/'.$sessionOs->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['session_oses[session]'] = strval($session->getId());
+        $form['session_oses[os]'] = strval($sessionOs->getOs()->getId());
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->sessionOsesRepository->findOneBy(
+                ['session' => $session->getId(), 'os' => $sessionOs->getOs()]);
+        $this->assertNotNull($item);        
+    }     
 }

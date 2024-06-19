@@ -26,9 +26,6 @@
                 <td>{{ instance_type.instancesCounter }}</td>
                 <td>
                     <a href="{{ path('app_instance_types_show', {'id': instance_type.id}) }}">show</a>
-                    <!--
-                    <a href="{{ path('app_instance_types_edit', {'id': instance_type.id}) }}">edit</a>
-                    -->
                 </td>
             </tr>
         {% else %}
@@ -38,7 +35,5 @@
         {% endfor %}
         </tbody>
     </table>
-<!--
-    <a href="{{ path('app_instance_types_new') }}">Create new</a>
--->
+
 {% endblock %}

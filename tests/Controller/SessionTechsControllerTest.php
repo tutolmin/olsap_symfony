@@ -214,4 +214,37 @@ class SessionTechsControllerTest extends WebTestCase
                 ['session' => $session->getId(), 'tech' => $tech->getId()]);
         $this->assertNotNull($item);        
     }       
+    
+    /**
+     * @depends testSessionTechsListIsNotEmpty
+     * @param array<SessionTechs> $sessionTechs
+     * @return void
+     */
+    public function testCanEditSessionTechBySubmittingForm($sessionTechs): void {
+        
+        $session = $this->addDummySession();
+        $this->assertNotNull($session);
+        
+        $sessionTech = $this->sessionTechsRepository->findOneById($sessionTechs[0]);
+        $this->assertNotNull($sessionTech);
+            
+        $crawler = $this->client->request('GET', '/session/techs/'.$sessionTech->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['session_techs[session]'] = strval($session->getId());
+        $form['session_techs[tech]'] = strval($sessionTech->getTech()->getId());
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->sessionTechsRepository->findOneBy(
+                ['session' => $session->getId(), 'tech' => $sessionTech->getTech()]);
+        $this->assertNotNull($item);        
+    }      
 }

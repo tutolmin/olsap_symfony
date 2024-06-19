@@ -1,5 +1,331 @@
+Addresses (App\Tests\Addresses)
+ [x] Addresses list is not empty
+ [x] Can not add address without ip
+ [x] Can not add address without mac
+ [x] Can not add duplicate addresses
+ [x] Spare addresses are available
+ [x] Each instance has address
+ [x] Can add dummy address
+ [ ] Can remove all addresses
+
+Breeds (App\Tests\Breeds)
+ [x] Breeds list is not empty
+ [x] Breed has operating systems reference
+ [x] Can not add breed without name
+ [x] Can not add duplicate breed
+ [x] Can add dummy breed
+ [x] Can remove all breeds
+
+Awx Me Command (App\Tests\Command\AwxMeCommand)
+ [x] Awx me is symfony
+
+Awx Project List Command (App\Tests\Command\AwxProjectListCommand)
+ [ ] Execute
+
+Addresses Controller (App\Tests\Controller\AddressesController)
+ [x] Addresses list is not empty
+ [x] Addresses web page list contains all records
+ [x] Address display web page contains data
+ [x] Can remove all addresses by clicking delete button
+ [x] Can add dummy address by submitting form
+ [x] Can edit address by submitting form
+
+Breeds Controller (App\Tests\Controller\BreedsController)
+ [x] Breeds list is not empty
+ [x] Breeds web page list contains all records
+ [x] Breed display web page contains data
+ [x] Can remove all breeds by clicking delete button
+ [x] Can add dummy breed by submitting form
+ [x] Can edit breed by submitting form
+
+Domains Controller (App\Tests\Controller\DomainsController)
+ [x] Domains list is not empty
+ [x] Domains web page list contains all records
+ [x] Domain display web page contains data
+ [x] Can remove all domains by clicking delete button
+ [x] Can add dummy domain by submitting form
+ [x] Can edit domain by submitting form
+
+Environment Statuses Controller (App\Tests\Controller\EnvironmentStatusesController)
+ [x] Environment statuses list is not empty
+ [x] Environment statuses web page list contains all records
+ [x] Environment status display web page contains data
+ [x] Can remove all environment statuses by clicking delete button
+ [x] Can add dummy environment status by submitting form
+ [x] Can edit environment status by submitting form
+
+Environments Controller (App\Tests\Controller\EnvironmentsController)
+ [x] Environments list is not empty
+ [x] Environments web page list contains all records
+ [x] Environment display web page contains data
+ [x] Can remove all environments by clicking delete button
+
+Hardware Profiles Controller (App\Tests\Controller\HardwareProfilesController)
+ [x] Hardware profiles list is not empty
+ [x] Hardware profiles web page list contains all records
+ [x] Hardware profile display web page contains data
+ [x] Can remove all hardware profiles by clicking delete button
+ [x] Can add dummy hardware profile by submitting form
+ [x] Can edit hardware profile by submitting form
+
+Instance Statuses Controller (App\Tests\Controller\InstanceStatusesController)
+ [x] Instance statuses list is not empty
+ [x] Instance statuses web page list contains all records
+ [x] Instance status display web page contains data
+ [x] Can remove all instance statuses by clicking delete button
+ [x] Can add dummy instance status by submitting form
+ [x] Can edit instance status by submitting form
+
 Instance Types Controller (App\Tests\Controller\InstanceTypesController)
  [x] Instance types list is not empty
  [x] Instance types web page list contains all records
  [x] Instance type display web page contains data
+
+Instances Controller (App\Tests\Controller\InstancesController)
+ [x] Instances list is not empty
+ [x] Instances web page list contains all records
+ [x] Instance display web page contains data
+ [x] Delete button does not delete instance instantly
+
+Lucky Number Controller (App\Tests\Controller\LuckyNumberController)
+ [x] Lucky number
+
+Operating Systems Controller (App\Tests\Controller\OperatingSystemsController)
+ [x] Operating systems list is not empty
+ [x] Operating systems web page list contains all records
+ [x] Operating system display web page contains data
+ [x] Can remove all operating systems by clicking delete button
+ [x] Can add dummy operating system by submitting form
+ [x] Can edit operating system by submitting form
+
+Ports Controller (App\Tests\Controller\PortsController)
+ [x] Ports list is not empty
+ [x] Ports web page list contains 10 records
+ [x] Port display web page contains data
+ [x] Can remove 10 ports by clicking delete button
+ [x] Can add dummy port by submitting form
+ [x] Can edit port by submitting form
+
+Session Oses Controller (App\Tests\Controller\SessionOsesController)
+ [x] Session oses list is not empty
+ [x] Session oses web page list contains all records
+ [x] Session os display web page contains data
+ [x] Can remove all session oses by clicking delete button
+ [x] Can add dummy session os by submitting form
+ [x] Can edit session os by submitting form
+
+Session Statuses Controller (App\Tests\Controller\SessionStatusesController)
+ [x] Session statuses list is not empty
+ [x] Session statuses web page list contains all records
+ [x] Session status display web page contains data
+ [x] Can remove all session statuses by clicking delete button
+ [x] Can add dummy session status by submitting form
+ [x] Can edit session status by submitting form
+
+Session Techs Controller (App\Tests\Controller\SessionTechsController)
+ [x] Session techs list is not empty
+ [x] Session techs web page list contains all records
+ [x] Session tech display web page contains data
+ [x] Can remove all session techs by clicking delete button
+ [x] Can add dummy session tech by submitting form
+ [x] Can edit session tech by submitting form
+
+Sessions Controller (App\Tests\Controller\SessionsController)
+ [x] Sessions list is not empty
+ [x] Sessions web page list contains all records
+ [x] Session display web page contains data
+ [x] Can remove all sessions by clicking delete button
+
+Task Techs Controller (App\Tests\Controller\TaskTechsController)
+ [x] Task techs list is not empty
+ [x] Task techs web page list contains all records
+ [x] Task tech display web page contains data
+ [x] Can remove all task techs by clicking delete button
+ [x] Can add dummy task tech by submitting form
+ [x] Can edit task tech by submitting form
+
+Tasks Controller (App\Tests\Controller\TasksController)
+ [x] Tasks list is not empty
+ [x] Tasks web page list contains all records
+ [x] Task display web page contains data
+ [x] Can remove all tasks by clicking delete button
+ [x] Can add dummy task by submitting form
+ [x] Can edit task by submitting form
+
+Technologies Controller (App\Tests\Controller\TechnologiesController)
+ [x] Technologies list is not empty
+ [x] Technologies web page list contains all records
+ [x] Technology display web page contains data
+ [x] Can remove all technologies by clicking delete button
+ [x] Can add dummy technology by submitting form
+ [x] Can edit technology by submitting form
+
+ees Controller (App\Tests\Controller\eesController)
+ [x] Testees list is not empty
+ [x] Testees web page list contains all records
+ [x] Testee display web page contains data
+ [x] Can remove all testees by clicking delete button
+ [x] Can add dummy testee by submitting form
+ [x] Can edit testee by submitting form
+
+Domains (App\Tests\Domains)
+ [x] Domains list is not empty
+ [x] Can not add domain without name
+ [x] Can not add duplicate domain
+ [x] Can add dummy domain
+ [x] Can remove all domains
+ [x] Domain removal leads to linked technologies deletion
+
+Environment Statuses (App\Tests\EnvironmentStatuses)
+ [x] Environment statuses list is not empty
+ [x] Can not add environment status without status string
+ [x] Can not add duplicate environment status
+ [x] Can add dummy environment status
+ [x] Can remove all environment statuses
+
+Environments (App\Tests\Environments)
+ [x] Environments list is not empty
+ [x] Can not add environment without mandatory fields
+ [x] Can add dummy environment
+ [x] Can remove all environments
+ [x] Can not add duplicate environment
+
+Hardware Profiles (App\Tests\HardwareProfiles)
+ [x] Hardware profiles list is not empty
+ [x] Container hardware profiles list is not empty
+ [x] Vm hardware profiles list is not empty
+ [x] Supported hardware profiles list is not empty
+ [x] Each supported hardware profile has corresponding instance types for all supported oses
+ [x] Can not add hardware profile without name or type
+ [x] Can not add duplicate hardware profile
+ [x] Can add dummy hardware profile
+ [x] Can add dummy supported hardware profile
+ [x] Can remove all hardware profiles
+ [x] Can make hardware profile supported
+ [x] Can make hardware profile unsupported
+
+Instance Statuses (App\Tests\InstanceStatuses)
+ [x] Instance statuses list is not empty
+ [x] Can not add instance status without status string
+ [x] Can not add duplicate instance status
+ [x] Can add dummy instance status
+ [x] Can remove all instance statuses
+
+Instance Types (App\Tests\InstanceTypes)
+ [x] Instance types list is not empty
+ [x] Can not add instance type without operating system
+ [x] Can not add instance type without hardware profile
+ [x] Can not add duplicate instance types
+ [x] Can remove all instance types
+
+Instances (App\Tests\Instances)
+ [x] Instances list is not empty
+ [x] Can not add instance without mandatory fields
+ [x] Can add dummy instance
+ [x] Instance list has no orphans
+ [x] Lxc inventory has no orphans
+ [x] Can wipe all instances from database
+ [x] Can not add duplicate instance
+
+Messenger Messages (App\Tests\MessengerMessages)
+ [x] Messenger messages list is empty
+
+Operating Systems (App\Tests\OperatingSystems)
+ [x] Operating systems list is not empty
+ [x] Supported operating systems list is not empty
+ [x] Each supported os has corresponding instance types for all supported hardware profiles
+ [x] Can not add operating system without release or breed
+ [x] Can not add duplicate operating system
+ [x] Can add dummy operating system
+ [x] Can add dummy supported operating system
+ [x] Can remove all operating systems
+ [x] Can make operating system supported
+ [x] Can make operating system unsupported
+
+Ports (App\Tests\Ports)
+ [x] Ports list is not empty
+ [x] Can not add port without port number
+ [x] Can not add duplicate ports
+ [x] Spare ports are available
+ [x] Each address has port
+ [x] Can add dummy port
+ [x] Can remove all ports
+
+Session Oses (App\Tests\SessionOses)
+ [x] Session oses list is not empty
+ [x] Can not add session os without session
+ [x] Can not add session os without operating system
+ [x] Can not add duplicate session oses
+ [x] Can remove all session oses
+ [x] Can add dummy session os
+
+Session Statuses (App\Tests\SessionStatuses)
+ [x] Session statuses list is not empty
+ [x] Can not add session status without status string
+ [x] Can not add duplicate session status
+ [x] Can add dummy session status
+ [x] Can remove all session statuses
+
+Session Techs (App\Tests\SessionTechs)
+ [x] Session techs list is not empty
+ [x] Can not add session tech without session
+ [x] Can not add session tech without technology
+ [x] Can not add duplicate session techs
+ [x] Can remove all session techs
+ [x] Can add dummy session tech
+
+Sessions (App\Tests\Sessions)
+ [x] Sessions list is not empty
+ [x] Can not add session without mandatory fields
+ [x] Can add dummy session
+ [x] Can remove all sessions
+ [x] Can not add duplicate session
+
+Task Instance Types (App\Tests\TaskInstanceTypes)
+ [x] Task instance types list is not empty
+ [x] Can remove random task instance type
+ [x] Can remove all task instance types
+ [x] Can not add task instance type without task
+ [x] Can not add task instance type without instance type
+ [x] Can not add duplicate task instance types
+ [x] Can add dummy task instance type
+
+Task Oses (App\Tests\TaskOses)
+ [x] Task oses list is not empty
+ [x] Can remove random task os
+ [x] Can remove all task oses
+ [x] Can not add task os without task
+ [x] Can not add task os without operating system
+ [x] Can not add duplicate task oses
+ [x] Can add dummy task os
+
+Task Techs (App\Tests\TaskTechs)
+ [x] Task techs list is not empty
+ [x] Can remove all task techs
+ [x] Can not add task tech without task
+ [x] Can not add task tech without technology
+ [x] Can not add duplicate task techs
+ [x] Can add dummy task tech
+
+Tasks (App\Tests\Tasks)
+ [x] Tasks list is not empty
+ [x] Can not add task without name
+ [x] Can not add task without path
+ [x] Can not add duplicate tasks
+ [x] Can add dummy task
+ [x] Can remove all tasks
+
+Technologies (App\Tests\Technologies)
+ [x] Technologies list is not empty
+ [x] Can not add technology without mandatory fields
+ [x] Can add dummy technology
+ [x] Can remove all technologies
+ [x] Can not add duplicate technology
+
+ees (App\Tests\ees)
+ [x] Testees list is not empty
+ [x] Can not add testee without mandatory fields
+ [x] Can add dummy testee
+ [x] Can remove all testees
+ [x] Can not add duplicate testee
 

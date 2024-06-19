@@ -186,5 +186,38 @@ class TaskTechsControllerTest extends WebTestCase
         $item = $this->taskTechsRepository->findOneBy(
                 ['task' => $task->getId(), 'tech' => $tech->getId()]);
         $this->assertNotNull($item);        
-    }    
+    }
+    
+    /**
+     * @depends testTaskTechsListIsNotEmpty
+     * @param array<TaskTechs> $taskTechs
+     * @return void
+     */
+    public function testCanEditTaskTechBySubmittingForm($taskTechs): void {
+        
+        $task = $this->addDummyTask();
+        $this->assertNotNull($task);
+        
+        $taskTech = $this->taskTechsRepository->findOneById($taskTechs[0]);
+        $this->assertNotNull($taskTech);
+            
+        $crawler = $this->client->request('GET', '/task/techs/'.$taskTech->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['task_techs[task]'] = strval($task->getId());
+        $form['task_techs[tech]'] = strval($taskTech->getTech()->getId());
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->taskTechsRepository->findOneBy(
+                ['task' => $task->getId(), 'tech' => $taskTech->getTech()]);
+        $this->assertNotNull($item);        
+    }      
 }

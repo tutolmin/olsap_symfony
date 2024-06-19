@@ -149,4 +149,33 @@ class OperatingSystemsControllerTest extends WebTestCase
         $item = $this->operatingSystemsRepository->findOneByAlias($this->dummy['name']);
         $this->assertNotNull($item);        
     } 
+    
+    /**
+     * @depends testOperatingSystemsListIsNotEmpty
+     * @param array<OperatingSystems> $operatingSystems
+     * @return void
+     */
+    public function testCanEditOperatingSystemBySubmittingForm($operatingSystems): void {
+
+        $operatingSystem = $this->operatingSystemsRepository->findOneById($operatingSystems[0]);
+        $this->assertNotNull($operatingSystem);
+            
+        $crawler = $this->client->request('GET', '/operating/systems/'.$operatingSystem->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['operating_systems[release]'] = $this->dummy['name'];
+        $form['operating_systems[alias]'] = $this->dummy['name'];
+        
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->operatingSystemsRepository->findOneByAlias($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }        
 }

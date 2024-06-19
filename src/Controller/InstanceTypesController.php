@@ -5,25 +5,26 @@ namespace App\Controller;
 use Psr\Log\LoggerInterface;
 
 use App\Entity\InstanceTypes;
-use App\Form\InstanceTypesType;
+//use App\Form\InstanceTypesType;
 use App\Repository\InstanceTypesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+//use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\InstanceTypesManager;
+//use App\Service\InstanceTypesManager;
 
 #[Route('/instance/types')]
 class InstanceTypesController extends AbstractController
 {
     private LoggerInterface $logger;
-    private InstanceTypesManager $instanceTypesManager;
+//    private InstanceTypesManager $instanceTypesManager;
     public function __construct(LoggerInterface $logger,
-            InstanceTypesManager $instanceTypesManager)
+//            InstanceTypesManager $instanceTypesManager
+    )
     {
         $this->logger = $logger;
         $this->logger->debug(__METHOD__);
-        $this->instanceTypesManager = $instanceTypesManager;
+//        $this->instanceTypesManager = $instanceTypesManager;
     }
 
     #[Route('/', name: 'app_instance_types_index', methods: ['GET'])]
@@ -35,7 +36,7 @@ class InstanceTypesController extends AbstractController
             'instance_types' => $instanceTypesRepository->findAll(),
         ]);
     }
-
+/*
     #[Route('/new', name: 'app_instance_types_new', methods: ['GET', 'POST'])]
     public function new(Request $request, InstanceTypesRepository $instanceTypesRepository): Response
     {
@@ -56,7 +57,13 @@ class InstanceTypesController extends AbstractController
             'form' => $form,
         ]);
     }
-
+<!--
+    <a href="{{ path('app_instance_types_new') }}">Create new</a>
+-->
+                    <!--
+                    <a href="{{ path('app_instance_types_edit', {'id': instance_type.id}) }}">edit</a>
+                    -->
+*/
     #[Route('/{id}', name: 'app_instance_types_show', methods: ['GET'])]
     public function show(InstanceTypes $instanceType): Response
     {
@@ -66,7 +73,7 @@ class InstanceTypesController extends AbstractController
             'instance_type' => $instanceType,
         ]);
     }
-
+/*
     #[Route('/{id}/edit', name: 'app_instance_types_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, InstanceTypes $instanceType, InstanceTypesRepository $instanceTypesRepository): Response
     {
@@ -98,4 +105,11 @@ class InstanceTypesController extends AbstractController
 
         return $this->redirectToRoute('app_instance_types_index', [], Response::HTTP_SEE_OTHER);
     }
+<!--
+    <a href="{{ path('app_instance_types_edit', {'id': instance_type.id}) }}">edit</a>
+
+    {{ include('instance_types/_delete_form.html.twig') }}
+--> 
+ * 
+ */
 }

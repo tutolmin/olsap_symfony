@@ -162,4 +162,32 @@ class PortsControllerTest extends WebTestCase
         $item = $this->portsRepository->findOneByNumber($this->dummy['number']);
         $this->assertNotNull($item);        
     }   
+    
+    /**
+     * @depends testPortsListIsNotEmpty
+     * @param array<Ports> $ports
+     * @return void
+     */
+    public function testCanEditPortBySubmittingForm($ports): void {
+
+        $port = $this->portsRepository->findOneById($ports[0]);
+        $this->assertNotNull($port);
+            
+        $crawler = $this->client->request('GET', '/ports/'.$port->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['ports[number]'] = $this->dummy['number'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->portsRepository->findOneByNumber($this->dummy['number']);
+        $this->assertNotNull($item);        
+    }    
 }

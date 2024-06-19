@@ -147,4 +147,32 @@ class BreedsControllerTest extends WebTestCase
         $item = $this->breedsRepository->findOneByName($this->dummy['name']);
         $this->assertNotNull($item);        
     }
+    
+    /**
+     * @depends testBreedsListIsNotEmpty
+     * @param array<Breeds> $breeds
+     * @return void
+     */
+    public function testCanEditBreedBySubmittingForm($breeds): void {
+
+        $breed = $this->breedsRepository->findOneById($breeds[0]);
+        $this->assertNotNull($breed);
+            
+        $crawler = $this->client->request('GET', '/breeds/'.$breed->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['breeds[name]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->breedsRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }
 }

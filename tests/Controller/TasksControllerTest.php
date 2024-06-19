@@ -148,4 +148,33 @@ class TasksControllerTest extends WebTestCase
         $item = $this->tasksRepository->findOneByPath($this->dummy['path']);
         $this->assertNotNull($item);        
     }
+    
+    /**
+     * @depends testTasksListIsNotEmpty
+     * @param array<Tasks> $tasks
+     * @return void
+     */
+    public function testCanEditTaskBySubmittingForm($tasks): void {
+
+        $task = $this->tasksRepository->findOneById($tasks[0]);
+        $this->assertNotNull($task);
+            
+        $crawler = $this->client->request('GET', '/tasks/'.$task->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['tasks[name]'] = $this->dummy['name'];
+        $form['tasks[path]'] = $this->dummy['path'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->tasksRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }  
 }

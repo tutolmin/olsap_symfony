@@ -15,7 +15,13 @@ class AddressesControllerTest extends WebTestCase
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
-    
+
+    /**
+     * 
+     * @var array<string>
+     */
+    private $dummy = array('ip'=>'192.168.0.1', 'mac'=>'aa:bb:cc:dd:ee:ff');
+        
     /**
      * 
      * @var AddressesRepository
@@ -132,4 +138,60 @@ class AddressesControllerTest extends WebTestCase
             }
         }
     }
+    
+    /**
+     * 
+     * @return void
+     */
+    public function testCanAddDummyAddressBySubmittingForm(): void {
+
+        $crawler = $this->client->request('GET', '/addresses/new');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Save');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['addresses[ip]'] = $this->dummy['ip'];
+        $form['addresses[mac]'] = $this->dummy['mac'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->addressesRepository->findOneByIp($this->dummy['ip']);
+        $this->assertNotNull($item);        
+    }   
+    
+    /**
+     * @depends testAddressesListIsNotEmpty
+     * @param array<Addresses> $addresses
+     * @return void
+     */
+    public function testCanEditAddressBySubmittingForm($addresses): void {
+
+        $address = $this->addressesRepository->findOneById($addresses[0]);
+        $this->assertNotNull($address);
+            
+        $crawler = $this->client->request('GET', '/addresses/'.$address->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['addresses[ip]'] = $this->dummy['ip'];
+        $form['addresses[mac]'] = $this->dummy['mac'];
+        $form['addresses[port]'] = $address->getPort() ? strval($address->getPort()->getId()) : '';
+        $form['addresses[instance]'] = $address->getInstance() ? strval($address->getInstance()->getId()) : '';
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->addressesRepository->findOneByIp($this->dummy['ip']);
+        $this->assertNotNull($item);        
+    }        
 }

@@ -147,4 +147,32 @@ class SessionStatusesControllerTest extends WebTestCase
         $item = $this->sessionStatusesRepository->findOneByStatus($this->dummy['name']);
         $this->assertNotNull($item);        
     }    
+    
+    /**
+     * @depends testSessionStatusesListIsNotEmpty
+     * @param array<SessionStatuses> $session_statuses
+     * @return void
+     */
+    public function testCanEditSessionStatusBySubmittingForm($session_statuses): void {
+
+        $session_status = $this->sessionStatusesRepository->findOneById($session_statuses[0]);
+        $this->assertNotNull($session_status);
+            
+        $crawler = $this->client->request('GET', '/session/statuses/'.$session_status->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['session_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->sessionStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }     
 }

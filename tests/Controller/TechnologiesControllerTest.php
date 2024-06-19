@@ -147,4 +147,32 @@ class TechnologiesControllerTest extends WebTestCase
         $item = $this->technologiesRepository->findOneByName($this->dummy['name']);
         $this->assertNotNull($item);        
     } 
+    
+    /**
+     * @depends testTechnologiesListIsNotEmpty
+     * @param array<Technologies> $techmologies
+     * @return void
+     */
+    public function testCanEditTechnologyBySubmittingForm($techmologies): void {
+
+        $technology = $this->technologiesRepository->findOneById($techmologies[0]);
+        $this->assertNotNull($technology);
+            
+        $crawler = $this->client->request('GET', '/technologies/'.$technology->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['technologies[name]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->technologiesRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }  
 }

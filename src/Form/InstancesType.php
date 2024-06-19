@@ -9,7 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class InstancesType extends AbstractType
-{
+{ 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

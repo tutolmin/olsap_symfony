@@ -149,4 +149,32 @@ class HardwareProfilesControllerTest extends WebTestCase
         $item = $this->hardwareProfilesRepository->findOneByName($this->dummy['name']);
         $this->assertNotNull($item);        
     } 
+    
+    /**
+     * @depends testHardwareProfilesListIsNotEmpty
+     * @param array<HardwareProfiles> $hardwareProfiles
+     * @return void
+     */
+    public function testCanEditHardwareProfileBySubmittingForm($hardwareProfiles): void {
+
+        $operatingSystem = $this->hardwareProfilesRepository->findOneById($hardwareProfiles[0]);
+        $this->assertNotNull($operatingSystem);
+            
+        $crawler = $this->client->request('GET', '/hardware/profiles/'.$operatingSystem->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['hardware_profiles[name]'] = $this->dummy['name'];
+        
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->hardwareProfilesRepository->findOneByName($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }     
 }

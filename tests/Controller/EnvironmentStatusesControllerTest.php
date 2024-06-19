@@ -147,4 +147,32 @@ class EnvironmentStatusesControllerTest extends WebTestCase
         $item = $this->environmentStatusesRepository->findOneByStatus($this->dummy['name']);
         $this->assertNotNull($item);        
     }
+    
+    /**
+     * @depends testEnvironmentStatusesListIsNotEmpty
+     * @param array<EnvironmentStatuses> $environment_statuses
+     * @return void
+     */
+    public function testCanEditEnvironmentStatusBySubmittingForm($environment_statuses): void {
+
+        $environment_status = $this->environmentStatusesRepository->findOneById($environment_statuses[0]);
+        $this->assertNotNull($environment_status);
+            
+        $crawler = $this->client->request('GET', '/environment/statuses/'.$environment_status->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['environment_statuses[status]'] = $this->dummy['name'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->environmentStatusesRepository->findOneByStatus($this->dummy['name']);
+        $this->assertNotNull($item);        
+    }    
 }
