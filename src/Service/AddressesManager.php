@@ -4,9 +4,7 @@ namespace App\Service;
 
 use Psr\Log\LoggerInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Instances;
 use App\Entity\Addresses;
-use App\Repository\InstancesRepository;
 use App\Repository\AddressesRepository;
 use App\Service\LxcManager;
 
@@ -14,7 +12,6 @@ class AddressesManager {
 
     private LoggerInterface $logger;
     private EntityManagerInterface $entityManager;
-    private InstancesRepository $instanceRepository;
     private AddressesRepository $addressesRepository;
     private LxcManager $lxcService;
     
@@ -26,7 +23,6 @@ class AddressesManager {
         $this->logger->debug(__METHOD__);
 
         $this->entityManager = $em;
-        $this->instanceRepository = $this->entityManager->getRepository(Instances::class);
         $this->addressesRepository = $this->entityManager->getRepository(Addresses::class);
         $this->lxcService = $lxcManager;
     }
@@ -39,12 +35,10 @@ class AddressesManager {
 
         $this->logger->debug(__METHOD__);
 
-        $instances = $this->instanceRepository->findBy(['status' => $address->getId()]);
+        $instance = $address->getInstance();
 
-        if ($instances) {
-            foreach ($instances as $instance) {
-                $this->lxcService->wipeInstance($instance->getName(), $force = true);
-            }
+        if ($instance) {
+            $this->lxcService->wipeInstance($instance->getName(), $force = true);
         }
 
         $this->addressesRepository->remove($address, true);

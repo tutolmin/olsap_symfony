@@ -12,8 +12,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Addresses;
-//use App\Entity\Ports;
 use App\Repository\AddressesRepository;
+use App\Service\AddressesManager;
 
 #[AsCommand(
     name: 'net:addresses:delete',
@@ -23,7 +23,7 @@ class AddressesDeleteCommand extends Command
 {
     // Doctrine EntityManager
     private EntityManagerInterface $entityManager;
-
+ 
      /**
       * 
       * @var AddressesRepository
@@ -31,11 +31,20 @@ class AddressesDeleteCommand extends Command
     private $addressRepository;
 //    private $portRepository;
 
+    /**
+     * 
+     * @var AddressesManager
+     */
+    private $addressManager;
+      
     // Dependency injection of the EntityManagerInterface entity
-    public function __construct( EntityManagerInterface $entityManager)
+    public function __construct( EntityManagerInterface $entityManager,
+            AddressesManager $addressManager)
     {
         parent::__construct();
 
+        $this->addressManager = $addressManager;
+        
         $this->entityManager = $entityManager;
         $this->addressRepository = $this->entityManager->getRepository( Addresses::class);
 //        $this->portRepository = $this->entityManager->getRepository( Ports::class);
@@ -68,14 +77,16 @@ class AddressesDeleteCommand extends Command
           if( $address) {
 
             $io->note('Deleting IP address 172.27.'.$subnet.'.'.$p.' from the database');
-
+/*
             // Unbind address from the port
 	    $address->setPort(null);
 
 	    // Delete item from the DB
 	    $this->entityManager->remove($address);
             $this->entityManager->flush();
-
+*/
+            $this->addressManager->removeAddress($address);
+            
 	  } else {
 
             $io->warning('Address 172.27.'.$subnet.'.'.$p.' does NOT exist in the database');

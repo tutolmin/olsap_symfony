@@ -144,4 +144,35 @@ class SessionsControllerTest extends WebTestCase
     }
      */
     
+    /**
+     * @depends testTesteesListIsNotEmpty
+     * @param array<Testees> $testees
+     * @return void
+     */
+    /*
+    public function testCanEditTesteeBySubmittingForm($testees): void {
+
+        $testee = $this->testeesRepository->findOneById($testees[0]);
+        $this->assertNotNull($testee);
+            
+        $crawler = $this->client->request('GET', '/testees/'.$testee->getId().'/edit');
+
+        // select the button
+        $buttonCrawlerNode = $crawler->selectButton('Update');
+
+        // retrieve the Form object for the form belonging to this button
+        $form = $buttonCrawlerNode->form();
+
+        // set values on a form object
+        $form['testees[email]'] = $this->dummy['email'];
+        $form['testees[oauth_token]'] = $this->dummy['oauth_token'];
+
+        // submit the Form object
+        $this->client->submit($form);
+        
+        $item = $this->testeesRepository->findOneByEmail($this->dummy['email']);
+        $this->assertNotNull($item);        
+    } 
+
+*/    
 }

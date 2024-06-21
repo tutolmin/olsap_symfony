@@ -163,5 +163,8 @@ class AddressesTest extends KernelTestCase
         }
 
         $this->assertEmpty($this->addressesRepository->findAll());
+
+        // No instances left
+//        $this->assertEmpty($this->instanceRepository->findAll());
     }          
 }
