@@ -1,3 +1,4 @@
-Addresses Delete Command (App\Tests\Command\AddressesDeleteCommand)
- [x] Addresses delete subnet
+Lxc Manager (App\Tests\Service\LxcManager)
+ [x] Object stop
+ [x] Object start
 

@@ -1,10 +1,14 @@
 
-##teamcity[testCount count='1' flowId='13707']
+##teamcity[testCount count='2' flowId='29579']
 
-##teamcity[testSuiteStarted name='App\Tests\Command\AddressesDeleteCommandTest' locationHint='php_qn:///srv/app/tests/Command/AddressesDeleteCommandTest.php::\App\Tests\Command\AddressesDeleteCommandTest' flowId='13707']
+##teamcity[testSuiteStarted name='App\Tests\Service\LxcManagerTest' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest' flowId='29579']
 
-##teamcity[testStarted name='testAddressesDeleteSubnet' locationHint='php_qn:///srv/app/tests/Command/AddressesDeleteCommandTest.php::\App\Tests\Command\AddressesDeleteCommandTest::testAddressesDeleteSubnet' flowId='13707']
+##teamcity[testStarted name='testObjectStop' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest::testObjectStop' flowId='29579']
 
-##teamcity[testFinished name='testAddressesDeleteSubnet' duration='5950' flowId='13707']
+##teamcity[testFinished name='testObjectStop' duration='3698' flowId='29579']
 
-##teamcity[testSuiteFinished name='App\Tests\Command\AddressesDeleteCommandTest' flowId='13707']
+##teamcity[testStarted name='testObjectStart' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest::testObjectStart' flowId='29579']
+
+##teamcity[testFinished name='testObjectStart' duration='1872' flowId='29579']
+
+##teamcity[testSuiteFinished name='App\Tests\Service\LxcManagerTest' flowId='29579']
