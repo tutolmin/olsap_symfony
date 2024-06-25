@@ -1,14 +1,12 @@
 
-##teamcity[testCount count='2' flowId='29579']
+##teamcity[testCount count='1' flowId='16796']
 
-##teamcity[testSuiteStarted name='App\Tests\Service\LxcManagerTest' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest' flowId='29579']
+##teamcity[testSuiteStarted name='App\Tests\Service\LxcManagerTest' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest' flowId='16796']
 
-##teamcity[testStarted name='testObjectStop' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest::testObjectStop' flowId='29579']
+##teamcity[testStarted name='testObjectStopStart' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest::testObjectStopStart' flowId='16796']
 
-##teamcity[testFinished name='testObjectStop' duration='3698' flowId='29579']
+##teamcity[testFailed name='testObjectStopStart' message='Failed asserting that two strings are equal.' details=' /srv/app/tests/Service/LxcManagerTest.php:121|n /srv/app/vendor/phpunit/phpunit/phpunit:107|n ' duration='6822' type='comparisonFailure' actual='|'stopped|'' expected='|'stop|'' flowId='16796']
 
-##teamcity[testStarted name='testObjectStart' locationHint='php_qn:///srv/app/tests/Service/LxcManagerTest.php::\App\Tests\Service\LxcManagerTest::testObjectStart' flowId='29579']
+##teamcity[testFinished name='testObjectStopStart' duration='6822' flowId='16796']
 
-##teamcity[testFinished name='testObjectStart' duration='1872' flowId='29579']
-
-##teamcity[testSuiteFinished name='App\Tests\Service\LxcManagerTest' flowId='29579']
+##teamcity[testSuiteFinished name='App\Tests\Service\LxcManagerTest' flowId='16796']

@@ -1,4 +1,3 @@
 Lxc Manager (App\Tests\Service\LxcManager)
- [x] Object stop
- [x] Object start
+ [ ] Object stop start
 

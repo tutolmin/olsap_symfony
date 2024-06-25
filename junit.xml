@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\Service\LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" tests="2" assertions="8" errors="0" warnings="0" failures="0" skipped="0" time="5.569627">
-    <testcase name="testObjectStop" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="63" assertions="4" time="3.697828"/>
-    <testcase name="testObjectStart" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="80" assertions="4" time="1.871799"/>
+  <testsuite name="App\Tests\Service\LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="1" skipped="0" time="6.821890">
+    <testcase name="testObjectStopStart" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="87" assertions="10" time="6.821890">
+      <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\Service\LxcManagerTest::testObjectStopStart
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'stop'
++'stopped'
+
+/srv/app/tests/Service/LxcManagerTest.php:121
+/srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
+    </testcase>
   </testsuite>
 </testsuites>

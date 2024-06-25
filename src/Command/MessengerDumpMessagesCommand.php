@@ -23,6 +23,8 @@ use App\Message\EnvironmentEvent;
 use App\Message\SessionAction;
 use App\Message\SessionEvent;
 use Symfony\Component\Messenger\Stamp\BusNameStamp;
+use App\Service\MessengerMessagesManager;
+
 
 #[AsCommand(
     name: 'app:messenger:dump-messages',
@@ -36,11 +38,15 @@ class MessengerDumpMessagesCommand extends Command
 
     private MessengerMessagesRepository $messengerRepository;
 
-    public function __construct(EntityManagerInterface $entityManager) {
+    private MessengerMessagesManager $messengerManager;
+    
+    public function __construct(EntityManagerInterface $entityManager,
+            MessengerMessagesManager $messengerManager) {
         parent::__construct();
 
         $this->entityManager = $entityManager;
         $this->messengerRepository = $this->entityManager->getRepository(MessengerMessages::class);
+        $this->messengerManager = $messengerManager;
     }
 
     protected function configure(): void {
@@ -66,7 +72,13 @@ class MessengerDumpMessagesCommand extends Command
         
         // Iterate through all the messages
         foreach ($messages as $message) {
+            
+            $object = $this->messengerManager->parseBody($message);
+            if (is_string($object)) {
+                $io->note($object);
+            }
 
+            /*
             $stamps = [];
             $headers = json_decode($message->getHeaders() ?? "", true);
             if (is_array($headers) && isset($headers['stamps'])) {
@@ -116,6 +128,8 @@ class MessengerDumpMessagesCommand extends Command
                     endswitch;
                 }
             }
+ * 
+ */
         }
 
         return Command::SUCCESS;
