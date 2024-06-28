@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tests>
-  <test className="App\Tests\Service\LxcManagerTest" methodName="testObjectStopStart" prettifiedClassName="Lxc Manager (App\Tests\Service\LxcManager)" prettifiedMethodName="Object stop start" status="3" time="6.821890334" size="-1" groups="default" exceptionLine="121" exceptionMessage="Failed asserting that two strings are equal.">
+  <test className="App\Tests\Service\LxcManagerTest" methodName="testObjectRestart" prettifiedClassName="Lxc Manager (App\Tests\Service\LxcManager)" prettifiedMethodName="Object restart" status="0" time="2.355792212" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\Service\LxcManagerTest" methodName="testObjectStopStart" prettifiedClassName="Lxc Manager (App\Tests\Service\LxcManager)" prettifiedMethodName="Object stop start" status="0" time="4.308177835" size="-1" groups="default">
+    <group name="default"/>
+  </test>
+  <test className="App\Tests\Service\LxcManagerTest" methodName="testObjectCreate" prettifiedClassName="Lxc Manager (App\Tests\Service\LxcManager)" prettifiedMethodName="Object create" status="0" time="1.026816841" size="-1" groups="default">
     <group name="default"/>
   </test>
 </tests>

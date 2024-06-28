@@ -16,6 +16,14 @@ class MessengerMessagesRepository extends ServiceEntityRepository
         parent::__construct($registry, MessengerMessages::class);
     }
 
+    public function remove(MessengerMessages $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
+    }
     //    /**
     //     * @return MessengerMessages[] Returns an array of MessengerMessages objects
     //     */

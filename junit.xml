@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="App\Tests\Service\LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" tests="1" assertions="10" errors="0" warnings="0" failures="1" skipped="0" time="6.821890">
-    <testcase name="testObjectStopStart" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="87" assertions="10" time="6.821890">
-      <failure type="PHPUnit\Framework\ExpectationFailedException">App\Tests\Service\LxcManagerTest::testObjectStopStart
-Failed asserting that two strings are equal.
---- Expected
-+++ Actual
-@@ @@
--'stop'
-+'stopped'
-
-/srv/app/tests/Service/LxcManagerTest.php:121
-/srv/app/vendor/phpunit/phpunit/phpunit:107</failure>
-    </testcase>
+  <testsuite name="/srv/app/tests/Service" tests="3" assertions="36" errors="0" warnings="0" failures="0" skipped="0" time="7.690787">
+    <testsuite name="App\Tests\Service\LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" tests="3" assertions="36" errors="0" warnings="0" failures="0" skipped="0" time="7.690787">
+      <testcase name="testObjectRestart" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="99" assertions="11" time="2.355792"/>
+      <testcase name="testObjectStopStart" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="142" assertions="14" time="4.308178"/>
+      <testcase name="testObjectCreate" class="App\Tests\Service\LxcManagerTest" classname="App.Tests.Service.LxcManagerTest" file="/srv/app/tests/Service/LxcManagerTest.php" line="192" assertions="11" time="1.026817"/>
+    </testsuite>
   </testsuite>
 </testsuites>

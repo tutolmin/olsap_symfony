@@ -67,7 +67,7 @@ class InstancesRepository extends ServiceEntityRepository
 
     public function remove(Instances $entity, bool $flush = false): void {
         $this->logger->debug(__METHOD__);
-
+/*
         // Unbind an instance from env so it can be used again
         $entity->setEnvs(null);
         
@@ -76,6 +76,7 @@ class InstancesRepository extends ServiceEntityRepository
         foreach ($addresses as $address) {
             $address->setInstance(null);
         }
+*/        
         $this->getEntityManager()->remove($entity);
 
         if ($flush) {

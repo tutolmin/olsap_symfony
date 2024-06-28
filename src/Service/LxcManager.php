@@ -206,6 +206,7 @@ class LxcManager
             return false;
         }
 
+        // Get allocated IP address
         $address = $this->addressRepository->findOneByInstance($instance);
         if (!$address) {
             $this->logger->error("Can't allocate the address");
@@ -414,7 +415,7 @@ class LxcManager
      * @param bool $force
      * @return bool
      */
-    private function wipeObject($name, $force = false) {
+    public function wipeObject($name, $force = false) {
         $this->logger->debug(__METHOD__);
 
         $this->logger->debug("Deleting LXC object: `" . $name . "`");
@@ -494,22 +495,24 @@ class LxcManager
                 $this->logger->debug("Force opiton specified");
             }
         }
-        /*
-          // Unbind an instance from env so it can be used again
-          $instance->setEnvs(null);
-
-          // Fetch all linked Addresses and release them
-          $addresses = $instance->getAddresses();
-          foreach ($addresses as $address) {
-          $address->setInstance(null);
-          //            $this->entityManager->flush();
-          }
-
-          // Delete item from the DB
-          $this->entityManager->remove($instance);
-          $this->entityManager->flush();
-         */
         
+          // Unbind an instance from env so it can be used again
+        $instance->setEnvs(null);
+
+        // Fetch all linked Addresses and release them
+        $addresses = $instance->getAddresses();
+        $this->logger->debug("Addresses: ". count($addresses));
+        
+        foreach ($addresses as $address) {
+            
+            $address->setInstance(null);
+            //            $this->entityManager->flush();
+        }
+
+        // Delete item from the DB
+//        $this->entityManager->remove($instance);
+//        $this->entityManager->flush();
+
         $this->instanceRepository->remove($instance, $flush = true);
         
         return true;
